@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+    <Style x:Key="DialogHostPopup" TargetType="{x:Type controls:PopupEx}">
+        <Setter Property="StaysOpen" Value="True" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="PopupAnimation" Value="None" />
+        <Setter Property="Placement" Value="Center" />
+    </Style>
+</ResourceDictionary>

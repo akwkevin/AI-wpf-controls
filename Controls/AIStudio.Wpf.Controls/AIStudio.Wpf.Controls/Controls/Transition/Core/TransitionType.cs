@@ -1,0 +1,29 @@
+﻿namespace AIStudio.Wpf.Controls
+{
+    public enum TransitionSwitchType
+    {
+        None,
+        CheckerboardTransition,
+        DiagonalWipeTransition,
+        DiamondsTransition,
+        DoorTransition,
+        DotsTransition,
+        DoubleRotateWipeTransition,
+        ExplosionTransition,
+        FadeAndBlurTransition,
+        FadeAndGrowTransition,
+        FadeTransition,
+        FlipTransition,
+        HorizontalBlindsTransition,
+        HorizontalWipeTransition,
+        MeltTransition,
+        PageTransition,
+        RollTransition,
+        RotateTransition,
+        RotateWipeTransition,
+        StarTransition,
+        TranslateTransition,
+        VerticalBlindsTransition,
+        VerticalWipeTransition,
+    }
+}

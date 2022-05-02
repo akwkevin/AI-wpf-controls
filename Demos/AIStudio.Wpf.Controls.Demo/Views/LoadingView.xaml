@@ -1,0 +1,58 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.LoadingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <Grid>
+        <StackPanel >
+            <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                <StackPanel>
+                    <WrapPanel>
+                        <ac:Loading Margin="2" IsRunning="True"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="Wave"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="Ring"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="RingInertial"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="Line" Width="80"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="Circle"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="Arcs"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="ArcsRing"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="DoubleBounce"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="FlipPlane"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="Pulse"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="ThreeDots"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="Streamer"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="AnimationPath"></ac:Loading>
+                        <ac:Loading Margin="2" IsRunning="True" LoadingStyle="TransPath"></ac:Loading>
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="更多" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                <StackPanel>
+                    <WrapPanel>
+                        <ac:LoadingLine Margin="2" Width="100"/>
+                        <ac:LoadingCircle Margin="2"/>
+                        <ac:BallLoading Margin="2" Width="100"/>
+                        <ac:StreamerLoading Margin="2"/>
+                        <ac:WaitLoading Margin="2"/>
+                        <ac:CycleLoading Margin="2" Value="50" LoadTitle="Loading...." Width="100" >
+                            <TextBlock Text="activity"/>
+                        </ac:CycleLoading>
+                        <ac:RollLoading Margin="2"
+                                        IsStart="true" 
+                                    HorizontalContentAlignment="Center" 
+                                    VerticalContentAlignment="Center"
+                                    Width="100" >
+                            <TextBlock Text="Loading activity..."/>
+                        </ac:RollLoading>                      
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+    </Grid>
+</ac:AIStudioUserControl>

@@ -1,0 +1,79 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.BadgeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <Grid>
+        <StackPanel >
+            <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                <StackPanel>
+                    <WrapPanel>
+                        <ac:Badged Margin="10" Badge="1" IsWaving="True">
+                            <Rectangle Width="{DynamicResource AIStudio.Avatar.Size.Small}" Height="{DynamicResource AIStudio.Avatar.Size.Small}" Fill="{DynamicResource MahApps.Brushes.Gray8}"></Rectangle>
+                        </ac:Badged>
+                        <ac:Badged Margin="10" Badge="22+" >
+                            <Rectangle Width="{DynamicResource AIStudio.Avatar.Size.Small}" Height="{DynamicResource AIStudio.Avatar.Size.Small}" Fill="{DynamicResource MahApps.Brushes.Gray8}"></Rectangle>
+                        </ac:Badged>
+                        <ac:Badged Margin="10" Badge="22+" CornerRadius="3">
+                            <Rectangle Width="{DynamicResource AIStudio.Avatar.Size.Small}" Height="{DynamicResource AIStudio.Avatar.Size.Small}" Fill="{DynamicResource MahApps.Brushes.Gray8}"></Rectangle>
+                        </ac:Badged>
+                        <ac:Badged Margin="10" Badge="New" Status="Danger">
+                            <Rectangle Width="{DynamicResource AIStudio.Avatar.Size.Small}" Height="{DynamicResource AIStudio.Avatar.Size.Small}" Fill="{DynamicResource MahApps.Brushes.Gray8}"></Rectangle>
+                        </ac:Badged>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True">
+                            <Rectangle Width="{DynamicResource AIStudio.Avatar.Size.Small}" Height="{DynamicResource AIStudio.Avatar.Size.Small}" Fill="{DynamicResource MahApps.Brushes.Gray8}"></Rectangle>
+                        </ac:Badged>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Success" BadgePlacementMode="Left"  VerticalAlignment="Center">
+                            <TextBlock Margin="10,0,0,0" Text="Success"/>
+                        </ac:Badged>
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="独立使用" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                <StackPanel>
+                    <WrapPanel>
+                        <ac:Badged Margin="2" Badge="29" BorderThickness="1" Status="Danger">
+                        </ac:Badged>
+                        <ac:Badged Margin="2" Badge="99" BadgeForeground="{DynamicResource MahApps.Brushes.Gray2}" BadgeBackground="{DynamicResource MahApps.Brushes.ThemeBackground}" BadgeBorderBrush="{DynamicResource MahApps.Brushes.Gray2}" BadgeBorderThickness="1">
+                        </ac:Badged>
+                        <ac:Badged Margin="2" Badge="99+" BorderThickness="1" Status="Success">
+                        </ac:Badged>
+                        <ac:Badged Margin="2" Badge="99+" BorderThickness="1" Status="Plain">
+                        </ac:Badged>
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="主题" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                <StackPanel>
+                    <WrapPanel>
+                        <ac:Badged Margin="2" Badge="Light" Status="Light"/>
+                        <ac:Badged Margin="2" Badge="Mid"  Status="Mid" />
+                        <ac:Badged Margin="2" Badge="Dark"  Status="Dark" />
+                        <ac:Badged Margin="2" Badge="Accent" Status="Accent" />
+                        <ac:Badged Margin="2" Badge="Success" Status="Success" />
+                        <ac:Badged Margin="2" Badge="Danger" Status="Danger" />
+                        <ac:Badged Margin="2" Badge="Warning" Status="Warning" />
+                        <ac:Badged Margin="2" Badge="Info" Status="Info" />
+                        <ac:Badged Margin="2" Badge="Plain" Status="Plain" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Light" VerticalAlignment="Center"/>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Mid" VerticalAlignment="Center"/>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Dark" VerticalAlignment="Center"/>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Accent" VerticalAlignment="Center"/>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Success" VerticalAlignment="Center"/>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Danger" VerticalAlignment="Center"/>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Warning" VerticalAlignment="Center"/>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Info" VerticalAlignment="Center"/>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Plain" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</ac:AIStudioUserControl>

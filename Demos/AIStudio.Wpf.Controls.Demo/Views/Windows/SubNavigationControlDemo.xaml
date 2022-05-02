@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.SubNavigationControlDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <WrapPanel>
+            <Button x:Name="button" ac:ControlNavigationAttach.NavigationIndex="0" Margin="5" Style="{DynamicResource AIStudio.Styles.Button.Focus}">按钮131</Button>
+            <Button ac:ControlNavigationAttach.NavigationIndex="1" Margin="5" Style="{DynamicResource AIStudio.Styles.Button.Focus}">按钮132</Button>
+            <Button ac:ControlNavigationAttach.NavigationIndex="2" Margin="5" Style="{DynamicResource AIStudio.Styles.Button.Focus}">按钮133</Button>
+        </WrapPanel>
+    </Grid>
+</UserControl>

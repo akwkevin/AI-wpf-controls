@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:Long2FileSizeConverter x:Key="Long2FileSizeConverter"/>
+
+    <Style x:Key="AIStudio.Styles.ImageBrowser" TargetType="controls:ImageBrowser">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="MinWidth" Value="400"/>
+        <Setter Property="MinHeight" Value="250"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ImageBrowser">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="Storyboard1">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_PanelTop">
+                                <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="Storyboard2">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_PanelTop">
+                                <EasingDoubleKeyFrame KeyTime="0:0:.4" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <controls:ImageViewer x:Name="PART_ImageViewer" ShowImgMap="True" BorderThickness="0" Background="#dd000000" IsFullScreen="{Binding IsFullScreen,RelativeSource={RelativeSource AncestorType=controls:ImageBrowser},Mode=TwoWay}"  ShowFullScreenButton="True"/>
+                        <Grid x:Name="PART_PanelTop" Opacity="0" Background="{DynamicResource MahApps.Brushes.SemiTransparent}" VerticalAlignment="Top" Grid.Row="0">
+                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                                <TextBlock Text="{Binding ImgPath,ElementName=PART_ImageViewer}" Foreground="White" Margin="10,0,0,0"/>
+                                <TextBlock Text="{Binding ImgSize,ElementName=PART_ImageViewer,Converter={StaticResource Long2FileSizeConverter}}" Foreground="White" Margin="30,0,0,0"/>
+                            </StackPanel>
+                            <Button x:Name="PART_CloseButton" WindowChrome.IsHitTestVisibleInChrome="True" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                            IsTabStop="False"  
+                                            Style="{StaticResource AIStudio.Styles.Button.Window.Close}"   />
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="PART_ImageViewer" Property="ShowCloseButton" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource Storyboard2}"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="Foreground" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="Foreground" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+
+            <Trigger Property="IsFullScreen" Value="True">
+                <Setter Property="WindowState" Value="Maximized"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type controls:ImageBrowser}" BasedOn="{StaticResource AIStudio.Styles.ImageBrowser}"/>
+</ResourceDictionary>

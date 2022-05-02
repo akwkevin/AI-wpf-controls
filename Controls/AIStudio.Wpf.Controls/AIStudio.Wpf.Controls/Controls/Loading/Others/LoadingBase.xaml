@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+    <Style x:Key="AIStudio.Styles.LoadingBase" TargetType="controls:LoadingBase">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="DotDiameter" Value="10"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+    </Style>
+
+</ResourceDictionary>

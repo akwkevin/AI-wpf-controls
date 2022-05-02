@@ -1,0 +1,138 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.MenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <HierarchicalDataTemplate x:Key="HamburgerMenuImageItem" DataType="{x:Type ac:HamburgerTreeMenuGlyphItem}" ItemsSource="{Binding Path=Children}">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Width="{Binding Path=HamburgerWidth, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
+                          Height="{Binding Path=HamburgerHeight, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}">
+                        <Image Margin="{Binding Path=HamburgerMargin, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="{Binding ImgPath}"
+                           Stretch="UniformToFill" />
+                    </Grid>
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding Name}" />
+                </Grid>
+            </HierarchicalDataTemplate>
+
+            <HierarchicalDataTemplate x:Key="LeftHamburgerMenuImageItem" DataType="{x:Type ac:HamburgerTreeMenuGlyphItem}" ItemsSource="{Binding Path=Children}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Width="{Binding Path=HamburgerWidth, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
+                          Height="{Binding Path=HamburgerHeight, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}">
+                        <Image Margin="{Binding Path=HamburgerMargin, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Source="{Binding ImgPath}"
+                       Stretch="UniformToFill" />
+                    </Grid>
+                    <TextBlock x:Name="txt" Grid.Column="1" 
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
+                           Text="{Binding Name}" />
+                </Grid>
+            </HierarchicalDataTemplate>
+
+            <HierarchicalDataTemplate x:Key="MenuImageItem" DataType="{x:Type ac:HamburgerTreeMenuGlyphItem}" ItemsSource="{Binding Path=Children}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image HorizontalAlignment="Center" Width="{Binding ElementName=txt,Path=FontSize}" Height="{Binding ElementName=txt,Path=FontSize}"
+                       VerticalAlignment="Center"
+                       Source="{Binding ImgPath}"
+                       Stretch="UniformToFill" />
+                    <TextBlock x:Name="txt" Grid.Column="1" Margin="2,0,0,0"
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
+                           Text="{Binding Name}" />
+                </Grid>
+            </HierarchicalDataTemplate>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel >
+                <GroupBox Header="菜单" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Menu Margin="2" Style="{DynamicResource AIStudio.Styles.Menu}" ItemTemplate="{StaticResource MenuImageItem}" ItemsSource="{Binding DataList}"/>
+                            <TextBox Width="140" Margin="2" ac:ControlAttach.Watermark="右键菜单" ContextMenu="{DynamicResource AIStudio.TextBox.ContextMenu}" Style="{DynamicResource AIStudio.Styles.TextBox}" ></TextBox>
+                            <TextBox Text="With Custom Context Menu" Style="{DynamicResource AIStudio.Styles.TextBox}">
+                                <TextBox.ContextMenu>
+                                    <ContextMenu Style="{DynamicResource AIStudio.Styles.ContextMenu}">
+                                        <MenuItem Header="Hello World"/>
+                                        <MenuItem Header="Clickety Click">
+                                            <MenuItem Header="Clackety Clack"/>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </TextBox.ContextMenu>
+                            </TextBox>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="左侧菜单" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <ac:HamburgerTreeMenu
+                                x:Name="HamburgerMenuControl"
+                                ItemsSource="{Binding DataList}"
+                                SelectedIndex="1"
+                                Margin="2"
+                                Content="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Path=SelectedItem}"
+                                OptionsItemsSource="{Binding DataList}"
+                                OptionsItemTemplate="{StaticResource LeftHamburgerMenuImageItem}"
+                                ItemTemplate="{StaticResource HamburgerMenuImageItem}"
+                                MenuItemTemplate="{StaticResource LeftHamburgerMenuImageItem}"
+                                Style="{DynamicResource AIStudio.Styles.HamburgerTreeMenu}">
+                        <!--  Content  -->
+                        <ac:HamburgerTreeMenu.ContentTemplate>
+                            <DataTemplate>
+                                <Grid x:Name="ContentGrid">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Background="{Binding Path=PaneBackground, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}" Height="{Binding Path=HamburgerHeight, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}">
+                                        <TextBlock x:Name="Header"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding Name}"/>
+                                    </Border>
+                                    <ac:TransitioningContentControl Grid.Row="1"
+                                                              Content="{Binding ImgPath}"
+                                                              RestartTransitionOnContentChange="True"
+                                                              Transition="Default">
+                                        <ac:TransitioningContentControl.ContentTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding}" Width="800"/>
+                                            </DataTemplate>
+                                        </ac:TransitioningContentControl.ContentTemplate>
+                                    </ac:TransitioningContentControl>
+                                </Grid>
+                            </DataTemplate>
+                        </ac:HamburgerTreeMenu.ContentTemplate>
+                    </ac:HamburgerTreeMenu>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

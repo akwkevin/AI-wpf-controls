@@ -1,0 +1,117 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.CardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel>
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:Card Header="Atomic" Footer="Stive Morgan" Margin="2">
+                                <ac:Card.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding}" Margin="10"/>
+                                    </DataTemplate>
+                                </ac:Card.HeaderTemplate>
+                                <Border Style="{DynamicResource AIStudio.Styles.Border.Clip}">
+                                    <Image Width="240" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/1.jpg" Stretch="Uniform"/>
+                                </Border>
+                                <ac:Card.FooterTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{Binding}" Margin="0,6,0,0" HorizontalAlignment="Left"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ac:Card.FooterTemplate>
+                            </ac:Card>
+                            <ac:Card Header="Atomic" Footer="Stive Morgan" Margin="2" Style="{DynamicResource AIStudio.Styles.Card.Corner}">
+                                <ac:Card.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding}" Margin="10"/>
+                                    </DataTemplate>
+                                </ac:Card.HeaderTemplate>
+                                <Border Style="{DynamicResource AIStudio.Styles.Border.Clip}">
+                                    <Image Width="240" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/1.jpg" Stretch="Uniform"/>
+                                </Border>
+                                <ac:Card.FooterTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{Binding}" Margin="0,6,0,0" HorizontalAlignment="Left"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ac:Card.FooterTemplate>
+                            </ac:Card>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="可翻转" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:Flipper x:Name="flipper" Header="Atomic" Footer="Stive Morgan" Margin="2">
+                                <ac:Flipper.HeaderTemplate>
+                                    <DataTemplate>
+                                        <DockPanel LastChildFill="True">
+                                            <ToggleButton IsChecked="{Binding ElementName=flipper,Path=IsFlipped}" DockPanel.Dock="Right" Margin="2" Padding="6" Background="Transparent" Style="{DynamicResource AIStudio.Styles.ToggleButton.Icon}" ac:IconAttach.Geometry="{StaticResource ArrowForwardGeometry}" ac:IconAttach.GeometrySelected="{StaticResource ArrowBackGeometry}" VerticalAlignment="Center"/>
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding}" Margin="10"/>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ac:Flipper.HeaderTemplate>
+                                <ac:Flipper.FrontContent>
+                                    <Border Style="{DynamicResource AIStudio.Styles.Border.Clip}">
+                                        <Image Width="240" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/1.jpg" Stretch="Uniform"/>
+                                    </Border>
+                                </ac:Flipper.FrontContent>
+                                <ac:Flipper.BackContent>
+                                    <Border Style="{DynamicResource AIStudio.Styles.Border.Clip}">
+                                        <Image Width="240" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/2.jpg" Stretch="Uniform"/>
+                                    </Border>
+                                </ac:Flipper.BackContent>
+                                <ac:Flipper.FooterTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{Binding}" Margin="0,6,0,0" HorizontalAlignment="Left"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ac:Flipper.FooterTemplate>
+                            </ac:Flipper>
+                            <ac:Flipper x:Name="flipper2" Header="Atomic" Footer="Stive Morgan" Margin="2" Style="{DynamicResource AIStudio.Styles.Flipper.Corner}">
+                                <ac:Flipper.HeaderTemplate>
+                                    <DataTemplate>
+                                        <DockPanel LastChildFill="True">
+                                            <ToggleButton IsChecked="{Binding ElementName=flipper2,Path=IsFlipped}" DockPanel.Dock="Right" Margin="2" Padding="6" Background="Transparent" Style="{DynamicResource AIStudio.Styles.ToggleButton.Icon}" ac:IconAttach.Geometry="{StaticResource ArrowForwardGeometry}" ac:IconAttach.GeometrySelected="{StaticResource ArrowBackGeometry}" VerticalAlignment="Center"/>
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding}" Margin="10"/>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ac:Flipper.HeaderTemplate>
+                                <ac:Flipper.FrontContent>
+                                    <Border Style="{DynamicResource AIStudio.Styles.Border.Clip}">
+                                        <Image Width="240" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/1.jpg" Stretch="Uniform"/>
+                                    </Border>
+                                </ac:Flipper.FrontContent>
+                                <ac:Flipper.BackContent>
+                                    <Border Style="{DynamicResource AIStudio.Styles.Border.Clip}">
+                                        <Image Width="240" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/2.jpg" Stretch="Uniform"/>
+                                    </Border>
+                                </ac:Flipper.BackContent>
+                                <ac:Flipper.FooterTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{Binding}" Margin="0,6,0,0" HorizontalAlignment="Left"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ac:Flipper.FooterTemplate>
+                            </ac:Flipper>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

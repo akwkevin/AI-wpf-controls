@@ -1,0 +1,782 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/CheckBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ComboBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TextBlock.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Expander.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/NumericUpDown/NumericUpDown.MaterialDesign.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <!--MetroDataGrid-->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
+
+    <Style x:Key="AIStudio.Styles.CheckBox.DataGrid" BasedOn="{StaticResource AIStudio.Styles.CheckBox}" TargetType="CheckBox">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=IsReadOnly, RelativeSource={RelativeSource AncestorType=DataGridCell}}" Value="True">
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsEditing, RelativeSource={RelativeSource AncestorType=DataGridCell}}" Value="False">
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="AIStudio.Styles.ComboBox.DataGrid" BasedOn="{StaticResource AIStudio.Styles.ComboBox}" TargetType="{x:Type ComboBox}">
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridCell}}, Path=Foreground, Mode=OneWay}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="IsSynchronizedWithCurrentItem" Value="False" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="Padding" Value="4 0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <ContentPresenter Margin="{TemplateBinding Padding}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Content="{TemplateBinding SelectionBoxItem}"
+                                      ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                      IsHitTestVisible="false"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.ComboBox.DataGrid.Editing" BasedOn="{StaticResource AIStudio.Styles.ComboBox.Virtualized}" TargetType="{x:Type ComboBox}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="IsSynchronizedWithCurrentItem" Value="False" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="Padding" Value="3 4" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0" />
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEditable" Value="False" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignDataGridRowHoverBackground}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.TextBlock.DataGrid" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="4 0" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.TextBox.DataGrid.Editing" BasedOn="{StaticResource AIStudio.Styles.TextBox}" TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="Padding" Value="2 4" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0" />
+        <Setter Property="controls:ControlAttach.ClearTextButton" Value="True" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.Hyperlink.DataGrid" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" TargetType="{x:Type TextBlock}">
+        <Style.Resources>
+            <Style TargetType="{x:Type Hyperlink}">
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="TextDecorations" Value="Underline" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignSelection}" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="True">
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="ForceCursor" Value="True" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Style.Resources>
+        <Setter Property="Margin" Value="4 0" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.NumericUpDown.DataGrid" BasedOn="{StaticResource AIStudio.Styles.NumericUpDown}" TargetType="{x:Type controls:NumericUpDown}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="AllowSpin" Value="False" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.NumericUpDown.DataGrid.Editing" BasedOn="{StaticResource AIStudio.Styles.NumericUpDown.DataGrid}" TargetType="{x:Type controls:NumericUpDown}">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="AllowSpin" Value="True" />
+    </Style>
+
+    <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Rectangle x:Name="Border"
+                                   Fill="{DynamicResource MaterialDesignDivider}" />
+                        <Polygon x:Name="Arrow"
+                                 Margin="8 8 3 3"
+                                 HorizontalAlignment="Right"
+                                 VerticalAlignment="Bottom"
+                                 Fill="{DynamicResource MaterialDesignBodyLight}"
+                                 Opacity="0.15"
+                                 Points="0,10 10,10 10,0"
+                                 Stretch="Uniform" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Stroke"  Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Arrow" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.Thumb.ColumnHeaderGripper" TargetType="{x:Type Thumb}">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignDivider}" />
+        <Setter Property="Cursor" Value="SizeWE" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Margin="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            Background="Transparent"
+                            BorderBrush="{TemplateBinding Background}"
+                            BorderThickness="0 0 1 0" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Width" Value="8" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.Thumb.RowHeaderGripper" TargetType="{x:Type Thumb}">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignDivider}" />
+        <Setter Property="Cursor" Value="SizeNS" />
+        <Setter Property="Height" Value="6" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Margin="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            Background="Transparent"
+                            BorderBrush="{TemplateBinding Background}"
+                            BorderThickness="0 0 0 1" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.DataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="BorderThickness" Value="0 0 0 1" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1,0,1,0" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="BackgroundBorder"
+                                Grid.ColumnSpan="2"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" />
+
+                        <ContentControl x:Name="HeaderContent"
+                                                   Margin="{TemplateBinding Padding}"
+                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                   Content="{TemplateBinding Content}"                                                  
+                                                   ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                   ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                        <Path x:Name="SortArrow"
+                              Grid.Column="1"
+                              Width="8"
+                              Height="6"
+                              Margin="0 0 8 2"
+                              VerticalAlignment="Center"
+                              Fill="{DynamicResource MaterialDesignColumnHeader}"
+                              RenderTransformOrigin="0.5,0.5"
+                              Stretch="Fill"
+                              Visibility="Collapsed" />
+
+                        <Thumb x:Name="PART_LeftHeaderGripper"
+                               Grid.ColumnSpan="2"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource AIStudio.Styles.Thumb.ColumnHeaderGripper}"
+                               Background="Transparent" />
+
+                        <Thumb x:Name="PART_RightHeaderGripper"
+                               Grid.ColumnSpan="2"
+                               HorizontalAlignment="Right"
+                               Style="{StaticResource AIStudio.Styles.Thumb.ColumnHeaderGripper}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="SortArrow" Property="Data" Value="M5,10 H14 L9.5,4.5 Z" />
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="SortArrow" Property="Data" Value="M5,6 H14 L9.5,12 Z" />
+                            <Setter TargetName="SortArrow" Property="Margin" Value="0 0 8 0" />
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="DisplayIndex" Value="0">
+                            <Setter TargetName="PART_LeftHeaderGripper" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="SortDirection" Value="{x:Null}" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignDataGridRowHoverBackground}" />
+            </MultiTrigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.DataGridRowHeader" TargetType="{x:Type DataGridRowHeader}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="BorderThickness" Value="0 0 1 0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
+                    <Grid>
+                        <Border Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <Control Grid.Column="1"
+                                         SnapsToDevicePixels="False"
+                                         Focusable="False"
+                                         Template="{Binding ValidationErrorTemplate, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
+                                         Visibility="{Binding (Validation.HasError), Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                            </Grid>
+                        </Border>
+                        <Thumb x:Name="PART_TopHeaderGripper"
+                               VerticalAlignment="Top"
+                               Style="{StaticResource AIStudio.Styles.Thumb.RowHeaderGripper}"
+                               Background="Transparent" />
+                        <Thumb x:Name="PART_BottomHeaderGripper"
+                               VerticalAlignment="Bottom"
+                               Style="{StaticResource AIStudio.Styles.Thumb.RowHeaderGripper}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignDataGridRowHoverBackground}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--  ____________________ Metro CellStyle ____________________  -->
+    <Style x:Key="AIStudio.Styles.DataGridCell" TargetType="{x:Type DataGridCell}">
+        <Setter Property="controls:DataGridAttach.SelectionUnit" Value="{Binding Path=(controls:DataGridAttach.SelectionUnit), Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1,0,1,0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <!--  IsSelected  -->
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource Mode=Self}}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.IsCellOrRowHeader" Value="True" />
+                    <Condition Property="IsSelected" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self}}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self}}" />
+            </MultiTrigger>
+
+            <!--  IsKeyboardFocusWithin  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.IsCellOrRowHeader" Value="True" />
+                    <Condition Property="IsKeyboardFocusWithin" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self}}" />
+            </MultiTrigger>
+
+            <!--  IsSelected and Selector.IsSelectionActive  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True" />
+                    <Condition Property="Selector.IsSelectionActive" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.IsCellOrRowHeader" Value="True" />
+                    <Condition Property="IsSelected" Value="True" />
+                    <Condition Property="Selector.IsSelectionActive" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.6}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.6}" />
+            </MultiTrigger>
+
+            <!--  IsMouseOver  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.IsCellOrRowHeader" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}" />
+            </MultiTrigger>
+
+            <!--  IsEnabled  -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+            </Trigger>
+
+            <!--  IsEnabled and IsSelected  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="False" />
+                    <Condition Property="IsSelected" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource Mode=Self}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.IsCellOrRowHeader" Value="True" />
+                    <Condition Property="IsEnabled" Value="False" />
+                    <Condition Property="IsSelected" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.12}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.12}" />
+            </MultiTrigger>
+
+        </Style.Triggers>
+    </Style>
+
+    <ControlTemplate x:Key="AIStudio.Templates.DataGridRow.ValidationError">
+        <Grid Margin="2 0 2 0"
+              VerticalAlignment="Center"
+              DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}, Path=(Validation.Errors).CurrentItem}"
+              ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.ErrorContent}">
+            <Path Width="20"
+                  Height="20"
+                  Fill="{DynamicResource MaterialDesignValidationErrorBrush}"
+                  Data="m 31.630585,39.233818 24.6309,-24.6308 c 0.6183,-0.6184 1.6208,-0.6184 2.2392,0 l 24.6308,24.6308 c 0.6184,0.6184 0.6184,1.6209 0,2.2392 l -24.6308,24.6309 c -0.6183,0.6183 -1.6209,0.6183 -2.2392,0 l -24.6309,-24.6309 c -0.6183,-0.6183 -0.6183,-1.6208 0,-2.2392 z"
+                  Stretch="Uniform" />
+            <Path Width="10"
+                  Height="10"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Fill="{DynamicResource MaterialDesignValidationErrorBrush}"
+                  Data="m 53.781741,31.196677 c -2.237724,0 -4.0625,1.824776 -4.0625,4.0625 0,2.237724 1.824776,4.0625 4.0625,4.0625 2.237724,0 4.0625,-1.824776 4.0625,-4.0625 0,-2.237724 -1.824776,-4.0625 -4.0625,-4.0625 z m -4.09375,-21.375 0.03125,0.53125 1.21875,19.46875 5.6875,0 1.25,-20 -8.1875,0 z"
+                  Stretch="Uniform" />
+        </Grid>
+    </ControlTemplate>
+
+    <!--  ____________________ Metro RowStyle ____________________  -->
+    <!--  Don't set the MinHeight or Height property, use the MinRowHeight or RowHeight property on DataGrid style!  -->
+    <Style x:Key="AIStudio.Styles.DataGridRow" TargetType="{x:Type DataGridRow}">
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+        <Setter Property="controls:DataGridAttach.SelectionUnit" Value="{Binding Path=SelectionUnit, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+        <Setter Property="Margin" Value="0 0 0 0" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+        <Setter Property="ValidationErrorTemplate" Value="{StaticResource AIStudio.Templates.DataGridRow.ValidationError}" />
+        <Style.Triggers>
+            <!--  IsSelected  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.SelectionUnit" Value="FullRow" />
+                    <Condition Property="IsSelected" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self}}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self}}" />
+                <Setter Property="Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource Mode=Self}}" />
+            </MultiTrigger>
+
+            <!--  IsSelected and Selector.IsSelectionActive  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.SelectionUnit" Value="FullRow" />
+                    <Condition Property="IsSelected" Value="True" />
+                    <Condition Property="Selector.IsSelectionActive" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.6}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.6}" />
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+            </MultiTrigger>
+
+            <!--  IsMouseOver  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.SelectionUnit" Value="FullRow" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}" />
+            </MultiTrigger>
+
+            <!--  IsEnabled  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.SelectionUnit" Value="FullRow" />
+                    <Condition Property="IsEnabled" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+            </MultiTrigger>
+
+            <!--  IsEnabled and IsSelected  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:DataGridAttach.SelectionUnit" Value="FullRow" />
+                    <Condition Property="IsEnabled" Value="False" />
+                    <Condition Property="IsSelected" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.12}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.12}" />
+                <Setter Property="Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource Mode=Self}}" />
+            </MultiTrigger>
+
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.DataGrid" TargetType="{x:Type DataGrid}">
+        <Style.Resources>
+            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource AIStudio.Styles.DataGridColumnHeader}" />
+            <Style TargetType="{x:Type DataGridRowHeader}" BasedOn="{StaticResource AIStudio.Styles.DataGridRowHeader}" />
+            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource AIStudio.Styles.DataGridRow}" >
+                <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" />
+                <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" />
+            </Style>
+            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource AIStudio.Styles.DataGridCell}" >
+                <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" />
+                <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" />
+            </Style>
+        </Style.Resources>
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource MaterialDesignChipBackground}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource AIStudio.Styles.DataGridColumnHeader}" />
+        <Setter Property="DropLocationIndicatorStyle">
+            <Setter.Value>
+                <Style TargetType="Separator">
+                    <Setter Property="Background" Value="{DynamicResource MaterialDesignDivider}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Separator">
+                                <Rectangle Width="{TemplateBinding Width}"
+                                           Height="{TemplateBinding Height}"
+                                           Fill="{TemplateBinding Background}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Width" Value="2" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="GridLinesVisibility" Value="All" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource MaterialDesignDivider}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource MaterialDesignDivider}" />
+        <Setter Property="MinRowHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="RowHeaderStyle" Value="{StaticResource AIStudio.Styles.DataGridRowHeader}" />
+        <Setter Property="RowStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource AIStudio.Styles.DataGridRow}" TargetType="{x:Type DataGridRow}">
+                    <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" />
+                    <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource AIStudio.Styles.DataGridCell}" TargetType="{x:Type DataGridCell}">
+                    <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" />
+                    <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGrid}">
+                    <Border Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="DG_ScrollViewer" Focusable="False">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Button Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                Style="{DynamicResource {ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}"
+                                                Command="{x:Static DataGrid.SelectAllCommand}"
+                                                Focusable="False"
+                                                Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                        <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
+                                                                        Grid.Column="1"
+                                                                        Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                                    Grid.ColumnSpan="2"
+                                                                    CanContentScroll="{TemplateBinding CanContentScroll}" />
+                                        </Grid>
+                                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                                   Grid.Row="1"
+                                                   Grid.Column="2"
+                                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                                   Orientation="Vertical"
+                                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        <Grid Grid.Row="2" Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                                       Grid.Column="1"
+                                                       Maximum="{TemplateBinding ScrollableWidth}"
+                                                       Orientation="Horizontal"
+                                                       ViewportSize="{TemplateBinding ViewportWidth}"
+                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                       Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource PrimaryHueLightBrush}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueLightForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MaterialDesignToolBackground}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MaterialDesignToolForeground}" />
+            </Trigger>
+
+            <Trigger Property="IsGrouping" Value="True">
+                <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.ToggleButton.ExpanderHeader.Down.DataGrid.GroupItem"
+           BasedOn="{StaticResource AIStudio.Styles.ToggleButton.ExpanderHeader.Down}"
+           TargetType="{x:Type ToggleButton}">
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid x:Name="RowGroupHeaderRoot"
+                              Margin="{TemplateBinding Padding}"
+                              Background="Transparent"
+                              SnapsToDevicePixels="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="22" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Path x:Name="Arrow"
+                                  Grid.Column="0"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Data="M 1,1.5 L 4.5,5 L 8,1.5"
+                                  SnapsToDevicePixels="False"
+                                  Stroke="{TemplateBinding Foreground}"
+                                  StrokeThickness="2" />
+                            <ContentControl Grid.Column="1"
+                                                  Margin="4 0 0 0"
+                                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"                                               
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="Arrow" Property="Data" Value="M 1,4.5  L 4.5,1  L 8,4.5" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="{DynamicResource MaterialDesignDataGridRowHoverBackground}" />
+                            <Setter TargetName="Arrow" Property="Stroke" Value="{DynamicResource MaterialDesignBody}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" Value="{DynamicResource MaterialDesignDataGridRowHoverBackground}" />
+                            <Setter TargetName="Arrow" Property="Stroke" Value="{DynamicResource MaterialDesignBody}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.GroupItem.DataGrid" TargetType="{x:Type GroupItem}">
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupItem}">
+                    <Expander x:Name="PART_Header"
+                              Padding="0"
+                              controls:ExpanderAttach.HeaderDownStyle="{StaticResource AIStudio.Styles.ToggleButton.ExpanderHeader.Down.DataGrid.GroupItem}"
+                              Background="{DynamicResource MaterialDesignDataGridRowHoverBackground}"
+                              BorderThickness="0"
+                              Header="{TemplateBinding Content}"
+                              HeaderStringFormat="{TemplateBinding ContentStringFormat}"
+                              HeaderTemplate="{TemplateBinding ContentTemplate}"
+                              HeaderTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                              IsExpanded="True"
+                              Style="{StaticResource AIStudio.Styles.Expander}">
+                        <ItemsPresenter x:Name="ItemsPresenter" />
+                    </Expander>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

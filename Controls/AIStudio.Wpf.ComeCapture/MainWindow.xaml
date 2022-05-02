@@ -1,0 +1,37 @@
+﻿<Window x:Class="AIStudio.Wpf.ComeCapture.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AIStudio.Wpf.ComeCapture"
+        xmlns:ctrl="clr-namespace:AIStudio.Wpf.ComeCapture.Controls"
+        Title="MainWindow" AllowsTransparency="True" WindowState="Maximized" Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None" FontFamily="Microsoft YaHei" Cursor="Cross"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        MouseMove="Window_MouseMove"
+        PreviewKeyDown="Window_KeyDown">
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Background="{TemplateBinding Background}" Margin="0" Padding="0">
+                <ContentControl Content="{TemplateBinding Content}"/>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
+    <Grid>
+        <Canvas x:Name="MainCanvas" Background="Transparent" Margin="0,0">
+            <!--遮罩-->
+            <Canvas x:Name="MaskLeft" Background="Black" Opacity="0.5" Canvas.Left="0" Canvas.Top="0" Width="{Binding MaskLeftWidth}"/>
+            <Canvas x:Name="MaskRight" Background="Black" Opacity="0.5" Canvas.Right="0" Canvas.Top="0" Width="{Binding MaskRightWidth}"/>
+            <Canvas x:Name="MaskTop" Background="Black" Opacity="0.5" Canvas.Left="{Binding ElementName=MaskLeft, Path=Width}" Canvas.Top="0" Width="{Binding MaskTopWidth}" Height="{Binding MaskTopHeight}"/>
+            <Canvas x:Name="MaskBottom" Background="Black" Opacity="0.5" Canvas.Left="{Binding ElementName=MaskLeft, Path=Width}" Canvas.Bottom="0" Width="{Binding ElementName=MaskTop, Path=Width}" Height="{Binding MaskBottomHeight}"/>
+            
+            <!--尺寸和RGB-->
+            <StackPanel x:Name="SizeRGB" Width="140" Opacity="0.7" Background="Black" Canvas.Left="{Binding ShowSizeLeft}" Canvas.Top="{Binding ShowSizeTop}">
+                <TextBlock x:Name="Show_Size" Height="20" Text="{Binding ShowSize}" FontSize="12" Foreground="White" TextAlignment="Left" Padding="10,4,10,0" Visibility="Collapsed"/>
+                <TextBlock x:Name="Show_RGB" Height="20" Text="{Binding ShowRGB}" FontSize="12" Foreground="White" TextAlignment="Left" Padding="10,1,10,0" Visibility="Collapsed"/>
+            </StackPanel>
+
+            <ctrl:MainImage x:Name="MainImage"/>
+            <ctrl:ImageEditBar x:Name="ImageEditBar"/>
+            <ctrl:SizeColorBar x:Name="SizeColorBar"/>
+        </Canvas>
+    </Grid>
+</Window>

@@ -1,0 +1,506 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ToggleButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TreeView.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ListBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TextBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Tag/TagBox.MaterialDesign.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:BoolInverseConverter x:Key="BoolInverseConverter"/>
+    <converter:ShadowConverter x:Key="ShadowConverter"/>
+
+    <!--TreeSelect普通样式-->
+    <Style x:Key="AIStudio.Styles.TreeSelect" TargetType="{x:Type controls:TreeSelect}">
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="MaxDropDownHeight" Value="200" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
+        <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
+        <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
+        <Setter Property="controls:IconAttach.Geometry" Value="{StaticResource DownGeometry}"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource AIStudio.Styles.ValidationErrorTemplate}" />
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Left" >
+                        <TextBlock Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:TreeSelect}">
+                    <Grid x:Name="PART_Root">
+                        <Border x:Name="Bg" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" 
+                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <Grid x:Name="PART_InnerGrid" Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="12" />
+                            </Grid.ColumnDefinitions>
+                            <!--Label区域-->
+                            <ContentControl x:Name="Label" Template="{TemplateBinding controls:ControlAttach.LabelTemplate}" IsTabStop="False" IsHitTestVisible="False"
+                                            Content="{TemplateBinding controls:ControlAttach.Label}" Margin="1"/>
+                            <!--附加内容区域-->
+                            <Border x:Name="PART_AttachContent" Panel.ZIndex="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                <ContentControl VerticalAlignment="Center" VerticalContentAlignment="Center" Template="{TemplateBinding controls:ControlAttach.AttachContent}" />
+                            </Border>
+
+                            <!--下拉按钮-->
+                            <ToggleButton x:Name="PART_DropDownToggle" 
+                                      Grid.Column="1"  Grid.ColumnSpan="3" 
+                                      IsTabStop="False" 
+                                      Style="{StaticResource AIStudio.Styles.ComboToggleButton}" 
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Width="{Binding Path=(controls:IconAttach.Width), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Height="{Binding Path=(controls:IconAttach.Height), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Geometry="{Binding Path=(controls:IconAttach.Geometry), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      IsEnabled="{Binding Path=IsReadOnly,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource BoolInverseConverter},Mode=OneWay}"
+                                      Foreground="{TemplateBinding BorderBrush}"/>
+                            <!--水印-->
+                            <Border Grid.Column="1">
+                                <TextBlock x:Name="Message" Visibility="Collapsed"
+                                       Text="{TemplateBinding controls:ControlAttach.Watermark}"
+                                       Foreground="{TemplateBinding BorderBrush}" IsHitTestVisible="False" Opacity="0.4" Margin="2,0" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <!--内容区-->
+                            <Grid Grid.Column="1">
+                                <!--文本编辑-->
+                                <TextBox x:Name="PART_EditableTextBox"                                           
+                                         HorizontalAlignment="Stretch" 
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                         IsHitTestVisible="False"
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                         IsReadOnly="{TemplateBinding IsReadOnly}" 
+                                         FontFamily="{TemplateBinding FontFamily}" 
+                                         FontSize="{TemplateBinding FontSize}"
+                                         Foreground="{TemplateBinding Foreground}"
+                                         SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                         CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"       
+                                         Text="{Binding Path=Text,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"  
+                                         Style="{StaticResource AIStudio.Styles.TextBox.ComboBox.Editable}"/>
+                            </Grid>
+                        </Grid>
+
+                        <!--弹出多选列表-->
+                        <Popup x:Name="PART_Popup" VerticalOffset="1" AllowsTransparency="True" Focusable="False" StaysOpen="False"
+                               IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
+                            <Grid MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                <Border x:Name="PopupBorder" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch"
+                                        Height="Auto" BorderBrush="{TemplateBinding BorderBrush}" 
+                                        CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                        Background="{DynamicResource MaterialDesignBackground}">
+                                    <controls:ExtendedTreeView x:Name="PART_TreeView" Margin="2"
+                                              ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"
+                                              MaxHeight="{TemplateBinding MaxDropDownHeight}"  
+                                              ItemTemplate="{TemplateBinding ItemTemplate}"
+                                              Background="{TemplateBinding Background}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              controls:ControlAttach.Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Background)}"   
+                                              controls:ControlAttach.Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Foreground)}"   
+                                              Style="{StaticResource AIStudio.Styles.TreeView}">
+                                    </controls:ExtendedTreeView>
+                                </Border>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <!--触发器-->
+                    <ControlTemplate.Triggers>
+                        <!--1.显示水印-->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
+                            <Setter TargetName="Message" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <!--编辑模式-->
+                        <Trigger Property="IsEditable" Value="True">
+                            <Setter TargetName="PART_DropDownToggle" Property="Grid.Column" Value="3" />
+                            <Setter TargetName="PART_DropDownToggle" Property="Grid.ColumnSpan" Value="1" />
+                            <Setter TargetName="PART_DropDownToggle" Property="Background" Value="Transparent" />
+                            <Setter Property="IsTabStop" Value="false" />
+                            <Setter TargetName="PART_DropDownToggle" Property="Focusable" Value="False" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                            <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                            <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignValidationErrorBrush}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_Root" Property="Opacity" Value="0.5"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="controls:ControlAttach.AttachContent">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Button x:Name="clear" 
+                            Visibility="Collapsed" 
+                            Foreground="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType=controls:TreeSelect}}"
+                            Focusable="False"
+                            IsTabStop="False" 
+                            Style="{StaticResource AIStudio.Styles.Button.Clear}"
+                            controls:ControlAttach.ClearTextButton="{Binding Path=(controls:ControlAttach.ClearTextButton),RelativeSource={RelativeSource AncestorType=controls:TreeSelect}}" 
+                            Command="controls:ControlAttach.ClearTextCommand" 
+                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type controls:TreeSelect}}}" />
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True" />
+                                <Condition Binding="{Binding Path=(controls:ControlAttach.ClearTextButton), RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="clear" Property="Visibility" Value="Visible"></Setter>
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="{x:Null}">
+                            <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="">
+                            <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueLightBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--TreeSelect包含附加属性Label的样式 AIStudio.Styles.TreeSelect.Label -->
+    <Style TargetType="{x:Type controls:TreeSelect}" x:Key="AIStudio.Styles.TreeSelect.Label" BasedOn="{StaticResource AIStudio.Styles.TreeSelect}">
+        <Setter Property="Width" Value="260"></Setter>
+        <Setter Property="controls:ControlAttach.LabelTemplate" >
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <TextBlock VerticalAlignment="Center" Margin="{Binding Path=Padding,RelativeSource={RelativeSource AncestorType=controls:TreeSelect},Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyRight}}" Text="{Binding Path=(controls:ControlAttach.Label),RelativeSource={RelativeSource AncestorType=controls:TreeSelect}}"></TextBlock>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--AIStudio.Styles.TreeSelect.Underline普通样式-->
+    <Style x:Key="AIStudio.Styles.TreeSelect.Underline" TargetType="{x:Type controls:TreeSelect}" BasedOn="{StaticResource AIStudio.Styles.TreeSelect}">
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:TreeSelect}">
+                    <Grid x:Name="PART_Root">
+                        <Border x:Name="Bg" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" />
+                        <Grid  x:Name="PART_InnerGrid" Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="12" />
+                            </Grid.ColumnDefinitions>
+                            <!--Label区域-->
+                            <ContentControl x:Name="Label" Template="{TemplateBinding controls:ControlAttach.LabelTemplate}" IsTabStop="False" IsHitTestVisible="False"
+                                            Content="{TemplateBinding controls:ControlAttach.Label}" Margin="1"/>
+                            <!--附加内容区域-->
+                            <Border x:Name="PART_AttachContent" Panel.ZIndex="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                <ContentControl VerticalAlignment="Center" VerticalContentAlignment="Center" Template="{TemplateBinding controls:ControlAttach.AttachContent}" />
+                            </Border>
+                            <!--下拉按钮-->
+                            <ToggleButton x:Name="PART_DropDownToggle" 
+                                      Grid.Column="1"  Grid.ColumnSpan="3" 
+                                      IsTabStop="False" 
+                                      Style="{StaticResource AIStudio.Styles.ComboToggleButton}" 
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Width="{Binding Path=(controls:IconAttach.Width), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Height="{Binding Path=(controls:IconAttach.Height), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Geometry="{Binding Path=(controls:IconAttach.Geometry), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      IsEnabled="{Binding Path=IsReadOnly,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource BoolInverseConverter},Mode=OneWay}"
+                                      Foreground="{TemplateBinding BorderBrush}"/>
+                            <!--水印-->
+                            <Border Grid.Column="1">
+                                <TextBlock x:Name="Message" Visibility="Collapsed"
+                                       Text="{TemplateBinding controls:ControlAttach.Watermark}"
+                                       Foreground="{TemplateBinding BorderBrush}" IsHitTestVisible="False" Opacity="0.4" Margin="2,0" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <!--内容区-->
+                            <Grid Grid.Column="1">
+                                <!--文本编辑-->
+                                <TextBox x:Name="PART_EditableTextBox"                                           
+                                         HorizontalAlignment="Stretch" 
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                         IsHitTestVisible="False"
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                         IsReadOnly="{TemplateBinding IsReadOnly}" 
+                                         FontFamily="{TemplateBinding FontFamily}" 
+                                         FontSize="{TemplateBinding FontSize}"
+                                         Foreground="{TemplateBinding Foreground}"
+                                         SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                         CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"       
+                                         Text="{Binding Path=Text,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"  
+                                         Style="{StaticResource AIStudio.Styles.TextBox.ComboBox.Editable}"/>
+                            </Grid>
+                        </Grid>
+
+                        <!--弹出多选列表-->
+                        <Popup x:Name="PART_Popup" VerticalOffset="1" AllowsTransparency="True" Focusable="False" StaysOpen="False"
+                               IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
+                            <Grid MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                <Border x:Name="PopupBorder" BorderThickness="1" HorizontalAlignment="Stretch"
+                                            Height="Auto" BorderBrush="{TemplateBinding BorderBrush}" 
+                                            CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                            Background="{DynamicResource MaterialDesignBackground}">
+                                    <controls:ExtendedTreeView x:Name="PART_TreeView" Margin="2"
+                                              ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"
+                                              MaxHeight="{TemplateBinding MaxDropDownHeight}"  
+                                              ItemTemplate="{TemplateBinding ItemTemplate}"
+                                              Background="{TemplateBinding Background}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              controls:ControlAttach.Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Background)}"   
+                                              controls:ControlAttach.Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Foreground)}"   
+                                              Style="{StaticResource AIStudio.Styles.TreeView}">
+                                    </controls:ExtendedTreeView>
+                                </Border>
+                            </Grid>
+                        </Popup>
+
+                        <controls:Underline x:Name="Underline" Background="{TemplateBinding controls:ControlAttach.BorderBrush}"/>
+                    </Grid>
+                    <!--触发器-->
+                    <ControlTemplate.Triggers>
+                        <!--1.显示水印-->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
+                            <Setter TargetName="Message" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <!--编辑模式-->
+                        <Trigger Property="IsEditable" Value="True">
+                            <Setter TargetName="PART_DropDownToggle" Property="Grid.Column" Value="3" />
+                            <Setter TargetName="PART_DropDownToggle" Property="Grid.ColumnSpan" Value="1" />
+                            <Setter TargetName="PART_DropDownToggle" Property="Background" Value="Transparent" />
+                            <Setter Property="IsTabStop" Value="false" />
+                            <Setter TargetName="PART_DropDownToggle" Property="Focusable" Value="False" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="Underline" Property="IsActive" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignValidationErrorBrush}"/>
+                            <Setter TargetName="Underline" Property="Background" Value="{DynamicResource MaterialDesignValidationErrorBrush}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_Root" Property="Opacity" Value="0.5"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.ListBoxItem.Clear" BasedOn="{StaticResource AIStudio.Styles.ListBoxItem}" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBodyLight}"/>
+        <Setter Property="Margin" Value="1,0"/>
+        <Setter Property="controls:ControlAttach.ClearTextButton" Value="True"/>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.TreeSelect.Tag" TargetType="{x:Type controls:TreeSelect}" BasedOn="{StaticResource AIStudio.Styles.TreeSelect}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:TreeSelect}">
+                    <Grid x:Name="PART_Root">
+                        <Border x:Name="Bg" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"   
+                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <Grid x:Name="PART_InnerGrid" Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="12" />
+                            </Grid.ColumnDefinitions>
+                            <!--Label区域-->
+                            <ContentControl x:Name="Label" Template="{TemplateBinding controls:ControlAttach.LabelTemplate}" IsTabStop="False" IsHitTestVisible="False"
+                                            Content="{TemplateBinding controls:ControlAttach.Label}" Margin="1,1,0,1"/>
+                            <!--附加内容区域-->
+                            <Border x:Name="PART_AttachContent" Panel.ZIndex="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                <ContentControl VerticalAlignment="Center" VerticalContentAlignment="Center" Template="{TemplateBinding controls:ControlAttach.AttachContent}" />
+                            </Border>
+                            <!--下拉按钮-->
+                            <ToggleButton x:Name="PART_DropDownToggle" 
+                                      Grid.Column="1"  Grid.ColumnSpan="3" 
+                                      IsTabStop="False" 
+                                      Style="{StaticResource AIStudio.Styles.ComboToggleButton}" 
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Width="{Binding Path=(controls:IconAttach.Width), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Height="{Binding Path=(controls:IconAttach.Height), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Geometry="{Binding Path=(controls:IconAttach.Geometry), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      IsEnabled="{Binding Path=IsReadOnly,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource BoolInverseConverter},Mode=OneWay}"
+                                      Foreground="{TemplateBinding BorderBrush}"/>
+                            <!--水印-->
+                            <Border Grid.Column="1">
+                                <TextBlock x:Name="Message" Visibility="Collapsed"
+                                       Text="{TemplateBinding controls:ControlAttach.Watermark}"
+                                       Foreground="{TemplateBinding BorderBrush}" IsHitTestVisible="False" Opacity="0.4" Margin="2,0" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <!--内容区-->
+                            <Grid Grid.Column="1">
+                                <!--Tag-->
+                                <controls:TagBox x:Name="PART_ListBox" ItemsSource="{TemplateBinding SelectedItems}" 
+                                         DisplayPath="{TemplateBinding DisplayMemberPath}" 
+                                         SelectedValuePath="{TemplateBinding SelectedValuePath}" 
+                                         Panel.ZIndex="2" 
+                                         BorderThickness="0" 
+                                         Padding="0"
+                                         MinHeight="0">
+                                    <controls:TagBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource AIStudio.Styles.Tag}" TargetType="{x:Type controls:Tag}">
+                                            <Setter Property="Background" Value="{DynamicResource MaterialDesignToolBackground}" />
+                                            <Setter Property="Foreground" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:TreeSelect}}}" />
+                                            <Setter Property="BorderThickness" Value="0" />
+                                            <Setter Property="Padding" Value="3,0" />
+                                            <Setter Property="Margin" Value="0,0,2,0" />
+                                        </Style>
+                                    </controls:TagBox.ItemContainerStyle>
+                                </controls:TagBox>
+                            </Grid>
+                            <!--弹出多选列表-->
+                            <Popup x:Name="PART_Popup" VerticalOffset="1" AllowsTransparency="True" Focusable="False" StaysOpen="False"
+                               IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
+                                <Grid MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <Border x:Name="PopupBorder" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch"
+                                            Height="Auto" BorderBrush="{TemplateBinding BorderBrush}" 
+                                            CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                            Background="{DynamicResource MaterialDesignBackground}">
+                                        <controls:ExtendedTreeView x:Name="PART_TreeView" Margin="2"
+                                              ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"
+                                              MaxHeight="{TemplateBinding MaxDropDownHeight}"  
+                                              ItemTemplate="{TemplateBinding ItemTemplate}"
+                                              Background="{TemplateBinding Background}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              controls:ControlAttach.Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Background)}"   
+                                              controls:ControlAttach.Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Foreground)}"                       
+                                              Style="{StaticResource AIStudio.Styles.TreeView}">
+                                        </controls:ExtendedTreeView>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </Grid>
+                    <!--触发器-->
+                    <ControlTemplate.Triggers>
+                        <!--1.显示水印-->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
+                            <Setter TargetName="Message" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <!--编辑模式-->
+                        <Trigger Property="IsEditable" Value="True">
+                            <Setter TargetName="PART_DropDownToggle" Property="Grid.Column" Value="3" />
+                            <Setter TargetName="PART_DropDownToggle" Property="Grid.ColumnSpan" Value="1" />
+                            <Setter TargetName="PART_DropDownToggle" Property="Background" Value="Transparent" />
+                            <Setter Property="IsTabStop" Value="false" />
+                            <Setter TargetName="PART_DropDownToggle" Property="Focusable" Value="False" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                            <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignValidationErrorBrush}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_Root" Property="Opacity" Value="0.5"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--默认样式-->
+    <Style TargetType="{x:Type controls:TreeSelect}" BasedOn="{StaticResource AIStudio.Styles.TreeSelect}"></Style>
+
+
+</ResourceDictionary>

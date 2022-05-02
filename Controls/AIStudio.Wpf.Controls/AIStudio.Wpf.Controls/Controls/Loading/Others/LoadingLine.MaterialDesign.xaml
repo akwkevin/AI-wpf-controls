@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="LoadingBase.MaterialDesign.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="AIStudio.Styles.LoadingLine" BasedOn="{StaticResource AIStudio.Styles.LoadingBase}" TargetType="controls:LoadingLine">
+        <Setter Property="DotDiameter" Value="5"/>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="Foreground" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="Foreground" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignToolForeground}" />
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Size" Value="Small">
+                <Setter Property="DotDiameter" Value="3"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Size" Value="Large">
+                <Setter Property="DotDiameter" Value="10"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--直线加载条默认样式-->
+    <Style BasedOn="{StaticResource AIStudio.Styles.LoadingLine}" TargetType="controls:LoadingLine"/>
+
+</ResourceDictionary>

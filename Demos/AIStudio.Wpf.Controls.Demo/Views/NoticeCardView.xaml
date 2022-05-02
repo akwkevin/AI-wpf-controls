@@ -1,0 +1,71 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.NoticeCardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel >
+                <GroupBox Header="弹窗提示" Style="{DynamicResource AIStudio.Styles.GroupBox}">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Light}" Content="Light" ac:ControlAttach.Status="Light" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Mid}" Content="Mid" ac:ControlAttach.Status="Mid" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Dark}" Content="Dark" ac:ControlAttach.Status="Dark" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Accent}" Content="Accent" ac:ControlAttach.Status="Accent" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Success}" Content="Success" ac:ControlAttach.Status="Success" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Info}" Content="Info" ac:ControlAttach.Status="Info" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Warning}" Content="Warning" ac:ControlAttach.Status="Warning" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Danger}" Content="Danger" ac:ControlAttach.Status="Danger" Style="{DynamicResource AIStudio.Styles.Button}"/>
+
+                            <TextBox Margin="2" MinWidth="100" Text="{Binding Width}" ac:TextBoxAttach.EnterUpdateSource="True" Style="{DynamicResource AIStudio.Styles.TextBox}"/>
+                            <TextBox Margin="2" MinWidth="100" Text="{Binding Height}" ac:TextBoxAttach.EnterUpdateSource="True" Style="{DynamicResource AIStudio.Styles.TextBox}"/>
+                            <ComboBox Margin="2" SelectedItem="{Binding HorizontalAlignment}" ac:EnumHelper.Enum="{x:Type HorizontalAlignment}" Width="100" Style="{DynamicResource AIStudio.Styles.ComboBox}"/>
+                            <ComboBox Margin="2" SelectedItem="{Binding VerticalAlignment}" ac:EnumHelper.Enum="{x:Type VerticalAlignment}" Width="100" Style="{DynamicResource AIStudio.Styles.ComboBox}"/>
+                            <ComboBox Margin="2" SelectedItem="{Binding NoticeCardStyle}" ac:EnumHelper.Enum="{x:Type ac:NoticeCardStyle}" Width="100" Style="{DynamicResource AIStudio.Styles.ComboBox}"/>
+                            <ToggleButton Margin="2" Content="Window" ac:ToggleButtonAttach.CheckedElement="Desktop" IsChecked="{Binding Desktop}" Style="{DynamicResource AIStudio.Styles.ToggleButton.Switch}"/>
+                            <ToggleButton Margin="2" Content="ShowSure" IsChecked="{Binding ShowSure}" Style="{DynamicResource AIStudio.Styles.ToggleButton.Switch}"/>
+                            <ToggleButton Margin="2" Content="ShowClose" IsChecked="{Binding ShowClose}" Style="{DynamicResource AIStudio.Styles.ToggleButton.Switch}"/>
+                            <Button Margin="2" Command="{Binding ClearCommand}" Content="Clear" ac:ControlAttach.Status="Danger" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:NoticeCard Margin="2" Status="Light" Title="Light" Message="Light Text" />
+                            <ac:NoticeCard Margin="2" Status="Mid" Title="Mid" Message="Mid Text" />
+                            <ac:NoticeCard Margin="2" Status="Dark" Title="Dark" Message="Dark Text" />
+                            <ac:NoticeCard Margin="2" Status="Accent" Title="Accent" Message="Accent Text" />
+                            <ac:NoticeCard Margin="2" Status="Success" Title="Success" Message="Success Text" />
+                            <ac:NoticeCard Margin="2" Status="Info" Title="Info" Message="Info Text" />
+                            <ac:NoticeCard Margin="2" Status="Warning" Title="Warning" Message="Warning Text" />
+                            <ac:NoticeCard Margin="2" Status="Danger" Title="Danger" Message="Danger Text" />
+                            <ac:NoticeCard Margin="2" Status="Plain" Title="Plain" Message="Plain Text" />
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="简洁" Style="{DynamicResource AIStudio.Styles.GroupBox}">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Light" Message="Light Text" />
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Mid" Message="Mid Text" />
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Dark" Message="Dark Text" />
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Accent" Message="Accent Text" />
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Success" Message="Success Text" />
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Info" Message="Info Text" />
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Warning" Message="Warning Text" />
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Danger" Message="Danger Text" />
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Plain" Message="Plain Text" />
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>               
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

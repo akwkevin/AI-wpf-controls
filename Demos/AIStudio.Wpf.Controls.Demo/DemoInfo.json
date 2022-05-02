@@ -1,0 +1,95 @@
+﻿[
+  {
+    "title": "General",
+    "image": "Home",
+    "demoItemList": [
+      [ "Introduce 介绍", "IntroduceView", "Introduce", "" ],
+      [ "Theme 自定义主题", "ColorToolView", "PalettePath", "" ],
+      [ "Color 色彩", "BrushView", "Brush", "" ],
+      [ "Button 按钮", "ButtonView", "Button", "" ],
+      [ "Icon 图标", "IconView", "FontAwesome", "" ],
+      [ "Path 路径", "PathView", "Path", "" ],
+      [ "TextBox 输入框", "TextBoxView", "Input", "" ]
+    ]
+  },
+  {
+    "title": "Navigation",
+    "image": "Navigation",
+    "demoItemList": [
+      [ "BreadcrumbBar 面包屑", "BreadcrumbBarView", "BreadcrumbBar", "" ],
+      [ "DropDown 下拉控件", "DropDownView", "DropDown", "" ],
+      [ "Menu 菜单", "MenuView", "Menu", "" ],
+      [ "Link 文字链接", "LinkTextBlockView", "Link", "" ],
+      [ "Pagination 分页", "PaginationView", "Pagination", "" ],
+      [ "StepBar 步骤条", "StepBarView", "Step", "" ]
+    ]
+  },
+  {
+    "title": "Data Entry",
+    "image": "Edit",
+    "demoItemList": [
+      [ "Cascader 级联选择", "CascaderView", "Cascader", "" ],
+      [ "CheckBox 复选框", "CheckBoxView", "CheckBox", "" ],
+      [ "DateTimePicker 日期和时间选择器", "DatePickerView", "DatePicker", "" ],
+      [ "Form 表单", "FormView", "Form", "" ],
+      [ "ComboBox 选择器", "ComboBoxView", "ComboBox", "" ],
+      [ "Radio 单选框", "RadioButtonView", "RadioButton", "" ],
+      [ "Rate 评分", "RateView", "Star", "" ],
+      [ "Repeat 重复按钮", "RepeatButtonView", "RepeatButton", "" ],
+      [ "Slider 滑动输入条", "SliderView", "Slider", "" ],
+      [ "Toggle 切换按钮", "ToggleButtonView", "ToggleSwitch", "" ],
+      [ "UpDown 数值选择控件", "NumericUpDownView", "NumericUpDown", "" ],
+      [ "Upload 上传", "UploadFileView", "Upload", "" ]
+    ]
+  },
+  {
+    "title": "Data Display",
+    "image": "Display",
+    "demoItemList": [
+      [ "Avatar 头像", "AvatarView", "Avatar", "" ],
+      [ "Badge 徽标数", "BadgeView", "Badge", "" ],
+      [ "Calendar 日历和时间", "CalendarView", "Calendar", "" ],
+      [ "Card 卡片", "CardView", "Card", "" ],
+      [ "Carousel 走马灯", "CarouselView", "Carousel", "" ],
+      [ "DataGrid 数据表格", "DataGridView", "Grid", "" ],
+      [ "Expander 折叠面板", "ExpanderView", "Expander", "" ],
+      [ "Group 分组框", "GroupBoxView", "Group", "" ],
+      [ "Imgae 图片", "ImageView", "Image", "" ],
+      [ "ScrollViewer 滚动视图", "ScrollViewerView", "Scroll", "" ],
+      [ "Tag 标签", "TagView", "Tag", "" ],
+      [ "Tabs 标签页", "TabControlView", "Tabs", "" ],
+      [ "ToolBar 工具条", "ToolBarView", "ToolBar", "" ],
+      [ "Text 文本块", "TextBlockView", "Text", "" ],
+      [ "Timeline 时间轴", "TimelineView", "Timeline", "" ],
+      [ "Tree 树形控件", "TreeViewView", "Tree", "" ],
+      [ "List 列表框", "ListBoxView", "List", "" ]
+    ]
+  },
+  {
+    "title": "Feedback",
+    "image": "Feedback",
+    "demoItemList": [
+      [ "Notice 警告提示", "NoticeCardView", "Alarm", "" ],
+      [ "Drawer 抽屉", "DrawerView", "Drawer", "" ],
+      [ "Message 全局提示", "MessageBoxView", "Message", "" ],
+      [ "Dialog 对话框", "DialogView", "Dialog", "" ],
+      [ "Notification 通知提醒框", "NotificationView", "Notification", "" ],
+      [ "Progress 进度条", "ProgressBarView", "Progress", "" ],
+      [ "Loading 加载中", "LoadingView", "Loading", "" ]
+    ]
+  },
+  {
+    "title": "Other",
+    "image": "Seedling",
+    "demoItemList": [
+      [ "Anchor 锚点", "NavigationBarView", "Anchor", "" ],
+      [ "GotoTop 回到顶部", "GotoTopView", "Goto", "" ],
+      [ "Divider 分割线", "DividerView", "Divider", "" ],
+      [ "ColorPicker 颜色拾取器", "ColorPickerView", "ColorPicker", "" ],
+      [ "MediaPlayer 媒体播放", "MediaPlayerView", "Media", "" ],
+      [ "Verify 校验", "VerifyView", "Verify", "" ],
+      [ "WebBrowser 网页", "WebBrowserView", "Browser", "" ],
+      [ "KeyNavigation 键盘操作", "ControlNavigationView", "Keyboard", "" ]
+    ]
+  }
+]

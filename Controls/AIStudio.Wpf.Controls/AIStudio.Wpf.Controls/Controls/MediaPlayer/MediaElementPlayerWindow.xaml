@@ -1,0 +1,17 @@
+﻿<controls:WindowBase x:Class="AIStudio.Wpf.Controls.MediaElementPlayerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"    
+        MaxboxEnable ="False"
+        MinboxEnable="False"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        Title="Player"
+        x:Name="playerWindow">
+    <Grid>
+        <controls:MediaElementPlayer x:Name="player" PlayStatus="Play"/>
+    </Grid>
+</controls:WindowBase>

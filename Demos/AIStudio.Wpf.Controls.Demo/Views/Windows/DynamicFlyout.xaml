@@ -1,0 +1,54 @@
+﻿<ac:Flyout x:Class="AIStudio.Wpf.Controls.Demo.Views.DynamicFlyout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" Style="{DynamicResource AIStudio.Styles.Flyout}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Grid.Row="0"
+                               Text="Something above the ScrollPanel" />
+            <TextBlock Grid.Row="0"
+                               Text="This Flyout animates its opacity when opening and closing."/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1"
+                                  VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <TextBox x:Name="firstTB" Text="TextBox 01" />
+                <TextBox Margin="0,5,0,0"
+                                     Text="TextBox 02" />
+                <TextBox Margin="0,5,0,0"
+                                     Text="TextBox 03" />
+                <TextBox Margin="0,5,0,0"
+                                     Text="TextBox 04" />
+                <TextBox Margin="0,5,0,0"
+                                     Text="TextBox 05" />
+                <TextBox Margin="0,5,0,0"
+                                     Text="TextBox 06" />
+                <TextBox Margin="0,5,0,0"
+                                     Text="TextBox 07" />
+                <TextBox Margin="0,5,0,0"
+                                     Text="TextBox 08" />
+                <TextBox Margin="0,5,0,0"
+                                     Text="TextBox 09" />
+                <TextBox Margin="0,5,0,0"
+                                     Text="TextBox 10" />
+            </StackPanel>
+        </ScrollViewer>
+        <UniformGrid Columns="2" Grid.Row="2">
+            <Button Style="{DynamicResource AIStudio.Styles.Button}"
+                                Margin="10"
+                                Content="Create" />
+            <Button Style="{DynamicResource AIStudio.Styles.Button}"
+                                Margin="10"
+                                Content="Cancel" />
+        </UniformGrid>
+    </Grid>
+</ac:Flyout>

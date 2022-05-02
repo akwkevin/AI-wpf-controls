@@ -1,0 +1,250 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.DatePickerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel >
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <DatePicker Margin="2" Style="{DynamicResource AIStudio.Styles.DatePicker}" MinWidth="120" ac:ControlAttach.Watermark="请选择日期"/>
+                            <ac:DateTimePicker Margin="2" MinWidth="170" ac:ControlAttach.Watermark="请选择时间日期">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:DateTimePicker Margin="2" MinWidth="170" ac:ControlAttach.Watermark="请选择时间日期">
+                                <ac:DateTimePicker.CalendarWithClock>
+                                    <ac:CalendarWithClock>
+                                        <ac:CalendarWithClock.Clock>
+                                            <ac:ListClock/>
+                                        </ac:CalendarWithClock.Clock>
+                                    </ac:CalendarWithClock>
+                                </ac:DateTimePicker.CalendarWithClock>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:DateTimePicker Margin="2" MinWidth="170" ac:ControlAttach.Watermark="请选择时间日期">
+                                <ac:DateTimePicker.CalendarWithClock>
+                                    <ac:CalendarWithClock>
+                                        <ac:CalendarWithClock.Clock>
+                                            <ac:Clock/>
+                                        </ac:CalendarWithClock.Clock>
+                                    </ac:CalendarWithClock>
+                                </ac:DateTimePicker.CalendarWithClock>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:DateTimePicker Margin="2" MinWidth="170" ac:ControlAttach.Watermark="请选择时间日期">
+                                <ac:DateTimePicker.CalendarWithClock>
+                                    <ac:CalendarWithClock>
+                                        <ac:CalendarWithClock.Clock>
+                                            <ac:NumberClock/>
+                                        </ac:CalendarWithClock.Clock>
+                                    </ac:CalendarWithClock>
+                                </ac:DateTimePicker.CalendarWithClock>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="时间选择" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:TimePicker Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请选择时间"/>
+                            <ac:TimePicker Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请选择时间">
+                                <ac:TimePicker.Clock>
+                                    <ac:ListClock />
+                                </ac:TimePicker.Clock>
+                            </ac:TimePicker>
+                            <ac:NumberClock Margin="2" />
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="默认值" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:DateTimePicker Margin="2" MinWidth="170" IsDefaultValue="True">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:DateTimePicker Margin="2" MinWidth="170" IsDefaultValue="True">
+                                <ac:DateTimePicker.CalendarWithClock>
+                                    <ac:CalendarWithClock>
+                                        <ac:CalendarWithClock.Clock>
+                                            <ac:ListClock/>
+                                        </ac:CalendarWithClock.Clock>
+                                    </ac:CalendarWithClock>
+                                </ac:DateTimePicker.CalendarWithClock>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:DateTimePicker Margin="2" MinWidth="170" IsDefaultValue="True">
+                                <ac:DateTimePicker.CalendarWithClock>
+                                    <ac:CalendarWithClock>
+                                        <ac:CalendarWithClock.Clock>
+                                            <ac:Clock/>
+                                        </ac:CalendarWithClock.Clock>
+                                    </ac:CalendarWithClock>
+                                </ac:DateTimePicker.CalendarWithClock>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:DateTimePicker Margin="2" MinWidth="170" IsDefaultValue="True">
+                                <ac:DateTimePicker.CalendarWithClock>
+                                    <ac:CalendarWithClock>
+                                        <ac:CalendarWithClock.Clock>
+                                            <ac:NumberClock/>
+                                        </ac:CalendarWithClock.Clock>
+                                    </ac:CalendarWithClock>
+                                </ac:DateTimePicker.CalendarWithClock>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:TimePicker Margin="2" MinWidth="100" IsDefaultValue="True"/>
+                            <ac:TimePicker Margin="2" MinWidth="100" IsDefaultValue="True">
+                                <ac:TimePicker.Clock>
+                                    <ac:ListClock />
+                                </ac:TimePicker.Clock>
+                            </ac:TimePicker>
+                            <ac:NumberClock Margin="2" IsDefaultValue="True"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="范围选择" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:ADateTimePicker Type="Date" DateTimeFormat="yyyy-MM-dd" Margin="2" MinWidth="140" ac:ControlAttach.Watermark="请选择日期"/>
+                            <ac:ADateTimePicker Type="DateTime" Margin="2" MinWidth="170" ac:ControlAttach.Watermark="请选择日期时间"/>
+                            <ac:ADateTimePicker Type="DateTime" IsShowConfirm="True" Margin="2" MinWidth="170" ac:ControlAttach.Watermark="请选择日期时间"/>
+                            <ac:RangeDatePicker Type="DateRange" Margin="2" MinWidth="200" ac:ControlAttach.Watermark="请选择日期范围"/>
+                            <ac:RangeDatePicker Type="DateRange" IsShowShortCuts="True" IsShowConfirm="True" Margin="2" MinWidth="200" ac:ControlAttach.Watermark="请选择日期范围"/>
+                            <ac:RangeDatePicker Type="DateTimeRange" DateTimeFormat="yyyy-MM-dd HH:mm:ss" IsShowShortCuts="True" IsShowConfirm="True" Margin="2" MinWidth="300" ac:ControlAttach.Watermark="请选择日期时间范围"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="上下选择" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="HH:mm:ss" MinWidth="120" ac:ControlAttach.Watermark="请选择时间"/>
+                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd" ButtonSpinnerLocation="UpDown" MinWidth="120" ac:ControlAttach.Watermark="请选择日期"/>
+                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd" ShowButtonSpinner="False" MinWidth="120" ac:ControlAttach.Watermark="请选择日期"/>
+                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd" ShowDropDown="True" ShowButtonSpinner="False" MinWidth="120" ac:ControlAttach.Watermark="请选择日期">
+                                <ac:DateTimeUpDown.CalendarWithClock>
+                                    <ac:CalendarWithClock ClockName="Flip" IsShowClock="False" IsShowConfirm="False"/>
+                                </ac:DateTimeUpDown.CalendarWithClock>
+                            </ac:DateTimeUpDown>
+                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd" ShowDropDown="True" MinWidth="170" ac:ControlAttach.Watermark="请选择日期">
+                                <ac:DateTimeUpDown.CalendarWithClock>
+                                    <ac:CalendarWithClock ClockName="Flip" IsShowClock="False" IsShowConfirm="False"/>
+                                </ac:DateTimeUpDown.CalendarWithClock>
+                            </ac:DateTimeUpDown>
+                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" MinWidth="200" ac:ControlAttach.Watermark="请选择日期时间"/>
+                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" ShowDropDown="True" MinWidth="220" ac:ControlAttach.Watermark="请选择日期时间"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="下划线" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <DatePicker Margin="2" Style="{DynamicResource AIStudio.Styles.DatePicker.Underline}" MinWidth="120" ac:ControlAttach.Watermark="请选择日期"/>
+                            <ac:DateTimePicker Margin="2" Style="{DynamicResource AIStudio.Styles.DateTimePicker.Underline}" MinWidth="170" ac:ControlAttach.Watermark="请选择日期时间">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:DateTimePicker Margin="2" Style="{DynamicResource AIStudio.Styles.DateTimePicker.Underline}" MinWidth="170" ac:ControlAttach.Watermark="请选择日期时间">
+                                <ac:DateTimePicker.CalendarWithClock>
+                                    <ac:CalendarWithClock>
+                                        <ac:CalendarWithClock.Clock>
+                                            <ac:ListClock/>
+                                        </ac:CalendarWithClock.Clock>
+                                    </ac:CalendarWithClock>
+                                </ac:DateTimePicker.CalendarWithClock>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:DateTimePicker Margin="2" Style="{DynamicResource AIStudio.Styles.DateTimePicker.Underline}" MinWidth="170" ac:ControlAttach.Watermark="请选择日期时间">
+                                <ac:DateTimePicker.CalendarWithClock>
+                                    <ac:CalendarWithClock>
+                                        <ac:CalendarWithClock.Clock>
+                                            <ac:Clock/>
+                                        </ac:CalendarWithClock.Clock>
+                                    </ac:CalendarWithClock>
+                                </ac:DateTimePicker.CalendarWithClock>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:DateTimePicker Margin="2" Style="{DynamicResource AIStudio.Styles.DateTimePicker.Underline}" MinWidth="170" ac:ControlAttach.Watermark="请选择日期时间">
+                                <ac:DateTimePicker.CalendarWithClock>
+                                    <ac:CalendarWithClock>
+                                        <ac:CalendarWithClock.Clock>
+                                            <ac:NumberClock/>
+                                        </ac:CalendarWithClock.Clock>
+                                    </ac:CalendarWithClock>
+                                </ac:DateTimePicker.CalendarWithClock>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateTimeChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedDateTimeChangedComamnd}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ac:DateTimePicker>
+                            <ac:TimePicker Margin="2" Style="{DynamicResource AIStudio.Styles.TimePicker.Underline}" MinWidth="120" ac:ControlAttach.Watermark="请选择时间"/>
+                            <ac:TimePicker Margin="2" Style="{DynamicResource AIStudio.Styles.TimePicker.Underline}" MinWidth="120" ac:ControlAttach.Watermark="请选择时间">
+                                <ac:TimePicker.Clock>
+                                    <ac:ListClock />
+                                </ac:TimePicker.Clock>
+                            </ac:TimePicker>
+                            <ac:NumberClock Margin="2" Style="{DynamicResource AIStudio.Styles.NumberClock.Underline}"/>
+                            <ac:ADateTimePicker Type="DateTime" IsShowConfirm="True" Margin="2" Style="{DynamicResource AIStudio.Styles.ADateTimePicker.Underline}" MinWidth="170" ac:ControlAttach.Watermark="请选择日期时间"/>
+                            <ac:RangeDatePicker Type="DateRange" Margin="2" Style="{DynamicResource AIStudio.Styles.RangeDatePicker.Underline}" MinWidth="200" ac:ControlAttach.Watermark="请选择日期范围"/>
+                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" Style="{DynamicResource AIStudio.Styles.DateTimeUpDown.Underline}" MinWidth="200" ac:ControlAttach.Watermark="请选择日期时间"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

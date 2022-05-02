@@ -1,0 +1,86 @@
+﻿<dragablz:DragablzWindow x:Class="AIStudio.Wpf.PrismRegions.Demo.Views.TabablzHostWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dockablz="http://dragablz.net/winfx/xaml/dockablz"
+        xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+        xmlns:helper="clr-namespace:AIStudio.Wpf.PrismRegions.Demo.Helpers"
+        mc:Ignorable="d"
+        Title="FloatWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="{x:Type Thumb}" x:Key="InvisibleThumbStyle">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid Background="{TemplateBinding Background}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <dockablz:Layout x:Name="RootLayout">
+        <dockablz:Layout.BranchTemplate>
+            <DataTemplate>
+                <dragablz:TabablzControl>
+                    <dragablz:TabablzControl.InterTabController>
+                        <dragablz:InterTabController InterTabClient="{x:Static helper:TabablzControlFactory.TabClientFactory}" />
+                    </dragablz:TabablzControl.InterTabController>
+                    <dragablz:TabablzControl.HeaderItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <Grid DockPanel.Dock="Right" Margin="6,0,2,0">
+                                    <Button Command="dragablz:TabablzControl.CloseItemCommand" Cursor="Hand" FontWeight="Bold" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                        <Button.Content>
+                                            <TextBlock Text="X" VerticalAlignment="Center"/>
+                                        </Button.Content>
+                                    </Button>
+                                </Grid>
+                                <Grid>
+                                    <TextBlock Text="{Binding DataContext.Title}" VerticalAlignment="Center"/>
+                                    <Thumb Style="{DynamicResource InvisibleThumbStyle}" dragablz:DragablzItem.IsCustomThumb="True" />
+                                </Grid>
+                            </DockPanel>
+                        </DataTemplate>
+                    </dragablz:TabablzControl.HeaderItemTemplate>
+                    <dragablz:TabablzControl.ContentTemplate>
+                        <DataTemplate>
+                            <ContentPresenter Margin="3" Content="{Binding View}" />
+                        </DataTemplate>
+                    </dragablz:TabablzControl.ContentTemplate>
+                </dragablz:TabablzControl>
+            </DataTemplate>
+        </dockablz:Layout.BranchTemplate>
+        <dragablz:TabablzControl x:Name="InitialTabablzControl" 
+                                 ItemsSource="{Binding Items}"
+                                 AddLocationHint="After">
+            <dragablz:TabablzControl.InterTabController>
+                <dragablz:InterTabController InterTabClient="{x:Static helper:TabablzControlFactory.TabClientFactory}" />
+            </dragablz:TabablzControl.InterTabController>
+            <dragablz:TabablzControl.HeaderItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <Grid DockPanel.Dock="Right" Margin="6,0,2,0">
+                            <Button Command="dragablz:TabablzControl.CloseItemCommand" Cursor="Hand" FontWeight="Bold" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                <Button.Content>
+                                    <TextBlock Text="X" VerticalAlignment="Center"/>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                        <Grid>
+                            <TextBlock Text="{Binding DataContext.Title}" VerticalAlignment="Center"/>
+                            <Thumb Style="{DynamicResource InvisibleThumbStyle}" dragablz:DragablzItem.IsCustomThumb="True" />
+                        </Grid>
+                    </DockPanel>
+                </DataTemplate>
+            </dragablz:TabablzControl.HeaderItemTemplate>
+            <dragablz:TabablzControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentPresenter Margin="3" Content="{Binding View}" />
+                </DataTemplate>
+            </dragablz:TabablzControl.ContentTemplate>
+        </dragablz:TabablzControl>
+    </dockablz:Layout>
+</dragablz:DragablzWindow>

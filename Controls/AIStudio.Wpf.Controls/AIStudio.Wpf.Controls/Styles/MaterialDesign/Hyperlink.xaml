@@ -1,0 +1,119 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+    <!-- updated specification 2018 -->
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Body1">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="TextDecorations" Value="None" />
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="Foreground" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="Foreground" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignToolForeground}" />
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignCheckBoxDisabled}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="TextDecorations" Value="Underline" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Body2"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Caption"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Overline"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="10" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Subtitle1"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Subtitle2"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Headline6"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Headline5"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="24" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Headline4"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="34" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Headline3"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="48" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Headline2"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="60" />
+        <Setter Property="FontWeight" Value="Light" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Headline1"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="96" />
+        <Setter Property="FontWeight" Value="Light" />
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}" x:Key="AIStudio.Styles.Hyperlink.Button"
+           BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+</ResourceDictionary>

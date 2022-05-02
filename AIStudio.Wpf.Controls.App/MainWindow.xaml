@@ -1,0 +1,116 @@
+﻿<ac:WindowBase x:Class="AIStudio.Wpf.Controls.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AIStudio.Wpf.Controls.App"
+        xmlns:controlsDemo="clr-namespace:AIStudio.Wpf.Controls.Demo;assembly=AIStudio.Wpf.Controls.Demo"   
+        xmlns:mdiContainerDemo="clr-namespace:AIStudio.Wpf.MDIContainer.Demo;assembly=AIStudio.Wpf.MDIContainer.Demo" 
+        xmlns:panelsDemo="clr-namespace:AIStudio.Wpf.Panels.Demo;assembly=AIStudio.Wpf.Panels.Demo"
+        xmlns:dragablzDemo="clr-namespace:AIStudio.Wpf.DragablzControls.Demo;assembly=AIStudio.Wpf.DragablzControls.Demo"
+        xmlns:gridControlDemo="clr-namespace:AIStudio.Wpf.GridControls.Demo;assembly=AIStudio.Wpf.GridControls.Demo"
+        xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+        mc:Ignorable="d"
+        Title="AIStudio.Wpf" Height="450" Width="800"
+        Identifier="RootWindow"
+        Icon="A.ico" 
+        Style="{DynamicResource AIStudio.Styles.WindowBase}">
+    <Grid>
+        <ac:WindowBaseTitleBar>
+            <ac:WindowBaseTitleBar.LeftWindowCommands>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="." VerticalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                    <ComboBox x:Name="comboBox" 
+                              SelectedIndex="0" 
+                              Background="Transparent" 
+                              Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" 
+                              Style="{DynamicResource AIStudio.Styles.ComboBox.Underline}" 
+                              Padding="0">
+                        <ComboBoxItem Content="Controls"/>
+                        <ComboBoxItem Content="Panels"/>
+                        <ComboBoxItem Content="Dragablz"/>
+                        <ComboBoxItem Content="MDIContainer"/>
+                        <ComboBoxItem Content="GridControl"/>
+                    </ComboBox>
+                    <Menu VerticalAlignment="Center" Style="{DynamicResource AIStudio.Styles.Menu}">
+                        <MenuItem>
+                            <MenuItem.Icon>
+                                <ac:PathIcon Kind="Star" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" Width="{Binding FontSize,RelativeSource={RelativeSource Mode=Self}}" Height="{Binding FontSize,RelativeSource={RelativeSource Mode=Self}}"/>
+                            </MenuItem.Icon>
+                            
+                            <MenuItem x:Name="menuScreenshot" Header="Screenshot" Click="menuScreenshot_Click">
+                                <MenuItem.Icon>
+                                    <ac:PathIcon Kind="Screenshot"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="menuPrint" Header="Print" Click="menuPrint_Click">
+                                <MenuItem.Icon>
+                                    <ac:PathIcon Kind="Print"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="menuPrism" Header="Prism" Click="menuPrism_Click">
+                                <MenuItem.Icon>
+                                    <ac:PathIcon Kind="Prism"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+            </ac:WindowBaseTitleBar.LeftWindowCommands>
+        </ac:WindowBaseTitleBar>
+        <Control x:Name="control">
+            <Control.Style>
+                <Style TargetType="Control">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text,ElementName=comboBox, Mode=OneWay}" Value="Controls">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Control">
+                                        <controlsDemo:MainView/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text,ElementName=comboBox, Mode=OneWay}" Value="Panels">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Control">
+                                        <panelsDemo:MainView/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text,ElementName=comboBox, Mode=OneWay}" Value="MDIContainer">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Control">
+                                        <mdiContainerDemo:MainView/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text,ElementName=comboBox, Mode=OneWay}" Value="Dragablz">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Control">
+                                        <dragablzDemo:MainView/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text,ElementName=comboBox, Mode=OneWay}" Value="GridControl">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Control">
+                                        <gridControlDemo:MainView/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Control.Style>
+        </Control>
+
+    </Grid>
+</ac:WindowBase>

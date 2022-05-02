@@ -1,0 +1,53 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.BreadcrumbBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:model="clr-namespace:AIStudio.Wpf.Controls.Demo.Models"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <UserControl.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type model:DemoDataModel}" ItemsSource="{Binding Path=Children}">
+            <TextBlock x:Name="txt" Text="{Binding Name}"/>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel >
+            <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                <StackPanel>
+                    <WrapPanel>
+                        <ac:BreadcrumbBar Margin="2" DataContext="{x:Null}" Width="500">
+                            <ac:BreadcrumbItem Header="Desktop" >
+                                <ac:BreadcrumbItem Header="Computer">
+                                    <ac:BreadcrumbItem Header="Computer 1"/>
+                                    <ac:BreadcrumbItem Header="Computer 2"/>
+                                    <ac:BreadcrumbItem Header="Computer 3"/>
+                                </ac:BreadcrumbItem>
+                                <ac:BreadcrumbItem Header="Network"/>
+                                <ac:BreadcrumbItem Header="Control Panel"/>
+                                <ac:BreadcrumbItem Header="Recylce bin"/>
+                            </ac:BreadcrumbItem>
+                        </ac:BreadcrumbBar>
+
+                        <ac:BreadcrumbBar Margin="2" ItemsSource="{Binding DataList}" Width="500">
+                            <ac:BreadcrumbBar.BreadcrumbItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </HierarchicalDataTemplate>
+                            </ac:BreadcrumbBar.BreadcrumbItemTemplate>
+                            <ac:BreadcrumbBar.OverflowItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ac:BreadcrumbBar.OverflowItemTemplate>
+                        </ac:BreadcrumbBar>
+
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</ac:AIStudioUserControl>

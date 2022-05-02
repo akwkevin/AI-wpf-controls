@@ -1,0 +1,25 @@
+﻿<Window x:Class="AIStudio.Wpf.Controls.NoticeWindow"
+        x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+        mc:Ignorable="d"
+        Title="NoticeWindow"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Topmost="True"
+        ShowInTaskbar="False"
+        WindowState="Maximized"
+        Closing="NoticeWindow_Closing"
+        Background="Transparent"
+        FontSize="{DynamicResource AIStudio.Font.Size}"
+        FontFamily="{DynamicResource AIStudio.Font.FontFamily}">
+    <Grid>
+        <StackPanel x:Name="cvaMain" 
+                    controls:NoticeCard.Identifier="{x:Static controls:NoticeWindow.Identifier}" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>

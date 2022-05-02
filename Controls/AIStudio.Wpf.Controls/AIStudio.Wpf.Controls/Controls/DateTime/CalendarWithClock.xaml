@@ -1,0 +1,251 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Calendar.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DateTime/Clock.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DateTime/ListClock.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DateTime/NumberClock.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <converter:BoolToInvisibleConverter x:Key="BoolToInvisibleConverter"/>
+
+
+    <Style x:Key="ChooseTimeToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter 
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand" />
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:ControlAttach.Background)}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Content" Value="选择时间" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Content" Value="选择日期" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.CalendarWithClock" TargetType="controls:CalendarWithClock">
+        <Style.Resources>
+            <Style TargetType="{x:Type Calendar}" BasedOn="{StaticResource AIStudio.Styles.Calendar}" >
+                <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:CalendarWithClock},Mode=OneWay}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:CalendarWithClock},Mode=OneWay}" />
+            </Style>
+            <Style TargetType="{x:Type controls:Clock}" BasedOn="{StaticResource AIStudio.Styles.Clock}" >
+                <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:CalendarWithClock},Mode=OneWay}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:CalendarWithClock},Mode=OneWay}" />
+            </Style>
+            <Style TargetType="{x:Type controls:ListClock}" BasedOn="{StaticResource AIStudio.Styles.ListClock}" >
+                <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:CalendarWithClock},Mode=OneWay}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:CalendarWithClock},Mode=OneWay}" />
+            </Style>
+            <Style TargetType="{x:Type controls:NumberClock}" BasedOn="{StaticResource AIStudio.Styles.NumberClock}" >
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:CalendarWithClock},Mode=OneWay}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:CalendarWithClock},Mode=OneWay}" />
+            </Style>
+        </Style.Resources>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:CalendarWithClock">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.ColumnSpan="2" Grid.Row="0" Height="Auto" Background="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ContentPresenter Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" x:Name="PART_CalendarPresenter" VerticalAlignment="Top"/>
+                            <ContentPresenter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" x:Name="PART_ClockPresenter" VerticalAlignment="Top"/>
+                            <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" BorderThickness="1,0,0,0" HorizontalAlignment="Left" BorderBrush="{TemplateBinding BorderBrush}" />
+                            <Grid Grid.Row="2" Grid.ColumnSpan="2" Visibility="{TemplateBinding IsShowConfirm,Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Border BorderThickness="0,1,0,0" VerticalAlignment="Top" BorderBrush="{TemplateBinding BorderBrush}" />
+                                <controls:ButtonGroup Orientation="Horizontal" HorizontalAlignment="Right" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0" Margin="5">
+                                    <Button  Name="PART_ClearDate"  Content="清除" Padding="6,3" Style="{StaticResource AIStudio.Styles.Button.Outlined}" Foreground="{TemplateBinding Foreground}"/>
+                                    <Button  Name="PART_NowDate"  Content="此刻" Padding="6,3" Style="{StaticResource AIStudio.Styles.Button.Outlined}" Foreground="{TemplateBinding Foreground}"/>
+                                    <Button  Name="PART_ButtonConfirm"  Content="确定" Padding="6,3" Style="{StaticResource AIStudio.Styles.Button.Outlined}" Foreground="{TemplateBinding Foreground}"/>
+                                </controls:ButtonGroup>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ClockName" Value="NumberClock">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="controls:CalendarWithClock">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Height="Auto" Background="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    <ContentPresenter Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" x:Name="PART_CalendarPresenter"/>
+                                    <Grid x:Name="ButtonLayout" Grid.Row="2" Grid.ColumnSpan="2" >
+                                        <Border BorderThickness="0,1,0,0" VerticalAlignment="Top" BorderBrush="{TemplateBinding BorderBrush}" />
+                                        <controls:ButtonGroup Orientation="Horizontal" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0" Margin="5">
+                                            <Button Content="时间" IsHitTestVisible="False" Padding="3,3"  Style="{StaticResource AIStudio.Styles.Button.Outlined}" Foreground="{TemplateBinding Foreground}"/>
+                                            <ContentPresenter TextElement.FontSize="13" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" x:Name="PART_ClockPresenter"/>
+                                        </controls:ButtonGroup>
+                                        <controls:ButtonGroup Orientation="Horizontal" HorizontalAlignment="Right" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0" Margin="5" Visibility="{TemplateBinding IsShowConfirm,Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Button Name="PART_ClearDate" Content="清除" Padding="6,3" Style="{StaticResource AIStudio.Styles.Button.Outlined}" Foreground="{TemplateBinding Foreground}"/>
+                                            <Button Name="PART_NowDate" Content="此刻" Padding="6,3" Style="{StaticResource AIStudio.Styles.Button.Outlined}" Foreground="{TemplateBinding Foreground}"/>
+                                            <Button Name="PART_ButtonConfirm" Content="确定" Padding="6,3" Style="{StaticResource AIStudio.Styles.Button.Outlined}" Foreground="{TemplateBinding Foreground}"/>
+                                        </controls:ButtonGroup>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsShowClock, RelativeSource={RelativeSource Mode=Self}}" Value="False" />
+                                        <Condition Binding="{Binding IsShowConfirm, RelativeSource={RelativeSource Mode=Self}}" Value="False" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="ButtonLayout" Property="Visibility" Value="Collapsed" />
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="ClockName" Value="Flip">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="controls:CalendarWithClock">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Height="Auto" Background="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    <ContentPresenter Grid.Row="0" Grid.RowSpan="2" x:Name="PART_CalendarPresenter" Visibility="{Binding ElementName=ChooseTime,Path=IsChecked,Converter={StaticResource BoolToInvisibleConverter}}"/>
+                                    <ContentPresenter Grid.Row="0" Grid.RowSpan="2" x:Name="PART_ClockPresenter" Visibility="{Binding ElementName=ChooseTime,Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                    <Grid Grid.Row="2" x:Name="ButtonLayout">
+                                        <Border BorderThickness="0,1,0,0" VerticalAlignment="Top" BorderBrush="{TemplateBinding BorderBrush}" />
+                                        <ToggleButton x:Name="ChooseTime" HorizontalAlignment="Left"
+                                                                      Margin="5"
+                                                                      Padding="6,3"
+                                                                      Style="{StaticResource ChooseTimeToggleButton}"
+                                                                      controls:ControlAttach.Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+
+                                        <controls:ButtonGroup Orientation="Horizontal" HorizontalAlignment="Right" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0" Margin="5" Visibility="{TemplateBinding IsShowConfirm,Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Button  Name="PART_ClearDate" 
+                                                     Content="清除" 
+                                                     Padding="6,3" 
+                                                     Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                     BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                     Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                     controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                            <Button  Name="PART_NowDate"  
+                                                     Content="此刻" 
+                                                     Padding="6,3" 
+                                                     Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                     BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                     Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                     controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                            <Button  Name="PART_ButtonConfirm"  
+                                                     Content="确定" 
+                                                     Padding="6,3" 
+                                                     Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                     BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                     Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                     controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                        </controls:ButtonGroup>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsShowClock, RelativeSource={RelativeSource Mode=Self}}" Value="False" />
+                                        <Condition Binding="{Binding IsShowConfirm, RelativeSource={RelativeSource Mode=Self}}" Value="False" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="ButtonLayout" Property="Visibility" Value="Collapsed" />
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Gray8}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.CalendarWithClock}" TargetType="controls:CalendarWithClock"/>
+</ResourceDictionary>

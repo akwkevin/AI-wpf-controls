@@ -1,0 +1,33 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.UploadFileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel>
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <ac:UploadFile Upload="{Binding Upload}" Margin="2"/>
+                        <ac:UploadFile Upload="{Binding Upload}" MaxCount="3" Margin="2"/>
+                        <ac:UploadFile Upload="{Binding Upload}" IsEnabled="False" Margin="2"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="图片上传" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:UploadFile Upload="{Binding Upload}" UploadFileType="Image" Margin="2"/>
+                            <ac:UploadFile Upload="{Binding Upload}" UploadFileType="Image" MaxCount="3" Margin="2"/>
+                            <ac:UploadFile Upload="{Binding Upload}" UploadFileType="Image" IsEnabled="False" Margin="2"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

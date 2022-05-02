@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+    
+    <Style x:Key="AIStudio.Styles.HighTextBlock" TargetType="{x:Type controls:HighTextBlock}">
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
+        <Setter Property="HighForeground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+        <Setter Property="HighBackground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="HighBackground" Value="{DynamicResource PrimaryHueLightBrush}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource PrimaryHueLightForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="HighBackground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="HighBackground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="HighBackground" Value="{DynamicResource SecondaryHueMidBrush}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource MaterialDesignBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="HighBackground" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="HighBackground" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="HighBackground" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="HighBackground" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="HighBackground" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="HighBackground" Value="{DynamicResource MaterialDesignToolForeground}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource MaterialDesignToolBackground}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type controls:HighTextBlock}" BasedOn="{StaticResource AIStudio.Styles.HighTextBlock}"/>
+</ResourceDictionary>

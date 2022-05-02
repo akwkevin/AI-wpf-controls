@@ -1,0 +1,126 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.DropDownView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <UserControl.Resources>
+        <ac:DropDownBorderPathConverter x:Key="DropDownBorderPathConverter" />
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel>
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:DropDown Margin="2" Content="Down" Command="{Binding ShowSnackbarCommand}">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+
+                            <ac:DropDown Margin="2" Content="Top" Command="{Binding ShowSnackbarCommand}" Placement="Top" ControlStyle="Standard">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+
+                            <ac:DropDown Margin="2" Content="Left" Command="{Binding ShowSnackbarCommand}" Placement="Left" ControlStyle="Flat">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+
+                            <ac:DropDown Margin="2" Content="Right" Command="{Binding ShowSnackbarCommand}" Placement="Right" ControlStyle="Plain">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="鼠标移入" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:DropDown Margin="2" Content="Down" Command="{Binding ShowSnackbarCommand}" HoverMode="True">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+
+                            <ac:DropDown Margin="2" Content="Top" Command="{Binding ShowSnackbarCommand}" Placement="Top" HoverMode="True">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+
+                            <ac:DropDown Margin="2" Content="Left" Command="{Binding ShowSnackbarCommand}" Placement="Left" HoverMode="True">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+
+                            <ac:DropDown Margin="2" Content="Right" Command="{Binding ShowSnackbarCommand}" Placement="Right" HoverMode="True">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="扩展用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:DropDown Margin="2" Content="None Arrow" Command="{Binding ShowSnackbarCommand}" IsDropVisible="False">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+
+                            <ac:DropDown Margin="2" Content="None Angle" Command="{Binding ShowSnackbarCommand}" IsAngleVisible="False">
+                                <ac:DropDown.Child>
+                                    <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="下拉菜单" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:DropDown Margin="2" Command="{Binding ShowSnackbarCommand}" Content="Menu" IsAngleVisible="False">
+                                <ac:DropDown.Child>
+                                    <Menu Style="{DynamicResource AIStudio.Styles.Menu.Left}">
+                                        <MenuItem Header="Menu1" Command="{Binding ShowSnackbarCommand}" />
+                                        <MenuItem Header="Menu2" Command="{Binding ShowSnackbarCommand}" />
+                                    </Menu>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+                            <ac:DropDown Margin="2" Command="{Binding ShowSnackbarCommand}" Content="Hover Me Menu ∨" IsAngleVisible="False" IsDropVisible="False" HoverMode="True">
+                                <ac:DropDown.Child>
+                                    <Menu Style="{DynamicResource AIStudio.Styles.Menu.Left}">
+                                        <MenuItem Header="Menu1" Command="{Binding ShowSnackbarCommand}" />
+                                        <MenuItem Header="Menu2" Command="{Binding ShowSnackbarCommand}" />
+                                    </Menu>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+                            <ac:DropDown Margin="2" Command="{Binding ShowSnackbarCommand}" Content="Hover Me Menu ∨" IsAngleVisible="False" IsDropVisible="False" HoverMode="True" ac:ControlAttach.CornerRadius="0" BorderThickness="0">
+                                <ac:DropDown.Child>
+                                    <Menu Style="{DynamicResource AIStudio.Styles.Menu.Left}">
+                                        <MenuItem Header="Menu1" Command="{Binding ShowSnackbarCommand}" />
+                                        <MenuItem Header="Menu2" Command="{Binding ShowSnackbarCommand}" />
+                                    </Menu>
+                                </ac:DropDown.Child>
+                            </ac:DropDown>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

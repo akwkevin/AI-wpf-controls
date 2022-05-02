@@ -1,0 +1,503 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:IntToThicknessConverter x:Key="IntToThicknessConverter"/>
+    <converter:String2VisibilityReConverter x:Key="String2VisibilityReConverter"/>
+    <converter:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
+
+
+    <LinearGradientBrush x:Key="ResizeGripperForeground" EndPoint="1,0.75" StartPoint="0,0.25">
+        <GradientStop Color="#FFFFFF" Offset="0.3"/>
+        <GradientStop Color="#BBC5D7" Offset="0.75"/>
+        <GradientStop Color="#6D83A9" Offset="1"/>
+    </LinearGradientBrush>
+
+    <Style TargetType="ResizeGrip">
+        <Setter Property="MinWidth" Value="11"/>
+        <Setter Property="MinHeight" Value="11"/>
+        <Setter Property="Width" Value="11"/>
+        <Setter Property="Height" Value="11"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ResizeGrip">
+                    <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <Path Width="11" Height="11" Data="M 9,0 L 11,0 L 11,11 L 0,11 L 0,9 L 3,9 L 3,6 L 6,6 L 6,3 L 9,3 z" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <Path.Fill>
+                                <DrawingBrush TileMode="Tile" Viewbox="0,0,3,3" Viewport="0,0,3,3" ViewportUnits="Absolute" ViewboxUnits="Absolute">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <GeometryDrawing Brush="{StaticResource ResizeGripperForeground}">
+                                                <GeometryDrawing.Geometry>
+                                                    <RectangleGeometry Rect="0,0,2,2"/>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Path.Fill>
+                        </Path>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.WindowBase.Custom" TargetType="{x:Type controls:WindowBase}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <!--标题栏背景色-->
+        <Setter Property="CaptionBackground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0"/>
+        <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
+        <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
+        <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
+        <Setter Property="CaptionHeight" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome ResizeBorderThickness="10" CaptionHeight="0" GlassFrameThickness="3" CornerRadius="0" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:WindowBase}">
+                    <Grid>
+                        <Border x:Name="PART_OUTBorder" SnapsToDevicePixels="True" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}" >
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <!--内容区域-->
+                                <AdornerDecorator>
+                                    <ContentPresenter Content="{TemplateBinding Content}" />
+                                </AdornerDecorator>
+
+                                <!--等待窗口弹出-->
+                                <Grid x:Name="PART_AnimationGrid"
+                            Width="Auto"
+                            Height="Auto"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Panel.ZIndex="8"
+                            Visibility="Hidden">
+                                    <Grid x:Name="PART_OverlayGrid" Width="Auto"
+                            Height="Auto"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Panel.ZIndex="6"
+                            Background="{DynamicResource MahApps.Brushes.Gray1}"
+                            Opacity="0.5" />
+                                    <Grid x:Name="PART_WaitingGrid" Panel.ZIndex="7" HorizontalAlignment="Center" />
+                                </Grid>
+
+                                <!-- disables the main content when a modal flyout is shown -->
+                                <Rectangle 
+                               Focusable="False"
+                               Name="PART_FlyoutModal"
+                               Fill="{DynamicResource MahApps.Brushes.Gray1}"
+                               Visibility="Hidden" />
+
+                                <!-- flyouts -->
+                                <Grid>
+                                    <ContentControl 
+                                    Panel.ZIndex="2"
+                                    Focusable="False"
+                                    Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}" 
+                                    KeyboardNavigation.TabNavigation="None"
+                                    Content="{Binding Flyouts, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                    VerticalAlignment="Stretch" />
+                                </Grid>
+
+                                <!-- inactive dialog container -->
+                                <Grid Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}"
+                          Panel.ZIndex="3"
+                          FocusVisualStyle="{x:Null}"
+                          x:Name="PART_MetroInactiveDialogsContainer" />
+
+                                <!-- overlay effect container -->
+                                <Grid Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}" 
+                          x:Name="PART_OverlayBox"                         
+                          Panel.ZIndex="4"
+                          Focusable="False"
+                          FocusVisualStyle="{x:Null}"
+                          Background="{DynamicResource MahApps.Brushes.Gray1}"
+                          Opacity="0"
+                          Visibility="Hidden" />
+
+                                <!-- active dialog container -->
+                                <Grid Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}"
+                          x:Name="PART_MetroActiveDialogContainer"                         
+                          Panel.ZIndex="5"
+                          FocusVisualStyle="{x:Null}" />
+
+                                <controls:Snackbar x:Name="PART_MainSnackbar" />
+
+                                <StackPanel controls:NoticeCard.Identifier="{TemplateBinding Identifier}" VerticalAlignment="Top" />
+
+                                <Border x:Name="PART_TitleBar" MinHeight="{TemplateBinding CaptionHeight}" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0" ClipToBounds="True" WindowChrome.IsHitTestVisibleInChrome="True">
+                                    <DockPanel>
+                                        <StackPanel x:Name="ButtonPanel"  DockPanel.Dock="Right" Orientation="Horizontal">
+                                            <Button 
+                                                Foreground="{TemplateBinding CaptionForeground}"
+                                                Command="{Binding Path=MinimizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}" 
+                                                IsTabStop="False" 
+                                                x:Name="ButtonMin"                          
+                                                Style="{StaticResource AIStudio.Styles.Button.Window}" 
+                                                MinWidth="45" 
+                                                VerticalAlignment="Stretch"
+                                                controls:IconAttach.Geometry="{StaticResource WindowMinGeometry}" 
+                                                BorderThickness="1,0,1,0" 
+                                                controls:IconAttach.Width="{TemplateBinding controls:IconAttach.Width}" 
+                                                controls:IconAttach.Height="{TemplateBinding controls:IconAttach.Height}"/>
+                                            <Button 
+                                                Foreground="{TemplateBinding CaptionForeground}"
+                                                Command="{Binding Path=MaximizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}" 
+                                                IsTabStop="False" 
+                                                x:Name="ButtonMax" 
+                                                Style="{StaticResource AIStudio.Styles.Button.Window}"
+                                                MinWidth="45"
+                                                VerticalAlignment="Stretch"
+                                                controls:IconAttach.Geometry="{StaticResource WindowRestoreGeometry}" 
+                                                BorderThickness="1,0,1,0" 
+                                                controls:IconAttach.Width="{TemplateBinding controls:IconAttach.Width}" 
+                                                controls:IconAttach.Height="{TemplateBinding controls:IconAttach.Height}"/>
+                                            <Button 
+                                                Foreground="{TemplateBinding CaptionForeground}"
+                                                Command="{Binding Path=CloseWindowCommand,RelativeSource={RelativeSource TemplatedParent}}"
+                                                IsTabStop="False" 
+                                                x:Name="ButtonClose" 
+                                                Style="{StaticResource AIStudio.Styles.Button.Window.Close}" 
+                                                MinWidth="45" 
+                                                VerticalAlignment="Stretch"
+                                                BorderThickness="1,0,0,0" 
+                                                controls:IconAttach.Width="{TemplateBinding controls:IconAttach.Width}" 
+                                                controls:IconAttach.Height="{TemplateBinding controls:IconAttach.Height}"/>
+                                        </StackPanel>
+                                        <!--  the right window commands  -->
+                                        <ContentPresenter x:Name="PART_RightWindowCommands"
+                                                Content="{Binding RightWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                                DockPanel.Dock="Right"
+                                                Focusable="False" />
+                                        <!--  the left window commands  -->
+                                        <ContentPresenter x:Name="PART_LeftWindowCommands"
+                                                Content="{Binding LeftWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                                DockPanel.Dock="Left"
+                                                Focusable="False" />
+
+                                    </DockPanel>
+                                </Border>
+
+                                <Border x:Name="PART_Border"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="{x:Null}"
+                            BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            UseLayoutRounding="True" />
+
+                                <ResizeGrip Width="10" Height="10" x:Name="ResizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" IsTabStop="False" Visibility="Collapsed" WindowChrome.ResizeGripDirection="BottomRight" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="OverlayFastSemiFadeIn"
+                        BeginTime="0:0:0"
+                        AccelerationRatio=".97"
+                        Storyboard.TargetProperty="Opacity"
+                        SpeedRatio="2.7">
+                            <DoubleAnimation To=".7" />
+                        </Storyboard>
+                        <Storyboard x:Key="OverlayFastSemiFadeOut"
+                        BeginTime="0:0:0"
+                        AccelerationRatio=".97"
+                        Storyboard.TargetProperty="Opacity"
+                        SpeedRatio="2.7">
+                            <DoubleAnimation To="0.0" />
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="Opacity" Value=".8" TargetName="ButtonPanel"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="CanMinimize">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter Property="controls:IconAttach.Geometry" TargetName="ButtonMax" Value="{StaticResource WindowMaxGeometry}"></Setter>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Border"></Setter>
+                            <Setter Property="BorderThickness" Value="0" TargetName="PART_OUTBorder"></Setter>
+                            <Setter Property="Margin" Value="7" TargetName="PART_OUTBorder"></Setter>
+                        </Trigger>
+                        <Trigger Property="MinboxEnable" Value="False">
+                            <Setter TargetName="ButtonMin" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="MaxboxEnable" Value="False">
+                            <Setter TargetName="ButtonMax" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="CloseboxEnable" Value="False">
+                            <Setter TargetName="ButtonClose" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResizeWithGrip"/>
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ResizeGrip" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--默认WindowBase的样式-->
+    <Style x:Key="AIStudio.Styles.WindowBase" TargetType="{x:Type controls:WindowBase}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <!--标题栏背景色-->
+        <Setter Property="CaptionBackground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0"/>
+        <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
+        <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
+        <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome ResizeBorderThickness="10" CaptionHeight="0" GlassFrameThickness="3" CornerRadius="0" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:WindowBase}">
+                    <Grid>
+                        <Border x:Name="PART_OUTBorder" SnapsToDevicePixels="True"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}">
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition MinHeight="18" Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <!--Caption标题部分-->
+                                <Border x:Name="PART_TitleBar" Background="{TemplateBinding CaptionBackground}" MinHeight="{TemplateBinding CaptionHeight}" WindowChrome.IsHitTestVisibleInChrome="True" ClipToBounds="True">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <!--Header部分-->
+                                        <DockPanel x:Name="PART_Header">
+                                            <!--  the right window commands  -->
+                                            <ContentPresenter x:Name="PART_RightWindowCommands" DockPanel.Dock="Right"
+                                                Content="{Binding RightWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                                Focusable="False" />
+
+                                            <Image Margin="9,0,0,0" IsHitTestVisible="False" Source="{TemplateBinding Icon}" VerticalAlignment="Center" Width="{DynamicResource AIStudio.Icon.Size.Large}" Height="{DynamicResource AIStudio.Icon.Size.Large}" />
+
+                                            <TextBlock VerticalAlignment="Center" Margin="9,0,0,0" Foreground="{TemplateBinding CaptionForeground}" Text="{TemplateBinding Title}"/>
+                                            <!--  the left window commands  -->
+                                            <ContentPresenter x:Name="PART_LeftWindowCommands"
+                                                Content="{Binding LeftWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                                Focusable="False" />
+
+                                        </DockPanel>
+
+                                        <!--窗体功能按钮：最小、最大、关闭-->
+                                        <Grid Grid.Column="1">
+                                            <StackPanel x:Name="ButtonPanel" Orientation="Horizontal">
+                                                <Button 
+                                                    Foreground="{TemplateBinding CaptionForeground}"
+                                                    Command="{Binding Path=MinimizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}" 
+                                                    IsTabStop="False" 
+                                                    x:Name="ButtonMin"
+                                                    Style="{StaticResource AIStudio.Styles.Button.Window}" 
+                                                    MinWidth="45" 
+                                                    VerticalAlignment="Stretch"
+                                                    controls:IconAttach.Geometry="{StaticResource WindowMinGeometry}" 
+                                                    BorderThickness="1,0,1,0" 
+                                                    controls:IconAttach.Width="{TemplateBinding controls:IconAttach.Width}" 
+                                                    controls:IconAttach.Height="{TemplateBinding controls:IconAttach.Height}"/>
+                                                <Button 
+                                                    Foreground="{TemplateBinding CaptionForeground}"
+                                                    Command="{Binding Path=MaximizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}" 
+                                                    IsTabStop="False" 
+                                                    x:Name="ButtonMax" 
+                                                    Style="{StaticResource AIStudio.Styles.Button.Window}"
+                                                    MinWidth="45"
+                                                    VerticalAlignment="Stretch"
+                                                    controls:IconAttach.Geometry="{StaticResource WindowRestoreGeometry}" 
+                                                    BorderThickness="1,0,1,0" 
+                                                    controls:IconAttach.Width="{TemplateBinding controls:IconAttach.Width}" 
+                                                    controls:IconAttach.Height="{TemplateBinding controls:IconAttach.Height}"/>
+                                                <Button 
+                                                    Foreground="{TemplateBinding CaptionForeground}"
+                                                    Command="{Binding Path=CloseWindowCommand,RelativeSource={RelativeSource TemplatedParent}}"
+                                                    IsTabStop="False" 
+                                                    x:Name="ButtonClose" 
+                                                    Style="{StaticResource AIStudio.Styles.Button.Window.Close}" 
+                                                    MinWidth="45" 
+                                                    VerticalAlignment="Stretch"
+                                                    BorderThickness="1,0,0,0" 
+                                                    controls:IconAttach.Width="{TemplateBinding controls:IconAttach.Width}" 
+                                                    controls:IconAttach.Height="{TemplateBinding controls:IconAttach.Height}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+
+                                <!--内容区域-->
+                                <AdornerDecorator Grid.Row="1">
+                                    <ContentPresenter Content="{TemplateBinding Content}" />
+                                </AdornerDecorator>
+
+                                <Grid Grid.Row="1">
+                                    <!--等待窗口弹出-->
+                                    <Grid x:Name="PART_AnimationGrid"
+                                        Width="Auto"
+                                        Height="Auto"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Panel.ZIndex="8"
+                                        Visibility="Hidden">
+                                        <Grid x:Name="PART_OverlayGrid" Width="Auto"
+                                            Height="Auto"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Panel.ZIndex="6"
+                                            Background="{DynamicResource MahApps.Brushes.Gray1}"
+                                            Opacity="0.5" />
+                                        <Grid x:Name="PART_WaitingGrid" Panel.ZIndex="7" HorizontalAlignment="Center" />
+                                    </Grid>
+
+                                    <!-- disables the main content when a modal flyout is shown -->
+                                    <Rectangle 
+                                        Focusable="False"
+                                        Name="PART_FlyoutModal"
+                                        Fill="{DynamicResource MahApps.Brushes.Gray1}"
+                                        Visibility="Hidden" />
+
+                                    <!-- flyouts -->
+                                    <Grid>
+                                        <ContentControl 
+                                            Panel.ZIndex="2"
+                                            Focusable="False"                                   
+                                            KeyboardNavigation.TabNavigation="None"
+                                            Content="{Binding Flyouts, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                            VerticalAlignment="Stretch" />
+                                    </Grid>
+
+                                    <!-- inactive dialog container -->
+                                    <Grid  Panel.ZIndex="3"
+                                          FocusVisualStyle="{x:Null}"
+                                          x:Name="PART_MetroInactiveDialogsContainer" />
+
+                                    <!-- overlay effect container -->
+                                    <Grid  x:Name="PART_OverlayBox"                         
+                                          Panel.ZIndex="4"
+                                          Focusable="False"
+                                          FocusVisualStyle="{x:Null}"
+                                          Background="{DynamicResource MahApps.Brushes.Gray1}"
+                                          Opacity="0"
+                                          Visibility="Hidden" />
+
+                                    <!-- active dialog container -->
+                                    <Grid  x:Name="PART_MetroActiveDialogContainer"                         
+                                          Panel.ZIndex="5"
+                                          FocusVisualStyle="{x:Null}" />
+
+                                    <controls:Snackbar x:Name="PART_MainSnackbar" />
+
+                                    <StackPanel controls:NoticeCard.Identifier="{TemplateBinding Identifier}" VerticalAlignment="Top" />
+                                </Grid>
+
+                                <Border x:Name="PART_Border" Grid.RowSpan="2"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="{x:Null}"
+                                    BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    UseLayoutRounding="True" />
+
+                                <ResizeGrip Width="10" Height="10" x:Name="ResizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" IsTabStop="False" Visibility="Collapsed" WindowChrome.ResizeGripDirection="BottomRight" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="OverlayFastSemiFadeIn"
+                            BeginTime="0:0:0"
+                            AccelerationRatio=".97"
+                            Storyboard.TargetProperty="Opacity"
+                            SpeedRatio="2.7">
+                            <DoubleAnimation To=".7" />
+                        </Storyboard>
+                        <Storyboard x:Key="OverlayFastSemiFadeOut"
+                            BeginTime="0:0:0"
+                            AccelerationRatio=".97"
+                            Storyboard.TargetProperty="Opacity"
+                            SpeedRatio="2.7">
+                            <DoubleAnimation To="0.0" />
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="Opacity" Value=".8" TargetName="ButtonPanel"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="CanMinimize">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter Property="controls:IconAttach.Geometry" TargetName="ButtonMax" Value="{StaticResource WindowMaxGeometry}"></Setter>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Border"></Setter>
+                            <Setter Property="BorderThickness" Value="0" TargetName="PART_OUTBorder"></Setter>
+                            <Setter Property="Margin" Value="7" TargetName="PART_OUTBorder"></Setter>
+                        </Trigger>
+                        <Trigger Property="MinboxEnable" Value="False">
+                            <Setter TargetName="ButtonMin" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="MaxboxEnable" Value="False">
+                            <Setter TargetName="ButtonMax" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="CloseboxEnable" Value="False">
+                            <Setter TargetName="ButtonClose" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResizeWithGrip"/>
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ResizeGrip" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.WindowBase}" TargetType="{x:Type controls:WindowBase}"/>
+</ResourceDictionary>

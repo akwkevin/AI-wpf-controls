@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(DefineConstants.Contains(NETCOREAPP))">
+    <PackageReference Include="System.Drawing.Common" Version="5.0.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Resources\showyou.png" />
+    <None Remove="Resources\保存.png" />
+    <None Remove="Resources\后退.png" />
+    <None Remove="Resources\笔刷.png" />
+    <None Remove="Resources\箭头.png" />
+    <None Remove="Resources\设置.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\showyou.png" />
+    <Resource Include="Resources\保存.png" />
+    <Resource Include="Resources\后退.png" />
+    <Resource Include="Resources\笔刷.png" />
+    <Resource Include="Resources\箭头.png" />
+    <Resource Include="Resources\设置.png" />
+  </ItemGroup>
+  
+</Project>

@@ -1,0 +1,279 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.NavigationBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <Grid>
+        <TabControl Style="{DynamicResource AIStudio.Styles.TabControl}">
+            <TabItem Header="基本用法">
+                <Grid x:Name="grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ac:NavigationBar x:Name="AnchorListBox" 
+                                    ItemsSource="{Binding DataList}"
+                                    DisplayMemberPath="Name"
+                                    HorizontalAlignment="Center"
+                                    BindScrollViewer="{Binding Path=.Parent, ElementName=AnchorPointPanel}"
+                                    BindNavigationControl="{Binding ElementName=AnchorPointPanel}" />
+
+                    <ScrollViewer x:Name="scrollViewer" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <ScrollViewer.Content>
+                            <StackPanel x:Name="AnchorPointPanel" ac:ScrollViewerAttach.MouseWheel ="true">
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                </ListBox>
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                </ListBox>
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                </ListBox>
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                </ListBox>
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                </ListBox>
+                            </StackPanel>
+                        </ScrollViewer.Content>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="竖向">
+                <Grid x:Name="grid2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollViewer x:Name="scrollViewer2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <ScrollViewer.Content>
+                            <StackPanel x:Name="AnchorPointPanel2" ac:ScrollViewerAttach.MouseWheel ="true">
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                    <ListBoxItem Content="第一项"/>
+                                </ListBox>
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                    <ListBoxItem Content="第二项"/>
+                                </ListBox>
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                    <ListBoxItem Content="第三项"/>
+                                </ListBox>
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                    <ListBoxItem Content="第四项"/>
+                                </ListBox>
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                    <ListBoxItem Content="第五项"/>
+                                </ListBox>
+                            </StackPanel>
+                        </ScrollViewer.Content>
+                    </ScrollViewer>
+
+                    <ac:NavigationBar Grid.Column="1" x:Name="AnchorListBox2" 
+                                    ItemsSource="{Binding DataList}"
+                                    DisplayMemberPath="Name"
+                                    VerticalAlignment="Center"
+                                    Orientation="Vertical"
+                                    BindScrollViewer="{Binding Path=.Parent, ElementName=AnchorPointPanel2}"
+                                    BindNavigationControl="{Binding ElementName=AnchorPointPanel2}" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</ac:AIStudioUserControl>

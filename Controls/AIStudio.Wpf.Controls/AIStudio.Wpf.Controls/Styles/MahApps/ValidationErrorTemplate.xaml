@@ -1,0 +1,105 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <ControlTemplate x:Key="AIStudio.Styles.ValidationErrorTemplate">
+        <ControlTemplate.Resources>
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock Foreground="{DynamicResource MahApps.Brushes.Control.Validation}"
+                           FontSize="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.FontSize)}"
+                           MaxWidth="{Binding ElementName=Placeholder, Path=ActualWidth}"
+                           HorizontalAlignment="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.HorizontalAlignment)}"
+                           Margin="2"
+                           TextWrapping="Wrap"
+                           Text="{Binding ErrorContent}"
+                           UseLayoutRounding="false" />
+            </DataTemplate>
+        </ControlTemplate.Resources>
+        <StackPanel>
+            <AdornedElementPlaceholder Name="Placeholder" />
+            <Border x:Name="DefaultErrorViewer"
+                    Visibility="Collapsed"
+                    Background="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.Background)}">
+                <TextBlock Foreground="{DynamicResource MahApps.Brushes.Control.Validation}"
+                           FontSize="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.FontSize)}"
+                           MaxWidth="{Binding ElementName=Placeholder, Path=ActualWidth}"
+                           HorizontalAlignment="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.HorizontalAlignment)}"
+                           Margin="0 2"
+                           TextWrapping="Wrap"
+                           Text="{Binding CurrentItem.ErrorContent}"
+                           UseLayoutRounding="false" />
+            </Border>
+            <controls:PopupEx x:Name="ValidationPopup"
+                         IsOpen="False"
+                         Placement="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.PopupPlacement)}"
+                         PlacementTarget="{Binding ElementName=Placeholder, Mode=OneWay}"
+                         AllowsTransparency="True">
+                <Border x:Name="PopupBorder" Background="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.Background)}">
+                    <TextBlock Foreground="{DynamicResource MahApps.Brushes.Control.Validation}"
+                               FontSize="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.FontSize)}"
+                               HorizontalAlignment="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.HorizontalAlignment)}"
+                               Margin="0 2"
+                               TextWrapping="Wrap"
+                               Text="{Binding CurrentItem.ErrorContent}"
+                               UseLayoutRounding="false" />
+                </Border>
+            </controls:PopupEx>
+        </StackPanel>
+        <ControlTemplate.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.OnlyShowOnFocus)}" Value="False"/>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.UsePopup)}" Value="True"/>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.Suppress)}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter TargetName="ValidationPopup" Property="IsOpen" Value="True"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.OnlyShowOnFocus)}" Value="False"/>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.UsePopup)}" Value="False"/>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.Suppress)}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter TargetName="DefaultErrorViewer" Property="Visibility" Value="Visible"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.OnlyShowOnFocus)}" Value="True"/>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.UsePopup)}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter TargetName="ValidationPopup" Property="IsOpen"
+                            Value="{Binding ElementName=Placeholder, Path=AdornedElement.IsKeyboardFocusWithin, Mode=OneWay}"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.OnlyShowOnFocus)}" Value="True"/>
+                    <Condition Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.UsePopup)}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter TargetName="DefaultErrorViewer" Property="Visibility"
+                            Value="{Binding ElementName=Placeholder, Path=AdornedElement.IsKeyboardFocusWithin, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <DataTrigger Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:ValidationAttach.Background)}" Value="{x:Null}">
+                <Setter TargetName="PopupBorder" Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}"/>
+                <Setter TargetName="DefaultErrorViewer" Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}"/>
+            </DataTrigger>
+
+            <!--<DataTrigger Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(controls:TextFieldAssist.HasOutlinedTextField)}" Value="True">
+                <Setter TargetName="DefaultErrorViewer" Property="Margin" Value="0,2,0,0"/>
+                <Setter TargetName="ValidationPopup" Property="VerticalOffset" Value="2"/>
+            </DataTrigger>-->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

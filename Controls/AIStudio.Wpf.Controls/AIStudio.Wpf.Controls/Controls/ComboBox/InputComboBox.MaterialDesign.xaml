@@ -1,0 +1,376 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ToggleButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TextBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
+
+
+    <!--下拉项基样式-->
+    <Style x:Key="AIStudio.Styles.ComboBoxItem" TargetType="ComboBoxItem" >
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Grid Background="{TemplateBinding Background}" Margin="0,0.5">
+                        <Border x:Name="ItemBackground" IsHitTestVisible="False" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}"/>
+                        <ContentPresenter x:Name="contentPresenter" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="ItemBackground" Property="Background" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType=ComboBox}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ItemBackground" Property="Background" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType=ComboBox}, Converter={StaticResource BrushOpacityConverter}, ConverterParameter=0.6}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--下拉框基样式-->
+    <Style x:Key="AIStudio.Styles.InputComboBox" TargetType="{x:Type controls:InputComboBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="IsEditable" Value="true"/>
+        <Setter Property="ShouldPreserveUserEnteredPrefix" Value="True"/>
+        <Setter Property="StaysOpenOnEdit" Value="True"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource AIStudio.Styles.ComboBoxItem}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="MaxDropDownHeight" Value="200" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
+        <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
+        <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--默认可编辑下拉框模板-->
+                <ControlTemplate TargetType="{x:Type controls:InputComboBox}">
+                    <Grid x:Name="PART_Root">
+                        <Border x:Name="Bg" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" 
+                                Padding="{TemplateBinding Padding}"
+                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}">
+                            <Grid x:Name="PART_InnerGrid" SnapsToDevicePixels="true" FocusManager.FocusedElement="{Binding ElementName=PART_EditableTextBox2}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="12"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--下拉按钮-->
+                                <ToggleButton x:Name="PART_DropDownToggle" 
+                                      Grid.ColumnSpan="2"
+                                      IsTabStop="False" 
+                                      Style="{StaticResource AIStudio.Styles.ComboToggleButton}" 
+                                      Padding="{TemplateBinding Padding}"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Width="{Binding Path=(controls:IconAttach.Width), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Height="{Binding Path=(controls:IconAttach.Height), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Geometry="{Binding Path=(controls:IconAttach.Geometry), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      Foreground="{TemplateBinding BorderBrush}"
+                                      IsHitTestVisible="False"/>
+                                
+                                <Border Grid.Column="0">
+                                    <TextBox x:Name="PART_EditableTextBox2" 
+                                             Background="{TemplateBinding Background}" 
+                                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                             IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                             CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"                                     
+                                             FontSize="{TemplateBinding FontSize}"
+                                             FontFamily="{TemplateBinding FontFamily}"
+                                             Style="{StaticResource AIStudio.Styles.TextBox.ComboBox.Editable}"  />
+                                </Border>
+                                <!--水印-->
+                                <Border Grid.Column="0">
+                                    <TextBlock x:Name="Message" Visibility="Collapsed"
+                                       Text="{TemplateBinding controls:ControlAttach.Watermark}"
+                                       Foreground="{TemplateBinding BorderBrush}" IsHitTestVisible="False" Opacity="0.4" Margin="2,0"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{StaticResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
+                            <Border CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" x:Name="dropDownBorder" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=PART_Root}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="{DynamicResource MaterialDesignBackground}">
+                                <ScrollViewer Margin="0,4" x:Name="DropDownScrollViewer">
+                                    <Grid RenderOptions.ClearTypeHint="Enabled">
+                                        <Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                            <Rectangle x:Name="opaqueRect" Fill="{Binding Background, ElementName=dropDownBorder}" Height="{Binding ActualHeight, ElementName=dropDownBorder}" Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                        </Canvas>
+                                        <ItemsPresenter Margin="2" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!--1.显示水印-->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
+                            <Setter TargetName="Message" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="{x:Null}">
+                            <Setter TargetName="Message" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                        <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                            <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                            <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true" SourceName="PART_EditableTextBox2">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true" SourceName="PART_DropDownToggle"/>
+                                <Condition Property="IsFocused" Value="false" SourceName="PART_EditableTextBox2"/>
+                            </MultiTrigger.Conditions>
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsFocused" Value="True" SourceName="PART_EditableTextBox2">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                            <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                            <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="controls:ControlAttach.AttachContent">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Button x:Name="clear" 
+                            Visibility="Collapsed" 
+                            Foreground="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType=controls:InputComboBox}}"
+                            Focusable="False"
+                            IsTabStop="False" 
+                            Style="{StaticResource AIStudio.Styles.Button.Clear}"
+                            controls:ControlAttach.ClearTextButton="{Binding Path=(controls:ControlAttach.ClearTextButton),RelativeSource={RelativeSource AncestorType=controls:InputComboBox}}" 
+                            Command="controls:ControlAttach.ClearTextCommand" 
+                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type controls:InputComboBox}}}" />
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True" />
+                                <Condition Binding="{Binding Path=(controls:ControlAttach.ClearTextButton), RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="clear" Property="Visibility" Value="Visible"></Setter>
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="{x:Null}">
+                            <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="">
+                            <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueLightBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MaterialDesignToolBackground}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--下拉框基样式-->
+    <Style x:Key="AIStudio.Styles.InputComboBox.Underline" TargetType="{x:Type controls:InputComboBox}" BasedOn="{StaticResource AIStudio.Styles.InputComboBox}">
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--默认可编辑下拉框模板-->
+                <ControlTemplate TargetType="{x:Type controls:InputComboBox}">
+                    <Grid x:Name="PART_Root">
+                        <Border x:Name="Bg" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" />
+                        <Popup x:Name="PART_Popup" VerticalOffset="1" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{StaticResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
+                            <Border CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" x:Name="dropDownBorder" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=PART_Root}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="{DynamicResource MaterialDesignBackground}">
+                                <ScrollViewer Margin="0,4" x:Name="DropDownScrollViewer">
+                                    <Grid RenderOptions.ClearTypeHint="Enabled">
+                                        <Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                            <Rectangle x:Name="opaqueRect" Fill="{Binding Background, ElementName=dropDownBorder}" Height="{Binding ActualHeight, ElementName=dropDownBorder}" Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                        </Canvas>
+                                        <ItemsPresenter Margin="2" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                        <Grid x:Name="PART_InnerGrid" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="true" FocusManager.FocusedElement="{Binding ElementName=PART_EditableTextBox2}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="12"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--下拉按钮-->
+                            <ToggleButton x:Name="PART_DropDownToggle" 
+                                      Grid.ColumnSpan="2"
+                                      IsTabStop="False" 
+                                      Style="{StaticResource AIStudio.Styles.ComboToggleButton}" 
+                                      Padding="{TemplateBinding Padding}"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Width="{Binding Path=(controls:IconAttach.Width), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Height="{Binding Path=(controls:IconAttach.Height), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      controls:IconAttach.Geometry="{Binding Path=(controls:IconAttach.Geometry), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      Foreground="{TemplateBinding BorderBrush}"
+                                      IsHitTestVisible="False"/>
+
+                            <Border Grid.Column="0">
+                                <TextBox x:Name="PART_EditableTextBox2" 
+                                         Background="{TemplateBinding Background}" 
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                         IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" 
+                                         Foreground="{TemplateBinding Foreground}"
+                                         SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                         CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"                                     
+                                         FontSize="{TemplateBinding FontSize}"
+                                         FontFamily="{TemplateBinding FontFamily}"
+                                         Style="{StaticResource AIStudio.Styles.TextBox.ComboBox.Editable}"  />
+                            </Border>
+                            <!--水印-->
+                            <Border Grid.Column="0">
+                                <TextBlock x:Name="Message" Visibility="Collapsed"
+                                       Text="{TemplateBinding controls:ControlAttach.Watermark}"
+                                       Foreground="{TemplateBinding BorderBrush}" IsHitTestVisible="False" Opacity="0.4" Margin="2,0"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </Grid>
+
+                        <controls:Underline x:Name="Underline" Background="{TemplateBinding controls:ControlAttach.BorderBrush}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!--1.显示水印-->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
+                            <Setter TargetName="Message" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="{x:Null}">
+                            <Setter TargetName="Message" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                        <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                            <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                            <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true" SourceName="PART_EditableTextBox2">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true" SourceName="PART_DropDownToggle"/>
+                                <Condition Property="IsFocused" Value="false" SourceName="PART_EditableTextBox2"/>
+                            </MultiTrigger.Conditions>
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="Underline" Property="IsActive" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True" SourceName="PART_EditableTextBox2">
+                            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignValidationErrorBrush}"/>
+                            <Setter TargetName="Underline" Property="Background" Value="{DynamicResource MaterialDesignValidationErrorBrush}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.InputComboBox}" TargetType="{x:Type controls:InputComboBox}"/>
+</ResourceDictionary>

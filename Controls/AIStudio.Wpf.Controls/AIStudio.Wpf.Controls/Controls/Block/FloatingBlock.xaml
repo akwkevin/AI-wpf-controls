@@ -1,0 +1,93 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+
+    <converter:ShadowConverter x:Key="ShadowConverter"/>
+
+    <Style x:Key="AIStudio.Styles.FloatingBlock" TargetType="controls:FloatingBlock">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
+        <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
+        <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:FloatingBlock">
+                    <Grid>
+                        <!--<AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(controls:ControlAttach.CacheMode)}">-->
+                        <Border x:Name="border" 
+                                Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Background}" 
+                                CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius)}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <!--</AdornerDecorator>-->
+                        <controls:Ripple Focusable="False" 
+                                         Padding="{TemplateBinding Padding}" 
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <controls:Ripple.Clip>
+                                <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                                    <Binding ElementName="border" Path="ActualWidth" />
+                                    <Binding ElementName="border" Path="ActualHeight" />
+                                    <Binding ElementName="border" Path="CornerRadius" />
+                                    <Binding ElementName="border" Path="BorderThickness" />
+                                </MultiBinding>
+                            </controls:Ripple.Clip>
+                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </controls:Ripple>
+                    </Grid>
+                    <!--触发器-->
+                    <ControlTemplate.Triggers>
+                        <!--设置鼠标进入时的背景、前景样式-->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="controls:ShadowAttach.Darken" Value="True" />
+                        </Trigger>
+                        <!--鼠标按下时的前景、背景样式-->
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="border" Property="controls:ShadowAttach.Darken" Value="True" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource SuccessBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource InfoBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource WarningBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource DangerBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.FloatingBlock}" TargetType="controls:FloatingBlock"/>
+
+</ResourceDictionary>

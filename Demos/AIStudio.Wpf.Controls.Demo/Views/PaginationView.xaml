@@ -1,0 +1,43 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.PaginationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <Grid>
+        <StackPanel >
+            <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                <StackPanel>
+                    <WrapPanel>
+                        <ac:Pagination Margin="2" CurrentIndex="{Binding Index2}" Total="100" PageSize="10" ControlStyle="Standard" TotalIndex="20" Height="28" HorizontalAlignment="Center" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="CurrentIndexChanged">
+                                    <i:InvokeCommandAction Command="{Binding CurrentIndexChangedComamnd}" PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ac:Pagination>
+                        <ac:Pagination Margin="2" CurrentIndex="{Binding Index2}" Total="100" PageSize="10" ControlStyle="Outlined" TotalIndex="20" Height="28" HorizontalAlignment="Center" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="CurrentIndexChanged">
+                                    <i:InvokeCommandAction Command="{Binding CurrentIndexChangedComamnd}" PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ac:Pagination>
+                        <ac:Pagination Margin="2" CurrentIndex="{Binding Index2}" Total="100" PageSize="10" ControlStyle="Plain" TotalIndex="20" Height="28" HorizontalAlignment="Center" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="CurrentIndexChanged">
+                                    <i:InvokeCommandAction Command="{Binding CurrentIndexChangedComamnd}" PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ac:Pagination>                                       
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>            
+        </StackPanel>
+    </Grid>
+</ac:AIStudioUserControl>

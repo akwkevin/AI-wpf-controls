@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="IStudio.Wpf.MDIContainer.Views.PersonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IStudio.Wpf.MDIContainer.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Name" Margin="4" Grid.Row="0" Grid.Column="0" FontWeight="Bold"/>
+        <TextBox Margin="4" Grid.Row="0" Grid.Column="1" Text="{Binding Person.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <TextBlock Text="Birth" Margin="4" Grid.Row="1" Grid.Column="0" FontWeight="Bold"/>
+        <DatePicker Margin="4" Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Person.BirthDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <TextBlock Text="Address" Margin="4" Grid.Row="2" Grid.Column="0" FontWeight="Bold"/>
+        <TextBox Margin="4" Grid.Row="2" Grid.Column="1" Text="{Binding Person.Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.ColumnSpan="2" Grid.Row="3">
+            <Button Content="Close" Command="{Binding CloseCommand}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

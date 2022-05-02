@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+    <Style x:Key="AIStudio.Styles.HighTextBlock" TargetType="{x:Type controls:HighTextBlock}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="HighBackground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="HighBackground" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="HighBackground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="HighBackground" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="HighBackground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="HighBackground" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="HighBackground" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="HighBackground" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="HighBackground" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="HighBackground" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="HighBackground" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
+                <Setter Property="HighForeground" Value="{DynamicResource MahApps.Brushes.Gray8}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type controls:HighTextBlock}" BasedOn="{StaticResource AIStudio.Styles.HighTextBlock}"/>
+</ResourceDictionary>

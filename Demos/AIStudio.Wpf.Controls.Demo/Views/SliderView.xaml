@@ -1,0 +1,73 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.SliderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel >
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Slider Margin="2,30" Style="{DynamicResource AIStudio.Styles.Slider}" Width="200" IsSnapToTickEnabled="True" Value="8"/>
+                            <Slider Margin="2,30" Style="{DynamicResource AIStudio.Styles.Slider}" Width="200" IsSnapToTickEnabled="True" Value="3" IsEnabled="False"/>
+                            <Slider Margin="2,30" Style="{DynamicResource AIStudio.Styles.Slider}" Width="200" IsSnapToTickEnabled="True" TickFrequency="10" Maximum="200" TickPlacement="TopLeft" Value="10" IsSelectionRangeEnabled="True" SelectionStart="10" SelectionEnd="80"/>
+                            <Slider Margin="2,30" Style="{DynamicResource AIStudio.Styles.Slider}" Width="200" ac:TipAttach.Visibility="Visible" ac:TipAttach.Placement="Top" IsSnapToTickEnabled="True" Maximum="200" Value="60" TickFrequency="10" TickPlacement="BottomRight"/>
+                            <Slider Margin="2,30" Style="{DynamicResource AIStudio.Styles.Slider}" Width="200" ac:TipAttach.Visibility="Visible" ac:TipAttach.Placement="Bottom" ac:TipAttach.StringFormat="#0.00" Value="5" TickPlacement="Both"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="预览" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:PreviewSlider Margin="2,30" Width="200" Value="500" Maximum="1000">
+                                <ac:PreviewSlider.PreviewContent>
+                                    <Label Background="{Binding Path=(ac:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=ContentControl}}" 
+                                           Foreground="{Binding Path=(ac:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=ContentControl}}" 
+                                           Content="{Binding Path=(ac:PreviewSlider.PreviewPosition),RelativeSource={RelativeSource Self}}" ContentStringFormat="{}{0:#0.0}"/>
+                                </ac:PreviewSlider.PreviewContent>
+                            </ac:PreviewSlider>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="范围" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:RangeSlider Margin="2,30" Width="200" IsSnapToTickEnabled="True" ValueStart="2" ValueEnd="8"/>
+                            <ac:RangeSlider Margin="2,30" Width="200" IsSnapToTickEnabled="True" ValueEnd="3"  IsEnabled="False"/>
+                            <ac:RangeSlider Margin="2,30" Width="200" ac:TipAttach.Visibility="Visible" ac:TipAttach.Placement="Top" IsSnapToTickEnabled="True" Maximum="100" ValueEnd="60" TickFrequency="10" TickPlacement="BottomRight" />
+                            <ac:RangeSlider Margin="2,30" Width="200" ac:TipAttach.Visibility="Visible" ac:TipAttach.Placement="Bottom" ac:TipAttach.StringFormat="#0.00" ValueEnd="5" TickPlacement="Both" />
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="竖向" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Slider Margin="30,2" Height="200" Style="{DynamicResource AIStudio.Styles.Slider}" IsSnapToTickEnabled="True" TickFrequency="10" Maximum="200" TickPlacement="TopLeft" Value="10" IsSelectionRangeEnabled="True" SelectionStart="30" SelectionEnd="80" Orientation="Vertical" />
+                            <Slider Margin="30,2" Height="200" Style="{DynamicResource AIStudio.Styles.Slider}" ac:TipAttach.Visibility="Visible" ac:TipAttach.Placement="Left" IsSnapToTickEnabled="True" Maximum="200" Value="60" TickFrequency="10" TickPlacement="BottomRight" Orientation="Vertical"/>
+                            <Slider Margin="30,2" Height="200" Style="{DynamicResource AIStudio.Styles.Slider}" ac:TipAttach.Visibility="Visible" ac:TipAttach.Placement="Right" Value="5" TickPlacement="Both" Orientation="Vertical"/>
+                            <Slider Margin="30,2" Height="200" Style="{DynamicResource AIStudio.Styles.Slider}" IsSnapToTickEnabled="True" Value="8" Orientation="Vertical" />
+                            <Slider Margin="30,2" Height="200" Style="{DynamicResource AIStudio.Styles.Slider}" IsSnapToTickEnabled="True" Value="3" IsEnabled="False" Orientation="Vertical"/>
+                            <ac:PreviewSlider Margin="30,2" Height="300" Value="200" Maximum="1000" Orientation="Vertical" HorizontalAlignment="Center">
+                                <ac:PreviewSlider.PreviewContent>
+                                    <Label Background="{Binding Path=(ac:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=ContentControl}}" 
+                                           Foreground="{Binding Path=(ac:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=ContentControl}}" 
+                                           Content="{Binding Path=(ac:PreviewSlider.PreviewPosition),RelativeSource={RelativeSource Self}}" ContentStringFormat="{}{0:#0.0}"/>
+                                </ac:PreviewSlider.PreviewContent>
+                            </ac:PreviewSlider>
+                            <ac:RangeSlider Margin="30,2" Height="200" IsSnapToTickEnabled="True" ValueEnd="8" Orientation="Vertical"/>
+                            <ac:RangeSlider Margin="30,2" Height="200" IsSnapToTickEnabled="True" ValueEnd="3"  IsEnabled="False" Orientation="Vertical"/>
+                            <ac:RangeSlider Margin="30,2" Height="200" ac:TipAttach.Visibility="Visible" ac:TipAttach.Placement="Left" IsSnapToTickEnabled="True" Maximum="100" ValueEnd="60" TickFrequency="10" TickPlacement="BottomRight"  Orientation="Vertical"/>
+                            <ac:RangeSlider Margin="30,2" Height="200" ac:TipAttach.Visibility="Visible" ac:TipAttach.Placement="Right" ac:TipAttach.StringFormat="#0.00" ValueEnd="5" TickPlacement="Both"  Orientation="Vertical"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

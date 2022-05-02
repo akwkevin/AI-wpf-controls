@@ -1,0 +1,210 @@
+﻿<UserControl x:Class="AIStudio.Wpf.Panels.Demo.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ap="https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.Panels"
+             xmlns:vm="clr-namespace:AIStudio.Wpf.Panels.Demo.ViewModels"
+             xmlns:local="clr-namespace:AIStudio.Wpf.Panels.Demo"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>            
+                <ResourceDictionary>
+                    <ap:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+
+                    <DataTemplate x:Key="MyTitleTemplate"
+                  x:Shared="False">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Fill="Green" Width="16" Height="16" Margin="2"/>
+                            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Text="{Binding Title}" Margin="2,2" IsHitTestVisible="False" />
+                        </StackPanel>
+                    </DataTemplate>
+                    <!--模型1-->
+                    <DataTemplate DataType="{x:Type vm:class1}">
+                        <Grid Margin="2">
+                            <i:Interaction.Behaviors>
+                                <ap:FluidMouseDragBehavior DragButton="Left"/>
+                            </i:Interaction.Behaviors>
+                            <Border Background="Red">
+                                <StackPanel>
+                                    <TextBlock Text="模板1"/>
+                                    <TextBlock Text="{Binding Number}"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                    <!--模型2-->
+                    <DataTemplate DataType="{x:Type vm:class2}">
+                        <Grid Margin="2">
+                            <i:Interaction.Behaviors>
+                                <ap:FluidMouseDragBehavior DragButton="Left"/>
+                            </i:Interaction.Behaviors>
+                            <Border Background="Green">
+                                <StackPanel>
+                                    <TextBlock Text="模板2"/>
+                                    <TextBlock Text="{Binding Number}"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                    <!--模型3-->
+                    <DataTemplate DataType="{x:Type vm:class3}">
+                        <Grid Margin="2">
+                            <i:Interaction.Behaviors>
+                                <ap:FluidMouseDragBehavior DragButton="Left"/>
+                            </i:Interaction.Behaviors>
+                            <Border Background="Blue">
+                                <StackPanel>
+                                    <TextBlock Text="模板3"/>
+                                    <TextBlock Text="{Binding Number}"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                    <Style x:Key="FluidItemContainerStyle" TargetType="{x:Type ListBoxItem}" >
+                        <Setter Property="Margin" Value="2" />
+                        <Setter Property="Padding" Value="2" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" >
+                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>     
+    </UserControl.Resources>
+    <Grid>
+        <TabControl>
+            <TabItem Header="可改变大小Panel">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Margin="2" Text="布局类型" VerticalAlignment="Center"/>
+                        <ComboBox Margin="2" x:Name="checkPanelType" IsEditable="False" SelectedIndex="1" ap:EnumHelper.Enum="{x:Type ap:PanelType}" Width="100" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Transparent" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=., Converter={StaticResource EnumDescriptionConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Margin="2" Text="排列方向" VerticalAlignment="Center"/>
+                        <ComboBox Margin="2" x:Name="checkOrientation" IsEditable="False" SelectedIndex="0" ap:EnumHelper.Enum="{x:Type Orientation}" Width="100" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Transparent" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=., Converter={StaticResource EnumDescriptionConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Margin="2" Text="MaxTile最大块位置" VerticalAlignment="Center"/>
+                        <ComboBox Margin="2" x:Name="checkLocation" IsEditable="False" SelectedIndex="0" ap:EnumHelper.Enum="{x:Type ap:Location}" Width="100" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Transparent" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=., Converter={StaticResource EnumDescriptionConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <CheckBox Margin="2" x:Name="checkWidthAndHeight" Content="绑定宽高" VerticalAlignment="Center"/>
+                        <CheckBox Margin="2" x:Name="txtShowTitle"  Content="显示标题" VerticalAlignment="Center"/>
+                        <CheckBox Margin="2" x:Name="txttile"  Content="Tile设置" VerticalAlignment="Center"/>
+                        <Popup PlacementTarget="{Binding ElementName=txttile}" IsOpen="{Binding ElementName=txttile,Path=IsChecked}">
+                            <ap:RectangleGrid x:Name="rec" ColumnNum="8" RowNum="8" SelectColumn="4" SelectRow="4"/>
+                        </Popup>
+                    </StackPanel>
+
+                    <ap:ResizableItemsControl  x:Name="resizableItemsControl" Grid.Row="1" 
+                                                   ItemsSource="{Binding Datas}" 
+                                                   AllowDrop="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="1" Background="{x:Null}" BorderBrush="{x:Null}" 
+                                                   PanelType="{Binding ElementName=checkPanelType,Path=SelectedItem}" 
+                                                   Orientation="{Binding ElementName=checkOrientation,Path=SelectedItem}"
+                                                   BindingWidthAndHeight="{Binding ElementName=checkWidthAndHeight,Path=IsChecked}"
+                                                   ShowTitle="{Binding ElementName=txtShowTitle,Path=IsChecked}"
+                                                   TitleTemplate="{StaticResource MyTitleTemplate}"
+                                                   ColumnNum="{Binding ElementName=rec,Path=SelectColumn}"
+                                                   RowNum="{Binding ElementName=rec,Path=SelectRow}"
+                                                   MaximizedTileLocation="{Binding ElementName=checkLocation,Path=SelectedItem}">
+                    </ap:ResizableItemsControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="虚拟化Panel">
+                <Grid>
+                    <Grid.Resources>
+                        <DataTemplate x:Key="ListBoxDataTemplate">
+                            <Grid Loaded="Grid_Loaded" Unloaded="Grid_Unloaded">
+                                <Label Content="{Binding}" Width="50" Height="50"></Label>
+                            </Grid>
+                        </DataTemplate>
+                        <DataTemplate x:Key="ListBoxDataTemplate2">
+                            <Grid Loaded="Grid_Loaded2" Unloaded="Grid_Unloaded2">
+                                <Label Content="{Binding}" Width="50" Height="50"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="listbox1" Grid.Row="0" ItemsSource="{Binding Lists}" ItemTemplate="{StaticResource  ListBoxDataTemplate}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ap:VirtualizingWrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock x:Name="txt1" Foreground="Green"/>
+                        <TextBlock x:Name="txt2" Foreground="Red" Margin="2,0" />
+                    </StackPanel>
+
+                    <ListBox x:Name="listbox2" Grid.Row="2" ItemsSource="{Binding Lists}" ItemTemplate="{StaticResource  ListBoxDataTemplate2}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ap:VirtualizingWrapPanelEx ChildWidth="50" ChildHeight="50" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock x:Name="txt3" Foreground="Green"/>
+                        <TextBlock x:Name="txt4" Foreground="Red" Margin="2,0" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="可拖拽Panel">
+                <ListBox x:Name="listview" ItemsSource="{Binding Datas}" ItemContainerStyle="{StaticResource FluidItemContainerStyle}" 
+                     ScrollViewer.HorizontalScrollBarVisibility="{Binding HorizontalScrollBarVisibility, Mode=TwoWay}" 
+                     ScrollViewer.VerticalScrollBarVisibility="{Binding VerticalScrollBarVisibility, Mode=TwoWay}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ap:FluidWrapPanel x:Name="fluidWrapPanel" HorizontalAlignment="Left" VerticalAlignment="Top" ClipToBounds="False" ItemHeight="50" ItemWidth="50" IsComposing="True" Orientation="Horizontal" DragOpacity="1" DragScale="1" >
+                                <ap:FluidWrapPanel.ElementEasing>
+                                    <BackEase EasingMode="EaseOut" Amplitude="0.35"></BackEase>
+                                </ap:FluidWrapPanel.ElementEasing>
+                                <ap:FluidWrapPanel.DragEasing>
+                                    <BackEase EasingMode="EaseOut" Amplitude="0.65"></BackEase>
+                                </ap:FluidWrapPanel.DragEasing>
+                            </ap:FluidWrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

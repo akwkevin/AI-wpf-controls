@@ -1,0 +1,32 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.CarouselView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <Grid>
+        <StackPanel >
+            <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                <StackPanel>
+                    <WrapPanel>
+                        <ac:Carousel Margin="2" IsCenter="True" AutoRun="True" Width="600" Height="330" VerticalAlignment="Center">
+                            <Image Width="600" Stretch="UniformToFill" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/1.jpg"/>
+                            <Image Width="300" Stretch="UniformToFill" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/2.jpg"/>
+                            <Grid Width="600">
+                                <Image Stretch="UniformToFill" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/3.jpg"/>
+                                <TextBlock Text="示例文本" FontSize="100" FontWeight="Bold" Foreground="White"/>
+                            </Grid>
+                            <Image Width="600" Stretch="UniformToFill" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/4.jpg"/>
+                            <Image Width="600" Stretch="UniformToFill" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/5.jpg"/>
+                        </ac:Carousel>
+                    </WrapPanel>
+
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</ac:AIStudioUserControl>

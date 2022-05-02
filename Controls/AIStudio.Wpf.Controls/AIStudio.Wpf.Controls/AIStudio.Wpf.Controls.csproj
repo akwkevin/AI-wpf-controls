@@ -1,0 +1,434 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controls\Emoji\emoji.json" />
+    <None Remove="Controls\Emoji\emotion\0.gif" />
+    <None Remove="Controls\Emoji\emotion\1.gif" />
+    <None Remove="Controls\Emoji\emotion\10.gif" />
+    <None Remove="Controls\Emoji\emotion\100.gif" />
+    <None Remove="Controls\Emoji\emotion\101.gif" />
+    <None Remove="Controls\Emoji\emotion\102.gif" />
+    <None Remove="Controls\Emoji\emotion\103.gif" />
+    <None Remove="Controls\Emoji\emotion\104.gif" />
+    <None Remove="Controls\Emoji\emotion\11.gif" />
+    <None Remove="Controls\Emoji\emotion\12.gif" />
+    <None Remove="Controls\Emoji\emotion\13.gif" />
+    <None Remove="Controls\Emoji\emotion\14.gif" />
+    <None Remove="Controls\Emoji\emotion\15.gif" />
+    <None Remove="Controls\Emoji\emotion\16.gif" />
+    <None Remove="Controls\Emoji\emotion\17.gif" />
+    <None Remove="Controls\Emoji\emotion\18.gif" />
+    <None Remove="Controls\Emoji\emotion\19.gif" />
+    <None Remove="Controls\Emoji\emotion\2.gif" />
+    <None Remove="Controls\Emoji\emotion\20.gif" />
+    <None Remove="Controls\Emoji\emotion\21.gif" />
+    <None Remove="Controls\Emoji\emotion\22.gif" />
+    <None Remove="Controls\Emoji\emotion\23.gif" />
+    <None Remove="Controls\Emoji\emotion\24.gif" />
+    <None Remove="Controls\Emoji\emotion\25.gif" />
+    <None Remove="Controls\Emoji\emotion\26.gif" />
+    <None Remove="Controls\Emoji\emotion\27.gif" />
+    <None Remove="Controls\Emoji\emotion\28.gif" />
+    <None Remove="Controls\Emoji\emotion\29.gif" />
+    <None Remove="Controls\Emoji\emotion\3.gif" />
+    <None Remove="Controls\Emoji\emotion\30.gif" />
+    <None Remove="Controls\Emoji\emotion\31.gif" />
+    <None Remove="Controls\Emoji\emotion\32.gif" />
+    <None Remove="Controls\Emoji\emotion\33.gif" />
+    <None Remove="Controls\Emoji\emotion\34.gif" />
+    <None Remove="Controls\Emoji\emotion\35.gif" />
+    <None Remove="Controls\Emoji\emotion\36.gif" />
+    <None Remove="Controls\Emoji\emotion\37.gif" />
+    <None Remove="Controls\Emoji\emotion\38.gif" />
+    <None Remove="Controls\Emoji\emotion\39.gif" />
+    <None Remove="Controls\Emoji\emotion\4.gif" />
+    <None Remove="Controls\Emoji\emotion\40.gif" />
+    <None Remove="Controls\Emoji\emotion\41.gif" />
+    <None Remove="Controls\Emoji\emotion\42.gif" />
+    <None Remove="Controls\Emoji\emotion\43.gif" />
+    <None Remove="Controls\Emoji\emotion\44.gif" />
+    <None Remove="Controls\Emoji\emotion\45.gif" />
+    <None Remove="Controls\Emoji\emotion\46.gif" />
+    <None Remove="Controls\Emoji\emotion\47.gif" />
+    <None Remove="Controls\Emoji\emotion\48.gif" />
+    <None Remove="Controls\Emoji\emotion\49.gif" />
+    <None Remove="Controls\Emoji\emotion\5.gif" />
+    <None Remove="Controls\Emoji\emotion\50.gif" />
+    <None Remove="Controls\Emoji\emotion\51.gif" />
+    <None Remove="Controls\Emoji\emotion\52.gif" />
+    <None Remove="Controls\Emoji\emotion\53.gif" />
+    <None Remove="Controls\Emoji\emotion\54.gif" />
+    <None Remove="Controls\Emoji\emotion\55.gif" />
+    <None Remove="Controls\Emoji\emotion\56.gif" />
+    <None Remove="Controls\Emoji\emotion\57.gif" />
+    <None Remove="Controls\Emoji\emotion\58.gif" />
+    <None Remove="Controls\Emoji\emotion\59.gif" />
+    <None Remove="Controls\Emoji\emotion\6.gif" />
+    <None Remove="Controls\Emoji\emotion\60.gif" />
+    <None Remove="Controls\Emoji\emotion\61.gif" />
+    <None Remove="Controls\Emoji\emotion\62.gif" />
+    <None Remove="Controls\Emoji\emotion\63.gif" />
+    <None Remove="Controls\Emoji\emotion\64.gif" />
+    <None Remove="Controls\Emoji\emotion\65.gif" />
+    <None Remove="Controls\Emoji\emotion\66.gif" />
+    <None Remove="Controls\Emoji\emotion\67.gif" />
+    <None Remove="Controls\Emoji\emotion\68.gif" />
+    <None Remove="Controls\Emoji\emotion\69.gif" />
+    <None Remove="Controls\Emoji\emotion\7.gif" />
+    <None Remove="Controls\Emoji\emotion\70.gif" />
+    <None Remove="Controls\Emoji\emotion\71.gif" />
+    <None Remove="Controls\Emoji\emotion\72.gif" />
+    <None Remove="Controls\Emoji\emotion\73.gif" />
+    <None Remove="Controls\Emoji\emotion\74.gif" />
+    <None Remove="Controls\Emoji\emotion\75.gif" />
+    <None Remove="Controls\Emoji\emotion\76.gif" />
+    <None Remove="Controls\Emoji\emotion\77.gif" />
+    <None Remove="Controls\Emoji\emotion\78.gif" />
+    <None Remove="Controls\Emoji\emotion\79.gif" />
+    <None Remove="Controls\Emoji\emotion\8.gif" />
+    <None Remove="Controls\Emoji\emotion\80.gif" />
+    <None Remove="Controls\Emoji\emotion\81.gif" />
+    <None Remove="Controls\Emoji\emotion\82.gif" />
+    <None Remove="Controls\Emoji\emotion\83.gif" />
+    <None Remove="Controls\Emoji\emotion\84.gif" />
+    <None Remove="Controls\Emoji\emotion\85.gif" />
+    <None Remove="Controls\Emoji\emotion\86.gif" />
+    <None Remove="Controls\Emoji\emotion\87.gif" />
+    <None Remove="Controls\Emoji\emotion\88.gif" />
+    <None Remove="Controls\Emoji\emotion\89.gif" />
+    <None Remove="Controls\Emoji\emotion\9.gif" />
+    <None Remove="Controls\Emoji\emotion\90.gif" />
+    <None Remove="Controls\Emoji\emotion\91.gif" />
+    <None Remove="Controls\Emoji\emotion\92.gif" />
+    <None Remove="Controls\Emoji\emotion\93.gif" />
+    <None Remove="Controls\Emoji\emotion\94.gif" />
+    <None Remove="Controls\Emoji\emotion\95.gif" />
+    <None Remove="Controls\Emoji\emotion\96.gif" />
+    <None Remove="Controls\Emoji\emotion\97.gif" />
+    <None Remove="Controls\Emoji\emotion\98.gif" />
+    <None Remove="Controls\Emoji\emotion\99.gif" />
+    <None Remove="Controls\MediaPlayer\Icon\a_next.png" />
+    <None Remove="Controls\MediaPlayer\Icon\a_pause.png" />
+    <None Remove="Controls\MediaPlayer\Icon\a_play.png" />
+    <None Remove="Controls\MediaPlayer\Icon\a_prev.png" />
+    <None Remove="Controls\MediaPlayer\Icon\a_stop.png" />
+    <None Remove="Controls\MediaPlayer\Icon\b_like_0.png" />
+    <None Remove="Controls\MediaPlayer\Icon\b_like_1.png" />
+    <None Remove="Controls\MediaPlayer\Icon\b_list.png" />
+    <None Remove="Controls\MediaPlayer\Icon\b_lrc-n.png" />
+    <None Remove="Controls\MediaPlayer\Icon\b_lrc.png" />
+    <None Remove="Controls\MediaPlayer\Icon\b_share.png" />
+    <None Remove="Controls\MediaPlayer\Icon\b_song_list.png" />
+    <None Remove="Controls\MediaPlayer\Icon\b_vol_0.png" />
+    <None Remove="Controls\MediaPlayer\Icon\b_vol_1.png" />
+    <None Remove="Controls\MediaPlayer\Icon\c_close.png" />
+    <None Remove="Controls\MediaPlayer\Icon\c_headIcon.png" />
+    <None Remove="Controls\MediaPlayer\Icon\c_max.png" />
+    <None Remove="Controls\MediaPlayer\Icon\c_min.png" />
+    <None Remove="Controls\MediaPlayer\Icon\c_mini.png" />
+    <None Remove="Controls\MediaPlayer\Icon\c_normal.png" />
+    <None Remove="Controls\MediaPlayer\Icon\c_search.png" />
+    <None Remove="Controls\MediaPlayer\Icon\c_set.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_cloud.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_download.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_fm.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_friend.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_like.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_local_m.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_look.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_m.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_my_f.png" />
+    <None Remove="Controls\MediaPlayer\Icon\d_video.png" />
+    <None Remove="Controls\MediaPlayer\Icon\e_now_song_0.png" />
+    <None Remove="Controls\MediaPlayer\Icon\e_now_song_1.png" />
+    <None Remove="Controls\MediaPlayer\Icon\f_clear.png" />
+    <None Remove="Controls\MediaPlayer\Icon\f_favorite.png" />
+    <None Remove="Controls\MediaPlayer\Icon\f_from.png" />
+    <None Remove="Controls\MediaPlayer\Icon\f_pause.png" />
+    <None Remove="Controls\MediaPlayer\Icon\f_play.png" />
+    <None Remove="Controls\MediaPlayer\Icon\s_style_0.png" />
+    <None Remove="Controls\MediaPlayer\Icon\s_style_1.png" />
+    <None Remove="Controls\MediaPlayer\Icon\s_style_2.png" />
+    <None Remove="Controls\Transition\Images\star.png" />
+    <None Remove="Controls\Verify\Idioms.txt" />
+    <None Remove="Resources\A.ico" />
+    <None Remove="Resources\fontawesome-webfont.ttf" />
+    <None Remove="Resources\variables.less" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Emoji\emoji.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Controls\Emoji\emotion\0.gif" />
+    <Resource Include="Controls\Emoji\emotion\1.gif" />
+    <Resource Include="Controls\Emoji\emotion\10.gif" />
+    <Resource Include="Controls\Emoji\emotion\100.gif" />
+    <Resource Include="Controls\Emoji\emotion\101.gif" />
+    <Resource Include="Controls\Emoji\emotion\102.gif" />
+    <Resource Include="Controls\Emoji\emotion\103.gif" />
+    <Resource Include="Controls\Emoji\emotion\104.gif" />
+    <Resource Include="Controls\Emoji\emotion\11.gif" />
+    <Resource Include="Controls\Emoji\emotion\12.gif" />
+    <Resource Include="Controls\Emoji\emotion\13.gif" />
+    <Resource Include="Controls\Emoji\emotion\14.gif" />
+    <Resource Include="Controls\Emoji\emotion\15.gif" />
+    <Resource Include="Controls\Emoji\emotion\16.gif" />
+    <Resource Include="Controls\Emoji\emotion\17.gif" />
+    <Resource Include="Controls\Emoji\emotion\18.gif" />
+    <Resource Include="Controls\Emoji\emotion\19.gif" />
+    <Resource Include="Controls\Emoji\emotion\2.gif" />
+    <Resource Include="Controls\Emoji\emotion\20.gif" />
+    <Resource Include="Controls\Emoji\emotion\21.gif" />
+    <Resource Include="Controls\Emoji\emotion\22.gif" />
+    <Resource Include="Controls\Emoji\emotion\23.gif" />
+    <Resource Include="Controls\Emoji\emotion\24.gif" />
+    <Resource Include="Controls\Emoji\emotion\25.gif" />
+    <Resource Include="Controls\Emoji\emotion\26.gif" />
+    <Resource Include="Controls\Emoji\emotion\27.gif" />
+    <Resource Include="Controls\Emoji\emotion\28.gif" />
+    <Resource Include="Controls\Emoji\emotion\29.gif" />
+    <Resource Include="Controls\Emoji\emotion\3.gif" />
+    <Resource Include="Controls\Emoji\emotion\30.gif" />
+    <Resource Include="Controls\Emoji\emotion\31.gif" />
+    <Resource Include="Controls\Emoji\emotion\32.gif" />
+    <Resource Include="Controls\Emoji\emotion\33.gif" />
+    <Resource Include="Controls\Emoji\emotion\34.gif" />
+    <Resource Include="Controls\Emoji\emotion\35.gif" />
+    <Resource Include="Controls\Emoji\emotion\36.gif" />
+    <Resource Include="Controls\Emoji\emotion\37.gif" />
+    <Resource Include="Controls\Emoji\emotion\38.gif" />
+    <Resource Include="Controls\Emoji\emotion\39.gif" />
+    <Resource Include="Controls\Emoji\emotion\4.gif" />
+    <Resource Include="Controls\Emoji\emotion\40.gif" />
+    <Resource Include="Controls\Emoji\emotion\41.gif" />
+    <Resource Include="Controls\Emoji\emotion\42.gif" />
+    <Resource Include="Controls\Emoji\emotion\43.gif" />
+    <Resource Include="Controls\Emoji\emotion\44.gif" />
+    <Resource Include="Controls\Emoji\emotion\45.gif" />
+    <Resource Include="Controls\Emoji\emotion\46.gif" />
+    <Resource Include="Controls\Emoji\emotion\47.gif" />
+    <Resource Include="Controls\Emoji\emotion\48.gif" />
+    <Resource Include="Controls\Emoji\emotion\49.gif" />
+    <Resource Include="Controls\Emoji\emotion\5.gif" />
+    <Resource Include="Controls\Emoji\emotion\50.gif" />
+    <Resource Include="Controls\Emoji\emotion\51.gif" />
+    <Resource Include="Controls\Emoji\emotion\52.gif" />
+    <Resource Include="Controls\Emoji\emotion\53.gif" />
+    <Resource Include="Controls\Emoji\emotion\54.gif" />
+    <Resource Include="Controls\Emoji\emotion\55.gif" />
+    <Resource Include="Controls\Emoji\emotion\56.gif" />
+    <Resource Include="Controls\Emoji\emotion\57.gif" />
+    <Resource Include="Controls\Emoji\emotion\58.gif" />
+    <Resource Include="Controls\Emoji\emotion\59.gif" />
+    <Resource Include="Controls\Emoji\emotion\6.gif" />
+    <Resource Include="Controls\Emoji\emotion\60.gif" />
+    <Resource Include="Controls\Emoji\emotion\61.gif" />
+    <Resource Include="Controls\Emoji\emotion\62.gif" />
+    <Resource Include="Controls\Emoji\emotion\63.gif" />
+    <Resource Include="Controls\Emoji\emotion\64.gif" />
+    <Resource Include="Controls\Emoji\emotion\65.gif" />
+    <Resource Include="Controls\Emoji\emotion\66.gif" />
+    <Resource Include="Controls\Emoji\emotion\67.gif" />
+    <Resource Include="Controls\Emoji\emotion\68.gif" />
+    <Resource Include="Controls\Emoji\emotion\69.gif" />
+    <Resource Include="Controls\Emoji\emotion\7.gif" />
+    <Resource Include="Controls\Emoji\emotion\70.gif" />
+    <Resource Include="Controls\Emoji\emotion\71.gif" />
+    <Resource Include="Controls\Emoji\emotion\72.gif" />
+    <Resource Include="Controls\Emoji\emotion\73.gif" />
+    <Resource Include="Controls\Emoji\emotion\74.gif" />
+    <Resource Include="Controls\Emoji\emotion\75.gif" />
+    <Resource Include="Controls\Emoji\emotion\76.gif" />
+    <Resource Include="Controls\Emoji\emotion\77.gif" />
+    <Resource Include="Controls\Emoji\emotion\78.gif" />
+    <Resource Include="Controls\Emoji\emotion\79.gif" />
+    <Resource Include="Controls\Emoji\emotion\8.gif" />
+    <Resource Include="Controls\Emoji\emotion\80.gif" />
+    <Resource Include="Controls\Emoji\emotion\81.gif" />
+    <Resource Include="Controls\Emoji\emotion\82.gif" />
+    <Resource Include="Controls\Emoji\emotion\83.gif" />
+    <Resource Include="Controls\Emoji\emotion\84.gif" />
+    <Resource Include="Controls\Emoji\emotion\85.gif" />
+    <Resource Include="Controls\Emoji\emotion\86.gif" />
+    <Resource Include="Controls\Emoji\emotion\87.gif" />
+    <Resource Include="Controls\Emoji\emotion\88.gif" />
+    <Resource Include="Controls\Emoji\emotion\89.gif" />
+    <Resource Include="Controls\Emoji\emotion\9.gif" />
+    <Resource Include="Controls\Emoji\emotion\90.gif" />
+    <Resource Include="Controls\Emoji\emotion\91.gif" />
+    <Resource Include="Controls\Emoji\emotion\92.gif" />
+    <Resource Include="Controls\Emoji\emotion\93.gif" />
+    <Resource Include="Controls\Emoji\emotion\94.gif" />
+    <Resource Include="Controls\Emoji\emotion\95.gif" />
+    <Resource Include="Controls\Emoji\emotion\96.gif" />
+    <Resource Include="Controls\Emoji\emotion\97.gif" />
+    <Resource Include="Controls\Emoji\emotion\98.gif" />
+    <Resource Include="Controls\Emoji\emotion\99.gif" />
+    <Resource Include="Controls\MediaPlayer\Icon\a_next.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\a_pause.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\a_play.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\a_prev.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\a_stop.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\b_like_0.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\b_like_1.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\b_list.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\b_lrc-n.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\b_lrc.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\b_share.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\b_song_list.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\b_vol_0.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\b_vol_1.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\c_close.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\c_headIcon.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\c_max.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\c_min.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\c_mini.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\c_normal.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\c_search.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\c_set.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_cloud.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_download.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_fm.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_friend.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_like.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_local_m.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_look.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_m.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_my_f.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\d_video.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\e_now_song_0.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\e_now_song_1.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\f_clear.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\f_favorite.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\f_from.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\f_pause.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\f_play.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\s_style_0.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\s_style_1.png" />
+    <Resource Include="Controls\MediaPlayer\Icon\s_style_2.png" />
+    <Resource Include="Controls\Transition\Images\star.png" />
+    <Resource Include="Controls\Verify\Idioms.txt" />
+    <Resource Include="Resources\A.ico" />
+    <Resource Include="Resources\fontawesome-webfont.ttf" />
+    <Resource Include="Resources\variables.less" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="TagLibSharp" Version="2.2.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Controls\Expander\FloatExpander.MaterialDesign.xamlxx">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\Drawer\Drawer.MaterialDesign.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\Form\FormItem.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Controls\Icon\PathIcon.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Controls\Window\BaseDialog\BaseDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MahApps\ContextMenu.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MahApps\Label.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MahApps\RichTextBox.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MahApps\StatusBar.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MahApps\Thumb.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MahApps\ToolBar.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MahApps\ToolTip.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MahApps\UserControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Styles\MahApps\ValidationErrorTemplate.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MahApps\Window.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MaterialDesign\Calendar.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MaterialDesign\DataGrid.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MaterialDesign\DatePicker.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MaterialDesign\GridSplitter.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MaterialDesign\GroupBox.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MaterialDesign\Menu.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MaterialDesign\RadioButton.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MaterialDesign\Slider.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\MahApps.Defaults.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="System.Text.Encoding.CodePages">
+      <Version>6.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

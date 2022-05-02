@@ -1,0 +1,545 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:BrushToColorConverter x:Key="BrushToColorConverter"/>
+    <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
+    <converter:BoolInverseConverter x:Key="BoolInverseConverter"/>
+
+    <!-- 播放 -->
+    <Style x:Key="buttonControlTemplate_play" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource PlayGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 暂停 -->
+    <Style x:Key="buttonControlTemplate_pause" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource PauseGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 停止 -->
+    <Style x:Key="buttonControlTemplate_stop" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource StopGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 下一首 -->
+    <Style x:Key="buttonControlTemplate_next" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource NextGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 上一首 -->
+    <Style x:Key="buttonControlTemplate_prev" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource PreviousGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 播放模式 列表循环 -->
+    <Style x:Key="buttonControlTemplate_play_style_0" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource RepeatGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 播放模式 单曲循环 -->
+    <Style x:Key="buttonControlTemplate_play_style_1" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource RepeatOnceGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 播放模式 随机播放 -->
+    <Style x:Key="buttonControlTemplate_play_style_2" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource RandomGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 音量静音按钮 -->
+    <Style x:Key="buttonControlTemplate_vol_0" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource VolumeHighGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 音量按钮 -->
+    <Style x:Key="buttonControlTemplate_vol_1" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Path x:Name="grid" Data="{StaticResource VolumeLowGeometry}" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Opacity="0.6"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="grid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--音量滑块槽 左边 样式 -->
+    <Style x:Key="Slider_RepeatButton_Left_Vol" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Background" Value="#FFB82525"/>
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <!-- 横向 -->
+                    <Border Background="{TemplateBinding Background}" CornerRadius="2,0,0,2" Height="4" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--音量滑块槽 右边 样式 -->
+    <Style x:Key="Slider_RepeatButton_Right_Vol" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Background" Value="#FF171719"/>
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <!-- 横向 -->
+                    <Border Background="{TemplateBinding Background}" CornerRadius="0,2,2,0" Height="4"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 音量滑块 样式 -->
+    <Style x:Key="Slider_Thumb_Vol" TargetType="{x:Type Thumb}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="#FFB82525"/>
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <!--滑块-->
+                    <Border CornerRadius="7" Background="{TemplateBinding Background}" Width="14" Height="14">
+                        <Border Width="6" Height="6" CornerRadius="3" Background="{TemplateBinding Foreground}"></Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 音量样式 （外部调用） -->
+    <Style x:Key="Slider_CustomStyle_Vol" TargetType="{x:Type Slider}">
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="Foreground" Value="#FFBC3232"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Track x:Name="PART_Track">
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource Slider_RepeatButton_Left_Vol}" Background="{TemplateBinding Foreground}" Command="Slider.DecreaseLarge"/>
+                        </Track.DecreaseRepeatButton>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource Slider_RepeatButton_Right_Vol}" Background="{TemplateBinding Background}" Command="Slider.IncreaseLarge"/>
+                        </Track.IncreaseRepeatButton>
+                        <Track.Thumb>
+                            <Thumb x:Name="S_Thumb_" Visibility="Collapsed" Foreground="{TemplateBinding Foreground}" Style="{StaticResource Slider_Thumb_Vol}"/>
+                        </Track.Thumb>
+                    </Track>
+
+                    <!-- 鼠标经过 显示音量滑块-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" TargetName="S_Thumb_" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--滑块左 进度条-->
+    <Style x:Key="Slider_RepeatButton_Left_Progress" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Background" Value="#FFB82525"/>
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="2,0,0,2" Height="4"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--滑块右 进度条-->
+    <Style x:Key="Slider_RepeatButton_Right_Progress" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Background" Value="#FF171719"/>
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="0,2,2,0" Height="4"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--滑块 进度条-->
+    <Style x:Key="Slider_Thumb_Progress" TargetType="{x:Type Thumb}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="#FFB82525"/>
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <!--滑块-->
+                    <Border x:Name="border_point" CornerRadius="8" Background="{TemplateBinding Background}" Width="16" Height="16">
+                        <Border Width="6" Height="6" CornerRadius="3"  Background="{TemplateBinding Foreground}"></Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border_point" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Direction="0" Color="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=Thumb},Converter={StaticResource BrushToColorConverter}}" ShadowDepth="0" BlurRadius="5"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--进度条样式 媒体进度 （外部调用）-->
+    <Style x:Key="Slider_CustomStyle_Progress" TargetType="{x:Type Slider}">
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="Foreground" Value="#FFBC3232"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Track x:Name="PART_Track">
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource Slider_RepeatButton_Left_Progress}"  Background="{TemplateBinding Foreground}"/>
+                        </Track.DecreaseRepeatButton>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource Slider_RepeatButton_Right_Progress}"  Background="{TemplateBinding Background}"/>
+                        </Track.IncreaseRepeatButton>
+                        <Track.Thumb>
+                            <Thumb Style="{StaticResource Slider_Thumb_Progress}" Foreground="{TemplateBinding Foreground}" />
+                        </Track.Thumb>
+                    </Track>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--播放器-->
+    <Style x:Key="AIStudio.Styles.MediaElementPlayer" TargetType="{x:Type controls:MediaElementPlayer}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkDangerBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:MediaElementPlayer}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="打开" x:Name="PART_OpenMenuItem" />
+                                <MenuItem Header="播放/暂停" x:Name="PART_PlarMenuItem" />
+                                <MenuItem Header="停止" x:Name="PART_StopMenuItem" />
+                                <MenuItem Header="上一个" x:Name="PART_PreMenuItem" />
+                                <MenuItem Header="下一个" x:Name="PART_NextMenuItem" />
+                            </ContextMenu>
+                        </Grid.ContextMenu>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <MediaElement MinHeight="200" x:Name="PART_MediaElement" LoadedBehavior="Manual" UnloadedBehavior="Manual" Visibility="Collapsed"/>
+                        <Grid Grid.Row="1" Height="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" MinWidth="100"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- 播放按钮 -->
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <Button x:Name="PART_Btn_Pre" Margin="5,0" Command="{Binding PreCommand,RelativeSource={RelativeSource TemplatedParent}}" Width="30" Height="30" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource buttonControlTemplate_prev}" Cursor="Hand" ToolTip="上一曲" Visibility="Collapsed"></Button>
+                                <Button x:Name="PART_Btn_Play" Margin="5,0" Command="{Binding PlayCommand,RelativeSource={RelativeSource TemplatedParent}}" Width="35" Height="35" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource buttonControlTemplate_pause}" Cursor="Hand" ToolTip="点击开始播放" ></Button>
+                                <Button x:Name="PART_Btn_Next" Margin="5,0" Command="{Binding NextCommand,RelativeSource={RelativeSource TemplatedParent}}" Width="30" Height="30" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource buttonControlTemplate_next}" Cursor="Hand" ToolTip="下一曲" Visibility="Collapsed"></Button>
+                            </StackPanel>
+
+                            <!-- 左边时间区域 -->
+                            <Grid Grid.Column="1">
+                                <TextBlock x:Name="PART_Left_Lable" Text="{TemplateBinding PositionTime}" VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <!-- 进度条区域 -->
+                            <Grid Grid.Column="2" >
+                                <!-- 进度条滑块 -->
+                                <controls:SliderProgress x:Name="PART_Slider_Progress" 
+                                                         Margin="2,0" 
+                                                         AutoToolTipFormat="{}{0:00}:{1:00}" 
+                                                         AutoToolTipPlacement="TopLeft" 
+                                                         IsMoveToPointEnabled="True"                                   
+                                                         Value="{TemplateBinding Position}"
+                                                         Maximum="{TemplateBinding TotalSeconds}" 
+                                                         Foreground="{TemplateBinding controls:ControlAttach.Foreground}"
+                                                         Background="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType=controls:MediaElementPlayer},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.12}"
+                                                         Style="{StaticResource Slider_CustomStyle_Progress}" 
+                                                         VerticalAlignment="Center" 
+                                                         HorizontalAlignment="Stretch" 
+                                                         Cursor="Hand">
+                                </controls:SliderProgress>
+                            </Grid>
+
+                            <!-- 右边时间区域 -->
+                            <Grid Grid.Column="3">
+                                <TextBlock x:Name="PART_Right_Lable" Text="{TemplateBinding TotalSecondsTime}" VerticalAlignment="Center" />
+                            </Grid>
+
+                            <!-- 音量区域 -->
+                            <StackPanel Orientation="Horizontal" Grid.Column="4">
+
+                                <Button Name="PART_Btn_Volume" Command="{Binding MuteCommand,RelativeSource={RelativeSource TemplatedParent}}" Width="18" Height="18" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource buttonControlTemplate_vol_0}" Cursor="Hand" ToolTip="点击静音" Margin="5,0,2,0" ></Button>
+
+                                <!-- 音量滑块 -->
+                                <controls:SliderVolume x:Name="PART_Slider_Volume" 
+                                                       AutoToolTipFormat="{}{0}" 
+                                                       AutoToolTipPlacement="TopLeft" 
+                                                       AutoToolTipPrecision="2" 
+                                                       IsMoveToPointEnabled="True"                                    
+                                                       Value="{TemplateBinding Volume}" 
+                                                       ToolTip="音量调节" 
+                                                       Width="60" 
+                                                       Height="30" 
+                                                       VerticalAlignment="Center" 
+                                                       HorizontalAlignment="Right" 
+                                                       Foreground="{TemplateBinding controls:ControlAttach.Foreground}"
+                                                       Background="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType=controls:MediaElementPlayer},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.12}"
+                                                       Style="{StaticResource Slider_CustomStyle_Vol}"
+                                                       Maximum="1" 
+                                                       LargeChange="0.05" 
+                                                       SmallChange="0.01" 
+                                                       Cursor="Hand" 
+                                                       IsEnabled="{Binding Path=IsMute,RelativeSource={RelativeSource AncestorType=controls:MediaElementPlayer},Converter={StaticResource BoolInverseConverter}}">
+                                </controls:SliderVolume>
+                            </StackPanel>
+
+                            <!-- 按钮区域 -->
+                            <Grid Grid.Column="5">
+                                <Button Name="PART_Btn_Play_Mode" Margin="5,0" Command="{Binding PlayModeCommand,RelativeSource={RelativeSource TemplatedParent}}" Width="20" Height="20" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Style="{StaticResource buttonControlTemplate_play_style_0}" Cursor="Hand" ToolTip="列表循环" Visibility="Collapsed"></Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ShowMode" Value="PathFullMode">
+                            <Setter TargetName="PART_Btn_Pre" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Btn_Next" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Btn_Play_Mode" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="ShowMode" Value="PathVideoFullMode">
+                            <Setter TargetName="PART_Btn_Pre" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Btn_Next" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Btn_Play_Mode" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="ShowMode" Value="MusicInfoFullMode">
+                            <Setter TargetName="PART_Btn_Pre" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Btn_Next" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Btn_Play_Mode" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="ShowMode" Value="MusicInfoVideoFullMode">
+                            <Setter TargetName="PART_Btn_Pre" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Btn_Next" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Btn_Play_Mode" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="ShowMode" Value="PathVideoMode">
+                            <Setter TargetName="PART_MediaElement" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="ShowMode" Value="PathVideoFullMode">
+                            <Setter TargetName="PART_MediaElement" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="ShowMode" Value="MusicInfoVideoMode">
+                            <Setter TargetName="PART_MediaElement" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="ShowMode" Value="MusicInfoVideoFullMode">
+                            <Setter TargetName="PART_MediaElement" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="PlayStatus" Value="Stop">
+                            <Setter TargetName="PART_Btn_Play" Property="Style" Value="{StaticResource buttonControlTemplate_play}"/>
+                        </Trigger>
+                        <Trigger Property="IsMute" Value="True">
+                            <Setter TargetName="PART_Btn_Volume" Property="Style" Value="{StaticResource buttonControlTemplate_vol_1}"/>
+                        </Trigger>
+                        <Trigger Property="PlayMode" Value="Looping">
+                            <Setter TargetName="PART_Btn_Play_Mode" Property="Style" Value="{StaticResource buttonControlTemplate_play_style_1}"/>
+                            <Setter TargetName="PART_Btn_Play_Mode" Property="ToolTip" Value="单曲循环"/>
+                        </Trigger>
+                        <Trigger Property="PlayMode" Value="Randomly">
+                            <Setter TargetName="PART_Btn_Play_Mode" Property="Style" Value="{StaticResource buttonControlTemplate_play_style_2}"/>
+                            <Setter TargetName="PART_Btn_Play_Mode" Property="ToolTip" Value="随机播放"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkSuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkInfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkWarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkDangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.MediaElementPlayer}" TargetType="{x:Type controls:MediaElementPlayer}"/>
+
+</ResourceDictionary>

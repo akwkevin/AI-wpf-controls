@@ -1,0 +1,590 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/TextBlock.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ValidationErrorTemplate.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:ShadowConverter x:Key="ShadowConverter"/>
+
+    <Style x:Key="OptionMarkFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="0,0,0,0" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.RadioButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource AIStudio.Styles.ValidationErrorTemplate}"/>
+        <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Large}"/>
+        <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Large}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="Click">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="48"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="48"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-24"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-24"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0.3"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:IconAttach.Width)}"
+                                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:IconAttach.Height)}"
+                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Canvas Width="24" Height="24">
+                                <Path x:Name="Graphic"
+                                      Data="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                                      Fill="{DynamicResource MahApps.Brushes.CheckBox.MouseOver}" />
+                                <Ellipse x:Name="InteractionEllipse" Fill="{TemplateBinding Foreground}" Width="0" Height="0" Canvas.Top="12" Canvas.Left="12" Opacity="0" RenderTransformOrigin="0.5,0.5" >
+                                    <Ellipse.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                            </Canvas>
+                        </Viewbox>
+                        <ContentPresenter x:Name="contentPresenter" 
+                                          Grid.Column="1"
+                                          Focusable="False"                                          
+                                          Margin="{TemplateBinding Padding}" 
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="ButtonBase.Click">
+                            <BeginStoryboard Storyboard="{StaticResource Click}"/>
+                        </EventTrigger>
+                        <Trigger Property="HasContent" Value="true">
+                            <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
+                            <Setter Property="Padding" Value="5,0,0,0"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Fill" TargetName="Graphic" Value="{DynamicResource MahApps.Brushes.Control.Disabled}" />
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true"/>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Data" TargetName="Graphic" Value="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z" />
+                            <Setter Property="Fill" TargetName="Graphic" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter Property="Data" TargetName="Graphic" Value="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z" />
+                            <Setter Property="Opacity" TargetName="Graphic" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="Fill" TargetName="Graphic" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                            <Setter Property="Control.Foreground" TargetName="contentPresenter" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value=".9"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value=".6"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Panel.ZIndex" Value="{x:Static system:Int32.MaxValue}"/>
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="BorderBrush" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="BorderBrush" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.RadioButton.Flat" TargetType="RadioButton">
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}"/>
+        <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}"/>
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="Transparent"/>
+        <Setter Property="controls:ControlAttach.BorderThickness" Value="0"/>
+        <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Medium}"/>
+        <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Medium}"/>
+        <Setter Property="controls:RippleAssist.Feedback" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid>
+                        <Border x:Name="Bg" 
+                            CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" 
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <Border Name="BorderHighlight" 
+                                    BorderThickness="{Binding Path=(controls:ControlAttach.BorderThickness),RelativeSource={RelativeSource TemplatedParent}}" 
+                                    CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" 
+                                    BorderBrush="Transparent"/>
+                        <controls:Ripple Focusable="False" 
+                                         Padding="{TemplateBinding Padding}" 
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <controls:Ripple.Clip>
+                                <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                                    <Binding ElementName="Bg" Path="ActualWidth" />
+                                    <Binding ElementName="Bg" Path="ActualHeight" />
+                                    <Binding ElementName="Bg" Path="CornerRadius" />
+                                    <Binding ElementName="Bg" Path="BorderThickness" />
+                                </MultiBinding>
+                            </controls:Ripple.Clip>
+                            <DockPanel>
+                                <Path x:Name="PathMain" DockPanel.Dock="{TemplateBinding controls:IconAttach.Dock}" Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource TemplatedParent}}" Fill="{TemplateBinding Foreground}" SnapsToDevicePixels="True" Stretch="Uniform" Data="{TemplateBinding controls:IconAttach.Geometry}"/>
+                                <Grid x:Name="padding" DockPanel.Dock="{TemplateBinding controls:IconAttach.Dock}" Margin="5,0,0,0"></Grid>
+                                <ContentPresenter x:Name="ContentPresenterMain" RecognizesAccessKey="True"/>
+                            </DockPanel>
+                        </controls:Ripple>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ContentPresenterMain"/>
+                        </Trigger>
+                        <Trigger Property="controls:IconAttach.Geometry" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="padding"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PathMain"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource TemplatedParent}}" TargetName="BorderHighlight"/>
+                            <Setter Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource TemplatedParent}}" TargetName="Bg"/>
+                            <Setter Property="Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource Mode=Self}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value=".9"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value=".6"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Panel.ZIndex" Value="{x:Static system:Int32.MaxValue}"/>
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.RadioButton.Plain" BasedOn="{StaticResource AIStudio.Styles.RadioButton.Flat}" TargetType="RadioButton">
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="controls:ControlAttach.BorderThickness" Value="3,0,0,0"/>
+        <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value=".9"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value=".6"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Panel.ZIndex" Value="{x:Static system:Int32.MaxValue}"/>
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.RadioButton.Outlined" BasedOn="{StaticResource AIStudio.Styles.RadioButton.Flat}" TargetType="RadioButton">
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid>
+                        <Border x:Name="Bg" CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" 
+                            Background="{TemplateBinding Background}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <controls:Ripple Focusable="False" 
+                                         Padding="{TemplateBinding Padding}" 
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <controls:Ripple.Clip>
+                                <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                                    <Binding ElementName="Bg" Path="ActualWidth" />
+                                    <Binding ElementName="Bg" Path="ActualHeight" />
+                                    <Binding ElementName="Bg" Path="CornerRadius" />
+                                    <Binding ElementName="Bg" Path="BorderThickness" />
+                                </MultiBinding>
+                            </controls:Ripple.Clip>
+                            <DockPanel>
+                                <Path x:Name="PathMain" DockPanel.Dock="{TemplateBinding controls:IconAttach.Dock}" Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource TemplatedParent}}" Fill="{TemplateBinding Foreground}" SnapsToDevicePixels="True" Stretch="Uniform" Data="{TemplateBinding controls:IconAttach.Geometry}"/>
+                                <Grid x:Name="padding" DockPanel.Dock="{TemplateBinding controls:IconAttach.Dock}" Margin="5,0,0,0"></Grid>
+                                <ContentPresenter x:Name="ContentPresenterMain" RecognizesAccessKey="True"/>
+                            </DockPanel>
+                        </controls:Ripple>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ContentPresenterMain"/>
+                        </Trigger>
+                        <Trigger Property="controls:IconAttach.Geometry" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="padding"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PathMain"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Mode=Self}}"/>
+                            <Setter Property="Foreground" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Mode=Self}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value=".9"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value=".6"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Panel.ZIndex" Value="{x:Static system:Int32.MaxValue}"/>
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.RadioButton.Check" TargetType="{x:Type RadioButton}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="auto"/>
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorderr}" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}"/>
+        <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Medium}"/>
+        <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Medium}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Grid x:Name="grid">
+                        <Border x:Name="Bg" CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" 
+                            Background="{TemplateBinding Background}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+
+                        <controls:Ripple Focusable="False" 
+                                         Padding="{TemplateBinding Padding}" 
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <controls:Ripple.Clip>
+                                <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                                    <Binding ElementName="Bg" Path="ActualWidth" />
+                                    <Binding ElementName="Bg" Path="ActualHeight" />
+                                    <Binding ElementName="Bg" Path="CornerRadius" />
+                                    <Binding ElementName="Bg" Path="BorderThickness" />
+                                </MultiBinding>
+                            </controls:Ripple.Clip>
+                            <ContentPresenter />
+                        </controls:Ripple>
+                        <!--选中的状态标识-->
+                        <Path Data="M64 960l832 0c35.392 0 64-28.608 64-64L960 64 64 960zM674.88 874.24C667.136 886.656 653.632 896 638.976 896c-0.64 0-1.344 0-1.344 0-14.656 0-27.776-7.36-36.224-18.496L457.28 696.32c-14.848-19.648-11.008-47.808 8.64-62.784 19.776-14.72 47.616-11.008 62.528 8.64l105.024 129.152 189.248-303.808c12.992-20.864 40.512-27.264 61.376-14.272 20.992 12.992 27.264 40.512 14.272 61.44L674.88 874.24z" 
+                                      x:Name="checkState" 
+                                      HorizontalAlignment="Right" 
+                                      VerticalAlignment="Bottom"
+                                      Visibility="Collapsed"
+                                      Width="{TemplateBinding controls:IconAttach.Width}" 
+                                      Height="{TemplateBinding controls:IconAttach.Height}"                                          
+                                      Stretch="Fill"
+                                      Fill="{TemplateBinding BorderBrush}"/>
+                    </Grid>
+                    <!--触发器：设置选中状态符号-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Visibility" Value="Visible" TargetName="checkState" />
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Mode=Self}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value=".9"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value=".6"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Panel.ZIndex" Value="{x:Static system:Int32.MaxValue}"/>
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+                <Setter Property="controls:RippleAssist.Feedback" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

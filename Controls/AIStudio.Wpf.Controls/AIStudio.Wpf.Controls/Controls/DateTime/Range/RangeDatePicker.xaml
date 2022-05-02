@@ -1,0 +1,475 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ToggleButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DateTime/Range/ACalendar.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:String2VisibilityReConverter x:Key="String2VisibilityReConverter"/>
+    <converter:ThicknessBindingConverter x:Key="ThicknessBindingConverter"/>
+    <converter:ValueInverseConverter x:Key="ValueInverseConverter"/>
+    <converter:ShadowConverter x:Key="ShadowConverter"/>
+
+    <Style x:Key="ChooseTimeToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter 
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand" />
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:ControlAttach.Background)}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Content" Value="选择时间" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Content" Value="选择日期" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.RangeDatePicker" TargetType="{x:Type controls:RangeDatePicker}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}"/>
+        <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource AIStudio.Styles.ValidationErrorTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RangeDatePicker}">
+                    <Grid x:Name="PART_Root">
+                        <!--<AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(controls:ControlAttach.CacheMode)}">-->
+                        <Border x:Name="Bg" 
+                                Padding="{TemplateBinding Padding}" 
+                                CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}"
+                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <!--</AdornerDecorator>-->
+                        <Grid x:Name="PART_InnerGrid" Margin="{TemplateBinding Padding}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="PART_TextBox_New" 
+                                     Grid.Column="0" 
+                                     Focusable="{TemplateBinding Focusable}"                                      
+                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                     Foreground="{TemplateBinding Foreground}" 
+                                     SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                     CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"      
+                                     BorderBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                     controls:ControlAttach.Watermark="{TemplateBinding controls:ControlAttach.Watermark}"                                    
+                                     Style="{StaticResource AIStudio.Styles.TextBox.Plain}"/>
+
+                            <ToggleButton x:Name="PART_DropDownButton" Grid.Column="1" 
+                                          Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyLeft}}"
+                                          Focusable="False"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                          Style="{StaticResource AIStudio.Styles.ComboToggleButton}" />
+
+                            <Popup x:Name="PART_Popup_New" 
+                                       AllowsTransparency="True"
+                                       IsOpen="{Binding Path=IsChecked, ElementName=PART_DropDownButton}"
+                                       Placement="Bottom"
+                                       PlacementTarget="{Binding ElementName=Bg}"
+                                       StaysOpen="False" VerticalOffset="{Binding ElementName=Bg, Path=ActualHeight,Converter={StaticResource ValueInverseConverter}}">
+                                <Border 
+                                    Background="{DynamicResource MahApps.Brushes.ThemeBackground}" 
+                                    CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius)}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}">
+                                    <Grid x:Name="Calendar_Layout">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.ColumnSpan="2">
+                                            <TextBox Margin="{TemplateBinding Padding}" 
+                                                    x:Name="PART_TextBox_Display" 
+                                                    Foreground="{TemplateBinding Foreground}" 
+                                                    SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                                    CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"         
+                                                    Style="{StaticResource AIStudio.Styles.TextBox.Plain}"/>
+                                        </Grid>
+
+                                        <controls:ACalendar x:Name="PART_Calendar" Grid.Row="1" Grid.Column="0" BorderThickness="0" />
+                                        <controls:ACalendar x:Name="PART_Calendar_Second" Grid.Row="1" Grid.Column="1" BorderThickness="0" />
+
+                                        <Border x:Name="ButtonLayout" Grid.Row="2" Grid.ColumnSpan="2"
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="0,1,0,0" 
+                                                Padding="{TemplateBinding Padding}"
+                                                Visibility="Collapsed">
+                                            <DockPanel>
+                                                <ToggleButton x:Name="ChooseTime" 
+                                                                      DockPanel.Dock="Left" 
+                                                                      Visibility="Collapsed"
+                                                                      Padding="6,3"
+                                                                      Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyRight}}"
+                                                                      Style="{StaticResource ChooseTimeToggleButton}"
+                                                                      controls:ControlAttach.Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+
+                                                <controls:ButtonGroup DockPanel.Dock="Left" Orientation="Horizontal" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0" Visibility="{TemplateBinding IsShowShortCuts,Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                    <Button Name="PART_Btn_RecentlyAWeek" 
+                                                            Content="最近一周" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                    <Button Name="PART_Btn_RecentlyAMonth" 
+                                                            Content="最近一个月" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                    <Button Name="PART_Btn_RecentlyThreeMonth" 
+                                                            Content="最近三个月" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                </controls:ButtonGroup>
+
+                                                <controls:ButtonGroup DockPanel.Dock="Right" Orientation="Horizontal" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0" Visibility="{TemplateBinding IsShowConfirm,Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                    <Button Name="PART_ClearDate" 
+                                                            Content="清空" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                    <Button Name="PART_ConfirmSelected" 
+                                                            Content="确定" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                </controls:ButtonGroup>
+
+                                                <Popup x:Name="PART_Popup_TimeSelector" AllowsTransparency="True" Placement="Top" PlacementTarget="{Binding ElementName=ButtonLayout}"
+                                                               IsOpen="{Binding IsChecked, ElementName=ChooseTime}"
+                                                               Width="{Binding Path=ActualWidth, ElementName=ButtonLayout}">
+                                                    <Grid Height="{Binding Path=ActualHeight, ElementName=PART_Calendar}">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <controls:ListClock x:Name="PART_TimeSelector" Width="Auto" Height="Auto" BorderThickness="0"/>
+                                                        <controls:ListClock x:Name="PART_TimeSelector_Second" Width="Auto" Height="Auto" BorderThickness="0" Grid.Column="1"/>
+                                                    </Grid>
+                                                </Popup>
+                                            </DockPanel>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Popup>
+                        </Grid>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
+                            <Setter TargetName="PART_TextBox_New" Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
+                            <Setter TargetName="PART_TextBox_New" Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource Mode=Self}}" Value="DateTimeRange">
+                            <Setter TargetName="ChooseTime" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ButtonLayout" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsShowConfirm, RelativeSource={RelativeSource Mode=Self}}" Value="True">
+                            <Setter TargetName="ButtonLayout" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsShowShortCuts, RelativeSource={RelativeSource Mode=Self}}" Value="True">
+                            <Setter TargetName="ButtonLayout" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <Trigger Property="IsFocused" Value="true" SourceName="PART_TextBox_New">
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                            <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+                        </Trigger>
+                        <Trigger Property="IsOpen" Value="True" SourceName="PART_Popup_New">
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="PART_Root" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.RangeDatePicker.Underline" TargetType="{x:Type controls:RangeDatePicker}" BasedOn="{StaticResource AIStudio.Styles.RangeDatePicker}">
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RangeDatePicker}">
+                    <Grid x:Name="PART_Root">
+                        <!--<AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(controls:ControlAttach.CacheMode)}">-->
+                        <Border x:Name="Bg" 
+                                Padding="{TemplateBinding Padding}" 
+                                CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}"
+                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <!--</AdornerDecorator>-->
+                        <Grid x:Name="PART_InnerGrid" Margin="{TemplateBinding Padding}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="PART_TextBox_New" 
+                                     Grid.Column="0" 
+                                     Focusable="{TemplateBinding Focusable}"                                      
+                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                     Foreground="{TemplateBinding Foreground}" 
+                                     SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                     CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"    
+                                     BorderBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                     controls:ControlAttach.Watermark="{TemplateBinding controls:ControlAttach.Watermark}"                                    
+                                     Style="{StaticResource AIStudio.Styles.TextBox.Plain}"/>
+
+                            <ToggleButton x:Name="PART_DropDownButton" Grid.Column="1" 
+                                          Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyLeft}}"
+                                          Focusable="False"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                          Style="{StaticResource AIStudio.Styles.ComboToggleButton}" />
+
+                            <Popup x:Name="PART_Popup_New" 
+                                       AllowsTransparency="True"
+                                       IsOpen="{Binding Path=IsChecked, ElementName=PART_DropDownButton}"
+                                       Placement="Bottom"
+                                       PlacementTarget="{Binding ElementName=Bg}"
+                                       StaysOpen="False" VerticalOffset="{Binding ElementName=Bg, Path=ActualHeight,Converter={StaticResource ValueInverseConverter}}">
+                                <Border 
+                                    Background="{DynamicResource MahApps.Brushes.ThemeBackground}" 
+                                    CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius)}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="1"
+                                    Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}">
+                                    <Grid x:Name="Calendar_Layout">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.ColumnSpan="2">
+                                            <TextBox Margin="{TemplateBinding Padding}" 
+                                                    x:Name="PART_TextBox_Display" 
+                                                    Foreground="{TemplateBinding Foreground}" 
+                                                    SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                                    CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"         
+                                                    Style="{StaticResource AIStudio.Styles.TextBox.Plain}"/>
+                                        </Grid>
+
+                                        <controls:ACalendar x:Name="PART_Calendar" Grid.Row="1" Grid.Column="0" BorderThickness="0" />
+                                        <controls:ACalendar x:Name="PART_Calendar_Second" Grid.Row="1" Grid.Column="1" BorderThickness="0" />
+
+                                        <Border x:Name="ButtonLayout" Grid.Row="2" Grid.ColumnSpan="2"
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="0,1,0,0" 
+                                                Padding="{TemplateBinding Padding}"
+                                                Visibility="Collapsed">
+                                            <DockPanel>
+                                                <ToggleButton x:Name="ChooseTime" 
+                                                                      DockPanel.Dock="Left" 
+                                                                      Visibility="Collapsed"
+                                                                      Padding="6,3"
+                                                                      Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyRight}}"
+                                                                      Style="{StaticResource ChooseTimeToggleButton}"
+                                                                      controls:ControlAttach.Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+
+                                                <controls:ButtonGroup DockPanel.Dock="Left" Orientation="Horizontal" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0" Visibility="{TemplateBinding IsShowShortCuts,Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                    <Button Name="PART_Btn_RecentlyAWeek" 
+                                                            Content="最近一周" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                    <Button Name="PART_Btn_RecentlyAMonth" 
+                                                            Content="最近一个月" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}"
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                    <Button Name="PART_Btn_RecentlyThreeMonth" 
+                                                            Content="最近三个月" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                </controls:ButtonGroup>
+
+                                                <controls:ButtonGroup DockPanel.Dock="Right" Orientation="Horizontal" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0" Visibility="{TemplateBinding IsShowConfirm,Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                    <Button Name="PART_ClearDate" 
+                                                            Content="清空" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                    <Button Name="PART_ConfirmSelected" 
+                                                            Content="确定" 
+                                                            Padding="6,3" 
+                                                            Style="{StaticResource AIStudio.Styles.Button.Outlined}" 
+                                                            BorderBrush="{TemplateBinding controls:ControlAttach.Background}"
+                                                            Foreground="{TemplateBinding controls:ControlAttach.Background}"
+                                                            controls:RippleAssist.Feedback="{TemplateBinding controls:ControlAttach.Background}"/>
+                                                </controls:ButtonGroup>
+
+                                                <Popup x:Name="PART_Popup_TimeSelector" AllowsTransparency="True" Placement="Top" PlacementTarget="{Binding ElementName=ButtonLayout}"
+                                                               IsOpen="{Binding IsChecked, ElementName=ChooseTime}"
+                                                               Width="{Binding Path=ActualWidth, ElementName=ButtonLayout}">
+                                                    <Grid Height="{Binding Path=ActualHeight, ElementName=PART_Calendar}">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <controls:ListClock x:Name="PART_TimeSelector" Width="Auto" Height="Auto" BorderThickness="0"/>
+                                                        <controls:ListClock x:Name="PART_TimeSelector_Second" Width="Auto" Height="Auto" BorderThickness="0" Grid.Column="1"/>
+                                                    </Grid>
+                                                </Popup>
+                                            </DockPanel>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <controls:Underline x:Name="Underline" 
+                                            IsTabStop="False"
+                                            Background="{TemplateBinding controls:ControlAttach.BorderBrush}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
+                            <Setter TargetName="PART_TextBox_New" Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
+                            <Setter TargetName="PART_TextBox_New" Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource Mode=Self}}" Value="DateTimeRange">
+                            <Setter TargetName="ChooseTime" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ButtonLayout" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsShowConfirm, RelativeSource={RelativeSource Mode=Self}}" Value="True">
+                            <Setter TargetName="ButtonLayout" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsShowShortCuts, RelativeSource={RelativeSource Mode=Self}}" Value="True">
+                            <Setter TargetName="ButtonLayout" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <Trigger Property="IsFocused" Value="true" SourceName="PART_TextBox_New">
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="Underline" Property="IsActive" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="IsOpen" Value="True" SourceName="PART_Popup_New">
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                            <Setter TargetName="Underline" Property="Background" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="PART_Root" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.RangeDatePicker}" TargetType="{x:Type controls:RangeDatePicker}"/>
+</ResourceDictionary>

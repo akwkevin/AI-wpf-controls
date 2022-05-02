@@ -1,0 +1,280 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+
+    <!--#region Item样式-->
+    <Style x:Key="ItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="6" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid x:Name="grid" Margin="-1,0" MinWidth="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="12" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.ColumnSpan="3" Margin="5,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" CornerRadius="3" HorizontalAlignment="Center">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <Path Grid.Row="1" Data="M0,0 5,5 10,0z" Fill="{TemplateBinding Background}" Width="10" Stretch="Uniform" />
+                        </Grid>
+
+                        <Border x:Name="PART_LeftLine" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1,0,0" SnapsToDevicePixels="True" UseLayoutRounding="True" />
+
+                        <Grid x:Name="grid_border" Grid.Row="1" Grid.Column="1" Background="Transparent">
+                            <Border x:Name="innerBorder" Width="7" Height="7" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Background="{TemplateBinding BorderBrush}" CornerRadius="100" SnapsToDevicePixels="True"
+                                    UseLayoutRounding="True" />
+                        </Grid>
+
+                        <Border x:Name="PART_RightLine" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1,0,0" SnapsToDevicePixels="True" UseLayoutRounding="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="grid_border" Property="Cursor" Value="Hand" />
+                            <Setter TargetName="innerBorder" Property="Width" Value="10" />
+                            <Setter TargetName="innerBorder" Property="Height" Value="10" />
+                            <Setter Property="Cursor" Value="Hand" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                <Condition Property="IsSelected" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="innerBorder" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},  Path=(controls:ControlAttach.Background)}" />
+                            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(controls:ControlAttach.Foreground)}" />
+                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(controls:ControlAttach.Background)}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="True" />
+                                <Condition Property="IsSelected" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="innerBorder" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Background)}" />
+                            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(controls:ControlAttach.Foreground)}" />
+                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(controls:ControlAttach.Background)}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False" />
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+
+    <!--#region Item样式-->
+    <Style x:Key="VerticalItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="6" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid x:Name="grid" Margin="-1,0" MinHeight="80">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="PART_LeftLine" Grid.Row="0" HorizontalAlignment="Center"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0,0,0" SnapsToDevicePixels="True" UseLayoutRounding="True" />
+
+                        <Grid x:Name="grid_border" Grid.Row="1" Background="Transparent">
+                            <Border x:Name="innerBorder" Width="7" Height="7" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Background="{TemplateBinding BorderBrush}" CornerRadius="100" SnapsToDevicePixels="True"
+                                    UseLayoutRounding="True" />
+                        </Grid>
+
+                        <Border x:Name="PART_RightLine" Grid.Row="2" HorizontalAlignment="Center"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0,0,0" SnapsToDevicePixels="True" UseLayoutRounding="True" />
+
+                        <Grid Grid.RowSpan="3" Grid.Column="1" Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Path Data="M5,0 0,5 5,10z" Fill="{TemplateBinding Background}" Height="10" Stretch="Uniform" />
+                            <Border Grid.Column="1" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" VerticalAlignment="Center" CornerRadius="3">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="grid_border" Property="Cursor" Value="Hand" />
+                            <Setter TargetName="innerBorder" Property="Width" Value="10" />
+                            <Setter TargetName="innerBorder" Property="Height" Value="10" />
+                            <Setter Property="Cursor" Value="Hand" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                <Condition Property="IsSelected" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="innerBorder" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},  Path=(controls:ControlAttach.Background)}" />
+                            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(controls:ControlAttach.Foreground)}" />
+                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(controls:ControlAttach.Background)}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="True" />
+                                <Condition Property="IsSelected" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="innerBorder" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Background)}" />
+                            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(controls:ControlAttach.Foreground)}" />
+                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(controls:ControlAttach.Background)}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False" />
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+
+    <ItemsPanelTemplate x:Key="ItemsPanelTemplate">
+        <StackPanel Orientation="Horizontal" IsItemsHost="True" />
+    </ItemsPanelTemplate>
+
+    <ItemsPanelTemplate x:Key="VerticalItemsPanelTemplate">
+        <StackPanel Orientation="Vertical" IsItemsHost="True" />
+    </ItemsPanelTemplate>
+
+    <Style x:Key="AIStudio.Styles.NavigationBar" TargetType="{x:Type controls:NavigationBar}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+        <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ItemStyle}" />
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource ItemStyle}" TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:NavigationBar},Mode=OneWay}" />
+                    <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:NavigationBar},Mode=OneWay}" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel" Value="{StaticResource ItemsPanelTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:NavigationBar}">
+                    <Border Name="Bd" Background="Transparent"
+                            BorderBrush="{TemplateBinding Control.BorderBrush}"
+                            BorderThickness="{TemplateBinding Control.BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer Focusable="False" HorizontalScrollBarVisibility="Disabled"
+                                      Padding="{TemplateBinding Control.Padding}"
+                                      VerticalScrollBarVisibility="Disabled">
+                            <ItemsPresenter Margin="20,0" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                        <Style BasedOn="{StaticResource VerticalItemStyle}" TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:NavigationBar},Mode=OneWay}" />
+                            <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:NavigationBar},Mode=OneWay}" />
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ItemsPanel" Value="{StaticResource VerticalItemsPanelTemplate}"/>
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type controls:NavigationBar}" BasedOn="{StaticResource AIStudio.Styles.NavigationBar}"/>
+</ResourceDictionary>

@@ -1,0 +1,125 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.ButtonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel>
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Button Content="Default" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            <Button Content="Outlined" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Outlined}"/>
+                            <Button Content="Flat" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Flat}"/>
+                            <Button Content="Paper" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Paper}"/>
+                            <Button Content="Progress" Margin="2" ac:ButtonAttach.Value="50" Style="{DynamicResource AIStudio.Styles.Button.Progress}"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="禁用状态" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Button Content="Default" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" IsEnabled="False"/>
+                            <Button Content="Outlined" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Outlined}" IsEnabled="False"/>
+                            <Button Content="Flat" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Flat}" IsEnabled="False"/>
+                            <Button Content="Paper" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Paper}" IsEnabled="False"/>
+                            <Button Content="Progress" Margin="2" ac:ButtonAttach.Value="50" Style="{DynamicResource AIStudio.Styles.Button.Progress}" IsEnabled="False"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="文字按钮" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Button Content="Transparent" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Plain}"/>
+                            <Button Content="Transparent" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Plain}" ac:IconAttach.Geometry="{DynamicResource TwitterGeometry}"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="图标按钮" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Button Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}" />
+                            <Button Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}" ac:IconAttach.AllowsAnimation="True"/>
+                            <Button Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}"/>
+                            <Button Content="Icon" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}"/>
+                            <Button Content="Icon" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}"/>
+                            <Button Content="Right" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource RotateRightGeometry}" ac:IconAttach.Dock="Right"/>
+                            <Button Content="Awesome" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Icon2}" ac:IconAttach.Icon="font-awesome"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="圆形按钮" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Button Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Circle}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}" />
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="进度按钮" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <WrapPanel>
+                        <Button Content="Progress" Margin="2" ac:ButtonAttach.Value="50" ac:ControlAttach.Status="Light" Style="{DynamicResource AIStudio.Styles.Button.Progress}"/>
+                        <Button Content="Outlined" Margin="2" ac:ButtonAttach.Value="50" ac:ControlAttach.Status="Light" Style="{DynamicResource AIStudio.Styles.Button.Outlined.Progress}"/>
+                        <Button Margin="2" ac:IconAttach.Geometry="{DynamicResource AddGeometry}" ac:ButtonAttach.Value="50"  Style="{DynamicResource AIStudio.Styles.Button.Circle.Progress}" />
+                        <Button Margin="2" ac:IconAttach.Geometry="{DynamicResource AddGeometry}" ac:ButtonAttach.IsIndeterminate="True" Style="{DynamicResource AIStudio.Styles.Button.Circle.Progress}" />
+                        <Button Margin="2" Content="Loading"  ac:ButtonAttach.IsIndeterminate="True" Style="{DynamicResource AIStudio.Styles.Button.Loading}" />
+                        <Button Margin="2" Padding="6" VerticalAlignment="Center" ac:ButtonAttach.IsIndeterminate="True" Style="{DynamicResource AIStudio.Styles.Button.Loading}" />
+                        <Button Margin="2" Padding="6" VerticalAlignment="Center" ac:ButtonAttach.IsIndeterminate="True" ac:ControlAttach.CornerRadius="18" Style="{DynamicResource AIStudio.Styles.Button.Loading}" />
+                    </WrapPanel>
+                </GroupBox>
+                <GroupBox Header="其它用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Button Content="Dash" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Dash}"/>
+                            <Button Content="Focus" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Focus}"/>
+                            <Button Content="Radius" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}"  ac:ControlAttach.CornerRadius="16"/>
+                            <Button Content="Radius" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}"  ac:ControlAttach.CornerRadius="16,16,0,0"/>
+                            <Button Content="Window" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Window}" />
+                            <Button Margin="2" Padding="6" Style="{DynamicResource AIStudio.Styles.Button.Window}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}"/>
+                            <Button Content="Window" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Window}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}"/>
+                            <Button Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Clear}" />
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="按钮组" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:ButtonGroup HorizontalAlignment="Left" Margin="2">
+                                <Button Content="Light" ac:ControlAttach.Status="Light" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                                <Button Content="Mid" ac:ControlAttach.Status="Mid" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                                <Button Content="Dark" ac:ControlAttach.Status="Dark" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                                <Button Content="Accent" ac:ControlAttach.Status="Accent" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                                <Button Content="Success" ac:ControlAttach.Status="Success" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                                <Button Content="Info" ac:ControlAttach.Status="Info" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                                <Button Content="Warning" ac:ControlAttach.Status="Warning" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                                <Button Content="Danger" ac:ControlAttach.Status="Danger" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            </ac:ButtonGroup>
+
+                            <ac:ButtonGroup HorizontalAlignment="Left" BorderThickness="1" CornerRadius="10" Margin="2">
+                                <Button Content="Dash" Style="{DynamicResource AIStudio.Styles.Button.Dash}"/>
+                                <Button Content="Outlined" Style="{DynamicResource AIStudio.Styles.Button.Outlined}"/>
+                                <Button Content="Outlined" Style="{DynamicResource AIStudio.Styles.Button.Outlined}"/>
+                            </ac:ButtonGroup>
+
+                            <ac:ButtonGroup HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Orange" Margin="2">
+                                <Button Style="{DynamicResource AIStudio.Styles.Button}" Content="Go back" ac:IconAttach.Geometry="{DynamicResource AngleLeftGeometry}"/>
+                                <Button Style="{DynamicResource AIStudio.Styles.Button}" Content="Go forward" ac:IconAttach.Geometry="{DynamicResource AngleRightGeometry}" ac:IconAttach.Dock="Right"/>
+                            </ac:ButtonGroup>
+
+                            <ac:ButtonGroup Orientation="Vertical" HorizontalAlignment="Left" Margin="2">
+                                <Button Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource TwitterGeometry}"/>
+                                <Button Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource StarGeometry}"/>
+                                <Button Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource SearchGeometry}"/>
+                            </ac:ButtonGroup>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>               
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

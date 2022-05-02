@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TextBlock.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Button.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--AIStudio.Styles.RepeatButton-->
+    <Style x:Key="AIStudio.Styles.RepeatButton"  TargetType="RepeatButton" BasedOn="{StaticResource AIStudio.Styles.Button}"/>
+</ResourceDictionary>

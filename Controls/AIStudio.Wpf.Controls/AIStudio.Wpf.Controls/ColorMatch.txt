@@ -1,0 +1,50 @@
+﻿PrimaryHueLightBrush					MahApps.Brushes.Accent3
+PrimaryHueLightForegroundBrush			MahApps.Brushes.ThemeForeground
+PrimaryHueMidBrush						MahApps.Brushes.Accent
+PrimaryHueMidForegroundBrush			MahApps.Brushes.ThemeBackground
+PrimaryHueDarkBrush                     MahApps.Brushes.AccentBase
+PrimaryHueDarkForegroundBrush			MahApps.Brushes.ThemeBackground
+
+SecondaryHueMidBrush					MahApps.Brushes.Accent
+SecondaryHueMidForegroundBrush			MahApps.Brushes.ThemeBackground
+
+MaterialDesignValidationErrorBrush		MahApps.Brushes.Control.Validation
+
+MaterialDesignBackground				MahApps.Brushes.ThemeBackground
+MaterialDesignPaper						MahApps.Brushes.Gray10
+MaterialDesignCardBackground			MahApps.Brushes.ThemeBackground
+MaterialDesignToolBarBackground			MahApps.Brushes.Gray7
+MaterialDesignBody						MahApps.Brushes.ThemeForeground
+MaterialDesignBodyLight					MahApps.Brushes.Gray1
+MaterialDesignColumnHeader				MahApps.Brushes.Gray1
+
+MaterialDesignCheckBoxOff				MahApps.Brushes.CheckBox.MouseOver
+MaterialDesignCheckBoxDisabled			MahApps.Brushes.Control.Disabled
+
+MaterialDesignTextBoxBorder				MahApps.Brushes.TextBox.Border
+MaterialDesignDivider                   MahApps.Brushes.Separator
+
+MaterialDesignSelection					MahApps.Brushes.Selected.Foreground
+
+MaterialDesignToolForeground			MahApps.Brushes.Gray2
+MaterialDesignToolBackground			MahApps.Brushes.Gray8
+
+MaterialDesignFlatButtonClick			MahApps.Brushes.Button.Flat.Background
+MaterialDesignFlatButtonRipple			MahApps.Brushes.Button.Flat.Background.MouseOver
+
+MaterialDesignToolTipBackground			MahApps.Brushes.Gray2
+MaterialDesignChipBackground			MahApps.Brushes.Gray9
+MaterialDesignSnackbarBackground		MahApps.Brushes.Gray
+MaterialDesignSnackbarMouseOver			MahApps.Brushes.Gray.MouseOver
+MaterialDesignSnackbarRipple			MahApps.Brushes.Gray.SemiTransparent
+MaterialDesignTextFieldBoxBackground	MahApps.Brushes.Control.Background
+
+MaterialDesignTextFieldBoxHoverBackground		MahApps.Brushes.Button.Border.MouseOver
+
+MaterialDesignTextFieldBoxDisabledBackground	MahApps.Brushes.Control.Disabled
+
+MaterialDesignTextAreaBorder				MahApps.Brushes.TextBox.Border
+
+MaterialDesignTextAreaInactiveBorder   MahApps.Brushes.Gray.SemiTransparent
+
+MaterialDesignDataGridRowHoverBackground    MahApps.Brushes.DataGrid.Selection.Background.MouseOver

@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Controls\AIStudio.Wpf.MDIContainer\AIStudio.Wpf.MDIContainer.csproj" />
+  </ItemGroup>
+
+</Project>

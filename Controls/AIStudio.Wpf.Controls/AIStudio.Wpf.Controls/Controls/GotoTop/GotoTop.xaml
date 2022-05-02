@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="AIStudio.Styles.GotoTop" TargetType="controls:GotoTop" BasedOn="{StaticResource AIStudio.Styles.Button.Circle}">
+        <Setter Property="controls:IconAttach.Geometry" Value="{StaticResource UpGeometry}"/>
+    </Style>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.GotoTop}" TargetType="controls:GotoTop"/>
+
+</ResourceDictionary>

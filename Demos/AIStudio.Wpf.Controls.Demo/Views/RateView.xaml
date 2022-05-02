@@ -1,0 +1,61 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.RateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel>
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <WrapPanel>
+                        <ac:Rate Margin="5" Value="2"/>
+                        <ac:Rate Margin="5" AllowHalf="True" Value="2"/>
+                        <ac:Rate Margin="5" AllowHalf="True" Count="10" Value="2"/>
+                    </WrapPanel>
+                </GroupBox>
+                <GroupBox Header="其它字符" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <WrapPanel>
+                        <ac:Rate Margin="5" Value="2" Icon="{StaticResource LoveGeometry}"/>
+                        <ac:Rate Margin="5" Value="2" Icon="{StaticResource ClockGeometry}"/>
+                    </WrapPanel>
+                </GroupBox>
+                <GroupBox Header="文字" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <WrapPanel>
+                        <ac:Rate Margin="5" Value="2" AllowHalf="True" ShowText="True"/>
+                        <ac:Rate Margin="5" Value="2" ShowText="True" Text="{Binding Value,RelativeSource={RelativeSource Self},StringFormat={}{0:0星}}" />
+                        <ac:Rate Margin="5" Value="2" AllowHalf="True" ShowText="True" Text="{Binding Value,RelativeSource={RelativeSource Self},StringFormat={}你得了{0:0.0}分}" />
+                        <ac:Rate Margin="5" Value="2" ShowText="True" >
+                            <ac:Rate.Style>
+                                <Style TargetType="ac:Rate" BasedOn="{StaticResource AIStudio.Styles.Rate}">
+                                    <Setter Property="Text" Value=""/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Value,RelativeSource={RelativeSource Self}}" Value="1">
+                                            <Setter Property="Text" Value="差"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Value,RelativeSource={RelativeSource Self}}" Value="2">
+                                            <Setter Property="Text" Value="一般"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Value,RelativeSource={RelativeSource Self}}" Value="3">
+                                            <Setter Property="Text" Value="满意"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Value,RelativeSource={RelativeSource Self}}" Value="4">
+                                            <Setter Property="Text" Value="非常满意"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Value,RelativeSource={RelativeSource Self}}" Value="5">
+                                            <Setter Property="Text" Value="无可挑剔"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ac:Rate.Style>
+                        </ac:Rate>
+                    </WrapPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

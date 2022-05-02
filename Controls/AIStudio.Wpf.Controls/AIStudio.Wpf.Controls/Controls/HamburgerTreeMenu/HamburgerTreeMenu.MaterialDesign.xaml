@@ -1,0 +1,545 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/TransitioningContent/TransitioningContentControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/SplitView/SplitView.MaterialDesign.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Menu.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ToggleButton.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <converter:MathConverter Operation="Multiply" x:Key="MathConverter"/>
+    <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
+
+    <Geometry x:Key="Checkmark">M 0,5.1 L 1.7,5.2 L 3.4,7.1 L 8,0.4 L 9.2,0 L 3.3,10.8 Z</Geometry>
+    <Geometry x:Key="RightArrow">M 0,0 L 4,3.5 L 0,7 Z</Geometry>
+    <Geometry x:Key="DownArrow">M 0,0 L 3.5,4 L 7,0 Z</Geometry>
+    <Geometry x:Key="UpArrow">M 0,4 L 3.5,0 L 7,4 Z</Geometry>
+    
+    <!--  "Chromeless" style for buttons  -->
+    <ControlTemplate x:Key="ChromelessButtonTemplate" TargetType="{x:Type ButtonBase}">
+        <Grid Background="{TemplateBinding Background}">
+            <ContentPresenter x:Name="PART_ContentPresenter"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Opacity="0.75"
+                              RecognizesAccessKey="True"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value="1" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value=".5" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="#ADADAD" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="ChromelessButtonStyle" TargetType="{x:Type ButtonBase}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Transparent}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template" Value="{StaticResource ChromelessButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="HamburgerButtonStyle" BasedOn="{StaticResource ChromelessButtonStyle}" TargetType="{x:Type ButtonBase}">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Grid Background="Transparent">
+                        <Grid x:Name="PART_Background" Background="{TemplateBinding Background}" Opacity="0" />
+                        <ContentPresenter x:Name="PART_ContentPresenter"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Opacity="0.75"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0.3" />
+                            <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value="0.75" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="#ADADAD" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.TreeView.HamburgerTreeMenu" TargetType="{x:Type TreeView}">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignBody}" />
+        <!--  default to 0  -->
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource AIStudio.Styles.TreeViewItem.HamburgerTreeMenu}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeView}">
+                    <Border Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ScrollViewer x:Name="TreeViewScrollViewer"
+                                      Padding="{TemplateBinding Padding}"
+                                      CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                      Focusable="False"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingStackPanel.IsVirtualizing" Value="True">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray9}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.TreeViewItem.HamburgerTreeMenu" TargetType="{x:Type TreeViewItem}">
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                    <StackPanel>
+                        <Grid x:Name="Root_Grid" Background="Transparent">
+                            <Grid x:Name="PART_Background" Background="{TemplateBinding Foreground}" Opacity="0" />
+                            <Border x:Name="Bd" Opacity="0.75"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <controls:Ripple Focusable="False" 
+                                         Padding="{TemplateBinding Padding}" 
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                         Feedback="{TemplateBinding Foreground, Converter={StaticResource BrushRoundConverter}}"
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <Grid Margin="{Binding Converter={StaticResource LengthConverter}, RelativeSource={x:Static RelativeSource.TemplatedParent}}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" MinWidth="19" />
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter x:Name="PART_Header"
+                                                  Grid.Column="0"
+                                                  ContentSource="Header"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        <ToggleButton x:Name="Expander"  Grid.Column="1"
+                                              Style="{StaticResource AIStudio.Styles.ComboToggleButton}"
+                                              controls:IconAttach.Geometry="{StaticResource FillUpGeometry}"
+                                              Margin="0,0,5,0"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              ClickMode="Press"
+                                              IsHitTestVisible="False"
+                                              IsChecked="{Binding Path=IsExpanded, RelativeSource={x:Static RelativeSource.TemplatedParent}, Mode=TwoWay}" />
+                                    </Grid>
+                                </controls:Ripple>
+                            </Border>
+                        </Grid>
+                        <ItemsPresenter x:Name="ItemsHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" >
+                            <ItemsPresenter.LayoutTransform>
+                                <ScaleTransform ScaleY="0" ScaleX="1"/>
+                            </ItemsPresenter.LayoutTransform>
+                        </ItemsPresenter>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <!--<Trigger Property="IsExpanded" Value="False">
+                            <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed" />
+                        </Trigger>-->
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.3"
+                                                         Storyboard.TargetName="ItemsHost"
+                                                         Storyboard.TargetProperty="(ContentPresenter.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                         To="1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.3"
+                                                         Storyboard.TargetName="ItemsHost"
+                                                         Storyboard.TargetProperty="(ContentPresenter.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                         To="0" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
+                        </Trigger>
+
+                        <Trigger SourceName="Root_Grid" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0.3" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0.2" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="Selector.IsSelectionActive" Value="True" />
+                            </MultiTrigger.Conditions>
+                          <Setter TargetName="PART_Background" Property="Opacity" Value="0.35" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="1" />
+                        </MultiTrigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingStackPanel.IsVirtualizing" Value="True">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="HamburgerTreeViewStyle" BasedOn="{StaticResource AIStudio.Styles.TreeView.HamburgerTreeMenu}" TargetType="{x:Type TreeView}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource AIStudio.Styles.TreeViewItem.HamburgerTreeMenu}" TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type TreeView},Mode=FindAncestor}}" />
+                    <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType={x:Type TreeView},Mode=FindAncestor}}" />
+                    <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType={x:Type TreeView},Mode=FindAncestor}}" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="Padding" Value="0" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.MenuItem.HamburgerTreeMenu" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource AIStudio.Styles.MenuItem.Left}">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MenuItem.Icon" Value="{x:Null}"/>
+        <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type MenuBase}},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.6}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Style.Triggers>
+            <!-- insert a null in ItemsSource if you want a separator -->
+            <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                <Setter Property="Template" >
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Separator Style="{StaticResource {x:Static MenuItem.SeparatorStyleKey}}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="PathIconContentControlStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="False" />
+        <Setter Property="UseLayoutRounding" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Viewbox Margin="{TemplateBinding Padding}">
+                        <Path Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform"
+                              Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                              SnapsToDevicePixels="False"
+                              UseLayoutRounding="False" />
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>   
+
+    <Style x:Key="AIStudio.Styles.HamburgerTreeMenu" TargetType="{x:Type controls:HamburgerTreeMenu}">
+        <Setter Property="HamburgerWidth" Value="{DynamicResource AIStudio.Hamburger.Size}" />
+        <Setter Property="HamburgerHeight" Value="{DynamicResource AIStudio.Hamburger.Size}" />
+        <Setter Property="CompactPaneLength" Value="{DynamicResource AIStudio.Hamburger.Size}" />
+        <Setter Property="HamburgerMargin" Value="9" />
+        <Setter Property="OpenPaneLength" Value="{DynamicResource AIStudio.Hamburger.Size.OpenPanel}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="PaneBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HamburgerMenuTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <!--  PackIconMaterial - Menu  -->
+                    <ContentControl Width="{Binding Path=HamburgerWidth, RelativeSource={RelativeSource AncestorType=controls:HamburgerTreeMenu}}"
+                                    Height="{Binding Path=HamburgerHeight, RelativeSource={RelativeSource AncestorType=controls:HamburgerTreeMenu}}"
+                                    Padding="{Binding Path=HamburgerMargin, RelativeSource={RelativeSource AncestorType=controls:HamburgerTreeMenu}}"
+                                    Content="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"
+                                    Style="{DynamicResource PathIconContentControlStyle}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                         <Grid Width="{Binding Path=HamburgerWidth, RelativeSource={RelativeSource AncestorType=controls:HamburgerTreeMenu}}"
+                             Height="{Binding Path=HamburgerHeight, RelativeSource={RelativeSource AncestorType=controls:HamburgerTreeMenu}}">
+                            <controls:PathIcon Kind="{Binding Glyph}" 
+                                 Margin="{Binding Path=HamburgerMargin, RelativeSource={RelativeSource AncestorType=controls:HamburgerTreeMenu}}" 
+                                 Foreground="{Binding ElementName=txt,Path=Foreground}" />
+                        </Grid>
+                        <TextBlock x:Name="txt" Grid.Column="1"
+                           VerticalAlignment="Center"
+                           Text="{Binding Label}" />
+                       
+                    </Grid>
+                </HierarchicalDataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="MenuItemTemplate">
+            <Setter.Value>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Width="{Binding Path=HamburgerWidth, RelativeSource={RelativeSource AncestorType=controls:HamburgerTreeMenu}}"
+                              Height="{Binding Path=HamburgerHeight, RelativeSource={RelativeSource AncestorType=controls:HamburgerTreeMenu}}">
+                            <controls:PathIcon Kind="{Binding Glyph}"
+                                 Margin="{Binding Path=HamburgerMargin, RelativeSource={RelativeSource AncestorType=controls:HamburgerTreeMenu}}" 
+                                 Foreground="{Binding ElementName=txt,Path=Foreground}"/>
+                        </Grid>
+                        <TextBlock x:Name="txt" Grid.Column="1" 
+                           VerticalAlignment="Center"
+                           Text="{Binding Label}" />
+                    </Grid>
+                </HierarchicalDataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:HamburgerTreeMenu}">
+                    <Grid>
+                        <controls:SplitView x:Name="MainSplitView"
+                                            CompactPaneLength="{TemplateBinding CompactPaneLength}"
+                                            DisplayMode="{TemplateBinding DisplayMode}"
+                                            IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            OpenPaneLength="{TemplateBinding OpenPaneLength}"
+                                            PaneBackground="{TemplateBinding PaneBackground}"
+                                            PanePlacement="{TemplateBinding PanePlacement}">
+                            <controls:SplitView.Pane>
+                                <Grid x:Name="PaneGrid">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Height="{TemplateBinding HamburgerHeight}" >
+                                        <Border x:Name="OpenHeader" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"  
+                                            BorderThickness="0,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            Width="{TemplateBinding OpenPaneLength}">
+                                        </Border>
+                                        <Button x:Name="PART_HamburgerButton" HorizontalAlignment="Left"
+                                                Width="{TemplateBinding OpenPaneLength}"
+                                                VerticalAlignment="Stretch"
+                                                AutomationProperties.Name="Main button"
+                                                Style="{StaticResource HamburgerButtonStyle}"
+                                                TabIndex="0">
+                                            <ContentControl
+                                                ContentTemplate="{TemplateBinding HamburgerMenuTemplate}"
+                                                Foreground="{TemplateBinding Foreground}"
+                                                IsTabStop="False" />
+                                        </Button>
+                                    </Grid>
+                                    <TreeView Name="PART_ButtonsListView"
+                                             Grid.Row="1"
+                                             Width="{TemplateBinding OpenPaneLength}"
+                                             FontSize="{TemplateBinding FontSize}"
+                                             FontFamily="{TemplateBinding FontFamily}"
+                                             AutomationProperties.Name="Menu items"
+                                             ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                             ItemTemplate="{TemplateBinding ItemTemplate}"
+                                             ItemsSource="{TemplateBinding ItemsSource}"
+                                             Style="{StaticResource HamburgerTreeViewStyle}"
+                                             Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                             Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                             controls:ControlAttach.Background="{Binding PaneBackground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                             controls:ControlAttach.Foreground="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                             TabIndex="1" 
+                                             Padding="0"
+                                             controls:TreeViewAttach.ExpandBehaviour="OnlyOne"
+                                             controls:TreeViewAttach.ExpandMode="SingleClick"/>
+
+                                    <Menu x:Name="PART_MenuListView" Visibility="Collapsed"
+                                          Grid.Row="1" 
+                                          HorizontalAlignment="Left"
+                                          Width="{TemplateBinding CompactPaneLength}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          FontFamily="{TemplateBinding FontFamily}"
+                                          ItemContainerStyle="{StaticResource AIStudio.Styles.MenuItem.HamburgerTreeMenu}" 
+                                          ItemTemplate ="{TemplateBinding MenuItemTemplate}"
+                                          ItemsSource="{TemplateBinding ItemsSource}"
+                                          Style="{StaticResource AIStudio.Styles.Menu.Left}" 
+                                          Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                          controls:ControlAttach.Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                          Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                          TabIndex="1" />
+
+                                    <Grid Grid.Row="2" Visibility="{TemplateBinding OptionsVisibility}"  Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+
+                                        <TreeView Name="PART_OptionsListView" Visibility="Collapsed"
+                                                 Grid.Row="1"
+                                                 Width="{TemplateBinding OpenPaneLength}"
+                                                 FontSize="{TemplateBinding FontSize}"
+                                                 FontFamily="{TemplateBinding FontFamily}"
+                                                 VerticalAlignment="Bottom"
+                                                 AutomationProperties.Name="Option items"
+                                                 ItemTemplateSelector="{TemplateBinding OptionsItemTemplateSelector}"
+                                                 ItemTemplate="{TemplateBinding OptionsItemTemplate}"
+                                                 ItemsSource="{TemplateBinding OptionsItemsSource}"                                               
+                                                 Style="{StaticResource HamburgerTreeViewStyle}"
+                                                 Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                                 Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                                 TabIndex="2" 
+                                                 Padding="0"
+                                                 controls:TreeViewAttach.ExpandBehaviour="OnlyOne"
+                                                 controls:TreeViewAttach.ExpandMode="SingleClick"/>
+
+                                        <Menu x:Name="OptionsMenuListView" 
+                                              Grid.Row="1" 
+                                              HorizontalAlignment="Left"
+                                              Width="{TemplateBinding CompactPaneLength}"
+                                              FontSize="{TemplateBinding FontSize}"
+                                              FontFamily="{TemplateBinding FontFamily}"
+                                              ItemContainerStyle="{StaticResource AIStudio.Styles.MenuItem.HamburgerTreeMenu}" 
+                                              ItemTemplate ="{TemplateBinding OptionsItemTemplate}"
+                                              ItemsSource="{TemplateBinding OptionsItemsSource}"
+                                              Style="{StaticResource AIStudio.Styles.Menu.Left}" 
+                                              controls:ControlAttach.Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                              Background="Transparent"
+                                              Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                              TabIndex="3" />
+                                    </Grid>
+
+                                    <Border x:Name="OpenHeaderLine" BorderBrush="{TemplateBinding BorderBrush}"  
+                                            BorderThickness="0,0,1,0"
+                                            Grid.RowSpan="3"
+                                            HorizontalAlignment="Left"
+                                            Width="{TemplateBinding OpenPaneLength}">
+                                    </Border>
+                                </Grid>
+
+                            </controls:SplitView.Pane>
+                            <controls:TransitioningContentControl HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                  AutomationProperties.Name="Content"
+                                                                  Content="{TemplateBinding Content}"
+                                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                                  Padding="{TemplateBinding Padding}"
+                                                                  RestartTransitionOnContentChange="True"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  Transition="{TemplateBinding ContentTransition}" />
+                        </controls:SplitView>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPaneOpen" Value="false">
+                            <Setter TargetName="PART_ButtonsListView" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PART_MenuListView" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="OpenHeader" Property="Width" Value="{Binding Path=CompactPaneLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="OpenHeaderLine" Property="Width" Value="{Binding Path=CompactPaneLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="PART_HamburgerButton" Property="Width" Value="{Binding Path=CompactPaneLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>      
+    </Style>
+
+    <Style TargetType="{x:Type controls:HamburgerTreeMenu}" BasedOn="{StaticResource AIStudio.Styles.HamburgerTreeMenu}"/>
+</ResourceDictionary>
+
+
+

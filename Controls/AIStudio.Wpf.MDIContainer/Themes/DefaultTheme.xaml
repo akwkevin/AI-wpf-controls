@@ -1,0 +1,97 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
+                    xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+                    >
+
+    <!--Colors-->
+    <SolidColorBrush x:Key="ActiveWindowColor" Color="LightBlue"  />
+    <SolidColorBrush x:Key="InactiveWindowColor" Color="LightGray" />
+    <SolidColorBrush x:Key="WindowContentBorder" Color="DarkGray" />
+    <SolidColorBrush x:Key="ContainerBackground" Color="DarkGray" />
+    <SolidColorBrush x:Key="ContainerBorder" Color="Gray" />
+    <SolidColorBrush x:Key="WindowButtonPenColor" Color="Black" />
+    <SolidColorBrush x:Key="ToolTipBackgroundColor" Color="#7F84B4E1" />
+    <SolidColorBrush x:Key="ToolTipBackgroundBorderColor" Color="#476885" />
+
+    <LinearGradientBrush x:Key="WindowButtonOnMouseOverColor" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Color="#F35D5D" Offset="0"/>
+            <GradientStop Color="#EB5555" Offset="0.5"/>
+            <GradientStop Color="#DD4747" Offset="0.5"/>
+            <GradientStop Color="#CD3737" Offset="1"/>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="WindowButtonOnMouseOverColorBorder" Color="#700000"/>
+    <Color x:Key="WindowButtonEffect">#700000</Color>
+
+    <!--Shapes, Icons-->
+    <DrawingBrush x:Key="MinimizeShape" Stretch="None" PresentationOptions:Freeze="true" >
+        <DrawingBrush.Drawing>
+            <GeometryDrawing>
+                <GeometryDrawing.Geometry>
+                    <LineGeometry StartPoint="0,0" EndPoint="7,0"/>
+                </GeometryDrawing.Geometry>
+                <GeometryDrawing.Pen>
+                    <Pen Brush="{StaticResource WindowButtonPenColor}" Thickness="1" />
+                </GeometryDrawing.Pen>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="MaximizeShape" Stretch="None" PresentationOptions:Freeze="true" >
+        <DrawingBrush.Drawing>
+            <GeometryDrawing>
+                <GeometryDrawing.Geometry>
+                    <GeometryGroup>
+                        <LineGeometry StartPoint="0,0" EndPoint="0,7" />
+                        <LineGeometry StartPoint="0,7" EndPoint="7,7" />
+                        <LineGeometry StartPoint="7,7" EndPoint="7,0" />
+                        <LineGeometry StartPoint="7,0" EndPoint="0,0" />
+                    </GeometryGroup>
+                </GeometryDrawing.Geometry>
+                <GeometryDrawing.Pen>
+                    <Pen Brush="{StaticResource WindowButtonPenColor}" Thickness="1" />
+                </GeometryDrawing.Pen>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="NormalizeShape" Stretch="None" PresentationOptions:Freeze="true">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing>
+                <GeometryDrawing.Geometry>
+                    <GeometryGroup>
+                        <LineGeometry StartPoint="1,1" EndPoint="1,6" />
+                        <LineGeometry StartPoint="1,6" EndPoint="6,6" />
+                        <LineGeometry StartPoint="6,6" EndPoint="6,1" />
+                        <LineGeometry StartPoint="6,1" EndPoint="1,1" />
+
+                        <LineGeometry StartPoint="3,-1" EndPoint="8,-1" />
+                        <LineGeometry StartPoint="8,-1" EndPoint="8,5" />
+                    </GeometryGroup>
+                </GeometryDrawing.Geometry>
+                <GeometryDrawing.Pen>
+                    <Pen Brush="{StaticResource WindowButtonPenColor}" Thickness="1" />
+                </GeometryDrawing.Pen>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="CloseShape" Stretch="None" PresentationOptions:Freeze="true">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing>
+                <GeometryDrawing.Geometry>
+                    <GeometryGroup>
+                        <LineGeometry StartPoint="0,0" EndPoint="7,7" />
+                        <LineGeometry StartPoint="0,7" EndPoint="7,0" />
+                    </GeometryGroup>
+                </GeometryDrawing.Geometry>
+                <GeometryDrawing.Pen>
+                    <Pen Brush="{StaticResource WindowButtonPenColor}" Thickness="1" />
+                </GeometryDrawing.Pen>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+</ResourceDictionary>

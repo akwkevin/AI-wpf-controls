@@ -1,0 +1,31 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.MediaPlayerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel>
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <ac:MediaElementPlayer Margin="2"/>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Light}" Content="Open" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                        </StackPanel>
+                        <ac:MediaElementPlayer Margin="2" ShowMode="PathFullMode"/>
+                        
+                        <ac:MediaElementPlayer Margin="2" Height="300" ShowMode="PathVideoMode" />
+
+                        <ac:MediaElementPlayer Margin="2" Height="300" ShowMode="PathVideoFullMode"/>
+                        
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

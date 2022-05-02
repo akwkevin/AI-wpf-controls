@@ -1,0 +1,36 @@
+<!-- License Revision: 0 Last Revised: 3/29/2006 8:21 AM
+*******************************************************************************
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+
+This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
+If it does not, you can obtain a copy from: 
+
+http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
+*******************************************************************************
+License -->
+<FrameworkElement x:Class="AIStudio.Wpf.Controls.Transitions.StarTransitionFrameworkElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+  <FrameworkElement.Resources>
+    <Style x:Key="StarTransitionNewContentStyle" TargetType="ContentPresenter">
+      <Setter Property="OpacityMask">
+        <Setter.Value>
+          <ImageBrush ImageSource="images/star.png" Stretch="Uniform">
+            <ImageBrush.RelativeTransform>
+              <TransformGroup>
+                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="0" ScaleY="0"/>
+                <RotateTransform CenterX="0.5" CenterY="0.5"/>
+              </TransformGroup>
+            </ImageBrush.RelativeTransform>
+          </ImageBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Storyboard x:Key="StarTransitionNewContentStoryboard">
+      <DoubleAnimation Storyboard.TargetProperty="OpacityMask.RelativeTransform.Children[0].ScaleX" From="0" To="4" Duration="0:0:0.7"/>
+      <DoubleAnimation Storyboard.TargetProperty="OpacityMask.RelativeTransform.Children[0].ScaleY" From="0" To="4" Duration="0:0:0.7"/>
+    </Storyboard>
+  </FrameworkElement.Resources>
+</FrameworkElement>

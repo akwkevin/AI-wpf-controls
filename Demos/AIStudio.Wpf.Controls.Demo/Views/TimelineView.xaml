@@ -1,0 +1,94 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.TimelineView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel>
+                <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
+                            <ac:Timeline Margin="2">
+                                <ac:TimelineItem Content="1"/>
+                                <ac:TimelineItem Content="2" />
+                                <ac:TimelineItem Content="3" />
+                                <ac:TimelineItem Content="4" />
+                            </ac:Timeline>
+
+                            <ac:Timeline ac:ControlAttach.Status="Accent" Margin="2">
+                                <ac:TimelineItem Content="1"/>
+                                <ac:TimelineItem Content="2" />
+                                <ac:TimelineItem Content="3" />
+                                <ac:TimelineItem Content="4" />
+                            </ac:Timeline>
+
+                            <ac:Timeline Margin="2">
+                                <ac:TimelineItem Height="50" Content="1"/>
+                                <ac:TimelineItem Height="50" Content="2" />
+                                <ac:TimelineItem Height="50" Content="3" />
+                                <ac:TimelineItem Height="50" Content="4" />
+                                <ac:Timeline.FirstSlotTemplate>
+                                    <DataTemplate>
+                                        <Image Width="36" Height="36" Stretch="Fill" ac:ImageAttach.CornerRadius="50" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/1.jpg"/>
+                                    </DataTemplate>
+                                </ac:Timeline.FirstSlotTemplate>
+                                <ac:Timeline.MiddleSlotTemplate>
+                                    <DataTemplate>
+                                        <Image Width="36" Height="36" Stretch="Fill" ac:ImageAttach.CornerRadius="50" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/1.jpg"/>
+                                    </DataTemplate>
+                                </ac:Timeline.MiddleSlotTemplate>
+                                <ac:Timeline.LastSlotTemplate>
+                                    <DataTemplate>
+                                        <Image Width="36" Height="36" Stretch="Fill" ac:ImageAttach.CornerRadius="50" Source="/AIStudio.Wpf.Controls.Demo;component/Resources/Images/1.jpg"/>
+                                    </DataTemplate>
+                                </ac:Timeline.LastSlotTemplate>
+                            </ac:Timeline>
+
+                            <ac:Timeline IsCustomEverySlot="True" ItemsSource="{Binding DataList}">
+                                <ac:Timeline.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock x:Name="timePart" Text="{Binding Name}" Foreground="Black" />
+                                        </StackPanel>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsFirstItem, RelativeSource={RelativeSource AncestorType={x:Type ac:TimelineItem}}}" Value="True">
+                                                <Setter TargetName="timePart" Property="Foreground" Value="Red" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ac:Timeline.ItemTemplate>
+                                <ac:Timeline.SlotTemplate>
+                                    <DataTemplate>
+                                        <Border x:Name="border" Width="11" Height="11" CornerRadius="100" 
+                                            BorderBrush="Blue" BorderThickness="2" 
+                                            SnapsToDevicePixels="True" UseLayoutRounding="True" />
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Index}" Value="1">
+                                                <Setter TargetName="border" Property="BorderBrush" Value="#09CD6B" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Index}" Value="2">
+                                                <Setter TargetName="border" Property="BorderBrush" Value="#FD4416" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Index}" Value="3">
+                                                <Setter TargetName="border" Property="BorderBrush" Value="#46A2FF" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Index}" Value="4">
+                                                <Setter TargetName="border" Property="BorderBrush" Value="#06CD6A" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ac:Timeline.SlotTemplate>
+                            </ac:Timeline>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</ac:AIStudioUserControl>

@@ -1,0 +1,277 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ToggleButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Shadows.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:DropDownBorderPathConverter x:Key="DropDownBorderPathConverter" />
+    <converter:ShadowConverter x:Key="ShadowConverter"/>
+    <converter:CornerRadiusBindingConverter x:Key="CornerRadiusBindingConverter"/>
+    <converter:ThicknessBindingConverter x:Key="ThicknessBindingConverter"/>
+
+    <Style  x:Key="AIStudio.Styles.DropDown" TargetType="{x:Type controls:DropDown}">
+        <Setter Property="Foreground"
+                Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+        <Setter Property="Background"
+                Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
+        <Setter Property="BorderThickness"  Value="1" />
+        <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
+        <Setter Property="IsAngleVisible" Value="True" />
+        <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}"/>
+        <Style.Triggers>
+            <Trigger Property="IsDropVisible" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:DropDown}">
+                            <Grid x:Name="PART_Gird">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button x:Name="PART_Button" 
+                                        Focusable="false"      
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}" 
+                                        controls:ControlAttach.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius), Converter={StaticResource CornerRadiusBindingConverter},ConverterParameter={x:Static converter:RadiusType.Right}}" 
+                                        controls:ControlAttach.Status="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Status)}"                                        
+                                        Style="{StaticResource AIStudio.Styles.Button.Outlined}"
+                                        Content="{TemplateBinding Content}">
+                                </Button>
+
+                                <ToggleButton x:Name="PART_ToggleButton" 
+                                              Grid.Column="1" 
+                                              Focusable="false"                                     
+                                              BorderThickness="{TemplateBinding BorderThickness}"
+                                              Margin="-1,0,0,0"
+                                              HorizontalContentAlignment="Center"
+                                              Padding="{TemplateBinding Padding}"
+                                              controls:ControlAttach.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius), Converter={StaticResource CornerRadiusBindingConverter},ConverterParameter={x:Static converter:RadiusType.Left}}" 
+                                              controls:ControlAttach.Status="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Status)}"                                            
+                                              IsChecked="{Binding IsOpen,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}},Mode=TwoWay}"
+                                              ClickMode="Press"                                              
+                                              Style="{StaticResource AIStudio.Styles.ComboToggleButton.Outlined}" >
+                                </ToggleButton>
+
+                                <controls:NotTopMostPopup Placement="{TemplateBinding Placement}"
+                                                          x:Name="PART_Popup"
+                                                          AllowsTransparency="True"
+                                                          PopupAnimation="Slide"
+                                                          AutoClose="{Binding HoverMode,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}}}"
+                                                          PlacementTarget="{Binding ElementName=PART_Gird}"
+                                                          IsOpen="{Binding IsOpen,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}},Mode=TwoWay}"  >
+                                    <Grid x:Name="DropDown"
+                                          Margin="1,1,1,1">
+                                        <Path x:Name="Path"
+                                              Fill="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                                              Stroke="{TemplateBinding BorderBrush}"
+                                              StrokeThickness="{TemplateBinding BorderThickness}"
+                                              Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}">
+                                            <Path.Data>
+                                                <MultiBinding Converter="{StaticResource DropDownBorderPathConverter}">
+                                                    <Binding Path="ActualWidth"
+                                                             ElementName="Path" />
+                                                    <Binding Path="ActualHeight"
+                                                             ElementName="Path" />
+                                                    <Binding Path="ActualWidth"
+                                                             ElementName="PART_Button" />
+                                                    <Binding Path="ActualHeight"
+                                                             ElementName="PART_Button" />
+                                                    <Binding Path="Placement"
+                                                             RelativeSource="{RelativeSource AncestorType={x:Type controls:DropDown}}" />
+                                                    <Binding Path="(controls:ControlAttach.CornerRadius)"
+                                                             RelativeSource="{RelativeSource AncestorType={x:Type controls:DropDown}}" />
+                                                    <Binding Path="IsAngleVisible"
+                                                             RelativeSource="{RelativeSource AncestorType={x:Type controls:DropDown}}" />
+                                                </MultiBinding>
+                                            </Path.Data>
+                                        </Path>
+                                        <Grid x:Name="ChildGrid" Margin="0,0,0,0">
+                                            <ContentPresenter x:Name="Child"
+                                                              ContentSource="Child" />
+                                        </Grid>
+                                    </Grid>
+                                </controls:NotTopMostPopup>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsAngleVisible" Value="True"/>
+                                        <Condition Property="Placement" Value="Top"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="ChildGrid" Property="Margin" Value="0,0,0,7"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsAngleVisible" Value="True"/>
+                                        <Condition Property="Placement" Value="Bottom"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="ChildGrid" Property="Margin" Value="0,7,0,0"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsAngleVisible" Value="True"/>
+                                        <Condition Property="Placement" Value="Left"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="ChildGrid" Property="Margin" Value="0,0,7,0"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsAngleVisible" Value="True"/>
+                                        <Condition Property="Placement" Value="Right"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="ChildGrid" Property="Margin" Value="7,0,0,0"/>
+                                </MultiTrigger>
+                                <Trigger Property="ControlStyle" Value="Standard">
+                                    <Setter TargetName="PART_Button" Property="Style" Value="{StaticResource AIStudio.Styles.Button}"/>
+                                    <Setter TargetName="PART_ToggleButton" Property="Style" Value="{StaticResource AIStudio.Styles.ComboToggleButton.Standard}"/>
+                                </Trigger>
+                                <Trigger Property="ControlStyle" Value="Flat">
+                                    <Setter TargetName="PART_Button" Property="Style" Value="{StaticResource AIStudio.Styles.Button.Flat}"/>
+                                    <Setter TargetName="PART_ToggleButton" Property="Style" Value="{StaticResource AIStudio.Styles.ComboToggleButton.Flat}"/>
+                                </Trigger>
+                                <Trigger Property="ControlStyle" Value="Outlined">
+                                    <Setter TargetName="PART_Button" Property="Style" Value="{StaticResource AIStudio.Styles.Button.Outlined}"/>
+                                    <Setter TargetName="PART_ToggleButton" Property="Style" Value="{StaticResource AIStudio.Styles.ComboToggleButton.Outlined}"/>
+                                </Trigger>
+                                <Trigger Property="ControlStyle" Value="Plain">
+                                    <Setter TargetName="PART_Button" Property="Style" Value="{StaticResource AIStudio.Styles.Button.Plain}"/>
+                                    <Setter TargetName="PART_ToggleButton" Property="Style" Value="{StaticResource AIStudio.Styles.ComboToggleButton.Plain}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsDropVisible" Value="False">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:DropDown}">
+                            <Grid x:Name="PART_Gird">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button x:Name="PART_Button" 
+                                        Focusable="False"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}" 
+                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        controls:ControlAttach.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius), Converter={StaticResource CornerRadiusBindingConverter},ConverterParameter={x:Static converter:RadiusType.Left}}" 
+                                        controls:ControlAttach.Status="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Status)}"       
+                                        Style="{StaticResource AIStudio.Styles.Button.Outlined}"
+                                        Content="{TemplateBinding Content}">
+                                </Button>
+
+                                <ToggleButton x:Name="PART_ToggleButton"
+                                              Focusable="false"                                           
+                                              ClickMode="Press"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              Background="Transparent"
+                                              BorderBrush="Transparent"
+                                              BorderThickness="0"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              IsChecked="{Binding IsOpen,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}},Mode=TwoWay}">
+                                    <ToggleButton.Style>
+                                        <Style TargetType="ToggleButton">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ToggleButton">
+                                                        <Grid Background="Transparent" />
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
+
+                                <controls:NotTopMostPopup Placement="{TemplateBinding Placement}"
+                                                          x:Name="PART_Popup"                                                
+                                                          AllowsTransparency="True"
+                                                          PopupAnimation="Slide"                                                          
+                                                          PlacementTarget="{Binding ElementName=PART_Gird}"
+                                                          AutoClose="{Binding HoverMode,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}}}"
+                                                          IsOpen="{Binding IsOpen,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}},Mode=TwoWay}"                    >
+                                    <Grid x:Name="DropDown"
+                                          Margin="1,1,1,1">
+                                        <Path x:Name="Path"
+                                              Fill="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                                              Stroke="{TemplateBinding BorderBrush}"
+                                              StrokeThickness="{TemplateBinding BorderThickness}"
+                                              Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}">
+                                            <Path.Data>
+                                                <MultiBinding Converter="{StaticResource DropDownBorderPathConverter}">
+                                                    <Binding Path="ActualWidth"
+                                                             ElementName="Path" />
+                                                    <Binding Path="ActualHeight"
+                                                             ElementName="Path" />
+                                                    <Binding Path="ActualWidth"
+                                                             ElementName="PART_Button" />
+                                                    <Binding Path="ActualHeight"
+                                                             ElementName="PART_Button" />
+                                                    <Binding Path="Placement"
+                                                             RelativeSource="{RelativeSource AncestorType={x:Type controls:DropDown}}" />
+                                                    <Binding Path="(controls:ControlAttach.CornerRadius)"
+                                                             RelativeSource="{RelativeSource AncestorType={x:Type controls:DropDown}}" />
+                                                    <Binding Path="IsAngleVisible"
+                                                             RelativeSource="{RelativeSource AncestorType={x:Type controls:DropDown}}" />
+                                                </MultiBinding>
+                                            </Path.Data>
+                                        </Path>
+                                        <Grid x:Name="ChildGrid" Margin="0,0,0,0">
+                                            <ContentPresenter x:Name="Child"
+                                                              ContentSource="Child" />
+                                        </Grid>
+                                    </Grid>
+                                </controls:NotTopMostPopup>
+                            </Grid>
+                            <!--触发器-->
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsAngleVisible" Value="True"/>
+                                        <Condition Property="Placement" Value="Top"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="ChildGrid" Property="Margin" Value="0,0,0,7"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsAngleVisible" Value="True"/>
+                                        <Condition Property="Placement" Value="Bottom"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="ChildGrid" Property="Margin" Value="0,7,0,0"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsAngleVisible" Value="True"/>
+                                        <Condition Property="Placement" Value="Left"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="ChildGrid" Property="Margin" Value="0,0,7,0"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsAngleVisible" Value="True"/>
+                                        <Condition Property="Placement" Value="Right"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="ChildGrid" Property="Margin" Value="7,0,0,0"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type controls:DropDown}" BasedOn="{StaticResource AIStudio.Styles.DropDown}"/>
+</ResourceDictionary>

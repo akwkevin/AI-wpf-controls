@@ -1,0 +1,23 @@
+<!-- License Revision: 0 Last Revised: 3/29/2006 8:21 AM
+*******************************************************************************
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+
+This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
+If it does not, you can obtain a copy from: 
+
+http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
+*******************************************************************************
+License -->
+<Selector x:Class="AIStudio.Wpf.Controls.Slideshow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Transitionals="clr-namespace:AIStudio.Wpf.Controls">
+  <Selector.Template>
+    <ControlTemplate>
+      <Grid x:Name="layoutRoot" Background="{TemplateBinding Background}">
+        <ItemsPresenter x:Name="presenter" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+      </Grid>
+    </ControlTemplate>
+  </Selector.Template>
+</Selector>

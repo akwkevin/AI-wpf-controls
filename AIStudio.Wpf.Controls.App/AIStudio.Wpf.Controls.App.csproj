@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>A.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="A.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Controls\AIStudio.Wpf.ComeCapture\AIStudio.Wpf.ComeCapture.csproj" />
+    <ProjectReference Include="..\Controls\AIStudio.Wpf.PrintDialog\AIStudio.Wpf.PrintDialog.csproj" />
+    <ProjectReference Include="..\Demos\AIStudio.Wpf.Controls.Demo\AIStudio.Wpf.Controls.Demo.csproj" />
+    <ProjectReference Include="..\Demos\AIStudio.Wpf.DragablzControls.Demo\AIStudio.Wpf.DragablzControls.Demo.csproj" />
+    <ProjectReference Include="..\Demos\AIStudio.Wpf.GridControls.Demo\AIStudio.Wpf.GridControls.Demo.csproj" />
+    <ProjectReference Include="..\Demos\AIStudio.Wpf.MDIContainer.Demo\AIStudio.Wpf.MDIContainer.Demo.csproj" />
+    <ProjectReference Include="..\Demos\AIStudio.Wpf.Panels.Demo\AIStudio.Wpf.Panels.Demo.csproj" />
+    <ProjectReference Include="..\Demos\AIStudio.Wpf.PrismRegions.Demo\AIStudio.Wpf.PrismRegions.Demo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="A.ico" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,37 @@
+﻿<ac:AIStudioUserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.PathView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+    <Grid x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ac:SearchBar Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource AIStudio.Styles.SearchBar.Underline}"/>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Kinds}" SelectedItem="{Binding SelectedKind}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ac:VirtualizingWrapPanelEx Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBox},Path=ActualWidth}" ChildWidth="142" ChildHeight="46"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="126" Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ac:PathIcon Kind="{Binding Item2}" Width="{DynamicResource AIStudio.Icon.Size.Small}" Height="{DynamicResource AIStudio.Icon.Size.Small}"/>
+                        <TextBlock Grid.Column="1" Margin="2,0,0,0" Text="{Binding Item2}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Style="{DynamicResource AIStudio.Styles.TextBlock}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</ac:AIStudioUserControl>

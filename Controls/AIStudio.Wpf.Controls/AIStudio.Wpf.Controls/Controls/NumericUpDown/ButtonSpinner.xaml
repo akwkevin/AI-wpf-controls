@@ -1,0 +1,544 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ValidationErrorTemplate.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converter:ShadowConverter x:Key="ShadowConverter"/>
+
+    <Style x:Key="AIStudio.Styles.ButtonSpinner" TargetType="{x:Type controls:ButtonSpinner}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
+        <Setter Property="controls:ControlAttach.ClearTextButton" Value="False" />
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="MinWidth" Value="62" />
+        <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
+        <Setter Property="UpDownButtonsWidth" Value="22" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource AIStudio.Styles.ValidationErrorTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ButtonSpinner}">
+                    <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <!--<AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(controls:ControlAttach.CacheMode)}">-->
+                        <Border x:Name="Bg" 
+                                Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Background}" 
+                                CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius)}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <!--</AdornerDecorator>-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="PART_LeftColumn" Width="*" />
+                                <ColumnDefinition x:Name="PART_MiddleColumn" Width="Auto" />
+                                <ColumnDefinition x:Name="PART_RightColumn" Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter x:Name="contentPresenter" Focusable="{TemplateBinding Focusable}" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                            <RepeatButton x:Name="PART_IncreaseButton"
+                                          Grid.Column="1"
+                                          Width="{TemplateBinding UpDownButtonsWidth}"
+                                          MinHeight="0"
+                                          Padding="3,0"
+                                          BorderThickness="0"
+                                          Delay="{TemplateBinding Delay}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          IsTabStop="False"
+                                          Focusable="False"                                             
+                                          controls:ControlAttach.CornerRadius="0"
+                                          controls:IconAttach.Geometry="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z"
+                                          Style="{StaticResource AIStudio.Styles.Button.Flat}">
+                            </RepeatButton>
+                            <RepeatButton x:Name="PART_DecreaseButton"
+                                          Grid.Column="2"
+                                          Width="{TemplateBinding UpDownButtonsWidth}"
+                                          MinHeight="0"
+                                          Padding="3, 0"
+                                          BorderThickness="0"
+                                          Delay="{TemplateBinding Delay}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          IsTabStop="False"
+                                          Focusable="False"                                                
+                                          controls:ControlAttach.CornerRadius="0"
+                                          controls:IconAttach.Geometry="F1 M 19,38L 57,38L 57,44L 19,44L 19,38 Z"
+                                          Style="{StaticResource AIStudio.Styles.Button.Flat}">
+                            </RepeatButton>
+                        </Grid>
+                        <Border x:Name="DisabledVisualElement"
+                                Background="{DynamicResource MahApps.Brushes.Control.Disabled}"
+                                BorderBrush="{DynamicResource MahApps.Brushes.Control.Disabled}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                IsHitTestVisible="False"
+                                Opacity="0"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ButtonSpinnerLocation" Value="Left">
+                            <Setter TargetName="PART_LeftColumn" Property="Width" Value="Auto" />
+                            <Setter TargetName="PART_MiddleColumn" Property="Width" Value="Auto" />
+                            <Setter TargetName="PART_DecreaseButton" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="PART_IncreaseButton" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_RightColumn" Property="Width" Value="*" />
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="2" />
+                        </Trigger>
+
+                        <Trigger Property="ButtonSpinnerLocation" Value="Opposite">
+                            <Setter TargetName="PART_LeftColumn" Property="Width" Value="Auto" />
+                            <Setter TargetName="PART_MiddleColumn" Property="Width" Value="*" />
+                            <Setter TargetName="PART_DecreaseButton" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="PART_IncreaseButton" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_RightColumn" Property="Width" Value="Auto" />
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="1" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="DisabledVisualElement" Property="Opacity" Value="0.5" />
+                        </Trigger>
+                        <Trigger SourceName="PART_IncreaseButton" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_IncreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+                        <Trigger SourceName="PART_IncreaseButton" Property="IsPressed" Value="True">
+                            <Setter TargetName="PART_IncreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+                        <Trigger SourceName="PART_DecreaseButton" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_DecreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+                        <Trigger SourceName="PART_DecreaseButton" Property="IsPressed" Value="True">
+                            <Setter TargetName="PART_DecreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Bg" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+                        <Trigger SourceName="contentPresenter" Property="IsFocused" Value="true">
+                            <Setter TargetName="Bg" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                            <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+                        </Trigger>
+                        <Trigger Property="ShowButtonSpinner" Value="False">
+                            <Setter TargetName="PART_DecreaseButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_IncreaseButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ButtonSpinnerLocation" Value="UpDown">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:ButtonSpinner}">
+                            <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <!--<AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(controls:ControlAttach.CacheMode)}">-->
+                                <Border x:Name="Bg" 
+                                        Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Background}" 
+                                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius)}" 
+                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                                <!--</AdornerDecorator>-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition x:Name="PART_LeftColumn" Width="*" />
+                                        <ColumnDefinition x:Name="PART_MiddleColumn" Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="{TemplateBinding Focusable}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+                                    <UniformGrid Grid.Column="1" Rows="2">
+                                        <RepeatButton x:Name="PART_IncreaseButton"
+                                                  Width="{TemplateBinding UpDownButtonsWidth}"
+                                                  MinHeight="0"
+                                                  Padding="6,0"
+                                                  BorderThickness="0"
+                                                  Delay="{TemplateBinding Delay}"
+                                                  Foreground="{TemplateBinding Foreground}"
+                                                  IsTabStop="False"
+                                                  Focusable="False"       
+                                                  controls:ControlAttach.CornerRadius="0"
+                                                  controls:IconAttach.Geometry="{StaticResource UpGeometry}"
+                                                  controls:IconAttach.Height="8"
+                                                  Style="{StaticResource AIStudio.Styles.Button.Flat}">
+                                        </RepeatButton>
+                                        <RepeatButton x:Name="PART_DecreaseButton"  
+                                                  Width="{TemplateBinding UpDownButtonsWidth}"
+                                                  MinHeight="0"
+                                                  Padding="6,0"
+                                                  BorderThickness="0"
+                                                  Delay="{TemplateBinding Delay}"
+                                                  Foreground="{TemplateBinding Foreground}"
+                                                  IsTabStop="False"
+                                                  Focusable="False"                                                 
+                                                  controls:ControlAttach.CornerRadius="0"
+                                                  controls:IconAttach.Geometry="{StaticResource DownGeometry}"
+                                                  controls:IconAttach.Height="8"
+                                                  Style="{StaticResource AIStudio.Styles.Button.Flat}">
+                                        </RepeatButton>
+                                    </UniformGrid>
+                                </Grid>
+
+                                <Border x:Name="DisabledVisualElement"
+                                    Background="{DynamicResource MahApps.Brushes.Control.Disabled}"
+                                    BorderBrush="{DynamicResource MahApps.Brushes.Control.Disabled}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                    IsHitTestVisible="False"
+                                    Opacity="0"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="DisabledVisualElement" Property="Opacity" Value="0.5" />
+                                </Trigger>
+                                <Trigger SourceName="PART_IncreaseButton" Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="PART_IncreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger SourceName="PART_IncreaseButton" Property="IsPressed" Value="True">
+                                    <Setter TargetName="PART_IncreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger SourceName="PART_DecreaseButton" Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="PART_DecreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger SourceName="PART_DecreaseButton" Property="IsPressed" Value="True">
+                                    <Setter TargetName="PART_DecreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter TargetName="Bg" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger SourceName="contentPresenter" Property="IsFocused" Value="true">
+                                    <Setter TargetName="Bg" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                    <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+                                </Trigger>
+                                <Trigger Property="ShowButtonSpinner" Value="False">
+                                    <Setter TargetName="PART_DecreaseButton" Property="Visibility" Value="Collapsed" />
+                                    <Setter TargetName="PART_IncreaseButton" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                                <Trigger Property="Validation.HasError" Value="true">
+                                    <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.ButtonSpinner.Underline" TargetType="{x:Type controls:ButtonSpinner}" BasedOn="{StaticResource AIStudio.Styles.ButtonSpinner}">
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ButtonSpinner}">
+                    <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <!--<AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(controls:ControlAttach.CacheMode)}">-->
+                        <Border x:Name="Bg" 
+                                Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Background}" 
+                                CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius)}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <!--</AdornerDecorator>-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="PART_LeftColumn" Width="*" />
+                                <ColumnDefinition x:Name="PART_MiddleColumn" Width="Auto" />
+                                <ColumnDefinition x:Name="PART_RightColumn" Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter x:Name="contentPresenter" Focusable="{TemplateBinding Focusable}" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                            <RepeatButton x:Name="PART_IncreaseButton"
+                                          Grid.Column="1"
+                                          Width="{TemplateBinding UpDownButtonsWidth}"
+                                          MinHeight="0"
+                                          Padding="6,0"
+                                          BorderThickness="0"
+                                          Delay="{TemplateBinding Delay}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          IsTabStop="False"
+                                          Focusable="False"                                            
+                                          controls:ControlAttach.CornerRadius="0"
+                                          controls:IconAttach.Geometry="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z"
+                                          Style="{StaticResource AIStudio.Styles.Button.Flat}">
+                            </RepeatButton>
+                            <RepeatButton x:Name="PART_DecreaseButton"
+                                          Grid.Column="2"
+                                          Width="{TemplateBinding UpDownButtonsWidth}"
+                                          MinHeight="0"
+                                          Padding="6,0"
+                                          BorderThickness="0"
+                                          Delay="{TemplateBinding Delay}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          IsTabStop="False"
+                                          Focusable="False"                                              
+                                          controls:ControlAttach.CornerRadius="0"
+                                          controls:IconAttach.Geometry="F1 M 19,38L 57,38L 57,44L 19,44L 19,38 Z"
+                                          Style="{StaticResource AIStudio.Styles.Button.Flat}">
+                            </RepeatButton>
+                        </Grid>
+                        <Border x:Name="DisabledVisualElement"
+                                Background="{DynamicResource MahApps.Brushes.Control.Disabled}"
+                                BorderBrush="{DynamicResource MahApps.Brushes.Control.Disabled}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                IsHitTestVisible="False"
+                                Opacity="0"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                        <controls:Underline x:Name="Underline" 
+                                            IsTabStop="False" 
+                                            Background="{TemplateBinding controls:ControlAttach.BorderBrush}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ButtonSpinnerLocation" Value="Left">
+                            <Setter TargetName="PART_LeftColumn" Property="Width" Value="Auto" />
+                            <Setter TargetName="PART_MiddleColumn" Property="Width" Value="Auto" />
+                            <Setter TargetName="PART_DecreaseButton" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="PART_IncreaseButton" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_RightColumn" Property="Width" Value="*" />
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="2" />
+                        </Trigger>
+
+                        <Trigger Property="ButtonSpinnerLocation" Value="Opposite">
+                            <Setter TargetName="PART_LeftColumn" Property="Width" Value="Auto" />
+                            <Setter TargetName="PART_MiddleColumn" Property="Width" Value="*" />
+                            <Setter TargetName="PART_DecreaseButton" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="PART_IncreaseButton" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_RightColumn" Property="Width" Value="Auto" />
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="1" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="DisabledVisualElement" Property="Opacity" Value="0.5" />
+                        </Trigger>
+                        <Trigger SourceName="PART_IncreaseButton" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_IncreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+                        <Trigger SourceName="PART_IncreaseButton" Property="IsPressed" Value="True">
+                            <Setter TargetName="PART_IncreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+                        <Trigger SourceName="PART_DecreaseButton" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_DecreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+                        <Trigger SourceName="PART_DecreaseButton" Property="IsPressed" Value="True">
+                            <Setter TargetName="PART_DecreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Bg" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="Underline" Property="IsActive" Value="True"/>
+                        </Trigger>
+                        <Trigger SourceName="contentPresenter" Property="IsFocused" Value="true">
+                            <Setter TargetName="Bg" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                            <Setter TargetName="Underline" Property="Background" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                        </Trigger>
+                        <Trigger Property="ShowButtonSpinner" Value="False">
+                            <Setter TargetName="PART_DecreaseButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_IncreaseButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                            <Setter TargetName="Underline" Property="Background" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ButtonSpinnerLocation" Value="UpDown">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:ButtonSpinner}">
+                            <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <!--<AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(controls:ControlAttach.CacheMode)}">-->
+                                <Border x:Name="Bg" 
+                                        Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Background}" 
+                                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius)}" 
+                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                                <!--</AdornerDecorator>-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition x:Name="PART_LeftColumn" Width="*" />
+                                        <ColumnDefinition x:Name="PART_MiddleColumn" Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="{TemplateBinding Focusable}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+                                    <UniformGrid Grid.Column="1" Rows="2">
+                                        <RepeatButton x:Name="PART_IncreaseButton"
+                                                  Width="{TemplateBinding UpDownButtonsWidth}"
+                                                  MinHeight="0"
+                                                  Padding="0"
+                                                  BorderThickness="0"
+                                                  Delay="{TemplateBinding Delay}"
+                                                  Foreground="{TemplateBinding Foreground}"
+                                                  IsTabStop="False"
+                                                  Focusable="False"    
+                                                  controls:ControlAttach.CornerRadius="0"
+                                                  controls:IconAttach.Geometry="{StaticResource UpGeometry}"
+                                                  controls:IconAttach.Height="8"
+                                                  Style="{StaticResource AIStudio.Styles.Button.Flat}">
+                                        </RepeatButton>
+                                        <RepeatButton x:Name="PART_DecreaseButton"  
+                                                  Width="{TemplateBinding UpDownButtonsWidth}"
+                                                  MinHeight="0"
+                                                  Padding="0"
+                                                  BorderThickness="0"
+                                                  Delay="{TemplateBinding Delay}"
+                                                  Foreground="{TemplateBinding Foreground}"
+                                                  IsTabStop="False"
+                                                  Focusable="False"                                                
+                                                  controls:ControlAttach.CornerRadius="0"
+                                                  controls:IconAttach.Geometry="{StaticResource DownGeometry}"
+                                                  controls:IconAttach.Height="8"
+                                                  Style="{StaticResource AIStudio.Styles.Button.Flat}">
+                                        </RepeatButton>
+                                    </UniformGrid>
+                                </Grid>
+
+                                <Border x:Name="DisabledVisualElement"
+                                    Background="{DynamicResource MahApps.Brushes.Control.Disabled}"
+                                    BorderBrush="{DynamicResource MahApps.Brushes.Control.Disabled}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
+                                    IsHitTestVisible="False"
+                                    Opacity="0"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                                <controls:Underline x:Name="Underline" 
+                                                    IsTabStop="False" 
+                                                    Background="{TemplateBinding controls:ControlAttach.BorderBrush}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="DisabledVisualElement" Property="Opacity" Value="0.5" />
+                                </Trigger>
+                                <Trigger SourceName="PART_IncreaseButton" Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="PART_IncreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger SourceName="PART_IncreaseButton" Property="IsPressed" Value="True">
+                                    <Setter TargetName="PART_IncreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger SourceName="PART_DecreaseButton" Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="PART_DecreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger SourceName="PART_DecreaseButton" Property="IsPressed" Value="True">
+                                    <Setter TargetName="PART_DecreaseButton" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter TargetName="Bg" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="true">
+                                    <Setter TargetName="Underline" Property="IsActive" Value="True"/>
+                                </Trigger>
+                                <Trigger SourceName="contentPresenter" Property="IsFocused" Value="true">
+                                    <Setter TargetName="Bg" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}" />
+                                </Trigger>
+                                <Trigger Property="Validation.HasError" Value="true">
+                                    <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                                    <Setter TargetName="Underline" Property="Background" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                                </Trigger>
+                                <Trigger Property="ShowButtonSpinner" Value="False">
+                                    <Setter TargetName="PART_DecreaseButton" Property="Visibility" Value="Collapsed" />
+                                    <Setter TargetName="PART_IncreaseButton" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                                <Trigger Property="Validation.HasError" Value="true">
+                                    <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                                    <Setter TargetName="Underline" Property="Background" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
+                                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.ButtonSpinner}" TargetType="{x:Type controls:ButtonSpinner}"/>
+
+</ResourceDictionary>

@@ -1,0 +1,189 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Calendar.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TextBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ValidationErrorTemplate.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:String2VisibilityReConverter x:Key="String2VisibilityReConverter"/>
+    <converter:ThicknessBindingConverter x:Key="ThicknessBindingConverter"/>
+    <converter:ShadowConverter x:Key="ShadowConverter"/>
+
+    <Style x:Key="DatePickerTextBoxStyle" BasedOn="{StaticResource AIStudio.Styles.TextBox.Plain}" TargetType="DatePickerTextBox">
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+
+    <!--AIStudio.Styles.DatePicker-->
+    <Style x:Key="AIStudio.Styles.DatePicker" TargetType="DatePicker">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>   
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="CalendarStyle" Value="{StaticResource AIStudio.Styles.Calendar}"/>
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}"/>
+        <Setter Property="IsTodayHighlighted" Value="True"/>
+        <Setter Property="SelectedDateFormat" Value="Short"/>
+        <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource AIStudio.Styles.ValidationErrorTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePicker">
+                    <Grid x:Name="PART_Root" >
+                        <Border x:Name="Bg"                            
+                            CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}"
+                            Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}"/>
+                        <Grid x:Name="PART_InnerGrid" Margin="{TemplateBinding Padding}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="PART_Button" Grid.Column="1" Style="{StaticResource AIStudio.Styles.Button.Plain}" Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyLeft}}" Content="" Padding="0" BorderThickness="0" controls:IconAttach.Geometry="{StaticResource CalendarGeometry}" Foreground="{TemplateBinding BorderBrush}" Focusable="False"/>
+                            <DatePickerTextBox x:Name="PART_TextBox" 
+                                               Grid.Column="0" 
+                                               Foreground="{TemplateBinding Foreground}" 
+                                               SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                               CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"        
+                                               BorderBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                               controls:ControlAttach.Watermark="{TemplateBinding controls:ControlAttach.Watermark}"     
+                                               Focusable="{TemplateBinding Focusable}" 
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                               Style="{StaticResource DatePickerTextBoxStyle}"/>
+                            <Popup x:Name="PART_Popup" VerticalOffset="1"  PopupAnimation="Fade" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=Bg}" StaysOpen="False"/>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>                       
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="IsOpen" Value="false" SourceName="PART_Popup"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="IsOpen" Value="true" SourceName="PART_Popup"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsFocused" Value="true" SourceName="PART_TextBox">
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                            <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+                        </Trigger>
+                        <Trigger Property="IsOpen" Value="True" SourceName="PART_Popup">
+                            <Setter Property="BorderBrush" TargetName="Bg" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignValidationErrorBrush}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="PART_Root" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueLightBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SecondaryHueMidBrush}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MaterialDesignToolBackground}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.DatePicker.Underline" TargetType="DatePicker" BasedOn="{StaticResource AIStudio.Styles.DatePicker}">
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePicker">
+                    <Grid x:Name="PART_Root" >
+                        <Border x:Name="Bg"                            
+                            CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}"/>
+                        <Grid x:Name="PART_InnerGrid" Margin="{TemplateBinding Padding}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="PART_Button" Grid.Column="1" Style="{StaticResource AIStudio.Styles.Button.Plain}" Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyLeft}}" Content="" Padding="0" BorderThickness="0" controls:IconAttach.Geometry="{StaticResource CalendarGeometry}" Foreground="{TemplateBinding BorderBrush}" Focusable="False"/>
+                            <DatePickerTextBox x:Name="PART_TextBox" 
+                                               Grid.Column="0" 
+                                               Foreground="{TemplateBinding Foreground}" 
+                                               SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                               CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"   
+                                               BorderBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                               controls:ControlAttach.Watermark="{TemplateBinding controls:ControlAttach.Watermark}"     
+                                               Focusable="{TemplateBinding Focusable}" 
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                               Style="{StaticResource DatePickerTextBoxStyle}"/>
+                            <Popup x:Name="PART_Popup" VerticalOffset="1"  PopupAnimation="Fade" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=Bg}" StaysOpen="False"/>
+                        </Grid>
+                        <controls:Underline x:Name="Underline" IsTabStop="False" Background="{TemplateBinding controls:ControlAttach.BorderBrush}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="Underline" Property="IsActive" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignValidationErrorBrush}"/>
+                            <Setter TargetName="Underline" Property="Background" Value="{DynamicResource MaterialDesignValidationErrorBrush}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_Root" Property="Opacity" Value="0.5"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

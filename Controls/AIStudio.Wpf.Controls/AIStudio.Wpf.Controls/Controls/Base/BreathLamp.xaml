@@ -1,0 +1,158 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+    <CubicEase x:Key="CubicEaseInOut" EasingMode="EaseInOut"/>
+    <PowerEase x:Key="PowerEaseInOut" EasingMode="EaseInOut"/>
+    <ExponentialEase x:Key="ExponentialEaseOut" EasingMode="EaseOut"/>
+    <SineEase x:Key="SineEaseOut" EasingMode="EaseOut" />
+    <SineEase x:Key="SineEaseInOut" EasingMode="EaseInOut" />
+
+    <ControlTemplate x:Key="LampEffect_Eclipse" TargetType="{x:Type controls:BreathLamp}">
+        <Grid>
+            <Border x:Name="PART_Lamp"  
+                            BorderThickness="0" 
+                            BorderBrush="Transparent" 
+                            CornerRadius="{TemplateBinding CornerRadius}" 
+                            Background="{TemplateBinding Background}"
+                            RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <ScaleTransform CenterX="0" CenterY="0" ScaleX="0.8" ScaleY="0.8"></ScaleTransform>
+                </Border.RenderTransform>
+            </Border>
+            <Border CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"/>
+            <ContentPresenter/>
+        </Grid>
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="EaseOut">
+                <DoubleAnimation Duration="0:0:1" BeginTime="0" From="0.8" To="1.1" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" EasingFunction="{StaticResource SineEaseOut}"/>
+                <DoubleAnimation Duration="0:0:1" BeginTime="0" From="0.8" To="1.1" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" EasingFunction="{StaticResource SineEaseOut}"/>
+            </Storyboard>
+        </ControlTemplate.Resources>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsLampStart" Value="True">
+                <Setter Property="Effect" TargetName="PART_Lamp">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="{DynamicResource MahApps.Brushes.Gray8}"/>
+                    </Setter.Value>
+                </Setter>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                            <DoubleAnimation Duration="0:0:1" BeginTime="0" From="0.8" To="1.1" Storyboard.TargetName="PART_Lamp" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" EasingFunction="{StaticResource SineEaseOut}"/>
+                            <DoubleAnimation Duration="0:0:1" BeginTime="0" From="0.8" To="1.1" Storyboard.TargetName="PART_Lamp" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" EasingFunction="{StaticResource SineEaseOut}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="LampEffect_Ripple" TargetType="{x:Type controls:BreathLamp}">
+        <Grid>
+            <Border x:Name="PART_LampRipple_1" 
+                            RenderTransformOrigin="0.5,0.5"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            CornerRadius="{TemplateBinding CornerRadius}" 
+                            Background="Transparent">
+                <Border.RenderTransform>
+                    <ScaleTransform CenterX="0" CenterY="0" ScaleX="0.8" ScaleY="0.8"></ScaleTransform>
+                </Border.RenderTransform>
+            </Border>
+            <Border x:Name="PART_LampRipple_2" 
+                            RenderTransformOrigin="0.5,0.5"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            CornerRadius="{TemplateBinding CornerRadius}" 
+                            Background="Transparent">
+                <Border.RenderTransform>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8"></ScaleTransform>
+                </Border.RenderTransform>
+            </Border>
+            <Border CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"/>
+            <ContentPresenter/>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsLampStart" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                            <DoubleAnimation Duration="0:0:1" BeginTime="0" From="0.8" To="1.3" Storyboard.TargetName="PART_LampRipple_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" EasingFunction="{StaticResource SineEaseOut}"/>
+                            <DoubleAnimation Duration="0:0:1" BeginTime="0" From="0.8" To="1.3" Storyboard.TargetName="PART_LampRipple_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" EasingFunction="{StaticResource SineEaseOut}"/>
+
+                            <DoubleAnimation Duration="0:0:1" BeginTime="0:0:0.4" From="0.8" To="1.3" Storyboard.TargetName="PART_LampRipple_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" EasingFunction="{StaticResource SineEaseOut}"/>
+                            <DoubleAnimation Duration="0:0:1" BeginTime="0:0:0.4" From="0.8" To="1.3" Storyboard.TargetName="PART_LampRipple_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" EasingFunction="{StaticResource SineEaseOut}"/>
+
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="LampEffect_OuterGlow" TargetType="{x:Type controls:BreathLamp}">
+        <Grid>
+            <Border x:Name="PART_Lamp"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            CornerRadius="{TemplateBinding CornerRadius}" 
+                            Background="{TemplateBinding Background}"
+                            RenderTransformOrigin="0.5,0.5">
+            </Border>
+          
+            <ContentPresenter/>
+        </Grid>
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="EaseOut">
+                <DoubleAnimation Duration="0:0:0.6" BeginTime="0" From="0" To="40" Storyboard.TargetProperty="(UIElement.Effect).BlurRadius" EasingFunction="{StaticResource SineEaseInOut}"/>
+            </Storyboard>
+        </ControlTemplate.Resources>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsLampStart" Value="True">
+                <Setter Property="Effect" TargetName="PART_Lamp">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="0" ShadowDepth="0" Color="{DynamicResource MahApps.Brushes.Gray8}"/>
+                    </Setter.Value>
+                </Setter>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever" >
+                            <DoubleAnimation Duration="0:0:0.6" AutoReverse="True" BeginTime="0" From="0" To="40" Storyboard.TargetName="PART_Lamp" Storyboard.TargetProperty="(UIElement.Effect).BlurRadius" EasingFunction="{StaticResource SineEaseInOut}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+
+
+    </ControlTemplate>
+
+    <Style x:Key="AIStudio.Styles.BreathLamp" TargetType="{x:Type controls:BreathLamp}">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Style.Triggers>
+            <Trigger Property="LampEffect" Value="Eclipse">
+                <Setter Property="Template" Value="{StaticResource LampEffect_Eclipse}"/>
+            </Trigger>
+
+            <Trigger Property="LampEffect" Value="Ripple">
+                <Setter Property="Template" Value="{StaticResource LampEffect_Ripple}"/>
+            </Trigger>
+
+            <Trigger Property="LampEffect" Value="OuterGlow">
+                <Setter Property="Template" Value="{StaticResource LampEffect_OuterGlow}"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style TargetType="{x:Type controls:BreathLamp}" BasedOn="{StaticResource AIStudio.Styles.BreathLamp}"></Style>
+
+</ResourceDictionary>

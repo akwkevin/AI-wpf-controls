@@ -1,0 +1,155 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                    
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:commands="clr-namespace:AIStudio.Wpf.Controls.Commands"
+                    xmlns:helper="clr-namespace:AIStudio.Wpf.Controls.Helper">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ComboBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/StatusBar.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ToolTip.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/NumericUpDown/NumericUpDown.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Propertie/PropertyGrid.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/OptionsPanel/OptionsPanel.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.ToolTip}" TargetType="ToolTip" />
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    <Style x:Key="AIStudio.Styles.AIStudioUserControl" TargetType="{x:Type controls:AIStudioUserControl}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray1}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:AIStudioUserControl}">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid x:Name="PART_RootGrid" controls:PropertyGrid.GotFocusProperty="{Binding ElementName=property}">
+                            <ContentPresenter Panel.ZIndex="0"/>
+                            <Grid x:Name="maskingGrid"
+                            Width="Auto"
+                            Height="Auto"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Panel.ZIndex="3"
+                            Background="{TemplateBinding Background}"
+                            Opacity="0.8"
+                            Visibility="{Binding Path=ShowOverlay, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            </Grid>
+                            <Grid x:Name="animationGrid"
+                            Width="Auto"
+                            Height="Auto"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Panel.ZIndex="2"
+                            Visibility="{Binding Path=IsWaiting, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Grid Width="Auto"
+                                Height="Auto"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Panel.ZIndex="0"
+                                Background="{TemplateBinding Background}"
+                                Opacity="0.2" />
+                                <Border Panel.ZIndex="1" HorizontalAlignment="Center" CornerRadius="5" Height="30">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Black"></DropShadowEffect>
+                                    </Border.Effect>
+                                    <StackPanel Orientation="Horizontal">
+                                        <controls:Loading Width="28" Height="28" Foreground="{TemplateBinding Foreground}" Margin="5,0" VerticalAlignment="Center"></controls:Loading>
+                                        <TextBlock Name="tbPrompt" VerticalAlignment="Center" FontSize="12" Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding WaitInfo}"></TextBlock>
+                                        <TextBlock Name="txtCancel" VerticalAlignment="Center" Visibility="Collapsed">
+                                        <Hyperlink Command="{Binding Path=CancelCommmad,RelativeSource={RelativeSource TemplatedParent}}"> <TextBlock FontSize="12" Text="取消"/> </Hyperlink>
+                                    </TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Grid>
+
+                        <StatusBar Grid.Row="1" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" Style="{DynamicResource AIStudio.Styles.StatusBar}">
+                            <ComboBox x:Name="PART_ControlStatus" IsEditable="True" helper:EnumHelper.Enum="{x:Type controls:ControlStatus}" ToolTip="色彩" Tag="此处可以选择色彩" controls:ControlAttach.CornerRadius="0" Style="{StaticResource AIStudio.Styles.ComboBox}" Background="{DynamicResource MahApps.Brushes.Accent}" BorderBrush="{DynamicResource MahApps.Brushes.ThemeBackground}" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" controls:ControlAttach.BorderBrush="{DynamicResource MahApps.Brushes.Gray8}" MinWidth="80">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid x:Name="grid">
+                                            <TextBlock x:Name="txt" VerticalAlignment="Center" Text="{Binding .}"/>
+                                        </Grid>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding .}" Value="Light">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding .}" Value="Mid">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding .}" Value="Dark">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding .}" Value="Accent">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding .}" Value="Success">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding .}" Value="Info">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource InfoBrush}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding .}" Value="Warning">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource WarningBrush}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding .}" Value="Danger">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource DangerBrush}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding .}" Value="Plain">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <controls:NumericUpDown x:Name="PART_CornerRadius" Margin="2,0,0,0" Maximum="100" Minimum="0" Value="3" ToolTip="圆角" Tag="此处可以设置圆角半径" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.NumericUpDown}" Background="{DynamicResource MahApps.Brushes.Accent}" BorderBrush="{DynamicResource MahApps.Brushes.ThemeBackground}" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" controls:ControlAttach.BorderBrush="{DynamicResource MahApps.Brushes.Gray8}"  MinWidth="80"/>
+                            <controls:NumericUpDown x:Name="PART_MinHeight" Margin="2,0,0,0" Maximum="100" Minimum="6" Value="22" ToolTip="高度" Tag="此处可以设置最小控件高度" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.NumericUpDown}" Background="{DynamicResource MahApps.Brushes.Accent}" BorderBrush="{DynamicResource MahApps.Brushes.ThemeBackground}" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" controls:ControlAttach.BorderBrush="{DynamicResource MahApps.Brushes.Gray8}"  MinWidth="80"/>
+                            <controls:NumericUpDown x:Name="PART_IconWidth" Margin="2,0,0,0" Maximum="100" Minimum="6" Value="13" ToolTip="图标大小" Tag="此处可以设置图标大小" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.NumericUpDown}" Background="{DynamicResource MahApps.Brushes.Accent}" BorderBrush="{DynamicResource MahApps.Brushes.ThemeBackground}" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" controls:ControlAttach.BorderBrush="{DynamicResource MahApps.Brushes.Gray8}"  MinWidth="80"/>
+                            <ComboBox x:Name="PART_FontFamily" ItemsSource="{x:Static controls:AIStudioUserControl.SystemFontFamilies}" ToolTip="字体" Tag="此处可以选择字体" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.ComboBox}" Background="{DynamicResource MahApps.Brushes.Accent}" BorderBrush="{DynamicResource MahApps.Brushes.ThemeBackground}" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" controls:ControlAttach.BorderBrush="{DynamicResource MahApps.Brushes.Gray8}" MinWidth="80">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid x:Name="grid">
+                                            <TextBlock x:Name="txt" VerticalAlignment="Center" Text="{Binding Source}" FontFamily="{Binding .}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <controls:NumericUpDown x:Name="PART_FontSize" Margin="2,0,0,0" Maximum="100" Minimum="6" Value="12" ToolTip="字体大小" Tag="此处可以设置字体大小" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.NumericUpDown}" Background="{DynamicResource MahApps.Brushes.Accent}" BorderBrush="{DynamicResource MahApps.Brushes.ThemeBackground}" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" controls:ControlAttach.BorderBrush="{DynamicResource MahApps.Brushes.Gray8}"  MinWidth="80"/>
+                            <ToggleButton x:Name="PART_ToggleCode" Tag="切换查看Xaml代码" Margin="2,0,0,0" IsChecked="{Binding IsOpen,ElementName=PART_DrawerCode}" ToolTip="显示代码" Style="{DynamicResource AIStudio.Styles.ToggleButton.Switch}"/>
+                        </StatusBar>
+
+                        <controls:Drawer x:Name="PART_DrawerCode" ShowMode="Press"  Dock="Top">
+                            <Grid>
+                                <TextBox IsReadOnly="True" FontFamily="Consolas" Text="{TemplateBinding Code}"/>
+                                <Button CommandTarget="{Binding}" Command="commands:ControlCommands.Close" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AIStudio.Styles.Button.Window.Close}"/>
+                            </Grid>
+                        </controls:Drawer>
+
+                        <controls:OptionsPanel Grid.RowSpan="2" x:Name="PART_OptionsPanel" Tag="展开查看选中控件的属性" HeaderText="属性" IsExpanded="False" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+                            <Grid>
+                                <controls:PropertyGrid x:Name="property" Width="200" Height="300"/>
+                                <controls:BorderResizeThumb Width="1" Margin="-3,0,0,0" ResizeElement="{Binding ElementName=property}" Cursor="SizeWE" VerticalAlignment="Stretch" HorizontalAlignment="Right" />
+                                <controls:BorderResizeThumb Height="1" Margin="0,-3,0,0" ResizeElement="{Binding ElementName=property}" Cursor="SizeNS" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />
+                            </Grid>
+                        </controls:OptionsPanel>
+
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ShowCancel" Value="True">
+                            <Setter TargetName="txtCancel" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--默认样式-->
+    <Style TargetType="{x:Type controls:AIStudioUserControl}" BasedOn="{StaticResource AIStudio.Styles.AIStudioUserControl}"></Style>
+</ResourceDictionary>

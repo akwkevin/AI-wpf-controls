@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+    <Style x:Key="AIStudio.Styles.Drawer" TargetType="controls:Drawer">
+        <Setter Property="Dock" Value="Right"/>
+        <Setter Property="MaskBrush" Value="{DynamicResource MaterialDesignToolBackground}"/>
+    </Style>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.Drawer}" TargetType="controls:Drawer"/>
+
+</ResourceDictionary>

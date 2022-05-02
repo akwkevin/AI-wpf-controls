@@ -1,0 +1,358 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Slider.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--region RangeSlider-->
+
+    <ControlTemplate x:Key="RangeSliderThumb" TargetType="controls:RangeThumb">
+        <Border Effect="{StaticResource ShadowDepth1}" Name="BorderDot"  BorderThickness="0" BorderBrush="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" Width="18" Height="18" CornerRadius="9"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Effect" Value="{StaticResource ShadowDepth2}"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="2" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="0" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TipRangeSliderThumbHorizontalTop" TargetType="controls:RangeThumb">
+        <Canvas>
+            <Label Name="LabelValue" Opacity="0" Canvas.Bottom="28" 
+                   Foreground="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:RangeSlider}}" 
+                   Background="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:RangeSlider}}" 
+                   Content="{TemplateBinding Content}" ContentStringFormat="{Binding Path=(controls:TipAttach.StringFormat),RelativeSource={RelativeSource TemplatedParent}}"/>
+            <Border Canvas.Bottom="0" Effect="{StaticResource ShadowDepth1}" Name="BorderDot" BorderThickness="0" BorderBrush="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" Width="18" Height="18" CornerRadius="9"/>
+        </Canvas>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Effect" Value="{StaticResource ShadowDepth2}" TargetName="BorderDot"/>
+                <Setter Property="Opacity" Value="1" TargetName="LabelValue"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="2" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="0" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TipRangeSliderThumbHorizontalBottom" TargetType="controls:RangeThumb">
+        <Canvas>
+            <Label Name="LabelValue" Opacity="0" Canvas.Top="28"                    
+                   Foreground="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:RangeSlider}}" 
+                   Background="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:RangeSlider}}"  
+                   Content="{TemplateBinding Content}" ContentStringFormat="{Binding Path=(controls:TipAttach.StringFormat),RelativeSource={RelativeSource TemplatedParent}}"/>
+            <Border Canvas.Bottom="0" Effect="{StaticResource ShadowDepth1}" Name="BorderDot" BorderThickness="0" BorderBrush="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" Width="18" Height="18" CornerRadius="9"/>
+        </Canvas>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Effect" Value="{StaticResource ShadowDepth2}" TargetName="BorderDot"/>
+                <Setter Property="Opacity" Value="1" TargetName="LabelValue"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="2" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="0" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TipRangeSliderThumbVerticalLeft" TargetType="controls:RangeThumb">
+        <Canvas>
+            <Label Name="LabelValue" Opacity="0" Canvas.Right="28" 
+                   Foreground="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:RangeSlider}}" 
+                   Background="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:RangeSlider}}" 
+                   Content="{TemplateBinding Content}" ContentStringFormat="{Binding Path=(controls:TipAttach.StringFormat),RelativeSource={RelativeSource TemplatedParent}}"/>
+            <Border Canvas.Right="0" Effect="{StaticResource ShadowDepth1}" Name="BorderDot" BorderThickness="0" BorderBrush="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" Width="18" Height="18" CornerRadius="9"/>
+        </Canvas>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Effect" Value="{StaticResource ShadowDepth2}" TargetName="BorderDot"/>
+                <Setter Property="Opacity" Value="1" TargetName="LabelValue"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="2" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="0" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TipRangeSliderThumbVerticalRight" TargetType="controls:RangeThumb">
+        <Canvas>
+            <Label Name="LabelValue" Opacity="0" Canvas.Left="28"                   
+                   Foreground="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=controls:RangeSlider}}" 
+                   Background="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=controls:RangeSlider}}"  
+                   Content="{TemplateBinding Content}" ContentStringFormat="{Binding Path=(controls:TipAttach.StringFormat),RelativeSource={RelativeSource TemplatedParent}}"/>
+            <Border Canvas.Right="0" Effect="{StaticResource ShadowDepth1}" Name="BorderDot" BorderThickness="0" BorderBrush="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" Width="18" Height="18" CornerRadius="9"/>
+        </Canvas>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Effect" Value="{StaticResource ShadowDepth2}" TargetName="BorderDot"/>
+                <Setter Property="Opacity" Value="1" TargetName="LabelValue"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="2" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="0" Duration="0:0:.1" Storyboard.TargetName="BorderDot" Storyboard.TargetProperty="BorderThickness"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RangeSliderHorizontal" TargetType="controls:RangeSlider">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TickBar x:Name="TopTick" Width="{Binding ActualWidth,ElementName=TrackBackground}" Ticks="{TemplateBinding Ticks}" TickFrequency="{TemplateBinding TickFrequency}" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" IsDirectionReversed="{TemplateBinding IsDirectionReversed}" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2" Placement="Top" Grid.Row="0" Visibility="Collapsed"/>
+            <TickBar x:Name="BottomTick" Width="{Binding ActualWidth,ElementName=TrackBackground}" Ticks="{TemplateBinding Ticks}" TickFrequency="{TemplateBinding TickFrequency}" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" IsDirectionReversed="{TemplateBinding IsDirectionReversed}" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0" Placement="Bottom" Grid.Row="2" Visibility="Collapsed"/>
+            <Border x:Name="TrackBackground" Background="{TemplateBinding Background}" Margin="9,0" Grid.Row="1" Height="2" VerticalAlignment="center"/>
+            <controls:RangeTrack IsDirectionReversed="{TemplateBinding IsDirectionReversed}" Orientation="{TemplateBinding Orientation}" ValueStart="{TemplateBinding ValueStart}" ValueEnd="{TemplateBinding ValueEnd}" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Margin="9,0" x:Name="PART_Track" Grid.Row="1">
+                <controls:RangeTrack.DecreaseRepeatButton>
+                    <RepeatButton Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}" Command="{x:Static controls:RangeSlider.DecreaseLarge}" Style="{StaticResource SliderRepeatButtonHorizontalStyle}"/>
+                </controls:RangeTrack.DecreaseRepeatButton>
+                <controls:RangeTrack.CenterRepeatButton>
+                    <RepeatButton Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}" Command="{x:Static controls:RangeSlider.CenterLarge}" Background="{TemplateBinding Foreground}" Style="{StaticResource SliderRepeatButtonHorizontalStyle}"/>
+                </controls:RangeTrack.CenterRepeatButton>
+                <controls:RangeTrack.IncreaseRepeatButton>
+                    <RepeatButton Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}" Command="{x:Static controls:RangeSlider.IncreaseLarge}" Style="{StaticResource SliderRepeatButtonHorizontalStyle}"/>
+                </controls:RangeTrack.IncreaseRepeatButton>
+                <controls:RangeTrack.ThumbStart>
+                    <controls:RangeThumb Content="{TemplateBinding ValueStart}" ClipToBounds="False" Width="18" Margin="-9,0" Height="18" x:Name="ThumbStart" Focusable="False" OverridesDefaultStyle="True" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding controls:ControlAttach.Foreground}" Template="{StaticResource RangeSliderThumb}" VerticalAlignment="Center"/>
+                </controls:RangeTrack.ThumbStart>
+                <controls:RangeTrack.ThumbEnd>
+                    <controls:RangeThumb Content="{TemplateBinding ValueEnd}" ClipToBounds="False" Width="18" Margin="-9,0" Height="18" x:Name="ThumbEnd" Focusable="False" OverridesDefaultStyle="True" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding controls:ControlAttach.Foreground}" Template="{StaticResource RangeSliderThumb}" VerticalAlignment="Center"/>
+                </controls:RangeTrack.ThumbEnd>
+            </controls:RangeTrack>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:TipAttach.Placement" Value="Top"/>
+                    <Condition Property="controls:TipAttach.Visibility" Value="Visible"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Template" TargetName="ThumbStart" Value="{StaticResource TipRangeSliderThumbHorizontalTop}"/>
+                <Setter Property="Template" TargetName="ThumbEnd" Value="{StaticResource TipRangeSliderThumbHorizontalTop}"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:TipAttach.Placement" Value="Bottom"/>
+                    <Condition Property="controls:TipAttach.Visibility" Value="Visible"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Template" TargetName="ThumbStart" Value="{StaticResource TipRangeSliderThumbHorizontalBottom}"/>
+                <Setter Property="Template" TargetName="ThumbEnd" Value="{StaticResource TipRangeSliderThumbHorizontalBottom}"/>
+            </MultiTrigger>
+            <Trigger Property="TickPlacement" Value="TopLeft">
+                <Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="TickPlacement" Value="BottomRight">
+                <Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="TickPlacement" Value="Both">
+                <Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RangeSliderVertical" TargetType="controls:RangeSlider">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition MinWidth="{TemplateBinding MinWidth}" Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TickBar x:Name="TopTick" Height="{Binding ActualHeight,ElementName=TrackBackground}" Ticks="{TemplateBinding Ticks}" TickFrequency="{TemplateBinding TickFrequency}" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" IsDirectionReversed="{TemplateBinding IsDirectionReversed}" Grid.Column="0" Fill="{TemplateBinding Foreground}" Margin="0,0,2,0" Placement="Left" Visibility="Collapsed" Width="4"/>
+            <TickBar x:Name="BottomTick" Height="{Binding ActualHeight,ElementName=TrackBackground}" Ticks="{TemplateBinding Ticks}" TickFrequency="{TemplateBinding TickFrequency}" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" IsDirectionReversed="{TemplateBinding IsDirectionReversed}" Grid.Column="2" Fill="{TemplateBinding Foreground}" Margin="2,0,0,0" Placement="Right" Visibility="Collapsed" Width="4"/>
+            <Border x:Name="TrackBackground" Background="{TemplateBinding Background}" Margin="0,9" Grid.Column="1" HorizontalAlignment="center" Width="2"/>
+            <controls:RangeTrack IsDirectionReversed="{TemplateBinding IsDirectionReversed}" Orientation="{TemplateBinding Orientation}" ValueStart="{TemplateBinding ValueStart}" ValueEnd="{TemplateBinding ValueEnd}" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Margin="0,9" x:Name="PART_Track" Grid.Column="1">
+                <controls:RangeTrack.DecreaseRepeatButton>
+                    <RepeatButton Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}" Command="{x:Static controls:RangeSlider.DecreaseLarge}" Style="{StaticResource SliderRepeatButtonVerticalStyle}"/>
+                </controls:RangeTrack.DecreaseRepeatButton>
+                <controls:RangeTrack.CenterRepeatButton>
+                    <RepeatButton Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}" Command="{x:Static controls:RangeSlider.CenterLarge}" Background="{TemplateBinding Foreground}" Style="{StaticResource SliderRepeatButtonVerticalStyle}"/>
+                </controls:RangeTrack.CenterRepeatButton>
+                <controls:RangeTrack.IncreaseRepeatButton>
+                    <RepeatButton Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}" Command="{x:Static controls:RangeSlider.IncreaseLarge}" Style="{StaticResource SliderRepeatButtonVerticalStyle}"/>
+                </controls:RangeTrack.IncreaseRepeatButton>
+                <controls:RangeTrack.ThumbStart>
+                    <controls:RangeThumb Content="{TemplateBinding ValueStart}" Margin="0,-9" x:Name="ThumbStart" Focusable="False" Height="18" OverridesDefaultStyle="True" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding controls:ControlAttach.Foreground}" Template="{StaticResource RangeSliderThumb}" HorizontalAlignment="Center" Width="18"/>
+                </controls:RangeTrack.ThumbStart>
+                <controls:RangeTrack.ThumbEnd>
+                    <controls:RangeThumb Content="{TemplateBinding ValueEnd}" Margin="0,-9" x:Name="ThumbEnd" Focusable="False" Height="18" OverridesDefaultStyle="True" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding controls:ControlAttach.Foreground}" Template="{StaticResource RangeSliderThumb}" HorizontalAlignment="Center" Width="18"/>
+                </controls:RangeTrack.ThumbEnd>
+            </controls:RangeTrack>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:TipAttach.Placement" Value="Left"/>
+                    <Condition Property="controls:TipAttach.Visibility" Value="Visible"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Template" TargetName="ThumbStart" Value="{StaticResource TipRangeSliderThumbVerticalLeft}"/>
+                <Setter Property="Template" TargetName="ThumbEnd" Value="{StaticResource TipRangeSliderThumbVerticalLeft}"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="controls:TipAttach.Placement" Value="Right"/>
+                    <Condition Property="controls:TipAttach.Visibility" Value="Visible"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Template" TargetName="ThumbStart" Value="{StaticResource TipRangeSliderThumbVerticalRight}"/>
+                <Setter Property="Template" TargetName="ThumbEnd" Value="{StaticResource TipRangeSliderThumbVerticalRight}"/>
+            </MultiTrigger>
+            <Trigger Property="TickPlacement" Value="TopLeft">
+                <Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="TickPlacement" Value="BottomRight">
+                <Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="TickPlacement" Value="Both">
+                <Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="AIStudio.Styles.RangeSlider" TargetType="controls:RangeSlider">
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="Template" Value="{StaticResource RangeSliderHorizontal}"/>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="Foreground" Value="{DynamicResource InfoBrush}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray8}"/>
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Template" Value="{StaticResource RangeSliderVertical}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value=".5"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--endregion-->
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.RangeSlider}" TargetType="controls:RangeSlider"/>
+
+</ResourceDictionary>

@@ -1,0 +1,169 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Hyperlink.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--  never ever make a default style for TextBlock in App.xaml !!!  -->
+    <Style x:Key="AIStudio.Styles.TextBlock.Base" TargetType="{x:Type TextBlock}" >
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="Foreground" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="Foreground" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.TextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock.Base}" >
+        <Setter Property="Padding" Value="0,4" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="Regular" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.TextBlock.Watermark" BasedOn="{StaticResource AIStudio.Styles.TextBlock.Base}" TargetType="{x:Type TextBlock}">
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+
+
+    <Style x:Key="AIStudio.Styles.TextBlock.FontAwesome" BasedOn="{StaticResource AIStudio.Styles.TextBlock.Base}" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="/AIStudio.Wpf.Controls;component/Resources/#FontAwesome"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource AIStudio.Styles.Body}"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Caption">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Caption}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Regular" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Body1">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body1}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Regular" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Body2">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Body2}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Regular" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Overline">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Overline}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontWeight" Value="Regular" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Subtitle1">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Subtitle1}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Regular" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Subtitle2">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Subtitle2}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Headline6">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Headline6}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Headline5">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Headline5}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Regular" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Headline4">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Headline4}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="34" />
+        <Setter Property="FontWeight" Value="Regular" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Headline3">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Headline3}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="48" />
+        <Setter Property="FontWeight" Value="Regular" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Headline2">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Headline2}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="60" />
+        <Setter Property="FontWeight" Value="Light" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Headline1">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Headline1}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="96" />
+        <Setter Property="FontWeight" Value="Light" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Button">
+        <Style.Resources>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource AIStudio.Styles.Hyperlink.Button}" />
+        </Style.Resources>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,253 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ComboBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/RepeatButton.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:Add5Converter x:Key="Add5Converter"/>
+    <converter:DoubleToLeftMarginConverter x:Key="DoubleToLeftMarginConverter"/>
+    <converter:DoubleToLeftRightMarginConverter x:Key="DoubleToLeftRightMarginConverter"/>
+    <converter:CloneConverter x:Key="CloneConverter"/>
+
+    <Style x:Key="AIStudio.Styles.Pagination" TargetType="{x:Type controls:Pagination}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBodyLight}" />
+        <Setter Property="SelectedBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
+        <Setter Property="Spacing" Value="3" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:Pagination}">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+                            <TextBlock x:Name="Total" Margin="5,0" VerticalAlignment="Center" Text="{TemplateBinding TotalText}"></TextBlock>
+                        </Border>
+                        <Grid x:Name="GrdMain">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <RepeatButton x:Name="BtnPrevious"
+                                      Margin="{Binding Spacing,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}},Converter={StaticResource DoubleToLeftMarginConverter}}"
+                                      Command="{TemplateBinding PreviousCommand}"
+                                      CommandParameter="{Binding RelativeSource={x:Static RelativeSource.TemplatedParent}}"
+                                      Height="{Binding ActualHeight,ElementName=GrdMain}"
+                                      MinWidth="{Binding ActualHeight,ElementName=GrdMain}"                                     
+                                      Background="{TemplateBinding Background}"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      FontSize="{Binding FontSize,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}},Converter={StaticResource Add5Converter}}"
+                                      FontWeight="{TemplateBinding FontWeight}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      Padding="0"
+                                      controls:ControlAttach.CornerRadius ="{TemplateBinding CornerRadius}"
+                                      controls:IconAttach.Geometry="{StaticResource AngleLeftGeometry}" 
+                                      Style="{StaticResource AIStudio.Styles.Button}"/>
+                            <ItemsControl Grid.Column="1"
+                                      ItemsSource="{TemplateBinding PaginationItems}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="{Binding Spacing,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}},Converter={StaticResource DoubleToLeftMarginConverter}}"
+                                          Height="{Binding ActualHeight,ElementName=GrdMain}"
+                                          MinWidth="{Binding ActualHeight,ElementName=GrdMain}">
+                                            <Path x:Name="TxtDot"
+                                                   Visibility="Collapsed"
+                                                   Height="3"
+                                                   Width="16"                                                   
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,5,0,0"
+                                                   Data="{StaticResource ThreeDotsGeometry}"
+                                                   Stretch="Fill"
+                                                   Fill="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"/>
+                                            <Button x:Name="BtnItem"
+                                                Command="{Binding IndexCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                FontSize="{Binding FontSize,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                FontWeight="{Binding FontWeight,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                FontFamily="{Binding FontFamily,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                FontStyle="{Binding FontStyle,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" 
+                                                BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" 
+                                                Padding="0"
+                                                Content="{Binding Value}"
+                                                controls:ControlAttach.CornerRadius ="{Binding CornerRadius,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" 
+                                                Style="{StaticResource AIStudio.Styles.Button}">
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource CloneConverter}">
+                                                        <Binding Path="."
+                                                             RelativeSource="{RelativeSource AncestorType={x:Type controls:Pagination}}" />
+                                                        <Binding Path="Value"></Binding>
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </Grid>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding ControlStyle,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" Value="Outlined">
+                                                <Setter TargetName="BtnItem" Property="Style" Value="{StaticResource AIStudio.Styles.Button.Outlined}" />
+                                                <Setter TargetName="TxtDot" Property="Fill" Value="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ControlStyle,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" Value="Plain">
+                                                <Setter TargetName="BtnItem" Property="Style" Value="{DynamicResource AIStudio.Styles.Button.Flat}"/>
+                                                <Setter TargetName="TxtDot" Property="Fill" Value="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" />
+                                                <Setter TargetName="BtnItem" Property="BorderBrush" Value="Transparent" />
+                                                <Setter TargetName="BtnItem" Property="Background" Value="Transparent" />
+                                            </DataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsSelected}"
+                                                           Value="True" />
+                                                    <Condition Binding="{Binding ControlStyle,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                           Value="Standard" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="BtnItem"
+                                                    Property="Background"
+                                                    Value="{Binding SelectedBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" />
+                                            </MultiDataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsSelected}"
+                                                           Value="True" />
+                                                    <Condition Binding="{Binding ControlStyle,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                           Value="Outlined" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="BtnItem"
+                                                    Property="BorderBrush"
+                                                    Value="{Binding SelectedBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" />
+                                                <Setter TargetName="BtnItem"
+                                                    Property="Foreground"
+                                                    Value="{Binding SelectedBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" />
+                                            </MultiDataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsSelected}"
+                                                           Value="True" />
+                                                    <Condition Binding="{Binding ControlStyle,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                                                           Value="Plain" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="BtnItem"
+                                                    Property="Foreground"
+                                                    Value="{Binding SelectedBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" />
+                                            
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding Value}"
+                                                     Value="{x:Null}">
+                                                <Setter TargetName="BtnItem"
+                                                    Property="Visibility"
+                                                    Value="Collapsed" />
+                                                <Setter TargetName="TxtDot"
+                                                    Property="Visibility"
+                                                    Value="Visible" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <RepeatButton x:Name="BtnNext"
+                                      Command="{TemplateBinding NextCommand}"
+                                      CommandParameter="{Binding RelativeSource={x:Static RelativeSource.TemplatedParent}}"
+                                      Grid.Column="2"
+                                      Height="{Binding ActualHeight,ElementName=GrdMain}"
+                                      MinWidth="{Binding ActualHeight,ElementName=GrdMain}"
+                                      Margin="{Binding Spacing,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}},Converter={StaticResource DoubleToLeftMarginConverter}}"
+                                      Background="{TemplateBinding Background}"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      FontSize="{Binding FontSize,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}},Converter={StaticResource Add5Converter}}"
+                                      FontWeight="{TemplateBinding FontWeight}"  
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      Padding="0"
+                                      controls:ControlAttach.CornerRadius ="{TemplateBinding CornerRadius}"
+                                      controls:IconAttach.Geometry="{StaticResource AngleRightGeometry}" 
+                                      Style="{StaticResource AIStudio.Styles.Button}" />
+                        </Grid>
+                        <ComboBox x:Name="Combo" Margin="{Binding Spacing,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}},Converter={StaticResource DoubleToLeftRightMarginConverter}}"
+                            SelectedValue="{Binding PageSize,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}"
+                            ItemsSource="{Binding PageSizeSource,RelativeSource={RelativeSource AncestorType={x:Type controls:Pagination}}}" 
+                            Width="Auto" Height="Auto" 
+                            Padding="5,0"
+                            Background="{TemplateBinding Background}"
+                            Foreground="{TemplateBinding Foreground}"
+                            controls:ControlAttach.BorderBrush="{TemplateBinding SelectedBrush}"
+                            FontSize="{TemplateBinding FontSize}"
+                            controls:ControlAttach.CornerRadius="{TemplateBinding CornerRadius}"
+                            Style="{StaticResource AIStudio.Styles.ComboBox}">
+                            <controls:ControlAttach.LabelTemplate>
+                                <ControlTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Text="每页"></TextBlock>
+                                    </StackPanel>
+                                </ControlTemplate>
+                            </controls:ControlAttach.LabelTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ControlStyle" Value="Outlined">
+                            <Setter TargetName="BtnPrevious" Property="Style" Value="{StaticResource AIStudio.Styles.Button.Outlined}" />
+                            <Setter TargetName="BtnNext" Property="Style" Value="{StaticResource AIStudio.Styles.Button.Outlined}" />
+                            <Setter TargetName="Combo" Property="Style" Value="{StaticResource AIStudio.Styles.ComboBox}" />
+                            <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="ControlStyle" Value="Plain">
+                            <Setter TargetName="BtnPrevious" Property="Style" Value="{StaticResource AIStudio.Styles.Button.Flat}" />
+                            <Setter TargetName="BtnNext" Property="Style" Value="{StaticResource AIStudio.Styles.Button.Flat}" />
+                            <Setter TargetName="Combo" Property="Style" Value="{StaticResource AIStudio.Styles.ComboBox.Underline}" />
+                            <Setter TargetName="Combo" Property="controls:ControlAttach.CornerRadius" Value="0"/>
+                            <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="SelectedBrush" Value="{DynamicResource PrimaryHueLightBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="SelectedBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="SelectedBrush" Value="{DynamicResource PrimaryHueDarkBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+                <Setter Property="SelectedBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="SelectedBrush" Value="{DynamicResource SuccessBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="SelectedBrush" Value="{DynamicResource InfoBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="SelectedBrush" Value="{DynamicResource WarningBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="SelectedBrush" Value="{DynamicResource DangerBrush}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="SelectedBrush" Value="{DynamicResource MaterialDesignToolForeground}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.Pagination}" TargetType="{x:Type controls:Pagination}"/>
+</ResourceDictionary>
