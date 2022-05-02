@@ -1,10 +1,10 @@
 using System.Windows;
 
-namespace AIStudio.Wpf.GridControls.Controls
+namespace AIStudio.Wpf.GridControls
 {
     /// <summary>
-    /// Event arguments created for the RangeSlider's SelectionChanged event.
-    /// <see cref="RangeSlider"/>
+    /// Event arguments created for the Range_Slider's SelectionChanged event.
+    /// <see cref="Range_Slider"/>
     /// </summary>
     public class RangeSelectionChangedEventArgs : RoutedEventArgs
     {
@@ -29,7 +29,7 @@ namespace AIStudio.Wpf.GridControls.Controls
             OldUpperValue = oldUpperValue;
         }
 
-        //internal RangeSelectionChangedEventArgs(RangeSlider slider)
+        //internal RangeSelectionChangedEventArgs(Range_Slider slider)
         //    : this(slider.LowerValue, slider.UpperValue)
         //{ }
     }

@@ -12,7 +12,7 @@ using System.Collections;
 //
 //  http://www.codeproject.com/KB/WPF/WPFJoshSmith.aspx
 //
-namespace AIStudio.Wpf.GridControls.Controls
+namespace AIStudio.Wpf.GridControls
 {
     //
     // This class is an adorner that allows a FrameworkElement derived class to adorn another FrameworkElement.

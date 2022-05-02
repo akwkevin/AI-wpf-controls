@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Collections;
 
-namespace AIStudio.Wpf.GridControls.Controls
+namespace AIStudio.Wpf.GridControls
 {
     /// <summary>
     /// A content control that allows an adorner for the content to

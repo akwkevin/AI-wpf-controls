@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace AIStudio.Wpf.GridControls.Controls
+namespace AIStudio.Wpf.GridControls
 {
     public class RangeParameterChangedEventArgs : RoutedEventArgs
     {

@@ -8,7 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-namespace AIStudio.Wpf.GridControls.Controls
+namespace AIStudio.Wpf.GridControls
 {
     public delegate void RangeSelectionChangedEventHandler(object sender, RangeSelectionChangedEventArgs e);
     public delegate void RangeParameterChangedEventHandler(object sender, RangeParameterChangedEventArgs e);
@@ -29,23 +29,23 @@ namespace AIStudio.Wpf.GridControls.Controls
     TemplatePart(Name = "PART_RightThumbAdorner", Type = typeof(TextBlock)),
     TemplatePart(Name = "PART_LeftThumbAdorner", Type = typeof(TextBlock))]
    
-    public class RangeSlider : RangeBase
+    public class Range_Slider : RangeBase
     {
         #region Routed UI commands
 
-        public static RoutedUICommand MoveBack = new RoutedUICommand("MoveBack", "MoveBack", typeof(RangeSlider),
+        public static readonly RoutedUICommand MoveBack = new RoutedUICommand("MoveBack", nameof(MoveBack), typeof(Range_Slider),
             new InputGestureCollection(new InputGesture[] { new KeyGesture(Key.B, ModifierKeys.Control) }));
 
-        public static RoutedUICommand MoveForward = new RoutedUICommand("MoveForward", "MoveForward",
-            typeof(RangeSlider),
+        public static readonly RoutedUICommand MoveForward = new RoutedUICommand("MoveForward", nameof(MoveForward),
+            typeof(Range_Slider),
             new InputGestureCollection(new InputGesture[] { new KeyGesture(Key.F, ModifierKeys.Control) }));
 
-        public static RoutedUICommand MoveAllForward = new RoutedUICommand("MoveAllForward", "MoveAllForward",
-            typeof(RangeSlider),
+        public static readonly RoutedUICommand MoveAllForward = new RoutedUICommand("MoveAllForward", nameof(MoveAllForward),
+            typeof(Range_Slider),
             new InputGestureCollection(new InputGesture[] { new KeyGesture(Key.F, ModifierKeys.Alt) }));
 
-        public static RoutedUICommand MoveAllBack = new RoutedUICommand("MoveAllBack", "MoveAllBack",
-            typeof(RangeSlider),
+        public static readonly RoutedUICommand MoveAllBack = new RoutedUICommand("MoveAllBack", nameof(MoveAllBack),
+            typeof(Range_Slider),
             new InputGestureCollection(new InputGesture[] { new KeyGesture(Key.B, ModifierKeys.Alt) }));
 
         #endregion
@@ -54,53 +54,53 @@ namespace AIStudio.Wpf.GridControls.Controls
         #region Routed events
 
         public static readonly RoutedEvent RangeSelectionChangedEvent =
-            EventManager.RegisterRoutedEvent("RangeSelectionChanged", RoutingStrategy.Bubble,
-                typeof(RangeSelectionChangedEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(RangeSelectionChanged), RoutingStrategy.Bubble,
+                typeof(RangeSelectionChangedEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent LowerValueChangedEvent =
-            EventManager.RegisterRoutedEvent("LowerValueChanged", RoutingStrategy.Bubble,
-                typeof(RangeParameterChangedEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(LowerValueChanged), RoutingStrategy.Bubble,
+                typeof(RangeParameterChangedEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent UpperValueChangedEvent =
-            EventManager.RegisterRoutedEvent("UpperValueChanged", RoutingStrategy.Bubble,
-                typeof(RangeParameterChangedEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(UpperValueChanged), RoutingStrategy.Bubble,
+                typeof(RangeParameterChangedEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent LowerThumbDragStartedEvent =
-            EventManager.RegisterRoutedEvent("LowerThumbDragStarted", RoutingStrategy.Bubble,
-                typeof(DragStartedEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(LowerThumbDragStarted), RoutingStrategy.Bubble,
+                typeof(DragStartedEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent LowerThumbDragCompletedEvent =
-            EventManager.RegisterRoutedEvent("LowerThumbDragCompleted", RoutingStrategy.Bubble,
-                typeof(DragCompletedEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(LowerThumbDragCompleted), RoutingStrategy.Bubble,
+                typeof(DragCompletedEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent UpperThumbDragStartedEvent =
-            EventManager.RegisterRoutedEvent("UpperThumbDragStarted", RoutingStrategy.Bubble,
-                typeof(DragStartedEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(UpperThumbDragStarted), RoutingStrategy.Bubble,
+                typeof(DragStartedEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent UpperThumbDragCompletedEvent =
-            EventManager.RegisterRoutedEvent("UpperThumbDragCompleted", RoutingStrategy.Bubble,
-                typeof(DragCompletedEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(UpperThumbDragCompleted), RoutingStrategy.Bubble,
+                typeof(DragCompletedEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent CentralThumbDragStartedEvent =
-            EventManager.RegisterRoutedEvent("CentralThumbDragStarted", RoutingStrategy.Bubble,
-                typeof(DragStartedEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(CentralThumbDragStarted), RoutingStrategy.Bubble,
+                typeof(DragStartedEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent CentralThumbDragCompletedEvent =
-            EventManager.RegisterRoutedEvent("CentralThumbDragCompleted", RoutingStrategy.Bubble,
-                typeof(DragCompletedEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(CentralThumbDragCompleted), RoutingStrategy.Bubble,
+                typeof(DragCompletedEventHandler), typeof(Range_Slider));
 
 
         public static readonly RoutedEvent LowerThumbDragDeltaEvent =
-            EventManager.RegisterRoutedEvent("LowerThumbDragDelta", RoutingStrategy.Bubble,
-                typeof(DragDeltaEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(LowerThumbDragDelta), RoutingStrategy.Bubble,
+                typeof(DragDeltaEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent UpperThumbDragDeltaEvent =
-            EventManager.RegisterRoutedEvent("UpperThumbDragDelta", RoutingStrategy.Bubble,
-                typeof(DragDeltaEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(UpperThumbDragDelta), RoutingStrategy.Bubble,
+                typeof(DragDeltaEventHandler), typeof(Range_Slider));
 
         public static readonly RoutedEvent CentralThumbDragDeltaEvent =
-            EventManager.RegisterRoutedEvent("CentralThumbDragDelta", RoutingStrategy.Bubble,
-                typeof(DragDeltaEventHandler), typeof(RangeSlider));
+            EventManager.RegisterRoutedEvent(nameof(CentralThumbDragDelta), RoutingStrategy.Bubble,
+                typeof(DragDeltaEventHandler), typeof(Range_Slider));
         #endregion
 
 
@@ -184,67 +184,78 @@ namespace AIStudio.Wpf.GridControls.Controls
         #region Dependency properties
 
         public static readonly DependencyProperty UpperValueProperty =
-            DependencyProperty.Register("UpperValue", typeof(Double), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(UpperValue), typeof(Double), typeof(Range_Slider),
                 new FrameworkPropertyMetadata((Double)0,
                     FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.AffectsRender, RangesChanged, CoerceUpperValue));
 
         public static readonly DependencyProperty LowerValueProperty =
-            DependencyProperty.Register("LowerValue", typeof(Double), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(LowerValue), typeof(Double), typeof(Range_Slider),
                 new FrameworkPropertyMetadata((Double)0,
                     FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.AffectsRender, RangesChanged, CoerceLowerValue));
 
         public static readonly DependencyProperty MinRangeProperty =
-            DependencyProperty.Register("MinRange", typeof(Double), typeof(RangeSlider),
-                new FrameworkPropertyMetadata((Double)0, MinRangeChanged, CoerceMinRange), IsValidMinRange);
+            DependencyProperty.Register(nameof(MinRange), typeof(Double), typeof(Range_Slider),
+                new FrameworkPropertyMetadata((Double)0, OnMinRangeChanged, CoerceMinRange), IsValidMinRange);
 
         public static readonly DependencyProperty MinRangeWidthProperty =
-            DependencyProperty.Register("MinRangeWidth", typeof(Double), typeof(RangeSlider),
-                new FrameworkPropertyMetadata(1.0, MinRangeWidthChanged, CoerceMinRangeWidth), IsValidMinRange);
+            DependencyProperty.Register(nameof(MinRangeWidth), typeof(Double), typeof(Range_Slider),
+                new FrameworkPropertyMetadata(0d, OnMinRangeWidthChanged, CoerceMinRangeWidth), IsValidMinRange);
 
         public static readonly DependencyProperty MoveWholeRangeProperty =
-            DependencyProperty.Register("MoveWholeRange", typeof(Boolean), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(MoveWholeRange), typeof(Boolean), typeof(Range_Slider),
                 new PropertyMetadata(false));
 
         public static readonly DependencyProperty ExtendedModeProperty =
-            DependencyProperty.Register("ExtendedMode", typeof(Boolean), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(ExtendedMode), typeof(Boolean), typeof(Range_Slider),
                 new PropertyMetadata(false));
 
         public static readonly DependencyProperty IsSnapToTickEnabledProperty =
-            DependencyProperty.Register("IsSnapToTickEnabled", typeof(Boolean), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(IsSnapToTickEnabled), typeof(Boolean), typeof(Range_Slider),
                 new PropertyMetadata(false));
 
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(Orientation), typeof(Orientation), typeof(Range_Slider),
                 new FrameworkPropertyMetadata(Orientation.Horizontal));
 
         public static readonly DependencyProperty TickFrequencyProperty =
-            DependencyProperty.Register("TickFrequency", typeof(Double), typeof(RangeSlider),
-                new FrameworkPropertyMetadata(1.0), IsValidTickFrequency);
+            DependencyProperty.Register(nameof(TickFrequency), typeof(Double), typeof(Range_Slider),
+                new FrameworkPropertyMetadata(1.0), ValidateTickFrequency);
 
         public static readonly DependencyProperty IsMoveToPointEnabledProperty =
-            DependencyProperty.Register("IsMoveToPointEnabled", typeof(Boolean), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(IsMoveToPointEnabled), typeof(Boolean), typeof(Range_Slider),
                 new PropertyMetadata(false));
 
         public static readonly DependencyProperty TickPlacementProperty =
-            DependencyProperty.Register("TickPlacement", typeof(TickPlacement), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(TickPlacement), typeof(TickPlacement), typeof(Range_Slider),
                 new FrameworkPropertyMetadata(TickPlacement.None));
 
         public static readonly DependencyProperty AutoToolTipPlacementProperty =
-            DependencyProperty.Register("AutoToolTipPlacement", typeof(AutoToolTipPlacement), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(AutoToolTipPlacement), typeof(AutoToolTipPlacement), typeof(Range_Slider),
                 new FrameworkPropertyMetadata(AutoToolTipPlacement.None));
 
         public static readonly DependencyProperty AutoToolTipPrecisionProperty =
-            DependencyProperty.Register("AutoToolTipPrecision", typeof(Int32), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(AutoToolTipPrecision), typeof(Int32), typeof(Range_Slider),
                 new FrameworkPropertyMetadata(0), IsValidPrecision);
 
         public static readonly DependencyProperty AutoToolTipTextConverterProperty =
-            DependencyProperty.Register("AutoToolTipTextConverter", typeof(IValueConverter), typeof(RangeSlider),
+            DependencyProperty.Register(nameof(AutoToolTipTextConverter), typeof(IValueConverter), typeof(Range_Slider),
                 new FrameworkPropertyMetadata(null));
 
         public static readonly DependencyProperty IntervalProperty =
-            DependencyProperty.Register("Interval", typeof(Int32), typeof(RangeSlider),
-                new FrameworkPropertyMetadata(100, IntervalChangedCallback), IsValidPrecision);
+            DependencyProperty.Register(nameof(Interval), typeof(Int32), typeof(Range_Slider),
+                new FrameworkPropertyMetadata(100, OnIntervalChanged), IsValidPrecision);
 
+        public static readonly DependencyProperty ThumbHeightProperty =
+          DependencyProperty.Register(nameof(ThumbHeight), typeof(Double), typeof(Range_Slider),
+              new FrameworkPropertyMetadata(10d));
+
+        public static readonly DependencyProperty ThumbWidthProperty =
+         DependencyProperty.Register(nameof(ThumbWidth), typeof(Double), typeof(Range_Slider),
+             new FrameworkPropertyMetadata(16d));
+
+        public static readonly DependencyProperty TickBarWidthProperty =
+         DependencyProperty.Register(nameof(TickBarWidth), typeof(Double), typeof(Range_Slider),
+             new FrameworkPropertyMetadata(8d));
 
         /// <summary>
         /// Get/sets value how fast thumbs will move when user press on left/right/central with left mouse button (IsMoveToPoint must be set to FALSE)
@@ -397,6 +408,44 @@ namespace AIStudio.Wpf.GridControls.Controls
             set { SetValue(MinRangeProperty, value); }
         }
 
+        [Bindable(true), Category("Common")]
+        public Double ThumbHeight
+        {
+            get
+            {
+                return (Double)GetValue(ThumbHeightProperty);
+            }
+            set
+            {
+                SetValue(ThumbHeightProperty, value);
+            }
+        }
+
+        [Bindable(true), Category("Common")]
+        public Double ThumbWidth
+        {
+            get
+            {
+                return (Double)GetValue(ThumbWidthProperty);
+            }
+            set
+            {
+                SetValue(ThumbWidthProperty, value);
+            }
+        }
+
+        [Bindable(true), Category("Common")]
+        public Double TickBarWidth
+        {
+            get
+            {
+                return (Double)GetValue(TickBarWidthProperty);
+            }
+            set
+            {
+                SetValue(TickBarWidthProperty, value);
+            }
+        }        
         #endregion
 
 
@@ -444,26 +493,26 @@ namespace AIStudio.Wpf.GridControls.Controls
             }
         }
 
-        public RangeSlider()
+        public Range_Slider()
         {
             CommandBindings.Add(new CommandBinding(MoveBack, MoveBackHandler));
             CommandBindings.Add(new CommandBinding(MoveForward, MoveForwardHandler));
             CommandBindings.Add(new CommandBinding(MoveAllForward, MoveAllForwardHandler));
             CommandBindings.Add(new CommandBinding(MoveAllBack, MoveAllBackHandler));
 
-            DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(RangeSlider)).AddValueChanged(this, delegate { ReCalculateSize(); });
-            DependencyPropertyDescriptor.FromProperty(ActualHeightProperty, typeof(RangeSlider)).AddValueChanged(this, delegate { ReCalculateSize(); });
+            DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(Range_Slider)).AddValueChanged(this, delegate { ReCalculateSize(); });
+            DependencyPropertyDescriptor.FromProperty(ActualHeightProperty, typeof(Range_Slider)).AddValueChanged(this, delegate { ReCalculateSize(); });
             _timer = new DispatcherTimer();
             _timer.Tick += MoveToNextValue;
             _timer.Interval = TimeSpan.FromMilliseconds(Interval);
         }
 
 
-        static RangeSlider()
+        static Range_Slider()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(RangeSlider), new FrameworkPropertyMetadata(typeof(RangeSlider)));
-            MinimumProperty.OverrideMetadata(typeof(RangeSlider), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsMeasure, MinPropertyChangedCallback, CoerceMinimum));
-            MaximumProperty.OverrideMetadata(typeof(RangeSlider), new FrameworkPropertyMetadata(100.0, FrameworkPropertyMetadataOptions.AffectsMeasure, MaxPropertyChangedCallback, CoerceMaximum));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Range_Slider), new FrameworkPropertyMetadata(typeof(Range_Slider)));
+            MinimumProperty.OverrideMetadata(typeof(Range_Slider), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsMeasure, MinPropertyChangedCallback, CoerceMinimum));
+            MaximumProperty.OverrideMetadata(typeof(Range_Slider), new FrameworkPropertyMetadata(100.0, FrameworkPropertyMetadataOptions.AffectsMeasure, MaxPropertyChangedCallback, CoerceMaximum));
         }
 
 
@@ -2286,7 +2335,7 @@ namespace AIStudio.Wpf.GridControls.Controls
             return true;
         }
 
-        private static bool IsValidTickFrequency(object value)
+        private static bool ValidateTickFrequency(object value)
         {
             double d = (double)value;
             if (d <= 0.0 || Double.IsInfinity(d) || Double.IsNaN(d))
@@ -2303,7 +2352,7 @@ namespace AIStudio.Wpf.GridControls.Controls
 
         private static object CoerceMinimum(DependencyObject d, object basevalue)
         {
-            RangeSlider rs = (RangeSlider)d;
+            Range_Slider rs = (Range_Slider)d;
             double value = (double)basevalue;
             if (value > rs.Maximum)
                 return rs.Maximum;
@@ -2313,7 +2362,7 @@ namespace AIStudio.Wpf.GridControls.Controls
 
         private static object CoerceMaximum(DependencyObject d, object basevalue)
         {
-            RangeSlider rs = (RangeSlider)d;
+            Range_Slider rs = (Range_Slider)d;
             double value = (double)basevalue;
 
             if (value < rs.Minimum)
@@ -2324,7 +2373,7 @@ namespace AIStudio.Wpf.GridControls.Controls
 
         private static object CoerceLowerValue(DependencyObject d, object basevalue)
         {
-            RangeSlider rs = (RangeSlider)d;
+            Range_Slider rs = (Range_Slider)d;
             double value = (double)basevalue;
 
             if (value < rs.Minimum || rs.UpperValue - rs.MinRange < rs.Minimum)
@@ -2339,7 +2388,7 @@ namespace AIStudio.Wpf.GridControls.Controls
 
         private static object CoerceUpperValue(DependencyObject d, object basevalue)
         {
-            RangeSlider rs = (RangeSlider)d;
+            Range_Slider rs = (Range_Slider)d;
             double value = (double)basevalue;
             if (value > rs.Maximum || rs.LowerValue + rs.MinRange > rs.Maximum)
                 return rs.Maximum;
@@ -2354,7 +2403,7 @@ namespace AIStudio.Wpf.GridControls.Controls
 
         private static object CoerceMinRange(DependencyObject d, object basevalue)
         {
-            RangeSlider rs = (RangeSlider)d;
+            Range_Slider rs = (Range_Slider)d;
             double value = (double)basevalue;
             if (rs.LowerValue + value > rs.Maximum)
             {
@@ -2365,7 +2414,7 @@ namespace AIStudio.Wpf.GridControls.Controls
 
         private static object CoerceMinRangeWidth(DependencyObject d, object basevalue)
         {
-            RangeSlider rs = (RangeSlider)d;
+            Range_Slider rs = (Range_Slider)d;
             if (rs._leftThumb != null && rs._rightThumb != null)
             {
                 double width;
@@ -2405,7 +2454,7 @@ namespace AIStudio.Wpf.GridControls.Controls
         //Lower/Upper values property changed callback
         private static void RangesChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            var slider = (RangeSlider)dependencyObject;
+            var slider = (Range_Slider)dependencyObject;
             if (slider._rightThumbAdorner != null && slider._leftThumbAdorner != null)
             {
                 var converter = slider.AutoToolTipTextConverter;
@@ -2439,13 +2488,13 @@ namespace AIStudio.Wpf.GridControls.Controls
             slider.ReCalculateSize();
         }
 
-        private static void MinRangeChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        private static void OnMinRangeChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             Double value = (Double)e.NewValue;
             if (value < 0)
                 value = 0;
 
-            var slider = (RangeSlider)dependencyObject;
+            var slider = (Range_Slider)dependencyObject;
             dependencyObject.CoerceValue(MinRangeProperty);
             slider._internalUpdate = true;
             slider.UpperValue = Math.Max(slider.UpperValue, slider.LowerValue + value);
@@ -2463,23 +2512,23 @@ namespace AIStudio.Wpf.GridControls.Controls
         }
 
 
-        private static void MinRangeWidthChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnMinRangeWidthChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var slider = (RangeSlider)sender;
+            var slider = (Range_Slider)sender;
             slider.ReCalculateSize();
         }
 
 
-        private static void IntervalChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        private static void OnIntervalChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            RangeSlider rs = (RangeSlider)dependencyObject;
+            Range_Slider rs = (Range_Slider)dependencyObject;
             rs._timer.Interval = TimeSpan.FromMilliseconds((Int32)e.NewValue);
         }
 
         //Raises all value changes events
         private static void RaiseValueChangedEvents(DependencyObject dependencyObject)
         {
-            var slider = (RangeSlider)dependencyObject;
+            var slider = (Range_Slider)dependencyObject;
             if (!Equals(slider._oldLower, slider.LowerValue) || !Equals(slider._oldUpper, slider.UpperValue))
             {
                 slider.OnRangeSelectionChanged(new RangeSelectionChangedEventArgs(slider.LowerValue, slider.UpperValue,

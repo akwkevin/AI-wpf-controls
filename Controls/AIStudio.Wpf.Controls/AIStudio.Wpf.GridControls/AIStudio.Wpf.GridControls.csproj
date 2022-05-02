@@ -8,4 +8,15 @@
     <Reference Include="PresentationFramework.Aero" Condition="$(DefineConstants.Contains(NETCOREAPP)) == false" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Controls\RangeSlider\Range_Slider.MaterialDesign.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\MaterialDesign.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>
