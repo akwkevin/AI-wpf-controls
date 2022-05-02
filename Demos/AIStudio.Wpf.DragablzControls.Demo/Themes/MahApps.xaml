@@ -278,14 +278,14 @@
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="CloseMenuCommandButtonStyle" BasedOn="{StaticResource MenuCommandButtonStyle}">
-        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
         <Setter Property="Width" Value="46" />
         <Setter Property="Margin" Value="0 0 4 0" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightForegroundBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                 <Setter Property="Opacity" Value="1"/>
             </Trigger>
         </Style.Triggers>
@@ -312,15 +312,15 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
         <Setter Property="Width" Value="12" />
         <Setter Property="Height" Value="12" />
         <Setter Property="Margin" Value="4 0 2 0" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightForegroundBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                 <Setter Property="Opacity" Value="1"/>
             </Trigger>
         </Style.Triggers>
@@ -347,15 +347,15 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
         <Setter Property="Width" Value="12" />
         <Setter Property="Height" Value="12" />
         <Setter Property="Margin" Value="4 0 2 0" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightForegroundBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
                 <Setter Property="Opacity" Value="1"/>
@@ -402,9 +402,9 @@
     <Style x:Key="AIStudio.Styles.DragablzWindow" TargetType="{x:Type dragablz:DragablzWindow}">
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="AllowsTransparency" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="Template">
@@ -473,7 +473,7 @@
                 <Setter Property="Template" Value="{StaticResource WindowTemplateKey}"/>
             </Trigger>
             <Trigger Property="IsActive" Value="False">
-                <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
             </Trigger>
             <Trigger Property="IsBeingDraggedByTab" Value="True">
                 <Setter Property="Background" Value="Transparent" />
@@ -595,7 +595,7 @@
     <Style TargetType="{x:Type dragablz:HeaderedDragablzItem}">
         <Style.Setters>
             <Setter Property="Padding" Value="2"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Canvas.Left" Value="{Binding X, RelativeSource={RelativeSource Self}}" />
             <Setter Property="Canvas.Top" Value="{Binding Y, RelativeSource={RelativeSource Self}}" />
@@ -636,7 +636,7 @@
 
     <Style TargetType="{x:Type dragablz:HeaderedDragablzItem}" x:Key="ToolDragablzItemStyle">
         <Style.Setters>
-            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
             <Setter Property="BorderThickness" Value="4" />
             <Setter Property="Canvas.Left" Value="{Binding X, RelativeSource={RelativeSource Self}}" />
             <Setter Property="Canvas.Top" Value="{Binding Y, RelativeSource={RelativeSource Self}}" />
@@ -646,7 +646,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type dragablz:HeaderedDragablzItem}">
                         <Grid Margin="{TemplateBinding Margin}">
-                            <Border Background="{DynamicResource MaterialDesignBackground}">
+                            <Border Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
                                 <Border.Effect>
                                     <DropShadowEffect BlurRadius="10" ShadowDepth="5" Direction="315" Color="{DynamicResource AccentColor2}" Opacity=".5" />
                                 </Border.Effect>
@@ -790,7 +790,7 @@
 
     <Style TargetType="{x:Type dragablz:DragablzItem}" x:Key="SizableFromBottomRightDragablzItemStyle">
         <Style.Setters>
-            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
             <Setter Property="BorderThickness" Value="4" />
             <Setter Property="Canvas.Left" Value="{Binding X, RelativeSource={RelativeSource Self}}" />
             <Setter Property="Canvas.Top" Value="{Binding Y, RelativeSource={RelativeSource Self}}" />
@@ -819,7 +819,7 @@
 
     <Style TargetType="{x:Type dragablz:DragablzItem}" x:Key="FloatingDragablzItemStyle">
         <Style.Setters>
-            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
             <Setter Property="BorderThickness" Value="4" />
             <Setter Property="Canvas.Left" Value="{Binding X, RelativeSource={RelativeSource Self}}" />
             <Setter Property="Canvas.Top" Value="{Binding Y, RelativeSource={RelativeSource Self}}" />
@@ -827,7 +827,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type dragablz:DragablzItem}">
                         <Grid Margin="{TemplateBinding Margin}">
-                            <Border Background="{DynamicResource MaterialDesignBackground}">
+                            <Border Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
                                 <Border.Effect>
                                     <DropShadowEffect BlurRadius="10" ShadowDepth="5" Direction="315" Color="Black" Opacity=".5" />
                                 </Border.Effect>
@@ -948,9 +948,9 @@
 
     <Style x:Key="AIStudio.Styles.TrapezoidDragableTabItemStyle"  TargetType="{x:Type dragablz:DragablzItem}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
-        <Setter Property="Background" Value="{DynamicResource MaterialDesignToolBackground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray8}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="Margin" Value="0 0 0 0"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
@@ -994,8 +994,8 @@
                             <Setter TargetName="contentPresenter" Property="Content" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.Header}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" TargetName="Trapezoid"/>
-                            <Setter Property="LongBasePenBrush" Value="{DynamicResource MaterialDesignBackground}" TargetName="Trapezoid"/>
+                            <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" TargetName="Trapezoid"/>
+                            <Setter Property="LongBasePenBrush" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" TargetName="Trapezoid"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1006,9 +1006,9 @@
     <!-- this style is effectively a duplicate of CoreTabItemStyle, allowing users to bind tabs in and immedietly get a standard tab look -->
     <Style x:Key="AIStudio.Styles.StandardDragablzTabItemStyle" TargetType="{x:Type dragablz:DragablzItem}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
-        <Setter Property="Background" Value="{DynamicResource MaterialDesignToolBackground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray8}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="6,2,6,2"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -1018,7 +1018,7 @@
                 <ControlTemplate TargetType="{x:Type dragablz:DragablzItem}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
                         <Border x:Name="mainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,1,0" Background="{TemplateBinding Background}" Margin="0 0 0 1">
-                            <Border x:Name="innerBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,1,0" Background="{DynamicResource MaterialDesignBackground}" Margin="-1" Opacity="0"/>
+                            <Border x:Name="innerBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,1,0" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Margin="-1" Opacity="0"/>
                         </Border>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -1094,8 +1094,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="contentPresenter" Value="0.56"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,0,1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,0,1"/>
                         </MultiDataTrigger>
@@ -1105,8 +1105,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="contentPresenter" Value="0.56"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,0,1,1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,0,1,1"/>
                         </MultiDataTrigger>
@@ -1116,8 +1116,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="contentPresenter" Value="0.56"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="0,1,1,1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="0,1,1,1"/>
                         </MultiDataTrigger>
@@ -1127,8 +1127,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="contentPresenter" Value="0.56"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
                         </MultiDataTrigger>
@@ -1217,9 +1217,9 @@
 
     <Style x:Key="AIStudio.Styles.StandardDragablzTabItemVerticalStyle" TargetType="{x:Type dragablz:DragablzItem}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
-        <Setter Property="Background" Value="{DynamicResource MaterialDesignToolBackground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray8}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="6,2,6,2"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -1229,7 +1229,7 @@
                 <ControlTemplate TargetType="{x:Type dragablz:DragablzItem}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
                         <Border x:Name="mainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,1,1" Background="{TemplateBinding Background}">
-                            <Border x:Name="innerBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,0,1" Background="{DynamicResource MaterialDesignBackground}" Margin="-1" Opacity="0"/>
+                            <Border x:Name="innerBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,0,1" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Margin="-1" Opacity="0"/>
                         </Border>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -1264,8 +1264,8 @@
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
                             <!--
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
@@ -1276,8 +1276,8 @@
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
                             <!--
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="0,1,1,1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="0,1,1,1"/>
@@ -1288,8 +1288,8 @@
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
                             <!--
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,0,1,1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,0,1,1"/>
@@ -1300,8 +1300,8 @@
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
                             <!--
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,0,1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,0,1"/>
@@ -1313,8 +1313,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="contentPresenter" Value="0.56"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
                             <!--
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
@@ -1326,8 +1326,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="contentPresenter" Value="0.56"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
                             <!--
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="0,1,1,1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="0,1,1,1"/>
@@ -1339,8 +1339,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="contentPresenter" Value="0.56"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
                             <!--
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,0,1,1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,0,1,1"/>
@@ -1352,8 +1352,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="contentPresenter" Value="0.56"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource MahApps.Brushes.Control.Disabled}"/>
                             <!--
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,0,1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,0,1"/>
@@ -1462,10 +1462,10 @@
         <Setter Property="Padding" Value="2"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource AIStudio.Styles.StandardDragablzTabItemStyle}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -1654,8 +1654,8 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Padding" Value="2 2 2 2" />
-        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
-        <Setter Property="PenBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="PenBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
         <Setter Property="PenThickness" Value=".5" />
         <Setter Property="Template">
             <Setter.Value>

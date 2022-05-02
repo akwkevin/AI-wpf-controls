@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Themes\MahApps.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Themes\MaterialDesign.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>

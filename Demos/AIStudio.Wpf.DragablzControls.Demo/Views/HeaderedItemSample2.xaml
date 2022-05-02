@@ -22,7 +22,7 @@
                 <dockablz:Branch.FirstItem>
                     <dockablz:Branch Orientation="Horizontal">
                         <dockablz:Branch.FirstItem >
-                            <dragablz:TabablzControl ItemsSource="{Binding BranchItems[0].Items}"
+                            <dragablz:TabablzControl ItemsSource="{Binding BranchItems[0].Items}" ClosingItemCallback="{Binding BranchItems[0].ClosingTabItemHandler}"
                                  Style="{StaticResource AIStudio.Wpf.TabablzControl}">
                                 <dragablz:TabablzControl.InterTabController>
                                     <dragablz:InterTabController 
@@ -32,7 +32,7 @@
                             </dragablz:TabablzControl>
                         </dockablz:Branch.FirstItem>
                         <dockablz:Branch.SecondItem>
-                            <dragablz:TabablzControl ItemsSource="{Binding BranchItems[1].Items}"
+                            <dragablz:TabablzControl ItemsSource="{Binding BranchItems[1].Items}" ClosingItemCallback="{Binding BranchItems[1].ClosingTabItemHandler}"
                                  Style="{StaticResource AIStudio.Wpf.TabablzControl}">
                                 <dragablz:TabablzControl.InterTabController>
                                     <dragablz:InterTabController 
@@ -44,7 +44,7 @@
                     </dockablz:Branch>
                 </dockablz:Branch.FirstItem>
                 <dockablz:Branch.SecondItem>
-                    <dragablz:TabablzControl ItemsSource="{Binding BranchItems[2].Items}"
+                    <dragablz:TabablzControl ItemsSource="{Binding BranchItems[2].Items}" ClosingItemCallback="{Binding BranchItems[2].ClosingTabItemHandler}"
                                  Style="{StaticResource AIStudio.Wpf.TabablzControl}">
                         <dragablz:TabablzControl.InterTabController>
                             <dragablz:InterTabController 

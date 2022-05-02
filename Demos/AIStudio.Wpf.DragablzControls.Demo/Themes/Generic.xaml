@@ -8,7 +8,9 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <ResourceDictionary.MergedDictionaries>       
         <!-- Dragablz Material Design -->
-        <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/Generic.xaml"/>
+        <!--<ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/Generic.xaml"/>-->
+        <!--<ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/MaterialDesign.xaml"/>-->
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.DragablzControls.Demo;component/Themes/MaterialDesign.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate DataType="{x:Type dragablz:HeaderedItemViewModel}">
@@ -27,7 +29,7 @@
 
 
     <!-- Dragablz Material Design -->  
-    <Style TargetType="{x:Type dragablz:TabablzControl}" x:Key="AIStudio.Wpf.TabablzControl" >
+    <Style TargetType="{x:Type dragablz:TabablzControl}" x:Key="AIStudio.Wpf.TabablzControl" BasedOn="{StaticResource AIStudio.Styles.TabablzControl}">
         <Setter Property="NewItemFactory" Value="{x:Static m:HeaderedItemViewModelFactory.Factory}" />
         <Setter Property="ItemsSource" Value="{Binding Items}" />
         <Setter Property="ClosingItemCallback" Value="{Binding ClosingTabItemHandler}" />
