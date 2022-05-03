@@ -17,7 +17,7 @@
             <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
                 <StackPanel>
                     <WrapPanel>
-                        <DataGrid Margin="2" ItemsSource="{Binding DataList}" CanUserSortColumns="True" AutoGenerateColumns="False" Style="{DynamicResource AIStudio.Styles.DataGrid}">             
+                        <DataGrid Margin="2" ItemsSource="{Binding DataList}" CanUserSortColumns="True" AutoGenerateColumns="False" Style="{DynamicResource AIStudio.Styles.DataGrid}">
                             <i:Interaction.Behaviors>
                                 <ac:SelectAllBahavior InitialState="False"/>
                             </i:Interaction.Behaviors>
@@ -27,7 +27,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <DataGrid Margin="2" ItemsSource="{Binding DataList0}" CanUserSortColumns="True" AutoGenerateColumns="False" Style="{DynamicResource AIStudio.Styles.DataGrid}">                      
+                        <DataGrid Margin="2" ItemsSource="{Binding DataList0}" CanUserSortColumns="True" AutoGenerateColumns="False" Style="{DynamicResource AIStudio.Styles.DataGrid}">
                             <i:Interaction.Behaviors>
                                 <ac:SelectAllBahavior InitialState="False"/>
                             </i:Interaction.Behaviors>
@@ -47,27 +47,31 @@
                             </DataGrid.Columns>
                         </ac:ExtendedDataGrid>
 
-                        <ac:DataGridExt Margin="2" ItemsSource="{Binding DataList0}" IsShowSaveMenu="True" IsShowColumnConfigMenu="True"  CanUserSortColumns="True" AutoGenerateColumns="False">
-                            <i:Interaction.Behaviors>
-                                <ac:SelectAllBahavior InitialState="False"/>
-                            </i:Interaction.Behaviors>
-                            <DataGrid.Columns>
-                                <ac:DataGridTemplateColumnExt Header="编号" CanUserSort="True" SortMemberPath="Index" HeaderStyle="{DynamicResource AIStudio.Styles.DataGridColumnHeaderExt}">
-                                    <ac:DataGridTemplateColumnExt.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Index}"/>
-                                        </DataTemplate>
-                                    </ac:DataGridTemplateColumnExt.CellTemplate>
-                                </ac:DataGridTemplateColumnExt>
-                                <ac:DataGridTemplateColumnExt Header="姓名" CanUserSort="True" SortMemberPath="Name" HeaderStyle="{DynamicResource AIStudio.Styles.DataGridColumnHeaderExt}">
-                                    <ac:DataGridTemplateColumnExt.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Name}"/>
-                                        </DataTemplate>
-                                    </ac:DataGridTemplateColumnExt.CellTemplate>
-                                </ac:DataGridTemplateColumnExt>
-                            </DataGrid.Columns>
-                        </ac:DataGridExt>
+                        <ac:DGFilterPanelContainer ButtonStyle="{DynamicResource AIStudio.Styles.Button.Window}">
+                            <ac:DGFilterPanelContainer.DataGridObject>
+                                <ac:DataGridExt Margin="2" ItemsSource="{Binding DataList0}" IsShowSaveMenu="True" IsShowColumnConfigMenu="True"  CanUserSortColumns="True" AutoGenerateColumns="False">
+                                    <i:Interaction.Behaviors>
+                                        <ac:SelectAllBahavior InitialState="False"/>
+                                    </i:Interaction.Behaviors>
+                                    <DataGrid.Columns>
+                                        <ac:DataGridTemplateColumnExt Header="编号" CanUserSort="True" SortMemberPath="Index" HeaderStyle="{DynamicResource AIStudio.Styles.DataGridColumnHeaderExt}">
+                                            <ac:DataGridTemplateColumnExt.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Index}"/>
+                                                </DataTemplate>
+                                            </ac:DataGridTemplateColumnExt.CellTemplate>
+                                        </ac:DataGridTemplateColumnExt>
+                                        <ac:DataGridTemplateColumnExt Header="姓名" CanUserSort="True" SortMemberPath="Name" HeaderStyle="{DynamicResource AIStudio.Styles.DataGridColumnHeaderExt}">
+                                            <ac:DataGridTemplateColumnExt.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </DataTemplate>
+                                            </ac:DataGridTemplateColumnExt.CellTemplate>
+                                        </ac:DataGridTemplateColumnExt>
+                                    </DataGrid.Columns>
+                                </ac:DataGridExt>
+                            </ac:DGFilterPanelContainer.DataGridObject>
+                        </ac:DGFilterPanelContainer>
 
                         <ac:TreeDataGrid Margin="2" ItemsSource="{Binding DataList1}" CanUserSortColumns="True" AutoGenerateColumns="False" >
                             <DataGrid.Columns>

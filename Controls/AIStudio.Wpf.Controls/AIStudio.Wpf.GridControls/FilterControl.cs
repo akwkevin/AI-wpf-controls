@@ -75,7 +75,7 @@ namespace AIStudio.Wpf.GridControls
         /// Parent Dependency Property
         /// </summary>
         public static readonly DependencyProperty ParentCollectionProperty =
-            DependencyProperty.Register("ParentCollection", typeof(IEnumerable), typeof(FilterControl),
+            DependencyProperty.Register(nameof(ParentCollection), typeof(IEnumerable), typeof(FilterControl),
                 new FrameworkPropertyMetadata((object)null,
                     new PropertyChangedCallback(OnParentCollectionChanged)));
 
@@ -127,7 +127,7 @@ namespace AIStudio.Wpf.GridControls
         /// Key Dependency Property
         /// </summary>
         public static readonly DependencyProperty KeyProperty =
-            DependencyProperty.Register("Key", typeof(string), typeof(FilterControl),
+            DependencyProperty.Register(nameof(Key), typeof(string), typeof(FilterControl),
                 new FrameworkPropertyMetadata((string)null,
                     new PropertyChangedCallback(OnKeyChanged)));
         /// <summary>
@@ -177,7 +177,7 @@ namespace AIStudio.Wpf.GridControls
         /// FilterInitializersManager Dependency Property
         /// </summary>
         public static readonly DependencyProperty FilterInitializersManagerProperty =
-            DependencyProperty.Register("FilterInitializersManager", typeof(FilterInitializersManager), typeof(FilterControl),
+            DependencyProperty.Register(nameof(FilterInitializersManager), typeof(FilterInitializersManager), typeof(FilterControl),
                 new FrameworkPropertyMetadata((FilterInitializersManager)null,
                     new PropertyChangedCallback(OnFilterInitializersManagerChanged)));
         /// <summary>
@@ -227,7 +227,7 @@ namespace AIStudio.Wpf.GridControls
         /// Model Read-Only Dependency Property
         /// </summary>
         private static readonly DependencyPropertyKey ModelPropertyKey
-            = DependencyProperty.RegisterReadOnly("Model", typeof(FilterControlVm), typeof(FilterControl),
+            = DependencyProperty.RegisterReadOnly(nameof(Model), typeof(FilterControlVm), typeof(FilterControl),
                 new FrameworkPropertyMetadata((FilterControlVm)null,
                     new PropertyChangedCallback(OnModelChanged)));
 

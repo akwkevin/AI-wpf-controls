@@ -8,8 +8,14 @@ using System.Windows.Input;
 
 namespace AIStudio.Wpf.Controls
 {
+    [TemplatePart(Name = PART_ContentPresenter, Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = PART_TreeView, Type = typeof(ExtendedTreeView))]
+    [TemplatePart(Name = PART_EditableTextBox, Type = typeof(TextBox))]    
     public class TreeComboBox : ComboBox
     {
+        private const string PART_ContentPresenter = "PART_ContentPresenter";
+        private const string PART_TreeView = "PART_TreeView";
+        private const string PART_EditableTextBox = "PART_EditableTextBox";
         private ExtendedTreeView _treeView;
         private ContentPresenter _contentPresenter;
         /// <summary>
@@ -31,12 +37,12 @@ namespace AIStudio.Wpf.Controls
         {
             base.OnApplyTemplate();
 
-            _treeView = (ExtendedTreeView)this.GetTemplateChild("PART_TreeView");
-            popupTextBox = (TextBox)this.GetTemplateChild("PART_EditableTextBox");
+            _treeView = this.GetTemplateChild(PART_TreeView) as ExtendedTreeView;
+            popupTextBox = this.GetTemplateChild(PART_EditableTextBox) as TextBox;
             _treeView.OnHierarchyMouseUp += OnTreeViewHierarchyMouseUp;
             _treeView.AddHandler(System.Windows.Controls.TreeViewItem.SelectedEvent, new System.Windows.RoutedEventHandler(treeview_Selected));
 
-            _contentPresenter = (ContentPresenter)this.GetTemplateChild("ContentPresenter");
+            _contentPresenter = this.GetTemplateChild(PART_ContentPresenter) as ContentPresenter;
 
             this.SetSelectedItemToHeader();
         }
@@ -87,7 +93,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly new DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable<IBaseTreeItemViewModel>), typeof(TreeComboBox), new PropertyMetadata(null, new PropertyChangedCallback(OnItemsSourceChanged)));
+            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable<IBaseTreeItemViewModel>), typeof(TreeComboBox), new PropertyMetadata(null, new PropertyChangedCallback(OnItemsSourceChanged)));
 
         private static void OnItemsSourceChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -110,7 +116,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public new static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(TreeComboBox), new PropertyMetadata(null, new PropertyChangedCallback(OnSelectedItemChanged)));
+            DependencyProperty.Register(nameof(SelectedItem), typeof(object), typeof(TreeComboBox), new PropertyMetadata(null, new PropertyChangedCallback(OnSelectedItemChanged)));
 
         private static void OnSelectedItemChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {

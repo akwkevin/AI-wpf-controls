@@ -45,7 +45,7 @@ namespace AIStudio.Wpf.GridControls.View
         /// Model Dependency Property
         /// </summary>
         public static readonly DependencyProperty ModelProperty =
-            DependencyProperty.Register("Model", typeof(T), typeof(FilterViewBase<T>),
+            DependencyProperty.Register(nameof(Model), typeof(T), typeof(FilterViewBase<T>),
                 new FrameworkPropertyMetadata(default(T),
                     new PropertyChangedCallback(OnModelChanged)));
 

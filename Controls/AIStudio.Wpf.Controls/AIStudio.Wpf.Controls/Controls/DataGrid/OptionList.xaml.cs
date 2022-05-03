@@ -118,6 +118,16 @@ namespace AIStudio.Wpf.Controls
             }
 
         }
+
+        public void ResetOptionList()
+        {
+            for (int i = 0; i < OptionOrdtS.Count; i++)
+            {
+                if (IsCheck.HasValue)
+                    OptionOrdtS[i].Host = true;
+            }
+        }
+
         private void OptionList_IsCheckChanged()
         {
             for (int i = 0; i < OptionOrdtS.Count; i++)

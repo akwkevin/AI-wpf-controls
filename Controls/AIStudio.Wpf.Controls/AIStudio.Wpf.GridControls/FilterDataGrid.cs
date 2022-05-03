@@ -70,7 +70,7 @@ namespace AIStudio.Wpf.GridControls
             }
         }
 
-        public static readonly DependencyProperty IsAnimatedProperty = DependencyProperty.Register("IsAnimated", typeof(bool), typeof(FilterDataGrid), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsAnimatedProperty = DependencyProperty.Register(nameof(IsAnimated), typeof(bool), typeof(FilterDataGrid), new PropertyMetadata(false));
 
         public bool IsAnimated
         {

@@ -18,7 +18,10 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// 是否从已经过滤过的数据源进行过滤
         /// </summary>
-        bool FromFilteredSource { get; set; }
+        bool FromFilteredSource
+        {
+            get; set;
+        }
     }
 
     public class DGFilterPanelContainer : Grid
@@ -68,64 +71,85 @@ namespace AIStudio.Wpf.Controls
 
         public DataGrid DataGridObject
         {
-            get { return (DataGrid)GetValue(DataGridObjectProperty); }
-            set { SetValue(DataGridObjectProperty, value); }
+            get
+            {
+                return (DataGrid)GetValue(DataGridObjectProperty);
+            }
+            set
+            {
+                SetValue(DataGridObjectProperty, value);
+            }
         }
 
         public static readonly DependencyProperty DataGridObjectProperty =
-            DependencyProperty.Register("DataGridObject", typeof(DataGrid), typeof(DGFilterPanelContainer), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(DataGridObject), typeof(DataGrid), typeof(DGFilterPanelContainer), new PropertyMetadata(null));
 
         private static void FilterPanelVisibilityCallBack(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as DGFilterPanelContainer).scrollViewerButtonPanel.Visibility = (Visibility)e.NewValue;
         }
 
-
-
         public Style BorderStyle
         {
-            get { return (Style)GetValue(BorderStyleProperty); }
-            set { SetValue(BorderStyleProperty, value); }
+            get
+            {
+                return (Style)GetValue(BorderStyleProperty);
+            }
+            set
+            {
+                SetValue(BorderStyleProperty, value);
+            }
         }
 
         public static readonly DependencyProperty BorderStyleProperty =
-            DependencyProperty.Register("BorderStyle", typeof(Style), typeof(DGFilterPanelContainer), new PropertyMetadata(null));
-
-
+            DependencyProperty.Register(nameof(BorderStyle), typeof(Style), typeof(DGFilterPanelContainer), new PropertyMetadata(null));
 
         public Style TextStyle
         {
-            get { return (Style)GetValue(TextStyleProperty); }
-            set { SetValue(TextStyleProperty, value); }
+            get
+            {
+                return (Style)GetValue(TextStyleProperty);
+            }
+            set
+            {
+                SetValue(TextStyleProperty, value);
+            }
         }
 
         public static readonly DependencyProperty TextStyleProperty =
-            DependencyProperty.Register("TextStyle", typeof(Style), typeof(DGFilterPanelContainer), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(TextStyle), typeof(Style), typeof(DGFilterPanelContainer), new PropertyMetadata(null));
 
 
-
-
-        public Style ButtobStyle
+        public Style ButtonStyle
         {
-            get { return (Style)GetValue(ButtobStyleProperty); }
-            set { SetValue(ButtobStyleProperty, value); }
+            get
+            {
+                return (Style)GetValue(ButtonStyleProperty);
+            }
+            set
+            {
+                SetValue(ButtonStyleProperty, value);
+            }
         }
 
-        public static readonly DependencyProperty ButtobStyleProperty =
-            DependencyProperty.Register("ButtobStyle", typeof(Style), typeof(DGFilterPanelContainer), new PropertyMetadata(null));
-
-
+        public static readonly DependencyProperty ButtonStyleProperty =
+            DependencyProperty.Register(nameof(ButtonStyle), typeof(Style), typeof(DGFilterPanelContainer), new PropertyMetadata(null));
 
 
         public DGFilterPanelVisibility FilterPanelVisibility
         {
-            get { return (DGFilterPanelVisibility)GetValue(FilterPanelVisibilityProperty); }
-            set { SetValue(FilterPanelVisibilityProperty, value); }
+            get
+            {
+                return (DGFilterPanelVisibility)GetValue(FilterPanelVisibilityProperty);
+            }
+            set
+            {
+                SetValue(FilterPanelVisibilityProperty, value);
+            }
         }
 
         public static readonly DependencyProperty FilterPanelVisibilityProperty =
-            DependencyProperty.Register("FilterPanelVisibility", typeof(DGFilterPanelVisibility), typeof(DGFilterPanelContainer), new PropertyMetadata(DGFilterPanelVisibility.Auto));
-
+            DependencyProperty.Register(nameof(FilterPanelVisibility), typeof(DGFilterPanelVisibility), typeof(DGFilterPanelContainer), new PropertyMetadata(DGFilterPanelVisibility.Auto));
 
 
         private void DGFilterPanelContainer_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -174,12 +198,12 @@ namespace AIStudio.Wpf.Controls
         private void FilterCol_FilterChanged(IFilteringSupportColumn obj, string status)
         {
             if (obj == null) return;
-            var describes = obj.GetFilteredDescribe();     
+            var describes = obj.GetFilteredDescribe();
 
             if (describes == null || describes.Length == 0 || status == "ColorAll_State")
             {
                 this.RemoveFilterTitle(obj);
-                this.ColFilterEleInpanel.Remove(obj);               
+                this.ColFilterEleInpanel.Remove(obj);
             }
             else
             {
@@ -230,7 +254,7 @@ namespace AIStudio.Wpf.Controls
             if (this.BorderStyle != null)
                 border.Style = this.BorderStyle;
 
-            var grid = new Grid() { Background = Brushes.Transparent };
+            var grid = new StackPanel() { Background = Brushes.Transparent, Orientation = Orientation.Horizontal };
             border.Child = grid;
 
             var textTitle = new TextBlock()
@@ -238,7 +262,6 @@ namespace AIStudio.Wpf.Controls
                 Text = string.Format("{0} [{1}]", column.GetFilterTitle(), string.Join("; ", column.GetFilteredDescribe())),
                 VerticalAlignment = VerticalAlignment.Center,
                 TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
             };
 
             if (this.TextStyle != null)
@@ -250,14 +273,15 @@ namespace AIStudio.Wpf.Controls
             var buttonRemoveFilter = new Button()
             {
                 Visibility = Visibility.Collapsed,
-                HorizontalAlignment = HorizontalAlignment.Right,
-                VerticalAlignment = VerticalAlignment.Top,
+                VerticalAlignment = VerticalAlignment.Center,
                 Content = "×",
                 ToolTip = "取消筛选",
-                Tag = border
+                Tag = border,
+                Padding = new Thickness(0),
+                MinHeight= 0,
             };
-            if (this.ButtobStyle != null)
-                buttonRemoveFilter.Style = this.ButtobStyle;
+            if (this.ButtonStyle != null)
+                buttonRemoveFilter.Style = this.ButtonStyle;
             buttonRemoveFilter.Click += this.ButtonRemoveFilter_Click;
 
             grid.Children.Add(buttonRemoveFilter);
@@ -283,7 +307,7 @@ namespace AIStudio.Wpf.Controls
         private void Border_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var border = sender as Border;
-            var btns = (border.Child as Grid).Children.OfType<Button>();
+            var btns = (border.Child as Panel).Children.OfType<Button>();
             if (btns != null)
             {
                 foreach (var btn in btns)
@@ -296,7 +320,7 @@ namespace AIStudio.Wpf.Controls
         private void Border_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var border = sender as Border;
-            var btns = (border.Child as Grid).Children.OfType<Button>();
+            var btns = (border.Child as Panel).Children.OfType<Button>();
             if (btns != null)
             {
                 foreach (var btn in btns)

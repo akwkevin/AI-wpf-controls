@@ -68,6 +68,8 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/ComboBox/MultiComboBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/ComboBox/NumberBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DataGrid/ExtendedDataGrid.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DataGrid/DataGridExt.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DataGrid/OptionList.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DateTime/Range/ACalendar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DateTime/Range/ADateTimePicker.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DateTime/Range/RangeDatePicker.xaml"/>
@@ -134,10 +136,10 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Tree/TreeDataGrid.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Tree/TreeSelect.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/UploadFile/UploadFile.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Verify/CodeVerify.MaterialDesgin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Verify/CodeVerify.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Verify/DragVerify.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Verify/SliderVerify.MaterialDesgin.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Verify/TextClickVerify.MaterialDesgin.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Verify/SliderVerify.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Verify/TextClickVerify.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/UserControl/AIStudioUserControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/BaseDialog/BaseDialog.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/Flyout/Flyout.xaml"/>

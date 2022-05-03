@@ -57,7 +57,7 @@ namespace AIStudio.Wpf.Controls
 
 
         public static readonly DependencyProperty DefaultFillBrushProperty =
-            DependencyProperty.Register("DefaultFillBrush", typeof(Brush), typeof(DataGridTemplateColumnExt), new PropertyMetadata(defaultBorderBrush));
+            DependencyProperty.Register(nameof(DefaultFillBrush), typeof(Brush), typeof(DataGridTemplateColumnExt), new PropertyMetadata(defaultBorderBrush));
 
         /// <summary>
         /// 按钮是否显示
@@ -69,7 +69,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty IsVisbileProperty =
-            DependencyProperty.Register("btnVisbile", typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata("1"));
+            DependencyProperty.Register(nameof(btnVisbile), typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata("1"));
 
 
         public bool IsVisbiles
@@ -79,7 +79,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty IsVisbilesProperty =
-            DependencyProperty.Register("IsVisbiles", typeof(bool), typeof(DataGridTemplateColumnExt), new PropertyMetadata(true));
+            DependencyProperty.Register(nameof(IsVisbiles), typeof(bool), typeof(DataGridTemplateColumnExt), new PropertyMetadata(true));
 
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty MergeRowsProperty =
-            DependencyProperty.Register("MergeRows", typeof(int), typeof(DataGridTemplateColumnExt), new PropertyMetadata(0));
+            DependencyProperty.Register(nameof(MergeRows), typeof(int), typeof(DataGridTemplateColumnExt), new PropertyMetadata(0));
 
         /// <summary>
         /// 存储多列的名称(^隔开)
@@ -104,7 +104,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty MultiColumnsnameProperty =
-            DependencyProperty.Register("MultiColumnsName", typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata(""));
+            DependencyProperty.Register(nameof(MultiColumnsName), typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata(""));
 
         /// <summary>
         /// 存储多列绑定的值(^隔开)
@@ -116,7 +116,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty MultiColumnsValueProperty =
-            DependencyProperty.Register("MultiColumnsValue", typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata(""));
+            DependencyProperty.Register(nameof(MultiColumnsValue), typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata(""));
 
         /// <summary>
         /// 存储多列定的格式化方式(^隔开)
@@ -128,7 +128,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty MultiColumnsStrFromProperty =
-            DependencyProperty.Register("MultiColumnsStrFrom", typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata(""));
+            DependencyProperty.Register(nameof(MultiColumnsStrFrom), typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata(""));
 
 
 
@@ -142,7 +142,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty StrFormatProperty =
-            DependencyProperty.Register("StrFormat", typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata(""));
+            DependencyProperty.Register(nameof(StrFormat), typeof(string), typeof(DataGridTemplateColumnExt), new PropertyMetadata(""));
 
 
         private void ColCmdExeAction(object obj)
@@ -427,13 +427,6 @@ namespace AIStudio.Wpf.Controls
                 view.Refresh();
             dataGridExt.CalculateSum();
 
-            //数据源改变后，重置条件
-            //ClearFilter();
-
-            if (FilterChanged != null)
-            {
-                FilterChanged(this, "ColorAll_State");
-            }
             dataGridExt.ItemsChanged += DataGridExt_ItemsChanged;
         }
 
@@ -446,10 +439,10 @@ namespace AIStudio.Wpf.Controls
 
             if (view != null)
             {
-                if (view.Filter == null || view.Filter.GetInvocationList()[0].Method.Name != "BankDataGridTemplateColumn_CloumnFilter")
+                if (view.Filter == null)
                 {
                     outerFilter = view.Filter;
-                    view.Filter = BankDataGridTemplateColumn_CloumnFilter;
+                    view.Filter = DataGridTemplateColumn_CloumnFilter;
                 }
 
                 hasNoFilter = false;
@@ -467,14 +460,14 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty FilterActionProperty =
-          DependencyProperty.Register("FilterAction", typeof(Action<IFilteringSupportColumn>), typeof(DataGridTemplateColumnExt));
+          DependencyProperty.Register(nameof(FilterAction), typeof(Action<IFilteringSupportColumn>), typeof(DataGridTemplateColumnExt));
 
         /// <summary>
         /// /设置列的过滤
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        private bool BankDataGridTemplateColumn_CloumnFilter(object obj)
+        private bool DataGridTemplateColumn_CloumnFilter(object obj)
         {
             if (outerFilter != null && !outerFilter(obj)) return false;
             foreach (var item in this.DataGridOwner.Columns)
@@ -518,9 +511,12 @@ namespace AIStudio.Wpf.Controls
             }
             if (Option != null)
             {
-                Option.IsCheck = true;
                 hasNoFilter = true;
+                Option.ResetOptionList();              
                 Option.SaveAction();
+                var colHeader = button.TemplatedParent as DataGridColumnHeader;
+                VisualStateManager.GoToState(colHeader, "ColorNotAll_State", true);
+                btnVisbile = "1";
 
                 var view = CollectionViewSource.GetDefaultView(this.DataGridOwner.ItemsSource);
                 if (view != null)

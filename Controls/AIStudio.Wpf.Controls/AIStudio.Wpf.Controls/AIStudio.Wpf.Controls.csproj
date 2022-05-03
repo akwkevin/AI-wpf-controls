@@ -334,6 +334,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Controls\DataGrid\DataGridExt.MaterialDesign.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Controls\DataGrid\OptionList.MaterialDesign.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Controls\Drawer\Drawer.MaterialDesign.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
