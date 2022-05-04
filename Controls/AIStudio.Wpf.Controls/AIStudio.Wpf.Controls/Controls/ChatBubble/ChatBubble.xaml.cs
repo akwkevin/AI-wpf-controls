@@ -19,7 +19,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty RoleProperty = DependencyProperty.Register(
-            "Role", typeof(string), typeof(ChatBubble), new PropertyMetadata(default(string)));
+            nameof(Role), typeof(string), typeof(ChatBubble), new PropertyMetadata(default(string)));
 
         public string Role
         {
@@ -28,7 +28,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
-            "Type", typeof(int), typeof(ChatBubble), new PropertyMetadata(1));
+            nameof(Type), typeof(int), typeof(ChatBubble), new PropertyMetadata(1));
 
         public int Type
         {
@@ -37,7 +37,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty AvatarProperty = DependencyProperty.Register(
-           "Avatar", typeof(BitmapImage), typeof(ChatBubble), new PropertyMetadata(null));
+           nameof(Avatar), typeof(BitmapImage), typeof(ChatBubble), new PropertyMetadata(null));
 
         public BitmapImage Avatar
         {
@@ -46,7 +46,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty IsReadProperty = DependencyProperty.Register(
-            "IsRead", typeof(bool), typeof(ChatBubble), new PropertyMetadata(false));
+            nameof(IsRead), typeof(bool), typeof(ChatBubble), new PropertyMetadata(false));
 
         public bool IsRead
         {
@@ -55,7 +55,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty ShowTimeProperty = DependencyProperty.Register(
-          "ShowTime", typeof(bool), typeof(ChatBubble), new PropertyMetadata(true));
+          nameof(ShowTime), typeof(bool), typeof(ChatBubble), new PropertyMetadata(true));
 
         public bool ShowTime
         {
@@ -64,7 +64,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty CreateTimeProperty = DependencyProperty.Register(
-         "CreateTime", typeof(DateTime), typeof(ChatBubble), new PropertyMetadata(DateTime.Now));
+         nameof(CreateTime), typeof(DateTime), typeof(ChatBubble), new PropertyMetadata(DateTime.Now));
 
         public DateTime CreateTime
         {
@@ -145,7 +145,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register(
-            "IsSelected", typeof(bool), typeof(ChatBubble), new PropertyMetadata(false));
+            nameof(IsSelected), typeof(bool), typeof(ChatBubble), new PropertyMetadata(false));
 
         public bool IsSelected
         {
@@ -154,7 +154,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty SelfManageProperty = DependencyProperty.Register(
-            "SelfManage", typeof(bool), typeof(ChatBubble), new PropertyMetadata(false));
+            nameof(SelfManage), typeof(bool), typeof(ChatBubble), new PropertyMetadata(false));
 
         public bool SelfManage
         {
@@ -163,7 +163,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty CanDeselectProperty = DependencyProperty.Register(
-            "CanDeselect", typeof(bool), typeof(ChatBubble), new PropertyMetadata(false));
+            nameof(CanDeselect), typeof(bool), typeof(ChatBubble), new PropertyMetadata(false));
 
         public bool CanDeselect
         {
@@ -172,7 +172,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly RoutedEvent SelectedEvent =
-            EventManager.RegisterRoutedEvent("Selected", RoutingStrategy.Bubble,
+            EventManager.RegisterRoutedEvent(nameof(Selected), RoutingStrategy.Bubble,
                 typeof(RoutedEventHandler), typeof(ChatBubble));
 
         public event RoutedEventHandler Selected
@@ -182,7 +182,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly RoutedEvent DeselectedEvent =
-            EventManager.RegisterRoutedEvent("Deselected", RoutingStrategy.Bubble,
+            EventManager.RegisterRoutedEvent(nameof(Deselected), RoutingStrategy.Bubble,
                 typeof(RoutedEventHandler), typeof(ChatBubble));
 
         public event RoutedEventHandler Deselected

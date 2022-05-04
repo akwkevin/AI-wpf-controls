@@ -93,16 +93,16 @@ namespace AIStudio.Wpf.Controls
                 {
                     if (ToggleFullScreen)
                     {
-                        this.MaxHeight = SystemParameters.PrimaryScreenHeight + 14;//全屏
+                        this.MaxHeight = SystemParameters.PrimaryScreenHeight + 13;//全屏
                     }
                     else
                     {
-                        this.MaxHeight = SystemParameters.WorkArea.Height + 14;
+                        this.MaxHeight = SystemParameters.WorkArea.Height + 13;
                     }
                 }
                 else if (screen != null)
                 {
-                    this.MaxHeight = screen.WorkingArea.Height + 14;
+                    this.MaxHeight = screen.WorkingArea.Height + 13;
                 }
             }
         }

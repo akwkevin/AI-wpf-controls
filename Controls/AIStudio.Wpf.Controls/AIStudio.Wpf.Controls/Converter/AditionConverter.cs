@@ -11,7 +11,7 @@ namespace AIStudio.Wpf.Controls.Converter
             if ((value != null) && (parameter != null))
             {
                 var firstValue = (double)value;
-                var secondValue = double.Parse(parameter as string);
+                var secondValue = double.Parse(parameter?.ToString());
 
                 return firstValue + secondValue;
             }

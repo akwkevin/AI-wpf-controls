@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
+using AIStudio.Wpf.GridControls.Demo.Models;
+using Newtonsoft.Json;
 
 namespace AIStudio.Wpf.GridControls.Demo.ViewModels
 {
@@ -11,97 +13,55 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             get; set;
         }
 
+
+        public ObservableCollection<DataGridColumnCustom> DataGridColumns
+        {
+            get; private set;
+        } = new ObservableCollection<DataGridColumnCustom>();
+
         public MainViewModel()
         {
             List<Device> ds = new List<Device>();
+            Random rd = new Random();
             for (int i = 0; i < 1000; i++)
             {
                 var d1 = new Device()
                 {
                     Name = "MX33333333333333333333333331_" + i,
-                    Manufacturer = "Meizu--" + i,
-                    Mode = "M303",
-                    OSType = EnumOSType.Android,
-                    State = EnumDeviceState.Online,
-                    Version = "4,2,1",
-                    SerialNumber = i,
-                    IsRoot = true,
+                    Mode1 = "M303" + i,
+                    Mode2 = "M303" + i,
+                    Value1 = i,
+                    Value2 = i,
+                    Value3 = i,
+                    Value4 = i + rd.NextDouble(),
+                    Value5 = i + rd.NextDouble(),
+                    Value6 = i,
+                    Value7 = i,
+                    Value8 = i,
+                    Value9 = i,
+                    Value10 = i,
                     DateTime = DateTime.Now.AddMinutes(0 - i),
                 };
                 ds.Add(d1);
             }
 
             Datas = ds;
-        }
-    }
 
-    public class Device
-    {
-        public string Name
-        {
-            get; set;
-        }
-        public string Mode
-        {
-            get; set;
-        }
-        public string Manufacturer
-        {
-            get; set;
-        }
-        public int SerialNumber
-        {
-            get; set;
-        }
-        public EnumOSType OSType
-        {
-            get; set;
-        }
-        public EnumDeviceState State
-        {
-            get; set;
-        }
-        public string Version
-        {
-            get; set;
-        }
-        public bool IsRoot
-        {
-            get; set;
-        }
-        public string IsRootDesc
-        {
-            get
+            var properties = typeof(Device).GetProperties();
+            foreach (System.Reflection.PropertyInfo info in properties)
             {
-                return this.IsRoot ? "已Root" : "未Root";
+                DataGridColumnCustom dataGridColumnCustom = ColumnHeaderAttribute.GetDataGridColumnCustom(info);
+                if (dataGridColumnCustom != null)
+                {
+                    DataGridColumns.Add(dataGridColumnCustom);
+                }                
             }
-        }
 
-        public DateTime DateTime
-        {
-            get; set;
-        }
-        public override string ToString()
-        {
-            return this.Name;
+            var str = JsonConvert.SerializeObject(DataGridColumns);
         }
     }
 
-    public enum EnumOSType
-    {
-        [Description("IOS")]
-        IOS = 1,
-        [Description("Android")]
-        Android = 2,
-    }
 
-    public enum EnumDeviceState
-    {
-        [Description("在线")]
-        Online = 1,
-        [Description("离线")]
-        Offline = 2,
-        [Description("正忙")]
-        Busy = 3,
-    }
+
+
 }

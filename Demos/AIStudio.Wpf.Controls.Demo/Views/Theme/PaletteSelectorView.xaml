@@ -210,7 +210,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </GroupBox>
-            <GroupBox Header="Accent主题">
+            <GroupBox Header="Accent主题" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
                 <ListBox ItemsSource="{Binding AccentSwatches, Mode=OneTime}" SelectedItem="{Binding SelectedAccent}" ItemContainerStyle="{StaticResource AIStudio.Style.ListBoxItem.Checked}" Style="{DynamicResource AIStudio.Styles.ListBox}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>

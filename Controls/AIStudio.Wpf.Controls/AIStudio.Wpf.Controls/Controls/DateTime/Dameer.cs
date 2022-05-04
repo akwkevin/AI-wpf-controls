@@ -141,7 +141,7 @@ namespace AIStudio.Wpf.Controls
 
         // Using a DependencyProperty as the backing store for TheDate.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(DateTime?), typeof(Dameer), new FrameworkPropertyMetadata(DateTime.Now, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(Dameer.OnValueChanged), new CoerceValueCallback(Dameer.CoerceValue), true, System.Windows.Data.UpdateSourceTrigger.PropertyChanged));
+            DependencyProperty.Register(nameof(Value), typeof(DateTime?), typeof(Dameer), new FrameworkPropertyMetadata(DateTime.Now, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(Dameer.OnValueChanged), new CoerceValueCallback(Dameer.CoerceValue), true, System.Windows.Data.UpdateSourceTrigger.PropertyChanged));
 
 
         static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

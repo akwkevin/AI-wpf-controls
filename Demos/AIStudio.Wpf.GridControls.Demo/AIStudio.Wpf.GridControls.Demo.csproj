@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MathParser.org-mXparser" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Controls\AIStudio.Wpf.Controls\AIStudio.Wpf.Controls\AIStudio.Wpf.Controls.csproj" />
     <ProjectReference Include="..\..\Controls\AIStudio.Wpf.Controls\AIStudio.Wpf.GridControls\AIStudio.Wpf.GridControls.csproj" />
   </ItemGroup>
 

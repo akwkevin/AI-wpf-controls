@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Data;
+using org.mariuszgromada.math.mxparser;
+
+namespace AIStudio.Wpf.GridControls.Demo.Converter
+{
+    public class ExpressionConverter : IValueConverter
+    {
+        public object Convert(object value, Type typeTarget, object param, System.Globalization.CultureInfo culture)
+        {
+            if (param is string str)
+            {
+                try
+                {
+                    var conditions = str.Split(new string[] { "——" }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var condition in conditions)
+                    {
+                        string[] datas = condition.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
+                        List<Argument> args = new List<Argument>();
+                        if (value is ValueType)
+                        {
+                            Argument x = new Argument($"p0", value?.ToString());
+                            args.Add(x);
+                        }
+                        else
+                        {
+                            var paras = datas[0].Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+                            for (int i = 0; i < paras.Length; i++)
+                            {
+                                Argument x = new Argument($"p{i}", value.GetType().GetProperty(paras[i]).GetValue(value).ToString());
+                                args.Add(x);
+                            }
+                        }
+                        Expression e = new Expression(datas[1], args.ToArray());
+                        var result = e.calculate();
+                        if (result > 0)
+                        {
+                            return datas[2];
+                        }
+                    }
+                }
+                catch { }
+            }
+            return System.Windows.DependencyProperty.UnsetValue;
+        }
+        public object ConvertBack(object value, Type typeTarget, object param, System.Globalization.CultureInfo culture)
+        {
+            return "";
+        }
+    }
+}
