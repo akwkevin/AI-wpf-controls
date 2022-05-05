@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using AIStudio.Wpf.GridControls.Demo.Models;
 
 namespace AIStudio.Wpf.GridControls.Demo
 {

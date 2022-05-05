@@ -58,6 +58,26 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
             get; set;
         }
 
+        public bool IsPin
+        {
+            get; set;
+        }
+
+        public bool IsRequired
+        {
+            get; set;
+        }
+
+        public bool IsReadOnly
+        {
+            get; set;
+        }
+
+        public ControlType ControlType
+        {
+            get; set;
+        } = ControlType.TextBox;
+
         public static DataGridColumnCustom GetDataGridColumnCustom(PropertyInfo property)
         {
             DataGridColumnCustom dataGridColumnCustom = new DataGridColumnCustom();

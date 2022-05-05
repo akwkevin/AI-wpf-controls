@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace AIStudio.Wpf.GridControls.Demo
+namespace AIStudio.Wpf.GridControls.Demo.Models
 {
     public class DataGridColumnCustom
     {
