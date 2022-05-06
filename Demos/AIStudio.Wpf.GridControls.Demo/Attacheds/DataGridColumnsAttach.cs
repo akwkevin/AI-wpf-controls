@@ -92,12 +92,14 @@ namespace AIStudio.Wpf.GridControls.Demo
 
             DataTemplate dt = new DataTemplate();
 
-            FrameworkElementFactory fef = new FrameworkElementFactory(typeof(Label));
+            FrameworkElementFactory fef = new FrameworkElementFactory(typeof(Grid));
+            FrameworkElementFactory textblock_fef = new FrameworkElementFactory(typeof(TextBlock));
+            fef.AppendChild(textblock_fef);
 
             Binding bind = new Binding(columnCustom.Binding);
-            fef.SetBinding(Label.ContentProperty, bind);
-            fef.SetValue(Label.VerticalContentAlignmentProperty, VerticalAlignment.Center);
-            fef.SetValue(Label.HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
+            textblock_fef.SetBinding(TextBlock.TextProperty, bind);
+            textblock_fef.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center);
+            textblock_fef.SetValue(TextBlock.HorizontalAlignmentProperty, columnCustom.HorizontalAlignment);
 
             if (!string.IsNullOrEmpty(columnCustom.StringFormat))
             {
@@ -107,21 +109,22 @@ namespace AIStudio.Wpf.GridControls.Demo
             {
                 bind.Converter = columnCustom.Converter;
                 bind.ConverterParameter = columnCustom.ConverterParameter;
-            }
-            //**************
+            }            
+
             if (!string.IsNullOrEmpty(columnCustom.ForegroundExpression))
             {
                 Binding bindColor = new Binding(columnCustom.ForegroundExpression.StartsWith(";") ? columnCustom.Binding : ".");
                 bindColor.Converter = new Demo.Converter.ExpressionConverter();
                 bindColor.ConverterParameter = columnCustom.ForegroundExpression;
-                fef.SetBinding(Label.ForegroundProperty, bindColor);
+                textblock_fef.SetBinding(TextBlock.ForegroundProperty, bindColor);
             }
+
             if (!string.IsNullOrEmpty(columnCustom.BackgroundExpression))
             {
                 Binding bindColor = new Binding(columnCustom.BackgroundExpression.StartsWith(";") ? columnCustom.Binding : ".");
                 bindColor.Converter = new Demo.Converter.ExpressionConverter();
                 bindColor.ConverterParameter = columnCustom.BackgroundExpression;
-                fef.SetBinding(Label.BackgroundProperty, bindColor);
+                fef.SetBinding(Grid.BackgroundProperty, bindColor);
             }
             dt.VisualTree = fef;
             column.CellTemplate = dt;

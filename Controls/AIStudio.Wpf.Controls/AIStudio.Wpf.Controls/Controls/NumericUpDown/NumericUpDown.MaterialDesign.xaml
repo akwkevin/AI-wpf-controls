@@ -10,7 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ValidationErrorTemplate.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="AIStudio.Styles.NumericUpDown" TargetType="{x:Type controls:NumericUpDownBase}">
+    <Style x:Key="AIStudio.Styles.NumericUpDown" TargetType="{x:Type controls:UpDownBase}">
         <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}"/>
         <Setter Property="BorderThickness" Value="1" />
@@ -30,7 +30,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource AIStudio.Styles.ValidationErrorTemplate}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:NumericUpDownBase}">
+                <ControlTemplate TargetType="{x:Type controls:UpDownBase}">
                     <controls:ButtonSpinner x:Name="PART_Spinner" 
                                             Background="{TemplateBinding Background}"
                                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -113,12 +113,12 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="AIStudio.Styles.NumericUpDown.Underline" BasedOn="{StaticResource AIStudio.Styles.NumericUpDown}" TargetType="{x:Type controls:NumericUpDownBase}">
+    <Style x:Key="AIStudio.Styles.NumericUpDown.Underline" BasedOn="{StaticResource AIStudio.Styles.NumericUpDown}" TargetType="{x:Type controls:UpDownBase}">
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="controls:ControlAttach.CornerRadius" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:NumericUpDownBase}">
+                <ControlTemplate TargetType="{x:Type controls:UpDownBase}">
                     <controls:ButtonSpinner x:Name="PART_Spinner" 
                                             Background="{TemplateBinding Background}"
                                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -171,5 +171,5 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource AIStudio.Styles.NumericUpDown}" TargetType="{x:Type controls:NumericUpDownBase}"/>
+    <Style BasedOn="{StaticResource AIStudio.Styles.NumericUpDown}" TargetType="{x:Type controls:UpDownBase}"/>
 </ResourceDictionary>

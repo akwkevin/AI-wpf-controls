@@ -78,6 +78,11 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
             get; set;
         } = ControlType.TextBox;
 
+        public HorizontalAlignment HorizontalAlignment
+        {
+            get; set;
+        }
+
         public static DataGridColumnCustom GetDataGridColumnCustom(PropertyInfo property)
         {
             DataGridColumnCustom dataGridColumnCustom = new DataGridColumnCustom();
@@ -101,11 +106,35 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
                 }
                 dataGridColumnCustom.ForegroundExpression = attribute.ForegroundExpression;
                 dataGridColumnCustom.BackgroundExpression = attribute.BackgroundExpression;
+                dataGridColumnCustom.HorizontalAlignment = attribute.HorizontalAlignment;
             }
             else
             {
                 dataGridColumnCustom.Header = property.Name;
             }
+
+            if (property.PropertyType == typeof(int) || property.PropertyType == typeof(long))
+            {
+                if (string.IsNullOrEmpty(dataGridColumnCustom.StringFormat))
+                {
+                    dataGridColumnCustom.StringFormat = "n0";
+                }
+            }
+            else if (property.PropertyType == typeof(double) || property.PropertyType == typeof(float))
+            {
+                if (string.IsNullOrEmpty(dataGridColumnCustom.StringFormat))
+                {
+                    dataGridColumnCustom.StringFormat = "f3";
+                }
+            }
+            else if (property.PropertyType == typeof(DateTime))
+            {
+                if (string.IsNullOrEmpty(dataGridColumnCustom.StringFormat))
+                {
+                    dataGridColumnCustom.StringFormat = "yyyy-MM-dd HH:mm:ss";
+                }
+            }
+
             return dataGridColumnCustom;
         }
 

@@ -100,7 +100,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
                 {
                     queryConditionItem.StringFormat = "n0";
                 }
-                queryConditionItem.ControlType = ControlType.NumericUpDown;
+                queryConditionItem.ControlType = ControlType.IntegerUpDown;
             }
             else if (property.PropertyType == typeof(double) || property.PropertyType == typeof(float))
             {
@@ -134,7 +134,6 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
                 item.Value = value.GetType().GetProperty(item.PropertyName).GetValue(value);
             }
         }
-
 
         public static void ListToObject<T>(object value, IEnumerable<T> items) where T : BaseControlItem
         {

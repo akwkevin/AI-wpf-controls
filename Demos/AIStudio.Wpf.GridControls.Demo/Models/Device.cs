@@ -9,7 +9,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
 {
     public class Device : BindableBase
     {
-        [ColumnHeader("名称", IsPin = true, IsReadOnly = true)]
+        [ColumnHeader("名称", IsReadOnly = true)]
         public string Name
         {
             get; set;
@@ -109,6 +109,39 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
 
         private DateTime _dateTime;
         [ColumnHeader("时间", StringFormat = "yyyy-MM-dd HH:mm:ss")]
+        public DateTime DateTime
+        {
+            get => _dateTime;
+            set => SetProperty(ref _dateTime, value);
+        }
+    }
+
+    public class Device_Query : BindableBase
+    {
+        [ColumnHeader("名称", IsPin = true)]
+        public string Name
+        {
+            get; set;
+        }
+
+        private string _model;
+        [ColumnHeader("模式1")]
+        public string Mode1
+        {
+            get => _model;
+            set => SetProperty(ref _model, value);
+        }
+
+        private string _mode2;
+        [ColumnHeader("模式2")]
+        public string Mode2
+        {
+            get => _mode2;
+            set => SetProperty(ref _mode2, value);
+        }      
+
+        private DateTime _dateTime;
+        [ColumnHeader("时间", StringFormat = "yyyy-MM-dd HH:mm:ss", IsPin = true)]
         public DateTime DateTime
         {
             get => _dateTime;

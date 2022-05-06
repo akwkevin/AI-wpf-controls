@@ -8,10 +8,9 @@ using System.Windows.Threading;
 
 namespace AIStudio.Wpf.Controls
 {
-    [TemplatePart(Name = PART_TextBox, Type = typeof(TextBox))]
-    [TemplatePart(Name = PART_Spinner, Type = typeof(Spinner))]
-    public abstract class UpDownBase<T> : Control
+    public abstract class UpDownBase : Control
     {
+        #region Properties
         #region AutoMoveFocus
 
         public bool AutoMoveFocus
@@ -27,7 +26,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty AutoMoveFocusProperty =
-            DependencyProperty.Register("AutoMoveFocus", typeof(bool), typeof(UpDownBase<T>), new UIPropertyMetadata(false));
+            DependencyProperty.Register("AutoMoveFocus", typeof(bool), typeof(UpDownBase), new UIPropertyMetadata(false));
 
         #endregion AutoMoveFocus
 
@@ -46,14 +45,14 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty AutoSelectBehaviorProperty =
-            DependencyProperty.Register("AutoSelectBehavior", typeof(AutoSelectBehavior), typeof(UpDownBase<T>),
+            DependencyProperty.Register("AutoSelectBehavior", typeof(AutoSelectBehavior), typeof(UpDownBase),
           new UIPropertyMetadata(AutoSelectBehavior.OnFocus));
 
-        #endregion AutoSelectBehavior PROPERTY
+        #endregion AutoSelectBehavior PROPERTY            
 
         /// <summary>Identifies the <see cref="UpDownButtonsWidth"/> dependency property.</summary>
         public static readonly DependencyProperty UpDownButtonsWidthProperty
-            = DependencyProperty.Register(nameof(UpDownButtonsWidth), typeof(double), typeof(UpDownBase<T>), new PropertyMetadata(20d));
+            = DependencyProperty.Register(nameof(UpDownButtonsWidth), typeof(double), typeof(UpDownBase), new PropertyMetadata(20d));
 
         /// <summary>
         /// Gets or sets the width of the up/down buttons.
@@ -65,11 +64,256 @@ namespace AIStudio.Wpf.Controls
             set => this.SetValue(UpDownButtonsWidthProperty, value);
         }
 
+        #region AllowTextInput
+
+        public static readonly DependencyProperty AllowTextInputProperty = DependencyProperty.Register("AllowTextInput", typeof(bool), typeof(UpDownBase), new UIPropertyMetadata(true, OnAllowTextInputChanged));
+        public bool AllowTextInput
+        {
+            get
+            {
+                return (bool)GetValue(AllowTextInputProperty);
+            }
+            set
+            {
+                SetValue(AllowTextInputProperty, value);
+            }
+        }
+
+        private static void OnAllowTextInputChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            UpDownBase inputBase = o as UpDownBase;
+            if (inputBase != null)
+                inputBase.OnAllowTextInputChanged((bool)e.OldValue, (bool)e.NewValue);
+        }
+
+        protected virtual void OnAllowTextInputChanged(bool oldValue, bool newValue)
+        {
+        }
+
+        #endregion //AllowTextInput
+
+        #region CultureInfo
+
+        public static readonly DependencyProperty CultureInfoProperty = DependencyProperty.Register("CultureInfo", typeof(CultureInfo), typeof(UpDownBase), new UIPropertyMetadata(CultureInfo.CurrentCulture, OnCultureInfoChanged));
+        public CultureInfo CultureInfo
+        {
+            get
+            {
+                return (CultureInfo)GetValue(CultureInfoProperty);
+            }
+            set
+            {
+                SetValue(CultureInfoProperty, value);
+            }
+        }
+
+        private static void OnCultureInfoChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            UpDownBase inputBase = o as UpDownBase;
+            if (inputBase != null)
+                inputBase.OnCultureInfoChanged((CultureInfo)e.OldValue, (CultureInfo)e.NewValue);
+        }
+
+        protected virtual void OnCultureInfoChanged(CultureInfo oldValue, CultureInfo newValue)
+        {
+
+        }
+
+        #endregion //CultureInfo
+
+        #region IsReadOnly
+
+        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(UpDownBase), new UIPropertyMetadata(false, OnReadOnlyChanged));
+        public bool IsReadOnly
+        {
+            get
+            {
+                return (bool)GetValue(IsReadOnlyProperty);
+            }
+            set
+            {
+                SetValue(IsReadOnlyProperty, value);
+            }
+        }
+
+        private static void OnReadOnlyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            UpDownBase inputBase = o as UpDownBase;
+            if (inputBase != null)
+                inputBase.OnReadOnlyChanged((bool)e.OldValue, (bool)e.NewValue);
+        }
+
+        protected virtual void OnReadOnlyChanged(bool oldValue, bool newValue)
+        {
+        }
+
+        #endregion //IsReadOnly
+
+        #region IsUndoEnabled
+
+        public static readonly DependencyProperty IsUndoEnabledProperty = DependencyProperty.Register("IsUndoEnabled", typeof(bool), typeof(UpDownBase), new UIPropertyMetadata(true, OnIsUndoEnabledChanged));
+        public bool IsUndoEnabled
+        {
+            get
+            {
+                return (bool)GetValue(IsUndoEnabledProperty);
+            }
+            set
+            {
+                SetValue(IsUndoEnabledProperty, value);
+            }
+        }
+
+        private static void OnIsUndoEnabledChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            UpDownBase inputBase = o as UpDownBase;
+            if (inputBase != null)
+                inputBase.OnIsUndoEnabledChanged((bool)e.OldValue, (bool)e.NewValue);
+        }
+
+        protected virtual void OnIsUndoEnabledChanged(bool oldValue, bool newValue)
+        {
+        }
+
+        #endregion //IsUndoEnabled
+
+        #region Text
+
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(UpDownBase), new FrameworkPropertyMetadata(default(String), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged, null, false, UpdateSourceTrigger.LostFocus));
+        public string Text
+        {
+            get
+            {
+                return (string)GetValue(TextProperty);
+            }
+            set
+            {
+                SetValue(TextProperty, value);
+            }
+        }
+
+        private static void OnTextChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            UpDownBase inputBase = o as UpDownBase;
+            if (inputBase != null)
+                inputBase.OnTextChanged((string)e.OldValue, (string)e.NewValue);
+        }
+
+        protected virtual void OnTextChanged(string oldValue, string newValue)
+        {
+
+        }
+
+        #endregion //Text
+
+        #region TextAlignment
+
+        public static readonly DependencyProperty TextAlignmentProperty = DependencyProperty.Register("TextAlignment", typeof(TextAlignment), typeof(UpDownBase), new UIPropertyMetadata(TextAlignment.Left));
+        public TextAlignment TextAlignment
+        {
+            get
+            {
+                return (TextAlignment)GetValue(TextAlignmentProperty);
+            }
+            set
+            {
+                SetValue(TextAlignmentProperty, value);
+            }
+        }
+
+
+        #endregion //TextAlignment
+
+        #region Watermark
+
+        public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(object), typeof(UpDownBase), new UIPropertyMetadata(null));
+        public object Watermark
+        {
+            get
+            {
+                return (object)GetValue(WatermarkProperty);
+            }
+            set
+            {
+                SetValue(WatermarkProperty, value);
+            }
+        }
+
+        #endregion //Watermark
+
+        #region WatermarkTemplate
+
+        public static readonly DependencyProperty WatermarkTemplateProperty = DependencyProperty.Register("WatermarkTemplate", typeof(DataTemplate), typeof(UpDownBase), new UIPropertyMetadata(null));
+        public DataTemplate WatermarkTemplate
+        {
+            get
+            {
+                return (DataTemplate)GetValue(WatermarkTemplateProperty);
+            }
+            set
+            {
+                SetValue(WatermarkTemplateProperty, value);
+            }
+        }
+
+        #endregion //WatermarkTemplate
+
+        #region AllowSpin
+
+        public static readonly DependencyProperty AllowSpinProperty = DependencyProperty.Register("AllowSpin", typeof(bool), typeof(UpDownBase), new UIPropertyMetadata(true));
+        public bool AllowSpin
+        {
+            get
+            {
+                return (bool)GetValue(AllowSpinProperty);
+            }
+            set
+            {
+                SetValue(AllowSpinProperty, value);
+            }
+        }
+
+        #endregion //AllowSpin
+
+        #region ButtonSpinnerLocation
+
+        public static readonly DependencyProperty ButtonSpinnerLocationProperty = DependencyProperty.Register(nameof(ButtonSpinnerLocation), typeof(Location), typeof(UpDownBase), new UIPropertyMetadata(Location.Right));
+        public Location ButtonSpinnerLocation
+        {
+            get
+            {
+                return (Location)GetValue(ButtonSpinnerLocationProperty);
+            }
+            set
+            {
+                SetValue(ButtonSpinnerLocationProperty, value);
+            }
+        }
+
+        #endregion //ButtonSpinnerLocation
+
+        #region ShowButtonSpinner
+
+        public static readonly DependencyProperty ShowButtonSpinnerProperty = DependencyProperty.Register("ShowButtonSpinner", typeof(bool), typeof(
+            UpDownBase), new UIPropertyMetadata(true));
+        public bool ShowButtonSpinner
+        {
+            get
+            {
+                return (bool)GetValue(ShowButtonSpinnerProperty);
+            }
+            set
+            {
+                SetValue(ShowButtonSpinnerProperty, value);
+            }
+        }
+
+        #endregion //ShowButtonSpinner
+
+        #region Delay
         /// <summary>Identifies the <see cref="Delay"/> dependency property.</summary>
         public static readonly DependencyProperty DelayProperty
-            = DependencyProperty.Register(nameof(Delay), typeof(int), typeof(UpDownBase<T>), new FrameworkPropertyMetadata(500));
-
-
+            = DependencyProperty.Register(nameof(Delay), typeof(int), typeof(UpDownBase), new FrameworkPropertyMetadata(500));
 
         /// <summary>
         /// Gets or sets the amount of time, in milliseconds, the ButtonSpinner waits while the up/down button is pressed
@@ -81,7 +325,14 @@ namespace AIStudio.Wpf.Controls
             get => (int)this.GetValue(DelayProperty);
             set => this.SetValue(DelayProperty, value);
         }
+        #endregion
+        #endregion //Properties
+    }
 
+    [TemplatePart(Name = PART_TextBox, Type = typeof(TextBox))]
+    [TemplatePart(Name = PART_Spinner, Type = typeof(Spinner))]
+    public abstract class UpDownBase<T> : UpDownBase
+    {
         #region FormatString
 
         public static readonly DependencyProperty FormatStringProperty = DependencyProperty.Register("FormatString", typeof(string), typeof(UpDownBase<T>), new UIPropertyMetadata(String.Empty, OnFormatStringChanged));
@@ -158,59 +409,11 @@ namespace AIStudio.Wpf.Controls
             return baseValue;
         }
 
-        #endregion
-
-        #region AllowTextInput
-
-        public static readonly DependencyProperty AllowTextInputProperty = DependencyProperty.Register("AllowTextInput", typeof(bool), typeof(UpDownBase<T>), new UIPropertyMetadata(true, OnAllowTextInputChanged));
-        public bool AllowTextInput
-        {
-            get
-            {
-                return (bool)GetValue(AllowTextInputProperty);
-            }
-            set
-            {
-                SetValue(AllowTextInputProperty, value);
-            }
-        }
-
-        private static void OnAllowTextInputChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            UpDownBase<T> inputBase = o as UpDownBase<T>;
-            if (inputBase != null)
-                inputBase.OnAllowTextInputChanged((bool)e.OldValue, (bool)e.NewValue);
-        }
-
-        protected virtual void OnAllowTextInputChanged(bool oldValue, bool newValue)
-        {
-        }
-
-        #endregion //AllowTextInput
+        #endregion       
 
         #region CultureInfo
 
-        public static readonly DependencyProperty CultureInfoProperty = DependencyProperty.Register("CultureInfo", typeof(CultureInfo), typeof(UpDownBase<T>), new UIPropertyMetadata(CultureInfo.CurrentCulture, OnCultureInfoChanged));
-        public CultureInfo CultureInfo
-        {
-            get
-            {
-                return (CultureInfo)GetValue(CultureInfoProperty);
-            }
-            set
-            {
-                SetValue(CultureInfoProperty, value);
-            }
-        }
-
-        private static void OnCultureInfoChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            UpDownBase<T> inputBase = o as UpDownBase<T>;
-            if (inputBase != null)
-                inputBase.OnCultureInfoChanged((CultureInfo)e.OldValue, (CultureInfo)e.NewValue);
-        }
-
-        protected virtual void OnCultureInfoChanged(CultureInfo oldValue, CultureInfo newValue)
+        protected override void OnCultureInfoChanged(CultureInfo oldValue, CultureInfo newValue)
         {
             if (IsInitialized)
             {
@@ -220,62 +423,13 @@ namespace AIStudio.Wpf.Controls
 
         #endregion //CultureInfo
 
-        #region IsReadOnly
-
-        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(UpDownBase<T>), new UIPropertyMetadata(false, OnReadOnlyChanged));
-        public bool IsReadOnly
-        {
-            get
-            {
-                return (bool)GetValue(IsReadOnlyProperty);
-            }
-            set
-            {
-                SetValue(IsReadOnlyProperty, value);
-            }
-        }
-
-        private static void OnReadOnlyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            UpDownBase<T> inputBase = o as UpDownBase<T>;
-            if (inputBase != null)
-                inputBase.OnReadOnlyChanged((bool)e.OldValue, (bool)e.NewValue);
-        }
-
-        protected virtual void OnReadOnlyChanged(bool oldValue, bool newValue)
+        #region IsReadOnly  
+        protected override void OnReadOnlyChanged(bool oldValue, bool newValue)
         {
             SetValidSpinDirection();
         }
 
-        #endregion //IsReadOnly
-
-        #region IsUndoEnabled
-
-        public static readonly DependencyProperty IsUndoEnabledProperty = DependencyProperty.Register("IsUndoEnabled", typeof(bool), typeof(UpDownBase<T>), new UIPropertyMetadata(true, OnIsUndoEnabledChanged));
-        public bool IsUndoEnabled
-        {
-            get
-            {
-                return (bool)GetValue(IsUndoEnabledProperty);
-            }
-            set
-            {
-                SetValue(IsUndoEnabledProperty, value);
-            }
-        }
-
-        private static void OnIsUndoEnabledChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            UpDownBase<T> inputBase = o as UpDownBase<T>;
-            if (inputBase != null)
-                inputBase.OnIsUndoEnabledChanged((bool)e.OldValue, (bool)e.NewValue);
-        }
-
-        protected virtual void OnIsUndoEnabledChanged(bool oldValue, bool newValue)
-        {
-        }
-
-        #endregion //IsUndoEnabled
+        #endregion //IsReadOnly       
 
         #region Text
 
@@ -373,40 +527,6 @@ namespace AIStudio.Wpf.Controls
             get;
             private set;
         }
-
-        #region AllowSpin
-
-        public static readonly DependencyProperty AllowSpinProperty = DependencyProperty.Register("AllowSpin", typeof(bool), typeof(UpDownBase<T>), new UIPropertyMetadata(true));
-        public bool AllowSpin
-        {
-            get
-            {
-                return (bool)GetValue(AllowSpinProperty);
-            }
-            set
-            {
-                SetValue(AllowSpinProperty, value);
-            }
-        }
-
-        #endregion //AllowSpin
-
-        #region ButtonSpinnerLocation
-
-        public static readonly DependencyProperty ButtonSpinnerLocationProperty = DependencyProperty.Register(nameof(ButtonSpinnerLocation), typeof(Location), typeof(UpDownBase<T>), new UIPropertyMetadata(Location.Right));
-        public Location ButtonSpinnerLocation
-        {
-            get
-            {
-                return (Location)GetValue(ButtonSpinnerLocationProperty);
-            }
-            set
-            {
-                SetValue(ButtonSpinnerLocationProperty, value);
-            }
-        }
-
-        #endregion //ButtonSpinnerLocation
 
         #region ClipValueToMinMax
 
@@ -641,25 +761,6 @@ namespace AIStudio.Wpf.Controls
         }
 
         #endregion //MouseWheelActiveOnFocus
-
-        #region ShowButtonSpinner
-
-        public static readonly DependencyProperty ShowButtonSpinnerProperty = DependencyProperty.Register("ShowButtonSpinner", typeof(bool), typeof(
-
-    UpDownBase<T>), new UIPropertyMetadata(true));
-        public bool ShowButtonSpinner
-        {
-            get
-            {
-                return (bool)GetValue(ShowButtonSpinnerProperty);
-            }
-            set
-            {
-                SetValue(ShowButtonSpinnerProperty, value);
-            }
-        }
-
-        #endregion //ShowButtonSpinner
 
         #region UpdateValueOnEnterKey
 

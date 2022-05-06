@@ -109,5 +109,10 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
         {
             get; set;
         }
+
+        public HorizontalAlignment HorizontalAlignment
+        {
+            get; set;
+        }
     }
 }
