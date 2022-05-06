@@ -5,12 +5,15 @@ using System.Windows.Input;
 using AIStudio.Wpf.Controls.Bindings;
 using AIStudio.Wpf.Controls.Commands;
 using AIStudio.Wpf.GridControls.Demo.Models;
+using AIStudio.Wpf.GridControls.Demo.Servers;
 using Newtonsoft.Json;
 
 namespace AIStudio.Wpf.GridControls.Demo.ViewModels
 {
     class MainViewModel : BindableBase
     {
+        private IDataProvider _dataProvider = new DataProvider();
+
         private ObservableCollection<Device> _datas;
         public ObservableCollection<Device> Datas
         {
@@ -108,32 +111,6 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
 
         public MainViewModel()
         {
-            ObservableCollection<Device> ds = new ObservableCollection<Device>();
-            Random rd = new Random();
-            for (int i = 0; i < 1000; i++)
-            {
-                var d1 = new Device()
-                {
-                    Name = "MX33333333333333333333333331_" + i,
-                    Mode1 = "M303" + i,
-                    Mode2 = "M303" + i,
-                    Value1 = i,
-                    Value2 = i,
-                    Value3 = i,
-                    Value4 = i + rd.NextDouble(),
-                    Value5 = i + rd.NextDouble(),
-                    Value6 = i,
-                    Value7 = i,
-                    Value8 = i,
-                    Value9 = i,
-                    Value10 = i,
-                    DateTime = DateTime.Now.AddMinutes(0 - i),
-                };
-                ds.Add(d1);
-            }
-
-            Datas = ds;
-
             var properties = typeof(Device).GetProperties();
             foreach (System.Reflection.PropertyInfo info in properties)
             {
@@ -162,12 +139,14 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             QueryConditionItems.Add(new QueryConditionItem() { Header = "查询", ControlType = ControlType.Query, Visibility = System.Windows.Visibility.Collapsed });
             EditFormItems.Add(new EditFormItem() { Header = "提交", ControlType = ControlType.Submit });
 
-            var str = JsonConvert.SerializeObject(DataGridColumns);
+            Query();
         }
 
-        public void Query()
+        public async void Query()
         {      
             var dic = QueryConditionItem.ListToDictionary(QueryConditionItems);
+            var result = await _dataProvider.GetData<List<Device>>("Device", dic);
+            Datas = new ObservableCollection<Device>(result.Data);
         }
 
         public void Submit()
