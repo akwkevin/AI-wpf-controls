@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
+using AIStudio.Wpf.Controls;
 using AIStudio.Wpf.Controls.Bindings;
 using AIStudio.Wpf.Controls.Commands;
 using AIStudio.Wpf.GridControls.Demo.Models;
@@ -136,8 +138,8 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
                     EditFormItems.Add(editFormItem);
                 }
             }
-            QueryConditionItems.Add(new QueryConditionItem() { Header = "查询", ControlType = ControlType.Query, Visibility = System.Windows.Visibility.Collapsed });
-            EditFormItems.Add(new EditFormItem() { Header = "提交", ControlType = ControlType.Submit });
+            QueryConditionItems.Add(new QueryConditionItem() { Header = "查询", ControlType = ControlType.Query, Visibility = System.Windows.Visibility.Visible });
+            EditFormItems.Add(new EditFormItem() { Header = "提交", ControlType = ControlType.Submit, Visibility = System.Windows.Visibility.Visible });
 
             Query();
         }
@@ -145,13 +147,20 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
         public async void Query()
         {      
             var dic = QueryConditionItem.ListToDictionary(QueryConditionItems);
-            var result = await _dataProvider.GetData<List<Device>>("Device", dic);
+            var result = await _dataProvider.GetData<List<Device>>("Device/GetDataList", dic);
             Datas = new ObservableCollection<Device>(result.Data);
         }
 
-        public void Submit()
+        public async void Submit()
         {
-            var dic = QueryConditionItem.ListToDictionary(EditFormItems);
+            Device device = new Device();
+            BaseControlItem.ListToObject(device, EditFormItems);
+            var result = await _dataProvider.GetData<AjaxResult>("Device/SaveData", JsonConvert.SerializeObject(device));
+            if (result.Success == true)
+            {
+                Controls.MessageBox.Show(Application.Current.MainWindow, "提交成功");
+                Query();
+            }
         }
 
         public void QueryConditionConfig()
@@ -161,8 +170,10 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
 
         private void SelectedDataChanged(Device value)
         {
-            QueryConditionItem.ObjectToList(value, EditFormItems);
-
+            if (value != null)
+            {
+                BaseControlItem.ObjectToList(value, EditFormItems);
+            }
         }
 
 
