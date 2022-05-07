@@ -146,24 +146,24 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
                 {
 
                     var propertyInfo = value.GetType().GetProperty(item.PropertyName);
-                    object objvalue = item.Value;
-                    if (propertyInfo.PropertyType == typeof(double))
-                    {
-                        objvalue = double.Parse(objvalue?.ToString());
-                    }
-                    else if (propertyInfo.PropertyType == typeof(float))
-                    {
-                        objvalue = float.Parse(objvalue?.ToString());
-                    }
-                    else if (propertyInfo.PropertyType == typeof(int))
-                    {
-                        objvalue = int.Parse(objvalue?.ToString());
-                    }
-                    else if (propertyInfo.PropertyType == typeof(long))
-                    {
-                        objvalue = long.Parse(objvalue?.ToString());
-                    }
-                    propertyInfo.SetValue(value, objvalue);
+                    //object objvalue = item.Value;
+                    //if (propertyInfo.PropertyType == typeof(double))
+                    //{
+                    //    objvalue = double.Parse(objvalue?.ToString());
+                    //}
+                    //else if (propertyInfo.PropertyType == typeof(float))
+                    //{
+                    //    objvalue = float.Parse(objvalue?.ToString());
+                    //}
+                    //else if (propertyInfo.PropertyType == typeof(int))
+                    //{
+                    //    objvalue = int.Parse(objvalue?.ToString());
+                    //}
+                    //else if (propertyInfo.PropertyType == typeof(long))
+                    //{
+                    //    objvalue = long.Parse(objvalue?.ToString());
+                    //}
+                    propertyInfo.SetValue(value, item.Value);
                 }
                 catch { }
             }
