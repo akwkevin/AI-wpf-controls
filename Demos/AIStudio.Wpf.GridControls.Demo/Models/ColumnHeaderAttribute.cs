@@ -83,11 +83,20 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
             get; set;
         }
 
+        public string SortMemberPath
+        {
+            get; set;
+        }
+
+        public bool CanUserSort
+        {
+            get; set;
+        } = true;
+
         public static DataGridColumnCustom GetDataGridColumnCustom(PropertyInfo property)
         {
             DataGridColumnCustom dataGridColumnCustom = new DataGridColumnCustom();
             dataGridColumnCustom.Binding = property.Name;
-          
 
             var attribute = ColumnHeaderAttribute.GetPropertyAttribute(property);
             if (attribute != null)
@@ -109,11 +118,15 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
                 dataGridColumnCustom.BackgroundExpression = attribute.BackgroundExpression;
                 dataGridColumnCustom.HorizontalAlignment = attribute.HorizontalAlignment;
                 dataGridColumnCustom.DisplayIndex = attribute.DisplayIndex;
+                dataGridColumnCustom.SortMemberPath = attribute.SortMemberPath ?? property.Name;
+                dataGridColumnCustom.CanUserSort = attribute.CanUserSort;
             }
             else
             {
                 dataGridColumnCustom.Header = property.Name;
                 dataGridColumnCustom.DisplayIndex = int.MaxValue;
+                dataGridColumnCustom.SortMemberPath = property.Name;
+                dataGridColumnCustom.CanUserSort = true;
             }
 
             if (property.PropertyType == typeof(int) || property.PropertyType == typeof(long))

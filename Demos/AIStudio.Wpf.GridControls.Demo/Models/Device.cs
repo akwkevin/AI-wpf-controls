@@ -18,7 +18,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
         }
 
         private string _mode2;
-        [ColumnHeader("模式2", DisplayIndex = 1)]
+        [ColumnHeader("模式2", DisplayIndex = 1, CanUserSort = false)]
         public string Mode2
         {
             get => _mode2;

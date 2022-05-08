@@ -103,8 +103,8 @@ namespace AIStudio.Wpf.GridControls.Demo
             column.Header = columnCustom.Header;
             column.DisplayIndex = columnCustom.DisplayIndex;
             column.Visibility = columnCustom.Visibility;
-            column.CanUserSort = true;
-            column.SortMemberPath = columnCustom.Binding;
+            column.CanUserSort = columnCustom.CanUserSort;
+            column.SortMemberPath = columnCustom.SortMemberPath;
 
             DataTemplate dt = new DataTemplate();
 
