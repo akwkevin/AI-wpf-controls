@@ -129,7 +129,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Servers
             var filterdatas = datas.Where(p => 1 == 1);
             foreach (var dic in pagination.Keywords)
             {
-                filterdatas = filterdatas.Where(p => p.GetType().GetProperty(dic.Key).GetValue(p)?.ToString() == dic.Value);
+                filterdatas = filterdatas.Where(p => p.GetType().GetProperty(dic.Key).GetValue(p) == dic.Value);
             }
 
             int count = filterdatas.Count();
