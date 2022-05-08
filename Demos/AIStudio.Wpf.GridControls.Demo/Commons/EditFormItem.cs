@@ -5,8 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Windows;
 using AIStudio.Wpf.Controls.Bindings;
+using AIStudio.Wpf.GridControls.Demo.Attributes;
 
-namespace AIStudio.Wpf.GridControls.Demo.Models
+namespace AIStudio.Wpf.GridControls.Demo.Commons
 {
     public class EditFormItem : BaseControlItem
     {

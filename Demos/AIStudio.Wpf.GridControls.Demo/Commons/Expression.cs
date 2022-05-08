@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using Microsoft.CSharp;
 
-namespace AIStudio.Wpf.GridControls.Demo.Models
+namespace AIStudio.Wpf.GridControls.Demo.Commons
 {
     /// <summary>
     /// 处理表达试运算---动态生成数学表达式并计算其值

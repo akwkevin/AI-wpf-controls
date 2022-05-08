@@ -6,6 +6,8 @@ using System.Text;
 using System.Windows.Input;
 using AIStudio.Wpf.Controls.Bindings;
 using AIStudio.Wpf.Controls.Commands;
+using AIStudio.Wpf.GridControls.Demo.Attributes;
+using AIStudio.Wpf.GridControls.Demo.Commons;
 using AIStudio.Wpf.GridControls.Demo.Models;
 using AIStudio.Wpf.GridControls.Demo.Servers;
 using Newtonsoft.Json;
@@ -87,6 +89,8 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             get; private set;
         } = new ObservableCollection<EditFormItem>();
 
+        public Pagination Pagination { get; set; } = new Pagination() { PageRows = 100 };
+
         private ICommand _queryCommand;
         public ICommand QueryCommand
         {
@@ -112,7 +116,16 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             {
                 return this._queryConditionConfigCommand ?? (this._queryConditionConfigCommand = new DelegateCommand(() => this.QueryConditionConfig()));
             }
-        }     
+        }
+
+        private ICommand _currentIndexChangedComamnd;
+        public ICommand CurrentIndexChangedComamnd
+        {
+            get
+            {
+                return this._currentIndexChangedComamnd ?? (this._currentIndexChangedComamnd = new DelegateCommand<object>(para => Query()));
+            }
+        }
 
         public BaseViewModel()
         {
@@ -158,8 +171,11 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
         public async void Query()
         {
             var dic = QueryConditionItem.ListToDictionary(QueryConditionItems);
-            var result = await _dataProvider.GetData<List<T>>("Device/GetDataList", dic);
+            Pagination.Keywords = dic;
+
+            var result = await _dataProvider.GetData<List<T>>("Device/GetDataList", JsonConvert.SerializeObject(Pagination));
             Datas = new ObservableCollection<T>(result.Data);
+            Pagination.Total = result.Total;
         }
 
         public async void Submit()

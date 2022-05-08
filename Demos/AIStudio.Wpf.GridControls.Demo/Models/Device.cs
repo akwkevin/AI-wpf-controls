@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using AIStudio.Wpf.Controls.Bindings;
 using AIStudio.Wpf.Controls.Converter;
+using AIStudio.Wpf.GridControls.Demo.Attributes;
 
 namespace AIStudio.Wpf.GridControls.Demo.Models
 {
@@ -26,7 +27,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
         }
 
         [ColumnHeader("名称", IsReadOnly = true, DisplayIndex = 0)]
-        public string Name
+        public string Id
         {
             get; set;
         }

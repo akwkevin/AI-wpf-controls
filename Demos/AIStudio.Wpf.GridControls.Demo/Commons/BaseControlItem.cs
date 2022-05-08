@@ -4,8 +4,9 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows;
 using AIStudio.Wpf.Controls.Bindings;
+using AIStudio.Wpf.GridControls.Demo.Attributes;
 
-namespace AIStudio.Wpf.GridControls.Demo.Models
+namespace AIStudio.Wpf.GridControls.Demo.Commons
 {
     public abstract class BaseControlItem : BindableBase
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AIStudio.Wpf.GridControls.Demo.Models
+namespace AIStudio.Wpf.GridControls.Demo.Commons
 {
     public class SelectOption
     {

@@ -5,8 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using AIStudio.Wpf.GridControls.Demo.Commons;
 
-namespace AIStudio.Wpf.GridControls.Demo.Models
+namespace AIStudio.Wpf.GridControls.Demo.Attributes
 {
     public class ColumnHeaderAttribute : DisplayNameAttribute
     {
