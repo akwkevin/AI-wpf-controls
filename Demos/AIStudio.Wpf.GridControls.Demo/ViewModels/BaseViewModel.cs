@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using AIStudio.Wpf.Controls.Bindings;
@@ -116,14 +117,17 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
         public BaseViewModel()
         {
             var properties_query = typeof(Q).GetProperties();
+            var queryConditionItems = new List<QueryConditionItem>();
             foreach (System.Reflection.PropertyInfo info in properties_query)
             {
                 QueryConditionItem queryConditionItem = QueryConditionItem.GetQueryConditionItem(info);
                 if (queryConditionItem != null)
                 {
-                    QueryConditionItems.Add(queryConditionItem);
+                    queryConditionItems.Add(queryConditionItem);
                 }
             }
+            queryConditionItems.OrderBy(p => p.DisplayIndex).ToList().ForEach(p => QueryConditionItems.Add(p)); 
+
             QueryConditionItems.Add(new QueryConditionItem() { Header = "查询", ControlType = ControlType.Query, Visibility = System.Windows.Visibility.Visible });
 
             var properties = typeof(T).GetProperties();
@@ -134,15 +138,18 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
                 {
                     DataGridColumns.Add(dataGridColumnCustom);
                 }
-            }           
+            }
+
+            var editFormItems = new List<EditFormItem>();
             foreach (System.Reflection.PropertyInfo info in properties)
             {
                 EditFormItem editFormItem = EditFormItem.GetEditFormItem(info);
                 if (editFormItem != null)
                 {
-                    EditFormItems.Add(editFormItem);
+                    editFormItems.Add(editFormItem);
                 }
-            }            
+            }
+            editFormItems.OrderBy(p => p.DisplayIndex).ToList().ForEach(p => EditFormItems.Add(p));
             EditFormItems.Add(new EditFormItem() { Header = "提交", ControlType = ControlType.Submit, Visibility = System.Windows.Visibility.Visible });
 
             Query();

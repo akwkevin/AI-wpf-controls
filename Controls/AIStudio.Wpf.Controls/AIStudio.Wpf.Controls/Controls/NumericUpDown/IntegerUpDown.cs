@@ -2,7 +2,7 @@
 
 namespace AIStudio.Wpf.Controls
 {
-    public class IntegerUpDown : NumericUpDownBase<int>
+    public class IntegerUpDown : CommonNumericUpDown<int>
     {
         #region Constructors
 

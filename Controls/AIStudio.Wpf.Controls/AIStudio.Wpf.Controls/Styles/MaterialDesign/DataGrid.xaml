@@ -116,7 +116,7 @@
         <Setter Property="Margin" Value="4 0" />
     </Style>
 
-    <Style x:Key="AIStudio.Styles.NumericUpDown.DataGrid" BasedOn="{StaticResource AIStudio.Styles.NumericUpDown}" TargetType="{x:Type controls:NumericUpDown}">
+    <Style x:Key="AIStudio.Styles.NumericUpDown.DataGrid" BasedOn="{StaticResource AIStudio.Styles.NumericUpDown}" TargetType="{x:Type controls:DoubleUpDown}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="AllowSpin" Value="False" />
@@ -126,7 +126,7 @@
         <Setter Property="controls:ControlAttach.CornerRadius" Value="0" />
     </Style>
 
-    <Style x:Key="AIStudio.Styles.NumericUpDown.DataGrid.Editing" BasedOn="{StaticResource AIStudio.Styles.NumericUpDown.DataGrid}" TargetType="{x:Type controls:NumericUpDown}">
+    <Style x:Key="AIStudio.Styles.NumericUpDown.DataGrid.Editing" BasedOn="{StaticResource AIStudio.Styles.NumericUpDown.DataGrid}" TargetType="{x:Type controls:DoubleUpDown}">
         <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
         <Setter Property="AllowSpin" Value="True" />
     </Style>

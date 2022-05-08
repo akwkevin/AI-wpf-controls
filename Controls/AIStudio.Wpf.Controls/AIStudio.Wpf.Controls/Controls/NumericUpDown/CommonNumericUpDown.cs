@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Windows;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Windows;
 
 namespace AIStudio.Wpf.Controls
 {
-    public abstract class NumericUpDownBase<T> : UpDownBase<T?> where T : struct, IFormattable, IComparable<T>
+    public abstract class CommonNumericUpDown<T> : NumericUpDown<T?> where T : struct, IFormattable, IComparable<T>
     {
         protected delegate bool FromText(string s, NumberStyles style, IFormatProvider provider, out T result);
         protected delegate T FromDecimal(decimal d);
@@ -20,7 +20,7 @@ namespace AIStudio.Wpf.Controls
         #region ParsingNumberStyle
 
         public static readonly DependencyProperty ParsingNumberStyleProperty =
-            DependencyProperty.Register("ParsingNumberStyle", typeof(NumberStyles), typeof(NumericUpDownBase<T>), new UIPropertyMetadata(NumberStyles.Any));
+            DependencyProperty.Register("ParsingNumberStyle", typeof(NumberStyles), typeof(CommonNumericUpDown<T>), new UIPropertyMetadata(NumberStyles.Any));
 
         public NumberStyles ParsingNumberStyle
         {
@@ -38,7 +38,7 @@ namespace AIStudio.Wpf.Controls
 
         #region Constructors
 
-        protected NumericUpDownBase(FromText fromText, FromDecimal fromDecimal, Func<T, T, bool> fromLowerThan, Func<T, T, bool> fromGreaterThan)
+        protected CommonNumericUpDown(FromText fromText, FromDecimal fromDecimal, Func<T, T, bool> fromLowerThan, Func<T, T, bool> fromGreaterThan)
         {
             if (fromText == null)
                 throw new ArgumentNullException("tryParseMethod");
@@ -351,16 +351,5 @@ namespace AIStudio.Wpf.Controls
         protected abstract T DecrementValue(T value, T increment);
 
         #endregion
-    }
-
-    [Flags]
-    public enum AllowedSpecialValues
-    {
-        None = 0,
-        NaN = 1,
-        PositiveInfinity = 2,
-        NegativeInfinity = 4,
-        AnyInfinity = PositiveInfinity | NegativeInfinity,
-        Any = NaN | AnyInfinity
     }
 }

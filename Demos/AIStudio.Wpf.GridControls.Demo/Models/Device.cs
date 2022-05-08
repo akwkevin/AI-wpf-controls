@@ -9,12 +9,6 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
 {
     public class Device : BindableBase
     {
-        [ColumnHeader("名称", IsReadOnly = true)]
-        public string Name
-        {
-            get; set;
-        }
-
         private string _model;
         [ColumnHeader("模式1", Visibility = Visibility.Collapsed)]
         public string Mode1
@@ -24,11 +18,17 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
         }
 
         private string _mode2;
-        [ColumnHeader("模式2")]
+        [ColumnHeader("模式2", DisplayIndex = 1)]
         public string Mode2
         {
             get => _mode2;
             set => SetProperty(ref _mode2, value);
+        }
+
+        [ColumnHeader("名称", IsReadOnly = true, DisplayIndex = 0)]
+        public string Name
+        {
+            get; set;
         }
 
         private double _value1;
@@ -138,7 +138,15 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
         {
             get => _mode2;
             set => SetProperty(ref _mode2, value);
-        }      
+        }
+
+        private double _value1;
+        [ColumnHeader("数值1", StringFormat = "f3")]
+        public double Value1
+        {
+            get => _value1;
+            set => SetProperty(ref _value1, value);
+        }
 
         private DateTime _dateTime;
         [ColumnHeader("时间", StringFormat = "yyyy-MM-dd HH:mm:ss", IsPin = true)]

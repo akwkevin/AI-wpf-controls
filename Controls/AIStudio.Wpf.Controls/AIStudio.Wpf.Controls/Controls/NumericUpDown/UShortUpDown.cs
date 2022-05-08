@@ -2,9 +2,10 @@
 
 namespace AIStudio.Wpf.Controls
 {
-    internal class UShortUpDown : NumericUpDownBase<ushort>
+    internal class UShortUpDown : CommonNumericUpDown<ushort>
     {
         #region Constructors
+
         static UShortUpDown()
         {
             UpdateMetadata(typeof(UShortUpDown), (ushort)1, ushort.MinValue, ushort.MaxValue);

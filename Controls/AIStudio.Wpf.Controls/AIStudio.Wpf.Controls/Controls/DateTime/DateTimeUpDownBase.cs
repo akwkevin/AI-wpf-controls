@@ -220,7 +220,8 @@ namespace AIStudio.Wpf.Controls
             var dateTimeInfo = this.GetDateTimeInfo(TextBox.SelectionStart);
             if ((dateTimeInfo != null) && (dateTimeInfo.Type == DateTimePart.Other))
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => {
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+                {
                     // Select the next dateTime part
                     this.Select(this.GetDateTimeInfo(dateTimeInfo.StartPosition + dateTimeInfo.Length));
                 }

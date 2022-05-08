@@ -163,18 +163,7 @@
                             <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="HH:mm:ss" MinWidth="120" ac:ControlAttach.Watermark="请选择时间"/>
                             <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd" ButtonSpinnerLocation="UpDown" MinWidth="120" ac:ControlAttach.Watermark="请选择日期"/>
                             <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd" ShowButtonSpinner="False" MinWidth="120" ac:ControlAttach.Watermark="请选择日期"/>
-                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd" ShowDropDown="True" ShowButtonSpinner="False" MinWidth="120" ac:ControlAttach.Watermark="请选择日期">
-                                <ac:DateTimeUpDown.CalendarWithClock>
-                                    <ac:CalendarWithClock ClockName="Flip" IsShowClock="False" IsShowConfirm="False"/>
-                                </ac:DateTimeUpDown.CalendarWithClock>
-                            </ac:DateTimeUpDown>
-                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd" ShowDropDown="True" MinWidth="170" ac:ControlAttach.Watermark="请选择日期">
-                                <ac:DateTimeUpDown.CalendarWithClock>
-                                    <ac:CalendarWithClock ClockName="Flip" IsShowClock="False" IsShowConfirm="False"/>
-                                </ac:DateTimeUpDown.CalendarWithClock>
-                            </ac:DateTimeUpDown>
                             <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" MinWidth="200" ac:ControlAttach.Watermark="请选择日期时间"/>
-                            <ac:DateTimeUpDown Margin="2" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" ShowDropDown="True" MinWidth="220" ac:ControlAttach.Watermark="请选择日期时间"/>
                         </WrapPanel>
                     </StackPanel>
                 </GroupBox>

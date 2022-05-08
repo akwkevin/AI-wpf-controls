@@ -15,6 +15,8 @@
     <Style x:Key="ClockListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="controls:ControlAttach.Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(controls:ControlAttach.Foreground)}" />
+        <Setter Property="controls:ControlAttach.Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(controls:ControlAttach.Background)}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -31,11 +33,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                            <Setter Property="Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                            <Setter TargetName="Border" Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=ListBoxItem}}"/>
+                            <Setter Property="Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType=ListBoxItem}}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=ListBox},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.6}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=ListBoxItem},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.6}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.5" />

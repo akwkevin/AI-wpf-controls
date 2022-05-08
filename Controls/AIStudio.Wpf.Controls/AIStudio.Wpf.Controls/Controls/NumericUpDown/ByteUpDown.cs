@@ -18,7 +18,7 @@ using System;
 
 namespace AIStudio.Wpf.Controls
 {
-    public class ByteUpDown : NumericUpDownBase<byte>
+    public class ByteUpDown : CommonNumericUpDown<byte>
     {
         #region Constructors
 

@@ -2,7 +2,7 @@
 
 namespace AIStudio.Wpf.Controls
 {
-    internal class SByteUpDown : NumericUpDownBase<sbyte>
+    internal class SByteUpDown : CommonNumericUpDown<sbyte>
     {
         #region Constructors
 

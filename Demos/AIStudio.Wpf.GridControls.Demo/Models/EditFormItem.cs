@@ -10,11 +10,6 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
 {
     public class EditFormItem : BaseControlItem
     {
-        public bool IsReadOnly
-        {
-            get; set;
-        }
-
         public static EditFormItem GetEditFormItem(PropertyInfo property)
         {
             EditFormItem editFormItem = new EditFormItem();

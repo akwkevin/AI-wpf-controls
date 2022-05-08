@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,10 +43,17 @@ namespace AIStudio.Wpf.GridControls.Demo
                     return;
                 }
 
-                foreach (DataGridColumnCustom column in columns)
+                var colums1 = columns.Where(p => p.DisplayIndex == int.MaxValue).Reverse().ToList();
+                var colums2 = columns.Except(colums1).OrderBy(p => p.DisplayIndex).ToList();
+                foreach (DataGridColumnCustom column in colums1)
                 {
+                    column.DisplayIndex = 0;
                     dataGrid.Columns.Add(GetDataColumn(column));
                 }
+                foreach (DataGridColumnCustom column in colums2)
+                {
+                    dataGrid.Columns.Add(GetDataColumn(column));
+                }   
 
                 columns.CollectionChanged += (sender, e2) => {
                     NotifyCollectionChangedEventArgs ne = e2;
@@ -88,7 +96,8 @@ namespace AIStudio.Wpf.GridControls.Demo
             var column = new DataGridTemplateColumn();
             column.IsReadOnly = true;
             column.Header = columnCustom.Header;
-
+            column.DisplayIndex = columnCustom.DisplayIndex;
+            column.Visibility = columnCustom.Visibility;
 
             DataTemplate dt = new DataTemplate();
 

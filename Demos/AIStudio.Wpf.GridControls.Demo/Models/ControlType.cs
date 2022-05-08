@@ -13,7 +13,9 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
         TreeSelect,
         MultiComboBox,
         IntegerUpDown,
-        NumericUpDown,
+        LongUpDown,
+        DoubleUpDown,
+        DecimalUpDown,
         DateTimeUpDown,
         Query,
         Submit

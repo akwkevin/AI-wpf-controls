@@ -25,7 +25,6 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
             {
                 queryConditionItem.Visibility =  Visibility.Collapsed;
             }
-
             return queryConditionItem;
 
         }       

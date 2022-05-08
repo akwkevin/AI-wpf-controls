@@ -9,6 +9,11 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
 {
     public abstract class BaseControlItem : BindableBase
     {
+        public int DisplayIndex
+        {
+            get; set;
+        }
+
         public object Header
         {
             get; set;
@@ -28,11 +33,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
             }
             set
             {
-                if (_value != value)
-                {
-                    _value = value;
-                    RaisePropertyChanged("Value");
-                }
+                SetProperty(ref _value, value);
             }
         }
 
@@ -45,11 +46,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
             }
             set
             {
-                if (_visibility != value)
-                {
-                    _visibility = value;
-                    RaisePropertyChanged("Visibility");
-                }
+                SetProperty(ref _visibility, value);
             }
         }
 
@@ -73,6 +70,11 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
             get; set;
         }
 
+        public bool IsReadOnly
+        {
+            get; set;
+        }
+
         public static bool GetControlItem(PropertyInfo property, BaseControlItem queryConditionItem)
         {
             var attribute = ColumnHeaderAttribute.GetPropertyAttribute(property);
@@ -87,14 +89,16 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
                 queryConditionItem.ControlType = attribute.ControlType;
                 queryConditionItem.IsRequired = attribute.IsRequired;
                 queryConditionItem.StringFormat = attribute.StringFormat;
+                queryConditionItem.DisplayIndex = attribute.DisplayIndex;
             }
             else
             {
                 queryConditionItem.Header = property.Name;
                 queryConditionItem.ControlType = ControlType.TextBox;
+                queryConditionItem.DisplayIndex = int.MaxValue;
             }
 
-            if (property.PropertyType == typeof(int) || property.PropertyType == typeof(long))
+            if (property.PropertyType == typeof(int))
             {
                 if (string.IsNullOrEmpty(queryConditionItem.StringFormat))
                 {
@@ -102,13 +106,29 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
                 }
                 queryConditionItem.ControlType = ControlType.IntegerUpDown;
             }
-            else if (property.PropertyType == typeof(double) || property.PropertyType == typeof(float))
+            else if (property.PropertyType == typeof(long))
+            {
+                if (string.IsNullOrEmpty(queryConditionItem.StringFormat))
+                {
+                    queryConditionItem.StringFormat = "n0";
+                }
+                queryConditionItem.ControlType = ControlType.LongUpDown;
+            }
+            else if (property.PropertyType == typeof(double))
             {
                 if (string.IsNullOrEmpty(queryConditionItem.StringFormat))
                 {
                     queryConditionItem.StringFormat = "f3";
                 }
-                queryConditionItem.ControlType = ControlType.NumericUpDown;
+                queryConditionItem.ControlType = ControlType.DoubleUpDown;
+            }
+            else if (property.PropertyType == typeof(decimal))
+            {
+                if (string.IsNullOrEmpty(queryConditionItem.StringFormat))
+                {
+                    queryConditionItem.StringFormat = "f3";
+                }
+                queryConditionItem.ControlType = ControlType.DecimalUpDown;
             }
             else if (property.PropertyType == typeof(DateTime))
             {
@@ -183,6 +203,11 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
             }
 
             return keyValue;
+        }
+
+        public static object GetDefaultValue(Type type)
+        {
+            return type.IsValueType ? Activator.CreateInstance(type) : null;
         }
     }
 }

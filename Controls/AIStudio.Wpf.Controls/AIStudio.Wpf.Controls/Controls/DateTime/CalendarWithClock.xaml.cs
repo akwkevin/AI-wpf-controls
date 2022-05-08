@@ -175,12 +175,24 @@ namespace AIStudio.Wpf.Controls
                     newClock.Background = Brushes.Transparent;
                     Binding binding = new Binding() { Path = new PropertyPath("ActualHeight"), Source = ctl._calendar };
                     newClock.SetBinding(HeightProperty, binding);
+
+                    var binding2 = new Binding() { Path = new PropertyPath(ControlAttach.ForegroundProperty), Source = ctl };
+                    newClock.SetBinding(ControlAttach.ForegroundProperty, binding2);
+
+                    var binding3 = new Binding() { Path = new PropertyPath(ControlAttach.BackgroundProperty), Source = ctl };
+                    newClock.SetBinding(ControlAttach.BackgroundProperty, binding3);
                 }
                 else
                 {
                     newClock.Padding = new Thickness(1);
                     newClock.Background = Brushes.Transparent;
                     newClock.SetValue(ControlAttach.CornerRadiusProperty, new CornerRadius(0));
+
+                    var binding2 = new Binding() { Path = new PropertyPath(ControlAttach.ForegroundProperty), Source = ctl };
+                    newClock.SetBinding(ControlAttach.ForegroundProperty, binding2);
+
+                    var binding3 = new Binding() { Path = new PropertyPath(ControlAttach.BackgroundProperty), Source = ctl };
+                    newClock.SetBinding(ControlAttach.BackgroundProperty, binding3);
                 }
             }
 

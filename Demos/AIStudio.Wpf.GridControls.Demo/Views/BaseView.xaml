@@ -14,27 +14,39 @@
         <ControlTemplate x:Key="TextBoxTemplate">
             <StackPanel Orientation="Horizontal" Margin="2" Visibility="{Binding Visibility}">
                 <TextBlock Text="{Binding Header}" Margin="0,0,2,0" VerticalAlignment="Center"/>
-                <TextBox Text="{Binding Value}" IsReadOnly="{Binding IsReadOnly,TargetNullValue=false}" Padding="1" MinWidth="100" VerticalAlignment="Center" Style="{DynamicResource AIStudio.Styles.TextBox}"/>
+                <TextBox Text="{Binding Value}" IsReadOnly="{Binding IsReadOnly}" Padding="1" MinWidth="100" VerticalAlignment="Center" Style="{DynamicResource AIStudio.Styles.TextBox}"/>
             </StackPanel>
         </ControlTemplate>
-        <ControlTemplate x:Key="NumericUpDownTemplate">
+        <ControlTemplate x:Key="DoubleUpDownTemplate">
             <StackPanel Orientation="Horizontal" Margin="2" Visibility="{Binding Visibility}">
                 <TextBlock Text="{Binding Header}" Margin="0,0,2,0" VerticalAlignment="Center"/>
-                <ac:NumericUpDown Value="{Binding Value}" FormatString="{Binding StringFormat}" IsReadOnly="{Binding IsReadOnly,TargetNullValue=false}" Padding="1" MinWidth="100" VerticalAlignment="Center" VerticalContentAlignment="Center" ButtonSpinnerLocation="UpDown" Style="{DynamicResource AIStudio.Styles.NumericUpDown}"/>
+                <ac:DoubleUpDown Value="{Binding Value}" FormatString="{Binding StringFormat}" IsReadOnly="{Binding IsReadOnly}" Padding="1" MinWidth="100" VerticalAlignment="Center" VerticalContentAlignment="Center" ButtonSpinnerLocation="UpDown" />
+            </StackPanel>
+        </ControlTemplate>
+        <ControlTemplate x:Key="DecimalUpDownTemplate">
+            <StackPanel Orientation="Horizontal" Margin="2" Visibility="{Binding Visibility}">
+                <TextBlock Text="{Binding Header}" Margin="0,0,2,0" VerticalAlignment="Center"/>
+                <ac:DecimalUpDown Value="{Binding Value}" FormatString="{Binding StringFormat}" IsReadOnly="{Binding IsReadOnly}" Padding="1" MinWidth="100" VerticalAlignment="Center" VerticalContentAlignment="Center" ButtonSpinnerLocation="UpDown" />
             </StackPanel>
         </ControlTemplate>
         <ControlTemplate x:Key="IntegerUpDownTemplate">
             <StackPanel Orientation="Horizontal" Margin="2" Visibility="{Binding Visibility}">
                 <TextBlock Text="{Binding Header}" Margin="0,0,2,0" VerticalAlignment="Center"/>
-                <ac:IntegerUpDown Value="{Binding Value}" FormatString="{Binding StringFormat}" IsReadOnly="{Binding IsReadOnly,TargetNullValue=false}" Padding="1" MinWidth="100" VerticalAlignment="Center" VerticalContentAlignment="Center" ButtonSpinnerLocation="UpDown" Style="{DynamicResource AIStudio.Styles.NumericUpDown}"/>
+                <ac:IntegerUpDown Value="{Binding Value}" FormatString="{Binding StringFormat}" IsReadOnly="{Binding IsReadOnly}" Padding="1" MinWidth="100" VerticalAlignment="Center" VerticalContentAlignment="Center" ButtonSpinnerLocation="UpDown" />
             </StackPanel>
         </ControlTemplate>
+        <ControlTemplate x:Key="LongUpDownTemplate">
+            <StackPanel Orientation="Horizontal" Margin="2" Visibility="{Binding Visibility}">
+                <TextBlock Text="{Binding Header}" Margin="0,0,2,0" VerticalAlignment="Center"/>
+                <ac:LongUpDown Value="{Binding Value}" FormatString="{Binding StringFormat}" IsReadOnly="{Binding IsReadOnly}" Padding="1" MinWidth="100" VerticalAlignment="Center" VerticalContentAlignment="Center" ButtonSpinnerLocation="UpDown" />
+            </StackPanel>
+        </ControlTemplate>       
         <ControlTemplate x:Key="DateTimeUpDownTemplate">
             <StackPanel Orientation="Horizontal" Margin="2" Visibility="{Binding Visibility}">
                 <TextBlock Text="{Binding Header}" Margin="0,0,2,0" VerticalAlignment="Center"/>
-                <ac:DateTimeUpDown Value="{Binding Value}" Format="Custom" FormatString="{Binding StringFormat}" IsReadOnly="{Binding IsReadOnly,TargetNullValue=false}" Padding="1" MinWidth="100" VerticalAlignment="Center" VerticalContentAlignment="Center" ButtonSpinnerLocation="UpDown" Style="{DynamicResource AIStudio.Styles.DateTimeUpDown}"/>
+                <ac:DateTimeUpDown Value="{Binding Value,Mode=TwoWay}" Format="Custom" FormatString="{Binding StringFormat}" IsReadOnly="{Binding IsReadOnly}" Padding="1" MinWidth="100" VerticalAlignment="Center" VerticalContentAlignment="Center" ButtonSpinnerLocation="UpDown" />
             </StackPanel>
-        </ControlTemplate>
+        </ControlTemplate>       
         <ControlTemplate x:Key="QueryTemplate">
             <StackPanel Orientation="Horizontal" Margin="2" Visibility="{Binding Visibility}">
                 <Button Content="{Binding Header}" Command="{Binding DataContext.QueryCommand,RelativeSource={RelativeSource AncestorType=UserControl}}" VerticalAlignment="Center" Style="{DynamicResource AIStudio.Styles.Button}"/>
@@ -55,7 +67,7 @@
         <Grid Background="Transparent">
             <Grid.ContextMenu>
                 <ContextMenu Style="{DynamicResource AIStudio.Styles.ContextMenu}">
-                    <MenuItem Header="配置显示列" Command="{Binding QueryConditionConfigCommand}" />
+                    <MenuItem Header="配置查询条件" Command="{Binding QueryConditionConfigCommand}" />
                 </ContextMenu>
             </Grid.ContextMenu>
             
@@ -74,11 +86,17 @@
                                         <DataTrigger Binding="{Binding ControlType}" Value="TextBox">
                                             <Setter Property="Template" Value="{StaticResource TextBoxTemplate}"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding ControlType}" Value="NumericUpDown">
-                                            <Setter Property="Template" Value="{StaticResource NumericUpDownTemplate}"/>
+                                        <DataTrigger Binding="{Binding ControlType}" Value="DoubleUpDown">
+                                            <Setter Property="Template" Value="{StaticResource DoubleUpDownTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ControlType}" Value="DecimalUpDown">
+                                            <Setter Property="Template" Value="{StaticResource DecimalUpDownTemplate}"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding ControlType}" Value="IntegerUpDown">
                                             <Setter Property="Template" Value="{StaticResource IntegerUpDownTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ControlType}" Value="LongUpDown">
+                                            <Setter Property="Template" Value="{StaticResource LongUpDownTemplate}"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding ControlType}" Value="DateTimeUpDown">
                                             <Setter Property="Template" Value="{StaticResource DateTimeUpDownTemplate}"/>
@@ -166,11 +184,17 @@
                                     <DataTrigger Binding="{Binding ControlType}" Value="TextBox">
                                         <Setter Property="Template" Value="{StaticResource TextBoxTemplate}"/>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding ControlType}" Value="NumericUpDown">
-                                        <Setter Property="Template" Value="{StaticResource NumericUpDownTemplate}"/>
+                                    <DataTrigger Binding="{Binding ControlType}" Value="DoubleUpDown">
+                                        <Setter Property="Template" Value="{StaticResource DoubleUpDownTemplate}"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ControlType}" Value="DecimalUpDown">
+                                        <Setter Property="Template" Value="{StaticResource DecimalUpDownTemplate}"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ControlType}" Value="IntegerUpDown">
                                         <Setter Property="Template" Value="{StaticResource IntegerUpDownTemplate}"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ControlType}" Value="LongUpDown">
+                                        <Setter Property="Template" Value="{StaticResource LongUpDownTemplate}"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ControlType}" Value="DateTimeUpDown">
                                         <Setter Property="Template" Value="{StaticResource DateTimeUpDownTemplate}"/>

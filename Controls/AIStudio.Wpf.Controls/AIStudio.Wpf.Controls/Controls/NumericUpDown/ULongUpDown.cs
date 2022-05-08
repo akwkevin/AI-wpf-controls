@@ -2,7 +2,7 @@
 
 namespace AIStudio.Wpf.Controls
 {
-    internal class ULongUpDown : NumericUpDownBase<ulong>
+    internal class ULongUpDown : CommonNumericUpDown<ulong>
     {
         #region Constructors
 

@@ -2,7 +2,7 @@
 
 namespace AIStudio.Wpf.Controls
 {
-    public class ShortUpDown : NumericUpDownBase<short>
+    public class ShortUpDown : CommonNumericUpDown<short>
     {
         #region Constructors
 

@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace AIStudio.Wpf.Controls
 {
-    public class SingleUpDown : NumericUpDownBase<float>
+    public class SingleUpDown : CommonNumericUpDown<float>
     {
         #region Constructors
 

@@ -2,7 +2,7 @@
 
 namespace AIStudio.Wpf.Controls
 {
-    public class LongUpDown : NumericUpDownBase<long>
+    public class LongUpDown : CommonNumericUpDown<long>
     {
         #region Constructors
 

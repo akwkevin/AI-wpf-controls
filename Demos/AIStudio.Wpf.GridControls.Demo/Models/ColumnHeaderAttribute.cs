@@ -23,10 +23,10 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
             get; set;
         } = Visibility.Visible;
 
-        public bool DisplayIndex
+        public int DisplayIndex
         {
             get; set;
-        }
+        } = int.MaxValue;
 
         public string StringFormat
         {
@@ -87,6 +87,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
         {
             DataGridColumnCustom dataGridColumnCustom = new DataGridColumnCustom();
             dataGridColumnCustom.Binding = property.Name;
+          
 
             var attribute = ColumnHeaderAttribute.GetPropertyAttribute(property);
             if (attribute != null)
@@ -107,10 +108,12 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
                 dataGridColumnCustom.ForegroundExpression = attribute.ForegroundExpression;
                 dataGridColumnCustom.BackgroundExpression = attribute.BackgroundExpression;
                 dataGridColumnCustom.HorizontalAlignment = attribute.HorizontalAlignment;
+                dataGridColumnCustom.DisplayIndex = attribute.DisplayIndex;
             }
             else
             {
                 dataGridColumnCustom.Header = property.Name;
+                dataGridColumnCustom.DisplayIndex = int.MaxValue;
             }
 
             if (property.PropertyType == typeof(int) || property.PropertyType == typeof(long))
@@ -120,7 +123,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
                     dataGridColumnCustom.StringFormat = "n0";
                 }
             }
-            else if (property.PropertyType == typeof(double) || property.PropertyType == typeof(float))
+            else if (property.PropertyType == typeof(double) || property.PropertyType == typeof(decimal))
             {
                 if (string.IsNullOrEmpty(dataGridColumnCustom.StringFormat))
                 {

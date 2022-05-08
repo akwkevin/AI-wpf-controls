@@ -87,7 +87,6 @@
                                      controls:ControlAttach.ClearTextButton="{TemplateBinding controls:ControlAttach.ClearTextButton}"
                                      controls:ControlAttach.BorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"
                                      Style="{StaticResource AIStudio.Styles.TextBox}"/>
-                            <Button x:Name="PART_Button" Grid.Column="1" Style="{StaticResource AIStudio.Styles.Button.Plain}" Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyLeft}}" Padding="0" BorderThickness="0" controls:IconAttach.Geometry="{StaticResource CalendarGeometry}" Foreground="{TemplateBinding BorderBrush}" Focusable="False" Visibility="{TemplateBinding ShowDropDown,Converter={StaticResource BooleanToVisibilityConverter}}"/>
                             <controls:NotTopMostPopup x:Name="PART_Popup" MinWidth="{Binding Path=ActualWidth, ElementName=PART_Spinner}" VerticalOffset="1"  PopupAnimation="Fade" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=PART_Spinner}"/>
                         </Grid>
                     </controls:ButtonSpinner>
@@ -185,7 +184,6 @@
                                      controls:ControlAttach.ClearTextButton="{TemplateBinding controls:ControlAttach.ClearTextButton}"
                                      controls:ControlAttach.BorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.BorderBrush)}"
                                      Style="{StaticResource AIStudio.Styles.TextBox}"/>
-                            <Button x:Name="PART_Button" Grid.Column="1" Style="{StaticResource AIStudio.Styles.Button.Plain}" Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyLeft}}" Padding="0" BorderThickness="0" controls:IconAttach.Geometry="{StaticResource CalendarGeometry}" Foreground="{TemplateBinding BorderBrush}" Focusable="False" Visibility="{TemplateBinding ShowDropDown,Converter={StaticResource BooleanToVisibilityConverter}}"/>
                             <controls:NotTopMostPopup x:Name="PART_Popup" MinWidth="{Binding Path=ActualWidth, ElementName=PART_Spinner}" VerticalOffset="1"  PopupAnimation="Fade" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=PART_Spinner}"/>
                         </Grid>
                     </controls:ButtonSpinner>

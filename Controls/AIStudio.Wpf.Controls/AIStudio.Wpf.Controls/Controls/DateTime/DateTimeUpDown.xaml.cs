@@ -9,16 +9,8 @@ using AIStudio.Wpf.Controls.Event;
 
 namespace AIStudio.Wpf.Controls
 {
-    [TemplatePart(Name = PART_Popup, Type = typeof(Popup))]
-    [TemplatePart(Name = PART_Button, Type = typeof(FrameworkElement))]
     public class DateTimeUpDown : DateTimeUpDownBase<DateTime?>
     {
-        private const string PART_Popup = "PART_Popup";
-        private const string PART_Button = "PART_Button";
-
-        private FrameworkElement _button;
-        private Popup _popUp;
-
         #region Members
 
         private DateTime? _lastValidDate; //null
@@ -26,51 +18,7 @@ namespace AIStudio.Wpf.Controls
 
         #endregion
 
-        public static readonly DependencyProperty CalendarWithClockProperty = DependencyProperty.Register(
-           "CalendarWithClock", typeof(CalendarWithClock), typeof(DateTimeUpDown), new FrameworkPropertyMetadata(default(CalendarWithClock), FrameworkPropertyMetadataOptions.NotDataBindable, OnCalendarWithClockChanged));
-
-        private static void OnCalendarWithClockChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var ctl = (DateTimeUpDown)d;
-            var oldClock = e.OldValue as CalendarWithClock;
-            var newClock = e.NewValue as CalendarWithClock;
-
-            if (oldClock != null)
-            {
-                oldClock.SelectedDateTimeChanged -= ctl.CalendarWithClock_SelectedDateTimeChanged;
-                oldClock.Confirmed -= ctl.CalendarWithClock_Confirmed;
-            }
-
-            if (newClock != null)
-            {
-                newClock.IsShowConfirm = true;
-                newClock.SelectedDateTimeChanged += ctl.CalendarWithClock_SelectedDateTimeChanged;
-                newClock.Confirmed += ctl.CalendarWithClock_Confirmed;
-                newClock.SetValue(ShadowAttach.DropShadowEffectProperty, newClock.FindResource("ShadowDepth1"));
-            }
-        }
-
-        public CalendarWithClock CalendarWithClock
-        {
-            get => (CalendarWithClock)GetValue(CalendarWithClockProperty);
-            set => SetValue(CalendarWithClockProperty, value);
-        }
-
         #region Properties
-        public static readonly DependencyProperty ShowDropDownProperty = DependencyProperty.Register(
-                "ShowDropDown", typeof(bool), typeof(DateTimeUpDown), new PropertyMetadata(false));
-
-        public bool ShowDropDown
-        {
-            get
-            {
-                return (bool)GetValue(ShowDropDownProperty);
-            }
-            set
-            {
-                SetValue(ShowDropDownProperty, value);
-            }
-        }
 
         #region Format
 
@@ -103,8 +51,8 @@ namespace AIStudio.Wpf.Controls
 
         #region FormatString
 
-        public new static readonly DependencyProperty FormatStringProperty = DependencyProperty.Register("FormatString", typeof(string), typeof(DateTimeUpDown), new UIPropertyMetadata(default(String), OnFormatStringChanged), IsFormatStringValid);
-        public new string FormatString
+        public static readonly DependencyProperty FormatStringProperty = DependencyProperty.Register("FormatString", typeof(string), typeof(DateTimeUpDown), new UIPropertyMetadata(default(String), OnFormatStringChanged), IsFormatStringValid);
+        public string FormatString
         {
             get
             {
@@ -138,7 +86,7 @@ namespace AIStudio.Wpf.Controls
                 dateTimeUpDown.OnFormatStringChanged((string)e.OldValue, (string)e.NewValue);
         }
 
-        protected override void OnFormatStringChanged(string oldValue, string newValue)
+        protected virtual void OnFormatStringChanged(string oldValue, string newValue)
         {
             FormatUpdated();
         }
@@ -223,51 +171,15 @@ namespace AIStudio.Wpf.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DateTimeUpDown), new FrameworkPropertyMetadata(typeof(DateTimeUpDown)));
             MaximumProperty.OverrideMetadata(typeof(DateTimeUpDown), new FrameworkPropertyMetadata(DateTime.MaxValue));
             MinimumProperty.OverrideMetadata(typeof(DateTimeUpDown), new FrameworkPropertyMetadata(DateTime.MinValue));
-            UpdateValueOnEnterKeyProperty.OverrideMetadata(typeof(DateTimeUpDown), new FrameworkPropertyMetadata(true));
         }
 
         public DateTimeUpDown()
         {
-            CalendarWithClock = new CalendarWithClock
-            {
-                ClockName = "Flip",
-                IsShowConfirm = true
-            };
+            this.Loaded += this.DateTimeUpDown_Loaded;
         }
 
         #endregion //Constructors
 
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            this._button = GetTemplateChild(PART_Button) as FrameworkElement;
-
-            this._popUp = GetTemplateChild(PART_Popup) as Popup;
-            this._popUp.Child = this.CalendarWithClock;
-
-            this._button.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(_textBlock_MouseLeftButtonDown);
-        }
-
-        private void CalendarWithClock_Confirmed()
-        {
-            this._popUp.IsOpen = false;
-        }
-
-        private void CalendarWithClock_SelectedDateTimeChanged(object sender, FunctionEventArgs<DateTime?> e)
-        {
-            DateTime selectedDate = e.Info ?? new DateTime();
-            this.Value = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, selectedDate.Hour, selectedDate.Minute, selectedDate.Second);
-            if (!CalendarWithClock.IsShowConfirm)
-            {
-                this._popUp.IsOpen = false;
-            }
-        }
-
-        void _textBlock_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this._popUp.IsOpen = !(this._popUp.IsOpen);
-        }
         #region Base Class Overrides
 
         public override bool CommitInput()
@@ -286,7 +198,7 @@ namespace AIStudio.Wpf.Controls
         {
             if (this.IsCurrentValueValid())
             {
-                this.IncrementValue(this.Step);
+                this.Increment(this.Step);
             }
         }
 
@@ -294,7 +206,7 @@ namespace AIStudio.Wpf.Controls
         {
             if (this.IsCurrentValueValid())
             {
-                this.IncrementValue(-this.Step);
+                this.Increment(-this.Step);
             }
         }
 
@@ -317,7 +229,7 @@ namespace AIStudio.Wpf.Controls
             //Do not force "unspecified" to a time-zone specific
             //parsed text value. This would result in a lost of precision and
             //corrupt data. Let the value impose the Kind to the
-            //DateTimeUpDown. 
+            //DateTimePicker. 
             if (this.Kind != DateTimeKind.Unspecified)
             {
 
@@ -774,7 +686,7 @@ namespace AIStudio.Wpf.Controls
             return format.Length;
         }
 
-        private void IncrementValue(int step)
+        private void Increment(int step)
         {
             // if UpdateValueOnEnterKey is true, 
             // Sync Value on Text only when Enter Key is pressed.
@@ -827,7 +739,8 @@ namespace AIStudio.Wpf.Controls
         {
             string text = string.Empty;
 
-            _dateTimeInfoList.ForEach(info => {
+            _dateTimeInfoList.ForEach(info =>
+            {
                 if (info.Format == null)
                 {
                     info.StartPosition = text.Length;
@@ -900,7 +813,7 @@ namespace AIStudio.Wpf.Controls
                             case "u":
                                 return CultureInfo.DateTimeFormat.UniversalSortableDateTimePattern;
                             default:
-                                return FormatString ?? "yyyy-MM-dd";
+                                return FormatString;
                         }
                     }
                 default:
@@ -1032,6 +945,18 @@ namespace AIStudio.Wpf.Controls
         }
 
         #endregion //Methods
+
+        #region Event Handlers
+
+        private void DateTimeUpDown_Loaded(object sender, RoutedEventArgs e)
+        {
+            if ((this.Format == DateTimeFormat.Custom) && (string.IsNullOrEmpty(this.FormatString)))
+            {
+                throw new InvalidOperationException("A FormatString is necessary when Format is set to Custom.");
+            }
+        }
+
+        #endregion
     }
 
     public enum DateTimeFormat
