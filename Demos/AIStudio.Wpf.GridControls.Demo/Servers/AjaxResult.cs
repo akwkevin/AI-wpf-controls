@@ -8,7 +8,7 @@
         /// <summary>
         /// 是否成功
         /// </summary>
-        public bool Success { get; set; }
+        public bool Success { get; set; } = true;
 
         /// <summary>
         /// 错误代码
@@ -19,12 +19,5 @@
         /// 返回消息
         /// </summary>
         public string Msg { get; set; }
-
-        /// <summary>
-        /// 返回数据
-        /// </summary>
-        public object Data { get; set; }
-
-        public int Total { get; set; }
     }
 }

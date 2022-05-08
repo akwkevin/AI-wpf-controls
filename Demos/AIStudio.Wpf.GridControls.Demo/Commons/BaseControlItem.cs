@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Reflection;
 using System.Windows;
 using AIStudio.Wpf.Controls.Bindings;
@@ -152,7 +153,15 @@ namespace AIStudio.Wpf.GridControls.Demo.Commons
                 if (string.IsNullOrEmpty(item.PropertyName))
                     continue;
 
-                item.Value = value.GetType().GetProperty(item.PropertyName).GetValue(value);
+                if (value is ExpandoObject keyValuePairs)
+                {
+                    var dictionary = (IDictionary<string, object>)keyValuePairs;
+                    item.Value = dictionary[item.PropertyName];
+                }
+                else
+                {
+                    item.Value = value.GetType().GetProperty(item.PropertyName).GetValue(value);
+                }
             }
         }
 
@@ -165,34 +174,16 @@ namespace AIStudio.Wpf.GridControls.Demo.Commons
 
                 try
                 {
-
                     var propertyInfo = value.GetType().GetProperty(item.PropertyName);
-                    //object objvalue = item.Value;
-                    //if (propertyInfo.PropertyType == typeof(double))
-                    //{
-                    //    objvalue = double.Parse(objvalue?.ToString());
-                    //}
-                    //else if (propertyInfo.PropertyType == typeof(float))
-                    //{
-                    //    objvalue = float.Parse(objvalue?.ToString());
-                    //}
-                    //else if (propertyInfo.PropertyType == typeof(int))
-                    //{
-                    //    objvalue = int.Parse(objvalue?.ToString());
-                    //}
-                    //else if (propertyInfo.PropertyType == typeof(long))
-                    //{
-                    //    objvalue = long.Parse(objvalue?.ToString());
-                    //}
                     propertyInfo.SetValue(value, item.Value);
                 }
                 catch { }
             }
         }
 
-        public static Dictionary<string, string> ListToDictionary<T>(IEnumerable<T> items) where T : BaseControlItem
+        public static Dictionary<string, object> ListToDictionary<T>(IEnumerable<T> items) where T : BaseControlItem
         {
-            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            Dictionary<string, object> keyValue = new Dictionary<string, object>();
             foreach (var item in items)
             {
                 if (string.IsNullOrEmpty(item.PropertyName))
@@ -200,7 +191,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Commons
                 if (item.Value == null || item.Value.ToString() == string.Empty)
                     continue;
 
-                keyValue.Add(item.PropertyName, item.Value?.ToString());
+                keyValue.Add(item.PropertyName, item.Value);
             }
 
             return keyValue;

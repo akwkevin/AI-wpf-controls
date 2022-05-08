@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Newtonsoft.Json;
 
 namespace AIStudio.Wpf.GridControls.Demo.Commons
 {
@@ -39,6 +40,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Commons
             get; set;
         }
 
+        [JsonIgnore]
         public Style HeaderStyle
         {
             get; set;
@@ -90,7 +92,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Commons
             get; set;
         }
 
-        public IValueConverter Converter
+        public string Converter
         {
             get; set;
         }

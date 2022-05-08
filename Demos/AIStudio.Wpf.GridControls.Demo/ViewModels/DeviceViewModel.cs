@@ -5,9 +5,9 @@ using AIStudio.Wpf.GridControls.Demo.Models;
 
 namespace AIStudio.Wpf.GridControls.Demo.ViewModels
 {
-    public class DeviceViewModel: BaseViewModel<Device, Device_Query>
+    public class DeviceViewModel : BaseViewModel<Device, Device_Query>
     {
-        public DeviceViewModel():base()
+        public DeviceViewModel() : base()
         {
             Header = "设备";
         }

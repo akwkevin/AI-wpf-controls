@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
@@ -8,18 +9,24 @@ using AIStudio.Wpf.Controls.Bindings;
 using AIStudio.Wpf.Controls.Commands;
 using AIStudio.Wpf.GridControls.Demo.Attributes;
 using AIStudio.Wpf.GridControls.Demo.Commons;
+using AIStudio.Wpf.GridControls.Demo.Extensions;
 using AIStudio.Wpf.GridControls.Demo.Models;
 using AIStudio.Wpf.GridControls.Demo.Servers;
 using Newtonsoft.Json;
 
 namespace AIStudio.Wpf.GridControls.Demo.ViewModels
 {
-    public class BaseViewModel<T,Q>: BindableBase, IBaseViewModel where T : new()
+    public class DicBaseViewModel : BindableBase, IBaseViewModel
     {
         private IDataProvider _dataProvider = new DataProvider();
 
-        private ObservableCollection<T> _datas;
-        public ObservableCollection<T> Datas
+        public string Name
+        {
+            get;set;
+        }
+
+        private ObservableCollection<ExpandoObject> _datas;
+        public ObservableCollection<ExpandoObject> Datas
         {
             get
             {
@@ -31,8 +38,8 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             }
         }
 
-        private T _selectedData;
-        public T SelectedData
+        private ExpandoObject _selectedData;
+        public ExpandoObject SelectedData
         {
             get
             {
@@ -126,45 +133,24 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             }
         }
 
-        public BaseViewModel()
+        public DicBaseViewModel(string header, string name)
         {
-            var properties_query = typeof(Q).GetProperties();
-            var queryConditionItems = new List<QueryConditionItem>();
-            foreach (System.Reflection.PropertyInfo info in properties_query)
-            {
-                QueryConditionItem queryConditionItem = QueryConditionItem.GetQueryConditionItem(info);
-                if (queryConditionItem != null)
-                {
-                    queryConditionItems.Add(queryConditionItem);
-                }
-            }
-            queryConditionItems.OrderBy(p => p.DisplayIndex).ToList().ForEach(p => QueryConditionItems.Add(p)); 
+            Header = header;
+            Name = name;
 
-            QueryConditionItems.Add(new QueryConditionItem() { Header = "查询", ControlType = ControlType.Query, Visibility = System.Windows.Visibility.Visible });
-
-            var properties = typeof(T).GetProperties();
-            foreach (System.Reflection.PropertyInfo info in properties)
-            {
-                DataGridColumnCustom dataGridColumnCustom = ColumnHeaderAttribute.GetDataGridColumnCustom(info);
-                if (dataGridColumnCustom != null)
-                {
-                    DataGridColumns.Add(dataGridColumnCustom);
-                }
-            }
-
-            var editFormItems = new List<EditFormItem>();
-            foreach (System.Reflection.PropertyInfo info in properties)
-            {
-                EditFormItem editFormItem = EditFormItem.GetEditFormItem(info);
-                if (editFormItem != null)
-                {
-                    editFormItems.Add(editFormItem);
-                }
-            }
-            editFormItems.OrderBy(p => p.DisplayIndex).ToList().ForEach(p => EditFormItems.Add(p));
-            EditFormItems.Add(new EditFormItem() { Header = "提交", ControlType = ControlType.Submit, Visibility = System.Windows.Visibility.Visible });
-
+            GetConfig();
             Query();
+        }
+
+        public async void GetConfig()
+        {
+            var result = await _dataProvider.GetData<Tuple<List<QueryConditionItem>, List<DataGridColumnCustom>, List<EditFormItem>>>($"{Name}/GetGetConfig", JsonConvert.SerializeObject(Name));
+            if (result.Success == true)
+            {
+                result.Data.Item1.OrderBy(p => p.DisplayIndex).ToList().ForEach(p => QueryConditionItems.Add(p));
+                result.Data.Item2.OrderBy(p => p.DisplayIndex).ToList().ForEach(p => DataGridColumns.Add(p));
+                result.Data.Item3.OrderBy(p => p.DisplayIndex).ToList().ForEach(p => EditFormItems.Add(p));
+            }
         }
 
         public async void Query()
@@ -172,19 +158,18 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             var dic = QueryConditionItem.ListToDictionary(QueryConditionItems);
             Pagination.Keywords = dic;
 
-            var result = await _dataProvider.GetDataList<T>($"{typeof(T).Name}/GetDataList", JsonConvert.SerializeObject(Pagination));
+            var result = await _dataProvider.GetDataList<Dictionary<string, object>>($"{Name}/GetDicDataList", JsonConvert.SerializeObject(Pagination));
             if (result.Success == true)
             {
-                Datas = new ObservableCollection<T>(result.Data);
+                Datas = new ObservableCollection<ExpandoObject>(result.Data.Select(p => p.DicToExpandoObject()));
                 Pagination.Total = result.Total;
             }
         }
 
         public async void Submit()
         {
-            T device = new T();
-            BaseControlItem.ListToObject(device, EditFormItems);
-            var result = await _dataProvider.GetData<AjaxResult>($"{typeof(T).Name}/SaveData", JsonConvert.SerializeObject(device));
+            var dic = BaseControlItem.ListToDictionary(EditFormItems);
+            var result = await _dataProvider.GetData<AjaxResult>($"{Name}/SaveDicData", JsonConvert.SerializeObject(dic));
             if (result.Success == true)
             {
                 Controls.MessageBox.Show(System.Windows.Application.Current.MainWindow, "提交成功");
@@ -197,13 +182,12 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             QueryConditionConfigIsOpen = true;
         }
 
-        private void SelectedDataChanged(T value)
+        private void SelectedDataChanged(ExpandoObject value)
         {
             if (value != null)
             {
                 BaseControlItem.ObjectToList(value, EditFormItems);
             }
         }
-
     }
 }

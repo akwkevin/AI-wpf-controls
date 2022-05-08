@@ -112,7 +112,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Attributes
                 dataGridColumnCustom.Visibility = attribute.Visibility;
                 if (attribute.Converter != null)
                 {
-                    dataGridColumnCustom.Converter = Activator.CreateInstance(attribute.Converter) as IValueConverter;
+                    dataGridColumnCustom.Converter = attribute.Converter.FullName;
                     dataGridColumnCustom.ConverterParameter = attribute.ConverterParameter;
                 }
                 dataGridColumnCustom.ForegroundExpression = attribute.ForegroundExpression;

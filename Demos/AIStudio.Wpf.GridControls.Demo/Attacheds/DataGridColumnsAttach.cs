@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -122,11 +123,11 @@ namespace AIStudio.Wpf.GridControls.Demo
             {
                 bind.StringFormat = columnCustom.StringFormat;
             }
-            if (columnCustom.Converter != null)
-            {
-                bind.Converter = columnCustom.Converter;
-                bind.ConverterParameter = columnCustom.ConverterParameter;
-            }
+            //if (columnCustom.Converter != null)
+            //{
+            //    bind.Converter = Activator.CreateInstance(Assembly.GetExecutingAssembly().GetType(columnCustom.Converter)) as IValueConverter;
+            //    bind.ConverterParameter = columnCustom.ConverterParameter;
+            //}
 
             if (!string.IsNullOrEmpty(columnCustom.ForegroundExpression))
             {

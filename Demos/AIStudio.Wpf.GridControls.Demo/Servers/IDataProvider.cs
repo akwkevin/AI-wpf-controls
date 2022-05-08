@@ -14,5 +14,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Servers
 
         //[LogHandler]
         Task<AjaxResult<T>> GetData<T>(string url, string json = "{}");
+
+        Task<PageResult<T>> GetDataList<T>(string url, string json = "{}");
     }
 }

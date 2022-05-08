@@ -30,6 +30,9 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
         public MainViewModel()
         {
             Datas.Add(new DeviceViewModel());
+
+            DicBaseViewModel deviceviewmodel = new DicBaseViewModel("设备(无模型方法)", "Device");
+            Datas.Add(deviceviewmodel);
         }
     }
 

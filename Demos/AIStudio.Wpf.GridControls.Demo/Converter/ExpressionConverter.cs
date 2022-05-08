@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text;
 using System.Windows.Data;
 using org.mariuszgromada.math.mxparser;
@@ -29,8 +30,17 @@ namespace AIStudio.Wpf.GridControls.Demo.Converter
                             var paras = datas[0].Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
                             for (int i = 0; i < paras.Length; i++)
                             {
-                                Argument x = new Argument($"p{i}", value.GetType().GetProperty(paras[i]).GetValue(value).ToString());
-                                args.Add(x);
+                                if (value is ExpandoObject keyValuePairs)
+                                {
+                                    var dictionary = (IDictionary<string, object>)keyValuePairs;
+                                    Argument x = new Argument($"p{i}", dictionary[paras[i]].ToString());
+                                    args.Add(x);
+                                }
+                                else
+                                {
+                                    Argument x = new Argument($"p{i}", value.GetType().GetProperty(paras[i]).GetValue(value).ToString());
+                                    args.Add(x);
+                                }
                             }
                         }
                         Expression e = new Expression(datas[1], args.ToArray());

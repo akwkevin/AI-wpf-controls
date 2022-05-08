@@ -94,7 +94,7 @@ namespace AIStudio.Wpf.GridControls.Demo.Commons
             }
         }
 
-        public Dictionary<string, string> Keywords
+        public Dictionary<string, object> Keywords
         {
             get;set;
         }

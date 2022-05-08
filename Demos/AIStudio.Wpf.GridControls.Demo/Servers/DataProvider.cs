@@ -50,30 +50,72 @@ namespace AIStudio.Wpf.GridControls.Demo.Servers
         public async Task<AjaxResult<T>> GetData<T>(string url, string json = "{}")
         {
             var result = new AjaxResult<T>();
-            if (url.Contains("GetDataList"))
-            {
-                await Task.Run(() => {
-                    if (url.Contains("Device"))
-                    {
-                        var pagination = JsonConvert.DeserializeObject<Pagination>(json);
-                        var data = GetData(Devices, pagination);
-                        result.Data = JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(data.Item2));
-                        result.Total = data.Item1;
-                    }
-                });
-            }
-            else if (url.Contains("SaveData"))
+            if (url.Contains("SaveData"))
             {
                 await Task.Run(() => {
                     if (url.Contains("Device"))
                     {
                         var data = JsonConvert.DeserializeObject<Device>(json);
                         var olddata = Devices.FirstOrDefault(p => p.Id == data.Id);
-                        ObjectCopy.CopyTo(data, olddata);
+                        data.CopyTo(olddata);
                     }
                     result.Success = true;
                 });
             }
+            else if (url.Contains("SaveDicData"))
+            {
+                await Task.Run(() => {
+                    if (url.Contains("Device"))
+                    {
+                        var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                        var olddata = Devices.FirstOrDefault(p => p.Id == data["Id"]?.ToString());
+                        data.CopyTo(olddata);
+                    }
+                    result.Success = true;
+                });
+            }
+            else if (url.Contains("GetGetConfig"))
+            {
+                await Task.Run(() => {
+                    if (url.Contains("Device"))
+                    {
+                        result.Data = JsonConvert.DeserializeObject<T>(deviceconfig);
+                    }
+                    result.Success = true;
+                });
+            }
+            return result;
+        }
+
+        public async Task<PageResult<T>> GetDataList<T>(string url, string json = "{}")
+        {
+            var result = new PageResult<T>();
+            if (url.Contains("GetDataList"))
+            {
+                await Task.Run(() => {
+                    if (url.Contains("Device"))
+                    {
+                        var pagination = JsonConvert.DeserializeObject<Pagination>(json);
+                        var data = GetData(Devices.OfType<T>().ToList(), pagination);
+                        result.Data = data.Item2;
+                        result.Total = data.Item1;
+                    }
+                    result.Success = true;
+                });
+            }
+            else if (url.Contains("GetDicDataList"))
+            {
+                await Task.Run(() => {
+                    if (url.Contains("Device"))
+                    {
+                        var pagination = JsonConvert.DeserializeObject<Pagination>(json);
+                        var data = GetDicData(Devices, pagination);
+                        result.Data = data.Item2.OfType<T>().ToList();
+                        result.Total = data.Item1;
+                    }
+                    result.Success = true;
+                });
+            }           
             return result;
         }
 
@@ -106,36 +148,31 @@ namespace AIStudio.Wpf.GridControls.Demo.Servers
             }
         }
 
-        public class ObjectCopy
-{
-    public static PropertyInfo[] GetPropertyInfos(Type type)
-    {
-        return type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-    }
-    /// <summary>
-    /// 实体属性反射
-    /// </summary>
-    /// <typeparam name="S">赋值对象</typeparam>
-    /// <typeparam name="T">被赋值对象</typeparam>
-    /// <param name="s"></param>
-    /// <param name="t"></param>
-    public static void CopyTo<S, T>(S s, T t)
-    {
-        PropertyInfo[] pps = GetPropertyInfos(s.GetType());
-        Type target = t.GetType();
-
-        foreach (var pp in pps)
+        public Tuple<int, List<IDictionary<string, object>>> GetDicData<T>(List<T> datas, Pagination pagination)
         {
-            PropertyInfo targetPP = target.GetProperty(pp.Name);
-            object value = pp.GetValue(s, null);
-
-            if (targetPP != null && value != null)
+            var filterdatas = datas.Where(p => 1 == 1);
+            foreach (var dic in pagination.Keywords)
             {
-                targetPP.SetValue(t, value, null);
+                filterdatas = filterdatas.Where(p => p.GetType().GetProperty(dic.Key).GetValue(p) == dic.Value);
+            }
+
+            int count = filterdatas.Count();
+
+            if (pagination.SortType.ToLower() == "asc")
+            {
+                return new Tuple<int, List<IDictionary<string, object>>>(count, filterdatas.OrderBy(p => pagination.SortField)
+                    .Skip((pagination.PageIndex - 1) * pagination.PageRows)
+                    .Take(pagination.PageRows).Select(p => p.ModelToDic()).ToList());
+            }
+            else
+            {
+                return new Tuple<int, List<IDictionary<string, object>>>(count, filterdatas.OrderByDescending(p => pagination.SortField)
+                      .Skip((pagination.PageIndex - 1) * pagination.PageRows)
+                      .Take(pagination.PageRows).Select(p => p.ModelToDic()).ToList());
             }
         }
-    }
 
-}
+        //假设这些数据为配置在数据库中，这里为了简单，使用字符串保存一下。
+        readonly string deviceconfig = "{\"Item1\":[{\"DisplayIndex\":2147483647,\"Header\":\"名称\",\"PropertyName\":\"Name\",\"Value\":null,\"Visibility\":0,\"ControlType\":0,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":null,\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"模式1\",\"PropertyName\":\"Mode1\",\"Value\":null,\"Visibility\":2,\"ControlType\":0,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":null,\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"模式2\",\"PropertyName\":\"Mode2\",\"Value\":null,\"Visibility\":2,\"ControlType\":0,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":null,\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"数值1\",\"PropertyName\":\"Value1\",\"Value\":null,\"Visibility\":2,\"ControlType\":8,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"f3\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"时间\",\"PropertyName\":\"DateTime\",\"Value\":null,\"Visibility\":0,\"ControlType\":10,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"yyyy-MM-dd HH:mm:ss\",\"IsReadOnly\":false},{\"DisplayIndex\":0,\"Header\":\"查询\",\"PropertyName\":null,\"Value\":null,\"Visibility\":0,\"ControlType\":11,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":null,\"IsReadOnly\":false}],\"Item2\":[{\"DisplayIndex\":2147483647,\"Binding\":\"Mode1\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Mode1\",\"Visibility\":2,\"Header\":\"模式1\",\"StringFormat\":null,\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":1,\"Binding\":\"Mode2\",\"CellStyle\":null,\"CanUserSort\":false,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Mode2\",\"Visibility\":0,\"Header\":\"模式2\",\"StringFormat\":null,\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":0,\"Binding\":\"Id\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Id\",\"Visibility\":0,\"Header\":\"名称\",\"StringFormat\":null,\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"Value1\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Value1\",\"Visibility\":0,\"Header\":\"数值1\",\"StringFormat\":\"f3\",\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"Value2\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Value2\",\"Visibility\":0,\"Header\":\"数值2\",\"StringFormat\":\"f3\",\"Converter\":\"AIStudio.Wpf.Controls.Converter.AdditionConverter\",\"ConverterParameter\":1,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"Value3\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Value3\",\"Visibility\":0,\"Header\":\"数值3\",\"StringFormat\":\"f3\",\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":\";_p0<50_#FF0078D7——;_50<=p0 && p0<100_Red\",\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"Value4\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Value4\",\"Visibility\":0,\"Header\":\"数值4\",\"StringFormat\":\"f3\",\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":\"Value4;Value5_p0<p1_Red\",\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"Value5\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Value5\",\"Visibility\":0,\"Header\":\"Value5\",\"StringFormat\":\"f3\",\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"Value6\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Value6\",\"Visibility\":0,\"Header\":\"数值6\",\"StringFormat\":\"n0\",\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":\";_p0<50_#FF0078D7——;_50<=p0 && p0<100_Red\",\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"Value7\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Value7\",\"Visibility\":0,\"Header\":\"Value7\",\"StringFormat\":\"n0\",\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"Value8\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Value8\",\"Visibility\":0,\"Header\":\"Value8\",\"StringFormat\":\"n0\",\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"Value9\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"Value9\",\"Visibility\":0,\"Header\":\"Value9\",\"StringFormat\":\"n0\",\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0},{\"DisplayIndex\":2147483647,\"Binding\":\"DateTime\",\"CellStyle\":null,\"CanUserSort\":true,\"CanUserResize\":false,\"CanUserReorder\":false,\"Width\":\"Auto\",\"IsFrozen\":false,\"IsReadOnly\":false,\"MaxWidth\":0.0,\"MinWidth\":0.0,\"SortMemberPath\":\"DateTime\",\"Visibility\":0,\"Header\":\"时间\",\"StringFormat\":\"yyyy-MM-dd HH:mm:ss\",\"Converter\":null,\"ConverterParameter\":null,\"ForegroundExpression\":null,\"BackgroundExpression\":null,\"HorizontalAlignment\":0}],\"Item3\":[{\"DisplayIndex\":0,\"Header\":\"名称\",\"PropertyName\":\"Id\",\"Value\":null,\"Visibility\":0,\"ControlType\":0,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":null,\"IsReadOnly\":true},{\"DisplayIndex\":1,\"Header\":\"模式2\",\"PropertyName\":\"Mode2\",\"Value\":null,\"Visibility\":0,\"ControlType\":0,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":null,\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"模式1\",\"PropertyName\":\"Mode1\",\"Value\":null,\"Visibility\":2,\"ControlType\":0,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":null,\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"数值1\",\"PropertyName\":\"Value1\",\"Value\":null,\"Visibility\":0,\"ControlType\":8,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"f3\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"数值2\",\"PropertyName\":\"Value2\",\"Value\":null,\"Visibility\":0,\"ControlType\":8,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"f3\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"数值3\",\"PropertyName\":\"Value3\",\"Value\":null,\"Visibility\":0,\"ControlType\":8,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"f3\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"数值4\",\"PropertyName\":\"Value4\",\"Value\":null,\"Visibility\":0,\"ControlType\":8,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"f3\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"Value5\",\"PropertyName\":\"Value5\",\"Value\":null,\"Visibility\":0,\"ControlType\":8,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"f3\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"数值6\",\"PropertyName\":\"Value6\",\"Value\":null,\"Visibility\":0,\"ControlType\":6,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"n0\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"Value7\",\"PropertyName\":\"Value7\",\"Value\":null,\"Visibility\":0,\"ControlType\":6,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"n0\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"Value8\",\"PropertyName\":\"Value8\",\"Value\":null,\"Visibility\":0,\"ControlType\":6,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"n0\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"Value9\",\"PropertyName\":\"Value9\",\"Value\":null,\"Visibility\":0,\"ControlType\":6,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"n0\",\"IsReadOnly\":false},{\"DisplayIndex\":2147483647,\"Header\":\"时间\",\"PropertyName\":\"DateTime\",\"Value\":null,\"Visibility\":0,\"ControlType\":10,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":\"yyyy-MM-dd HH:mm:ss\",\"IsReadOnly\":false},{\"DisplayIndex\":0,\"Header\":\"提交\",\"PropertyName\":null,\"Value\":null,\"Visibility\":0,\"ControlType\":12,\"ItemSource\":null,\"IsRequired\":false,\"StringFormat\":null,\"IsReadOnly\":false}]}";
     }
 }
