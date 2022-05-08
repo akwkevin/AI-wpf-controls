@@ -202,7 +202,7 @@
     <Style x:Key="AIStudio.Styles.DataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
         <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignDivider}" />
         <Setter Property="BorderThickness" Value="0 0 0 1" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontWeight" Value="SemiBold" />

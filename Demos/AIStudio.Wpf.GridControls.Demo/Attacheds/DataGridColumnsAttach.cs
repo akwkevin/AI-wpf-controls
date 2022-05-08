@@ -93,11 +93,18 @@ namespace AIStudio.Wpf.GridControls.Demo
 
         private static DataGridColumn GetDataColumn(DataGridColumnCustom columnCustom)
         {
+            //var column = new DataGridTextColumn();
+            //column.IsReadOnly = true;
+            //column.Header = columnCustom.Header;
+            //column.Binding = new Binding(columnCustom.Binding);
+
             var column = new DataGridTemplateColumn();
             column.IsReadOnly = true;
             column.Header = columnCustom.Header;
             column.DisplayIndex = columnCustom.DisplayIndex;
             column.Visibility = columnCustom.Visibility;
+            column.CanUserSort = true;
+            column.SortMemberPath = columnCustom.Binding;
 
             DataTemplate dt = new DataTemplate();
 
@@ -118,7 +125,7 @@ namespace AIStudio.Wpf.GridControls.Demo
             {
                 bind.Converter = columnCustom.Converter;
                 bind.ConverterParameter = columnCustom.ConverterParameter;
-            }            
+            }
 
             if (!string.IsNullOrEmpty(columnCustom.ForegroundExpression))
             {

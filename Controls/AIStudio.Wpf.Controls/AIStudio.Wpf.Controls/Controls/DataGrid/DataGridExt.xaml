@@ -11,7 +11,7 @@
     <Style x:Key="AIStudio.Styles.DataGridColumnHeaderExt" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource AIStudio.Styles.DataGridColumnHeader}">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray5}" />
         <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
         <Setter Property="Template">
             <Setter.Value>

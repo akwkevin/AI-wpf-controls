@@ -150,24 +150,6 @@
                             CanUserSortColumns="True"
                             CanUserAddRows="False"
                             AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="数值10" Binding="{Binding Value10}" IsReadOnly="True">
-                    <agc:ColumnFilter.Initializers>
-                        <agc:FilterInitializersManager>
-                            <agc:LessOrEqualFilterInitializer />
-                            <agc:GreaterOrEqualFilterInitializer />
-                            <agc:RangeFilterInitializer />
-                        </agc:FilterInitializersManager>
-                    </agc:ColumnFilter.Initializers>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="时间" Binding="{Binding DateTime, StringFormat=yyyy-MM-dd HH:mm:ss}">
-                    <agc:ColumnFilter.Initializers>
-                        <agc:FilterInitializersManager>
-                            <agc:DateTimeRangeFilterInitializer />
-                        </agc:FilterInitializersManager>
-                    </agc:ColumnFilter.Initializers>
-                </DataGridTextColumn>
-            </DataGrid.Columns>
         </agc:FilterDataGrid>
         <ItemsControl Grid.Row="2" ItemsSource="{Binding EditFormItems}">
             <ItemsControl.ItemsPanel>

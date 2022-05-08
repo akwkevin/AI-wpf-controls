@@ -221,12 +221,19 @@ namespace AIStudio.Wpf.GridControls
             else if (column is DataGridTemplateColumn)
             {
                 DataGridTemplateColumn templateColumn = column as DataGridTemplateColumn;
-                string header = templateColumn.Header as string;
-                if (header == null)
+                if (templateColumn.SortMemberPath != null)
                 {
-                    return null;
+                    bindingPath = templateColumn.SortMemberPath;
                 }
-                bindingPath = header;
+                else
+                {
+                    string header = templateColumn.Header as string;
+                    if (header == null)
+                    {
+                        return null;
+                    }
+                    bindingPath = header;
+                }               
             }
             else if (column is DataGridComboBoxColumn)
             {

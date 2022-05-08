@@ -729,18 +729,13 @@
     </Style>
 
     <Style x:Key="AIStudio.Styles.Thumb.ColumnHeaderGripper.Filter" TargetType="{x:Type Thumb}">
-        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Separator}" />
-        <Setter Property="Cursor" Value="SizeNS" />
-        <Setter Property="Height" Value="6" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Width" Value="8" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="SizeWE" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Border Margin="{TemplateBinding Padding}"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Background="Transparent"
-                            BorderBrush="{TemplateBinding Background}"
-                            BorderThickness="0 0 0 1" />
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -762,19 +757,21 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>    
+    </Style>
 
     <Style x:Key="AIStudio.Styles.DataGridColumnHeader.Filter" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
-        <Setter Property="BorderThickness" Value="0 0 0 1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray5}" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="Padding" Value="1" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="1,0,1,0" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0" />
         <Setter Property="MinHeight" Value="25" />
+        <Setter Property="MinWidth" Value="5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -816,19 +813,20 @@
                               RenderTransformOrigin="0.5,0.5"
                               Stretch="Fill"
                               Visibility="Collapsed" />
-                        
                         <Thumb x:Name="PART_LeftHeaderGripper"
-                               Grid.ColumnSpan="2"
                                HorizontalAlignment="Left"
-                               Style="{StaticResource AIStudio.Styles.Thumb.ColumnHeaderGripper.Filter}"
-                               Background="Transparent" />
+                               Background="Transparent"
+                               Style="{StaticResource AIStudio.Styles.Thumb.ColumnHeaderGripper.Filter}" />
 
                         <Thumb x:Name="PART_RightHeaderGripper"
-                               Grid.ColumnSpan="2"
+                               Grid.Column="1"
                                HorizontalAlignment="Right"
                                Style="{StaticResource AIStudio.Styles.Thumb.ColumnHeaderGripper.Filter}" />
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True" >
+                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{DynamicResource MahApps.Brushes.Gray5}" />
+                        </Trigger>
                         <Trigger Property="SortDirection" Value="Ascending">
                             <Setter TargetName="SortArrow" Property="Data" Value="M5,10 H14 L9.5,4.5 Z" />
                             <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
@@ -841,22 +839,13 @@
                         <Trigger Property="DisplayIndex" Value="0">
                             <Setter TargetName="PART_LeftHeaderGripper" Property="Visibility" Value="Collapsed" />
                         </Trigger>
+                        <Trigger Property="IsEnabled"  Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                    <Condition Property="SortDirection" Value="{x:Null}" />
-                </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.Background.MouseOver}" />
-            </MultiTrigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <Style x:Key="AIStudio.Styles.DataGridRowHeader.Filter" TargetType="{x:Type DataGridRowHeader}">
@@ -910,12 +899,12 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="AIStudio.Styles.DataGridCell.Filter" TargetType="{x:Type DataGridCell}">       
+    <Style x:Key="AIStudio.Styles.DataGridCell.Filter" TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="1,0,1,0" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0,0,0,0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>

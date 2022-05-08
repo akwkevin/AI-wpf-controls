@@ -11,7 +11,7 @@
     <Style x:Key="AIStudio.Styles.DataGridColumnHeaderExt" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource AIStudio.Styles.DataGridColumnHeader}">
         <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignDivider}" />
         <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
         <Setter Property="Template">
             <Setter.Value>
