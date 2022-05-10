@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using AIStudio.Wpf.GridControls.Demo.Commons;
+using AIStudio.Wpf.GridControls.Demo.Extensions;
 using AIStudio.Wpf.GridControls.Demo.Models;
 
 namespace AIStudio.Wpf.GridControls.Demo
@@ -45,11 +46,10 @@ namespace AIStudio.Wpf.GridControls.Demo
                     return;
                 }
 
-                var colums1 = columns.Where(p => p.DisplayIndex == int.MaxValue).Reverse().ToList();
+                var colums1 = columns.Where(p => p.DisplayIndex == int.MaxValue).ToList();
                 var colums2 = columns.Except(colums1).OrderBy(p => p.DisplayIndex).ToList();
                 foreach (DataGridColumnCustom column in colums1)
                 {
-                    column.DisplayIndex = 0;
                     dataGrid.Columns.Add(GetDataColumn(column));
                 }
                 foreach (DataGridColumnCustom column in colums2)
@@ -103,7 +103,10 @@ namespace AIStudio.Wpf.GridControls.Demo
             var column = new DataGridTemplateColumn();
             column.IsReadOnly = true;
             column.Header = columnCustom.Header;
-            column.DisplayIndex = columnCustom.DisplayIndex;
+            if (columnCustom.DisplayIndex != int.MaxValue)
+            {
+                column.DisplayIndex = columnCustom.DisplayIndex;
+            }
             column.Visibility = columnCustom.Visibility;
             column.CanUserSort = columnCustom.CanUserSort;
             column.SortMemberPath = columnCustom.SortMemberPath;
@@ -123,11 +126,11 @@ namespace AIStudio.Wpf.GridControls.Demo
             {
                 bind.StringFormat = columnCustom.StringFormat;
             }
-            //if (columnCustom.Converter != null)
-            //{
-            //    bind.Converter = Activator.CreateInstance(Assembly.GetExecutingAssembly().GetType(columnCustom.Converter)) as IValueConverter;
-            //    bind.ConverterParameter = columnCustom.ConverterParameter;
-            //}
+            if (columnCustom.Converter != null)
+            {
+                bind.Converter = Activator.CreateInstance(columnCustom.Converter.GetAssemblyType()) as IValueConverter;
+                bind.ConverterParameter = columnCustom.ConverterParameter;
+            }
 
             if (!string.IsNullOrEmpty(columnCustom.ForegroundExpression))
             {

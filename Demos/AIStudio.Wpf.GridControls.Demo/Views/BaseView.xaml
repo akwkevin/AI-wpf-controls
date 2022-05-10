@@ -140,7 +140,7 @@
         </Grid>
         <agc:FilterDataGrid x:Name="datagrid" 
                             Grid.Row="1"
-                            ItemsSource="{Binding Datas,IsAsync=True}"
+                            ItemsSource="{Binding Datas}"
                             SelectedItem="{Binding SelectedData}"
                             local:DataGridColumnsAttach.BindableColumns="{Binding DataGridColumns}"
                             EnableColumnVirtualization="False"
