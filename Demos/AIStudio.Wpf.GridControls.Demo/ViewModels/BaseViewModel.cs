@@ -187,7 +187,6 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             var result = await _dataProvider.GetData<AjaxResult>($"{typeof(T).Name}/SaveData", JsonConvert.SerializeObject(device));
             if (result.Success == true)
             {
-                Controls.MessageBox.Show(System.Windows.Application.Current.MainWindow, "提交成功");
                 Query();
             }
         }

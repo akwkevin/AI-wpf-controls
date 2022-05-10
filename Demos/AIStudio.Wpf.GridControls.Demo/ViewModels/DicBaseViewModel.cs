@@ -144,7 +144,7 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
 
         public async void GetConfig()
         {
-            var result = await _dataProvider.GetData<Tuple<List<QueryConditionItem>, List<DataGridColumnCustom>, List<EditFormItem>>>($"{Name}/GetGetConfig", JsonConvert.SerializeObject(Name));
+            var result = await _dataProvider.GetData<Tuple<List<QueryConditionItem>, List<DataGridColumnCustom>, List<EditFormItem>>>($"{Name}/GetConfig", JsonConvert.SerializeObject(Name));
             if (result.Success == true)
             {
                 result.Data.Item1.OrderBy(p => p.DisplayIndex).ToList().ForEach(p => QueryConditionItems.Add(p));
@@ -172,7 +172,6 @@ namespace AIStudio.Wpf.GridControls.Demo.ViewModels
             var result = await _dataProvider.GetData<AjaxResult>($"{Name}/SaveDicData", JsonConvert.SerializeObject(dic));
             if (result.Success == true)
             {
-                Controls.MessageBox.Show(System.Windows.Application.Current.MainWindow, "提交成功");
                 Query();
             }
         }
