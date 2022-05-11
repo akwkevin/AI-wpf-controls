@@ -6,12 +6,14 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/TransitioningContent/TransitioningContentControl.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/SplitView/SplitView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/SplitView/SplitView.MaterialDesign.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Menu.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ToggleButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converter:MathConverter Operation="Multiply" x:Key="MathConverter"/>
+    <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
 
     <Geometry x:Key="Checkmark">M 0,5.1 L 1.7,5.2 L 3.4,7.1 L 8,0.4 L 9.2,0 L 3.3,10.8 Z</Geometry>
     <Geometry x:Key="RightArrow">M 0,0 L 4,3.5 L 0,7 Z</Geometry>
@@ -281,6 +283,7 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="MenuItem.Icon" Value="{x:Null}"/>
         <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type MenuBase}},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.6}" />
+        <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType={x:Type MenuBase}}}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
         <Style.Triggers>
@@ -328,6 +331,8 @@
         <Setter Property="OpenPaneLength" Value="{DynamicResource AIStudio.Hamburger.Size.OpenPanel}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="PaneBackground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
         <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -453,8 +458,8 @@
                                           ItemTemplate ="{TemplateBinding MenuItemTemplate}"
                                           ItemsSource="{TemplateBinding ItemsSource}"
                                           Style="{StaticResource AIStudio.Styles.Menu.Left}" 
-                                          Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
-                                          controls:ControlAttach.Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                          controls:ControlAttach.Foreground="{Binding PaneBackground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}" 
+                                          Background="Transparent"
                                           Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
                                           TabIndex="1" />
 
@@ -491,8 +496,8 @@
                                               ItemContainerStyle="{StaticResource AIStudio.Styles.MenuItem.HamburgerTreeMenu}" 
                                               ItemTemplate ="{TemplateBinding OptionsItemTemplate}"
                                               ItemsSource="{TemplateBinding OptionsItemsSource}"
-                                              Style="{StaticResource AIStudio.Styles.Menu.Left}" 
-                                              controls:ControlAttach.Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                              Style="{StaticResource AIStudio.Styles.Menu.Left}"                                               
+                                              controls:ControlAttach.Foreground="{Binding PaneBackground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}" 
                                               Background="Transparent"
                                               Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
                                               TabIndex="3" />

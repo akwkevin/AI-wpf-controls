@@ -184,17 +184,18 @@
                                                 controls:IconAttach.Width="{TemplateBinding controls:IconAttach.Width}" 
                                                 controls:IconAttach.Height="{TemplateBinding controls:IconAttach.Height}"/>
                                         </StackPanel>
-                                        <!--  the right window commands  -->
-                                        <ContentPresenter x:Name="PART_RightWindowCommands"
+                                        <DockPanel x:Name="PART_Header">
+                                            <!--  the right window commands  -->
+                                            <ContentPresenter x:Name="PART_RightWindowCommands"
                                                 Content="{Binding RightWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                                 DockPanel.Dock="Right"
                                                 Focusable="False" />
-                                        <!--  the left window commands  -->
-                                        <ContentPresenter x:Name="PART_LeftWindowCommands"
+                                            <!--  the left window commands  -->
+                                            <ContentPresenter x:Name="PART_LeftWindowCommands"
                                                 Content="{Binding LeftWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                                 DockPanel.Dock="Left"
                                                 Focusable="False" />
-
+                                        </DockPanel>
                                     </DockPanel>
                                 </Border>
 

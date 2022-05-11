@@ -181,7 +181,7 @@
                                     IsTabStop="False"
                                     Template="{DynamicResource {ComponentResourceKey ResourceId=SubmenuContent, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                         <Grid>
-                            <Rectangle x:Name="LayoutRoot" Fill="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            <Rectangle x:Name="LayoutRoot" Fill="{TemplateBinding controls:ControlAttach.Foreground}" />
                             <ScrollViewer x:Name="SubMenuScrollViewer"
                                       Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}"
                                       CanContentScroll="True">
@@ -287,7 +287,7 @@
                                     IsTabStop="False"
                                     Template="{DynamicResource {ComponentResourceKey ResourceId=SubmenuContent, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                         <Grid>
-                            <Rectangle x:Name="LayoutRoot" Fill="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            <Rectangle x:Name="LayoutRoot" Fill="{TemplateBinding controls:ControlAttach.Foreground}" />
                             <ScrollViewer x:Name="SubMenuScrollViewer"
                                       Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}"
                                       CanContentScroll="True">
@@ -474,7 +474,7 @@
                                     IsTabStop="False"
                                     Template="{DynamicResource {ComponentResourceKey ResourceId=SubmenuContent, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                         <Grid>
-                            <Rectangle x:Name="LayoutRoot" Fill="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            <Rectangle x:Name="LayoutRoot" Fill="{TemplateBinding controls:ControlAttach.Foreground}" />
                             <ScrollViewer x:Name="SubMenuScrollViewer"
                                       Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}"
                                       CanContentScroll="True">

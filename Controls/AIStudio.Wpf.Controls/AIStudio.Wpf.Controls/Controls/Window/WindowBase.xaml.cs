@@ -28,7 +28,7 @@ namespace AIStudio.Wpf.Controls
     [TemplatePart(Name = PART_OverlayGrid, Type = typeof(Grid))]
     [TemplatePart(Name = PART_WaitingGrid, Type = typeof(Grid))]
     [TemplatePart(Name = PART_TitleBar, Type = typeof(UIElement))]
-
+    [TemplatePart(Name = PART_Header, Type = typeof(Panel))]
     public class WindowBase : System.Windows.Window
     {
         private const string PART_FlyoutModal = "PART_FlyoutModal";
@@ -40,6 +40,7 @@ namespace AIStudio.Wpf.Controls
         private const string PART_OverlayGrid = "PART_OverlayGrid";
         private const string PART_WaitingGrid = "PART_WaitingGrid";
         private const string PART_TitleBar = "PART_TitleBar";
+        private const string PART_Header = "PART_Header";
 
         internal Grid overlayBox;
         internal Grid metroActiveDialogContainer;
@@ -50,6 +51,7 @@ namespace AIStudio.Wpf.Controls
         internal Grid overlayGrid;
         internal Grid waitingGrid;
         internal UIElement titleBar;
+        internal Panel headerPanel;
 
         static WindowBase()
         {
@@ -96,6 +98,7 @@ namespace AIStudio.Wpf.Controls
             overlayGrid = GetTemplateChild(PART_OverlayGrid) as Grid;
             waitingGrid = GetTemplateChild(PART_WaitingGrid) as Grid;
             titleBar = GetTemplateChild(PART_TitleBar) as UIElement;
+            headerPanel = GetTemplateChild(PART_Header) as Panel;
             if (titleBar != null)
             {
                 titleBar.MouseLeftButtonDown += TitleBar_MouseLeftButtonDown;
@@ -1103,9 +1106,9 @@ namespace AIStudio.Wpf.Controls
         private void SetVisibiltyForAllTitleElements(bool visible)
         {
             var newVisibility = visible && this.ShowTitleBar ? Visibility.Visible : Visibility.Collapsed;
-            if (this.titleBar != null)
+            if (this.headerPanel != null)
             {
-                this.titleBar.Visibility = newVisibility;
+                this.headerPanel.Visibility = newVisibility;
             }
         }
 

@@ -66,7 +66,7 @@
         <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
         <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
         <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
-        <Setter Property="CaptionHeight" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
+        <Setter Property="CaptionHeight" Value="{DynamicResource DefaultHeaderHeight}"/>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome ResizeBorderThickness="10" CaptionHeight="0" GlassFrameThickness="3" CornerRadius="0" />
@@ -184,16 +184,19 @@
                                                 controls:IconAttach.Width="{TemplateBinding controls:IconAttach.Width}" 
                                                 controls:IconAttach.Height="{TemplateBinding controls:IconAttach.Height}"/>
                                         </StackPanel>
-                                        <!--  the right window commands  -->
-                                        <ContentPresenter x:Name="PART_RightWindowCommands"
+
+                                        <DockPanel x:Name="PART_Header">
+                                            <!--  the right window commands  -->
+                                            <ContentPresenter x:Name="PART_RightWindowCommands"
                                                 Content="{Binding RightWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                                 DockPanel.Dock="Right"
                                                 Focusable="False" />
-                                        <!--  the left window commands  -->
-                                        <ContentPresenter x:Name="PART_LeftWindowCommands"
+                                            <!--  the left window commands  -->
+                                            <ContentPresenter x:Name="PART_LeftWindowCommands"
                                                 Content="{Binding LeftWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                                 DockPanel.Dock="Left"
                                                 Focusable="False" />
+                                        </DockPanel>
 
                                     </DockPanel>
                                 </Border>
@@ -281,6 +284,7 @@
         <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
         <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
         <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
+        <Setter Property="CaptionHeight" Value="{DynamicResource DefaultHeaderHeight}"/>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome ResizeBorderThickness="10" CaptionHeight="0" GlassFrameThickness="3" CornerRadius="0" />

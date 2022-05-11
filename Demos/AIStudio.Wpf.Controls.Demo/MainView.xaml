@@ -106,7 +106,21 @@
                             CommandParameter="Popup"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}"
                             Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
-                  
+
+                    <!--<Menu VerticalAlignment="Center" Style="{DynamicResource AIStudio.Styles.Menu}">
+                        <MenuItem Header="窗口">                           
+                            <MenuItem Header="任务栏显示"
+                                IsCheckable="True"
+                                IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ac:WindowBase}}, Path=ShowInTaskbar}" />
+                            <MenuItem Header="总在最前"
+                                IsCheckable="True"
+                                IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ac:WindowBase}}, Path=Topmost}" />
+                            <MenuItem Header="最大化全屏"
+                                IsCheckable="True"
+                                IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ac:WindowBase}}, Path=ToggleFullScreen}" />
+                        </MenuItem>
+                    </Menu>-->
+
                 </DockPanel>
             </ac:WindowBaseTitleBar.RightWindowCommands>
         </ac:WindowBaseTitleBar>       

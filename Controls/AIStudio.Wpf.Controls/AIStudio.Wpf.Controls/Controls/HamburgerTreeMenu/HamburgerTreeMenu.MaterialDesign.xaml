@@ -283,6 +283,7 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="MenuItem.Icon" Value="{x:Null}"/>
         <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type MenuBase}},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.6}" />
+        <Setter Property="controls:ControlAttach.Foreground" Value="{Binding Path=(controls:ControlAttach.Foreground),RelativeSource={RelativeSource AncestorType={x:Type MenuBase}}}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
         <Style.Triggers>
@@ -330,6 +331,8 @@
         <Setter Property="OpenPaneLength" Value="{DynamicResource AIStudio.Hamburger.Size.OpenPanel}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="PaneBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}" />
         <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -455,8 +458,8 @@
                                           ItemTemplate ="{TemplateBinding MenuItemTemplate}"
                                           ItemsSource="{TemplateBinding ItemsSource}"
                                           Style="{StaticResource AIStudio.Styles.Menu.Left}" 
-                                          Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
-                                          controls:ControlAttach.Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                          controls:ControlAttach.Foreground="{Binding PaneBackground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}" 
+                                          Background="Transparent"
                                           Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
                                           TabIndex="1" />
 
@@ -493,8 +496,8 @@
                                               ItemContainerStyle="{StaticResource AIStudio.Styles.MenuItem.HamburgerTreeMenu}" 
                                               ItemTemplate ="{TemplateBinding OptionsItemTemplate}"
                                               ItemsSource="{TemplateBinding OptionsItemsSource}"
-                                              Style="{StaticResource AIStudio.Styles.Menu.Left}" 
-                                              controls:ControlAttach.Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
+                                              Style="{StaticResource AIStudio.Styles.Menu.Left}"                                               
+                                              controls:ControlAttach.Foreground="{Binding PaneBackground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}" 
                                               Background="Transparent"
                                               Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
                                               TabIndex="3" />
