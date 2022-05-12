@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="$(DefineConstants.Contains(NETCOREAPP))">
-    <PackageReference Include="System.Drawing.Common" Version="5.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
   
   <ItemGroup>
@@ -24,6 +24,10 @@
     <Resource Include="Resources\笔刷.png" />
     <Resource Include="Resources\箭头.png" />
     <Resource Include="Resources\设置.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
   </ItemGroup>
   
 </Project>

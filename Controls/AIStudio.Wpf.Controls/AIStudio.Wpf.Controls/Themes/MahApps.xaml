@@ -142,6 +142,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Verify/TextClickVerify.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/UserControl/AIStudioUserControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/BaseDialog/BaseDialog.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/BaseDialog/MessageBoxDialogStyle.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/Flyout/Flyout.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/Flyout/FlyoutsControl.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/Snackbar/Snackbar.xaml"/>

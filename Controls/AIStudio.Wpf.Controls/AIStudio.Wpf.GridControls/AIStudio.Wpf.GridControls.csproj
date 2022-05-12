@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <UseWPF>true</UseWPF>
+    <Authors>akwkevin</Authors>
+    <PackageProjectUrl>https://gitee.com/akwkevin</PackageProjectUrl>
+    <PackageIcon>A.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +21,21 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\AIStudio.Wpf.Controls\Resources\A.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="A.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
   </ItemGroup>
 
 </Project>

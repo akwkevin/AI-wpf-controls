@@ -30,4 +30,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
+
 </Project>

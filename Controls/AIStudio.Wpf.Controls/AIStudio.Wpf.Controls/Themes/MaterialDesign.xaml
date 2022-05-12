@@ -142,6 +142,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Verify/TextClickVerify.MaterialDesgin.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/UserControl/AIStudioUserControl.MaterialDesign.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/BaseDialog/BaseDialog.MaterialDesign.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/BaseDialog/MessageBoxDialogStyle.MaterialDesign.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/Flyout/Flyout.MaterialDesign.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/Flyout/FlyoutsControl.MaterialDesign.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/Snackbar/Snackbar.MaterialDesign.xaml"/>

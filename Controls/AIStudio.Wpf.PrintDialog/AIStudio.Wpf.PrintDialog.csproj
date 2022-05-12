@@ -62,4 +62,8 @@
     <Resource Include="Resources\WindowIcons\Icon 64x64.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
+
 </Project>

@@ -45,5 +45,9 @@
     <Resource Include="Images\PinRestore_Dark.png" />
     <Resource Include="Images\VTabGroup.png" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
  
 </Project>

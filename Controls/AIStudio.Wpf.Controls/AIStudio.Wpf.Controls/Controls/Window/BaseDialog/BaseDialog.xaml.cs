@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using AIStudio.Wpf.Controls.Helper;
 
 namespace AIStudio.Wpf.Controls
 {
@@ -31,14 +32,14 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// 取消
         /// </summary>
-        Button PART_NegativeButton = null;
+        protected Button PART_NegativeButton = null;
         /// <summary>
         /// 确定
         /// </summary>
-        Button PART_AffirmativeButton = null;
-        Button PART_OtherButton = null;
-        Button PART_OtherButton2 = null;
-        Button PART_OtherButton3 = null;
+        protected Button PART_AffirmativeButton = null;
+        protected Button PART_OtherButton = null;
+        protected Button PART_OtherButton2 = null;
+        protected Button PART_OtherButton3 = null;
         public bool AutoNavigation { get; set; } = true;
 
         public virtual Task<object> WaitForButtonPressAsync()
@@ -247,8 +248,9 @@ namespace AIStudio.Wpf.Controls
         #region 拖动使用
         private bool _move = false;
         private Point _lastPos;
-        private double _widthRatio;
-        private double _heightRatio;
+        private double _widthRatio = 0;
+        private double _heightRatio = 0;
+        private bool _hastag;
 
         private void BaseDialog_Loaded(object sender, RoutedEventArgs e)
         {
@@ -260,11 +262,23 @@ namespace AIStudio.Wpf.Controls
                 this.HorizontalAlignment = HorizontalAlignment.Left;
                 this.VerticalAlignment = VerticalAlignment.Top;
                 this.Margin = new Thickness(left, top, 0, 0);
-                _widthRatio = this.Margin.Left / (parent.ActualWidth - this.ActualWidth);
-                _heightRatio = this.Margin.Top / (parent.ActualHeight - this.ActualHeight);
+                if (parent.ActualWidth == this.ActualWidth)
+                {
+                    _widthRatio = 1;
+                    _heightRatio = 1;
+                }
+                else
+                {
+                    _widthRatio = this.Margin.Left / (parent.ActualWidth - this.ActualWidth);
+                    _heightRatio = this.Margin.Top / (parent.ActualHeight - this.ActualHeight);
+                }
                 parent.SizeChanged += BaseDialog_SizeChanged;
             }
+
+            this.MouseLeftButtonDown += BaseDialog_MouseLeftButtonDown;
         }
+
+
 
         private void BaseDialog_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -273,11 +287,57 @@ namespace AIStudio.Wpf.Controls
             this.Margin = new Thickness(left, top, 0, 0);
         }
 
-
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        /// <summary>
+        /// TitleTag,打上标记支持拖拽
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool GetTitleTag(DependencyObject obj)
         {
-            base.OnMouseLeftButtonDown(e);
+            return (bool)obj.GetValue(TitleTagProperty);
+        }
+        /// <summary>
+        /// TitleTag,打上标记支持拖拽
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="value"></param>
+        public static void SetTitleTag(DependencyObject obj, bool value)
+        {
+            obj.SetValue(TitleTagProperty, value);
+        }
+        /// <summary>
+        /// TitleTag,打上标记支持拖拽
+        /// </summary>
+        public static readonly DependencyProperty TitleTagProperty =
+            DependencyProperty.RegisterAttached("TitleTag", typeof(bool), typeof(BaseDialog), new FrameworkPropertyMetadata(false, (d, f) => {
+                var element = d as FrameworkElement;
+                if (element != null)
+                {
+                    if (element is BaseDialog)
+                    {
+                        return;
+                    }
+                    element.MouseLeftButtonDown += Element_MouseLeftButtonDown;
+                    BaseDialog baseDialog = (element as BaseDialog) ?? element.TryFindParent<BaseDialog>();
+                    if (baseDialog != null)
+                    {
+                        SetTitleTag(baseDialog, true);
+                    }
+                }
+            }));
 
+        private static void Element_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var element = sender as FrameworkElement;
+            BaseDialog baseDialog = (element as BaseDialog) ?? element.TryFindParent<BaseDialog>();
+            if (baseDialog != null)
+            {
+                baseDialog.TitleBar_MouseLeftButtonDown(sender, e);
+            }
+        }
+
+        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
             if (this.Parent != null && this.Parent is FrameworkElement)
             {
                 FrameworkElement parent = this.Parent as FrameworkElement;
@@ -321,11 +381,29 @@ namespace AIStudio.Wpf.Controls
                         }
                         this.Margin = new Thickness(left, top, 0, 0);
 
-                        _widthRatio = this.Margin.Left / (parent.ActualWidth - this.ActualWidth);
-                        _heightRatio = this.Margin.Top / (parent.ActualHeight - this.ActualHeight);
+                        if (parent.ActualWidth == this.ActualWidth)
+                        {
+                            _widthRatio = 1;
+                            _heightRatio = 1;
+                        }
+                        else
+                        {
+                            _widthRatio = this.Margin.Left / (parent.ActualWidth - this.ActualWidth);
+                            _heightRatio = this.Margin.Top / (parent.ActualHeight - this.ActualHeight);
+                        }
                     }
                 };
             }
+        }
+
+        private void BaseDialog_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (GetTitleTag(this) == true)
+            {
+                return;
+            }
+
+            TitleBar_MouseLeftButtonDown(sender, e);
         }
         #endregion
 

@@ -230,10 +230,27 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
             }
         }
 
+        int dialog = 0;
         private async void ShowDialog()
         {
-            var dialog = new DialogTest();
-            var res = await WindowBase.ShowDialogAsync(dialog, "RootWindow");
+            if (dialog == (int)ControlStatus.Plain)
+            {
+                var dialogtest = new DialogTest();
+                var res = await WindowBase.ShowDialogAsync(dialogtest, "RootWindow");
+            }
+            else
+            {
+                await MessageBoxDialog.Show("Diaglog", "Title", (ControlStatus)dialog, "RootWindow");
+            }
+
+            if (dialog < (int)ControlStatus.Plain)
+            {
+                dialog++;
+            }
+            else
+            {
+                dialog = 0;
+            }
         }
 
         int waitingStyle = 0;

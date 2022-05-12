@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="Themes\MahApps.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

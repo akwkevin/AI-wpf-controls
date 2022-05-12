@@ -1,0 +1,93 @@
+﻿<controls:BaseDialog x:Class="AIStudio.Wpf.Controls.MessageBoxDialog"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+    <controls:BaseDialog.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml" />
+                <ResourceDictionary>
+                    <BooleanToVisibilityConverter x:Key="BoolToVisibleConverter"/>
+                    <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
+                    <converter:CornerRadiusBindingConverter x:Key="CornerRadiusBindingConverter"/>
+                    <converter:AdditionConverter x:Key="AdditionConverter"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </controls:BaseDialog.Resources>
+
+    <Grid x:Name="NoticeGrid" Margin="1" RenderTransformOrigin="1,0.5">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform />
+                <RotateTransform />
+                <SkewTransform />
+                <TranslateTransform />
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Border Background="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Background}" 
+                                CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=(controls:ControlAttach.CornerRadius)}" 
+                                SnapsToDevicePixels="True" 
+                                UseLayoutRounding="True">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="8" Opacity="0.2" ShadowDepth="0" Color="Brown" />
+            </Border.Effect>
+        </Border>
+
+        <Border x:Name="Border" 
+                Background="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=BorderBrush}"
+                CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=(controls:ControlAttach.CornerRadius)}" />
+
+        <Border Margin="3,0,0,0" 
+                                Background="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Background}" 
+                                CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=(controls:ControlAttach.CornerRadius),Converter={StaticResource CornerRadiusBindingConverter},ConverterParameter={x:Static converter:RadiusType.Left}}" 
+                                Padding="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=(controls:ControlAttach.Padding)}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Path x:Name="Icon" Grid.RowSpan="3" 
+                      Width="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=(controls:IconAttach.Width)}" 
+                      Height="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=(controls:IconAttach.Height)}" 
+                      Fill="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=BorderBrush}" 
+                      Data="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Path}"
+                      Margin="0,0,10,0" 
+                      VerticalAlignment="Center" 
+                      Stretch="Uniform" />
+
+                <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontWeight="Bold" Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Foreground}" Text="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Title}" />
+
+                <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="0,8,0,0" VerticalScrollBarVisibility="Auto">
+                    <TextBlock Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Foreground}" Opacity="0.8" Text="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Message}" TextWrapping="Wrap" />
+                </ScrollViewer>
+                
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" controls:ControlNavigationAttach.NavWithUpDown="True" controls:ControlNavigationAttach.NavWithUpDownDefaultIndex="0">
+                    <Button x:Name="PART_AffirmativeButton" Padding="3,0" BorderThickness="0" IsDefault="True" Content="确定" Margin="5,0,0,0" 
+                                            Style="{StaticResource AIStudio.Styles.Button.Focus}" 
+                                            Background="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}}"
+                                            BorderBrush="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}}"
+                                            Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Background}"
+                                            controls:ControlNavigationAttach.NavigationIndex="0"/>
+                    <Button x:Name="PART_NegativeButton" Padding="3,0" BorderThickness="0" IsCancel="True" Content="取消" Margin="5,0" 
+                                            Style="{StaticResource AIStudio.Styles.Button.Focus}" 
+                                            Background="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}"
+                                            BorderBrush="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}"
+                                            Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Background}"
+                                            controls:ControlNavigationAttach.NavigationIndex="1"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+    </Grid>
+
+</controls:BaseDialog>
+                     

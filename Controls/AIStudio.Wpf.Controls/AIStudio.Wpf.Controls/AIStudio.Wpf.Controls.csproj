@@ -3,6 +3,14 @@
   <PropertyGroup>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <Company>AIStudio.Wpf.Controls</Company>
+    <Authors>akwkevin</Authors>
+    <PackageProjectUrl>https://gitee.com/akwkevin</PackageProjectUrl>
+    <PackageIcon>A.png</PackageIcon>
+    <PackageIconUrl />
+    <NeutralLanguage />
+    <Version>1.0.5</Version>
+    <Description>兼容主流控件库MahApps和MaterialDesign的一个控件库</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +20,10 @@
     <EmbeddedResource Remove="Controls\Window\Standard\**" />
     <None Remove="Controls\Window\Native\**" />
     <None Remove="Controls\Window\Standard\**" />
+    <None Include="Resources\A.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <Page Remove="Controls\Window\Native\**" />
     <Page Remove="Controls\Window\Standard\**" />
   </ItemGroup>
@@ -345,6 +357,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="Controls\DataGrid\DataGridExt.MaterialDesign.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
@@ -362,6 +378,10 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="Controls\Window\BaseDialog\BaseDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\Window\BaseDialog\MessageBoxDialogStyle.MaterialDesign.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

@@ -8,4 +8,8 @@
     <ProjectReference Include="..\..\Controls\AIStudio.Wpf.MDIContainer\AIStudio.Wpf.MDIContainer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
+
 </Project>

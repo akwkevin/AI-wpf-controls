@@ -9,4 +9,8 @@
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
+
 </Project>

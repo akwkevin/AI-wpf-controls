@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Controls\AIStudio.Wpf.Panels\AIStudio.Wpf.Panels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
+
 </Project>

@@ -91,4 +91,7 @@
   <ItemGroup>
     <Resource Include="Themes\Generic\Images\PinRestore.png" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
 </Project>
