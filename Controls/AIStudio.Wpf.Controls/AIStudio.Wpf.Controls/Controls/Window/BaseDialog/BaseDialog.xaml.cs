@@ -32,14 +32,14 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// 取消
         /// </summary>
-        protected Button PART_NegativeButton = null;
+        protected Button _negativeButton = null;
         /// <summary>
         /// 确定
         /// </summary>
-        protected Button PART_AffirmativeButton = null;
-        protected Button PART_OtherButton = null;
-        protected Button PART_OtherButton2 = null;
-        protected Button PART_OtherButton3 = null;
+        protected Button _affirmativeButton = null;
+        protected Button _otherButton = null;
+        protected Button _otherButton2 = null;
+        protected Button _otherButton3 = null;
         public bool AutoNavigation { get; set; } = true;
 
         public virtual Task<object> WaitForButtonPressAsync()
@@ -47,23 +47,23 @@ namespace AIStudio.Wpf.Controls
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
 
-            if (PART_NegativeButton == null)
-                PART_NegativeButton = this.FindName("PART_NegativeButton") as Button;
-            if (PART_AffirmativeButton == null)
-                PART_AffirmativeButton = this.FindName("PART_AffirmativeButton") as Button;
-            if (PART_OtherButton == null)
-                PART_OtherButton = this.FindName("PART_OtherButton") as Button;
-            if (PART_OtherButton2 == null)
-                PART_OtherButton2 = this.FindName("PART_OtherButton2") as Button;
-            if (PART_OtherButton3 == null)
-                PART_OtherButton3 = this.FindName("PART_OtherButton3") as Button;
+            if (_negativeButton == null)
+                _negativeButton = this.FindName("PART_NegativeButton") as Button;
+            if (_affirmativeButton == null)
+                _affirmativeButton = this.FindName("PART_AffirmativeButton") as Button;
+            if (_otherButton == null)
+                _otherButton = this.FindName("PART_OtherButton") as Button;
+            if (_otherButton2 == null)
+                _otherButton2 = this.FindName("PART_OtherButton2") as Button;
+            if (_otherButton3 == null)
+                _otherButton3 = this.FindName("PART_OtherButton3") as Button;
 
             if (AutoNavigation)
             {
-                if (PART_AffirmativeButton != null)
-                    ControlNavigationAttach.SetNavigationIndex(PART_AffirmativeButton, 0);
-                if (PART_NegativeButton != null)
-                    ControlNavigationAttach.SetNavigationIndex(PART_NegativeButton, 1);
+                if (_affirmativeButton != null)
+                    ControlNavigationAttach.SetNavigationIndex(_affirmativeButton, 0);
+                if (_negativeButton != null)
+                    ControlNavigationAttach.SetNavigationIndex(_negativeButton, 1);
 
                 ControlNavigationAttach.SetNavWithUpDown(this, true);
                 ControlNavigationAttach.SetNavWithUpDownDefaultIndex(this, 0);
@@ -102,21 +102,21 @@ namespace AIStudio.Wpf.Controls
             cleanUpHandlers = () => {
                 this.KeyDown -= escapeKeyHandler;
 
-                if (PART_NegativeButton != null)
-                    PART_NegativeButton.Click -= negativeHandler;
-                if (PART_AffirmativeButton != null)
-                    PART_AffirmativeButton.Click -= affirmativeHandler;
-                if (PART_OtherButton != null)
-                    PART_OtherButton.Click -= otherHandler;
-                if (PART_OtherButton2 != null)
-                    PART_OtherButton2.Click -= otherHandler2;
-                if (PART_OtherButton3 != null)
-                    PART_OtherButton3.Click -= otherHandler3;
+                if (_negativeButton != null)
+                    _negativeButton.Click -= negativeHandler;
+                if (_affirmativeButton != null)
+                    _affirmativeButton.Click -= affirmativeHandler;
+                if (_otherButton != null)
+                    _otherButton.Click -= otherHandler;
+                if (_otherButton2 != null)
+                    _otherButton2.Click -= otherHandler2;
+                if (_otherButton3 != null)
+                    _otherButton3.Click -= otherHandler3;
 
-                if (PART_NegativeButton != null)
-                    PART_NegativeButton.KeyDown -= negativeKeyHandler;
-                if (PART_AffirmativeButton != null)
-                    PART_AffirmativeButton.KeyDown -= affirmativeKeyHandler;
+                if (_negativeButton != null)
+                    _negativeButton.KeyDown -= negativeKeyHandler;
+                if (_affirmativeButton != null)
+                    _affirmativeButton.KeyDown -= affirmativeKeyHandler;
 
 
                 cancellationTokenRegistration.Dispose();
@@ -219,23 +219,23 @@ namespace AIStudio.Wpf.Controls
                 e.Handled = true;
             };
 
-            if (PART_NegativeButton != null)
-                PART_NegativeButton.KeyDown += negativeKeyHandler;
-            if (PART_AffirmativeButton != null)
-                PART_AffirmativeButton.KeyDown += affirmativeKeyHandler;
+            if (_negativeButton != null)
+                _negativeButton.KeyDown += negativeKeyHandler;
+            if (_affirmativeButton != null)
+                _affirmativeButton.KeyDown += affirmativeKeyHandler;
 
             this.KeyDown += escapeKeyHandler;
 
-            if (PART_NegativeButton != null)
-                PART_NegativeButton.Click += negativeHandler;
-            if (PART_AffirmativeButton != null)
-                PART_AffirmativeButton.Click += affirmativeHandler;
-            if (PART_OtherButton != null)
-                PART_OtherButton.Click += otherHandler;
-            if (PART_OtherButton2 != null)
-                PART_OtherButton2.Click += otherHandler2;
-            if (PART_OtherButton3 != null)
-                PART_OtherButton3.Click += otherHandler3;
+            if (_negativeButton != null)
+                _negativeButton.Click += negativeHandler;
+            if (_affirmativeButton != null)
+                _affirmativeButton.Click += affirmativeHandler;
+            if (_otherButton != null)
+                _otherButton.Click += otherHandler;
+            if (_otherButton2 != null)
+                _otherButton2.Click += otherHandler2;
+            if (_otherButton3 != null)
+                _otherButton3.Click += otherHandler3;
 
             return tcs.Task;
         }

@@ -147,10 +147,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToolBar}">
                     <ControlTemplate.Resources>
-                        <Style BasedOn="{StaticResource MaterialDesignToolToggleFlatListBox}" TargetType="ListBox">
+                        <Style BasedOn="{StaticResource AIStudio.Styles.ListBox.Toggle}" TargetType="ListBox">
                             <Setter Property="ItemContainerStyle">
                                 <Setter.Value>
-                                    <Style BasedOn="{StaticResource MaterialDesignToolToggleListBoxItem}" TargetType="ListBoxItem">
+                                    <Style BasedOn="{StaticResource AIStudio.Styles.ListBoxItem.Toggle}" TargetType="ListBoxItem">
                                         <Setter Property="TextBlock.FontWeight" Value="DemiBold" />
                                         <Setter Property="TextBlock.FontSize" Value="18" />
                                         <Setter Property="MinWidth" Value="54" />

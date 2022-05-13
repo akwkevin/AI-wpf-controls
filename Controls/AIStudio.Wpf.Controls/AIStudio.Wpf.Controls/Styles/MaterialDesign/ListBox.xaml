@@ -5,6 +5,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Shadows.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converter:BrushRoundConverter x:Key="BrushRoundConverter"/>
@@ -289,6 +290,172 @@
         <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
         <Setter Property="VirtualizingStackPanel.IsVirtualizingWhenGrouping" Value="True" />
         <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.ListBoxItem.Toggle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignDivider}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Padding" Value="5 0 5 0" />
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="{TemplateBinding Margin}"
+                            ClipToBounds="{TemplateBinding ClipToBounds}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.3" To="Normal">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CircleEase EasingMode="EaseOut"/>
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState Name="Normal"/>
+                                <VisualState Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="MouseOverBorder" Storyboard.TargetProperty="Opacity"
+                                                         To="0.03" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState Name="Disabled"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup Name="SelectionStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="*" To="Selected">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="SelectedBackgroundBorder">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="*" To="SelectedUnfocused">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="SelectedBackgroundBorder">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="Selected" To="Unselected">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="SelectedBackgroundBorder"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="0" Duration="0"/>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState Name="Selected">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="SelectedBackgroundBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="SelectedBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState Name="Unselected"/>
+                                <VisualState Name="SelectedUnfocused">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="SelectedBackgroundBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="SelectedBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <Border x:Name="MouseOverBorder"
+                                    Opacity="0"
+                                    Background="{TemplateBinding Foreground, Converter={StaticResource BrushRoundConverter}}"/>
+                            <Border x:Name="SelectedBackgroundBorder"
+                                    Opacity="0"
+                                    Background="{DynamicResource MaterialDesignDivider}" />
+                            <controls:Ripple x:Name="Ripple" Feedback="{TemplateBinding Foreground, Converter={StaticResource BrushRoundConverter}}"
+                                        Opacity=".56"
+                                        Focusable="False"
+                                        Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                        ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Padding="{TemplateBinding Padding}">
+                            </controls:Ripple>
+                            <Border x:Name="SelectedBorder"
+                                    Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=SelectionMode, Converter={StaticResource EqualityToVisibilityConverter}, ConverterParameter={x:Static SelectionMode.Extended}, Mode=OneWay}"
+                                    Opacity="0"
+                                    BorderThickness="0"
+                                    BorderBrush="{DynamicResource MaterialDesignDivider}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Ripple" Property="Opacity" Value=".92" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".56" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.ListBox.Toggle" TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignToolBarBackground}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}" />
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource AIStudio.Styles.ListBoxItem.Toggle}"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <Border x:Name="Bd" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="true"
+                            Padding="{TemplateBinding Padding}"
+                            Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ShadowAttach.DropShadowEffect),Converter={StaticResource ShadowConverter}}">
+                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>
