@@ -27,12 +27,12 @@ namespace AIStudio.Wpf.Controls.Converter
                 switch (placement)
                 {
                     case PlacementMode.Bottom:
-                        path = $"M 1,{radius.TopLeft + 7} A{radius.TopLeft},{radius.TopLeft} 0 0 1 {radius.TopLeft + 1}, 7 H {width - contentWidth / 2 - 5} L {width - contentWidth / 2},1 L {width - contentWidth / 2 + 5},7   H {width - radius.TopRight - 1} A{radius.TopRight},{radius.TopRight} 0 0 1 {width - 1}, {radius.TopRight + 7}" +
+                        path = $"M 1,{radius.TopLeft + 7} A{radius.TopLeft},{radius.TopLeft} 0 0 1 {radius.TopLeft + 1}, 7 H {contentWidth / 2 - 5} L {contentWidth / 2},1 L {contentWidth / 2 + 5},7   H {width - radius.TopRight - 1} A{radius.TopRight},{radius.TopRight} 0 0 1 {width - 1}, {radius.TopRight + 7}" +
                             $"V {height - radius.BottomRight - 1} A{ radius.BottomRight},{ radius.BottomRight} 0 0 1 {width - radius.BottomRight - 1}, {height - 1} H {radius.BottomLeft + 1} A{radius.BottomLeft},{radius.BottomLeft} 0 0 1 1, {height - radius.BottomLeft - 1} Z";
                         break;
                     case PlacementMode.Top:
                         path = $"M 1,{radius.TopLeft + 1} A{radius.TopLeft},{radius.TopLeft} 0 0 1 {radius.TopLeft + 1}, 1 H {width - radius.TopRight - 1} A{radius.TopRight},{radius.TopRight} 0 0 1 {width - 1}, {radius.TopRight + 1}" +
-                             $"V {height - radius.BottomRight - 7} A{radius.BottomRight},{radius.BottomRight} 0 0 1 {width - radius.BottomRight - 1}, {height - 7} H {width - contentWidth / 2 + 5} L {width - contentWidth / 2}, {height - 1} L {width - contentWidth / 2 - 5}, {height - 7} H {radius.BottomLeft + 1} A{radius.BottomLeft},{radius.BottomLeft} 0 0 1 1, {height - radius.BottomLeft - 7} Z";
+                             $"V {height - radius.BottomRight - 7} A{radius.BottomRight},{radius.BottomRight} 0 0 1 {width - radius.BottomRight - 1}, {height - 7} H {contentWidth / 2 + 5} L {contentWidth / 2}, {height - 1} L {contentWidth / 2 - 5}, {height - 7} H {radius.BottomLeft + 1} A{radius.BottomLeft},{radius.BottomLeft} 0 0 1 1, {height - radius.BottomLeft - 7} Z";
                         break;
                     case PlacementMode.Left:
                         path = $"M 1,{radius.TopLeft + 1} A{radius.TopLeft},{radius.TopLeft} 0 0 1 {radius.TopLeft + 1}, 1 H {width - radius.TopRight - 7} A{radius.TopRight },{radius.TopRight } 0 0 1 {width - 7}, {radius.TopRight + 1}" +

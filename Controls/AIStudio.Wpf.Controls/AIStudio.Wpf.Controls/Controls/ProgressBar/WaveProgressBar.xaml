@@ -69,8 +69,8 @@
             <Trigger Property="controls:ControlAttach.Status" Value="Dark">
                 <Setter Property="WaveFill" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="WaveFill" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="WaveFill" Value="{DynamicResource Theme.ShowcaseBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
                 <Setter Property="WaveFill" Value="{DynamicResource SuccessBrush}" />

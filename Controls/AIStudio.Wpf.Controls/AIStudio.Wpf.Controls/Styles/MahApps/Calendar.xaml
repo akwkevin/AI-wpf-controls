@@ -421,8 +421,8 @@
                 <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
                 <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource Theme.ShowcaseBrush}"/>
                 <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">

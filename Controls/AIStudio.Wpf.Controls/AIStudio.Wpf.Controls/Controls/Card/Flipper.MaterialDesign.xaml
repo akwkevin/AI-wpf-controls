@@ -142,7 +142,7 @@
             <Trigger Property="controls:ControlAttach.Status" Value="Dark">
                 <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
@@ -304,7 +304,7 @@
                 <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MaterialDesignBackground}"/>
             </Trigger>

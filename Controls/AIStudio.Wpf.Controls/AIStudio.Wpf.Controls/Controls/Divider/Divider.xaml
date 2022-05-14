@@ -61,8 +61,8 @@
             <Trigger Property="controls:ControlAttach.Status" Value="Dark">
                 <Setter Property="LineStroke" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="LineStroke" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="LineStroke" Value="{DynamicResource Theme.ShowcaseBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
                 <Setter Property="LineStroke" Value="{DynamicResource SuccessBrush}" />

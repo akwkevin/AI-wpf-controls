@@ -25,7 +25,7 @@
                             <RepeatButton Content="Light" ac:ControlAttach.Status="Light" Style="{DynamicResource AIStudio.Styles.RepeatButton}"/>
                             <RepeatButton Content="Mid" ac:ControlAttach.Status="Mid" Style="{DynamicResource AIStudio.Styles.RepeatButton}"/>
                             <RepeatButton Content="Dark" ac:ControlAttach.Status="Dark" Style="{DynamicResource AIStudio.Styles.RepeatButton}"/>
-                            <RepeatButton Content="Accent" ac:ControlAttach.Status="Accent" Style="{DynamicResource AIStudio.Styles.RepeatButton}"/>
+                            <RepeatButton Content="Accent" ac:ControlAttach.Status="Secondary" Style="{DynamicResource AIStudio.Styles.RepeatButton}"/>
                             <RepeatButton Content="Success" ac:ControlAttach.Status="Success" Style="{DynamicResource AIStudio.Styles.RepeatButton}"/>
                             <RepeatButton Content="Info" ac:ControlAttach.Status="Info" Style="{DynamicResource AIStudio.Styles.RepeatButton}"/>
                             <RepeatButton Content="Warning" ac:ControlAttach.Status="Warning" Style="{DynamicResource AIStudio.Styles.RepeatButton}"/>

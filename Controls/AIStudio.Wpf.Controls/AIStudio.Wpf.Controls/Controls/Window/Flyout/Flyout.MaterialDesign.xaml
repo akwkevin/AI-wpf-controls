@@ -277,7 +277,7 @@
                 <Setter Property="CaptionBackground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="CaptionForeground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="CaptionBackground" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}"/>
             </Trigger>

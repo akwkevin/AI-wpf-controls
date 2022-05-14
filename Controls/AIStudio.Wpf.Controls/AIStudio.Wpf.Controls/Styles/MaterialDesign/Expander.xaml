@@ -346,7 +346,7 @@
                 <Setter Property="controls:ExpanderAttach.HeaderBackground" Value="{DynamicResource PrimaryHueDarkBrush}" />
                 <Setter Property="controls:ExpanderAttach.HeaderForeground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="BorderBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
                 <Setter Property="controls:ExpanderAttach.HeaderBackground" Value="{DynamicResource SecondaryHueMidBrush}" />
                 <Setter Property="controls:ExpanderAttach.HeaderForeground" Value="{DynamicResource SecondaryHueLightForegroundBrush}"/>

@@ -114,7 +114,7 @@
                             <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}" />
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Status,RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Accent">
+                        <DataTrigger Binding="{Binding Status,RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Secondary">
                             <Setter TargetName="Icon" Property="Data" Value="{StaticResource InfoGeometry}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource SecondaryHueMidBrush}" />
@@ -281,7 +281,7 @@
                                                                                         Converter={StaticResource BrushOpacityConverter},
                                                                                         ConverterParameter=0.16}" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Status,RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Accent">
+                                <DataTrigger Binding="{Binding Status,RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Secondary">
                                     <Setter TargetName="Icon" Property="Data" Value="{StaticResource InfoGeometry}" />
                                     <Setter Property="BorderBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
                                     <Setter TargetName="Border" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self},

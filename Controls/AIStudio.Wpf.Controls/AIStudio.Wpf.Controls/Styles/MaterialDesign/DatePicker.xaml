@@ -108,7 +108,7 @@
             <Trigger Property="controls:ControlAttach.Status" Value="Dark">
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SecondaryHueMidBrush}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">

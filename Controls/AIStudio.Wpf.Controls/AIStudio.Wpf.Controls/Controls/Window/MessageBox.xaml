@@ -107,8 +107,8 @@
                         <DataTrigger Binding="{Binding Path=(controls:ControlAttach.Status),RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Dark">
                             <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(controls:ControlAttach.Status),RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Accent">
-                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                        <DataTrigger Binding="{Binding Path=(controls:ControlAttach.Status),RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Secondary">
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource Theme.ShowcaseBrush}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=(controls:ControlAttach.Status),RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Success">
                             <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource SuccessBrush}" />
@@ -145,8 +145,8 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">

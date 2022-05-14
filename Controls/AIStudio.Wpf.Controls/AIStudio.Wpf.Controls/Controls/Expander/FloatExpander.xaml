@@ -163,8 +163,8 @@
                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="Background" Value="{DynamicResource Theme.ShowcaseBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
@@ -226,8 +226,8 @@
                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="Background" Value="{DynamicResource Theme.ShowcaseBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
@@ -289,8 +289,8 @@
                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="Background" Value="{DynamicResource Theme.ShowcaseBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
@@ -362,8 +362,8 @@
                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="Background" Value="{DynamicResource Theme.ShowcaseBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
@@ -434,8 +434,8 @@
                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="Background" Value="{DynamicResource Theme.ShowcaseBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
@@ -1126,10 +1126,10 @@
                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
-                <Setter Property="Foreground" Value="{DynamicResource SecondaryHueLightForegroundBrush}"/>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                <Setter Property="Background" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
                 <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />

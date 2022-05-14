@@ -161,7 +161,7 @@
                 <Setter Property="BadgeBackground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="BadgeForeground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="Status" Value="Accent">
+            <Trigger Property="Status" Value="Secondary">
                 <Setter Property="BadgeBackground" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="BadgeForeground" Value="{DynamicResource MaterialDesignBackground}"/>
             </Trigger>

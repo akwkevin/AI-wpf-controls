@@ -54,7 +54,7 @@
                         <ac:Badged Margin="2" Badge="Light" Status="Light"/>
                         <ac:Badged Margin="2" Badge="Mid"  Status="Mid" />
                         <ac:Badged Margin="2" Badge="Dark"  Status="Dark" />
-                        <ac:Badged Margin="2" Badge="Accent" Status="Accent" />
+                        <ac:Badged Margin="2" Badge="Accent" Status="Secondary" />
                         <ac:Badged Margin="2" Badge="Success" Status="Success" />
                         <ac:Badged Margin="2" Badge="Danger" Status="Danger" />
                         <ac:Badged Margin="2" Badge="Warning" Status="Warning" />
@@ -65,7 +65,7 @@
                         <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Light" VerticalAlignment="Center"/>
                         <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Mid" VerticalAlignment="Center"/>
                         <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Dark" VerticalAlignment="Center"/>
-                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Accent" VerticalAlignment="Center"/>
+                        <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Secondary" VerticalAlignment="Center"/>
                         <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Success" VerticalAlignment="Center"/>
                         <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Danger" VerticalAlignment="Center"/>
                         <ac:Badged Margin="10" IsDot="True" IsWaving="True" Status="Warning" VerticalAlignment="Center"/>

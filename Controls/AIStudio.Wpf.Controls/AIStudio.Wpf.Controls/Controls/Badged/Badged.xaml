@@ -161,8 +161,8 @@
                 <Setter Property="BadgeBackground" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
                 <Setter Property="BadgeForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="Status" Value="Accent">
-                <Setter Property="BadgeBackground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+            <Trigger Property="Status" Value="Secondary">
+                <Setter Property="BadgeBackground" Value="{DynamicResource Theme.ShowcaseBrush}"/>
                 <Setter Property="BadgeForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
             <Trigger Property="Status" Value="Success">

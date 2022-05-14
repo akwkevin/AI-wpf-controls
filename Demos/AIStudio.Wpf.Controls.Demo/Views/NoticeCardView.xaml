@@ -17,7 +17,7 @@
                             <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Light}" Content="Light" ac:ControlAttach.Status="Light" Style="{DynamicResource AIStudio.Styles.Button}"/>
                             <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Mid}" Content="Mid" ac:ControlAttach.Status="Mid" Style="{DynamicResource AIStudio.Styles.Button}"/>
                             <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Dark}" Content="Dark" ac:ControlAttach.Status="Dark" Style="{DynamicResource AIStudio.Styles.Button}"/>
-                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Accent}" Content="Accent" ac:ControlAttach.Status="Accent" Style="{DynamicResource AIStudio.Styles.Button}"/>
+                            <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Secondary}" Content="Accent" ac:ControlAttach.Status="Secondary" Style="{DynamicResource AIStudio.Styles.Button}"/>
                             <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Success}" Content="Success" ac:ControlAttach.Status="Success" Style="{DynamicResource AIStudio.Styles.Button}"/>
                             <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Info}" Content="Info" ac:ControlAttach.Status="Info" Style="{DynamicResource AIStudio.Styles.Button}"/>
                             <Button Margin="2" Command="{Binding ShowCommand}" CommandParameter="{x:Static ac:ControlStatus.Warning}" Content="Warning" ac:ControlAttach.Status="Warning" Style="{DynamicResource AIStudio.Styles.Button}"/>
@@ -41,7 +41,7 @@
                             <ac:NoticeCard Margin="2" Status="Light" Title="Light" Message="Light Text" />
                             <ac:NoticeCard Margin="2" Status="Mid" Title="Mid" Message="Mid Text" />
                             <ac:NoticeCard Margin="2" Status="Dark" Title="Dark" Message="Dark Text" />
-                            <ac:NoticeCard Margin="2" Status="Accent" Title="Accent" Message="Accent Text" />
+                            <ac:NoticeCard Margin="2" Status="Secondary" Title="Accent" Message="Accent Text" />
                             <ac:NoticeCard Margin="2" Status="Success" Title="Success" Message="Success Text" />
                             <ac:NoticeCard Margin="2" Status="Info" Title="Info" Message="Info Text" />
                             <ac:NoticeCard Margin="2" Status="Warning" Title="Warning" Message="Warning Text" />
@@ -56,7 +56,7 @@
                             <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Light" Message="Light Text" />
                             <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Mid" Message="Mid Text" />
                             <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Dark" Message="Dark Text" />
-                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Accent" Message="Accent Text" />
+                            <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Secondary" Message="Accent Text" />
                             <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Success" Message="Success Text" />
                             <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Info" Message="Info Text" />
                             <ac:NoticeCard Margin="2" ControlStyle="Plain" Status="Warning" Message="Warning Text" />

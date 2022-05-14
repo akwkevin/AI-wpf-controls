@@ -182,10 +182,10 @@
                 <Setter Property="CaretBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
                 <Setter Property="SelectionBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
-                <Setter Property="CaretBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
-                <Setter Property="SelectionBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                <Setter Property="CaretBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                <Setter Property="SelectionBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
@@ -344,10 +344,10 @@
                 <Setter Property="CaretBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
                 <Setter Property="SelectionBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
-                <Setter Property="CaretBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
-                <Setter Property="SelectionBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                <Setter Property="CaretBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                <Setter Property="SelectionBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />

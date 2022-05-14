@@ -6,7 +6,7 @@
         Light,
         Mid,
         Dark,
-        Accent,
+        Secondary,
         Success,
         Info,
         Warning,

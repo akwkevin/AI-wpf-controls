@@ -31,8 +31,8 @@
             <DataTrigger Binding="{Binding Status,RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Dark">
                 <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Status,RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Accent">
-                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            <DataTrigger Binding="{Binding Status,RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Secondary">
+                <Setter Property="BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Status,RelativeSource={RelativeSource Self},Mode=OneWay}" Value="Success">
                 <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />

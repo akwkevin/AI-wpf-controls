@@ -232,44 +232,40 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="controls:ControlAttach.Status" Value="Light">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground }" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Mid">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground }" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Dark">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground }" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource SecondaryHueDarkForegroundBrush }" />
-                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground }" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Info">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground }" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Warning">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground }" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Danger">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground }" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Plain">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2 }" />
+                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray8}" />
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
-                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
             </Trigger>
         </Style.Triggers>
     </Style>

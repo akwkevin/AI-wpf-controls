@@ -177,7 +177,7 @@
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}" />
                 <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
                 <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}" />
             </Trigger>

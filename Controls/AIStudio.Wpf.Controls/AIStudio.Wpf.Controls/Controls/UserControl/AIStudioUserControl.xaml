@@ -85,8 +85,8 @@
                                             <DataTrigger Binding="{Binding .}" Value="Dark">
                                                 <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding .}" Value="Accent">
-                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                                            <DataTrigger Binding="{Binding .}" Value="Secondary">
+                                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource Theme.ShowcaseBrush}"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding .}" Value="Success">
                                                 <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource SuccessBrush}"/>

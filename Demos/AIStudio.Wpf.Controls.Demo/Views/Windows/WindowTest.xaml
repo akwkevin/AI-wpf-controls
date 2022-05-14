@@ -7,8 +7,16 @@
         xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
         mc:Ignorable="d"
         Title="WindowTest" Height="450" Width="800"
-        Style="{DynamicResource AIStudio.Styles.WindowBase}">
+        Style="{DynamicResource AIStudio.Styles.WindowBase.Custom}">
     <Grid>
+        <ac:WindowBaseTitleBar>
+            <ac:WindowBaseTitleBar.LeftWindowCommands>
+                <TextBlock Text="左侧" VerticalAlignment="Center"/>
+            </ac:WindowBaseTitleBar.LeftWindowCommands>
+            <ac:WindowBaseTitleBar.RightWindowCommands>
+                <TextBlock Text="右侧" VerticalAlignment="Center"/>
+            </ac:WindowBaseTitleBar.RightWindowCommands>
+        </ac:WindowBaseTitleBar>
         <TextBlock Text="WindowBase"/>
     </Grid>
 </ac:WindowBase>

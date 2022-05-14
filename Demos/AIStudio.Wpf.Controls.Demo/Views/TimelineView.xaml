@@ -21,7 +21,7 @@
                                 <ac:TimelineItem Content="4" />
                             </ac:Timeline>
 
-                            <ac:Timeline ac:ControlAttach.Status="Accent" Margin="2">
+                            <ac:Timeline ac:ControlAttach.Status="Secondary" Margin="2">
                                 <ac:TimelineItem Content="1"/>
                                 <ac:TimelineItem Content="2" />
                                 <ac:TimelineItem Content="3" />

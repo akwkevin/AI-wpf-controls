@@ -354,7 +354,7 @@
                 <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MaterialDesignBackground}"/>

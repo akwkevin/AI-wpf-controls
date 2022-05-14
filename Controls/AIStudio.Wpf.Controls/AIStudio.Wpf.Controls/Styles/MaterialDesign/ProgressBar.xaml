@@ -104,7 +104,7 @@
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignToolForeground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource MaterialDesignToolBackground}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignToolForeground}"/>
@@ -249,7 +249,7 @@
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignToolBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignToolBackground}"/>
@@ -398,7 +398,7 @@
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignToolBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignToolBackground}"/>

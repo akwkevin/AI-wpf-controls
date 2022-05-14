@@ -13,7 +13,7 @@
     <converter:IntToThicknessConverter x:Key="IntToThicknessConverter"/>
     <converter:String2VisibilityReConverter x:Key="String2VisibilityReConverter"/>
     <converter:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
-    
+
 
     <LinearGradientBrush x:Key="ResizeGripperForeground" EndPoint="1,0.75" StartPoint="0,0.25">
         <GradientStop Color="#FFFFFF" Offset="0.3"/>
@@ -64,7 +64,7 @@
         <Setter Property="controls:ControlAttach.CornerRadius" Value="0"/>
         <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
         <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
-        <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>       
+        <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
         <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
         <Setter Property="CaptionHeight" Value="{DynamicResource DefaultHeaderHeight}"/>
         <Setter Property="WindowChrome.WindowChrome">
@@ -85,19 +85,19 @@
 
                                 <!--等待窗口弹出-->
                                 <Grid x:Name="PART_AnimationGrid"
-                            Width="Auto"
-                            Height="Auto"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Panel.ZIndex="8"
-                            Visibility="Hidden">
+                                    Width="Auto"
+                                    Height="Auto"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Panel.ZIndex="8"
+                                    Visibility="Hidden">    
                                     <Grid x:Name="PART_OverlayGrid" Width="Auto"
-                            Height="Auto"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Panel.ZIndex="6"
-                            Background="{DynamicResource MaterialDesignBodyLight}"
-                            Opacity="0.5" />
+                                        Height="Auto"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Panel.ZIndex="6"
+                                        Background="{DynamicResource MaterialDesignBodyLight}"
+                                        Opacity="0.5" />
                                     <Grid x:Name="PART_WaitingGrid" Panel.ZIndex="7" HorizontalAlignment="Center" />
                                 </Grid>
 
@@ -111,40 +111,40 @@
                                 <!-- flyouts -->
                                 <Grid>
                                     <ContentControl 
-                                    Panel.ZIndex="2"
-                                    Focusable="False"
-                                    Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}" 
-                                    KeyboardNavigation.TabNavigation="None"
-                                    Content="{Binding Flyouts, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                    VerticalAlignment="Stretch" />
+                                        Panel.ZIndex="2"
+                                        Focusable="False"
+                                        Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}" 
+                                        KeyboardNavigation.TabNavigation="None"
+                                        Content="{Binding Flyouts, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                        VerticalAlignment="Stretch" />
                                 </Grid>
 
                                 <!-- inactive dialog container -->
                                 <Grid Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}"
-                          Panel.ZIndex="3"
-                          FocusVisualStyle="{x:Null}"
-                          x:Name="PART_MetroInactiveDialogsContainer" />
+                                      Panel.ZIndex="3"
+                                      FocusVisualStyle="{x:Null}"
+                                      x:Name="PART_MetroInactiveDialogsContainer" />
 
                                 <!-- overlay effect container -->
                                 <Grid Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}" 
-                          x:Name="PART_OverlayBox"                         
-                          Panel.ZIndex="4"
-                          Focusable="False"
-                          FocusVisualStyle="{x:Null}"
-                          Background="{DynamicResource MaterialDesignBodyLight}"
-                          Opacity="0"
-                          Visibility="Hidden" />
+                                      x:Name="PART_OverlayBox"                         
+                                      Panel.ZIndex="4"
+                                      Focusable="False"
+                                      FocusVisualStyle="{x:Null}"
+                                      Background="{DynamicResource MaterialDesignBodyLight}"
+                                      Opacity="0"
+                                      Visibility="Hidden" />
 
                                 <!-- active dialog container -->
                                 <Grid Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}"
-                          x:Name="PART_MetroActiveDialogContainer"                         
-                          Panel.ZIndex="5"
-                          FocusVisualStyle="{x:Null}" />
+                                      x:Name="PART_MetroActiveDialogContainer"                         
+                                      Panel.ZIndex="5"
+                                      FocusVisualStyle="{x:Null}" />
 
                                 <controls:Snackbar x:Name="PART_MainSnackbar" />
-                                
+
                                 <StackPanel controls:NoticeCard.Identifier="{TemplateBinding Identifier}" VerticalAlignment="Top" />
-                                
+
                                 <Border x:Name="PART_TitleBar" MinHeight="{TemplateBinding CaptionHeight}" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0" ClipToBounds="True" WindowChrome.IsHitTestVisibleInChrome="True">
                                     <DockPanel>
                                         <StackPanel x:Name="ButtonPanel"  DockPanel.Dock="Right" Orientation="Horizontal">
@@ -184,28 +184,26 @@
                                                 controls:IconAttach.Width="{TemplateBinding controls:IconAttach.Width}" 
                                                 controls:IconAttach.Height="{TemplateBinding controls:IconAttach.Height}"/>
                                         </StackPanel>
-                                        <DockPanel x:Name="PART_Header">
-                                            <!--  the right window commands  -->
-                                            <ContentPresenter x:Name="PART_RightWindowCommands"
+                                        <!--  the right window commands  -->
+                                        <ContentPresenter x:Name="PART_RightWindowCommands"
                                                 Content="{Binding RightWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                                 DockPanel.Dock="Right"
                                                 Focusable="False" />
-                                            <!--  the left window commands  -->
-                                            <ContentPresenter x:Name="PART_LeftWindowCommands"
+                                        <!--  the left window commands  -->
+                                        <ContentPresenter x:Name="PART_LeftWindowCommands"
                                                 Content="{Binding LeftWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                                 DockPanel.Dock="Left"
                                                 Focusable="False" />
-                                        </DockPanel>
                                     </DockPanel>
                                 </Border>
 
                                 <Border x:Name="PART_Border"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Background="{x:Null}"
-                            BorderBrush="{DynamicResource PrimaryHueMidBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            UseLayoutRounding="True" />
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="{x:Null}"
+                                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    UseLayoutRounding="True" />
 
                                 <ResizeGrip Width="10" Height="10" x:Name="ResizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" IsTabStop="False" Visibility="Collapsed" WindowChrome.ResizeGripDirection="BottomRight" />
                             </Grid>
@@ -282,7 +280,7 @@
         <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
         <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
         <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
-        <Setter Property="CaptionHeight" Value="{DynamicResource DefaultHeaderHeight}"/>        
+        <Setter Property="CaptionHeight" Value="{DynamicResource DefaultHeaderHeight}"/>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome ResizeBorderThickness="10" CaptionHeight="0" GlassFrameThickness="3" CornerRadius="0" />
@@ -307,7 +305,7 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <!--Header部分-->
-                                        <DockPanel x:Name="PART_Header">
+                                        <DockPanel>
                                             <!--  the right window commands  -->
                                             <ContentPresenter x:Name="PART_RightWindowCommands" DockPanel.Dock="Right"
                                                 Content="{Binding RightWindowCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"

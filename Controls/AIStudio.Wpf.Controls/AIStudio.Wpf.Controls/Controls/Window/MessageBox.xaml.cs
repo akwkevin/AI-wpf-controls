@@ -267,7 +267,7 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="messageBoxText"></param>
         /// <param name="caption"></param>
-        public static MessageBoxResult Success(string messageBoxText, string caption = null, System.Windows.Window owner = null)
+        public static MessageBoxResult Success(string messageBoxText, string caption = "系统提示", System.Windows.Window owner = null)
         {
             MessageBox messageBox = null;
             Application.Current.Dispatcher.Invoke(new Action(() => {
@@ -293,7 +293,7 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="messageBoxText"></param>
         /// <param name="caption"></param>
-        public static MessageBoxResult Info(string messageBoxText, string caption = null, System.Windows.Window owner = null)
+        public static MessageBoxResult Info(string messageBoxText, string caption = "系统提示", System.Windows.Window owner = null)
         {
             MessageBox messageBox = null;
             Application.Current.Dispatcher.Invoke(new Action(() => {
@@ -317,7 +317,7 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="messageBoxText"></param>
         /// <param name="caption"></param>
-        public static MessageBoxResult Warning(string messageBoxText, string caption = null, System.Windows.Window owner = null)
+        public static MessageBoxResult Warning(string messageBoxText, string caption = "系统提示", System.Windows.Window owner = null)
         {
             MessageBox messageBox = null;
             Application.Current.Dispatcher.Invoke(new Action(() => {
@@ -341,7 +341,7 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="messageBoxText"></param>
         /// <param name="caption"></param>
-        public static MessageBoxResult Error(string messageBoxText, string caption = null, System.Windows.Window owner = null)
+        public static MessageBoxResult Error(string messageBoxText, string caption = "系统提示", System.Windows.Window owner = null)
         {
             MessageBox messageBox = null;
             Application.Current.Dispatcher.Invoke(new Action(() => {
@@ -365,7 +365,7 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="messageBoxText"></param>
         /// <param name="caption"></param>
-        public static MessageBoxResult Fatal(string messageBoxText, string caption = null, System.Windows.Window owner = null)
+        public static MessageBoxResult Fatal(string messageBoxText, string caption = "系统提示", System.Windows.Window owner = null)
         {
             MessageBox messageBox = null;
             Application.Current.Dispatcher.Invoke(new Action(() => {
@@ -392,7 +392,7 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="messageBoxText"></param>
         /// <param name="caption"></param>
-        public static MessageBoxResult Ask(string messageBoxText, string caption = null, System.Windows.Window owner = null)
+        public static MessageBoxResult Ask(string messageBoxText, string caption = "系统提示", System.Windows.Window owner = null)
         {
             MessageBox messageBox = null;
             Application.Current.Dispatcher.Invoke(new Action(() => {
@@ -416,7 +416,7 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="messageBoxText"></param>
         /// <param name="caption"></param>
-        public static MessageBoxResult YesNo(string messageBoxText, string caption = null, System.Windows.Window owner = null)
+        public static MessageBoxResult YesNo(string messageBoxText, string caption = "系统提示", System.Windows.Window owner = null)
         {
             MessageBox messageBox = null;
             Application.Current.Dispatcher.Invoke(new Action(() => {
@@ -460,7 +460,7 @@ namespace AIStudio.Wpf.Controls
         /// <param name="icon"></param>
         /// <param name="defaultResult"></param>
         /// <returns></returns>
-        public static MessageBoxResult Show(System.Windows.Window owner, string messageBoxText, string caption = null, MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.None, MessageBoxResult defaultResult = MessageBoxResult.None, ControlStatus? controlStatus = null)
+        public static MessageBoxResult Show(System.Windows.Window owner, string messageBoxText, string caption = "系统提示", MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.None, MessageBoxResult defaultResult = MessageBoxResult.None, ControlStatus? controlStatus = null)
         {
             MessageBox messageBox = null;
             Application.Current.Dispatcher.Invoke(new Action(() => {

@@ -31,7 +31,7 @@
                             <RadioButton IsChecked="True" Content="Light" ac:ControlAttach.Status="Light" Style="{DynamicResource AIStudio.Styles.RadioButton.Outlined}"/>
                             <RadioButton Content="Mid" ac:ControlAttach.Status="Mid" Style="{DynamicResource AIStudio.Styles.RadioButton.Outlined}"/>
                             <RadioButton Content="Dark" ac:ControlAttach.Status="Dark" Style="{DynamicResource AIStudio.Styles.RadioButton.Outlined}"/>
-                            <RadioButton Content="Accent" ac:ControlAttach.Status="Accent" Style="{DynamicResource AIStudio.Styles.RadioButton.Outlined}"/>
+                            <RadioButton Content="Accent" ac:ControlAttach.Status="Secondary" Style="{DynamicResource AIStudio.Styles.RadioButton.Outlined}"/>
                             <RadioButton Content="Success" ac:ControlAttach.Status="Success" Style="{DynamicResource AIStudio.Styles.RadioButton.Outlined}"/>
                             <RadioButton Content="Info" ac:ControlAttach.Status="Info" Style="{DynamicResource AIStudio.Styles.RadioButton.Outlined}"/>
                             <RadioButton Content="Warning" ac:ControlAttach.Status="Warning" Style="{DynamicResource AIStudio.Styles.RadioButton.Outlined}"/>
@@ -43,7 +43,7 @@
                             <RadioButton IsChecked="True" Content="Light" ac:ControlAttach.Status="Light" Style="{DynamicResource AIStudio.Styles.RadioButton.Flat}"/>
                             <RadioButton Content="Mid" ac:ControlAttach.Status="Mid" Style="{DynamicResource AIStudio.Styles.RadioButton.Flat}"/>
                             <RadioButton Content="Dark" ac:ControlAttach.Status="Dark" Style="{DynamicResource AIStudio.Styles.RadioButton.Flat}"/>
-                            <RadioButton Content="Accent" ac:ControlAttach.Status="Accent" Style="{DynamicResource AIStudio.Styles.RadioButton.Flat}"/>
+                            <RadioButton Content="Accent" ac:ControlAttach.Status="Secondary" Style="{DynamicResource AIStudio.Styles.RadioButton.Flat}"/>
                             <RadioButton Content="Success" ac:ControlAttach.Status="Success" Style="{DynamicResource AIStudio.Styles.RadioButton.Flat}"/>
                             <RadioButton Content="Info" ac:ControlAttach.Status="Info" Style="{DynamicResource AIStudio.Styles.RadioButton.Flat}"/>
                             <RadioButton Content="Warning" ac:ControlAttach.Status="Warning" Style="{DynamicResource AIStudio.Styles.RadioButton.Flat}"/>
@@ -55,7 +55,7 @@
                             <RadioButton IsChecked="True" Content="Light" ac:ControlAttach.Status="Light" Style="{DynamicResource AIStudio.Styles.RadioButton.Check}"/>
                             <RadioButton Content="Mid" ac:ControlAttach.Status="Mid" Style="{DynamicResource AIStudio.Styles.RadioButton.Check}"/>
                             <RadioButton Content="Dark" ac:ControlAttach.Status="Dark" Style="{DynamicResource AIStudio.Styles.RadioButton.Check}"/>
-                            <RadioButton Content="Accent" ac:ControlAttach.Status="Accent" Style="{DynamicResource AIStudio.Styles.RadioButton.Check}"/>
+                            <RadioButton Content="Accent" ac:ControlAttach.Status="Secondary" Style="{DynamicResource AIStudio.Styles.RadioButton.Check}"/>
                             <RadioButton Content="Success" ac:ControlAttach.Status="Success" Style="{DynamicResource AIStudio.Styles.RadioButton.Check}"/>
                             <RadioButton Content="Info" ac:ControlAttach.Status="Info" Style="{DynamicResource AIStudio.Styles.RadioButton.Check}"/>
                             <RadioButton Content="Warning" ac:ControlAttach.Status="Warning" Style="{DynamicResource AIStudio.Styles.RadioButton.Check}"/>

@@ -163,7 +163,7 @@
                 <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}"/>
             </Trigger>
@@ -226,7 +226,7 @@
                 <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}"/>
             </Trigger>
@@ -289,7 +289,7 @@
                 <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}"/>
             </Trigger>
@@ -362,7 +362,7 @@
                 <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}"/>
             </Trigger>
@@ -434,7 +434,7 @@
                 <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}"/>
             </Trigger>
@@ -1126,7 +1126,7 @@
                 <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
                 <Setter Property="BorderBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
                 <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryHueLightForegroundBrush}"/>

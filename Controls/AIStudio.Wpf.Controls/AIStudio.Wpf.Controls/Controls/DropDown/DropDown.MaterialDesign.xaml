@@ -65,7 +65,7 @@
                                                           AllowsTransparency="True"
                                                           PopupAnimation="Slide"
                                                           AutoClose="{Binding HoverMode,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}}}"
-                                                          PlacementTarget="{Binding ElementName=PART_Gird}"
+                                                          PlacementTarget="{Binding ElementName=PART_Button}"
                                                           IsOpen="{Binding IsOpen,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}},Mode=TwoWay}"  >
                                     <Grid x:Name="DropDown"
                                           Margin="1,1,1,1">
@@ -155,18 +155,13 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type controls:DropDown}">
                             <Grid x:Name="PART_Gird">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
                                 <Button x:Name="PART_Button" 
                                         Focusable="False"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         Padding="{TemplateBinding Padding}" 
                                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        controls:ControlAttach.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius), Converter={StaticResource CornerRadiusBindingConverter},ConverterParameter={x:Static converter:RadiusType.Left}}" 
+                                        controls:ControlAttach.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.CornerRadius)}" 
                                         controls:ControlAttach.Status="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Status)}"       
                                         Style="{StaticResource AIStudio.Styles.Button.Outlined}"
                                         Content="{TemplateBinding Content}">
@@ -199,7 +194,7 @@
                                                           x:Name="PART_Popup"                                                
                                                           AllowsTransparency="True"
                                                           PopupAnimation="Slide"                                                          
-                                                          PlacementTarget="{Binding ElementName=PART_Gird}"
+                                                          PlacementTarget="{Binding ElementName=PART_Button}"
                                                           AutoClose="{Binding HoverMode,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}}}"
                                                           IsOpen="{Binding IsOpen,RelativeSource={RelativeSource AncestorType={x:Type controls:DropDown}},Mode=TwoWay}"                    >
                                     <Grid x:Name="DropDown"

@@ -132,7 +132,7 @@ namespace AIStudio.Wpf.Controls
                 case ControlStatus.Mid:
                 case ControlStatus.Dark:
                     path = "InfoGeometry"; break;
-                case ControlStatus.Accent:
+                case ControlStatus.Secondary:
                     path = "InfoGeometry"; break;
                 case ControlStatus.Success:
                     path = "SuccessGeometry"; break;

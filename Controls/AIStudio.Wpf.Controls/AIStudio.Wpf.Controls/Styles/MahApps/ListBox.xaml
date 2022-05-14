@@ -144,6 +144,78 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+  
+    <Style x:Key="AIStudio.Styles.ListBoxItem.Plain" BasedOn="{StaticResource AIStudio.Styles.ListBoxItem}" TargetType="{x:Type ListBoxItem}">      
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">                     
+                        <Grid>
+                            <controls:Ripple x:Name="Ripple" 
+                                        Feedback="{TemplateBinding Foreground, Converter={StaticResource BrushRoundConverter}}"
+                                        Focusable="False"                        
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                        Padding="{TemplateBinding Padding}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                        RecognizesAccessKey="False">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <ContentPresenter/>
+
+                                    <!--附加内容区域-->
+                                    <Border x:Name="PART_AttachContent" Grid.Column="1">
+                                        <ContentControl Template="{TemplateBinding controls:ControlAttach.AttachContent}" IsTabStop="False" />
+                                    </Border>
+                                </Grid>
+
+                            </controls:Ripple>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="controls:ControlAttach.AttachContent">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Button x:Name="clear" 
+                            Visibility="Collapsed" 
+                            Foreground="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType=ListBox}}"
+                            Focusable="False"
+                            IsTabStop="False" 
+                            Style="{StaticResource AIStudio.Styles.Button.Clear}"
+                            controls:ControlAttach.ClearTextButton="{Binding Path=(controls:ControlAttach.ClearTextButton),RelativeSource={RelativeSource AncestorType=ListBoxItem}}" 
+                            Command="controls:ControlAttach.ClearTextCommand" 
+                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type ListBoxItem}}}"
+                            Margin="5,0,0,0"/>
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(controls:ControlAttach.ClearTextButton), RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="clear" Property="Visibility" Value="Visible"></Setter>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Separator}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <Style x:Key="AIStudio.Styles.ListBox" TargetType="{x:Type ListBox}">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
@@ -214,8 +286,8 @@
             <Trigger Property="controls:ControlAttach.Status" Value="Dark">
                 <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource Theme.ShowcaseBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
                 <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource SuccessBrush}" />
@@ -263,8 +335,8 @@
             <Trigger Property="controls:ControlAttach.Status" Value="Dark">
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Accent">
-                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
