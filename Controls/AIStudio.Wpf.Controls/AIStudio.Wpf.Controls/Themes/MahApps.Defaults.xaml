@@ -35,6 +35,7 @@
     <Style TargetType="{x:Type StatusBar}" BasedOn="{StaticResource AIStudio.Styles.StatusBar}" />
     <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource AIStudio.Styles.TabControl}" />
     <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource AIStudio.Styles.TabItem}" />
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" />
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource AIStudio.Styles.TextBox}" />
     <Style TargetType="{x:Type Thumb}" BasedOn="{StaticResource AIStudio.Styles.Thumb}" />
     <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource AIStudio.Styles.ToggleButton.Switch}" />

@@ -9,6 +9,7 @@
     
     <!--  never ever make a default style for TextBlock in App.xaml !!!  -->
     <Style x:Key="AIStudio.Styles.TextBlock.Base" TargetType="{x:Type TextBlock}" >
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Style.Triggers>
             <Trigger Property="controls:ControlAttach.Status" Value="Light">
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
@@ -42,8 +43,8 @@
 
     <Style x:Key="AIStudio.Styles.TextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock.Base}" >
         <Setter Property="Padding" Value="0,4" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="AIStudio.Styles.TextBlock.Watermark" BasedOn="{StaticResource AIStudio.Styles.TextBlock.Base}" TargetType="{x:Type TextBlock}">
@@ -54,7 +55,7 @@
 
     <Style x:Key="AIStudio.Styles.TextBlock.FontAwesome" BasedOn="{StaticResource AIStudio.Styles.TextBlock.Base}" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="/AIStudio.Wpf.Controls;component/Resources/#FontAwesome"></Setter>
-        <Setter Property="Foreground" Value="{DynamicResource AIStudio.Styles.Body}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
