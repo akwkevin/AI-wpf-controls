@@ -121,7 +121,7 @@ namespace AIStudio.Wpf.Controls
                             SetNavigationMultiple(control, multiple);
                             SetNavigationOffset(control, baseoffset);
                             controlList.Add(control);
-                            System.Diagnostics.Debug.WriteLine(GetRealNavigationIndex(control));
+                            //System.Diagnostics.Debug.WriteLine(GetRealNavigationIndex(control));
 
                             control.PreviewKeyDown -= Control_PreviewKeyDown;
                             control.PreviewKeyDown += Control_PreviewKeyDown;

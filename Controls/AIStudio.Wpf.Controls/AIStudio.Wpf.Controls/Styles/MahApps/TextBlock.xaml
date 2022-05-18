@@ -42,12 +42,15 @@
     </Style>
 
     <Style x:Key="AIStudio.Styles.TextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock.Base}" >
-        <Setter Property="Padding" Value="0,4" />
         <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="AIStudio.Styles.TextBlock.Watermark" BasedOn="{StaticResource AIStudio.Styles.TextBlock.Base}" TargetType="{x:Type TextBlock}">
+    <Style x:Key="AIStudio.Styles.TextBlock.Center" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="AIStudio.Styles.TextBlock.Watermark" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" TargetType="{x:Type TextBlock}">
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Opacity" Value="0.6" />
     </Style>

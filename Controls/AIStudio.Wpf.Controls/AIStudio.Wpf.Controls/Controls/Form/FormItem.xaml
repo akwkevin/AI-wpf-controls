@@ -2,8 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
                     xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/TextBlock.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="AIStudio.Styles.FormItem" TargetType="{x:Type controls:FormItem}">
+        <Style.Resources>
+            <Style BasedOn="{StaticResource AIStudio.Styles.TextBlock.Center}" TargetType="{x:Type TextBlock}"/>
+        </Style.Resources>
         <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
         <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(controls:Form.ItemMargin)}"/>
         <Setter Property="Template">
@@ -14,16 +20,48 @@
                             <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />
                             <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyWidth)}" />
                         </Grid.ColumnDefinitions>
-                        <ContentPresenter
+                        <ContentPresenter x:Name="header"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
-                                ContentSource="Header" />
+                                ContentSource="Header" 
+                                TextElement.Foreground="{DynamicResource MahApps.Brushes.Text}"
+                                Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>
                         <ContentPresenter
                                 Grid.Column="1"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center"
-                                ContentSource="Content"/>
+                                ContentSource="Content"
+                                Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyMargin)}"/>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+                        </Trigger>
+                        <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                        </Trigger>
+                        <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+                        </Trigger>
+                        <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                        </Trigger>
+                        <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource SuccessBrush}" />
+                        </Trigger>
+                        <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource InfoBrush}" />
+                        </Trigger>
+                        <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource WarningBrush}" />
+                        </Trigger>
+                        <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource DangerBrush}" />
+                        </Trigger>
+                        <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -37,16 +75,48 @@
                                     <RowDefinition Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />
                                     <RowDefinition Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyWidth)}" />
                                 </Grid.RowDefinitions>
+                                <ContentPresenter x:Name="header"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    ContentSource="Header" 
+                                    TextElement.Foreground="{DynamicResource MahApps.Brushes.Text}"
+                                    Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>
                                 <ContentPresenter
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                ContentSource="Header" />
-                                <ContentPresenter
-                                Grid.Row="1"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Center"
-                                ContentSource="Content"/>
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    ContentSource="Content"
+                                    Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyMargin)}"/>
                             </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+                                </Trigger>
+                                <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                                </Trigger>
+                                <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+                                </Trigger>
+                                <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                                </Trigger>
+                                <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource SuccessBrush}" />
+                                </Trigger>
+                                <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource InfoBrush}" />
+                                </Trigger>
+                                <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource WarningBrush}" />
+                                </Trigger>
+                                <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource DangerBrush}" />
+                                </Trigger>
+                                <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>

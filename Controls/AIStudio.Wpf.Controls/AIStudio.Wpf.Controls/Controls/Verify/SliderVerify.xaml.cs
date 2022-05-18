@@ -131,7 +131,6 @@ namespace AIStudio.Wpf.Controls
                 RaiseResultChanged(Result);
             }
 
-            await Task.Delay(2000);
             icon.Fill = fill;
             icon.Data = data;
             Restart();
@@ -217,7 +216,7 @@ namespace AIStudio.Wpf.Controls
             ib.AlignmentX = AlignmentX.Left;
             ib.AlignmentY = AlignmentY.Top;
             ib.ImageSource = image;
-            ib.Viewbox = new Rect(value, (_myCanvas.ActualHeight - _path.ActualHeight) / 2, _myCanvas.ActualWidth, _path.ActualHeight);
+            ib.Viewbox = new Rect(value, (_myCanvas.ActualHeight - _path.ActualHeight) / 2, _path.ActualWidth, _path.ActualHeight);
             ib.ViewboxUnits = BrushMappingMode.Absolute; //按百分比设置宽高
             ib.TileMode = TileMode.None; //按百分比应该不会出现 image小于要切的值的情况
             ib.Stretch = Stretch.None;

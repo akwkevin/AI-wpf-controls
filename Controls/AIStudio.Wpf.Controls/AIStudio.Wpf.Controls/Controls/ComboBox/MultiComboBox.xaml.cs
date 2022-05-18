@@ -75,8 +75,6 @@ namespace AIStudio.Wpf.Controls
         {
             Loaded -= MultiComboBox_Loaded;
             Loaded += MultiComboBox_Loaded;
-            SizeChanged -= MultiComboBox_SizeChanged;
-            SizeChanged += MultiComboBox_SizeChanged;
         }
 
         #endregion
@@ -182,7 +180,7 @@ namespace AIStudio.Wpf.Controls
             }
         }
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(MultiComboBox));
+            DependencyProperty.Register("Text", typeof(string), typeof(MultiComboBox));     
 
         /// <summary>
         /// Gets or sets checkbox style.
@@ -218,24 +216,6 @@ namespace AIStudio.Wpf.Controls
 
         public static readonly DependencyProperty TextSeparatorProperty =
             DependencyProperty.Register(nameof(TextSeparator), typeof(string), typeof(MultiComboBox), new PropertyMetadata(","));
-
-        ///// <summary>
-        ///// Gets or sets max text length.
-        ///// </summary>
-        //public int? MaxTextLength
-        //{
-        //    get
-        //    {
-        //        return (int?)GetValue(MaxTextLengthProperty);
-        //    }
-        //    set
-        //    {
-        //        SetValue(MaxTextLengthProperty, value);
-        //    }
-        //}
-
-        //public static readonly DependencyProperty MaxTextLengthProperty =
-        //    DependencyProperty.Register(nameof(MaxTextLength), typeof(int?), typeof(MultiComboBox));
 
 
         /// <summary>
@@ -303,13 +283,6 @@ namespace AIStudio.Wpf.Controls
 
 
         #region EventHandler
-        private void MultiComboBox_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            UpdateText();
-        }
         private void MultiComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateText();
@@ -360,7 +333,7 @@ namespace AIStudio.Wpf.Controls
         {
             Text = GenerateText(base.SelectedItems);
         }
-        #endregion
+        #endregion      
     }
 
 }

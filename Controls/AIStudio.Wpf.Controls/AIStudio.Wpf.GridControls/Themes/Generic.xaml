@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.GridControls;component/Themes/MaterialDesign.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.GridControls;component/Themes/MahApps.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -44,7 +44,7 @@
         /// <summary>
         /// Identifies the <see cref="ItemsSource"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(HamburgerTreeMenu), new PropertyMetadata(null, OnItemsSourceChanged));
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(HamburgerTreeMenu), new PropertyMetadata(null));
 
         /// <summary>
         /// Identifies the <see cref="ItemTemplate"/> dependency property.

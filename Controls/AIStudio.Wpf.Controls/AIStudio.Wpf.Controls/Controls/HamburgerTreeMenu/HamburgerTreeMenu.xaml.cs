@@ -14,12 +14,14 @@
     [TemplatePart(Name = "PART_ButtonsListView", Type = typeof(TreeView))]
     [TemplatePart(Name = "PART_OptionsListView", Type = typeof(TreeView))]
     [TemplatePart(Name = "PART_MenuListView", Type = typeof(Menu))]
+    [TemplatePart(Name = "PART_OptionsMenuListView", Type = typeof(Menu))]
     public partial class HamburgerTreeMenu : ContentControl
     {
         private Button _hamburgerButton;
         private TreeView _buttonsListView;
         private TreeView _optionsListView;
         private Menu _menuListView;
+        private Menu _optionsMenuListView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HamburgerTreeMenu"/> class.
@@ -54,10 +56,16 @@
                 _menuListView.RemoveHandler(MenuItem.MouseUpEvent, new RoutedEventHandler(OnMouseUp));
             }
 
+            if (_optionsMenuListView != null)
+            {
+                _optionsMenuListView.RemoveHandler(MenuItem.MouseUpEvent, new RoutedEventHandler(OnMouseUp));
+            }
+
             _hamburgerButton = (Button)GetTemplateChild("PART_HamburgerButton");
             _buttonsListView = (TreeView)GetTemplateChild("PART_ButtonsListView");
             _optionsListView = (TreeView)GetTemplateChild("PART_OptionsListView");
             _menuListView = (Menu)GetTemplateChild("PART_MenuListView");
+            _optionsMenuListView = (Menu)GetTemplateChild("PART_OptionsMenuListView");
 
             if (_hamburgerButton != null)
             {
@@ -79,63 +87,16 @@
                 _menuListView.AddHandler(MenuItem.MouseUpEvent, new RoutedEventHandler(OnMouseUp), true);
             }
 
+            if (_optionsMenuListView != null)
+            {
+                _optionsMenuListView.AddHandler(MenuItem.MouseUpEvent, new RoutedEventHandler(OnMouseUp), true);
+            }
+
             this.Loaded -= HamburgerMenu_Loaded;
             this.Loaded += HamburgerMenu_Loaded;
 
             base.OnApplyTemplate();
         }
-
-
-
-        #region 此方法废弃
-        private static void OnItemsSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
-        {
-            HamburgerTreeMenu menu = (HamburgerTreeMenu)dependencyObject;
-            IEnumerable oldItemsSource = (IEnumerable)e.OldValue;
-            IEnumerable newItemsSource = menu.ItemsSource;
-            menu.OnItemsSourceChanged(oldItemsSource, newItemsSource);
-        }
-
-        protected void OnItemsSourceChanged(IEnumerable oldItemsSource, IEnumerable newItemsSource)
-        {
-            foreach (var item in newItemsSource.OfType<HamburgerTreeMenuItem>())
-            {
-                //SetCommand(item);
-            }
-        }
-
-        private void SetCommand(HamburgerTreeMenuItem item)
-        {
-            item.Command = MenuCommand;
-            foreach (var child in item.Children)
-            {
-                SetCommand(child);
-            }
-        }
-
-        private ICommand menuCommand;
-
-        public ICommand MenuCommand
-        {
-            get
-            {
-                return this.menuCommand ?? (this.menuCommand = new SimpleCommand2
-                {
-                    CanExecuteDelegate = x => true,
-                    ExecuteDelegate = x => MenuClick(x)
-                });
-            }
-        }
-
-        private void MenuClick(object para)
-        {
-            if (para is HamburgerTreeMenuItem)
-            {
-                SelectedItem = para as HamburgerTreeMenuItem;
-            }
-        }
-
-        #endregion
     }
 
     public class SimpleCommand2 : ICommand

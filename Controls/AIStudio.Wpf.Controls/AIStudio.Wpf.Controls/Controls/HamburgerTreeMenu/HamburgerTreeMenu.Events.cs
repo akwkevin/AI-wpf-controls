@@ -85,7 +85,14 @@
             if (menuItem != null)
             {
                 SelectedItem = menuItem.DataContext;
-                ItemClick?.Invoke(this, new ItemClickEventArgs(SelectedItem));
+                if (sender == _menuListView)
+                {
+                    ItemClick?.Invoke(this, new ItemClickEventArgs(SelectedItem));
+                }
+                else
+                {
+                    OptionsItemClick?.Invoke(this, new ItemClickEventArgs(SelectedItem));
+                }
             }
         }
 

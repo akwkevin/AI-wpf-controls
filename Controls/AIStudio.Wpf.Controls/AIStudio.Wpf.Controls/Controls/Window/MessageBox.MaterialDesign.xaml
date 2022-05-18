@@ -17,8 +17,8 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
         <Setter Property="ImageBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
-        <Setter Property="MinHeight" Value="172"/>
         <Setter Property="ShowInTaskbar" Value="False"/>
+        <Setter Property="MinHeight" Value="172"/>
         <Setter Property="MinWidth" Value="335"/>
         <Setter Property="MaxWidth" Value="476"/>
         <Setter Property="MaxHeight" Value="680"/>

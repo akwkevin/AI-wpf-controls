@@ -240,6 +240,11 @@ namespace AIStudio.Wpf.Controls
             return tcs.Task;
         }
 
+        static BaseDialog()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(BaseDialog), new FrameworkPropertyMetadata(typeof(BaseDialog)));
+        }
+
         public BaseDialog()
         {
             this.Loaded += BaseDialog_Loaded;

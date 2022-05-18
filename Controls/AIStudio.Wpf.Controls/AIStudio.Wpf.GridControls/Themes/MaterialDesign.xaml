@@ -1078,6 +1078,7 @@
             <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource AIStudio.Styles.DataGridCell.Filter}" />
         </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
         <Setter Property="AlternatingRowBackground" Value="{DynamicResource MaterialDesignChipBackground}" />
         <Setter Property="BorderThickness" Value="1" />

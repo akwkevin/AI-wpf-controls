@@ -487,7 +487,7 @@
                                                  controls:TreeViewAttach.ExpandBehaviour="OnlyOne"
                                                  controls:TreeViewAttach.ExpandMode="SingleClick"/>
 
-                                        <Menu x:Name="OptionsMenuListView" 
+                                        <Menu x:Name="PART_OptionsMenuListView" 
                                               Grid.Row="1" 
                                               HorizontalAlignment="Left"
                                               Width="{TemplateBinding CompactPaneLength}"

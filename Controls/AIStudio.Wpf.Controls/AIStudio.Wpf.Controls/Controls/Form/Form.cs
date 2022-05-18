@@ -35,5 +35,21 @@ namespace AIStudio.Wpf.Controls
         public static Thickness GetItemMargin(DependencyObject element) => (Thickness)element.GetValue(ItemMarginProperty);
         public static void SetItemMargin(DependencyObject element, Thickness value) => element.SetValue(ItemMarginProperty, value);
         #endregion     
+
+        #region AttachedProperty : HeaderMarginProperty
+        public static readonly DependencyProperty HeaderMarginProperty
+            = DependencyProperty.RegisterAttached("HeaderMargin", typeof(Thickness), typeof(Form), new FrameworkPropertyMetadata(default(Thickness), FrameworkPropertyMetadataOptions.Inherits));
+
+        public static Thickness GetHeaderMargin(DependencyObject element) => (Thickness)element.GetValue(HeaderMarginProperty);
+        public static void SetHeaderMargin(DependencyObject element, Thickness value) => element.SetValue(HeaderMarginProperty, value);
+        #endregion
+
+        #region AttachedProperty : BodyMarginProperty
+        public static readonly DependencyProperty BodyMarginProperty
+            = DependencyProperty.RegisterAttached("BodyMargin", typeof(Thickness), typeof(Form), new FrameworkPropertyMetadata(default(Thickness), FrameworkPropertyMetadataOptions.Inherits));
+
+        public static Thickness GetBodyMargin(DependencyObject element) => (Thickness)element.GetValue(BodyMarginProperty);
+        public static void SetBodyMargin(DependencyObject element, Thickness value) => element.SetValue(BodyMarginProperty, value);
+        #endregion
     }
 }

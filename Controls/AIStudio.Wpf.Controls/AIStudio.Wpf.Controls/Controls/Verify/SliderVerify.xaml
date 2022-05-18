@@ -136,8 +136,8 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Canvas x:Name="PART_Canvas">
-                            <Path x:Name="PART_Pathfix" Data="{StaticResource PuzzlePieceGeometry}" Stroke="{TemplateBinding Foreground}" Fill="{TemplateBinding Foreground}" SnapsToDevicePixels="True" Stretch="Uniform" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Path x:Name="PART_Path" Data="{StaticResource PuzzlePieceGeometry}" Stroke="{TemplateBinding Foreground}" SnapsToDevicePixels="True" Stretch="Uniform" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Path x:Name="PART_Pathfix" Panel.ZIndex="1" Data="{StaticResource PuzzlePieceGeometry}" Stroke="{TemplateBinding Foreground}" Fill="{TemplateBinding Background}" SnapsToDevicePixels="True" Stretch="Uniform" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Path x:Name="PART_Path" Panel.ZIndex="2" Data="{StaticResource PuzzlePieceGeometry}" Stroke="{TemplateBinding Foreground}" SnapsToDevicePixels="True" Stretch="Uniform" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Canvas>
                         <Slider x:Name="PART_Slider" Height="40" Grid.Row="1" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Style="{StaticResource VerifySlider}"></Slider>
                     </Grid>

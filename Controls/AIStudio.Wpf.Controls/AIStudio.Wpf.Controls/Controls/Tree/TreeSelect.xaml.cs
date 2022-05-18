@@ -96,7 +96,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public new static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(TreeSelect), new PropertyMetadata(null, new PropertyChangedCallback(OnSelectedItemChanged)));
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(TreeSelect), new PropertyMetadata(null, OnSelectedItemChanged));
 
         private static void OnSelectedItemChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -116,8 +116,12 @@ namespace AIStudio.Wpf.Controls
         }
 
         public new static readonly DependencyProperty SelectedValueProperty =
-            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TreeSelect), new PropertyMetadata(null));
+            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TreeSelect), new PropertyMetadata(null, OnSelectedValueChanged));
 
+        private static void OnSelectedValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            ((TreeSelect)sender).UpdateSelectedValue();
+        }
 
         public new string Text
         {
@@ -152,44 +156,6 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty TextSeparatorProperty =
             DependencyProperty.Register("TextSeparator", typeof(string), typeof(TreeSelect), new PropertyMetadata(","));
 
-        /// <summary>
-        /// Gets or sets max text length.
-        /// </summary>
-        public int? MaxTextLength
-        {
-            get
-            {
-                return (int?)GetValue(MaxTextLengthProperty);
-            }
-            set
-            {
-                SetValue(MaxTextLengthProperty, value);
-            }
-        }
-
-        public static readonly DependencyProperty MaxTextLengthProperty =
-            DependencyProperty.Register("MaxTextLength", typeof(int?), typeof(TreeSelect));
-
-        /// <summary>
-        /// Gets or sets text filler when text length exceeded.
-        /// </summary>
-        public string ExceededTextFiller
-        {
-            get
-            {
-                return (string)GetValue(ExceededTextFillerProperty);
-            }
-            set
-            {
-                SetValue(ExceededTextFillerProperty, value);
-            }
-        }
-
-        public static readonly DependencyProperty ExceededTextFillerProperty =
-            DependencyProperty.Register("ExceededTextFiller", typeof(string), typeof(TreeSelect), new PropertyMetadata("..."));
-
-
-
         static TreeSelect()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeSelect), new FrameworkPropertyMetadata(typeof(TreeSelect)));
@@ -199,8 +165,6 @@ namespace AIStudio.Wpf.Controls
         {
             Loaded -= TreeSelect_Loaded;
             Loaded += TreeSelect_Loaded;
-            SizeChanged -= TreeSelect_SizeChanged;
-            SizeChanged += TreeSelect_SizeChanged;
         }
 
         private ExtendedTreeView _treeView;
@@ -273,6 +237,11 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new ComboBoxItem();
+        }
+
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
             if (item is ComboBoxItem)
@@ -295,17 +264,22 @@ namespace AIStudio.Wpf.Controls
             base.PrepareContainerForItemOverride(element, item);
         }
 
-        private void TreeSelect_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UpdateText();
-        }
         private void TreeSelect_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateText();
         }
 
+        private void UpdateSelectedValue()
+        {
+            if (_interSelectedValueChanged == true) return;
+
+            SelectedItem = GetTreeModel(Items, SelectedValue);
+        }
+
+        private bool _interSelectedValueChanged;
         private void UpdateSelectedItem()
         {
+            _interSelectedValueChanged = true;
             if (this.SelectedItem == null || string.IsNullOrEmpty(this.SelectedValuePath))
             {
                 SelectedValue = null;
@@ -314,7 +288,7 @@ namespace AIStudio.Wpf.Controls
             {
                 SelectedValue = this.SelectedItem.GetType().GetProperty(SelectedValuePath).GetValue(this.SelectedItem, null);
             }
-
+            _interSelectedValueChanged = false;
             base.SelectedItem = this.SelectedItem;
 
             UpdateText();
@@ -461,28 +435,7 @@ namespace AIStudio.Wpf.Controls
                     else
                         isFirst = false;
 
-                    text += txt;
-
-                    //if (MaxTextLength == null)
-                    //{
-                    //    if (!ValidateStringWidth(text + ExceededTextFiller))
-                    //    {
-                    //        if (text.Length == 0)
-                    //            return null;
-                    //        text = text.Remove(text.Length - 1);
-                    //        while (!ValidateStringWidth(text + ExceededTextFiller))
-                    //        {
-                    //            if (text.Length == 0)
-                    //                return null;
-                    //            text = text.Remove(text.Length - 1);
-                    //        }
-                    //        return text + ExceededTextFiller;
-                    //    }
-                    //}
-                    //else if (text.Length >= MaxTextLength)
-                    //{
-                    //    return text.Cut((int)MaxTextLength, ExceededTextFiller);
-                    //}
+                    text += txt;                  
                 }
             }
             return text;
@@ -522,21 +475,31 @@ namespace AIStudio.Wpf.Controls
             return objs;
         }
 
-        private bool ValidateStringWidth(string text)
+        public object GetTreeModel(IList trees, object id)
         {
-            var size = MeasureString(text);
-            if (size.Width > (ActualWidth - Padding.Left - Padding.Right - 30))
-                return false;
-            else
-                return true;
-
-        }
-
-        private Size MeasureString(string candidate)
-        {
-            var formattedText = new FormattedText(candidate, System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), FontSize, Brushes.Black, new NumberSubstitution(), TextFormattingMode.Display);
-
-            return new Size(formattedText.Width, formattedText.Height);
+            object treemodel = null;
+            if (trees != null && id != null)
+            {
+                foreach (var tree in trees)
+                {
+                    if (tree.GetType().GetProperty(SelectedValuePath).GetValue(tree)?.ToString() == id?.ToString())
+                    {
+                        treemodel = tree;
+                        break;
+                    }
+                    else
+                    {
+                        var children = tree.GetType().GetProperty("Children").GetValue(tree) as IList;
+                        if (children != null)
+                        {
+                            treemodel = GetTreeModel(children, id);
+                            if (treemodel != null)
+                                break;
+                        }                        
+                    }
+                }
+            }
+            return treemodel;
         }
     }
 }

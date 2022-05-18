@@ -10,6 +10,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <converter:ShadowConverter x:Key="ShadowConverter"/>
+    <converter:BorderClipConverter x:Key="BorderClipConverter"/>
 
     <Style x:Key="OptionMarkFocusVisual">
         <Setter Property="Control.Template">

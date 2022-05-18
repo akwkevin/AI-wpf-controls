@@ -67,17 +67,17 @@
                 <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontWeight="Bold" Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Foreground}" Text="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Title}" />
 
                 <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="0,8,0,0" VerticalScrollBarVisibility="Auto">
-                    <TextBlock Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Foreground}" Opacity="0.8" Text="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Message}" TextWrapping="Wrap" />
+                    <TextBlock Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Foreground}" Opacity="0.8" Text="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Message}" TextWrapping="Wrap" VerticalAlignment="Center"/>
                 </ScrollViewer>
                 
                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" controls:ControlNavigationAttach.NavWithUpDown="True" controls:ControlNavigationAttach.NavWithUpDownDefaultIndex="0">
-                    <Button x:Name="PART_AffirmativeButton" Padding="3,0" BorderThickness="0" IsDefault="True" Content="确定" Margin="5,0,0,0" 
+                    <Button x:Name="PART_AffirmativeButton" IsDefault="True" Content="确定" Margin="5,0,0,0" 
                                             Style="{StaticResource AIStudio.Styles.Button.Focus}" 
                                             Background="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}}"
                                             BorderBrush="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}}"
                                             Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog}, Path=Background}"
                                             controls:ControlNavigationAttach.NavigationIndex="0"/>
-                    <Button x:Name="PART_NegativeButton" Padding="3,0" BorderThickness="0" IsCancel="True" Content="取消" Margin="5,0" 
+                    <Button x:Name="PART_NegativeButton" IsCancel="True" Content="取消" Margin="5,0" 
                                             Style="{StaticResource AIStudio.Styles.Button.Focus}" 
                                             Background="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}"
                                             BorderBrush="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:MessageBoxDialog},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}"

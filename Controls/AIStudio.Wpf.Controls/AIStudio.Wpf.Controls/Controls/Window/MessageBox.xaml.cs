@@ -289,6 +289,18 @@ namespace AIStudio.Wpf.Controls
         }
 
         /// <summary>
+        ///     成功
+        /// </summary>
+        /// <param name="messageBoxText"></param>
+        /// <param name="caption"></param>
+        public static MessageBoxResult Success(string messageBoxText, string windowIdentifier, string caption = "系统提示")
+        {
+            var owner = WindowBase.GetWindowBase(windowIdentifier);          
+
+            return Success(messageBoxText, caption, owner);
+        }
+
+        /// <summary>
         ///     消息
         /// </summary>
         /// <param name="messageBoxText"></param>
@@ -310,6 +322,18 @@ namespace AIStudio.Wpf.Controls
             }));
 
             return messageBox._messageBoxResult;
+        }
+
+        /// <summary>
+        ///     消息
+        /// </summary>
+        /// <param name="messageBoxText"></param>
+        /// <param name="caption"></param>
+        public static MessageBoxResult Info(string messageBoxText, string windowIdentifier, string caption = "系统提示")
+        {
+            var owner = WindowBase.GetWindowBase(windowIdentifier);
+
+            return Info(messageBoxText, caption, owner);
         }
 
         /// <summary>
@@ -337,6 +361,18 @@ namespace AIStudio.Wpf.Controls
         }
 
         /// <summary>
+        ///     警告
+        /// </summary>
+        /// <param name="messageBoxText"></param>
+        /// <param name="caption"></param>
+        public static MessageBoxResult Warning(string messageBoxText, string windowIdentifier, string caption = "系统提示")
+        {
+            var owner = WindowBase.GetWindowBase(windowIdentifier);
+
+            return Warning(messageBoxText, caption, owner);
+        }
+
+        /// <summary>
         ///     错误
         /// </summary>
         /// <param name="messageBoxText"></param>
@@ -358,6 +394,18 @@ namespace AIStudio.Wpf.Controls
             }));
 
             return messageBox._messageBoxResult;
+        }
+
+        /// <summary>
+        ///     错误
+        /// </summary>
+        /// <param name="messageBoxText"></param>
+        /// <param name="caption"></param>
+        public static MessageBoxResult Error(string messageBoxText, string windowIdentifier, string caption = "系统提示")
+        {
+            var owner = WindowBase.GetWindowBase(windowIdentifier);
+
+            return Error(messageBoxText, caption, owner);
         }
 
         /// <summary>
@@ -385,6 +433,18 @@ namespace AIStudio.Wpf.Controls
             }));
 
             return messageBox._messageBoxResult;
+        }
+
+        /// <summary>
+        ///     严重
+        /// </summary>
+        /// <param name="messageBoxText"></param>
+        /// <param name="caption"></param>
+        public static MessageBoxResult Fatal(string messageBoxText, string windowIdentifier, string caption = "系统提示")
+        {
+            var owner = WindowBase.GetWindowBase(windowIdentifier);
+
+            return Fatal(messageBoxText, caption, owner);
         }
 
         /// <summary>
@@ -416,6 +476,18 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="messageBoxText"></param>
         /// <param name="caption"></param>
+        public static MessageBoxResult Ask(string messageBoxText, string windowIdentifier, string caption = "系统提示")
+        {
+            var owner = WindowBase.GetWindowBase(windowIdentifier);
+
+            return Ask(messageBoxText, caption, owner);
+        }
+
+        /// <summary>
+        ///     询问
+        /// </summary>
+        /// <param name="messageBoxText"></param>
+        /// <param name="caption"></param>
         public static MessageBoxResult YesNo(string messageBoxText, string caption = "系统提示", System.Windows.Window owner = null)
         {
             MessageBox messageBox = null;
@@ -435,6 +507,17 @@ namespace AIStudio.Wpf.Controls
             return messageBox._messageBoxResult;
         }
 
+        /// <summary>
+        ///     询问
+        /// </summary>
+        /// <param name="messageBoxText"></param>
+        /// <param name="caption"></param>
+        public static MessageBoxResult YesNo(string messageBoxText, string windowIdentifier, string caption = "系统提示")
+        {
+            var owner = WindowBase.GetWindowBase(windowIdentifier);
+
+            return YesNo(messageBoxText, caption, owner);
+        }
 
         /// <summary>
         ///     信息展示
@@ -445,7 +528,7 @@ namespace AIStudio.Wpf.Controls
         /// <param name="icon"></param>
         /// <param name="defaultResult"></param>
         /// <returns></returns>
-        public static MessageBoxResult Show(string messageBoxText, string caption = null,
+        public static MessageBoxResult Show(string messageBoxText, string caption = null, 
             MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.None,
             MessageBoxResult defaultResult = MessageBoxResult.None, ControlStatus? controlStatus = null) =>
             Show(null, messageBoxText, caption, button, icon, defaultResult, controlStatus);

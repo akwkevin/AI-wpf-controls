@@ -39,7 +39,7 @@
             <Setter.Value>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Left" >
-                        <TextBlock Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{TemplateBinding Content}" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </Setter.Value>

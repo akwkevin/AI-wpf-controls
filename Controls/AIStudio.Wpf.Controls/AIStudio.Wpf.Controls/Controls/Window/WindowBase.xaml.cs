@@ -374,12 +374,19 @@ namespace AIStudio.Wpf.Controls
         private SizeChangedEventHandler SetupAndOpenDialog(UserControl dialog)
         {
             dialog.SetValue(Panel.ZIndexProperty, (int)overlayBox.GetValue(Panel.ZIndexProperty) + 1);
-            dialog.MinHeight = this.ActualHeight / 4.0;
-            dialog.MaxHeight = this.ActualHeight;
 
-            SizeChangedEventHandler sizeHandler = (sender, args) => {
+            if (dialog.Height == double.NaN)
+            {
                 dialog.MinHeight = this.ActualHeight / 4.0;
                 dialog.MaxHeight = this.ActualHeight;
+            }
+
+            SizeChangedEventHandler sizeHandler = (sender, args) => {
+                if (dialog.Height == double.NaN)
+                {
+                    dialog.MinHeight = this.ActualHeight / 4.0;
+                    dialog.MaxHeight = this.ActualHeight;
+                }
             };
 
             this.SizeChanged += sizeHandler;
@@ -958,6 +965,7 @@ namespace AIStudio.Wpf.Controls
         private void OnNotifyIconDoubleClick(object sender, System.EventArgs e)
         {
             this.ShowInTaskbar = true;
+            this.ShowNotifyIcon = false;
             this.NotifyIcon.Visible = false;
             this.WindowState = WindowState.Maximized;
             this.Activate();
@@ -982,7 +990,10 @@ namespace AIStudio.Wpf.Controls
         private void ClickedNotify_Execute(object sender, ExecutedRoutedEventArgs e)
         {
             OnNotifyIconDoubleClick(null, null);
-            e.Handled = true;
+            if (e != null)
+            {
+                e.Handled = true;
+            }
         }
 
         private static void OnShowNotifyIconChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)

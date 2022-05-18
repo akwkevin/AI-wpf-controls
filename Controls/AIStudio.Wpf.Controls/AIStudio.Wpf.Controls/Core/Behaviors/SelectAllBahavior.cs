@@ -61,6 +61,7 @@ namespace AIStudio.Wpf.Controls.Behaviors
             _allcheck.Checked += HeaderChecked;
             _allcheck.Unchecked += HeaderUnchecked;
             _allcheck.Indeterminate += HeaderIndeterminate;
+            _allcheck.Tag = "全选";
             _allcheck.SetCurrentValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
             _allcheck.SetCurrentValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center);
             column.Header = _allcheck;

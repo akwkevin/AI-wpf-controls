@@ -1081,6 +1081,7 @@
             <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource AIStudio.Styles.DataGridCell.Filter}" />
         </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
         <Setter Property="AlternatingRowBackground" Value="{DynamicResource MahApps.Brushes.Gray9}" />
         <Setter Property="BorderThickness" Value="1" />
