@@ -13,6 +13,7 @@
     <converter:String2VisibilityReConverter x:Key="String2VisibilityReConverter"/>
     <converter:ThicknessBindingConverter x:Key="ThicknessBindingConverter"/>
     <converter:ShadowConverter x:Key="ShadowConverter"/>
+    <converter:GridLengthConverter x:Key="GridLengthConverter"/>
 
     <Style x:Key="DatePickerTextBoxStyle" BasedOn="{StaticResource AIStudio.Styles.TextBox.Plain}" TargetType="DatePickerTextBox">
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
@@ -33,6 +34,8 @@
         <Setter Property="SelectedDateFormat" Value="Short"/>
         <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
         <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
+        <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource AIStudio.Styles.ValidationErrorTemplate}" />
         <Setter Property="Template">
@@ -50,7 +53,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource GridLengthConverter},ConverterParameter=2}" />
                             </Grid.ColumnDefinitions>
                             <!--Label区域-->
                             <ContentControl x:Name="Label" Margin="0" Template="{TemplateBinding controls:ControlAttach.LabelTemplate}" IsTabStop="False" IsHitTestVisible="False"/>
@@ -69,7 +72,7 @@
                             <Border x:Name="PART_AttachContent" Grid.Column="2">
                                 <ContentControl Template="{TemplateBinding controls:ControlAttach.AttachContent}" IsTabStop="False" />
                             </Border>
-                            <Button x:Name="PART_Button" Grid.Column="3" Style="{StaticResource AIStudio.Styles.Button.Plain}" Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyLeft}}" Content="" Padding="0" BorderThickness="0" controls:IconAttach.Geometry="{StaticResource CalendarGeometry}" Foreground="{TemplateBinding BorderBrush}" Focusable="False"/>
+                            <Button x:Name="PART_Button" Grid.Column="3" Style="{StaticResource AIStudio.Styles.Button.Plain}" Content="" Padding="0" BorderThickness="0" controls:IconAttach.Geometry="{StaticResource CalendarGeometry}" Foreground="{TemplateBinding BorderBrush}" Focusable="False"/>
                             <Popup x:Name="PART_Popup" VerticalOffset="1"  PopupAnimation="Fade" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=Bg}" StaysOpen="False"/>
                         </Grid>
                     </Grid>
@@ -184,7 +187,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource GridLengthConverter},ConverterParameter=2}" />
                             </Grid.ColumnDefinitions>
                             <!--Label区域-->
                             <ContentControl x:Name="Label" Margin="0" Template="{TemplateBinding controls:ControlAttach.LabelTemplate}" IsTabStop="False" IsHitTestVisible="False"/>
@@ -203,7 +206,7 @@
                             <Border x:Name="PART_AttachContent" Grid.Column="2">
                                 <ContentControl Template="{TemplateBinding controls:ControlAttach.AttachContent}" IsTabStop="False" />
                             </Border>
-                            <Button x:Name="PART_Button" Grid.Column="3" Style="{StaticResource AIStudio.Styles.Button.Plain}" Margin="{TemplateBinding Padding,Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyLeft}}" Content="" Padding="0" BorderThickness="0" controls:IconAttach.Geometry="{StaticResource CalendarGeometry}" Foreground="{TemplateBinding BorderBrush}" Focusable="False"/>
+                            <Button x:Name="PART_Button" Grid.Column="3" Style="{StaticResource AIStudio.Styles.Button.Plain}" Content="" Padding="0" BorderThickness="0" controls:IconAttach.Geometry="{StaticResource CalendarGeometry}" Foreground="{TemplateBinding BorderBrush}" Focusable="False"/>
                             <Popup x:Name="PART_Popup" VerticalOffset="1"  PopupAnimation="Fade" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=Bg}" StaysOpen="False"/>
                         </Grid>
                         <controls:Underline x:Name="Underline" IsTabStop="False" Background="{TemplateBinding controls:ControlAttach.BorderBrush}"/>

@@ -13,7 +13,9 @@ namespace AIStudio.Wpf.Controls.Converter
             var length = value?.ToString();
             try
             {
-                return new GridLength(double.Parse(length), GridUnitType.Pixel);
+                double add = 0;
+                double.TryParse(parameter?.ToString(), out add);
+                return new GridLength(double.Parse(length) + add, GridUnitType.Pixel);
             }
             catch
             {

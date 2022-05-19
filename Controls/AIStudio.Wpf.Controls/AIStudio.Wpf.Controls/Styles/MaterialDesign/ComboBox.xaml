@@ -91,7 +91,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource GridLengthConverter}}" />
+                                <ColumnDefinition Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource GridLengthConverter},ConverterParameter=2}" />
                             </Grid.ColumnDefinitions>
                             <!--Label区域-->
                             <ContentControl x:Name="Label" Template="{TemplateBinding controls:ControlAttach.LabelTemplate}" IsTabStop="False" IsHitTestVisible="False"
@@ -320,7 +320,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource GridLengthConverter}}" />
+                                <ColumnDefinition Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource GridLengthConverter},ConverterParameter=2}" />
                             </Grid.ColumnDefinitions>
                             <!--Label区域-->
                             <ContentControl x:Name="Label" Template="{TemplateBinding controls:ControlAttach.LabelTemplate}" IsTabStop="False" IsHitTestVisible="False"
