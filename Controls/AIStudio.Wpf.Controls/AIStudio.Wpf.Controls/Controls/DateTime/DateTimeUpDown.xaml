@@ -7,7 +7,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/NumericUpDown/ButtonSpinner.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ValidationErrorTemplate.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ValidationErrorTemplate.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>

@@ -8,6 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ToggleButton.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DateTime/Range/ACalendar.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ValidationErrorTemplate.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <converter:String2VisibilityReConverter x:Key="String2VisibilityReConverter"/>

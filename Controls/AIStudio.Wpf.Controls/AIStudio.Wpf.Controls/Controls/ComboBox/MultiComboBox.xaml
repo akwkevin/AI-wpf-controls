@@ -9,6 +9,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/TextBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/CheckBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Tag/TagBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ValidationErrorTemplate.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <converter:ShadowConverter x:Key="ShadowConverter"/>

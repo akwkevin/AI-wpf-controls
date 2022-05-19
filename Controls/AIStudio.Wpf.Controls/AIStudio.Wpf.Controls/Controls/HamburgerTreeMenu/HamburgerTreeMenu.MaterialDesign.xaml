@@ -12,6 +12,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <converter:TreeViewMarginConverter x:Key="TreeViewMarginConverter"/>
     <converter:MathConverter Operation="Multiply" x:Key="MathConverter"/>
     <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
 
@@ -163,7 +164,7 @@
                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                          Feedback="{TemplateBinding Foreground, Converter={StaticResource BrushRoundConverter}}"
                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                    <Grid Margin="{Binding Converter={StaticResource LengthConverter}, RelativeSource={x:Static RelativeSource.TemplatedParent}}">
+                                    <Grid Margin="{Binding Converter={StaticResource TreeViewMarginConverter}, RelativeSource={x:Static RelativeSource.TemplatedParent}}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" MinWidth="19" />

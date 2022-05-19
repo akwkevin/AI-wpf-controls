@@ -7,6 +7,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ToggleButton.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TreeView.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ValidationErrorTemplate.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <converter:BoolInverseConverter x:Key="BoolInverseConverter"/>

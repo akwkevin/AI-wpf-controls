@@ -10,6 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/Expander.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/NumericUpDown/NumericUpDown.MaterialDesign.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ValidationErrorTemplate.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <!--MetroDataGrid-->
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
