@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +16,43 @@ namespace AIStudio.Wpf.Controls
         #region Identifier
         private PropertyInfo _displayMemberPropertyInfo;
         #endregion
+
+        private ObservableCollection<object> bindingList = new ObservableCollection<object>();//数据源绑定List
+        private ICollectionView _view;
+
+        /// <summary>
+        /// 注册依赖事件
+        /// </summary>
+        public new static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(MultiComboBox), new FrameworkPropertyMetadata(new PropertyChangedCallback(ItemsSourceChanged)));
+        /// <summary>
+        /// 数据源改变，添加数据源到绑定数据源
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MultiComboBox ecb = d as MultiComboBox;
+            ecb.bindingList.Clear();
+            //遍历循环操作
+            foreach (var item in ecb.ItemsSource)
+            {
+                ecb.bindingList.Add(item);
+            }
+        }
+        /// <summary>
+        /// 设置或获取ComboBox的数据源
+        /// </summary>
+        public new IEnumerable ItemsSource
+        {
+            get
+            {
+                return (IEnumerable)GetValue(ItemsSourceProperty);
+            }
+            set
+            {
+                SetValue(ItemsSourceProperty, value);
+            }
+        }
 
         public new IList SelectedItems
         {
@@ -78,6 +118,55 @@ namespace AIStudio.Wpf.Controls
         }
 
         #endregion
+        /// <summary>
+        /// 重写初始化
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            base.ItemsSource = bindingList;
+        }
+
+        protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
+        {
+            SetView();
+            _view.Refresh();
+        }
+
+        private void SetView()
+        {
+            if (base.ItemsSource != null)
+            {
+                _view = CollectionViewSource.GetDefaultView(base.ItemsSource);
+                _view.Filter = (o) => {
+                    if (string.IsNullOrEmpty(SearchText))
+                    {
+                        return true;
+                    }
+
+                    if (o is string obj)
+                    {
+                        return obj.ToLower().Contains(SearchText.ToLower());
+                    }
+                    else
+                    {
+                        if (_displayMemberPropertyInfo == null || _displayMemberPropertyInfo.Name != DisplayMemberPath)
+                            _displayMemberPropertyInfo = o.GetType().GetProperty(DisplayMemberPath);
+
+                        if (_displayMemberPropertyInfo != null)
+                        {
+                            var text = _displayMemberPropertyInfo.GetValue(o, null)?.ToString();
+                            return text.ToLower().Contains(SearchText.ToLower());
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                };
+            }
+        }
 
         public virtual string GenerateText(IList selectedItems)
         {
@@ -180,7 +269,7 @@ namespace AIStudio.Wpf.Controls
             }
         }
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(MultiComboBox));     
+            DependencyProperty.Register("Text", typeof(string), typeof(MultiComboBox));
 
         /// <summary>
         /// Gets or sets checkbox style.
@@ -258,7 +347,12 @@ namespace AIStudio.Wpf.Controls
         private static void OnSearchTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var selector = d as MultiComboBox;
-            //selector.RaiseSearchTextChanged(e.NewValue as string);
+            selector.SearchTextChanged();
+        }
+
+        private void SearchTextChanged()
+        {
+            _view.Refresh();
         }
 
         /// <summary>
@@ -286,6 +380,7 @@ namespace AIStudio.Wpf.Controls
         private void MultiComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateText();
+            SetView();
         }
         #endregion
 

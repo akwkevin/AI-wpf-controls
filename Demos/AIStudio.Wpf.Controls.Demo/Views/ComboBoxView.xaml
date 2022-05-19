@@ -18,7 +18,7 @@
                             <ComboBox Width="180" Margin="2" ItemsSource="{Binding DataList}" DisplayMemberPath="Name" ac:ControlAttach.Watermark="请选择" Style="{DynamicResource AIStudio.Styles.ComboBox}"/>
                             <ComboBox Width="180" Margin="2" ItemsSource="{Binding DataList}" IsEditable="True" DisplayMemberPath="Name" ac:ControlAttach.Watermark="请选择" Style="{DynamicResource AIStudio.Styles.ComboBox}" ac:IconAttach.Geometry="{StaticResource FillUpGeometry}"/>
                             <ac:MultiComboBox DisplayMemberPath="Name" Width="180" Margin="2" ac:ControlAttach.Watermark="请多选" ItemsSource="{Binding DataList}"/>
-                            <!--<ac:TreeComboBox Width="180" Margin="2" ac:ControlAttach.Watermark="请选择" ItemsSource="{Binding DataList}">
+                            <ac:MultiComboBox DisplayMemberPath="Name" Width="180" Margin="2" ac:ControlAttach.Watermark="请多选" ItemsSource="{Binding DataList}" IsSearchTextBoxVisible="True"/>  <!--<ac:TreeComboBox Width="180" Margin="2" ac:ControlAttach.Watermark="请选择" ItemsSource="{Binding DataList}">
                                 <ac:TreeComboBox.Resources>
                                     <HierarchicalDataTemplate DataType="{x:Type model:DemoDataModel}" ItemsSource="{Binding Path=Children}" >
                                         <StackPanel Orientation="Horizontal">

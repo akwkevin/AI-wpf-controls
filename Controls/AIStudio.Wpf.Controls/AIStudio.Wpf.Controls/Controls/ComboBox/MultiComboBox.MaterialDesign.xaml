@@ -151,12 +151,14 @@
                                         <TextBox x:Name="TbSearch"
                                              Visibility="Collapsed"
                                              Height="30"
-                                             Padding="5,0,0,0"
-                                             BorderBrush="Transparent"
-                                             BorderThickness="0"                                  
-                                             Foreground="{TemplateBinding Foreground}"                                      
+                                             BorderBrush="{TemplateBinding BorderBrush}"
+                                             Background="{TemplateBinding Background}"                                
+                                             Foreground="{TemplateBinding Foreground}"  
+                                             controls:ControlAttach.BorderBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                             CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                             SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
                                              Text="{Binding SearchText,RelativeSource={RelativeSource AncestorType={x:Type controls:MultiComboBox}},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                             Margin="1,5,1,0" />
+                                             Style="{StaticResource AIStudio.Styles.TextBox.Underline}"/>
                                         <ScrollViewer Grid.Row="1"
                                                   Margin="2"
                                                   Padding="1">
@@ -367,14 +369,14 @@
                                         <TextBox x:Name="TbSearch"
                                              Visibility="Collapsed"
                                              Height="30"
-                                             Padding="5,0,0,0"
-                                             BorderBrush="Transparent"
-                                             BorderThickness="0"
-                                  
-                                             Foreground="{TemplateBinding Foreground}"
-                                      
+                                             BorderBrush="{TemplateBinding BorderBrush}"
+                                             Background="{TemplateBinding Background}"                                
+                                             Foreground="{TemplateBinding Foreground}"  
+                                             controls:ControlAttach.BorderBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                             CaretBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
+                                             SelectionBrush="{TemplateBinding controls:ControlAttach.BorderBrush}"
                                              Text="{Binding SearchText,RelativeSource={RelativeSource AncestorType={x:Type controls:MultiComboBox}},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                             Margin="1,5,1,0" />
+                                             Style="{StaticResource AIStudio.Styles.TextBox.Underline}"/>
                                         <ScrollViewer Grid.Row="1"
                                                   Margin="2"
                                                   Padding="1">

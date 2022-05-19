@@ -26,6 +26,7 @@ namespace AIStudio.Wpf.Controls
         internal Popup _popup;
         internal ToggleButton _toggleButton;
         private ObservableCollection<object> bindingList = new ObservableCollection<object>();//数据源绑定List
+        private ICollectionView _view;
 
         /// <summary>
         /// 注册依赖事件
@@ -160,7 +161,7 @@ namespace AIStudio.Wpf.Controls
         }
         #endregion
 
-        private ICollectionView _view;
+       
         private PropertyInfo _displayMemberPropertyInfo;
 
         static InputComboBox()
