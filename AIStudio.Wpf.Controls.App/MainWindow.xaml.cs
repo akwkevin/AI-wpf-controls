@@ -52,7 +52,7 @@ namespace AIStudio.Wpf.Controls.App
                 thread.Start();
             }));
 #else
-            System.Diagnostics.Process.Start("AIStudio.Wpf.PrismRegions.Demo.exe");
+            System.Diagnostics.Process.Start("PrismRegions.Demo/AIStudio.Wpf.PrismRegions.Demo.exe");
 #endif
         }
 

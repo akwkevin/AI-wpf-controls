@@ -26,6 +26,45 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="PrismRegions.Demo\AIStudio.Wpf.PrismAvalonExtensions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\AIStudio.Wpf.PrismDragablzExtensions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\AIStudio.Wpf.PrismRegions.Demo.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\AIStudio.Wpf.PrismRegions.Demo.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\Dragablz.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\Microsoft.Xaml.Behaviors.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\Prism.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\Prism.Unity.Wpf.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\Prism.Wpf.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\Unity.Abstractions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\Unity.Container.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrismRegions.Demo\Xceed.Wpf.AvalonDock.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
   </ItemGroup>
 
