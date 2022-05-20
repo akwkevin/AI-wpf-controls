@@ -7,7 +7,6 @@
         xmlns:controlsDemo="clr-namespace:AIStudio.Wpf.Controls.Demo;assembly=AIStudio.Wpf.Controls.Demo"   
         xmlns:mdiContainerDemo="clr-namespace:AIStudio.Wpf.MDIContainer.Demo;assembly=AIStudio.Wpf.MDIContainer.Demo" 
         xmlns:panelsDemo="clr-namespace:AIStudio.Wpf.Panels.Demo;assembly=AIStudio.Wpf.Panels.Demo"
-        xmlns:dragablzDemo="clr-namespace:AIStudio.Wpf.DragablzControls.Demo;assembly=AIStudio.Wpf.DragablzControls.Demo"
         xmlns:gridControlDemo="clr-namespace:AIStudio.Wpf.GridControls.Demo;assembly=AIStudio.Wpf.GridControls.Demo"
         xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
         mc:Ignorable="d"
@@ -28,7 +27,6 @@
                               Padding="0">
                         <ComboBoxItem Content="Controls"/>
                         <ComboBoxItem Content="Panels"/>
-                        <ComboBoxItem Content="Dragablz"/>
                         <ComboBoxItem Content="MDIContainer"/>
                         <ComboBoxItem Content="GridControl"/>
                     </ComboBox>
@@ -42,17 +40,7 @@
                                 <MenuItem.Icon>
                                     <ac:PathIcon Kind="Screenshot"/>
                                 </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem x:Name="menuPrint" Header="Print" Click="menuPrint_Click">
-                                <MenuItem.Icon>
-                                    <ac:PathIcon Kind="Print"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem x:Name="menuPrism" Header="Prism" Click="menuPrism_Click">
-                                <MenuItem.Icon>
-                                    <ac:PathIcon Kind="Prism"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
+                            </MenuItem>                           
                         </MenuItem>
                     </Menu>
                 </StackPanel>
@@ -85,15 +73,6 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Control">
                                         <mdiContainerDemo:MainView/>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Text,ElementName=comboBox, Mode=OneWay}" Value="Dragablz">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Control">
-                                        <dragablzDemo:MainView/>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>

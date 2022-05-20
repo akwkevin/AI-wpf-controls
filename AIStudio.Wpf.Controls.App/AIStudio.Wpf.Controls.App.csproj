@@ -12,56 +12,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Controls\AIStudio.Wpf.ComeCapture\AIStudio.Wpf.ComeCapture.csproj" />
-    <ProjectReference Include="..\Controls\AIStudio.Wpf.PrintDialog\AIStudio.Wpf.PrintDialog.csproj" />
     <ProjectReference Include="..\Demos\AIStudio.Wpf.Controls.Demo\AIStudio.Wpf.Controls.Demo.csproj" />
-    <ProjectReference Include="..\Demos\AIStudio.Wpf.DragablzControls.Demo\AIStudio.Wpf.DragablzControls.Demo.csproj" />
     <ProjectReference Include="..\Demos\AIStudio.Wpf.GridControls.Demo\AIStudio.Wpf.GridControls.Demo.csproj" />
     <ProjectReference Include="..\Demos\AIStudio.Wpf.MDIContainer.Demo\AIStudio.Wpf.MDIContainer.Demo.csproj" />
     <ProjectReference Include="..\Demos\AIStudio.Wpf.Panels.Demo\AIStudio.Wpf.Panels.Demo.csproj" />
-    <ProjectReference Include="..\Demos\AIStudio.Wpf.PrismRegions.Demo\AIStudio.Wpf.PrismRegions.Demo.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="A.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="PrismRegions.Demo\AIStudio.Wpf.PrismAvalonExtensions.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\AIStudio.Wpf.PrismDragablzExtensions.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\AIStudio.Wpf.PrismRegions.Demo.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\AIStudio.Wpf.PrismRegions.Demo.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\Dragablz.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\Microsoft.Xaml.Behaviors.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\Prism.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\Prism.Unity.Wpf.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\Prism.Wpf.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\Unity.Abstractions.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\Unity.Container.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="PrismRegions.Demo\Xceed.Wpf.AvalonDock.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

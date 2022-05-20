@@ -142,6 +142,7 @@
                             Grid.Row="1"
                             ItemsSource="{Binding Datas}"
                             SelectedItem="{Binding SelectedData}"
+                            LayoutName="{Binding Header}"
                             local:DataGridColumnsAttach.BindableColumns="{Binding DataGridColumns}"
                             EnableColumnVirtualization="False"
                             EnableRowVirtualization="True"

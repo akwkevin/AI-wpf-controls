@@ -6,6 +6,7 @@
     <PackageProjectUrl>https://gitee.com/akwkevin</PackageProjectUrl>
     <PackageIcon>A.png</PackageIcon>
     <PackageIconUrl />
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Controls\ListView\DragDropListBox.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Controls\RangeSlider\Range_Slider.MaterialDesign.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -24,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\AIStudio.Wpf.Controls\Resources\A.png">
+    <None Include="..\AIStudio.Wpf.GridControls\Resources\A.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

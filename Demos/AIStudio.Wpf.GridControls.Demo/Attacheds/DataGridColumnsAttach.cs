@@ -55,8 +55,16 @@ namespace AIStudio.Wpf.GridControls.Demo
                 foreach (DataGridColumnCustom column in colums2)
                 {
                     dataGrid.Columns.Add(GetDataColumn(column));
-                }   
+                }
 
+
+                Type t = source.GetType();
+                MethodInfo method = t.GetMethod("LoadConfig");
+                if (method != null)
+                {
+                    method.Invoke(source, new object[]{ });
+                }
+    
                 columns.CollectionChanged += (sender, e2) => {
                     NotifyCollectionChangedEventArgs ne = e2;
                     if (ne.Action == NotifyCollectionChangedAction.Reset)

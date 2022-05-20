@@ -12,7 +12,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    <converter:TreeViewMarginConverter x:Key="TreeViewMarginConverter"/>
+    <converter:TreeViewMarginConverter x:Key="TreeViewMarginConverter" Length="12" />
     <converter:MathConverter Operation="Multiply" x:Key="MathConverter"/>
     <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
 
