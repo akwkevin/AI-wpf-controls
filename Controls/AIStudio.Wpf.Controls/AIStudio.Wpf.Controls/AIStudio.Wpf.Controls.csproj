@@ -9,7 +9,7 @@
     <PackageIcon>A.png</PackageIcon>
     <PackageIconUrl />
     <NeutralLanguage />
-    <Version>1.1.3</Version>
+    <Version>1.1.4</Version>
     <Description>兼容主流控件库MahApps和MaterialDesign的一个控件库</Description>
   </PropertyGroup>
 

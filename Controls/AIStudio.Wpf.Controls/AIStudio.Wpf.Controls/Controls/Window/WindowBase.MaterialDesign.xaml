@@ -59,8 +59,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <!--标题栏背景色-->
-        <Setter Property="CaptionBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
-        <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="CaptionBackground" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBody}" />
         <Setter Property="controls:ControlAttach.CornerRadius" Value="0"/>
         <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
         <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
@@ -273,8 +273,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <!--标题栏背景色-->
-        <Setter Property="CaptionBackground" Value="{DynamicResource MaterialDesignBackground}" />
-        <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="CaptionBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}" />
         <Setter Property="controls:ControlAttach.CornerRadius" Value="0"/>
         <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
         <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
