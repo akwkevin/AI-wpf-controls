@@ -914,15 +914,14 @@ namespace AIStudio.Wpf.GridControls
             {
                 //保存列的集合中不包含该列，则认为是新添加的列
                 if (string.IsNullOrWhiteSpace(column.GetID())
-                    || DGInfo.ColumnInfos.FirstOrDefault(x => column.SortMemberPath.Equals(x.SortMemberPath) && column.GetID().Equals(x.Header)).Equals(default(ColumnInformation)))
+                    || DGInfo.ColumnInfos.FirstOrDefault(x => column.GetID().Equals(x.Header)).Equals(default(ColumnInformation)))
                 {
                     newColumns.Add(column.DisplayIndex, column);
                 }
             }
             foreach (var column in DGInfo.ColumnInfos.OrderBy(x => x.DisplayIndex))
             {
-                var realColumn = Columns.FirstOrDefault(x => column.SortMemberPath.Equals(x.SortMemberPath)
-                && column.Header.Equals(x.GetID()));
+                var realColumn = Columns.FirstOrDefault(x => column.Header.Equals(x.GetID()));
                 if (realColumn == null)
                 {
                     continue;
@@ -1241,7 +1240,6 @@ namespace AIStudio.Wpf.GridControls
             WidthType = column.Width.UnitType;
             SortDirection = column.SortDirection;
             DisplayIndex = column.DisplayIndex;
-            SortMemberPath = column.SortMemberPath;
             IsVisible = column.Visibility == Visibility.Visible;
         }
         public void Apply(DataGridColumn column, int gridColumnCount)
@@ -1257,7 +1255,6 @@ namespace AIStudio.Wpf.GridControls
             {
                 column.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
             }
-            column.SortMemberPath = SortMemberPath;
         }
         public string Header;
         public string PropertyPath;
@@ -1265,7 +1262,6 @@ namespace AIStudio.Wpf.GridControls
         public int DisplayIndex;
         public double WidthValue;
         public DataGridLengthUnitType WidthType;
-        public string SortMemberPath;
         public bool IsVisible;
     }
 

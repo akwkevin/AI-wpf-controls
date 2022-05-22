@@ -726,16 +726,21 @@
     </Style>
 
     <Style x:Key="AIStudio.Styles.Thumb.ColumnHeaderGripper.Filter" TargetType="{x:Type Thumb}">
-        <Setter Property="Width" Value="8" />
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignDivider}" />
         <Setter Property="Cursor" Value="SizeWE" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" />
+                    <Border Margin="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            Background="Transparent"
+                            BorderBrush="{TemplateBinding Background}"
+                            BorderThickness="0 0 1 0" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Width" Value="8" />
     </Style>
 
     <Style x:Key="AIStudio.Styles.Thumb.RowHeaderGripper.Filter" TargetType="{x:Type Thumb}">
@@ -764,9 +769,9 @@
         <Setter Property="Padding" Value="1" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="1,0,1,0" />
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -777,31 +782,34 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Border x:Name="BackgroundBorder"
-                                Grid.ColumnSpan="2"
+                                Grid.ColumnSpan="3"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" />
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
-                            <ContentPresenter x:Name="HeaderContent"
-								Content="{TemplateBinding Content}"
-								ContentTemplate="{TemplateBinding ContentTemplate}"
-								Margin="{TemplateBinding Padding}"	
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-								RecognizesAccessKey="True"
-								SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                            <controls:ColumnFilter x:Name="ColumnFilter" Background="Transparent"
+                        <ContentControl x:Name="HeaderContent"
+                                                   Margin="{TemplateBinding Padding}"
+                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                   Content="{TemplateBinding Content}"                                                  
+                                                   ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                   ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                        <controls:ColumnFilter Grid.Column="1" x:Name="ColumnFilter" Background="Transparent"
                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                    BorderThickness="0" BorderBrush="Transparent"
                                                    ParentCollection="{Binding ItemsSource, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
                                                    Style="{StaticResource AIStudio.Styles.ColumnFilter}"/>
 
-                        </StackPanel>
+
                         <Path x:Name="SortArrow"
-                              Grid.Column="1"
+                              Grid.Column="2"
                               Width="8"
                               Height="6"
                               Margin="0 0 8 2"
@@ -811,12 +819,13 @@
                               Stretch="Fill"
                               Visibility="Collapsed" />
                         <Thumb x:Name="PART_LeftHeaderGripper"
+                               Grid.ColumnSpan="3"
                                HorizontalAlignment="Left"
                                Background="Transparent"
                                Style="{StaticResource AIStudio.Styles.Thumb.ColumnHeaderGripper.Filter}" />
 
                         <Thumb x:Name="PART_RightHeaderGripper"
-                               Grid.Column="1"
+                               Grid.ColumnSpan="3"
                                HorizontalAlignment="Right"
                                Style="{StaticResource AIStudio.Styles.Thumb.ColumnHeaderGripper.Filter}" />
                     </Grid>

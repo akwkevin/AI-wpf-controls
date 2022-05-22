@@ -10,6 +10,20 @@ namespace AIStudio.Wpf.GridControls.Demo.Models
 {
     public class Device : BindableBase
     {
+        private bool _isChecked;
+        [ColumnHeader(Ignore = true)]
+        public bool IsChecked
+        {
+            get
+            {
+                return _isChecked;
+            }
+            set
+            {
+                SetProperty(ref _isChecked, value);
+            }
+        }
+
         private string _model;
         [ColumnHeader("模式1", Visibility = Visibility.Collapsed)]
         public string Mode1

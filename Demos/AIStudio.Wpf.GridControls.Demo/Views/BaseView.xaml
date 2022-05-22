@@ -153,6 +153,9 @@
                             CanUserSortColumns="True"
                             CanUserAddRows="False"
                             AutoGenerateColumns="False">
+            <i:Interaction.Behaviors>
+                <ac:SelectAllBahavior InitialState="False"/>
+            </i:Interaction.Behaviors>
         </agc:FilterDataGrid>
         
         <ac:Pagination x:Name="pagination"

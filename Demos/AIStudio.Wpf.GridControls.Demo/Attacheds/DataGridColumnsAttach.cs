@@ -40,7 +40,16 @@ namespace AIStudio.Wpf.GridControls.Demo
             ObservableCollection<DataGridColumnCustom> columns = e.NewValue as ObservableCollection<DataGridColumnCustom>;
             if (dataGrid != null)
             {
-                dataGrid.Columns.Clear();
+                foreach (var column in dataGrid.Columns.ToList())
+                {
+                    if (column.Header is CheckBox checkBox)
+                    {
+                        if (checkBox.Tag?.ToString() == "全选")
+                            continue;
+                    }
+                    dataGrid.Columns.Remove(column);
+                }
+
                 if (columns == null)
                 {
                     return;

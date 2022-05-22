@@ -221,7 +221,7 @@ namespace AIStudio.Wpf.GridControls
             else if (column is DataGridTemplateColumn)
             {
                 DataGridTemplateColumn templateColumn = column as DataGridTemplateColumn;
-                if (templateColumn.SortMemberPath != null)
+                if (!string.IsNullOrEmpty(templateColumn.SortMemberPath))
                 {
                     bindingPath = templateColumn.SortMemberPath;
                 }
