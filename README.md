@@ -98,3 +98,10 @@
 <p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">WebBrower</strong></p>
 <figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/cebf0cc9-31ac-4e66-9f88-ee675a53a641.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
 </section>
+
+
+技术交流
+个人QQ:80267720 QQ技术交流群:51286643 个人博客:https://www.cnblogs.com/akwkevin/
+
+更多
+界面截图请到博客介绍：https://www.cnblogs.com/akwkevin/p/16297568.html
