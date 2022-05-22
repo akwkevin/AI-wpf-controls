@@ -10,7 +10,7 @@ namespace AIStudio.Wpf.Controls
     /// <summary>
     /// GuideWindow.xaml 的交互逻辑
     /// </summary>
-    public class GuideWindow : Window
+    public class GuideWindow : WindowBase
     {
         private const string PART_Bor = "PART_Bor";
         private const string PART_Can = "PART_Can";
