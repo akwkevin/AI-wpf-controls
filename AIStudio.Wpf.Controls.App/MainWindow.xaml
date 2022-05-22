@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AIStudio.Wpf.Controls.App"
+        xmlns:local="clr-namespace:AIStudio.Wpf.Controls.App.Views"
         xmlns:controlsDemo="clr-namespace:AIStudio.Wpf.Controls.Demo;assembly=AIStudio.Wpf.Controls.Demo"   
         xmlns:mdiContainerDemo="clr-namespace:AIStudio.Wpf.MDIContainer.Demo;assembly=AIStudio.Wpf.MDIContainer.Demo" 
         xmlns:panelsDemo="clr-namespace:AIStudio.Wpf.Panels.Demo;assembly=AIStudio.Wpf.Panels.Demo"
@@ -29,20 +29,8 @@
                         <ComboBoxItem Content="Panels"/>
                         <ComboBoxItem Content="MDIContainer"/>
                         <ComboBoxItem Content="GridControl"/>
-                    </ComboBox>
-                    <Menu VerticalAlignment="Center" Style="{DynamicResource AIStudio.Styles.Menu}">
-                        <MenuItem>
-                            <MenuItem.Icon>
-                                <ac:PathIcon Kind="Star" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" Width="{Binding FontSize,RelativeSource={RelativeSource Mode=Self}}" Height="{Binding FontSize,RelativeSource={RelativeSource Mode=Self}}"/>
-                            </MenuItem.Icon>
-                            
-                            <MenuItem x:Name="menuScreenshot" Header="Screenshot" Click="menuScreenshot_Click">
-                                <MenuItem.Icon>
-                                    <ac:PathIcon Kind="Screenshot"/>
-                                </MenuItem.Icon>
-                            </MenuItem>                           
-                        </MenuItem>
-                    </Menu>
+                        <ComboBoxItem Content="Screenshot"/>
+                    </ComboBox>                   
                 </StackPanel>
             </ac:WindowBaseTitleBar.LeftWindowCommands>
         </ac:WindowBaseTitleBar>
@@ -82,6 +70,15 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Control">
                                         <gridControlDemo:MainView/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text,ElementName=comboBox, Mode=OneWay}" Value="Screenshot">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Control">
+                                        <local:ScreenshotView/>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>

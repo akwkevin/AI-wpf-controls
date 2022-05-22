@@ -24,14 +24,14 @@
                     </WrapPanel>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="水印">
+            <GroupBox Header="水印" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
                 <StackPanel>
                     <WrapPanel>
                         <ac:NumericUpDown Margin="2" Value="0" Minimum="0" Maximum="100" MinWidth="120" ButtonSpinnerLocation="UpDown" ac:ControlAttach.Watermark="请输入内容"/>
                     </WrapPanel> 
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="可清除">
+            <GroupBox Header="可清除" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
                 <StackPanel>
                     <WrapPanel>
                         <ac:NumericUpDown Margin="2" Value="0" Minimum="0" Maximum="100" MinWidth="120" ButtonSpinnerLocation="UpDown" ac:ControlAttach.Watermark="请输入内容" ac:ControlAttach.ClearTextButton="True"/>

@@ -78,6 +78,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="9"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="Template" Value="{StaticResource GroupBoxBaseTemplate}"/>
         <Style.Triggers>
             <Trigger Property="controls:ControlAttach.Status" Value="Light">

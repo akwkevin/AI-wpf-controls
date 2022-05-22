@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
              xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <Grid>
             <StackPanel>

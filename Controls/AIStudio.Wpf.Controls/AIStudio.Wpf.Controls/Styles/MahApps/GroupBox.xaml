@@ -77,6 +77,7 @@
         <Setter Property="controls:ContentHostAttach.Padding" Value="9"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="9"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Template" Value="{StaticResource GroupBoxBaseTemplate}"/>
         <Style.Triggers>

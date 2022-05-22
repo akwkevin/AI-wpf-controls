@@ -12,10 +12,7 @@ namespace AIStudio.Wpf.Controls.App
             InitializeComponent();
         }
 
-        private void menuScreenshot_Click(object sender, RoutedEventArgs e)
-        {
-            AIStudio.Wpf.ComeCapture.MainWindow window = new AIStudio.Wpf.ComeCapture.MainWindow();
-            window.Show();
-        }       
+
+
     }
 }
