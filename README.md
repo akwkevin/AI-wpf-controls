@@ -1,3 +1,4 @@
+一个Wpf控件库
 本控件库，结合了MahApps.Metro，Material-Design，HandyControl，PanuonUI，Xceed等控件库，做了一个集成，并有部分自定义的控件，供大家参考使用，以下为控件库截图，本控件库会保持定期维护定期更新，欢迎大家光临。
 
 控件库地址：https://gitee.com/akwkevin/aistudio.-wpf.-controls
@@ -144,5 +145,3 @@ Verify
 
 WebBrower
 
-
- 
