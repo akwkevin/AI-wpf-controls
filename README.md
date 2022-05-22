@@ -1,100 +1,148 @@
-<section id="nice" data-tool="mdnice编辑器" data-website="https://www.mdnice.com" style="font-size: 16px; color: black; padding: 0 10px; line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; word-break: break-word; word-wrap: break-word; text-align: left; font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">一个Wpf控件库</p>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">本控件库，结合了MahApps.Metro，Material-Design，HandyControl，PanuonUI，Xceed等控件库，做了一个集成，并有部分自定义的控件，供大家参考使用，以下为控件库截图，本控件库会保持定期维护定期更新，欢迎大家光临。</p>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">控件库地址：https://gitee.com/akwkevin/aistudio.-wpf.-controls</p>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Button</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/153c59a8-bc16-437c-b880-a34d01110619.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Icon</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/77710e97-da5f-4cbf-b7a8-7d414c404524.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Path</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/53187eaa-729f-419b-9743-702213935d6a.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">TextBox</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/cadc0d5e-45ba-42b9-9c3d-33f6bc89c0c4.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">DropDown</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/ed46c41b-efab-4bab-a17e-923f7a7e3004.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Menu</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/bf0e63e7-c210-4102-b278-faf35875068c.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Link</strong>
-<img src="https://files.mdnice.com/user/17967/2189747f-9275-4da3-bd5c-30284fa600e0.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></p>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Pagination</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/fec5f4eb-28a9-4c17-8827-6b2917c72d7d.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">StepBar</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/89cb057c-5331-4a8b-844c-815e8e1fbe77.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">CheckBox</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/a715a0e3-b00e-4fe8-a8ee-fcfa17e8df5a.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">DateTimePicker</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/30778bad-ecd6-4063-9a89-56361287c50a.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Form</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/6a88924c-9f92-4b46-aa9d-f5a0121bd04f.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">ComboBox</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/7cda6be0-f51b-460e-bd7f-1644f2638b3a.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Radio</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/97f8b218-ab00-470f-9dd8-24017b601a09.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Rate</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/d427fe3c-248e-46a2-84a1-1354d4d61d65.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Repeat</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/c724f4bf-4954-4da7-abfe-6dc982b74560.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Slider</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/e3c72c66-e43d-4916-82d7-dccc35440107.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Toggle</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/a4281167-1ba6-453f-9c6e-2e51dd3d55ff.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">UpDown</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/feea6e22-a0f4-4391-af54-d3e3d30dc928.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Upload</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/dc728d5b-c7f5-4268-9492-57b7b2252405.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Avatar</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/068d7c8a-0883-4f1c-b2ba-6853d8cb9878.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Badge</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/7be218ba-4d9d-4752-9a1a-1cf6bb1cd1e7.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Calender</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/4a4f530f-b40e-4495-8721-08d0444eb123.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Card</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/e6a8dad2-3c49-460b-b366-0aaf8bec609c.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Carousel</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/b4892221-7f52-4bdc-8b0e-e8261ee43ac3.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">DataGrid</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/1daead79-7062-4fa4-8107-c5e8cd066942.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Expander</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/dc861008-104c-4d97-8999-4fd429bbe48b.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Group</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/401eab3d-bdee-4ea8-a79e-2cb4dca67c91.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Image</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/519c950f-4d94-447c-a756-69434d9f21a4.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Tag</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/8ccc6ad9-f27d-4621-ab5a-714e719708b1.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Tabs</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/dc1fcdc9-d39f-47ba-b43f-e72602a7310b.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">ToolBar</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/dc1ce487-086c-44e7-9b98-b67603635eec.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">TextBlock</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/4a7390cb-d56f-4372-a923-e22fa81ef3c0.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Timeline</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/5fa3eb5d-a665-4a9f-8332-fc07e20bde91.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Tree</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/a02852ae-f66a-4557-a62c-5fa825fb2d15.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">List</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/6f79ace9-6cc2-4d8b-a190-bc576d13cda3.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Notice</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/722c4107-fa52-46f4-9ea2-c1479344b5be.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">MessageBox</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/b876e94a-86c7-433f-bdff-fdd1a7da7510.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Diaglog</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/83c9913a-aab6-45dc-b175-3fdd99a881b7.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Progress</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/11c1b73d-6497-4ffd-a119-a748a03837cb.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Loading</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/c394dfb9-b8ae-4960-90e6-fe8bb0b72913.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Anchor</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/e2df1e57-5cf5-4cff-a832-b070243afbb9.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">GotoTop</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/ac76c5a6-e17c-4d0d-aa51-d4ac306f1946.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Divider</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/b86f21c8-c87e-490e-ba67-801a2500e389.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">ColorPicker</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/a06dc854-07b9-45de-b9e8-feb0d962e605.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">MediaPlayer</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/ecf56013-8e3b-4ef6-83ce-5135e80d6566.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">Verify</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/e527ac17-f89f-4f85-bc57-6ad86886935f.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;"><strong style="font-weight: bold; color: black;">WebBrower</strong></p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://files.mdnice.com/user/17967/cebf0cc9-31ac-4e66-9f88-ee675a53a641.png" alt style="display: block; margin: 0 auto; max-width: 100%;"></figure>
-</section>
+本控件库，结合了MahApps.Metro，Material-Design，HandyControl，PanuonUI，Xceed等控件库，做了一个集成，并有部分自定义的控件，供大家参考使用，以下为控件库截图，本控件库会保持定期维护定期更新，欢迎大家光临。
+
+控件库地址：https://gitee.com/akwkevin/aistudio.-wpf.-controls
+
+Button
+
+
+Icon
+
+
+Path
+
+
+TextBox
+
+
+DropDown
+
+
+Menu
+
+
+Link 
+
+Pagination
+
+
+StepBar
+
+
+CheckBox
+
+
+DateTimePicker
+
+
+Form
+
+
+ComboBox
+
+
+Radio
+
+
+Rate
+
+
+Repeat
+
+
+Slider
+
+
+Toggle
+
+
+UpDown
+
+
+Upload
+
+
+Avatar
+
+
+Badge
+
+
+Calender
+
+
+Card
+
+
+Carousel
+
+
+DataGrid
+
+
+Expander
+
+
+Group
+
+
+Image
+
+
+Tag
+
+
+Tabs
+
+
+ToolBar
+
+
+TextBlock
+
+
+Timeline
+
+
+Tree
+
+
+List
+
+
+Notice
+
+
+MessageBox
+
+
+Diaglog
+
+
+Progress
+
+
+Loading
+
+
+Anchor
+
+
+GotoTop
+
+
+Divider
+
+
+ColorPicker
+
+
+MediaPlayer
+
+
+Verify
+
+
+WebBrower
+
+
+ 
