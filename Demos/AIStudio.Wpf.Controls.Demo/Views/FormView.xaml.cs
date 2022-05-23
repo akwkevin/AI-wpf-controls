@@ -16,7 +16,7 @@ namespace AIStudio.Wpf.Controls.Demo.Views
     /// <summary>
     /// FormView.xaml 的交互逻辑
     /// </summary>
-    public partial class FormView : AIStudioUserControl
+    public partial class FormView : UserControl
     {
         public FormView()
         {

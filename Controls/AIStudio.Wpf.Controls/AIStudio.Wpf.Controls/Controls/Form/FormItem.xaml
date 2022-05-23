@@ -40,6 +40,7 @@
                                 Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>
                         <Thumb x:Name="PART_Thumb" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{StaticResource InvisibleThumbStyle}" />
                         <ContentPresenter
+                                x:Name="PART_ContentPresenter"
                                 Grid.Column="1"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center"
@@ -95,7 +96,8 @@
                                     TextElement.Foreground="{DynamicResource MahApps.Brushes.Text}"
                                     Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>
                                 <Thumb x:Name="PART_Thumb" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{StaticResource InvisibleThumbStyle}" />
-                                <ContentPresenter
+                                <ContentPresenter 
+                                    x:Name="PART_ContentPresenter"
                                     Grid.Row="1"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"

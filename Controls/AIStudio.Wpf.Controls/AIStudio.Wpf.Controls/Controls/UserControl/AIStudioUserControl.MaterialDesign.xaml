@@ -69,7 +69,7 @@
                         </Grid>
 
                         <StatusBar Grid.Row="1" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" Style="{DynamicResource AIStudio.Styles.StatusBar}">
-                            <ComboBox x:Name="PART_ControlStatus" IsEditable="True" helper:EnumHelper.Enum="{x:Type controls:ControlStatus}" ToolTip="色彩" Tag="此处可以选择色彩" controls:ControlAttach.CornerRadius="0" Style="{StaticResource AIStudio.Styles.ComboBox}" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" controls:ControlAttach.BorderBrush="{DynamicResource MaterialDesignToolBackground}" MinWidth="80">
+                            <ComboBox x:Name="PART_ControlStatus" IsEditable="True" helper:EnumHelper.Enum="{x:Type controls:ControlStatus}" ToolTip="色彩" Tag="此处可以选择色彩" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.ComboBox}" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" controls:ControlAttach.BorderBrush="{DynamicResource MaterialDesignToolBackground}" MinWidth="80">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid x:Name="grid">
