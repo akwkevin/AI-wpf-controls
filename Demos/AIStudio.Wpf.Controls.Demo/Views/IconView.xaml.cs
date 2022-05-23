@@ -16,7 +16,7 @@ namespace AIStudio.Wpf.Controls.Demo.Views
     /// <summary>
     /// IconView.xaml 的交互逻辑
     /// </summary>
-    public partial class IconView : AIStudioUserControl
+    public partial class IconView : UserControl
     {
         public IconView()
         {
