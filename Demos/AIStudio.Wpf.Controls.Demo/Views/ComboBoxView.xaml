@@ -98,12 +98,28 @@
                                 </HierarchicalDataTemplate>
                             </ac:TreeSelect.ItemTemplate>
                         </ac:TreeSelect>
+
+                        <ComboBox Width="180" Margin="2" SelectedIndex="0" IsReadOnly="True" ItemsSource="{Binding DataList}" DisplayMemberPath="Name" ac:ControlAttach.Watermark="请选择" ac:ControlAttach.ClearTextButton="True" Style="{DynamicResource AIStudio.Styles.ComboBox}"/>
+                        <ac:MultiComboBox Width="180" Margin="2" DisplayMemberPath="Name" ac:ControlAttach.Watermark="请多选" IsReadOnly="True" ItemsSource="{Binding DataList}" ac:ControlAttach.ClearTextButton="True" Style="{DynamicResource AIStudio.Styles.MultiComboBox}"/>
+                        <ac:TreeSelect Width="180" Margin="2" DisplayMemberPath="Name" ac:ControlAttach.Watermark="请选择" IsReadOnly="True" ItemsSource="{Binding DataList}" ac:ControlAttach.ClearTextButton="True" Style="{DynamicResource AIStudio.Styles.TreeSelect}">
+                            <ac:TreeSelect.ItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path x:Name="IconPath" Width="13" Height="13" Stretch="Fill" Fill="Black" Data="F1 M 24.0033,56.0078L 24.0033,38.0053L 22.0031,40.0056L 19.0027,35.0049L 38.0053,20.0028L 45.0063,25.5299L 45.0063,21.753L 49.0068,21.0029L 49.0068,28.6882L 57.008,35.0049L 54.0075,40.0056L 52.0073,38.0053L 52.0073,56.0078L 24.0033,56.0078 Z M 38.0053,26.9204L 27.0038,36.005L 27.0038,53.0074L 33.0046,53.0074L 33.0046,42.006L 43.006,42.006L 43.006,53.0074L 49.0068,53.0074L 49.0068,36.005L 38.0053,26.9204 Z "/>
+                                        <Grid Margin="2,0,2,0">
+                                            <TextBlock x:Name="txtName" Text="{Binding Name, Mode=TwoWay}" Width="Auto"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </ac:TreeSelect.ItemTemplate>
+                        </ac:TreeSelect>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="搜索" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
                     <WrapPanel>
                         <ac:InputComboBox Width="180" Margin="2" ac:ControlAttach.Watermark="搜索" DisplayMemberPath="Name" ItemsSource="{Binding DataList}"/>
                         <ac:InputComboBox Width="180" Margin="2" ac:ControlAttach.Watermark="搜索" DisplayMemberPath="Name" ItemsSource="{Binding DataList}" ac:IconAttach.Geometry="{StaticResource SearchGeometry}"/>
+                        <ac:InputComboBox Width="180" Margin="2" ac:ControlAttach.Watermark="搜索" DisplayMemberPath="Name" IsReadOnly="True" ItemsSource="{Binding DataList}" ac:IconAttach.Geometry="{StaticResource SearchGeometry}"/>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="下划线" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">

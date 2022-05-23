@@ -140,7 +140,6 @@ namespace AIStudio.Wpf.Controls
                 SetValue(IsFocusTextProperty, value);
             }
         }
-
         #region Routed Event
         public static readonly RoutedEvent ResultChangedEvent = EventManager.RegisterRoutedEvent("ResultChanged", RoutingStrategy.Bubble, typeof(EventHandler), typeof(InputComboBox));
         public event EventHandler ResultChanged

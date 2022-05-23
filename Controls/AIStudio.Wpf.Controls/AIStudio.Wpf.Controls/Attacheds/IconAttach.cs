@@ -16,6 +16,15 @@ namespace AIStudio.Wpf.Controls
         public static string GetIcon(DependencyObject element)
             => (string)element.GetValue(IconProperty);
 
+        public static readonly DependencyProperty KindProperty = DependencyProperty.RegisterAttached(
+            "Kind", typeof(string), typeof(IconAttach), new FrameworkPropertyMetadata(default(string)));
+
+        public static void SetKind(DependencyObject element, string value)
+            => element.SetValue(KindProperty, value);
+
+        public static string GetKind(DependencyObject element)
+            => (string)element.GetValue(KindProperty);
+
         public static readonly DependencyProperty GeometryProperty = DependencyProperty.RegisterAttached(
            "Geometry", typeof(Geometry), typeof(IconAttach), new FrameworkPropertyMetadata(default(Geometry)));
 
@@ -39,7 +48,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty WidthProperty = DependencyProperty.RegisterAttached(
-            "Width", typeof(double), typeof(IconAttach), new FrameworkPropertyMetadata(double.NaN));
+            "Width", typeof(double), typeof(IconAttach), new FrameworkPropertyMetadata(10d));
 
         public static void SetWidth(DependencyObject element, double value)
             => element.SetValue(WidthProperty, value);
@@ -48,7 +57,7 @@ namespace AIStudio.Wpf.Controls
             => (double)element.GetValue(WidthProperty);
 
         public static readonly DependencyProperty HeightProperty = DependencyProperty.RegisterAttached(
-            "Height", typeof(double), typeof(IconAttach), new FrameworkPropertyMetadata(double.NaN));
+            "Height", typeof(double), typeof(IconAttach), new FrameworkPropertyMetadata(10d));
 
         public static void SetHeight(DependencyObject element, double value)
             => element.SetValue(HeightProperty, value);

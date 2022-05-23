@@ -73,6 +73,7 @@
                                             <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock.Base}">
                                                 <Setter Property="TextWrapping" Value="WrapWithOverflow" />
                                                 <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Snackbar}}, Path=Foreground}" />
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
@@ -103,8 +104,9 @@
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignPaper}" />
-        <Setter Property="Background" Value="{DynamicResource MaterialDesignSnackbarBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
         <Setter Property="ActionButtonStyle" Value="{StaticResource SnackbarActionButton}" />
         <Setter Property="MinWidth" Value="288" />
         <Setter Property="MaxWidth" Value="568" />
@@ -118,9 +120,14 @@
                             <ScaleTransform x:Name="Scale" ScaleY="0" />
                         </StackPanel.RenderTransform>
                         <Border x:Name="ContentBorder"
-                                Background="{TemplateBinding Background}" CornerRadius="2" SnapsToDevicePixels="True"                                
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}" 
+                                SnapsToDevicePixels="True"                                
                                 VerticalAlignment="Stretch">
                             <ContentPresenter Content="{TemplateBinding Message}"
+                                              TextElement.Foreground="{TemplateBinding Foreground}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Margin="{TemplateBinding Padding}"
                                               x:Name="ContentPresenter" />

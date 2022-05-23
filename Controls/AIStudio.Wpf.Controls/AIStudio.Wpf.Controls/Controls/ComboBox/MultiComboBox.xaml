@@ -91,7 +91,7 @@
                                 <ToggleButton x:Name="PART_DropDownToggle" 
                                       Grid.Column="1"  Grid.ColumnSpan="3"
                                       IsTabStop="False" 
-                                      Style="{StaticResource AIStudio.Styles.ComboToggleButton}" 
+                                      Style="{StaticResource AIStudio.Styles.ComboToggleButton}"                                       
                                       IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                       controls:IconAttach.Width="{Binding Path=(controls:IconAttach.Width), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                       controls:IconAttach.Height="{Binding Path=(controls:IconAttach.Height), Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
@@ -197,6 +197,9 @@
                             <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
                             <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
                         </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="PART_DropDownToggle" Property="IsEnabled" Value="False"/>
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="PART_Root" Property="Opacity" Value="0.5"></Setter>
                         </Trigger>
@@ -228,6 +231,9 @@
                             <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="">
+                            <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsReadOnly, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True">
                             <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
@@ -419,6 +425,9 @@
                             <Setter TargetName="Underline" Property="Background" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
                             <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
                         </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="PART_DropDownToggle" Property="IsEnabled" Value="False"/>
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="PART_Root" Property="Opacity" Value="0.5"></Setter>
                         </Trigger>
@@ -561,6 +570,9 @@
                         <Trigger Property="Validation.HasError" Value="true">
                             <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Validation}"/>
                             <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="PART_DropDownToggle" Property="IsEnabled" Value="False"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="PART_Root" Property="Opacity" Value="0.5"></Setter>

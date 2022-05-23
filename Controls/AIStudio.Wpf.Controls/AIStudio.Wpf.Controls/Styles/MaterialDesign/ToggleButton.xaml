@@ -1410,8 +1410,6 @@
             </Trigger>
 
             <DataTrigger Binding="{Binding Path=(controls:IconAttach.Geometry),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
-                <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
-                <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
                 <Setter Property="controls:ControlAttach.IconContent">
                     <Setter.Value>
                         <ControlTemplate TargetType="Control">
@@ -1422,6 +1420,39 @@
                                 SnapsToDevicePixels="True" 
                                 Stretch="Uniform" 
                                 Data="{Binding Path=(controls:IconAttach.Geometry),RelativeSource={RelativeSource AncestorType=ButtonBase}}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:PathIcon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=ButtonBase}}" >
+                            </controls:PathIcon>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:Icon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  FontSize="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  Kind="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource AncestorType=ButtonBase}}" >
+                            </controls:Icon>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>

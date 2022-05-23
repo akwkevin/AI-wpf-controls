@@ -15,8 +15,7 @@
                 <ResourceDictionary>
                     <ap:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
 
-                    <DataTemplate x:Key="MyTitleTemplate"
-                  x:Shared="False">
+                    <DataTemplate x:Key="MyTitleTemplate">
                         <StackPanel Orientation="Horizontal">
                             <Ellipse Fill="Green" Width="16" Height="16" Margin="2"/>
                             <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Text="{Binding Title}" Margin="2,2" IsHitTestVisible="False" />

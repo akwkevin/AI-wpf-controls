@@ -11,7 +11,7 @@ namespace AIStudio.Wpf.Panels.Helpers
             return (Type)obj.GetValue(EnumProperty);
         }
 
-        public static void SetEnum(DependencyObject obj, string value)
+        public static void SetEnum(DependencyObject obj, Type value)
         {
             obj.SetValue(EnumProperty, value);
         }

@@ -135,6 +135,8 @@
                     <Button x:Name="PART_Search" 
                             controls:ControlAttach.CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource AncestorType=controls:SearchBar},Converter={StaticResource CornerRadiusBindingConverter}, ConverterParameter={x:Static converter:RadiusType.Left}}" 
                             controls:IconAttach.Geometry="{Binding Path=(controls:IconAttach.Geometry),RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"
+                            controls:IconAttach.Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"
+                            controls:IconAttach.Icon="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"
                             Background="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"  
                             BorderBrush="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"  
                             Foreground="{Binding Background,RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"  
@@ -306,6 +308,9 @@
                         <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="">
                             <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsReadOnly, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True">
+                            <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -316,6 +321,8 @@
                     <Button x:Name="PART_Search" 
                             controls:ControlAttach.CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource AncestorType=controls:SearchBar},Converter={StaticResource CornerRadiusBindingConverter}, ConverterParameter={x:Static converter:RadiusType.Left}}" 
                             controls:IconAttach.Geometry="{Binding Path=(controls:IconAttach.Geometry),RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"                          
+                            controls:IconAttach.Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"
+                            controls:IconAttach.Icon="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"
                             Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=controls:SearchBar}}"  
                             controls:ShadowAttach.DropShadowEffect="{x:Null}"
                             Command="{Binding Path=SearchCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:SearchBar}}}" 

@@ -26,12 +26,17 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <!--  PackIconMaterial - Menu  -->
-                            <ContentControl Width="{Binding Path=HamburgerWidth, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
-                                    Height="{Binding Path=HamburgerHeight, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
-                                    Padding="{Binding Path=HamburgerMargin, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
-                                    Content="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"
-                                    Style="{DynamicResource PathIconContentControlStyle}" />
-
+                            <Border  
+                                Width="{Binding Path=HamburgerWidth, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
+                                Height="{Binding Path=HamburgerHeight, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
+                                Padding="{Binding Path=HamburgerMargin, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}">
+                                <Path                                
+                                    Fill="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                                    Stretch="Uniform"
+                                    Data="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"
+                                    SnapsToDevicePixels="False"
+                                    UseLayoutRounding="False" />
+                            </Border>
                             <TextBlock Text="Welcome To AIStudio" Grid.Column="1" VerticalAlignment="Center"/>
                         </Grid>
                     </ControlTemplate>
@@ -43,7 +48,7 @@
         <ac:WindowBaseTitleBar>
             <ac:WindowBaseTitleBar.RightWindowCommands>
                 <DockPanel>
-                    <Button DockPanel.Dock="Right" ac:IconAttach.Geometry="{StaticResource SkinGeometry}"   
+                    <Button DockPanel.Dock="Right" ac:IconAttach.Kind="Skin"   
                             MinWidth="45" 
                             BorderThickness="1,0,0,0" 
                             Command="{Binding ShowCommand}"
@@ -131,7 +136,7 @@
 
             <ac:HamburgerTreeMenu.HamburgerMenuTemplate>
                 <DataTemplate>
-                    <ContentControl Style="{DynamicResource MainIconStyle}" />
+                    <ContentControl Style="{StaticResource MainIconStyle}" />
                 </DataTemplate>
             </ac:HamburgerTreeMenu.HamburgerMenuTemplate>
 

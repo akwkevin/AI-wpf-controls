@@ -28,7 +28,12 @@
         /// </summary>
         public HamburgerTreeMenu()
         {
-            DefaultStyleKey = typeof(HamburgerTreeMenu);
+            //DefaultStyleKey = typeof(HamburgerTreeMenu);
+        }
+
+        static HamburgerTreeMenu()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(HamburgerTreeMenu), new FrameworkPropertyMetadata(typeof(HamburgerTreeMenu)));
         }
 
         /// <summary>

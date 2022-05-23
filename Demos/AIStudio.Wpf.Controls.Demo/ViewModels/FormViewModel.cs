@@ -492,6 +492,20 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
             }
         }
 
+        private bool _allowDrop;
+        public bool AllowDrop
+        {
+            get
+            {
+                return _allowDrop;
+            }
+            set
+            {
+                SetProperty(ref _allowDrop, value);
+            }
+        }
+        
+
         public FormSetting()
         {
             ItemMargin = new System.Windows.Thickness(HorizontalMargin, VerticalMargin, HorizontalMargin, VerticalMargin);

@@ -373,6 +373,23 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty SearchTextBoxWatermarkProperty =
             DependencyProperty.Register("SearchTextBoxWatermark", typeof(string), typeof(MultiComboBox));
 
+        /// <summary>
+        /// Gets or sets is search textbox visible.
+        /// </summary>
+        public bool IsReadOnly
+        {
+            get
+            {
+                return (bool)GetValue(IsReadOnlyProperty);
+            }
+            set
+            {
+                SetValue(IsReadOnlyProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty IsReadOnlyProperty =
+            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(MultiComboBox));
         #endregion
 
 

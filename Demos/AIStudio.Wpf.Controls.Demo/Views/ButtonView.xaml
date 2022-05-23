@@ -50,7 +50,10 @@
                             <Button Content="Icon" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}"/>
                             <Button Content="Icon" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource AddGeometry}"/>
                             <Button Content="Right" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Geometry="{DynamicResource RotateRightGeometry}" ac:IconAttach.Dock="Right"/>
-                            <Button Content="Awesome" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Icon2}" ac:IconAttach.Icon="font-awesome"/>
+                            <Button Content="Awesome" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Icon="font-awesome"/>
+                            <Button Content="Awesome" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Icon="font-awesome"/>
+                            <Button Content="Kind" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Kind="Add"/>
+                            <Button Content="Kind" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}" ac:IconAttach.Kind="RotateRight"/>
                         </WrapPanel>
                     </StackPanel>
                 </GroupBox>

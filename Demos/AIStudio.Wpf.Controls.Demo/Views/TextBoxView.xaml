@@ -34,6 +34,8 @@
                     <WrapPanel>
                         <TextBox MinWidth="120" Margin="2" ac:ControlAttach.Watermark="请输入内容" ac:ControlAttach.ClearTextButton="True" Style="{DynamicResource AIStudio.Styles.TextBox}" ></TextBox>
                         <ac:SearchBar MinWidth="150" Margin="2" ac:ControlAttach.Watermark="请输入内容" ac:ControlAttach.ClearTextButton="True" Style="{DynamicResource AIStudio.Styles.SearchBar}"/>
+                        <TextBox MinWidth="120" Margin="2" Text="TextBox" ac:ControlAttach.Watermark="请输入内容" ac:ControlAttach.ClearTextButton="True" IsReadOnly="True" Style="{DynamicResource AIStudio.Styles.TextBox}" ></TextBox>
+                        <ac:SearchBar MinWidth="150" Margin="2" Text="SearchBar" ac:ControlAttach.Watermark="请输入内容" ac:ControlAttach.ClearTextButton="True" IsReadOnly="True" Style="{DynamicResource AIStudio.Styles.SearchBar}"/>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="查询" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">

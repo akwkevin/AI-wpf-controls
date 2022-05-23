@@ -17,6 +17,6 @@
                 <TextBlock Text="右侧" VerticalAlignment="Center"/>
             </ac:WindowBaseTitleBar.RightWindowCommands>
         </ac:WindowBaseTitleBar>
-        <TextBlock Text="WindowBase"/>
+        <TextBlock Text="WindowBase" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </ac:WindowBase>

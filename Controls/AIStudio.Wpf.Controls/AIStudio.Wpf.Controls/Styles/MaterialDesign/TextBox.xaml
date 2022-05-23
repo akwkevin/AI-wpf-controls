@@ -130,6 +130,9 @@
                         <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="">
                             <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsReadOnly, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True">
+                            <Setter TargetName="clear" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -151,6 +154,23 @@
                 </Setter>
             </DataTrigger>
 
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:PathIcon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=TextBoxBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=TextBoxBase}}" 
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=TextBoxBase}}" >
+                            </controls:PathIcon>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
             <DataTrigger Binding="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
                 <Setter Property="controls:ControlAttach.IconContent">
                     <Setter.Value>

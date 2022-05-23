@@ -104,8 +104,6 @@
                                 </DockPanel>
                             </Grid>
                         </controls:Ripple>
-
-
                     </Grid>
                     <!--触发器-->
                     <ControlTemplate.Triggers>
@@ -178,7 +176,51 @@
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
-
+            
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:PathIcon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}"                                  
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=ButtonBase}}" >
+                                <controls:PathIcon.RenderTransform>
+                                    <ScaleTransform x:Name="transIcon"  ScaleX="1" ScaleY="1"/>
+                                </controls:PathIcon.RenderTransform>
+                            </controls:PathIcon>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                        <Condition Binding="{Binding Path=(controls:IconAttach.AllowsAnimation),RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.EnterActions>
+                                    <MultiDataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.ExitActions>
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
             <DataTrigger Binding="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
                 <Setter Property="controls:ControlAttach.IconContent">
                     <Setter.Value>
@@ -400,6 +442,50 @@
                 </Setter>
             </DataTrigger>
 
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:PathIcon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}"                                  
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=ButtonBase}}" >
+                                <controls:PathIcon.RenderTransform>
+                                    <ScaleTransform x:Name="transIcon"  ScaleX="1" ScaleY="1"/>
+                                </controls:PathIcon.RenderTransform>
+                            </controls:PathIcon>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                        <Condition Binding="{Binding Path=(controls:IconAttach.AllowsAnimation),RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.EnterActions>
+                                    <MultiDataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.ExitActions>
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
             <DataTrigger Binding="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
                 <Setter Property="controls:ControlAttach.IconContent">
                     <Setter.Value>
@@ -610,6 +696,50 @@
                 </Setter>
             </DataTrigger>
 
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:PathIcon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=ButtonBase}}" >
+                                <controls:PathIcon.RenderTransform>
+                                    <ScaleTransform x:Name="transIcon"  ScaleX="1" ScaleY="1"/>
+                                </controls:PathIcon.RenderTransform>
+                            </controls:PathIcon>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                        <Condition Binding="{Binding Path=(controls:IconAttach.AllowsAnimation),RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.EnterActions>
+                                    <MultiDataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.ExitActions>
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
             <DataTrigger Binding="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
                 <Setter Property="controls:ControlAttach.IconContent">
                     <Setter.Value>
@@ -824,6 +954,50 @@
                 </Setter>
             </DataTrigger>
 
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:PathIcon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}"  
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=ButtonBase}}" >
+                                <controls:PathIcon.RenderTransform>
+                                    <ScaleTransform x:Name="transIcon"  ScaleX="1" ScaleY="1"/>
+                                </controls:PathIcon.RenderTransform>
+                            </controls:PathIcon>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                        <Condition Binding="{Binding Path=(controls:IconAttach.AllowsAnimation),RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.EnterActions>
+                                    <MultiDataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.ExitActions>
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
             <DataTrigger Binding="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
                 <Setter Property="controls:ControlAttach.IconContent">
                     <Setter.Value>
@@ -1063,6 +1237,50 @@
                 </Setter>
             </DataTrigger>
 
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:PathIcon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}"  
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=ButtonBase}}" >
+                                <controls:PathIcon.RenderTransform>
+                                    <ScaleTransform x:Name="transIcon"  ScaleX="1" ScaleY="1"/>
+                                </controls:PathIcon.RenderTransform>
+                            </controls:PathIcon>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                        <Condition Binding="{Binding Path=(controls:IconAttach.AllowsAnimation),RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.EnterActions>
+                                    <MultiDataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.ExitActions>
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
             <DataTrigger Binding="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
                 <Setter Property="controls:ControlAttach.IconContent">
                     <Setter.Value>
@@ -1187,24 +1405,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <Style x:Key="AIStudio.Styles.Button.Icon2" BasedOn="{StaticResource AIStudio.Styles.Button}" TargetType="{x:Type ButtonBase}">
-        <Setter Property="controls:ControlAttach.IconContent">
-            <Setter.Value>
-                <ControlTemplate TargetType="Control">
-                    <controls:Icon 
-                                  x:Name="icon"
-                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
-                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
-                                  FontSize="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
-                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
-                                  SnapsToDevicePixels="True" 
-                                  Kind="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource AncestorType=ButtonBase}}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    </Style>    
 
     <Style x:Key="AIStudio.Styles.Button.Progress" BasedOn="{StaticResource AIStudio.Styles.Button}" TargetType="{x:Type ButtonBase}">
         <Setter Property="controls:ButtonAttach.IndicatorForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
@@ -1533,16 +1734,19 @@
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
                     <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}">
                         <DockPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
-                            <Path DockPanel.Dock="{TemplateBinding controls:IconAttach.Dock}" x:Name="path" VerticalAlignment="Center" Width="{TemplateBinding controls:IconAttach.Width}" Height="{TemplateBinding controls:IconAttach.Height}" Fill="{TemplateBinding Foreground}" SnapsToDevicePixels="True" Stretch="Uniform" Data="{TemplateBinding controls:IconAttach.Geometry}"/>
+                            <ContentControl x:Name="PART_IconContent" 
+                                                    DockPanel.Dock="{TemplateBinding controls:IconAttach.Dock}" 
+                                                    Template="{TemplateBinding controls:ControlAttach.IconContent}" 
+                                                    IsTabStop="False" />
                             <Grid x:Name="padding" DockPanel.Dock="{TemplateBinding controls:IconAttach.Dock}" Margin="5,0,0,0"></Grid>
                             <ContentPresenter x:Name="ContentPresenterMain" RecognizesAccessKey="True" VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="controls:IconAttach.Geometry" Value="{x:Null}">
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="path"/>
+                        <DataTrigger Binding="{Binding Path=(controls:ControlAttach.IconContent), RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_IconContent"/>
                             <Setter Property="Visibility" Value="Collapsed" TargetName="padding"/>
-                        </Trigger>
+                        </DataTrigger>
                         <Trigger Property="HasContent" Value="False">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="padding"/>
                         </Trigger>
@@ -1554,6 +1758,140 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Geometry),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <Path x:Name="icon" 
+                                Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                Fill="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                SnapsToDevicePixels="True" 
+                                Stretch="Uniform" 
+                                RenderTransformOrigin="0.5,0.5"
+                                Data="{Binding Path=(controls:IconAttach.Geometry),RelativeSource={RelativeSource AncestorType=ButtonBase}}">
+                                <Path.RenderTransform>
+                                    <ScaleTransform x:Name="transIcon"  ScaleX="1" ScaleY="1"/>
+                                </Path.RenderTransform>
+                            </Path>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                        <Condition Binding="{Binding Path=(controls:IconAttach.AllowsAnimation),RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.EnterActions>
+                                    <MultiDataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.ExitActions>
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:PathIcon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Kind="{Binding Path=(controls:IconAttach.Kind),RelativeSource={RelativeSource AncestorType=ButtonBase}}" >
+                                <controls:PathIcon.RenderTransform>
+                                    <ScaleTransform x:Name="transIcon"  ScaleX="1" ScaleY="1"/>
+                                </controls:PathIcon.RenderTransform>
+                            </controls:PathIcon>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                        <Condition Binding="{Binding Path=(controls:IconAttach.AllowsAnimation),RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.EnterActions>
+                                    <MultiDataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.ExitActions>
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource NullableToBoolConverter}}" Value="false">
+                <Setter Property="controls:ControlAttach.IconContent">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Control">
+                            <controls:Icon x:Name="icon"
+                                  Width="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Height="{Binding Path=(controls:IconAttach.Height),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  FontSize="{Binding Path=(controls:IconAttach.Width),RelativeSource={RelativeSource AncestorType=ButtonBase}}" 
+                                  Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                  SnapsToDevicePixels="True" 
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Kind="{Binding Path=(controls:IconAttach.Icon),RelativeSource={RelativeSource AncestorType=ButtonBase}}" >
+                                <controls:Icon.RenderTransform>
+                                    <ScaleTransform x:Name="transIcon"  ScaleX="1" ScaleY="1"/>
+                                </controls:Icon.RenderTransform>
+                            </controls:Icon>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                        <Condition Binding="{Binding Path=(controls:IconAttach.AllowsAnimation),RelativeSource={RelativeSource AncestorType=ButtonBase}}" Value="true"></Condition>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.EnterActions>
+                                    <MultiDataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiDataTrigger.ExitActions>
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
             <Trigger Property="controls:ControlAttach.Status" Value="Light">
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
             </Trigger>
