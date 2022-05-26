@@ -27,14 +27,25 @@
         <Style.Resources>
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource AIStudio.Styles.Button}" />
             <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource AIStudio.Styles.CheckBox}" />
-            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource AIStudio.Styles.ComboBox}" />
-            <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource AIStudio.Styles.DatePicker}" />
-            <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource AIStudio.Styles.PasswordBox}" />
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource AIStudio.Styles.ComboBox.Underline}" />
+            <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource AIStudio.Styles.DatePicker.Underline}" />
+            <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource AIStudio.Styles.PasswordBox.Underline}" />
             <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource AIStudio.Styles.RadioButton}" />
             <Style TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource AIStudio.Styles.RichTextBox}" />
-            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource AIStudio.Styles.TextBox}" />
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource AIStudio.Styles.TextBox.Underline}" />
             <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource AIStudio.Styles.ToggleButton.Switch}" />
+            <Style TargetType="{x:Type controls:TreeSelect}" BasedOn="{StaticResource AIStudio.Styles.TreeSelect.Underline}" />
+            <Style TargetType="{x:Type controls:MultiComboBox}" BasedOn="{StaticResource AIStudio.Styles.MultiComboBox.Underline}" />
         </Style.Resources>
     </Style>
-    
+
+    <Style x:Key="AIStudio.Styles.FormCodeItem.Custom" BasedOn="{StaticResource AIStudio.Styles.FormCodeItem}" TargetType="controls:FormCodeItem">
+        <Setter Property="Header" Value="{Binding Header}"/>
+        <Setter Property="ControlType" Value="{Binding ControlType}"/>
+        <Setter Property="Path" Value="{Binding Path}"/>
+        <Setter Property="ItemsSource" Value="{Binding ItemsSource}"/>
+    </Style>
+
+    <Style BasedOn="{StaticResource AIStudio.Styles.FormCodeItem}" TargetType="controls:FormCodeItem"/>
+
 </ResourceDictionary>

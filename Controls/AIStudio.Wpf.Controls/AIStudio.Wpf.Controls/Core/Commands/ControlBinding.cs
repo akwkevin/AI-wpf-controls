@@ -99,6 +99,18 @@ namespace AIStudio.Wpf.Controls.Bindings
             ValidationRules = new Collection<ValidationRule>();
         }
 
+        public ControlBinding(string path)
+        {
+            Path = new PropertyPath(path);
+            Mode = BindingMode.Default;
+            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            NotifyOnValidationError = true;
+            ValidatesOnDataErrors = true;
+            ValidatesOnExceptions = true;
+            TargetNullValue = null;
+            ValidationRules = new Collection<ValidationRule>();
+        }
+
         public ControlBinding(PropertyPath path)
         {
             Path = path;

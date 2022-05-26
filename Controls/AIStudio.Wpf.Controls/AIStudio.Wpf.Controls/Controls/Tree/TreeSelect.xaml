@@ -442,17 +442,18 @@
                                         </Style>
                                     </controls:TagBox.ItemContainerStyle>
                                 </controls:TagBox>
-                            </Grid>
-                            <!--弹出多选列表-->
-                            <Popup x:Name="PART_Popup" VerticalOffset="1" AllowsTransparency="True" Focusable="False" StaysOpen="False"
+                            </Grid>                           
+                        </Grid>
+                        <!--弹出多选列表-->
+                        <Popup x:Name="PART_Popup" VerticalOffset="1" AllowsTransparency="True" Focusable="False" StaysOpen="False"
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
-                                <Grid MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
-                                    <Border x:Name="PopupBorder" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch"
+                            <Grid MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                <Border x:Name="PopupBorder" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch"
                                             Height="Auto" BorderBrush="{TemplateBinding BorderBrush}" 
                                             CornerRadius="{TemplateBinding controls:ControlAttach.CornerRadius}"
                                             Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
-                                        <controls:ExtendedTreeView x:Name="PART_TreeView" Margin="2"
+                                    <controls:ExtendedTreeView x:Name="PART_TreeView" Margin="2"
                                               ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"
                                               MaxHeight="{TemplateBinding MaxDropDownHeight}"  
                                               ItemTemplate="{TemplateBinding ItemTemplate}"
@@ -461,11 +462,10 @@
                                               controls:ControlAttach.Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Background)}"   
                                               controls:ControlAttach.Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(controls:ControlAttach.Foreground)}"                       
                                               Style="{StaticResource AIStudio.Styles.TreeView}">
-                                        </controls:ExtendedTreeView>
-                                    </Border>
-                                </Grid>
-                            </Popup>
-                        </Grid>
+                                    </controls:ExtendedTreeView>
+                                </Border>
+                            </Grid>
+                        </Popup>
                     </Grid>
                     <!--触发器-->
                     <ControlTemplate.Triggers>

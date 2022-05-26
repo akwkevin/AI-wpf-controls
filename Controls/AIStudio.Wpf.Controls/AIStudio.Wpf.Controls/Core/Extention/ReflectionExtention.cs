@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AIStudio.Wpf.Controls.Core
 {
-    public static class ReflectionExtend
+    public static class ReflectionExtention
     {
         /// <summary>
         /// Indicates whether or not the specified type is a list.

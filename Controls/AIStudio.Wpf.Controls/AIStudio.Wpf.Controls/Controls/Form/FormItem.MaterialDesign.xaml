@@ -3,27 +3,15 @@
                     xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
                     xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/TextBlock.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/TextBlock.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type Thumb}" x:Key="InvisibleThumbStyle">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid Background="{TemplateBinding Background}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
     <Style x:Key="AIStudio.Styles.FormItem" TargetType="{x:Type controls:FormItem}">
         <Style.Resources>
             <Style BasedOn="{StaticResource AIStudio.Styles.TextBlock.Center}" TargetType="{x:Type TextBlock}"/>
         </Style.Resources>
         <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
         <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(controls:Form.ItemMargin)}"/>
-        <Setter Property="AllowDrop" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(controls:Form.AllowDrop)}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:FormItem}">
@@ -32,13 +20,12 @@
                             <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />
                             <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyWidth)}" />
                         </Grid.ColumnDefinitions>
-                        <ContentPresenter x:Name="header"
+                        <ContentPresenter x:Name="PART_Header"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 ContentSource="Header" 
                                 TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-                                Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>
-                        <Thumb x:Name="PART_Thumb" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{StaticResource InvisibleThumbStyle}" />
+                                Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>                       
                         <ContentPresenter
                                 x:Name="PART_ContentPresenter"
                                 Grid.Column="1"
@@ -49,31 +36,31 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="controls:ControlAttach.Status" Value="Light">
-                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
                         </Trigger>
                         <Trigger Property="controls:ControlAttach.Status" Value="Mid">
-                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
                         </Trigger>
                         <Trigger Property="controls:ControlAttach.Status" Value="Dark">
-                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
                         </Trigger>
                         <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
-                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource SecondaryHueMidBrush}" />
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource SecondaryHueMidBrush}" />
                         </Trigger>
                         <Trigger Property="controls:ControlAttach.Status" Value="Success">
-                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource SuccessBrush}" />
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource SuccessBrush}" />
                         </Trigger>
                         <Trigger Property="controls:ControlAttach.Status" Value="Info">
-                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource InfoBrush}" />
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource InfoBrush}" />
                         </Trigger>
                         <Trigger Property="controls:ControlAttach.Status" Value="Warning">
-                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource WarningBrush}" />
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource WarningBrush}" />
                         </Trigger>
                         <Trigger Property="controls:ControlAttach.Status" Value="Danger">
-                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource DangerBrush}" />
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource DangerBrush}" />
                         </Trigger>
                         <Trigger Property="controls:ControlAttach.Status" Value="Plain">
-                            <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignToolForeground}" />
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignToolForeground}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -89,13 +76,12 @@
                                     <RowDefinition Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />
                                     <RowDefinition Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyWidth)}" />
                                 </Grid.RowDefinitions>
-                                <ContentPresenter x:Name="header"
+                                <ContentPresenter x:Name="PART_Header"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     ContentSource="Header"
                                     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-                                    Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>
-                                <Thumb x:Name="PART_Thumb" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{StaticResource InvisibleThumbStyle}" />
+                                    Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>                               
                                 <ContentPresenter
                                     x:Name="PART_ContentPresenter"
                                     Grid.Row="1"
@@ -106,31 +92,31 @@
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="controls:ControlAttach.Status" Value="Light">
-                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
+                                    <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
                                 </Trigger>
                                 <Trigger Property="controls:ControlAttach.Status" Value="Mid">
-                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+                                    <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
                                 </Trigger>
                                 <Trigger Property="controls:ControlAttach.Status" Value="Dark">
-                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
+                                    <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
                                 </Trigger>
                                 <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
-                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource SecondaryHueMidBrush}" />
+                                    <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource SecondaryHueMidBrush}" />
                                 </Trigger>
                                 <Trigger Property="controls:ControlAttach.Status" Value="Success">
-                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource SuccessBrush}" />
+                                    <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource SuccessBrush}" />
                                 </Trigger>
                                 <Trigger Property="controls:ControlAttach.Status" Value="Info">
-                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource InfoBrush}" />
+                                    <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource InfoBrush}" />
                                 </Trigger>
                                 <Trigger Property="controls:ControlAttach.Status" Value="Warning">
-                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource WarningBrush}" />
+                                    <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource WarningBrush}" />
                                 </Trigger>
                                 <Trigger Property="controls:ControlAttach.Status" Value="Danger">
-                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource DangerBrush}" />
+                                    <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource DangerBrush}" />
                                 </Trigger>
                                 <Trigger Property="controls:ControlAttach.Status" Value="Plain">
-                                    <Setter TargetName="header" Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignToolForeground}" />
+                                    <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignToolForeground}" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

@@ -18,6 +18,8 @@ namespace AIStudio.Wpf.Controls
         DoubleUpDown,
         DecimalUpDown,
         DateTimeUpDown,
+        CheckBox,
+        ToggleButton,
         Query,
         Submit
     }
