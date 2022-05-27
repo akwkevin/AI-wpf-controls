@@ -69,7 +69,18 @@
                         </Grid>
 
                         <StatusBar Grid.Row="1" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" Style="{DynamicResource AIStudio.Styles.StatusBar}">
-                            <ComboBox x:Name="PART_ControlStatus" IsEditable="True" helper:EnumHelper.Enum="{x:Type controls:ControlStatus}" ToolTip="色彩" Tag="此处可以选择色彩" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.ComboBox}" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" controls:ControlAttach.BorderBrush="{DynamicResource MaterialDesignToolBackground}" MinWidth="80">
+                            <ComboBox x:Name="PART_ControlStatus" 
+                                      IsEditable="True" 
+                                      helper:EnumHelper.Enum="{x:Type controls:ControlStatus}"
+                                      ToolTip="色彩" 
+                                      Tag="此处可以选择色彩" 
+                                      controls:ControlAttach.CornerRadius="0" 
+                                      Style="{DynamicResource AIStudio.Styles.ComboBox}" 
+                                      Background="{DynamicResource PrimaryHueMidBrush}" 
+                                      BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" 
+                                      Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" 
+                                      controls:ControlAttach.BorderBrush="{DynamicResource MaterialDesignToolBackground}" 
+                                      MinWidth="80">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid x:Name="grid">
@@ -107,20 +118,17 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <controls:NumericUpDown x:Name="PART_CornerRadius" Margin="2,0,0,0" Maximum="100" Minimum="0" Value="3" ToolTip="圆角" Tag="此处可以设置圆角半径" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.NumericUpDown}" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" controls:ControlAttach.BorderBrush="{DynamicResource MaterialDesignToolBackground}"  MinWidth="80"/>
-                            <controls:NumericUpDown x:Name="PART_MinHeight" Margin="2,0,0,0" Maximum="100" Minimum="6" Value="22" ToolTip="高度" Tag="此处可以设置最小控件高度" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.NumericUpDown}" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" controls:ControlAttach.BorderBrush="{DynamicResource MaterialDesignToolBackground}"  MinWidth="80"/>
-                            <controls:NumericUpDown x:Name="PART_IconWidth" Margin="2,0,0,0" Maximum="100" Minimum="6" Value="13" ToolTip="图标大小" Tag="此处可以设置图标大小" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.NumericUpDown}" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" controls:ControlAttach.BorderBrush="{DynamicResource MaterialDesignToolBackground}"  MinWidth="80"/>
-                            <ComboBox x:Name="PART_FontFamily" ItemsSource="{x:Static controls:AIStudioUserControl.SystemFontFamilies}" ToolTip="字体" Tag="此处可以选择字体" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.ComboBox}" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" controls:ControlAttach.BorderBrush="{DynamicResource MaterialDesignToolBackground}" MinWidth="80">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid x:Name="grid">
-                                            <TextBlock x:Name="txt" VerticalAlignment="Center" Text="{Binding Source}" FontFamily="{Binding .}"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <controls:NumericUpDown x:Name="PART_FontSize" Margin="2,0,0,0" Maximum="100" Minimum="6" Value="12" ToolTip="字体大小" Tag="此处可以设置字体大小" controls:ControlAttach.CornerRadius="0" Style="{DynamicResource AIStudio.Styles.NumericUpDown}" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" controls:ControlAttach.BorderBrush="{DynamicResource MaterialDesignToolBackground}"  MinWidth="80"/>
-                            <ToggleButton x:Name="PART_ToggleCode" Tag="切换查看Xaml代码" Margin="2,0,0,0" IsChecked="{Binding IsOpen,ElementName=PART_DrawerCode}" ToolTip="显示代码" Style="{DynamicResource AIStudio.Styles.ToggleButton.Switch}"/>
+                            <ToggleButton x:Name="PART_ToggleCode" 
+                                          Tag="切换查看Xaml代码" 
+                                          Margin="2,0,0,0" 
+                                          IsChecked="{Binding IsOpen,ElementName=PART_DrawerCode}" 
+                                          ToolTip="显示代码" 
+                                          controls:ControlAttach.CornerRadius="0" 
+                                          Style="{DynamicResource AIStudio.Styles.ToggleButton}"
+                                          Background="{DynamicResource PrimaryHueMidBrush}" 
+                                          BorderBrush="{DynamicResource PrimaryHueMidForegroundBrush}" 
+                                          Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" 
+                                          controls:ControlAttach.Background="{DynamicResource MaterialDesignToolBackground}" />
                         </StatusBar>
 
                         <controls:Drawer x:Name="PART_DrawerCode" ShowMode="Press"  Dock="Top">

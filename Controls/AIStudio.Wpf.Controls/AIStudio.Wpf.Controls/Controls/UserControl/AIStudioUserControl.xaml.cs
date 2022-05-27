@@ -13,22 +13,12 @@ namespace AIStudio.Wpf.Controls
 {
     [TemplatePart(Name = PART_RootGrid, Type = typeof(Grid))]
     [TemplatePart(Name = PART_ControlStatus, Type = typeof(ComboBox))]
-    [TemplatePart(Name = PART_CornerRadius, Type = typeof(NumericUpDown))]
-    [TemplatePart(Name = PART_MinHeight, Type = typeof(NumericUpDown))]
-    [TemplatePart(Name = PART_IconWidth, Type = typeof(NumericUpDown))]
-    [TemplatePart(Name = PART_FontFamily, Type = typeof(ComboBox))]
-    [TemplatePart(Name = PART_FontSize, Type = typeof(NumericUpDown))]
     [TemplatePart(Name = PART_ToggleCode, Type = typeof(ToggleButton))]
     [TemplatePart(Name = PART_OptionsPanel, Type = typeof(OptionsPanel))]
     public class AIStudioUserControl : UserControl, INotifyPropertyChanged
     {
         private const string PART_RootGrid = "PART_RootGrid";
-        private const string PART_ControlStatus = "PART_ControlStatus";
-        private const string PART_CornerRadius = "PART_CornerRadius";
-        private const string PART_MinHeight = "PART_MinHeight";
-        private const string PART_IconWidth = "PART_IconWidth";
-        private const string PART_FontFamily = "PART_FontFamily";
-        private const string PART_FontSize = "PART_FontSize";
+        private const string PART_ControlStatus = "PART_ControlStatus";       
         private const string PART_ToggleCode = "PART_ToggleCode";
         private const string PART_OptionsPanel = "PART_OptionsPanel";
 
@@ -46,77 +36,7 @@ namespace AIStudio.Wpf.Controls
                 _controlStatus = value;
                 OnPropertyChanged(nameof(ControlStatus));
             }
-        }
-
-        private NumericUpDown _controlCornerRadius;
-        public NumericUpDown ControlCornerRadius
-        {
-            get
-            {
-                return _controlCornerRadius;
-            }
-            set
-            {
-                _controlCornerRadius = value;
-                OnPropertyChanged(nameof(ControlCornerRadius));
-            }
-        }
-
-        private NumericUpDown _controlMinHeight;
-        public NumericUpDown ControlMinHeight
-        {
-            get
-            {
-                return _controlMinHeight;
-            }
-            set
-            {
-                _controlMinHeight = value;
-                OnPropertyChanged(nameof(ControlMinHeight));
-            }
-        }
-
-        private NumericUpDown _controlIconWidth;
-        public NumericUpDown ControlIconWidth
-        {
-            get
-            {
-                return _controlIconWidth;
-            }
-            set
-            {
-                _controlIconWidth = value;
-                OnPropertyChanged(nameof(ControlIconWidth));
-            }
-        }
-
-        private ComboBox _controlFontFamily;
-        public ComboBox ControlFontFamily
-        {
-            get
-            {
-                return _controlFontFamily;
-            }
-            set
-            {
-                _controlFontFamily = value;
-                OnPropertyChanged(nameof(ControlFontFamily));
-            }
-        }
-
-        private NumericUpDown _controlFontSize;
-        public NumericUpDown ControlFontSize
-        {
-            get
-            {
-                return _controlFontSize;
-            }
-            set
-            {
-                _controlFontSize = value;
-                OnPropertyChanged(nameof(ControlFontSize));
-            }
-        }
+        }       
 
         private ToggleButton _codeToggleButton;
         public ToggleButton CodeToggleButton
@@ -251,29 +171,7 @@ namespace AIStudio.Wpf.Controls
 
         static AIStudioUserControl()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(AIStudioUserControl), new FrameworkPropertyMetadata(typeof(AIStudioUserControl)));
-
-            SystemFontFamilies = new List<FontFamily>();
-            foreach (FontFamily _f in Fonts.SystemFontFamilies)
-            {
-                LanguageSpecificStringDictionary _fontDic = _f.FamilyNames;
-                if (_fontDic.ContainsKey(XmlLanguage.GetLanguage("zh-cn")))
-                {
-                    string _fontName = null;
-                    if (_fontDic.TryGetValue(XmlLanguage.GetLanguage("zh-cn"), out _fontName))
-                    {
-                        SystemFontFamilies.Add(new FontFamily(_fontName));
-                    }
-                }
-                //else
-                //{
-                //    string _fontName = null;
-                //    if (_fontDic.TryGetValue(XmlLanguage.GetLanguage("en-us"), out _fontName))
-                //    {
-                //        SystemFontFamilies.Add(new FontFamily(_fontName));
-                //    }
-                //}
-            }
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(AIStudioUserControl), new FrameworkPropertyMetadata(typeof(AIStudioUserControl)));           
         }
 
         public AIStudioUserControl()
@@ -281,8 +179,6 @@ namespace AIStudio.Wpf.Controls
             this.CancelCommmad = new RoutedUICommand();
 
             this.BindCommand(CancelCommmad, this.Cancel);
-
-            this.Loaded += AIStudioUserControl_Loaded;
         }
 
         private void Cancel(object sender, ExecutedRoutedEventArgs e)
@@ -311,83 +207,29 @@ namespace AIStudio.Wpf.Controls
             if (ControlStatus != null)
             {
                 ControlStatus.SelectionChanged -= _controlStatus_SelectionChanged;
-            }
-            if (ControlCornerRadius != null)
-            {
-                ControlCornerRadius.ValueChanged -= _cornerRadius_ValueChanged;
-            }
-            if (ControlMinHeight != null)
-            {
-                ControlMinHeight.ValueChanged -= _minHeight_ValueChanged;
-            }
-            if (ControlIconWidth != null)
-            {
-                ControlIconWidth.ValueChanged -= _iconWidth_ValueChanged;
-            }
-            if (ControlFontFamily != null)
-            {
-                ControlFontFamily.SelectionChanged -= _fontFamily_SelectionChanged;
-            }
-            if (ControlFontSize != null)
-            {
-                ControlFontSize.ValueChanged -= _iconHeigt_ValueChanged;
-            }
+            }          
 
             _rootGrid = GetTemplateChild(PART_RootGrid) as Grid;
             ControlStatus = GetTemplateChild(PART_ControlStatus) as ComboBox;
-            ControlCornerRadius = GetTemplateChild(PART_CornerRadius) as NumericUpDown;
-            ControlMinHeight = GetTemplateChild(PART_MinHeight) as NumericUpDown;
-            ControlIconWidth = GetTemplateChild(PART_IconWidth) as NumericUpDown;
-            ControlFontFamily = GetTemplateChild(PART_FontFamily) as ComboBox;
-            ControlFontSize = GetTemplateChild(PART_FontSize) as NumericUpDown;
-            CodeToggleButton = GetTemplateChild(PART_ToggleCode) as ToggleButton;
+            CodeToggleButton = GetTemplateChild(PART_ToggleCode) as ToggleButton; 
             OptionsPanel = GetTemplateChild(PART_OptionsPanel) as OptionsPanel;
 
             if (ControlStatus != null)
             {
                 ControlStatus.SelectionChanged += _controlStatus_SelectionChanged;
-            }
-            if (ControlCornerRadius != null)
-            {
-                ControlCornerRadius.ValueChanged += _cornerRadius_ValueChanged;
-            }
-            if (ControlMinHeight != null)
-            {
-                ControlMinHeight.ValueChanged += _minHeight_ValueChanged; ;
-            }
-            if (ControlIconWidth != null)
-            {
-                ControlIconWidth.ValueChanged += _iconWidth_ValueChanged; ;
-            }
-            if (ControlFontFamily != null)
-            {
-                ControlFontFamily.SelectedItem = SystemFontFamilies.FirstOrDefault(p => p.Source == "微软雅黑");
-                ControlFontFamily.SelectionChanged += _fontFamily_SelectionChanged;
-            }
-            if (ControlFontSize != null)
-            {
-                ControlFontSize.ValueChanged += _iconHeigt_ValueChanged; ;
-            }
+            }      
 
         }
 
         List<FrameworkElement> _controls = new List<FrameworkElement>();
 
-        private void AIStudioUserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            _controls = VisualHelper.GetPanelChildren(_rootGrid).OfType<FrameworkElement>().ToList();
-        }
-
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
-        {
-            base.OnPreviewKeyDown(e);
-
-
-        }
-
-
         private void _controlStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (_controls == null)
+            {
+                _controls = GetPanelChildren(_rootGrid).OfType<FrameworkElement>().ToList();
+            }
+
             if (e.AddedItems == null)
                 return;
 
@@ -405,73 +247,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 }
             }
-        }
-
-        private void _cornerRadius_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (e.NewValue == null)
-                return;
-
-            foreach (var child in _controls)
-            {
-                if (child.GetType().GetProperty("CornerRadius") != null)
-                {
-                    child.GetType().GetProperty("CornerRadius").SetValue(child, new CornerRadius((double)e.NewValue));
-                }
-                else
-                {
-                    child.SetValue(ControlAttach.CornerRadiusProperty, new CornerRadius((double)e.NewValue));
-                }
-            }
-        }
-
-        private void _minHeight_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (e.NewValue == null)
-                return;
-
-            foreach (var child in _controls)
-            {
-                child.SetValue(FrameworkElement.MinHeightProperty, (double)e.NewValue);
-            }
-        }
-
-        private void _iconWidth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (e.NewValue == null)
-                return;
-
-            foreach (var child in _controls)
-            {
-                child.SetValue(IconAttach.WidthProperty, (double)e.NewValue);
-                child.SetValue(IconAttach.HeightProperty, (double)e.NewValue);
-            }
-        }
-
-        private void _iconHeigt_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (e.NewValue == null)
-                return;
-
-            foreach (var child in _controls)
-            {
-                child.SetValue(Control.FontSizeProperty, (double)e.NewValue);
-            }
-        }
-
-        private void _fontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems == null)
-                return;
-
-            if (e.AddedItems.Count > 0)
-            {
-                foreach (var child in _controls)
-                {
-                    child.SetValue(Control.FontFamilyProperty, (FontFamily)e.AddedItems[0]);
-                }
-            }
-        }
+        }     
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -495,6 +271,104 @@ namespace AIStudio.Wpf.Controls
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+
+        public static List<UIElement> GetPanelChildren(Panel panel)
+        {
+            List<UIElement> elements = new List<UIElement>();
+            if (panel != null)
+            {
+
+                foreach (var child in panel.Children)
+                {
+                    if (child is ContentPresenter contentPresenter)
+                    {
+                        if (contentPresenter.Content is Panel contentPresenterPanel)
+                        {
+                            elements.AddRange(GetPanelChildren(contentPresenterPanel));
+                        }
+                        else
+                        {
+                            elements.AddRange(GetPanelChildren(VisualHelper.FindVisualChild<Panel>(contentPresenter.Content as DependencyObject)));
+                        }
+                    }
+                    else if (child is ScrollViewer scroll)
+                    {
+                        if (scroll.Content is Panel scrollPanel)
+                        {
+                            elements.AddRange(GetPanelChildren(scrollPanel));
+                        }
+                        else
+                        {
+                            elements.AddRange(GetPanelChildren(VisualHelper.FindVisualChild<Panel>(scroll.Content as DependencyObject)));
+                        }
+                    }
+                    else if (child is Panel chiledpanel)
+                    {
+                        elements.AddRange(GetPanelChildren(chiledpanel));
+                    }
+                    else if (child is GroupBox groupBox)
+                    {
+                        if (groupBox.Content is Panel contentpanel)
+                        {
+                            elements.AddRange(GetPanelChildren(contentpanel));
+                        }
+                        else if (groupBox.Content is TextBlock)
+                        {
+                            elements.Add(groupBox);
+                        }
+                        else
+                        {
+                            elements.Add(groupBox.Content as UIElement);
+                        }
+                    }
+                    else if (child is ButtonGroup buttonGroup)
+                    {
+                        foreach (var item in buttonGroup.Items)
+                        {
+                            elements.Add(buttonGroup.ItemContainerGenerator.ContainerFromItem(item) as UIElement);
+                        }
+                    }
+                    else if (child is TabControl tabControl)
+                    {
+                        var tabitems = tabControl.FindChildren<TabItem>();
+                        foreach (var tabitem in tabitems)
+                        {
+                            if (tabitem.Content is Panel tabitemPanel)
+                            {
+                                elements.AddRange(GetPanelChildren(tabitemPanel));
+                            }
+                            else if (tabitem.Content is DependencyObject)
+                            {
+                                elements.AddRange(GetPanelChildren(VisualHelper.FindVisualChild<Panel>(tabitem.Content as DependencyObject)));
+                            }
+                        }
+                    }
+                    else if (child is ToolBarTray toolBarTray)
+                    {
+                        foreach (var childtoolbar in toolBarTray.ToolBars)
+                        {
+                            foreach (var item in childtoolbar.Items.OfType<UIElement>())
+                            {
+                                elements.Add(item);
+                            }
+                        }
+                    }
+                    else if (child is ToolBar toolbar)
+                    {
+                        foreach (var item in toolbar.Items.OfType<UIElement>())
+                        {
+                            elements.Add(item);
+                        }
+                    }
+                    else if (child is UIElement element)
+                    {
+                        elements.Add(element);
+                    }
+                }
+            }
+            return elements;
         }
 
     }

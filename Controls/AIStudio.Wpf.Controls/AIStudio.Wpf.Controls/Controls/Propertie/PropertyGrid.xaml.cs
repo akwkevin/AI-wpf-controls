@@ -29,7 +29,7 @@ namespace AIStudio.Wpf.Controls
             {
                 if (d is Panel panel)
                 {
-                    foreach (var child in VisualHelper.GetPanelChildren(panel).OfType<UIElement>())
+                    foreach (var child in AIStudioUserControl.GetPanelChildren(panel).OfType<UIElement>())
                     {
                         child.GotFocus -= Child_GotFocus;
                     }
@@ -40,7 +40,7 @@ namespace AIStudio.Wpf.Controls
             {
                 if (d is Panel panel)
                 {
-                    foreach (var child in VisualHelper.GetPanelChildren(panel).OfType<UIElement>())
+                    foreach (var child in AIStudioUserControl.GetPanelChildren(panel).OfType<UIElement>())
                     {
                         PropertyGrid.SetGotFocusProperty(child, newvalue);
 
@@ -50,8 +50,6 @@ namespace AIStudio.Wpf.Controls
                 }
             }
         }
-
-
 
         private static void Child_GotFocus(object sender, RoutedEventArgs e)
         {

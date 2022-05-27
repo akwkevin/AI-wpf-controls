@@ -93,11 +93,6 @@
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource ObjectListConverter}">
                         <Binding ElementName="userControl" Path="ControlStatus"/>
-                        <Binding ElementName="userControl" Path="ControlCornerRadius"/>
-                        <Binding ElementName="userControl" Path="ControlMinHeight"/>
-                        <Binding ElementName="userControl" Path="ControlIconWidth"/>
-                        <Binding ElementName="userControl" Path="ControlFontFamily"/>
-                        <Binding ElementName="userControl" Path="ControlFontSize"/>
                         <Binding ElementName="userControl" Path="CodeToggleButton"/>
                         <Binding ElementName="userControl" Path="OptionsPanel"/>
                         <Binding ElementName="testBtn" Path="."/>
