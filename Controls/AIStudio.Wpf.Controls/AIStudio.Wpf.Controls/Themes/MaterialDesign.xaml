@@ -85,7 +85,6 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Divider/Divider.MaterialDesign.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/DropDown/DropDown.MaterialDesign.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Expander/FloatExpander.MaterialDesign.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Form/Form.MaterialDesign.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Form/FormItem.MaterialDesign.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Form/FormCodeItem.MaterialDesign.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/GotoTop/GotoTop.MaterialDesign.xaml"/>
