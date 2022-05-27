@@ -39,13 +39,6 @@
         </Style.Resources>
     </Style>
 
-    <Style x:Key="AIStudio.Styles.FormCodeItem.Custom" BasedOn="{StaticResource AIStudio.Styles.FormCodeItem}" TargetType="controls:FormCodeItem">
-        <Setter Property="Header" Value="{Binding Header}"/>
-        <Setter Property="ControlType" Value="{Binding ControlType}"/>
-        <Setter Property="Path" Value="{Binding Path}"/>
-        <Setter Property="ItemsSource" Value="{Binding ItemsSource}"/>
-    </Style>
-
     <Style BasedOn="{StaticResource AIStudio.Styles.FormCodeItem}" TargetType="controls:FormCodeItem"/>
 
 </ResourceDictionary>

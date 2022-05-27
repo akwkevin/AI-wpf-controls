@@ -54,7 +54,7 @@ namespace AIStudio.Wpf.Controls
 
         #region Path
         public static readonly DependencyProperty PathProperty = DependencyProperty.Register(
-            "Path", typeof(string), typeof(FormCodeItem), new PropertyMetadata(".", OnPathChanged));
+            "Path", typeof(string), typeof(FormCodeItem), new PropertyMetadata("", OnPathChanged));
 
         private static void OnPathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

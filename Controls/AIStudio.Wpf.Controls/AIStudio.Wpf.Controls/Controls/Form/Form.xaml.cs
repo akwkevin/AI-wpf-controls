@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using AIStudio.Wpf.Controls.Helper;
 
 namespace AIStudio.Wpf.Controls
 {
-    public class Form : ListBox
+    public class Form : Selector
     {
         #region AttachedProperty : HeaderWidthProperty
         public static readonly DependencyProperty HeaderWidthProperty
-            = DependencyProperty.RegisterAttached("HeaderWidth", typeof(GridLength), typeof(Form), new FrameworkPropertyMetadata(new GridLength(50d, GridUnitType.Pixel), FrameworkPropertyMetadataOptions.Inherits));
+            = DependencyProperty.RegisterAttached("HeaderWidth", typeof(GridLength), typeof(Form), new FrameworkPropertyMetadata(new GridLength(60d, GridUnitType.Pixel), FrameworkPropertyMetadataOptions.Inherits));
 
         public static GridLength GetHeaderWidth(DependencyObject element) => (GridLength)element.GetValue(HeaderWidthProperty);
         public static void SetHeaderWidth(DependencyObject element, GridLength value) => element.SetValue(HeaderWidthProperty, value);
@@ -57,6 +61,8 @@ namespace AIStudio.Wpf.Controls
         public static void SetBodyMargin(DependencyObject element, Thickness value) => element.SetValue(BodyMarginProperty, value);
         #endregion
 
+        public static readonly DependencyProperty IsReadOnlyProperty =
+            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(Form));
         public bool IsReadOnly
         {
             get
@@ -69,47 +75,234 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-        public static readonly DependencyProperty IsReadOnlyProperty =
-            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(Form));
+        /// <summary>
+        ///     The Property for the Delay property.
+        ///     Flags:              Can be used in style rules
+        ///     Default Value:      Depend on SPI_GETKEYBOARDDELAY from SystemMetrics
+        /// </summary>
+        public static readonly DependencyProperty DelayProperty
+            = DependencyProperty.Register("Delay", typeof(int), typeof(Form),
+                                          new FrameworkPropertyMetadata(GetKeyboardDelay()),
+                                          new ValidateValueCallback(IsDelayValid));
 
-        public bool IsCodeMode
+        /// <summary>
+        ///     Specifies the amount of time, in milliseconds, to wait before repeating begins.
+        /// Must be non-negative
+        /// </summary>
+        [Bindable(true), Category("Behavior")]
+        public int Delay
         {
             get
             {
-                return (bool)GetValue(IsCodeModeProperty);
+                return (int)GetValue(DelayProperty);
             }
             set
             {
-                SetValue(IsCodeModeProperty, value);
+                SetValue(DelayProperty, value);
             }
         }
 
-        public static readonly DependencyProperty IsCodeModeProperty =
-            DependencyProperty.Register("IsCodeMode", typeof(bool), typeof(Form));
+        private static bool IsDelayValid(object value)
+        {
+            return ((int)value) >= 0;
+        }
+
+        /// <summary>
+        ///     The Property for the Interval property.
+        ///     Flags:              Can be used in style rules
+        ///     Default Value:      Depend on SPI_GETKEYBOARDSPEED from SystemMetrics
+        /// </summary>
+        public static readonly DependencyProperty IntervalProperty
+            = DependencyProperty.Register("Interval", typeof(int), typeof(Form),
+                                          new FrameworkPropertyMetadata(GetKeyboardSpeed()),
+                                          new ValidateValueCallback(IsIntervalValid));
+
+        /// <summary>
+        ///     Specifies the amount of time, in milliseconds, between repeats once repeating starts.
+        /// Must be non-negative
+        /// </summary>
+        [Bindable(true), Category("Behavior")]
+        public int Interval
+        {
+            get
+            {
+                return (int)GetValue(IntervalProperty);
+            }
+            set
+            {
+                SetValue(IntervalProperty, value);
+            }
+        }
+
+        private static bool IsIntervalValid(object value)
+        {
+            return ((int)value) > 0;
+        }
+
+        //static Form()
+        //{
+        //    DefaultStyleKeyProperty.OverrideMetadata(typeof(Form), new FrameworkPropertyMetadata(typeof(Form), FrameworkPropertyMetadataOptions.Inherits));
+        //}
 
         public Form()
         {
+            this.Background = Brushes.Transparent;
+
             this.Drop += Form_Drop;
             this.DragOver += Form_DragOver;
-            this.MouseLeftButtonDown += Form_MouseLeftButtonDown;
+
         }
 
-        private void Form_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        internal void NotifyListItemClicked(FormItem item, MouseButton mouseButton)
         {
+            if (!item.IsSelected)
+            {
+                item.SetCurrentValue(IsSelectedProperty, true);
+            }
+            else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                item.SetCurrentValue(IsSelectedProperty,false);
+            }
+
+            if (item.IsSelected)
+            {
+
+                bool isItemsSource;
+                var list = GetActualList(out isItemsSource);
+                int index = list.IndexOf(isItemsSource ? item.DataContext : item);
+                SetCurrentValue(SelectedIndexProperty, index);
+            }
+            else
+            {
+                SetCurrentValue(SelectedIndexProperty, -1);
+            }
+        }
+
+        private DispatcherTimer _timer;
+        private FormItem _dragItem;
+
+
+      /// <summary>
+        /// This is the method that responds to the MouseButtonEvent event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            if (AllowDrop == false)
+            {
+                e.Handled = true;
+                return;
+            }
+
             var pos = e.GetPosition(this);
             HitTestResult result = VisualTreeHelper.HitTest(this, pos);
             if (result == null)
             {
                 return;
             }
-            var dragItem = VisualHelper.FindParent<FormItem>(result.VisualHit);
-            if (dragItem == null)
+            _dragItem = VisualHelper.FindParent<FormItem>(result.VisualHit);
+            if (_dragItem == null)
             {
                 return;
             }
 
-            SelectedItem = dragItem;
-            DragDrop.DoDragDrop(this, dragItem, DragDropEffects.Move);
+            StartTimer();
+
+            //DragDrop.DoDragDrop(this, _dragItem, DragDropEffects.Move);
+        }
+
+        /// <summary>
+        /// This is the method that responds to the MouseButtonEvent event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonUp(e);
+
+            _dragItem = null;
+            StopTimer();
+            
+        }
+
+        /// <summary>
+        /// Starts a _timer ticking
+        /// </summary>
+        private void StartTimer()
+        {
+            if (_timer == null)
+            {
+                _timer = new DispatcherTimer();
+                _timer.Tick += new EventHandler(OnTimeout);
+            }
+            else if (_timer.IsEnabled)
+                return;
+
+            _timer.Interval = TimeSpan.FromMilliseconds(Delay);
+            _timer.Start();
+        }
+
+        /// <summary>
+        /// Stops a _timer that has already started
+        /// </summary>
+        private void StopTimer()
+        {
+            if (_timer != null)
+            {
+                _timer.Stop();
+            }
+        }
+
+        /// <summary>
+        /// This is the handler for when the repeat _timer expires. All we do
+        /// is invoke a click.
+        /// </summary>
+        /// <param name="sender">Sender of the event</param>
+        /// <param name="e">Event arguments</param>
+        private void OnTimeout(object sender, EventArgs e)
+        {
+            TimeSpan interval = TimeSpan.FromMilliseconds(Interval);
+            if (_timer.Interval != interval)
+                _timer.Interval = interval;
+
+
+            if (_dragItem != null)
+            {
+                DragDrop.DoDragDrop(this, _dragItem, DragDropEffects.Move);
+                _dragItem = null;
+            }
+            
+        }
+
+        /// <summary>
+        /// Retrieves the keyboard repeat-delay setting, which is a value in the range from 0
+        /// (approximately 250 ms delay) through 3 (approximately 1 second delay).
+        /// The actual delay associated with each value may vary depending on the hardware.
+        /// </summary>
+        /// <returns></returns>
+        internal static int GetKeyboardDelay()
+        {
+            int delay = SystemParameters.KeyboardDelay;
+            // SPI_GETKEYBOARDDELAY 0,1,2,3 correspond to 250,500,750,1000ms
+            if (delay < 0 || delay > 3)
+                delay = 0;
+            return (delay + 1) * 250;
+        }
+
+        /// <summary>
+        /// Retrieves the keyboard repeat-speed setting, which is a value in the range from 0
+        /// (approximately 2.5 repetitions per second) through 31 (approximately 30 repetitions per second).
+        /// The actual repeat rates are hardware-dependent and may vary from a linear scale by as much as 20%
+        /// </summary>
+        /// <returns></returns>
+        internal static int GetKeyboardSpeed()
+        {
+            int speed = SystemParameters.KeyboardSpeed;
+            // SPI_GETKEYBOARDSPEED 0,...,31 correspond to 1000/2.5=400,...,1000/30 ms
+            if (speed < 0 || speed > 31)
+                speed = 31;
+            return (31 - speed) * (400 - 1000 / 30) / 31 + 1000 / 30;
         }
 
         private void Form_DragOver(object sender, DragEventArgs e)
@@ -188,7 +381,23 @@ namespace AIStudio.Wpf.Controls
         {
             bool isItemsSource;
             var list = GetActualList(out isItemsSource);
-            var source = isItemsSource ? sourceItem.DataContext : sourceItem;
+            object source;
+            if (isItemsSource)
+            {
+                source = sourceItem.DataContext;
+            }
+            else
+            {
+                if (sourceItem.ParentSelector != this)
+                {
+                    string xaml = System.Windows.Markup.XamlWriter.Save(sourceItem);
+                    source = System.Windows.Markup.XamlReader.Parse(xaml) as FormItem;
+                }
+                else
+                {
+                    source = sourceItem;
+                }
+            }
 
             list.Remove(source);
             list.Add(source);
@@ -209,31 +418,6 @@ namespace AIStudio.Wpf.Controls
             }
 
             return list;
-        }
-
-
-        protected override bool IsItemItsOwnContainerOverride(object item)
-        {
-            if (IsCodeMode)
-            {
-                return item is FormCodeItem;
-            }
-            else
-            {
-                return item is FormItem;
-            }            
-        }
-
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            if (IsCodeMode)
-            {
-                return new FormCodeItem();
-            }
-            else
-            {
-                return new FormItem();
-            }
         }
     }
 }

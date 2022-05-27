@@ -87,7 +87,6 @@ namespace AIStudio.Wpf.Controls
 
         public void SetValuesToCheck(IEnumerable<OptionOrdt> values)
         {
-            List<OptionOrdt> itemsSourceOld;
             if (OptionOrdtS != null)
                 OptionOrdtS.Clear();
             else

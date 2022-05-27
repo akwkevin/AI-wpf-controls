@@ -120,6 +120,19 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
+        public string PropertiesString
+        {
+            get; set;
+        }
+
+        public string[] PropertiesArray
+        {
+            get
+            {
+                return PropertiesString?.Split('^');
+            }
+        }
+
         public PropertiesView()
         {
             InitializeComponent();
@@ -141,16 +154,24 @@ namespace AIStudio.Wpf.Controls
                     int row = 0;
                     foreach (var prop in SelectedObject.GetType().GetProperties())
                     {
-                        var attr = prop.GetCustomAttributes(typeof(BrowsableAttribute), true);
-                        if (NeedBrowsable == false && (attr.Length == 0 || (attr[0] as BrowsableAttribute).Browsable))
+                        if (PropertiesArray != null && PropertiesArray.Contains(prop.Name))
                         {
                             DisplayProperty(prop, row);
                             row++;
                         }
-                        else if (NeedBrowsable == true && (attr.Length > 0 && (attr[0] as BrowsableAttribute).Browsable))
-                        {
-                            DisplayProperty(prop, row);
-                            row++;
+                        else
+                        {                        
+                            var attr = prop.GetCustomAttributes(typeof(BrowsableAttribute), true);
+                            if (NeedBrowsable == false && (attr.Length == 0 || (attr[0] as BrowsableAttribute).Browsable))
+                            {
+                                DisplayProperty(prop, row);
+                                row++;
+                            }
+                            else if (NeedBrowsable == true && (attr.Length > 0 && (attr[0] as BrowsableAttribute).Browsable))
+                            {
+                                DisplayProperty(prop, row);
+                                row++;
+                            }
                         }
                     }
                     _panel.Children.Add(_gridContainer);

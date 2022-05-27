@@ -60,7 +60,7 @@
         <TabControl Grid.Row="1" Style="{DynamicResource AIStudio.Styles.TabControl}" >
             <TabItem Header="FormItem">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <Grid>
+                    <Grid VerticalAlignment="Top">
                         <ac:Form Orientation="{ac:ControlBinding FormSetting.Orientation}" 
                                      HeaderWidth="{ac:ControlBinding FormSetting.HeaderWidth, Converter={StaticResource GridLengthAutoConverter}}" 
                                      BodyWidth="{ac:ControlBinding FormSetting.BodyWidth, Converter={StaticResource GridLengthAutoConverter}}" 
@@ -175,7 +175,7 @@
             </TabItem>
             <TabItem Header="FormCodeItem">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <Grid>
+                    <Grid VerticalAlignment="Top">
                         <ac:Form Orientation="{ac:ControlBinding FormSetting.Orientation}" 
                                      HeaderWidth="{ac:ControlBinding FormSetting.HeaderWidth, Converter={StaticResource GridLengthAutoConverter}}" 
                                      BodyWidth="{ac:ControlBinding FormSetting.BodyWidth, Converter={StaticResource GridLengthAutoConverter}}" 
