@@ -264,7 +264,7 @@
                 Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
         <Setter Property="CaptionBackground" Value="{DynamicResource MahApps.Brushes.Accent}" />
         <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
-        <Setter Property="CaptionHeight" Value="{DynamicResource DefaultHeaderHeight}"/>
+        <Setter Property="CaptionHeight" Value="{DynamicResource AIStudio.Header.Size}"/>
         <Style.Triggers>
             <Trigger Property="controls:ControlAttach.Status" Value="Light">
                 <Setter Property="CaptionBackground" Value="{DynamicResource MahApps.Brushes.Accent3}"/>

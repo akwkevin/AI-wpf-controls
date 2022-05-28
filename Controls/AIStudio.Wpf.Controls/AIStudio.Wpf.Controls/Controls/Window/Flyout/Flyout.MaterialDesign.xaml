@@ -263,7 +263,7 @@
                 Value="{DynamicResource MaterialDesignTextBoxBorder}"/>
         <Setter Property="CaptionBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
         <Setter Property="CaptionForeground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
-        <Setter Property="CaptionHeight" Value="{DynamicResource DefaultHeaderHeight}"/>
+        <Setter Property="CaptionHeight" Value="{DynamicResource AIStudio.Header.Size}"/>
         <Style.Triggers>
             <Trigger Property="controls:ControlAttach.Status" Value="Light">
                 <Setter Property="CaptionBackground" Value="{DynamicResource PrimaryHueLightBrush}"/>

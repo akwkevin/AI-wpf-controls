@@ -312,9 +312,6 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
             ResourceDictionary resourceDictionary = GetControlResourceDictionary().GetResourceDictionary(sizesCulture);
 
             resourceDictionary["DefaultControlHeight"] = double.Parse(value);
-
-            GetControlResourceDictionary().MergedDictionaries.Remove(resourceDictionary);
-            GetControlResourceDictionary().MergedDictionaries.Add(resourceDictionary);
         }
 
         private void ApplyDefaultControlPadding(string value)
@@ -323,9 +320,6 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
 
             var paddingarray = value.Split(',').Select(p => double.Parse(p)).ToArray();
             resourceDictionary["DefaultControlPadding"] = new Thickness(paddingarray[0], paddingarray[1], paddingarray[2], paddingarray[3]);
-
-            GetControlResourceDictionary().MergedDictionaries.Remove(resourceDictionary);
-            GetControlResourceDictionary().MergedDictionaries.Add(resourceDictionary);
         }
 
         private void ApplyDefaultCornerRadius(string value)
@@ -334,9 +328,6 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
 
             var cornerRadiusarray = value.Split(',').Select(p => double.Parse(p)).ToArray();
             resourceDictionary["DefaultCornerRadius"] = new CornerRadius(cornerRadiusarray[0], cornerRadiusarray[1], cornerRadiusarray[2], cornerRadiusarray[3]);
-
-            GetControlResourceDictionary().MergedDictionaries.Remove(resourceDictionary);
-            GetControlResourceDictionary().MergedDictionaries.Add(resourceDictionary);
         }
 
         public static ResourceDictionary GetControlResourceDictionary()
@@ -359,23 +350,19 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
             resourceDictionary["AIStudio.Avatar.Size.Large"] = fontSize + 28;
             resourceDictionary["AIStudio.Avatar.Size.ExtraLarge"] = fontSize + 48;
             resourceDictionary["AIStudio.Badged.Size"] = fontSize + 10;
-            resourceDictionary["AIStudio.Hamburger.Size"] = fontSize + 24;
-            resourceDictionary["AIStudio.Hamburger.Size.OpenPanel"] = (fontSize + 24) * 6.5;
+            resourceDictionary["AIStudio.Hamburger.Size"] = fontSize + 20;
+            resourceDictionary["AIStudio.Hamburger.Size.OpenPanel"] = (fontSize + 20) * 6.5;
 
             resourceDictionary["AIStudio.Notice.Width"] = (fontSize + 38) * 6;
             resourceDictionary["AIStudio.Notice.Height"] = (fontSize + 24) * 3;
 
-            Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
-            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+            resourceDictionary["AIStudio.Header.Size"] = fontSize + 20;
         }
 
         private void ApplyFontFamily(FontFamily fontFamily)
         {
             ResourceDictionary resourceDictionary = GetControlResourceDictionary().GetResourceDictionary(sizesCulture);
             resourceDictionary["AIStudio.Font.FontFamily"] = fontFamily;
-
-            Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
-            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
         }
 
     }

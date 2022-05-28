@@ -66,7 +66,7 @@
         <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
         <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
         <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
-        <Setter Property="CaptionHeight" Value="{DynamicResource DefaultHeaderHeight}"/>
+        <Setter Property="CaptionHeight" Value="{DynamicResource AIStudio.Header.Size}"/>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome ResizeBorderThickness="10" CaptionHeight="0" GlassFrameThickness="3" CornerRadius="0" />
@@ -145,7 +145,7 @@
 
                                 <StackPanel controls:NoticeCard.Identifier="{TemplateBinding Identifier}" VerticalAlignment="Top" />
 
-                                <Border x:Name="PART_TitleBar" MinHeight="{TemplateBinding CaptionHeight}" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0" ClipToBounds="True" WindowChrome.IsHitTestVisibleInChrome="True">
+                                <Border x:Name="PART_TitleBar" Height="{TemplateBinding CaptionHeight}" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0" ClipToBounds="True" WindowChrome.IsHitTestVisibleInChrome="True">
                                     <DockPanel>
                                         <StackPanel x:Name="ButtonPanel"  DockPanel.Dock="Right" Orientation="Horizontal">
                                             <Button 
@@ -280,7 +280,7 @@
         <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.Small}"/>
         <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
         <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
-        <Setter Property="CaptionHeight" Value="{DynamicResource DefaultHeaderHeight}"/>
+        <Setter Property="CaptionHeight" Value="{DynamicResource AIStudio.Header.Size}"/>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome ResizeBorderThickness="10" CaptionHeight="0" GlassFrameThickness="3" CornerRadius="0" />
@@ -298,7 +298,7 @@
                                 </Grid.RowDefinitions>
 
                                 <!--Caption标题部分-->
-                                <Border x:Name="PART_TitleBar" Background="{TemplateBinding CaptionBackground}" MinHeight="{TemplateBinding CaptionHeight}" WindowChrome.IsHitTestVisibleInChrome="True" ClipToBounds="True">
+                                <Border x:Name="PART_TitleBar" Background="{TemplateBinding CaptionBackground}" Height="{TemplateBinding CaptionHeight}" WindowChrome.IsHitTestVisibleInChrome="True" ClipToBounds="True">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>

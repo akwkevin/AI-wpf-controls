@@ -41,11 +41,10 @@
 
                 if (!splitView.IsLoaded)
                     return;
-                if (!splitView.IsPaneOpen)
-                {
-                    splitView.IsPaneOpen = !splitView.IsPaneOpen;
-                    splitView.IsPaneOpen = !splitView.IsPaneOpen;
-                }
+
+                splitView.IsPaneOpen = !splitView.IsPaneOpen;
+                splitView.IsPaneOpen = !splitView.IsPaneOpen;
+
             }
 
         }

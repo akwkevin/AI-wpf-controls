@@ -3,8 +3,8 @@
                     xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
 
     <Style x:Key="AIStudio.Styles.SplitView" TargetType="{x:Type controls:SplitView}">
-        <Setter Property="CompactPaneLength" Value="48" />
-        <Setter Property="OpenPaneLength" Value="320" />
+        <Setter Property="CompactPaneLength" Value="{DynamicResource AIStudio.Hamburger.Size}" />
+        <Setter Property="OpenPaneLength" Value="{DynamicResource AIStudio.Hamburger.Size.OpenPanel}" />
         <Setter Property="PaneBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
