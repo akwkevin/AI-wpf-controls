@@ -10,6 +10,6 @@ using System.Windows.Markup;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.AIStudio.Wpf.MDIContainer", "AIStudio.Wpf.MDIContainer")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.AIStudio.Wpf.MDIContainer", "AIStudio.Wpf.MDIContainer")]
 
-[assembly: XmlnsPrefix("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.AIStudio.Wpf.MDIContainer", "acMDIContainer")]
+[assembly: XmlnsPrefix("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.AIStudio.Wpf.MDIContainer", "acMDIContainer")]

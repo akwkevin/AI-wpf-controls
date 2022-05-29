@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:viewmodel="clr-namespace:AIStudio.Wpf.Controls.Demo.ViewModels"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+    xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
     xmlns:materialDesignColors="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
     mc:Ignorable="d" 
     d:DataContext="{d:DesignInstance Type=viewmodel:ColorToolViewModel}"

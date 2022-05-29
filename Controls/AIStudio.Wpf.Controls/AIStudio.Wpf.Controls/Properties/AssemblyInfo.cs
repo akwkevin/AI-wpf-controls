@@ -11,14 +11,14 @@ using System.Windows.Markup;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls", "AIStudio.Wpf.Controls")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls", "AIStudio.Wpf.Controls.Converter")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls", "AIStudio.Wpf.Controls.Behaviors")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls", "AIStudio.Wpf.Controls.Commands")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls", "AIStudio.Wpf.Controls.Bindings")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls", "AIStudio.Wpf.Controls.Helper")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls", "AIStudio.Wpf.Controls")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls", "AIStudio.Wpf.Controls.Converter")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls", "AIStudio.Wpf.Controls.Behaviors")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls", "AIStudio.Wpf.Controls.Commands")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls", "AIStudio.Wpf.Controls.Bindings")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls", "AIStudio.Wpf.Controls.Helper")]
 
-[assembly: XmlnsPrefix("https://gitee.com/akwkevin/aistudio.-wpf.-controls", "ac")]
+[assembly: XmlnsPrefix("https://gitee.com/akwkevin/AI-wpf-controls", "ac")]
 
 
 

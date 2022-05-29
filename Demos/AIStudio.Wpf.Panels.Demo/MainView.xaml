@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:ap="https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.Panels"
+             xmlns:ap="https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.Panels"
              xmlns:vm="clr-namespace:AIStudio.Wpf.Panels.Demo.ViewModels"
              xmlns:local="clr-namespace:AIStudio.Wpf.Panels.Demo"
              mc:Ignorable="d" 

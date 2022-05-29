@@ -26,6 +26,7 @@
                 
                 <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.xaml"/>
                 <!--<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.xaml"/>-->
+                <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.GridControls;component/Themes/MahApps.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

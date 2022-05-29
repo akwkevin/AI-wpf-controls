@@ -8,7 +8,7 @@
         xmlns:mdiContainerDemo="clr-namespace:AIStudio.Wpf.MDIContainer.Demo;assembly=AIStudio.Wpf.MDIContainer.Demo" 
         xmlns:panelsDemo="clr-namespace:AIStudio.Wpf.Panels.Demo;assembly=AIStudio.Wpf.Panels.Demo"
         xmlns:gridControlDemo="clr-namespace:AIStudio.Wpf.GridControls.Demo;assembly=AIStudio.Wpf.GridControls.Demo"
-        xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+        xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
         mc:Ignorable="d"
         Title="AIStudio.Wpf" Height="450" Width="800"
         Identifier="RootWindow"

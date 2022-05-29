@@ -11,13 +11,13 @@ using System.Windows.Markup;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls.View")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls.ViewModel")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls.Initializer")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls.Model")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls.View")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls.ViewModel")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls.Initializer")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.GridControls", "AIStudio.Wpf.GridControls.Model")]
 
-[assembly: XmlnsPrefix("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.GridControls", "agc")]
+[assembly: XmlnsPrefix("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.GridControls", "agc")]
 
 
 

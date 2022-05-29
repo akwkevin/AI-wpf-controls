@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
              xmlns:viewmodel="clr-namespace:AIStudio.Wpf.Controls.Demo.ViewModels"
-             xmlns:ac="https://gitee.com/akwkevin/aistudio.-wpf.-controls"
+             xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
              Position="Right"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"

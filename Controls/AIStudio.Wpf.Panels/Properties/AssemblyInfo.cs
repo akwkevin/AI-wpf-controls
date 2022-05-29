@@ -10,10 +10,10 @@ using System.Windows.Markup;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.Panels", "AIStudio.Wpf.Panels")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.Panels", "AIStudio.Wpf.Panels.Converters")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.Panels", "AIStudio.Wpf.Panels.Controls")]
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.Panels", "AIStudio.Wpf.Panels.Helpers")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.Panels", "AIStudio.Wpf.Panels")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.Panels", "AIStudio.Wpf.Panels.Converters")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.Panels", "AIStudio.Wpf.Panels.Controls")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.Panels", "AIStudio.Wpf.Panels.Helpers")]
 
-[assembly: XmlnsPrefix("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.Panels", "ap")]
+[assembly: XmlnsPrefix("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.Panels", "ap")]
 

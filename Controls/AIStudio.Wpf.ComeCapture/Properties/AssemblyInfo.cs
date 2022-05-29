@@ -10,6 +10,6 @@ using System.Windows.Markup;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsDefinition("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.AIStudio.Wpf.ComeCapture", "AIStudio.Wpf.ComeCapture")]
+[assembly: XmlnsDefinition("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.AIStudio.Wpf.ComeCapture", "AIStudio.Wpf.ComeCapture")]
 
-[assembly: XmlnsPrefix("https://gitee.com/akwkevin/aistudio.-wpf.-controls/tree/master/AIStudio.Wpf.AIStudio.Wpf.ComeCapture", "acComeCapture")]
+[assembly: XmlnsPrefix("https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.AIStudio.Wpf.ComeCapture", "acComeCapture")]
