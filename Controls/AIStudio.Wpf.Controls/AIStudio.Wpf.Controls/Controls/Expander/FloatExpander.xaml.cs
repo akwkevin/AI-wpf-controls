@@ -186,7 +186,7 @@ namespace AIStudio.Wpf.Controls
             timer.Tick -= timeOpen;
             timer.Tick -= timeFold;
             timer.Tick += timeOpen;
-            timer.Interval = new TimeSpan(0, 0, 0, 1);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             timer.Start();
         }
 

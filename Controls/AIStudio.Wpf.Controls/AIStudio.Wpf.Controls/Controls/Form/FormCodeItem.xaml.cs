@@ -134,7 +134,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case ControlType.ComboBox:
                     {
-                        _control = new ComboBox(); 
+                        _control = new ComboBox();
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -380,6 +380,132 @@ namespace AIStudio.Wpf.Controls
 
             GetControl(ControlType);
             SetItemsSource(ItemsSource);
+        }
+
+        private string GetPath()
+        {
+            return string.IsNullOrEmpty(Path) ? "." : Path;
+        }
+
+        public override string ToString()
+        {
+            switch (ControlType)
+            {
+                case ControlType.TextBox:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <TextBox Text=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.TextBox.Underline}}\"></TextBox>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.ComboBox:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ComboBox SelectedValue=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ItemsSource=\"{{ac:ControlBinding {ItemsSource}}}\"  DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.ComboBox.Underline}}\"></ComboBox>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.PasswordBox:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <PasswordBox ac:PasswordBoxBindingBehavior.Password=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.PasswordBox.Underline}}\"></PasswordBox>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.DatePicker:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <DatePicker SelectedDate=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.DatePicker.Underline}}\"></DatePicker>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.TreeSelect:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:TreeSelect SelectedValue=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ItemsSource=\"{{ac:ControlBinding {ItemsSource}}}\"  DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.TreeSelect.Underline}}\">" + "\r\n" +
+$"              <ac:TreeSelect.ItemTemplate>" + "\r\n" +
+$"                  <HierarchicalDataTemplate ItemsSource = \"{{Binding Children}}\">" + "\r\n" +
+$"                      <StackPanel Orientation = \"Horizontal\">" + "\r\n" +
+$"                          <TextBlock Text = \"{{Binding Text}}\" VerticalAlignment = \"Center\" />" + "\r\n" +
+$"                      </StackPanel>" + "\r\n" +
+$"                  </HierarchicalDataTemplate>" + "\r\n" +
+$"              </ac:TreeSelect.ItemTemplate>" + "\r\n" +
+$"          </ac:TreeSelect>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.MultiComboBox:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:MultiComboBox ac:CustomeSelectionValues.SelectedValues=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ItemsSource=\"{{ac:ControlBinding {ItemsSource}}}\"  DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.MultiComboBox.Underline}}\"></ac:MultiComboBox>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.IntegerUpDown:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:IntegerUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.NumericUpDown}}\"></ac:IntegerUpDown>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.LongUpDown:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:LongUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.NumericUpDown}}\"></ac:LongUpDown>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.DoubleUpDown:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:DoubleUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.NumericUpDown}}\"></ac:DoubleUpDown>" + "\r\n" +
+"        </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.DecimalUpDown:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:DecimalUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.NumericUpDown}}\"></ac:DecimalUpDown>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.CheckBox:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <CheckBox IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.CheckBox}}\"></CheckBox>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.ToggleButton:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ToggleButton IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.ToggleButton.Switch}}\"></ToggleButton>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case ControlType.Query:
+                case ControlType.Submit:
+                    {
+                        string str =
+$"      <ac:FormItem>" + "\r\n" +
+$"          <Button Content=\"{Header}\" Command=\"{{ac:ControlBinding {GetPath()}}}\" CommandParameter=\"{{ Binding.}}\" Style=\"{{DynamicResource AIStudio.Styles.Button}}\"></Button>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                default: return base.ToString();
+            }
         }
 
     }

@@ -142,50 +142,13 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}" />
+                <Setter Property="Opacity" Value="0.8" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Opacity" Value=".6"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.5"/>
-            </Trigger>
-
-            <Trigger Property="controls:ControlAttach.Status" Value="Light">
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightForegroundBrush}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
-                <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Success">
-                <Setter Property="Background" Value="{DynamicResource SuccessBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Info">
-                <Setter Property="Background" Value="{DynamicResource InfoBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
-                <Setter Property="Background" Value="{DynamicResource WarningBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
-                <Setter Property="Background" Value="{DynamicResource DangerBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
-                <Setter Property="Background" Value="{DynamicResource MaterialDesignToolBackground}" />
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignToolForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>

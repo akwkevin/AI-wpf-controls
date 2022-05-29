@@ -142,51 +142,14 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}" />
+                <Setter Property="Opacity" Value="0.8" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Opacity" Value=".6"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.5"/>
-            </Trigger>
-
-            <Trigger Property="controls:ControlAttach.Status" Value="Light">
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
-                <Setter Property="Background" Value="{DynamicResource Theme.ShowcaseBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Success">
-                <Setter Property="Background" Value="{DynamicResource SuccessBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Info">
-                <Setter Property="Background" Value="{DynamicResource InfoBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
-                <Setter Property="Background" Value="{DynamicResource WarningBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
-                <Setter Property="Background" Value="{DynamicResource DangerBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray8}" />
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
-            </Trigger>
+            </Trigger>          
         </Style.Triggers>
     </Style>
 
@@ -562,10 +525,9 @@
                                             Width="15"
                                             Height="15"
                                             Padding="1"
-                                            controls:IconAttach.Geometry="{StaticResource CloseGeometry}"
                                             controls:IconAttach.Width="9"
                                             controls:IconAttach.Height="9"
-                                            Style="{StaticResource AIStudio.Styles.Button.Window}"/>
+                                            Style="{StaticResource AIStudio.Styles.Button.Window.Close}"/>
                                     </StackPanel>
                                     <ContentPresenter UseLayoutRounding="False"
                                         Margin="{TemplateBinding Padding}"

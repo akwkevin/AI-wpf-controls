@@ -99,7 +99,7 @@ namespace AIStudio.Wpf.Controls
             {
                 titleBar.MouseLeftButtonDown += TitleBar_MouseLeftButtonDown;
             }
-        }  
+        }
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -317,7 +317,7 @@ namespace AIStudio.Wpf.Controls
         }
         #endregion
 
-        #region 弹出对话框
+        #region 弹出对话框(有个DataError初始不显示的bug，暂时先不用了，要是没有数据验证，用也没啥,使用ShowDialogAsync2替代)
         public static event EventHandler<EventArgs> DialogOpened;
         public static event EventHandler<EventArgs> DialogClosed;
 
@@ -327,7 +327,6 @@ namespace AIStudio.Wpf.Controls
             if (win == null) throw new ArgumentNullException(nameof(win));
             return win.ShowDialogAsync(content, animate);
         }
-
 
         /// <summary>
         /// Creates a LoginDialog inside of the current window.
@@ -435,6 +434,7 @@ namespace AIStudio.Wpf.Controls
             metroActiveDialogContainer.Children.Clear();
             await HandleOverlayOnHide(animate);
         }
+
         public Task WaitForLoadAsync(bool animateShow)
         {
             Dispatcher.VerifyAccess();
@@ -577,6 +577,7 @@ namespace AIStudio.Wpf.Controls
 
             return tcs.Task;
         }
+
         public bool IsOverlayVisible()
         {
             if (overlayBox == null) throw new InvalidOperationException("OverlayBox can not be founded in this MetroWindow's template. Are you calling this before the window has loaded?");
@@ -594,6 +595,154 @@ namespace AIStudio.Wpf.Controls
             //overlayBox.Opacity = 0.0;
             overlayBox.SetCurrentValue(Grid.OpacityProperty, 0.0);
             overlayBox.Visibility = System.Windows.Visibility.Hidden;
+        }
+        #endregion
+
+        #region 弹出对话框（伪异步方法推荐）和同步方法
+        public static Task<object> ShowDialogAsync2(BaseDialog content, string windowIdentifier, bool animate = true)
+        {
+            var win = GetWindowBase(windowIdentifier);
+            if (win == null) throw new ArgumentNullException(nameof(win));
+
+            TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
+
+            win.ShowDialog(content, animate,(object res)=> {
+                tcs.TrySetResult(res);
+            });
+
+            return tcs.Task;
+        }
+
+        /// <summary>
+        ///  弹出对话框(同步方法)
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="windowIdentifier"></param>
+        /// <param name="action"></param>
+        /// <param name="animate"></param>
+        public static void ShowDialog(BaseDialog content, string windowIdentifier, Action<object> action, bool animate = true)
+        {
+            var win = GetWindowBase(windowIdentifier);
+            if (win == null) throw new ArgumentNullException(nameof(win));
+            win.ShowDialog(content, animate, action);
+        }
+
+        /// <summary>
+        /// Creates a LoginDialog inside of the current window.
+        /// </summary>
+        /// <param name="window">The window that is the parent of the dialog.</param>
+        /// <param name="title">The title of the LoginDialog.</param>
+        /// <param name="message">The message contained within the LoginDialog.</param>
+        /// <param name="settings">Optional settings that override the global metro dialog settings.</param>
+        /// <returns>The text that was entered or null (Nothing in Visual Basic) if the user cancelled the operation.</returns>
+        public void ShowDialog(BaseDialog dialog, bool animate, Action<object> action)
+        {
+            OverlayOnShow(animate);
+
+            SizeChangedEventHandler sizeHandler = SetupAndOpenDialog(dialog);
+            dialog.SizeChangedHandler = sizeHandler;
+
+            if (DialogOpened != null)
+            {
+                DialogOpened(this, new EventArgs());
+            }
+
+            dialog.WaitForButtonPress((object obj) => 
+                {
+                    if (DialogClosed != null)
+                    {
+                        DialogClosed(this, new EventArgs());
+                    }
+
+                    SizeChanged -= sizeHandler;
+
+                    RemoveDialog(dialog);
+
+                    HandleOverlayOnHide(animate);
+
+                    if (action != null)
+                    {
+                        action(obj);
+                    }
+                });
+        }
+
+        private void OverlayOnShow(bool animateShow)
+        {
+            if (metroActiveDialogContainer.Children.Count == 0)
+            {
+                if (animateShow)
+                {
+                    ShowOverlayAnimate();
+                }
+                else
+                {
+                    ShowOverlay();
+                };
+            }
+        }
+
+        /// <summary>
+        /// Begins to show the MetroWindow's overlay effect.
+        /// </summary>
+        /// <returns>A task representing the process.</returns>
+        public void ShowOverlayAnimate()
+        {
+            if (overlayBox == null) throw new InvalidOperationException("OverlayBox can not be founded in this MetroWindow's template. Are you calling this before the window has loaded?");
+
+            if (IsOverlayVisible() && overlayStoryboard == null)
+            {
+                return;
+            }
+            overlayBox.Visibility = Visibility.Visible;
+
+            var sb = (Storyboard)this.Template.Resources["OverlayFastSemiFadeIn"];
+            sb = sb.Clone();
+            EventHandler completionHandler = null;
+            completionHandler = (sender, args) => {
+                sb.Completed -= completionHandler;
+
+                if (overlayStoryboard == sb)
+                {
+                    overlayStoryboard = null;
+                }
+            };
+
+            sb.Completed += completionHandler;
+            overlayBox.BeginStoryboard(sb);
+            overlayStoryboard = sb;
+        }
+
+        /// <summary>
+        /// Begins to hide the MetroWindow's overlay effect.
+        /// </summary>
+        /// <returns>A task representing the process.</returns>
+        public void HideOverlayAnimate()
+        {
+            if (overlayBox == null) throw new InvalidOperationException("OverlayBox can not be founded in this MetroWindow's template. Are you calling this before the window has loaded?");
+
+            if (overlayBox.Visibility == Visibility.Visible && overlayBox.Opacity == 0.0)
+            {
+                return;
+            }
+
+            var sb = (Storyboard)this.Template.Resources["OverlayFastSemiFadeOut"];
+            sb = sb.Clone();
+
+            EventHandler completionHandler = null;
+            completionHandler = (sender, args) => {
+                sb.Completed -= completionHandler;
+
+                if (overlayStoryboard == sb)
+                {
+                    overlayBox.Visibility = Visibility.Hidden;
+                    overlayStoryboard = null;
+                }
+            };
+
+            sb.Completed += completionHandler;
+            overlayBox.BeginStoryboard(sb);
+            overlayStoryboard = sb;
         }
         #endregion
 

@@ -204,6 +204,7 @@ namespace AIStudio.Wpf.Controls
             if (displayAttr.Length > 0)
             {
                 tb.Text = (displayAttr[0] as DisplayNameAttribute).DisplayName;
+                tb.ToolTip = prop.Name;
             }
             tb.Margin = new Thickness(4);
             Grid.SetColumn(tb, 0);
