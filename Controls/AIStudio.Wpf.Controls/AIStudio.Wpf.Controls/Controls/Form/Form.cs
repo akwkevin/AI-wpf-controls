@@ -348,6 +348,10 @@ namespace AIStudio.Wpf.Controls
             {
                 AddItem(sourceItem);
             }
+            else if (sourceItem.ParentForm != this)
+            {
+                InsertItem(sourceItem, targetItem);
+            }
             else
             {
                 ChangedItem(sourceItem, targetItem);
@@ -399,8 +403,35 @@ namespace AIStudio.Wpf.Controls
                 }
             }
 
-            list.Remove(source);
             list.Add(source);
+        }
+
+        private void InsertItem(FormItem sourceItem, FormItem targetItem)
+        {
+            bool isItemsSource;
+            var list = GetActualList(out isItemsSource);
+            var target = isItemsSource ? targetItem.DataContext : targetItem;
+            int indexTarget = list.IndexOf(target);
+
+            object source;
+            if (isItemsSource)
+            {
+                source = sourceItem.DataContext;
+            }
+            else
+            {
+                if (sourceItem.ParentSelector != this)
+                {
+                    string xaml = System.Windows.Markup.XamlWriter.Save(sourceItem);
+                    source = System.Windows.Markup.XamlReader.Parse(xaml) as FormItem;
+                }
+                else
+                {
+                    source = sourceItem;
+                }
+            }
+
+            list.Insert(indexTarget, source);
         }
 
         internal IList GetActualList(out bool isItemsSource)

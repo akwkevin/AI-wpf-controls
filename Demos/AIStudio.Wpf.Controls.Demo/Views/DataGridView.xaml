@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
              xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
-             xmlns:agc="https://gitee.com/akwkevin/AI-wpf-controls/tree/master/AIStudio.Wpf.GridControls"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -27,16 +26,6 @@
                                 <DataGridTextColumn Header="姓名" CanUserSort="True" SortMemberPath="Name" Binding="{Binding Name}"></DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-
-                        <agc:FilterDataGrid Margin="2" ItemsSource="{Binding DataList0}" CanUserSortColumns="True" AutoGenerateColumns="False" >
-                            <i:Interaction.Behaviors>
-                                <ac:SelectAllBahavior InitialState="False"/>
-                            </i:Interaction.Behaviors>
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="编号" CanUserSort="True" SortMemberPath="Index" Binding="{Binding Index}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="姓名" CanUserSort="True" SortMemberPath="Name" Binding="{Binding Name}"></DataGridTextColumn>
-                            </DataGrid.Columns>
-                        </agc:FilterDataGrid>
 
                         <DataGrid Margin="2" ItemsSource="{Binding DataList0}" CanUserSortColumns="True" AutoGenerateColumns="False" Style="{DynamicResource AIStudio.Styles.DataGrid}">
                             <i:Interaction.Behaviors>

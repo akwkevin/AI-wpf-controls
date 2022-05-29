@@ -175,7 +175,7 @@ namespace AIStudio.Wpf.Controls
         {
             if (Focus())
             {
-                Form parent = ParentListBox;
+                Form parent = ParentForm;
                 if (parent != null)
                 {
                     parent.NotifyListItemClicked(this, mouseButton);
@@ -226,7 +226,7 @@ namespace AIStudio.Wpf.Controls
 
         #region Implementation
 
-        private Form ParentListBox
+        internal Form ParentForm
         {
             get
             {
