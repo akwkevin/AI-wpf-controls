@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AIStudio.Wpf.Controls
 {
-    public enum ControlType
+    public enum FormControlType
     {
         None,
         TextBox,
@@ -13,14 +13,19 @@ namespace AIStudio.Wpf.Controls
         DatePicker,
         TreeSelect,
         MultiComboBox,
-        IntegerUpDown,
+        MultiTreeSelect,
+        CheckBox,
+        ToggleButton,
+
+        IntegerUpDown = 100,
         LongUpDown,
         DoubleUpDown,
         DecimalUpDown,
         DateTimeUpDown,
-        CheckBox,
-        ToggleButton,
-        Query,
-        Submit
+
+        Query = 200,
+        Submit,
+        Add,
+        Delete,
     }
 }

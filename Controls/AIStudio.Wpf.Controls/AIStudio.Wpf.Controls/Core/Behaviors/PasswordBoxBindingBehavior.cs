@@ -211,5 +211,33 @@ namespace AIStudio.Wpf.Controls.Behaviors
         {
             obj.SetValue(RevealedPasswordTextBoxProperty, value);
         }
+
+        /// <summary>
+        /// Gets or sets the Password property on the PasswordBox control. This is a dependency property.
+        /// </summary>
+        public static readonly DependencyProperty IsReadOnlyProperty
+            = DependencyProperty.RegisterAttached(
+                "IsReadOnly",
+                typeof(bool),
+                typeof(PasswordBoxBindingBehavior),
+                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        /// <summary>Helper for getting <see cref="PasswordProperty"/> from <paramref name="dpo"/>.</summary>
+        /// <param name="dpo"><see cref="DependencyObject"/> to read <see cref="PasswordProperty"/> from.</param>
+        /// <returns>Password property value.</returns>
+        [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
+        public static bool GetIsReadOnly(DependencyObject dpo)
+        {
+            return (bool)dpo.GetValue(IsReadOnlyProperty);
+        }
+
+        /// <summary>Helper for setting <see cref="PasswordProperty"/> on <paramref name="dpo"/>.</summary>
+        /// <param name="dpo"><see cref="DependencyObject"/> to set <see cref="PasswordProperty"/> on.</param>
+        /// <param name="value">Password property value.</param>
+        [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
+        public static void SetIsReadOnly(DependencyObject dpo, bool value)
+        {
+            dpo.SetValue(IsReadOnlyProperty, value);
+        }
     }
 }

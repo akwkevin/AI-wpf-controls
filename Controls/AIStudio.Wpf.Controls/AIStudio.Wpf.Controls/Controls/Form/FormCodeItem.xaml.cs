@@ -28,21 +28,21 @@ namespace AIStudio.Wpf.Controls
 
         #region ControlType
         public static readonly DependencyProperty ControlTypeProperty = DependencyProperty.Register(
-            "ControlType", typeof(ControlType), typeof(FormCodeItem), new PropertyMetadata(ControlType.TextBox, OnControlTypeChanged));
+            "ControlType", typeof(FormControlType), typeof(FormCodeItem), new PropertyMetadata(FormControlType.TextBox, OnControlTypeChanged));
 
         private static void OnControlTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is FormCodeItem formCodeItem)
             {
-                formCodeItem.GetControl((ControlType)e.NewValue);
+                formCodeItem.GetControl((FormControlType)e.NewValue);
             }
         }
 
-        public ControlType ControlType
+        public FormControlType ControlType
         {
             get
             {
-                return (ControlType)GetValue(ControlTypeProperty);
+                return (FormControlType)GetValue(ControlTypeProperty);
             }
             set
             {
@@ -110,7 +110,7 @@ namespace AIStudio.Wpf.Controls
         }
 
 
-        private void GetControl(ControlType controlType)
+        private void GetControl(FormControlType controlType)
         {
             if (_contentPresenter == null)
                 return;
@@ -118,7 +118,7 @@ namespace AIStudio.Wpf.Controls
             bool hideHeader = false;
             switch (controlType)
             {
-                case ControlType.TextBox:
+                case FormControlType.TextBox:
                     {
                         _control = new TextBox();
                         if (!string.IsNullOrEmpty(Path))
@@ -132,7 +132,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.ComboBox:
+                case FormControlType.ComboBox:
                     {
                         _control = new ComboBox();
                         if (!string.IsNullOrEmpty(Path))
@@ -148,7 +148,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.PasswordBox:
+                case FormControlType.PasswordBox:
                     {
                         _control = new PasswordBox();
                         if (!string.IsNullOrEmpty(Path))
@@ -162,7 +162,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.DatePicker:
+                case FormControlType.DatePicker:
                     {
                         _control = new DatePicker();
                         if (!string.IsNullOrEmpty(Path))
@@ -176,7 +176,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.TreeSelect:
+                case FormControlType.TreeSelect:
                     {
                         _control = new TreeSelect();
                         if (!string.IsNullOrEmpty(Path))
@@ -200,7 +200,7 @@ namespace AIStudio.Wpf.Controls
                         (_control as TreeSelect).ItemTemplate = dataTemplate;
                         break;
                     }
-                case ControlType.MultiComboBox:
+                case FormControlType.MultiComboBox:
                     {
                         _control = new MultiComboBox();
                         if (!string.IsNullOrEmpty(Path))
@@ -217,7 +217,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.IntegerUpDown:
+                case FormControlType.IntegerUpDown:
                     {
                         _control = new IntegerUpDown();
                         if (!string.IsNullOrEmpty(Path))
@@ -231,7 +231,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.LongUpDown:
+                case FormControlType.LongUpDown:
                     {
                         _control = new LongUpDown();
                         if (!string.IsNullOrEmpty(Path))
@@ -245,7 +245,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.DoubleUpDown:
+                case FormControlType.DoubleUpDown:
                     {
                         _control = new DoubleUpDown();
                         if (!string.IsNullOrEmpty(Path))
@@ -259,7 +259,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.DecimalUpDown:
+                case FormControlType.DecimalUpDown:
                     {
                         _control = new DecimalUpDown();
                         if (!string.IsNullOrEmpty(Path))
@@ -273,7 +273,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.DateTimeUpDown:
+                case FormControlType.DateTimeUpDown:
                     {
                         _control = new DateTimeUpDown();
                         if (!string.IsNullOrEmpty(Path))
@@ -287,7 +287,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.CheckBox:
+                case FormControlType.CheckBox:
                     {
                         _control = new CheckBox();
                         if (!string.IsNullOrEmpty(Path))
@@ -301,7 +301,7 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.ToggleButton:
+                case FormControlType.ToggleButton:
                     {
                         _control = new ToggleButton();
                         if (!string.IsNullOrEmpty(Path))
@@ -315,8 +315,8 @@ namespace AIStudio.Wpf.Controls
                         }
                         break;
                     }
-                case ControlType.Query:
-                case ControlType.Submit:
+                case FormControlType.Query:
+                case FormControlType.Submit:
                     {
                         hideHeader = true;
 
@@ -391,7 +391,7 @@ namespace AIStudio.Wpf.Controls
         {
             switch (ControlType)
             {
-                case ControlType.TextBox:
+                case FormControlType.TextBox:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -399,7 +399,7 @@ $"          <TextBox Text=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigge
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.ComboBox:
+                case FormControlType.ComboBox:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -407,7 +407,7 @@ $"          <ComboBox SelectedValue=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.PasswordBox:
+                case FormControlType.PasswordBox:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -415,7 +415,7 @@ $"          <PasswordBox ac:PasswordBoxBindingBehavior.Password=\"{{Binding {Get
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.DatePicker:
+                case FormControlType.DatePicker:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -423,7 +423,7 @@ $"          <DatePicker SelectedDate=\"{{Binding {GetPath()},Mode=TwoWay,UpdateS
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.TreeSelect:
+                case FormControlType.TreeSelect:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -439,7 +439,7 @@ $"          </ac:TreeSelect>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.MultiComboBox:
+                case FormControlType.MultiComboBox:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -447,7 +447,7 @@ $"          <ac:MultiComboBox ac:CustomeSelectionValues.SelectedValues=\"{{Bindi
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.IntegerUpDown:
+                case FormControlType.IntegerUpDown:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -455,7 +455,7 @@ $"          <ac:IntegerUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.LongUpDown:
+                case FormControlType.LongUpDown:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -463,7 +463,7 @@ $"          <ac:LongUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourc
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.DoubleUpDown:
+                case FormControlType.DoubleUpDown:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -471,7 +471,7 @@ $"          <ac:DoubleUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSou
 "        </ac:FormItem>";
                         return str;
                     }
-                case ControlType.DecimalUpDown:
+                case FormControlType.DecimalUpDown:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -479,7 +479,7 @@ $"          <ac:DecimalUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.CheckBox:
+                case FormControlType.CheckBox:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -487,7 +487,7 @@ $"          <CheckBox IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSource
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.ToggleButton:
+                case FormControlType.ToggleButton:
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
@@ -495,8 +495,8 @@ $"          <ToggleButton IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
 "       </ac:FormItem>";
                         return str;
                     }
-                case ControlType.Query:
-                case ControlType.Submit:
+                case FormControlType.Query:
+                case FormControlType.Submit:
                     {
                         string str =
 $"      <ac:FormItem>" + "\r\n" +

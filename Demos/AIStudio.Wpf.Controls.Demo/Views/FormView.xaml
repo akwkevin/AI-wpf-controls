@@ -50,7 +50,7 @@
                 <ComboBox Margin="2" MinWidth="100" ac:EnumHelper.Enum="{x:Type Orientation}" SelectedItem="{Binding Orientation}" Style="{DynamicResource AIStudio.Styles.ComboBox}"/>
             </ac:FormItem>
             <ac:FormItem Header="可拖拽">
-                <CheckBox Margin="2" MinWidth="100" IsChecked="{Binding AllowDrop}" Style="{DynamicResource AIStudio.Styles.CheckBox}"/>
+                <CheckBox Margin="2" IsChecked="{Binding AllowDrop}" Style="{DynamicResource AIStudio.Styles.CheckBox}"/>
             </ac:FormItem>
             <ac:FormItem >
                 <Button Margin="2" MinWidth="60" Content="查看" Command="{ac:ControlBinding SubmitCommand}" CommandParameter="{Binding .}"

@@ -1209,14 +1209,10 @@
                                                                 Margin="0,0,5,0">
                                                             <Button x:Name="PART_ConfirmButton"
                                                                 Content="确定"
-                                                                Command="{Binding ConfirmCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:FilterDataGrid}}}"
-                                                                Width="75"
-                                                                Height="25" />
+                                                                Command="{Binding ConfirmCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:FilterDataGrid}}}" />
                                                             <Button x:Name="PART_CancelButton"
                                                                 Content="取消"
                                                                 Command="{Binding CancelCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:FilterDataGrid}}}"
-                                                                Width="75"
-                                                                Height="25"
                                                                 Margin="10,0,0,0" />
                                                         </StackPanel>
                                                     </Grid>

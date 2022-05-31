@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Dynamic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
@@ -74,9 +76,17 @@ namespace AIStudio.Wpf.Controls.Behaviors
         private void ItemChecked(object sender, RoutedEventArgs e)
         {
             var item = (sender as CheckBox).DataContext;
-            if (item.GetType().GetProperty("IsChecked") != null)
+            if (item is ExpandoObject keyValuePairs)
             {
-                item.GetType().GetProperty("IsChecked").SetValue(item, true);
+                var dictionary = (IDictionary<string, object>)keyValuePairs;
+                dictionary["IsChecked"] = true;
+            }
+            else
+            {
+                if (item.GetType().GetProperty("IsChecked") != null)
+                {
+                    item.GetType().GetProperty("IsChecked").SetValue(item, true);
+                }
             }
 
             if (CheckAllMode) return;
@@ -98,9 +108,17 @@ namespace AIStudio.Wpf.Controls.Behaviors
         private void ItemUnchecked(object sender, RoutedEventArgs e)
         {
             var item = (sender as CheckBox).DataContext;
-            if (item.GetType().GetProperty("IsChecked") != null)
+            if (item is ExpandoObject keyValuePairs)
             {
-                item.GetType().GetProperty("IsChecked").SetValue(item, false);
+                var dictionary = (IDictionary<string, object>)keyValuePairs;
+                dictionary["IsChecked"] = false;
+            }
+            else
+            {
+                if (item.GetType().GetProperty("IsChecked") != null)
+                {
+                    item.GetType().GetProperty("IsChecked").SetValue(item, false);
+                }
             }
 
             if (CheckAllMode) return;
@@ -161,9 +179,17 @@ namespace AIStudio.Wpf.Controls.Behaviors
             _allcheck.IsThreeState = false;
             foreach (var item in AssociatedObject.ItemsSource)
             {
-                if (item.GetType().GetProperty("IsChecked") != null)
+                if (item is ExpandoObject keyValuePairs)
                 {
-                    item.GetType().GetProperty("IsChecked").SetValue(item, true);
+                    var dictionary = (IDictionary<string, object>)keyValuePairs;
+                    dictionary["IsChecked"] = true;
+                }
+                else
+                {
+                    if (item.GetType().GetProperty("IsChecked") != null)
+                    {
+                        item.GetType().GetProperty("IsChecked").SetValue(item, true);
+                    }
                 }
             }
             CheckAllMode = false;
@@ -176,9 +202,17 @@ namespace AIStudio.Wpf.Controls.Behaviors
             _allcheck.IsThreeState = false;
             foreach (var item in AssociatedObject.ItemsSource)
             {
-                if (item.GetType().GetProperty("IsChecked") != null)
+                if (item is ExpandoObject keyValuePairs)
                 {
-                    item.GetType().GetProperty("IsChecked").SetValue(item, false);
+                    var dictionary = (IDictionary<string, object>)keyValuePairs;
+                    dictionary["IsChecked"] = false;
+                }
+                else
+                {
+                    if (item.GetType().GetProperty("IsChecked") != null)
+                    {
+                        item.GetType().GetProperty("IsChecked").SetValue(item, false);
+                    }
                 }
             }
             CheckAllMode = false;
@@ -189,12 +223,23 @@ namespace AIStudio.Wpf.Controls.Behaviors
             int count = 0;
             foreach (var item in AssociatedObject.ItemsSource)
             {
-                if (item.GetType().GetProperty("IsChecked") != null)
+                if (item is ExpandoObject keyValuePairs)
                 {
-                    var value = (bool)item.GetType().GetProperty("IsChecked").GetValue(item);
-                    if (value)
+                    var dictionary = (IDictionary<string, object>)keyValuePairs;
+                    if ((bool)dictionary["IsChecked"] == true)
                     {
                         count++;
+                    }
+                }
+                else
+                {
+                    if (item.GetType().GetProperty("IsChecked") != null)
+                    {
+                        var value = (bool)item.GetType().GetProperty("IsChecked").GetValue(item);
+                        if (value)
+                        {
+                            count++;
+                        }
                     }
                 }
             }

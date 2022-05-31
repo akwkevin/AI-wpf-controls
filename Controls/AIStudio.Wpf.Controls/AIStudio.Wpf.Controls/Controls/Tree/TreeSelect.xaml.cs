@@ -444,34 +444,36 @@ namespace AIStudio.Wpf.Controls
         private List<object> GenerateMultiObject(System.Collections.IEnumerable items)
         {
             List<object> objs = new List<object>();
-            foreach (var item in items)
+            if (items != null)
             {
-                object obj = null;
-                if (item is ComboBoxItem)//这个还未支持多选，按单选处理
+                foreach (var item in items)
                 {
-                    var msi = item as ComboBoxItem;
-                    if (msi.IsSelected)
+                    object obj = null;
+                    if (item is ComboBoxItem)//这个还未支持多选，按单选处理
                     {
-                        obj = item;
+                        var msi = item as ComboBoxItem;
+                        if (msi.IsSelected)
+                        {
+                            obj = item;
+                        }
                     }
-                }
-                else
-                {
-                    if (item.GetType().GetProperty("IsChecked") != null && item.GetType().GetProperty("IsChecked").GetValue(item, null).ToString() == "True")
+                    else
                     {
-                        obj = item;
+                        if (item.GetType().GetProperty("IsChecked") != null && item.GetType().GetProperty("IsChecked").GetValue(item, null).ToString() == "True")
+                        {
+                            obj = item;
+                        }
                     }
-                }
 
-                if (obj != null)
-                    objs.Add(obj);
+                    if (obj != null)
+                        objs.Add(obj);
 
-                if (item.GetType().GetProperty("Children") != null)
-                {
-                    objs.AddRange(GenerateMultiObject(item.GetType().GetProperty("Children").GetValue(item, null) as System.Collections.IEnumerable));
+                    if (item.GetType().GetProperty("Children") != null)
+                    {
+                        objs.AddRange(GenerateMultiObject(item.GetType().GetProperty("Children").GetValue(item, null) as System.Collections.IEnumerable));
+                    }
                 }
             }
-
             return objs;
         }
 
