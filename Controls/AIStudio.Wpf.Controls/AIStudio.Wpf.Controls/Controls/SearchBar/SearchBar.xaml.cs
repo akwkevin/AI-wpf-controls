@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using AIStudio.Wpf.Controls.Commands;
 using AIStudio.Wpf.Controls.Event;
@@ -51,6 +52,9 @@ namespace AIStudio.Wpf.Controls
 
         private void OnSearchStarted()
         {
+            BindingExpression binding = this.GetBindingExpression(TextBox.TextProperty);
+            binding.UpdateSource();
+
             RaiseEvent(new FunctionEventArgs<string>(SearchStartedEvent, this)
             {
                 Info = Text
