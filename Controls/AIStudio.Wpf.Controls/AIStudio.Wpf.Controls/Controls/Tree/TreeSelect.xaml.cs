@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -48,6 +49,26 @@ namespace AIStudio.Wpf.Controls
         private static void OnSelectedItemsChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             ((TreeSelect)sender).UpdateSelectedItems(e.NewValue as IList, e.OldValue as IList);
+        }
+
+        public IList SelectedValues
+        {
+            get
+            {
+                return (IList)GetValue(SelectedValuesProperty);
+            }
+            set
+            {
+                SetValue(SelectedValuesProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty SelectedValuesProperty =
+            DependencyProperty.Register("SelectedValues", typeof(IList), typeof(TreeSelect), new PropertyMetadata(OnSelectedValuesChanged));
+
+        private static void OnSelectedValuesChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            ((TreeSelect)sender).UpdateSelectedValues(e.NewValue as IList, e.OldValue as IList);
         }
 
         public new string DisplayMemberPath
@@ -204,18 +225,19 @@ namespace AIStudio.Wpf.Controls
             {
                 _interChanged = true;
 
-                if (SelectedItems != null)
+                if (SelectedItems == null)
                 {
-                    SelectedItems.Clear();
-                    foreach (var item in GenerateMultiObject(Items))
-                    {
-                        SelectedItems.Add(item);
-                    }
+                    SelectedItems = new ObservableCollection<object>();
                 }
-                else
+
+                SelectedItems.Clear();
+                foreach (var item in GenerateMultiObject(Items))
                 {
-                    SelectedItems = new ObservableCollection<object>(GenerateMultiObject(Items));
+                    SelectedItems.Add(item);
                 }
+
+                UpdateSelectedItemToValue();
+
                 _interChanged = false;
             }
             else
@@ -296,6 +318,17 @@ namespace AIStudio.Wpf.Controls
 
         private void UpdateSelectedItems(IList newitem, IList olditem)
         {
+            if (_interChanged) return;
+
+            var itemsource = GenerateItemsObject(Items);
+            foreach (var item in itemsource)
+            {
+                if (item != null && item.GetType().GetProperty("IsChecked") != null)
+                {
+                    item.GetType().GetProperty("IsChecked").SetValue(item, false);
+                }
+            }
+
             if (olditem != null)
             {
                 foreach (var item in olditem)
@@ -306,9 +339,10 @@ namespace AIStudio.Wpf.Controls
                     }
                 }
 
-                ((INotifyCollectionChanged)olditem).CollectionChanged -= TreeSelect_CollectionChanged;
+                ((INotifyCollectionChanged)olditem).CollectionChanged -= SelectedItems_CollectionChanged;
             }
 
+            SelectedValues.Clear();
             if (newitem != null)
             {
                 foreach (var item in newitem)
@@ -319,14 +353,100 @@ namespace AIStudio.Wpf.Controls
                     }
                 }
 
-                ((INotifyCollectionChanged)newitem).CollectionChanged += TreeSelect_CollectionChanged;
+                ((INotifyCollectionChanged)newitem).CollectionChanged += SelectedItems_CollectionChanged;
             }
-
+            _interChanged = true;
+            UpdateSelectedItemToValue();
+            _interChanged = false;
             UpdateText();
         }
 
+        private void UpdateSelectedValues(IList newitem, IList olditem)
+        {
+            if (_interChanged) return;
+
+            var itemsource = GenerateItemsObject(Items);
+            foreach (var item in itemsource)
+            {
+                if (item != null && item.GetType().GetProperty("IsChecked") != null)
+                {
+                    item.GetType().GetProperty("IsChecked").SetValue(item, false);
+                }
+            }
+
+            if (olditem != null)
+            {
+                foreach (var item in olditem)
+                {
+                    var uncheckeditem = itemsource.FirstOrDefault(p => object.Equals(p.GetType().GetProperty(SelectedValuePath).GetValue(p, null), item));
+                    if (uncheckeditem != null && uncheckeditem.GetType().GetProperty("IsChecked") != null)
+                    {
+                        uncheckeditem.GetType().GetProperty("IsChecked").SetValue(uncheckeditem, false);
+                    }
+                }
+
+                if (olditem is INotifyCollectionChanged)
+                {
+                    ((INotifyCollectionChanged)olditem).CollectionChanged -= SelectedValues_CollectionChanged;
+                }               
+            }
+
+            if (newitem != null)
+            {
+                foreach (var item in newitem)
+                {
+                    var checkeditem = itemsource.FirstOrDefault(p => object.Equals(p.GetType().GetProperty(SelectedValuePath).GetValue(p, null), item));
+                    if (checkeditem != null && checkeditem.GetType().GetProperty("IsChecked") != null)
+                    {
+                        checkeditem.GetType().GetProperty("IsChecked").SetValue(checkeditem, true);
+                    }
+                }
+
+                if (newitem is INotifyCollectionChanged)
+                {
+                    ((INotifyCollectionChanged)newitem).CollectionChanged += SelectedValues_CollectionChanged;
+                }
+            }
+
+            _interChanged = true;
+            UpdateSelectedValueToItem(itemsource);
+            _interChanged = false;
+            UpdateText();
+        }
+
+        public void UpdateSelectedItemToValue()
+        {
+            if (SelectedValues == null)
+            {
+                SelectedValues = new ObservableCollection<object>();
+            }
+
+            SelectedValues.Clear();
+            foreach (var item in SelectedItems)
+            {
+                SelectedValues.Add(item.GetType().GetProperty(SelectedValuePath).GetValue(item, null));
+            }
+        }
+
+        public void UpdateSelectedValueToItem(List<object> itemsource)
+        {
+            if (SelectedItems == null)
+            {
+                SelectedItems = new ObservableCollection<object>();
+            }
+
+            SelectedItems.Clear();
+            foreach (var item in itemsource)
+            {
+                if (item.GetType().GetProperty("IsChecked") != null && item.GetType().GetProperty("IsChecked").GetValue(item, null).ToString() == "True")
+                {
+                    SelectedItems.Add(item);
+                }                   
+            }
+        }
+
         //主要是外部改变的时候更新数据
-        private void TreeSelect_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void SelectedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (_interChanged) return;
 
@@ -338,6 +458,10 @@ namespace AIStudio.Wpf.Controls
                     {
                         item.GetType().GetProperty("IsCheckedOnlySelf").SetValue(item, true);
                     }
+                    else if (item.GetType().GetProperty("IsChecked") != null)
+                    {
+                        item.GetType().GetProperty("IsChecked").SetValue(item, true);
+                    }
                 }
             }
 
@@ -348,6 +472,57 @@ namespace AIStudio.Wpf.Controls
                     if (item.GetType().GetProperty("IsCheckedOnlySelf") != null)
                     {
                         item.GetType().GetProperty("IsCheckedOnlySelf").SetValue(item, false);
+                    }
+                    else if (item.GetType().GetProperty("IsChecked") != null)
+                    {
+                        item.GetType().GetProperty("IsChecked").SetValue(item, false);
+                    }
+                }
+            }
+
+            UpdateText();
+        }
+
+
+        private void SelectedValues_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (_interChanged) return;
+
+            var itemsource = GenerateItemsObject(Items);
+            if (e.NewItems != null)
+            {
+                foreach (var item in e.NewItems)
+                {
+                    var checkeditem = itemsource.FirstOrDefault(p => object.Equals(p.GetType().GetProperty(SelectedValuePath).GetValue(p, null), item));
+                    if (checkeditem != null)
+                    {
+                        if (checkeditem.GetType().GetProperty("IsCheckedOnlySelf") != null)
+                        {
+                            checkeditem.GetType().GetProperty("IsCheckedOnlySelf").SetValue(checkeditem, true);
+                        }
+                        else if (checkeditem.GetType().GetProperty("IsChecked") != null)
+                        {
+                            checkeditem.GetType().GetProperty("IsChecked").SetValue(checkeditem, true);
+                        }
+                    }
+                }
+            }
+
+            if (e.OldItems != null)
+            {
+                foreach (var item in e.OldItems)
+                {
+                    var uncheckeditem = itemsource.FirstOrDefault(p => object.Equals(p.GetType().GetProperty(SelectedValuePath).GetValue(p, null), item));
+                    if (uncheckeditem != null)
+                    {
+                        if (uncheckeditem.GetType().GetProperty("IsCheckedOnlySelf") != null)
+                        {
+                            uncheckeditem.GetType().GetProperty("IsCheckedOnlySelf").SetValue(uncheckeditem, false);
+                        }
+                        else if (uncheckeditem.GetType().GetProperty("IsChecked") != null)
+                        {
+                            uncheckeditem.GetType().GetProperty("IsChecked").SetValue(uncheckeditem, false);
+                        }
                     }
                 }
             }
@@ -435,7 +610,7 @@ namespace AIStudio.Wpf.Controls
                     else
                         isFirst = false;
 
-                    text += txt;                  
+                    text += txt;
                 }
             }
             return text;
@@ -477,6 +652,25 @@ namespace AIStudio.Wpf.Controls
             return objs;
         }
 
+        private List<object> GenerateItemsObject(System.Collections.IEnumerable items)
+        {
+            List<object> objs = new List<object>();
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    if (item != null)
+                        objs.Add(item);
+
+                    if (item.GetType().GetProperty("Children") != null)
+                    {
+                        objs.AddRange(GenerateMultiObject(item.GetType().GetProperty("Children").GetValue(item, null) as System.Collections.IEnumerable));
+                    }
+                }
+            }
+            return objs;
+        }
+
         public object GetTreeModel(IList trees, object id)
         {
             object treemodel = null;
@@ -497,7 +691,7 @@ namespace AIStudio.Wpf.Controls
                             treemodel = GetTreeModel(children, id);
                             if (treemodel != null)
                                 break;
-                        }                        
+                        }
                     }
                 }
             }
