@@ -220,18 +220,12 @@ namespace AIStudio.Wpf.Controls
             var styleNameAttr = prop.GetCustomAttributes(typeof(StyleNameAttribute), true);
             if (styleNameAttr.Length > 0)
             {
-                style = this.FindResource((styleNameAttr[0] as StyleNameAttribute).Name) as Style;
-                if (style != null)
-                {
-                    ContentControl content = new ContentControl();
-                    content.Style = style;
-                    content.DataContext = SelectedObject;
-
-                    Grid.SetColumn(content, 1);
-                    Grid.SetRow(content, _grid.RowDefinitions.Count - 1);
-
-                    _grid.Children.Add(content);
-                }
+                style = this.TryFindResource((styleNameAttr[0] as StyleNameAttribute).Name) as Style;
+               
+            }
+            else
+            {
+                style = this.TryFindResource(prop.Name + "Style") as Style;
             }
 
             if (style == null)
@@ -259,6 +253,17 @@ namespace AIStudio.Wpf.Controls
                 Validation.SetErrorTemplate(ed, template);
 
                 _grid.Children.Add(ed);
+            }
+            else
+            {
+                ContentControl content = new ContentControl();
+                content.Style = style;
+                content.DataContext = SelectedObject;
+
+                Grid.SetColumn(content, 1);
+                Grid.SetRow(content, _grid.RowDefinitions.Count - 1);
+
+                _grid.Children.Add(content);
             }
         }
 

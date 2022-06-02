@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.GridControls",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.GridControls.Demo", "Demos\AIStudio.Wpf.GridControls.Demo\AIStudio.Wpf.GridControls.Demo.csproj", "{DCECB5D8-16ED-47BF-A817-2C200AABD623}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.Wall3D", "Controls\AIStudio.Wpf.Wall3D\AIStudio.Wpf.Wall3D.csproj", "{511E29B0-E4BD-4C23-A942-3C4F6C494B10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{DCECB5D8-16ED-47BF-A817-2C200AABD623}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCECB5D8-16ED-47BF-A817-2C200AABD623}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCECB5D8-16ED-47BF-A817-2C200AABD623}.Release|Any CPU.Build.0 = Release|Any CPU
+		{511E29B0-E4BD-4C23-A942-3C4F6C494B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{511E29B0-E4BD-4C23-A942-3C4F6C494B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{511E29B0-E4BD-4C23-A942-3C4F6C494B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{511E29B0-E4BD-4C23-A942-3C4F6C494B10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{138A6020-8E95-4D42-A8F1-92169B94FA13} = {72A4E17E-1F5A-4324-9492-2CD44BEE3855}
 		{AB42F6D8-5151-49C9-95AB-AB50B15479A1} = {3D54C8D2-F15E-4BD8-8579-904AF5D4A5E7}
 		{DCECB5D8-16ED-47BF-A817-2C200AABD623} = {72A4E17E-1F5A-4324-9492-2CD44BEE3855}
+		{511E29B0-E4BD-4C23-A942-3C4F6C494B10} = {3D54C8D2-F15E-4BD8-8579-904AF5D4A5E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {38918B9E-D567-458D-8EE0-3A82F3D0C27F}

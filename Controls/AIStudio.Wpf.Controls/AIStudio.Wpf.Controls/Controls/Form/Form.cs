@@ -47,7 +47,7 @@ namespace AIStudio.Wpf.Controls
 
         #region AttachedProperty : HeaderMarginProperty
         public static readonly DependencyProperty HeaderMarginProperty
-            = DependencyProperty.RegisterAttached("HeaderMargin", typeof(Thickness), typeof(Form), new FrameworkPropertyMetadata(new Thickness(0,0,3,0), FrameworkPropertyMetadataOptions.Inherits));
+            = DependencyProperty.RegisterAttached("HeaderMargin", typeof(Thickness), typeof(Form), new FrameworkPropertyMetadata(new Thickness(0, 0, 3, 0), FrameworkPropertyMetadataOptions.Inherits));
 
         public static Thickness GetHeaderMargin(DependencyObject element) => (Thickness)element.GetValue(HeaderMarginProperty);
         public static void SetHeaderMargin(DependencyObject element, Thickness value) => element.SetValue(HeaderMarginProperty, value);
@@ -61,8 +61,16 @@ namespace AIStudio.Wpf.Controls
         public static void SetBodyMargin(DependencyObject element, Thickness value) => element.SetValue(BodyMarginProperty, value);
         #endregion
 
+        //#region AttachedProperty : ItemHeightProperty
+        //public static readonly DependencyProperty ItemHeightProperty
+        //    = DependencyProperty.RegisterAttached("ItemHeight", typeof(double), typeof(Form), new FrameworkPropertyMetadata(double.NaN, FrameworkPropertyMetadataOptions.Inherits));
+
+        //public static double GetItemHeight(DependencyObject element) => (double)element.GetValue(ItemHeightProperty);
+        //public static void SetItemHeight(DependencyObject element, double value) => element.SetValue(ItemHeightProperty, value);
+        //#endregion
+
         public static readonly DependencyProperty IsReadOnlyProperty =
-            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(Form));
+            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(Form), new FrameworkPropertyMetadata(true));
         public bool IsReadOnly
         {
             get
@@ -139,10 +147,85 @@ namespace AIStudio.Wpf.Controls
             return ((int)value) > 0;
         }
 
-        //static Form()
-        //{
-        //    DefaultStyleKeyProperty.OverrideMetadata(typeof(Form), new FrameworkPropertyMetadata(typeof(Form), FrameworkPropertyMetadataOptions.Inherits));
-        //}
+        public static readonly DependencyProperty PanelTypeProperty =
+          DependencyProperty.Register("PanelType", typeof(FormPanelType), typeof(Form), new PropertyMetadata(FormPanelType.StackPanel, OnPanelTypeChanged));
+
+        public FormPanelType PanelType
+        {
+            get
+            {
+                return (FormPanelType)GetValue(PanelTypeProperty);
+            }
+            set
+            {
+                SetValue(PanelTypeProperty, value);
+            }
+        }
+
+        private static void OnPanelTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Form form)
+            {
+                ItemsPanelTemplate panel = new ItemsPanelTemplate();
+                if ((FormPanelType)e.NewValue == FormPanelType.StackPanel)
+                {
+                    FrameworkElementFactory factory = new FrameworkElementFactory(typeof(StackPanel));
+                    factory.SetValue(StackPanel.OrientationProperty, Orientation.Vertical);
+                    panel.VisualTree = factory;
+                }
+                else if ((FormPanelType)e.NewValue == FormPanelType.WrapPanel)
+                {
+                    FrameworkElementFactory factory = new FrameworkElementFactory(typeof(WrapPanel));
+                    panel.VisualTree = factory;
+                }
+                else if ((FormPanelType)e.NewValue == FormPanelType.UniformGrid)
+                {
+                    FrameworkElementFactory factory = new FrameworkElementFactory(typeof(UniformGridEx));
+                    factory.SetValue(UniformGridEx.ColumnsProperty, form.PanelColumns);
+                    factory.SetValue(UniformGridEx.VerticalAlignmentProperty, VerticalAlignment.Top);
+                    panel.VisualTree = factory;
+                }
+
+                form.ItemsPanel = panel;
+            }
+
+        }
+
+        public static readonly DependencyProperty PanelColumnsProperty =
+          DependencyProperty.Register("PanelColumns", typeof(int), typeof(Form), new PropertyMetadata(3, OnPanelColumnsChanged), new ValidateValueCallback(IsPanelColumnsValid));
+
+        public int PanelColumns
+        {
+            get
+            {
+                return (int)GetValue(PanelColumnsProperty);
+            }
+            set
+            {
+                SetValue(PanelColumnsProperty, value);
+            }
+        }
+
+        private static void OnPanelColumnsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Form form)
+            {               
+                if (form.PanelType == FormPanelType.UniformGrid)
+                {
+                    ItemsPanelTemplate panel = new ItemsPanelTemplate();
+                    FrameworkElementFactory factory = new FrameworkElementFactory(typeof(UniformGridEx));
+                    factory.SetValue(UniformGridEx.ColumnsProperty, form.PanelColumns);
+                    factory.SetValue(UniformGridEx.VerticalAlignmentProperty, VerticalAlignment.Top);
+                    panel.VisualTree = factory;
+                    form.ItemsPanel = panel;
+                }               
+            }
+        }
+
+        private static bool IsPanelColumnsValid(object value)
+        {
+            return ((int)value) > 0;
+        }
 
         public Form()
         {
@@ -155,13 +238,16 @@ namespace AIStudio.Wpf.Controls
 
         internal void NotifyListItemClicked(FormItem item, MouseButton mouseButton)
         {
+            if (IsReadOnly == true)
+                return;
+
             if (!item.IsSelected)
             {
                 item.SetCurrentValue(IsSelectedProperty, true);
             }
             else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                item.SetCurrentValue(IsSelectedProperty,false);
+                item.SetCurrentValue(IsSelectedProperty, false);
             }
 
             if (item.IsSelected)
@@ -182,7 +268,7 @@ namespace AIStudio.Wpf.Controls
         private FormItem _dragItem;
 
 
-      /// <summary>
+        /// <summary>
         /// This is the method that responds to the MouseButtonEvent event.
         /// </summary>
         /// <param name="e"></param>
@@ -223,7 +309,7 @@ namespace AIStudio.Wpf.Controls
 
             _dragItem = null;
             StopTimer();
-            
+
         }
 
         /// <summary>
@@ -272,7 +358,7 @@ namespace AIStudio.Wpf.Controls
                 DragDrop.DoDragDrop(this, _dragItem, DragDropEffects.Move);
                 _dragItem = null;
             }
-            
+
         }
 
         /// <summary>
@@ -424,6 +510,8 @@ namespace AIStudio.Wpf.Controls
                 {
                     string xaml = System.Windows.Markup.XamlWriter.Save(sourceItem);
                     source = System.Windows.Markup.XamlReader.Parse(xaml) as FormItem;
+                    if (source is FormItem item)
+                        item.IsSelected = false;
                 }
                 else
                 {
@@ -432,6 +520,30 @@ namespace AIStudio.Wpf.Controls
             }
 
             list.Insert(indexTarget, source);
+        }
+
+        public void CopySelectItem()
+        {
+            if (SelectedItem == null)
+                return;
+
+            bool isItemsSource;
+            var list = GetActualList(out isItemsSource);
+
+            object source;
+            if (isItemsSource)
+            {
+                source = SelectedItem;
+            }
+            else
+            {
+                string xaml = System.Windows.Markup.XamlWriter.Save(SelectedItem);
+                source = System.Windows.Markup.XamlReader.Parse(xaml) as FormItem;
+                if (source is FormItem item)
+                    item.IsSelected = false;
+            }
+
+            list.Add(source);
         }
 
         internal IList GetActualList(out bool isItemsSource)

@@ -515,8 +515,8 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
             }
         }
 
-        private int _panelType;
-        public int PanelType
+        private FormPanelType _panelType;
+        public FormPanelType PanelType
         {
             get
             {

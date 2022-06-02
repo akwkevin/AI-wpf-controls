@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Media;
 using AIStudio.Wpf.Controls.Behaviors;
 using AIStudio.Wpf.Controls.Bindings;
 using AIStudio.Wpf.Controls.Converter;
@@ -38,6 +39,7 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
+        [DisplayName("控件类型")]
         public FormControlType ControlType
         {
             get
@@ -65,6 +67,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         [Browsable(true)]
+        [DisplayName("属性名")]
         public string Path
         {
             get
@@ -91,6 +94,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         [Browsable(true)]
+        [DisplayName("绑定集合")]
         public string ItemsSource
         {
             get
@@ -101,6 +105,37 @@ namespace AIStudio.Wpf.Controls
             {
                 SetValue(ItemsSourceProperty, value);
             }
+        }
+        #endregion
+
+        #region Span
+        public static readonly DependencyProperty SpanProperty = DependencyProperty.Register(
+            "Span", typeof(int), typeof(FormCodeItem), new PropertyMetadata(1, OnSpanChanged), new ValidateValueCallback(IsSpanValid));
+
+        private static void OnSpanChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is FormCodeItem formCodeItem)
+            {
+                formCodeItem.SetValue(UniformGridEx.SpanProperty, formCodeItem.Span);
+            }
+        }
+
+        [Browsable(true)]
+        public int Span
+        {
+            get
+            {
+                return (int)GetValue(SpanProperty);
+            }
+            set
+            {
+                SetValue(SpanProperty, value);
+            }
+        }
+
+        private static bool IsSpanValid(object value)
+        {
+            return ((int)value) > 0;
         }
         #endregion
 
@@ -120,7 +155,7 @@ namespace AIStudio.Wpf.Controls
             {
                 case FormControlType.TextBox:
                     {
-                        _control = new TextBox();
+                        _control = new TextBox() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -134,7 +169,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.ComboBox:
                     {
-                        _control = new ComboBox();
+                        _control = new ComboBox() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -142,15 +177,15 @@ namespace AIStudio.Wpf.Controls
                             binding.ValidatesOnExceptions = true;
                             binding.ValidatesOnDataErrors = true;
                             binding.NotifyOnValidationError = true;
-                            _control.SetBinding(ComboBox.SelectedValueProperty, binding);
-                            _control.SetValue(ComboBox.DisplayMemberPathProperty, "Text");
-                            _control.SetValue(ComboBox.SelectedValuePathProperty, "Value");
+                            _control.SetBinding(ComboBox.SelectedValueProperty, binding);                
                         }
+                        _control.SetValue(ComboBox.DisplayMemberPathProperty, "Text");
+                        _control.SetValue(ComboBox.SelectedValuePathProperty, "Value");
                         break;
                     }
                 case FormControlType.PasswordBox:
                     {
-                        _control = new PasswordBox();
+                        _control = new PasswordBox() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -164,7 +199,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.DatePicker:
                     {
-                        _control = new DatePicker();
+                        _control = new DatePicker() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -178,7 +213,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.TreeSelect:
                     {
-                        _control = new TreeSelect();
+                        _control = new TreeSelect() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -187,10 +222,11 @@ namespace AIStudio.Wpf.Controls
                             binding.ValidatesOnExceptions = true;
                             binding.ValidatesOnDataErrors = true;
                             binding.NotifyOnValidationError = true;
-                            _control.SetBinding(TreeSelect.SelectedValueProperty, binding);
-                            _control.SetValue(TreeSelect.DisplayMemberPathProperty, "Text");
-                            _control.SetValue(TreeSelect.SelectedValuePathProperty, "Value");
+                            _control.SetBinding(TreeSelect.SelectedValueProperty, binding);   
                         }
+                        _control.SetValue(TreeSelect.DisplayMemberPathProperty, "Text");
+                        _control.SetValue(TreeSelect.SelectedValuePathProperty, "Value");
+
                         var dataTemplate = new HierarchicalDataTemplate();
                         dataTemplate.ItemsSource = new Binding("Children");
                         FrameworkElementFactory fef = new FrameworkElementFactory(typeof(TextBlock));
@@ -202,7 +238,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.MultiComboBox:
                     {
-                        _control = new MultiComboBox();
+                        _control = new MultiComboBox() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -211,15 +247,52 @@ namespace AIStudio.Wpf.Controls
                             binding.ValidatesOnExceptions = true;
                             binding.ValidatesOnDataErrors = true;
                             binding.NotifyOnValidationError = true;
-                            _control.SetBinding(CustomeSelectionValues.SelectedValuesProperty, binding);
-                            _control.SetValue(ComboBox.DisplayMemberPathProperty, "Text");
-                            _control.SetValue(ComboBox.SelectedValuePathProperty, "Value");
+                            _control.SetBinding(CustomeSelectionValues.SelectedValuesProperty, binding);                         
                         }
+                        _control.SetValue(ComboBox.DisplayMemberPathProperty, "Text");
+                        _control.SetValue(ComboBox.SelectedValuePathProperty, "Value");
+                        break;
+                    }
+                case FormControlType.MultiTreeSelect:
+                    {
+                        _control = new TreeSelect() { Background = Brushes.Transparent, IsMulti = true };
+
+                        if (!string.IsNullOrEmpty(Path))
+                        {
+                            Binding binding = new Binding(Path);
+                            binding.Mode = BindingMode.TwoWay;
+                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                            binding.ValidatesOnExceptions = true;
+                            binding.ValidatesOnDataErrors = true;
+                            binding.NotifyOnValidationError = true;
+                            _control.SetBinding(TreeSelect.SelectedValuesProperty, binding);
+                        }
+                        _control.SetValue(TreeSelect.DisplayMemberPathProperty, "Text");
+                        _control.SetValue(TreeSelect.SelectedValuePathProperty, "Value");
+
+                        var dataTemplate = new HierarchicalDataTemplate();
+                        dataTemplate.ItemsSource = new Binding("Children");
+                        FrameworkElementFactory fef = new FrameworkElementFactory(typeof(StackPanel));
+                        fef.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+
+                        FrameworkElementFactory checkbox_fef = new FrameworkElementFactory(typeof(CheckBox));
+                        fef.AppendChild(checkbox_fef);
+                        Binding checkbox_bind = new Binding("IsChecked");
+                        checkbox_fef.SetBinding(CheckBox.IsCheckedProperty, checkbox_bind);
+
+                        FrameworkElementFactory textblock_fef = new FrameworkElementFactory(typeof(TextBlock));
+                        fef.AppendChild(textblock_fef);                        
+                        Binding textblock_bind = new Binding("Text");
+                        textblock_fef.SetBinding(TextBlock.TextProperty, textblock_bind);
+                        textblock_fef.SetValue(TextBlock.MarginProperty, new Thickness(2,0,0,0));
+
+                        dataTemplate.VisualTree = fef;
+                        (_control as TreeSelect).ItemTemplate = dataTemplate;
                         break;
                     }
                 case FormControlType.IntegerUpDown:
                     {
-                        _control = new IntegerUpDown();
+                        _control = new IntegerUpDown() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -233,7 +306,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.LongUpDown:
                     {
-                        _control = new LongUpDown();
+                        _control = new LongUpDown() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -247,7 +320,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.DoubleUpDown:
                     {
-                        _control = new DoubleUpDown();
+                        _control = new DoubleUpDown() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -261,7 +334,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.DecimalUpDown:
                     {
-                        _control = new DecimalUpDown();
+                        _control = new DecimalUpDown() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -275,7 +348,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.DateTimeUpDown:
                     {
-                        _control = new DateTimeUpDown();
+                        _control = new DateTimeUpDown() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -289,7 +362,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.CheckBox:
                     {
-                        _control = new CheckBox();
+                        _control = new CheckBox() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -303,7 +376,7 @@ namespace AIStudio.Wpf.Controls
                     }
                 case FormControlType.ToggleButton:
                     {
-                        _control = new ToggleButton();
+                        _control = new ToggleButton() { Background = Brushes.Transparent };
                         if (!string.IsNullOrEmpty(Path))
                         {
                             Binding binding = new Binding(Path);
@@ -348,6 +421,8 @@ namespace AIStudio.Wpf.Controls
                 _control.SetCurrentValue(ControlAttach.ClearTextButtonProperty, true);
                 _contentPresenter.Content = _control;
             }
+
+            SetItemsSource(ItemsSource);
         }
 
         private void SetItemsSource(string itemsSource)
@@ -379,7 +454,7 @@ namespace AIStudio.Wpf.Controls
             _header = GetTemplateChild(PART_Header) as ContentPresenter;
 
             GetControl(ControlType);
-            SetItemsSource(ItemsSource);
+     
         }
 
         private string GetPath()

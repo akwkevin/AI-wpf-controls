@@ -25,11 +25,7 @@
                 </ItemsPanelTemplate>
             </ac:Form.ItemsPanel>
             <ac:FormItem Header="布局">
-                <ComboBox Margin="2" MinWidth="100" SelectedIndex="{Binding PanelType}" Style="{DynamicResource AIStudio.Styles.ComboBox}">
-                    <ComboBoxItem Content="StackPanel" IsSelected="True"/>
-                    <ComboBoxItem Content="WrapPanel"/>
-                    <ComboBoxItem Content="UniformGrid"/>
-                </ComboBox>
+                <ComboBox Margin="2" MinWidth="100" ac:EnumHelper.Enum="{x:Type ac:FormPanelType}" SelectedItem="{Binding PanelType}" Style="{DynamicResource AIStudio.Styles.ComboBox}"/>
             </ac:FormItem>
             <ac:FormItem Header="标题长度">
                 <TextBox Margin="2" MinWidth="100" Text="{Binding HeaderWidth}" ac:TextBoxAttach.EnterUpdateSource="True" Style="{DynamicResource AIStudio.Styles.TextBox}"/>
@@ -60,18 +56,20 @@
         <TabControl Grid.Row="1" Style="{DynamicResource AIStudio.Styles.TabControl}" >
             <TabItem Header="FormItem">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <Grid VerticalAlignment="Top">
-                        <ac:Form Orientation="{ac:ControlBinding FormSetting.Orientation}" 
-                                     HeaderWidth="{ac:ControlBinding FormSetting.HeaderWidth, Converter={StaticResource GridLengthAutoConverter}}" 
-                                     BodyWidth="{ac:ControlBinding FormSetting.BodyWidth, Converter={StaticResource GridLengthAutoConverter}}" 
-                                     ItemMargin="{ac:ControlBinding FormSetting.ItemMargin}"
-                                     AllowDrop="{ac:ControlBinding FormSetting.AllowDrop}"
-                                     DataContext="{Binding Base_User}"
-                                     Margin="2">
+                    <Grid>
+                        <ac:Form x:Name="form" 
+                            VerticalAlignment="Top"
+                            Orientation="{ac:ControlBinding FormSetting.Orientation}" 
+                            HeaderWidth="{ac:ControlBinding FormSetting.HeaderWidth, Converter={StaticResource GridLengthAutoConverter}}" 
+                            BodyWidth="{ac:ControlBinding FormSetting.BodyWidth, Converter={StaticResource GridLengthAutoConverter}}" 
+                            ItemMargin="{ac:ControlBinding FormSetting.ItemMargin}"
+                            AllowDrop="{ac:ControlBinding FormSetting.AllowDrop}"
+                            DataContext="{Binding Base_User}"
+                            Margin="2">
                             <ac:Form.Style>
                                 <Style TargetType="{x:Type ac:Form}">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="0">
+                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="StackPanel">
                                             <Setter Property="ItemsPanel">
                                                 <Setter.Value>
                                                     <ItemsPanelTemplate>
@@ -80,7 +78,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="1">
+                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="WrapPanel">
                                             <Setter Property="ItemsPanel">
                                                 <Setter.Value>
                                                     <ItemsPanelTemplate>
@@ -89,7 +87,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="2">
+                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="UniformGrid">
                                             <Setter Property="ItemsPanel">
                                                 <Setter.Value>
                                                     <ItemsPanelTemplate>
@@ -131,7 +129,7 @@
                                             Style="{DynamicResource AIStudio.Styles.TreeSelect.Underline}">
                                     <ac:TreeSelect.ItemTemplate>
                                         <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                                            <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Left" >
+                                            <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{Binding Text}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                             </StackPanel>
                                         </HierarchicalDataTemplate>
@@ -175,18 +173,20 @@
             </TabItem>
             <TabItem Header="FormCodeItem">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <Grid VerticalAlignment="Top">
-                        <ac:Form Orientation="{ac:ControlBinding FormSetting.Orientation}" 
-                                     HeaderWidth="{ac:ControlBinding FormSetting.HeaderWidth, Converter={StaticResource GridLengthAutoConverter}}" 
-                                     BodyWidth="{ac:ControlBinding FormSetting.BodyWidth, Converter={StaticResource GridLengthAutoConverter}}" 
-                                     ItemMargin="{ac:ControlBinding FormSetting.ItemMargin}"
-                                     AllowDrop="{ac:ControlBinding FormSetting.AllowDrop}"
-                                     DataContext="{Binding Base_User2}"
-                                     Margin="2">
+                    <Grid>
+                        <ac:Form 
+                            VerticalAlignment="Top"
+                            Orientation="{ac:ControlBinding FormSetting.Orientation}"                                  
+                            HeaderWidth="{ac:ControlBinding FormSetting.HeaderWidth, Converter={StaticResource GridLengthAutoConverter}}" 
+                            BodyWidth="{ac:ControlBinding FormSetting.BodyWidth, Converter={StaticResource GridLengthAutoConverter}}" 
+                            ItemMargin="{ac:ControlBinding FormSetting.ItemMargin}"
+                            AllowDrop="{ac:ControlBinding FormSetting.AllowDrop}"
+                            DataContext="{Binding Base_User2}"
+                            Margin="2">
                             <ac:Form.Style>
                                 <Style TargetType="{x:Type ac:Form}">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="0">
+                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="StackPanel">
                                             <Setter Property="ItemsPanel">
                                                 <Setter.Value>
                                                     <ItemsPanelTemplate>
@@ -195,7 +195,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="1">
+                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="WrapPanel">
                                             <Setter Property="ItemsPanel">
                                                 <Setter.Value>
                                                     <ItemsPanelTemplate>
@@ -204,7 +204,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="2">
+                                        <DataTrigger Binding="{Binding DataContext.FormSetting.PanelType,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="UniformGrid">
                                             <Setter Property="ItemsPanel">
                                                 <Setter.Value>
                                                     <ItemsPanelTemplate>

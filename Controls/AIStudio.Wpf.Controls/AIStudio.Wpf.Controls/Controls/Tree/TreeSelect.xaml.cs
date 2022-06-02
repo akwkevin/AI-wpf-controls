@@ -421,10 +421,13 @@ namespace AIStudio.Wpf.Controls
                 SelectedValues = new ObservableCollection<object>();
             }
 
-            SelectedValues.Clear();
-            foreach (var item in SelectedItems)
+            if (SelectedValues != null)
             {
-                SelectedValues.Add(item.GetType().GetProperty(SelectedValuePath).GetValue(item, null));
+                SelectedValues.Clear();
+                foreach (var item in SelectedItems)
+                {
+                    SelectedValues.Add(item.GetType().GetProperty(SelectedValuePath).GetValue(item, null));
+                }
             }
         }
 

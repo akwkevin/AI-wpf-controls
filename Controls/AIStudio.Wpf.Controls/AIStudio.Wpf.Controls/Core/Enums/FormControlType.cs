@@ -24,6 +24,14 @@ namespace AIStudio.Wpf.Controls
         CheckBox,
         [Description("开关框")]
         ToggleButton,
+        [Description("富文本框")]
+        RichTextBox, 
+        [Description("文件上传")]
+        UploadFile,
+        [Description("图片上传")]
+        UploadImage,
+        [Description("表格")]
+        DataGrid,
 
         [Description("Int数值")]
         IntegerUpDown = 100,

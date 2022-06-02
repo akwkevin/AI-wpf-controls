@@ -13,29 +13,31 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Text}"/>
         <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
-        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(controls:Form.ItemMargin)}"/>
+        <Setter Property="Padding" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(controls:Form.ItemMargin)}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:FormItem}">
-                    <Grid Background="{TemplateBinding Background}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />
-                            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyWidth)}" />
-                        </Grid.ColumnDefinitions>
-                        <ContentPresenter x:Name="PART_Header"
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />
+                                <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyWidth)}" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter x:Name="PART_Header"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 ContentSource="Header" 
                                 TextElement.Foreground="{TemplateBinding Foreground}"
                                 Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>
-                        <ContentPresenter
+                            <ContentPresenter
                                 x:Name="PART_ContentPresenter"
                                 Grid.Column="1"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center"
                                 ContentSource="Content"
                                 Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyMargin)}"/>
-                    </Grid>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -44,28 +46,34 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type controls:FormItem}">
-                            <Grid Background="{TemplateBinding Background}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />
-                                    <RowDefinition Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyWidth)}" />
-                                </Grid.RowDefinitions>
-                                <ContentPresenter x:Name="PART_Header"
+                            <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                                <Grid >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />
+                                        <RowDefinition Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyWidth)}" />
+                                    </Grid.RowDefinitions>
+                                    <ContentPresenter x:Name="PART_Header"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     ContentSource="Header" 
                                     TextElement.Foreground="{TemplateBinding Foreground}"
                                     Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderMargin)}"/>
-                                <ContentPresenter 
+                                    <ContentPresenter 
                                     x:Name="PART_ContentPresenter"
                                     Grid.Row="1"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     ContentSource="Content"
                                     Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.BodyMargin)}"/>
-                            </Grid>
+                                </Grid>
+                            </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Trigger>
+
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray8}" />
             </Trigger>
 
             <Trigger Property="controls:ControlAttach.Status" Value="Light">
