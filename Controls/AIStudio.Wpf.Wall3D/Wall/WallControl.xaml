@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:wall="clr-namespace:AIStudio.Wpf.Wall3D.Wall">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Util.3DWall;component/Wall/WallItem.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="WallControlStyle" TargetType="{x:Type wall:WallControl}" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type wall:WallControl}">
+                    <Grid>
+                        <Grid x:Name="PART_3dgrid">
+                            <Viewport3D x:Name="PART_viewport3d"  RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased">
+                                <Viewport3D.Camera>
+                                    <PerspectiveCamera x:Name="PART_camera"  LookDirection="0,0,-1" UpDirection="0,1,0"  Position="0,18,60" FieldOfView="60">
+                                        <PerspectiveCamera.Transform>
+                                            <Transform3DGroup >
+                                                <TranslateTransform3D x:Name="PART_camTrans" />
+                                                <ScaleTransform3D x:Name="PART_camScale" />
+                                                <RotateTransform3D>
+                                                    <RotateTransform3D.Rotation>
+                                                        <AxisAngleRotation3D x:Name="PART_camRotation" Axis="0,1,0" Angle="0" />
+                                                    </RotateTransform3D.Rotation>
+                                                </RotateTransform3D>
+                                            </Transform3DGroup>
+                                        </PerspectiveCamera.Transform>
+                                    </PerspectiveCamera>
+                                </Viewport3D.Camera>
+                                <!--灯光-->
+                                <ModelVisual3D>
+                                    <ModelVisual3D.Content>
+                                        <AmbientLight Color="White"/>
+                                    </ModelVisual3D.Content>
+                                </ModelVisual3D>
+                                <ModelVisual3D>
+                                    <ModelVisual3D.Content>
+                                        <DirectionalLight Color="White"/>
+                                    </ModelVisual3D.Content>
+                                </ModelVisual3D>
+
+                            </Viewport3D>
+                        </Grid>
+                        <Grid x:Name="_grid" Visibility="Collapsed">
+                            <Rectangle Fill="AliceBlue" x:Name="_rec" Height="1080" Width="1920" Opacity=".3" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource WallControlStyle}" TargetType="{x:Type wall:WallControl}" />
+</ResourceDictionary>
