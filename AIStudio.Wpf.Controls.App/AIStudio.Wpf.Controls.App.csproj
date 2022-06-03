@@ -16,6 +16,7 @@
     <ProjectReference Include="..\Demos\AIStudio.Wpf.GridControls.Demo\AIStudio.Wpf.GridControls.Demo.csproj" />
     <ProjectReference Include="..\Demos\AIStudio.Wpf.MDIContainer.Demo\AIStudio.Wpf.MDIContainer.Demo.csproj" />
     <ProjectReference Include="..\Demos\AIStudio.Wpf.Panels.Demo\AIStudio.Wpf.Panels.Demo.csproj" />
+    <ProjectReference Include="..\Demos\AIStudio.Wpf.Wall3D.Demo\AIStudio.Wpf.Wall3D.Demo.csproj" />
   </ItemGroup>
 
   <ItemGroup>

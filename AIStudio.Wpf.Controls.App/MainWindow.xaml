@@ -8,6 +8,7 @@
         xmlns:mdiContainerDemo="clr-namespace:AIStudio.Wpf.MDIContainer.Demo;assembly=AIStudio.Wpf.MDIContainer.Demo" 
         xmlns:panelsDemo="clr-namespace:AIStudio.Wpf.Panels.Demo;assembly=AIStudio.Wpf.Panels.Demo"
         xmlns:gridControlDemo="clr-namespace:AIStudio.Wpf.GridControls.Demo;assembly=AIStudio.Wpf.GridControls.Demo"
+        xmlns:wall3dDemo="clr-namespace:AIStudio.Wpf.Wall3D.Demo;assembly=AIStudio.Wpf.Wall3D.Demo"
         xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
         mc:Ignorable="d"
         Title="AIStudio.Wpf" Height="450" Width="800"
@@ -30,6 +31,7 @@
                         <ComboBoxItem Content="MDIContainer"/>
                         <ComboBoxItem Content="GridControl"/>
                         <ComboBoxItem Content="Screenshot"/>
+                        <ComboBoxItem Content="Wall3D"/>
                     </ComboBox>                   
                 </StackPanel>
             </ac:WindowBaseTitleBar.LeftWindowCommands>
@@ -79,6 +81,15 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Control">
                                         <local:ScreenshotView/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text,ElementName=comboBox, Mode=OneWay}" Value="Wall3D">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Control">
+                                        <wall3dDemo:MainView/>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>

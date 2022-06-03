@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:wall="clr-namespace:AIStudio.Wpf.Wall3D.Wall">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Util.3DWall;component/Wall/WallItem.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Wall3D;component/Wall/WallItem.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="WallControlStyle" TargetType="{x:Type wall:WallControl}" >
@@ -41,8 +41,9 @@
 
                             </Viewport3D>
                         </Grid>
-                        <Grid x:Name="_grid" Visibility="Collapsed">
-                            <Rectangle Fill="AliceBlue" x:Name="_rec" Height="1080" Width="1920" Opacity=".3" />
+                      
+                        <Grid x:Name="PART_ShowGrid" >
+
                         </Grid>
                     </Grid>
                 </ControlTemplate>

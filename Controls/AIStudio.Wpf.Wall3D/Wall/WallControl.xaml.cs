@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
+using System.Windows.Shapes;
 using AIStudio.Wpf.Wall3D.Utils;
 
 namespace AIStudio.Wpf.Wall3D.Wall
@@ -17,6 +18,7 @@ namespace AIStudio.Wpf.Wall3D.Wall
     [TemplatePart(Name = PART_camTrans, Type = typeof(TranslateTransform3D))]
     [TemplatePart(Name = PART_camScale, Type = typeof(ScaleTransform3D))]
     [TemplatePart(Name = PART_camRotation, Type = typeof(AxisAngleRotation3D))]
+    [TemplatePart(Name = PART_ShowGrid, Type = typeof(Grid))]
     public class WallControl : Control
     {
         private const string PART_3dgrid = "PART_3dgrid";
@@ -25,6 +27,8 @@ namespace AIStudio.Wpf.Wall3D.Wall
         private const string PART_camTrans = "PART_camTrans";
         private const string PART_camScale = "PART_camScale";
         private const string PART_camRotation = "PART_camRotation";
+        private const string PART_Mask = "PART_Mask";
+        private const string PART_ShowGrid = "PART_ShowGrid";
 
         private Grid _3dgrid;
         private Viewport3D _viewport3d;
@@ -32,6 +36,7 @@ namespace AIStudio.Wpf.Wall3D.Wall
         private TranslateTransform3D _camTrans;
         private ScaleTransform3D _camScale;
         private AxisAngleRotation3D _camRotation;
+        private Grid _showGrid;
 
         private Window _window;
 
@@ -69,19 +74,14 @@ namespace AIStudio.Wpf.Wall3D.Wall
 
         public Orientation Orientation { get; set; } = Orientation.Horizontal;
 
+        static WallControl()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(WallControl), new FrameworkPropertyMetadata(typeof(WallControl)));
+        }
+
         public WallControl()
         {
-            //获取资源文件信息
-            ResourceDictionary rd = new ResourceDictionary();
-            rd.Source = new Uri("Util.3DWall;component/Wall/WallControl.xaml", UriKind.Relative);
-            if (!this.Resources.MergedDictionaries.Any(p => p.Source == rd.Source))
-            {
-                this.Resources.MergedDictionaries.Add(rd);
-            }
-
-
             Loaded += MianWall_Loaded;
-
         }
 
         public override void OnApplyTemplate()
@@ -94,6 +94,7 @@ namespace AIStudio.Wpf.Wall3D.Wall
             _camTrans = GetTemplateChild(PART_camTrans) as TranslateTransform3D;
             _camScale = GetTemplateChild(PART_camScale) as ScaleTransform3D;
             _camRotation = GetTemplateChild(PART_camRotation) as AxisAngleRotation3D;
+            _showGrid = GetTemplateChild(PART_ShowGrid) as Grid;
 
             SetSize();
             CreatWall();
@@ -169,7 +170,7 @@ namespace AIStudio.Wpf.Wall3D.Wall
                     {
                         if (ItemClick != null)
                         {
-                            ItemClick(this, new ItemclickEventArg() { Data = _block3d.Info });
+                            ItemClick(this, new ItemclickEventArg() { Sender = this, Data = _block3d.Info });
                         }
                     }
                     break;
@@ -178,10 +179,8 @@ namespace AIStudio.Wpf.Wall3D.Wall
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
 
+
         }
-
-
-
 
         void MianWall_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)//鼠标按下
         {
@@ -196,7 +195,6 @@ namespace AIStudio.Wpf.Wall3D.Wall
             _prePoint = e.GetPosition(this);
 
         }
-
         #endregion
 
         /// <summary>
@@ -340,12 +338,33 @@ namespace AIStudio.Wpf.Wall3D.Wall
 
         #endregion
 
+        public void PopupElement(FrameworkElement element)
+        {
+            if (_showGrid != null)
+            {
+                Rectangle mask = new Rectangle() { Stretch = Stretch.Fill, Fill = Brushes.Bisque, Opacity = 0.3 };
+                mask.MouseLeftButtonDown += _mask_MouseLeftButtonDown;
+                _showGrid.Children.Add(mask);
+                _showGrid.Children.Add(element);
+            }
+        }
 
+        void _mask_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _showGrid.Children.Clear();
+        }
         #region<<事件
 
         public class ItemclickEventArg : EventArgs
         {
-            public object Data;
+            public object Data
+            {
+                get; set;
+            }
+            public WallControl Sender
+            {
+                get; set;
+            }
         }
 
         public delegate void ItemClickeventHandler(object sender, ItemclickEventArg e);
