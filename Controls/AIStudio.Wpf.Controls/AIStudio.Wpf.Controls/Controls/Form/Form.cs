@@ -227,6 +227,37 @@ namespace AIStudio.Wpf.Controls
             return ((int)value) > 0;
         }
 
+        public static readonly DependencyProperty FormModeProperty =
+            DependencyProperty.Register("FormMode", typeof(FormMode), typeof(Form), new PropertyMetadata(FormMode.Form, OnFormModeChanged));
+
+        public FormMode FormMode
+        {
+            get
+            {
+                return (FormMode)GetValue(FormModeProperty);
+            }
+            set
+            {
+                SetValue(FormModeProperty, value);
+            }
+        }
+
+        private static void OnFormModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Form form)
+            {
+                form.SetFormMode();
+            }
+        }
+
+        public void SetFormMode()
+        {
+            if (FormMode == FormMode.ToolBar)
+            {
+                this.SetValue(Form.HeaderWidthProperty, new GridLength(0d, GridUnitType.Pixel));
+            }
+        }
+
         public Form()
         {
             this.Background = Brushes.Transparent;
@@ -234,6 +265,7 @@ namespace AIStudio.Wpf.Controls
             this.Drop += Form_Drop;
             this.DragOver += Form_DragOver;
 
+            SetFormMode();
         }
 
         internal void NotifyListItemClicked(FormItem item, MouseButton mouseButton)
@@ -488,7 +520,7 @@ namespace AIStudio.Wpf.Controls
                     source = sourceItem;
                 }
             }
-
+            list.Remove(source);
             list.Add(source);
         }
 
@@ -519,6 +551,7 @@ namespace AIStudio.Wpf.Controls
                 }
             }
 
+            list.Remove(source);
             list.Insert(indexTarget, source);
         }
 
@@ -543,6 +576,7 @@ namespace AIStudio.Wpf.Controls
                     item.IsSelected = false;
             }
 
+            list.Remove(source);
             list.Add(source);
         }
 

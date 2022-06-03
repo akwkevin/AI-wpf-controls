@@ -18,7 +18,9 @@
                             <ac:Icon Margin="2" Kind="500px" />
                             <ac:HighTextBlock Margin="2" Content="123456789" Keyword="12"></ac:HighTextBlock>
                             <ac:LinkTextBlock Margin="2" Content="123456789"></ac:LinkTextBlock>
-
+                            <ac:IconTextBlock Margin="2" Content="Clock" ac:IconAttach.Geometry="{StaticResource ClockGeometry}"/>
+                            <ac:IconTextBlock Margin="2" Content="Font" ac:IconAttach.Icon="font-awesome"/>
+                            <ac:IconTextBlock Margin="2" Content="Add" ac:IconAttach.Kind="Add"/>
                         </WrapPanel>
                     </GroupBox>
                     <GroupBox Header="其它" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
@@ -48,7 +50,7 @@
                     </GroupBox>                   
                 </StackPanel>
             </TabItem>
-            <TabItem Header="大小">
+            <TabItem Header="大小" Height="27" VerticalAlignment="Bottom">
                 <GroupBox Header="大小" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">

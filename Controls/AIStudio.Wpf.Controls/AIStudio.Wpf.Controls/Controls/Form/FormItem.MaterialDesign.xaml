@@ -17,7 +17,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:FormItem}">
-                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" UseLayoutRounding="False">
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />
@@ -46,7 +46,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type controls:FormItem}">
-                            <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" UseLayoutRounding="False">
                                 <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(controls:Form.HeaderWidth)}" />

@@ -14,6 +14,8 @@
                 <WrapPanel>
                     <ToggleButton Margin="2" Content="Default" Style="{DynamicResource AIStudio.Styles.ToggleButton}"/>
                     <ToggleButton Margin="2" Content="Clock" ac:IconAttach.Geometry="{StaticResource ClockGeometry}" Style="{DynamicResource AIStudio.Styles.ToggleButton}"  ac:ShadowAttach.DropShadowEffect="{StaticResource ShadowDepth1}"/>
+                    <ToggleButton Margin="2" Content="Font" ac:IconAttach.Icon="font-awesome" Style="{DynamicResource AIStudio.Styles.ToggleButton}" />
+                    <ToggleButton Margin="2" Content="Add" ac:IconAttach.Kind="Add" Style="{DynamicResource AIStudio.Styles.ToggleButton}" />
                     <ToggleButton Margin="2" Padding="6" BorderThickness="1" Style="{DynamicResource AIStudio.Styles.ToggleButton.Icon}" ac:IconAttach.Geometry="{StaticResource SubGeometry}" ac:IconAttach.GeometrySelected="{StaticResource AddGeometry}" VerticalAlignment="Center"/>
                     <ToggleButton Margin="2" Style="{DynamicResource AIStudio.Styles.ToggleButton.Switch}"/>
                     <ToggleButton Margin="2" Content="Flat" Style="{DynamicResource AIStudio.Styles.ToggleButton.Flat}"/>

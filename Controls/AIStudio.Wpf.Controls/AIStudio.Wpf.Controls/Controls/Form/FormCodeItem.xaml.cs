@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using AIStudio.Wpf.Controls.Behaviors;
 using AIStudio.Wpf.Controls.Bindings;
@@ -24,7 +25,7 @@ namespace AIStudio.Wpf.Controls
 
         private ContentPresenter _header;
         private ContentPresenter _contentPresenter;
-        private Control _control;
+        private FrameworkElement _control;
 
 
         #region ControlType
@@ -121,6 +122,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         [Browsable(true)]
+        [DisplayName("Uniform跨度")]
         public int Span
         {
             get
@@ -151,264 +153,284 @@ namespace AIStudio.Wpf.Controls
                 return;
 
             bool hideHeader = false;
-            switch (controlType)
+
+            if (ParentForm != null && ParentForm.FormMode == FormMode.ToolBar)
             {
-                case FormControlType.TextBox:
-                    {
-                        _control = new TextBox() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(TextBox.TextProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.ComboBox:
-                    {
-                        _control = new ComboBox() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(ComboBox.SelectedValueProperty, binding);                
-                        }
-                        _control.SetValue(ComboBox.DisplayMemberPathProperty, "Text");
-                        _control.SetValue(ComboBox.SelectedValuePathProperty, "Value");
-                        break;
-                    }
-                case FormControlType.PasswordBox:
-                    {
-                        _control = new PasswordBox() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(PasswordBoxBindingBehavior.PasswordProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.DatePicker:
-                    {
-                        _control = new DatePicker() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(DatePicker.SelectedDateProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.TreeSelect:
-                    {
-                        _control = new TreeSelect() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.Mode = BindingMode.TwoWay;
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(TreeSelect.SelectedValueProperty, binding);   
-                        }
-                        _control.SetValue(TreeSelect.DisplayMemberPathProperty, "Text");
-                        _control.SetValue(TreeSelect.SelectedValuePathProperty, "Value");
+                _control = new IconTextBlock();
+                Binding binding = new Binding("Header");
+                binding.Source = this;
+                _control.SetBinding(IconTextBlock.ContentProperty, binding);               
 
-                        var dataTemplate = new HierarchicalDataTemplate();
-                        dataTemplate.ItemsSource = new Binding("Children");
-                        FrameworkElementFactory fef = new FrameworkElementFactory(typeof(TextBlock));
-                        Binding bind = new Binding("Text");
-                        fef.SetBinding(TextBlock.TextProperty, bind);
-                        dataTemplate.VisualTree = fef;
-                        (_control as TreeSelect).ItemTemplate = dataTemplate;
-                        break;
-                    }
-                case FormControlType.MultiComboBox:
-                    {
-                        _control = new MultiComboBox() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.Mode = BindingMode.TwoWay;
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(CustomeSelectionValues.SelectedValuesProperty, binding);                         
-                        }
-                        _control.SetValue(ComboBox.DisplayMemberPathProperty, "Text");
-                        _control.SetValue(ComboBox.SelectedValuePathProperty, "Value");
-                        break;
-                    }
-                case FormControlType.MultiTreeSelect:
-                    {
-                        _control = new TreeSelect() { Background = Brushes.Transparent, IsMulti = true };
+                var bindingIcon = new Binding();
+                bindingIcon.Path = new PropertyPath(IconAttach.GeometryProperty);
+                bindingIcon.Mode = BindingMode.OneWay;
+                bindingIcon.Source = this;
+                _control.SetBinding(IconAttach.GeometryProperty, bindingIcon);
 
-                        if (!string.IsNullOrEmpty(Path))
+                _control.Cursor = Cursors.SizeAll;
+                _control.SetValue(IconTextBlock.PaddingProperty, new Thickness(6));
+            }
+            else
+            {
+                switch (controlType)
+                {
+                    case FormControlType.TextBox:
                         {
-                            Binding binding = new Binding(Path);
-                            binding.Mode = BindingMode.TwoWay;
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(TreeSelect.SelectedValuesProperty, binding);
+                            _control = new TextBox() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(TextBox.TextProperty, binding);
+                            }
+                            break;
                         }
-                        _control.SetValue(TreeSelect.DisplayMemberPathProperty, "Text");
-                        _control.SetValue(TreeSelect.SelectedValuePathProperty, "Value");
+                    case FormControlType.ComboBox:
+                        {
+                            _control = new ComboBox() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(ComboBox.SelectedValueProperty, binding);
+                            }
+                            _control.SetValue(ComboBox.DisplayMemberPathProperty, "Text");
+                            _control.SetValue(ComboBox.SelectedValuePathProperty, "Value");
+                            break;
+                        }
+                    case FormControlType.PasswordBox:
+                        {
+                            _control = new PasswordBox() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(PasswordBoxBindingBehavior.PasswordProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.DatePicker:
+                        {
+                            _control = new DatePicker() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(DatePicker.SelectedDateProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.TreeSelect:
+                        {
+                            _control = new TreeSelect() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.Mode = BindingMode.TwoWay;
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(TreeSelect.SelectedValueProperty, binding);
+                            }
+                            _control.SetValue(TreeSelect.DisplayMemberPathProperty, "Text");
+                            _control.SetValue(TreeSelect.SelectedValuePathProperty, "Value");
 
-                        var dataTemplate = new HierarchicalDataTemplate();
-                        dataTemplate.ItemsSource = new Binding("Children");
-                        FrameworkElementFactory fef = new FrameworkElementFactory(typeof(StackPanel));
-                        fef.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+                            var dataTemplate = new HierarchicalDataTemplate();
+                            dataTemplate.ItemsSource = new Binding("Children");
+                            FrameworkElementFactory fef = new FrameworkElementFactory(typeof(TextBlock));
+                            Binding bind = new Binding("Text");
+                            fef.SetBinding(TextBlock.TextProperty, bind);
+                            dataTemplate.VisualTree = fef;
+                            (_control as TreeSelect).ItemTemplate = dataTemplate;
+                            break;
+                        }
+                    case FormControlType.MultiComboBox:
+                        {
+                            _control = new MultiComboBox() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.Mode = BindingMode.TwoWay;
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(CustomeSelectionValues.SelectedValuesProperty, binding);
+                            }
+                            _control.SetValue(ComboBox.DisplayMemberPathProperty, "Text");
+                            _control.SetValue(ComboBox.SelectedValuePathProperty, "Value");
+                            break;
+                        }
+                    case FormControlType.MultiTreeSelect:
+                        {
+                            _control = new TreeSelect() { Background = Brushes.Transparent, IsMulti = true };
 
-                        FrameworkElementFactory checkbox_fef = new FrameworkElementFactory(typeof(CheckBox));
-                        fef.AppendChild(checkbox_fef);
-                        Binding checkbox_bind = new Binding("IsChecked");
-                        checkbox_fef.SetBinding(CheckBox.IsCheckedProperty, checkbox_bind);
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.Mode = BindingMode.TwoWay;
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(TreeSelect.SelectedValuesProperty, binding);
+                            }
+                            _control.SetValue(TreeSelect.DisplayMemberPathProperty, "Text");
+                            _control.SetValue(TreeSelect.SelectedValuePathProperty, "Value");
 
-                        FrameworkElementFactory textblock_fef = new FrameworkElementFactory(typeof(TextBlock));
-                        fef.AppendChild(textblock_fef);                        
-                        Binding textblock_bind = new Binding("Text");
-                        textblock_fef.SetBinding(TextBlock.TextProperty, textblock_bind);
-                        textblock_fef.SetValue(TextBlock.MarginProperty, new Thickness(2,0,0,0));
+                            var dataTemplate = new HierarchicalDataTemplate();
+                            dataTemplate.ItemsSource = new Binding("Children");
+                            FrameworkElementFactory fef = new FrameworkElementFactory(typeof(StackPanel));
+                            fef.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
 
-                        dataTemplate.VisualTree = fef;
-                        (_control as TreeSelect).ItemTemplate = dataTemplate;
-                        break;
-                    }
-                case FormControlType.IntegerUpDown:
-                    {
-                        _control = new IntegerUpDown() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(IntegerUpDown.ValueProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.LongUpDown:
-                    {
-                        _control = new LongUpDown() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(IntegerUpDown.ValueProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.DoubleUpDown:
-                    {
-                        _control = new DoubleUpDown() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(IntegerUpDown.ValueProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.DecimalUpDown:
-                    {
-                        _control = new DecimalUpDown() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(IntegerUpDown.ValueProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.DateTimeUpDown:
-                    {
-                        _control = new DateTimeUpDown() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(IntegerUpDown.ValueProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.CheckBox:
-                    {
-                        _control = new CheckBox() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(CheckBox.IsCheckedProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.ToggleButton:
-                    {
-                        _control = new ToggleButton() { Background = Brushes.Transparent };
-                        if (!string.IsNullOrEmpty(Path))
-                        {
-                            Binding binding = new Binding(Path);
-                            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            binding.ValidatesOnExceptions = true;
-                            binding.ValidatesOnDataErrors = true;
-                            binding.NotifyOnValidationError = true;
-                            _control.SetBinding(ToggleButton.IsCheckedProperty, binding);
-                        }
-                        break;
-                    }
-                case FormControlType.Query:
-                case FormControlType.Submit:
-                    {
-                        hideHeader = true;
+                            FrameworkElementFactory checkbox_fef = new FrameworkElementFactory(typeof(CheckBox));
+                            fef.AppendChild(checkbox_fef);
+                            Binding checkbox_bind = new Binding("IsChecked");
+                            checkbox_fef.SetBinding(CheckBox.IsCheckedProperty, checkbox_bind);
 
-                        _control = new Button();
-                        Binding binding = new Binding($"DataContext.{Path}");
-                        binding.RelativeSource = new RelativeSource { AncestorType = typeof(UserControl), Mode = RelativeSourceMode.FindAncestor };
-                        _control.SetBinding(Button.CommandProperty, binding);
-                        Binding binding2 = new Binding(".");
-                        _control.SetBinding(Button.CommandParameterProperty, binding2);
-                        Binding binding3 = new Binding("Header");
-                        binding3.Source = this;
-                        _control.SetBinding(Button.ContentProperty, binding3);
-                        break;
-                    }
-                default:
-                    {
-                        _control = null;
-                        break;
-                    }
+                            FrameworkElementFactory textblock_fef = new FrameworkElementFactory(typeof(TextBlock));
+                            fef.AppendChild(textblock_fef);
+                            Binding textblock_bind = new Binding("Text");
+                            textblock_fef.SetBinding(TextBlock.TextProperty, textblock_bind);
+                            textblock_fef.SetValue(TextBlock.MarginProperty, new Thickness(2, 0, 0, 0));
+
+                            dataTemplate.VisualTree = fef;
+                            (_control as TreeSelect).ItemTemplate = dataTemplate;
+                            break;
+                        }
+                    case FormControlType.IntegerUpDown:
+                        {
+                            _control = new IntegerUpDown() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(IntegerUpDown.ValueProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.LongUpDown:
+                        {
+                            _control = new LongUpDown() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(IntegerUpDown.ValueProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.DoubleUpDown:
+                        {
+                            _control = new DoubleUpDown() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(IntegerUpDown.ValueProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.DecimalUpDown:
+                        {
+                            _control = new DecimalUpDown() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(IntegerUpDown.ValueProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.DateTimeUpDown:
+                        {
+                            _control = new DateTimeUpDown() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(IntegerUpDown.ValueProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.CheckBox:
+                        {
+                            _control = new CheckBox() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(CheckBox.IsCheckedProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.ToggleButton:
+                        {
+                            _control = new ToggleButton() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(ToggleButton.IsCheckedProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.Query:
+                    case FormControlType.Submit:
+                        {
+                            hideHeader = true;
+
+                            _control = new Button();
+                            Binding binding = new Binding($"DataContext.{Path}");
+                            binding.RelativeSource = new RelativeSource { AncestorType = typeof(UserControl), Mode = RelativeSourceMode.FindAncestor };
+                            _control.SetBinding(Button.CommandProperty, binding);
+                            Binding binding2 = new Binding(".");
+                            _control.SetBinding(Button.CommandParameterProperty, binding2);
+                            Binding binding3 = new Binding("Header");
+                            binding3.Source = this;
+                            _control.SetBinding(Button.ContentProperty, binding3);
+                            break;
+                        }
+                    default:
+                        {
+                            _control = null;
+                            break;
+                        }
+                }
             }
 
             if (_header != null)
@@ -454,7 +476,7 @@ namespace AIStudio.Wpf.Controls
             _header = GetTemplateChild(PART_Header) as ContentPresenter;
 
             GetControl(ControlType);
-     
+
         }
 
         private string GetPath()
@@ -522,6 +544,23 @@ $"          <ac:MultiComboBox ac:CustomeSelectionValues.SelectedValues=\"{{Bindi
 "       </ac:FormItem>";
                         return str;
                     }
+                case FormControlType.MultiTreeSelect:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:TreeSelect SelectedValues=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ItemsSource=\"{{ac:ControlBinding {ItemsSource}}}\"  DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" IsMulti=\"True\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.TreeSelect.Underline}}\">" + "\r\n" +
+$"              <ac:TreeSelect.ItemTemplate>" + "\r\n" +
+$"                  <HierarchicalDataTemplate ItemsSource = \"{{Binding Children}}\">" + "\r\n" +
+$"                      <StackPanel Orientation = \"Horizontal\">" + "\r\n" +
+$"                          <CheckBox IsChecked=\"{{Binding IsChecked,Mode=TwoWay}}\" />" + "\r\n" +
+$"                          <TextBlock Text = \"{{Binding Text}}\" VerticalAlignment = \"Center\" />" + "\r\n" +
+$"                      </StackPanel>" + "\r\n" +
+$"                  </HierarchicalDataTemplate>" + "\r\n" +
+$"              </ac:TreeSelect.ItemTemplate>" + "\r\n" +
+$"          </ac:TreeSelect>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
                 case FormControlType.IntegerUpDown:
                     {
                         string str =
@@ -572,7 +611,9 @@ $"          <ToggleButton IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
                     }
                 case FormControlType.Query:
                 case FormControlType.Submit:
-                    {
+                case FormControlType.Add:
+                case FormControlType.Delete:
+                {
                         string str =
 $"      <ac:FormItem>" + "\r\n" +
 $"          <Button Content=\"{Header}\" Command=\"{{ac:ControlBinding {GetPath()}}}\" CommandParameter=\"{{ Binding.}}\" Style=\"{{DynamicResource AIStudio.Styles.Button}}\"></Button>" + "\r\n" +

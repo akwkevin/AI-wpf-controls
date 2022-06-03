@@ -5,7 +5,7 @@ PrimaryHueMidForegroundBrush			MahApps.Brushes.ThemeBackground
 PrimaryHueDarkBrush                     MahApps.Brushes.AccentBase
 PrimaryHueDarkForegroundBrush			MahApps.Brushes.ThemeBackground
 
-SecondaryHueMidBrush					MahApps.Brushes.Accent
+SecondaryHueMidBrush					Theme.ShowcaseBrush
 SecondaryHueMidForegroundBrush			MahApps.Brushes.ThemeBackground
 
 MaterialDesignValidationErrorBrush		MahApps.Brushes.Control.Validation

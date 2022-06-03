@@ -63,8 +63,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="16"/>
-    </Style>
-
+    </Style> 
 
     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AIStudio.Styles.TextBlock}" x:Key="AIStudio.Styles.TextBlock.Caption">
         <Style.Resources>

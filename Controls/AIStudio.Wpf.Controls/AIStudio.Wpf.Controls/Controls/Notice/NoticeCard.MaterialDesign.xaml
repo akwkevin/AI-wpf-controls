@@ -231,31 +231,31 @@
 
                                         <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" controls:ControlNavigationAttach.NavWithUpDown="True" controls:ControlNavigationAttach.NavWithUpDownDefaultIndex="0">
                                             <Button x:Name="PART_OkButton" Padding="3,0" BorderThickness="0" Visibility="{Binding IsEnabled,RelativeSource={RelativeSource Self},Converter={StaticResource BoolToVisibleConverter}}" IsDefault="True" Content="确定" Margin="5,0,0,0" 
-                                            Style="{StaticResource AIStudio.Styles.Button.Focus}" 
-                                            Background="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:NoticeCard}}"
-                                            BorderBrush="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:NoticeCard}}"
-                                            Foreground="{TemplateBinding Background}"
-                                            controls:ControlNavigationAttach.NavigationIndex="0"/>
+                                                Style="{StaticResource AIStudio.Styles.Button.Focus}" 
+                                                Background="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:NoticeCard}}"
+                                                BorderBrush="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:NoticeCard}}"
+                                                Foreground="{TemplateBinding Background}"
+                                                controls:ControlNavigationAttach.NavigationIndex="0"/>
                                             <Button x:Name="PART_CancelButton" Padding="3,0" BorderThickness="0" Visibility="{Binding IsEnabled,RelativeSource={RelativeSource Self},Converter={StaticResource BoolToVisibleConverter}}" IsCancel="True" Content="取消" Margin="5,0" 
-                                            Style="{StaticResource AIStudio.Styles.Button.Focus}" 
-                                            Background="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:NoticeCard},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}"
-                                            BorderBrush="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:NoticeCard},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}"
-                                            Foreground="{TemplateBinding Background}"
-                                            controls:ControlNavigationAttach.NavigationIndex="1"/>
+                                                Style="{StaticResource AIStudio.Styles.Button.Focus}" 
+                                                Background="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:NoticeCard},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}"
+                                                BorderBrush="{Binding Path=BorderBrush,RelativeSource={RelativeSource AncestorType=controls:NoticeCard},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}"
+                                                Foreground="{TemplateBinding Background}"
+                                                controls:ControlNavigationAttach.NavigationIndex="1"/>
                                         </StackPanel>
-                                        
+
                                         <Button x:Name="PART_CloseButton" 
-                                        Margin="5,0,0,0"
-                                        Grid.Column="3"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        IsTabStop="False" 
-                                        Style="{StaticResource AIStudio.Styles.Button.Window}"                                        
-                                        controls:IconAttach.Geometry="{StaticResource CloseGeometry}" 
-                                        controls:IconAttach.Width="{Binding FontSize,RelativeSource={RelativeSource Self},Converter={StaticResource AdditionConverter},ConverterParameter='-3'}" 
-                                        controls:IconAttach.Height="{Binding FontSize,RelativeSource={RelativeSource Self},Converter={StaticResource AdditionConverter},ConverterParameter='-3'}"
-                                        Padding="0" 
-                                        controls:ControlAttach.CornerRadius="0"
-                                        Visibility="{Binding IsEnabled,RelativeSource={RelativeSource Self},Converter={StaticResource BoolToVisibleConverter}}"/>
+                                            Margin="5,0,0,0"
+                                            Grid.Column="3"
+                                            Foreground="{TemplateBinding Foreground}"
+                                            IsTabStop="False" 
+                                            Style="{StaticResource AIStudio.Styles.Button.Window}"                                        
+                                            controls:IconAttach.Geometry="{StaticResource CloseGeometry}" 
+                                            controls:IconAttach.Width="{Binding FontSize,RelativeSource={RelativeSource Self},Converter={StaticResource AdditionConverter},ConverterParameter='-3'}" 
+                                            controls:IconAttach.Height="{Binding FontSize,RelativeSource={RelativeSource Self},Converter={StaticResource AdditionConverter},ConverterParameter='-3'}"
+                                            Padding="0" 
+                                            controls:ControlAttach.CornerRadius="0"
+                                            Visibility="{Binding IsEnabled,RelativeSource={RelativeSource Self},Converter={StaticResource BoolToVisibleConverter}}"/>
                                     </Grid>
                                 </Border>
                             </Grid>
