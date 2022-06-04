@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
@@ -259,6 +260,18 @@ namespace AIStudio.Wpf.Controls.Core
             }
 
             return resObj;
+        }
+
+        public static string ToLiteral(this object obj)
+        {
+            using (var writer = new StringWriter())
+            {
+                using (var provider = CodeDomProvider.CreateProvider("CSharp"))
+                {
+                    provider.GenerateCodeFromExpression(new System.CodeDom.CodePrimitiveExpression(obj), writer, null);
+                    return writer.ToString();
+                }
+            }
         }
     }
 }

@@ -109,13 +109,13 @@
                 <ControlTemplate>
                     <Button x:Name="clear" 
                             Visibility="Collapsed" 
-                            Foreground="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType=TextBox}}"
+                            Foreground="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType=TextBoxBase}}"
                             Focusable="False"
                             IsTabStop="False" 
                             Style="{StaticResource AIStudio.Styles.Button.Clear}"
-                            controls:ControlAttach.ClearTextButton="{Binding Path=(controls:ControlAttach.ClearTextButton),RelativeSource={RelativeSource AncestorType=TextBox}}" 
+                            controls:ControlAttach.ClearTextButton="{Binding Path=(controls:ControlAttach.ClearTextButton),RelativeSource={RelativeSource AncestorType=TextBoxBase}}" 
                             Command="controls:ControlAttach.ClearTextCommand" 
-                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}" />
+                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBoxBase}}}" />
                     <ControlTemplate.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -240,7 +240,7 @@
         <Setter Property="controls:ControlAttach.LabelTemplate" >
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
-                    <TextBlock VerticalAlignment="Center" Margin="{Binding Path=Padding,RelativeSource={RelativeSource AncestorType=TextBox},Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyRight}}" Text="{Binding Path=(controls:ControlAttach.Label),RelativeSource={RelativeSource AncestorType=TextBox}}"></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Margin="{Binding Path=Padding,RelativeSource={RelativeSource AncestorType=TextBoxBase},Converter={StaticResource ThicknessBindingConverter},ConverterParameter={x:Static converter:ThicknessSideType.OnlyRight}}" Text="{Binding Path=(controls:ControlAttach.Label),RelativeSource={RelativeSource AncestorType=TextBoxBase}}"></TextBlock>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -252,11 +252,11 @@
         <Setter Property="controls:ControlAttach.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
-                    <TextBlock VerticalAlignment="Center" Margin="3" Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource AncestorType=TextBox}}">
+                    <TextBlock VerticalAlignment="Center" Margin="3" Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource AncestorType=TextBoxBase}}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0}/{1}">
-                                <Binding Path="Text.Length" RelativeSource="{RelativeSource AncestorType=TextBox}" />
-                                <Binding Path="MaxLength" RelativeSource="{RelativeSource AncestorType=TextBox}"/>
+                                <Binding Path="Text.Length" RelativeSource="{RelativeSource AncestorType=TextBoxBase}" />
+                                <Binding Path="MaxLength" RelativeSource="{RelativeSource AncestorType=TextBoxBase}"/>
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
@@ -398,7 +398,7 @@
     </Style>
 
     <!--编辑状态文本框样式-->
-    <Style x:Key="AIStudio.Styles.TextBox.ComboBox.Editable" TargetType="{x:Type TextBox}" >
+    <Style x:Key="AIStudio.Styles.TextBox.ComboBox.Editable" TargetType="{x:Type TextBoxBase}" >
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="SelectionBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
@@ -419,7 +419,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="AIStudio.Styles.TextBox.Plain" BasedOn="{StaticResource AIStudio.Styles.TextBox}" TargetType="TextBox">
+    <Style x:Key="AIStudio.Styles.TextBox.Plain" BasedOn="{StaticResource AIStudio.Styles.TextBoxBase}" TargetType="TextBoxBase">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="MinHeight" Value="6" />

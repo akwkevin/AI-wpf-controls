@@ -550,17 +550,25 @@ namespace AIStudio.Wpf.Controls
             {
                 ((System.Windows.Controls.TextBox)tbox).Clear();
             }
-            if (tbox is System.Windows.Controls.PasswordBox)
+            else if (tbox is RichTextBox)
+            {
+                ((RichTextBox)tbox).Clear();
+            }
+            else if (tbox is System.Windows.Controls.RichTextBox)
+            {
+                ((System.Windows.Controls.RichTextBox)tbox).Document.Blocks.Clear();
+            }
+            else if (tbox is System.Windows.Controls.PasswordBox)
             {
                 ((System.Windows.Controls.PasswordBox)tbox).Clear();
             }
-            if (tbox is System.Windows.Controls.ComboBox)
+            else if(tbox is System.Windows.Controls.ComboBox)
             {
                 var cb = tbox as System.Windows.Controls.ComboBox;
                 cb.SelectedItem = null;
                 cb.Text = string.Empty;
             }
-            if (tbox is TreeSelect)
+            else if(tbox is TreeSelect)
             {
                 var cb = tbox as TreeSelect;
                 cb.SelectedItem = null;
@@ -569,26 +577,26 @@ namespace AIStudio.Wpf.Controls
                     cb.SelectedItems.Clear();
                 }
             }
-            if (tbox is TreeComboBox)
+            else if(tbox is TreeComboBox)
             {
                 var cb = tbox as TreeComboBox;
                 cb.SelectedItem = null;
                 cb.Text = string.Empty;
             }
-            if (tbox is MultiComboBox)
+            else if(tbox is MultiComboBox)
             {
                 var cb = tbox as MultiComboBox;
                 cb.SelectedItem = null;
                 cb.UnselectAll();
                 cb.Text = string.Empty;
             }
-            if (tbox is System.Windows.Controls.DatePicker)
+            else if(tbox is System.Windows.Controls.DatePicker)
             {
                 var dp = tbox as System.Windows.Controls.DatePicker;
                 dp.SelectedDate = null;
                 dp.Text = string.Empty;
             }
-            if (tbox is ListBoxItem)
+            else if(tbox is ListBoxItem)
             {
                 var listboxitem = tbox as ListBoxItem;
                 var listbox = listboxitem.TryFindParent<System.Windows.Controls.ListBox>();

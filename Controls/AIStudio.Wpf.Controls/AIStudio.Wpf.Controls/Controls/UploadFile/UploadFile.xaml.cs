@@ -135,6 +135,21 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
+        public static readonly DependencyProperty UploadTokenProperty = DependencyProperty.Register(
+        "UploadToken", typeof(string), typeof(UploadFile), new PropertyMetadata(default(string), FilePropertyChangedCallback));
+
+        public string UploadToken
+        {
+            get
+            {
+                return (string)this.GetValue(UploadTokenProperty);
+            }
+            set
+            {
+                this.SetValue(UploadTokenProperty, value);
+            }
+        }
+
         public static readonly DependencyProperty UploadProperty = DependencyProperty.Register(
             "Upload", typeof(Func<string, Task<Tuple<string, string>>>), typeof(UploadFile), new PropertyMetadata(null));
 
@@ -321,9 +336,19 @@ namespace AIStudio.Wpf.Controls
                             using (System.IO.FileStream fStream = System.IO.File.Open(path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                             {
                                 data.Add(new StreamContent(fStream, (int)fStream.Length), "file", System.IO.Path.GetFileName(path));
+                                var header = JsonConvert.DeserializeObject<Dictionary<string, string>>(UploadToken ?? "");
 
                                 using (HttpClient client = new HttpClient())
                                 {
+                                    if (header != null)
+                                    {
+                                        client.DefaultRequestHeaders.Clear();
+                                        foreach (var item in header)
+                                        {
+                                            client.DefaultRequestHeaders.Add(item.Key, item.Value);
+                                        }
+                                    }
+
                                     HttpResponseMessage response = await client.PostAsync(UploadUrl, data);
                                     response.EnsureSuccessStatusCode();
                                     var responseBody = await response.Content.ReadAsStringAsync();

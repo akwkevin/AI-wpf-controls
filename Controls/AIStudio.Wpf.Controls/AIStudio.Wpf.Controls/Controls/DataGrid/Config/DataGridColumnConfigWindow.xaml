@@ -1,0 +1,48 @@
+﻿<controls:WindowBase x:Class="AIStudio.Wpf.Controls.DataGridColumnConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+        xmlns:command="clr-namespace:AIStudio.Wpf.Controls.Commands"
+        xmlns:binding="clr-namespace:AIStudio.Wpf.Controls.Bindings"
+        xmlns:convterter="clr-namespace:AIStudio.Wpf.Controls.Converter"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"       
+        xmlns:behaviors="clr-namespace:AIStudio.Wpf.Controls.Behaviors"
+        mc:Ignorable="d"
+        x:Name="window"
+        Title="表格配置" Height="450" Width="600" WindowStartupLocation="CenterOwner"
+        Style="{StaticResource AIStudio.Styles.WindowBase}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="3" Content="添加字段" Command="{Binding AddCommand}"></Button>
+            <Button Margin="3" Content="删除字段" Command="{Binding DeleteCommand}"></Button>
+        </StackPanel>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding DataGridColumns}">
+            <i:Interaction.Behaviors>
+                <behaviors:SelectAllBahavior InitialState="False"/>
+            </i:Interaction.Behaviors>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="字段"  Binding="{Binding PropertyName}"/>
+                <DataGridTextColumn Header="列头"  Binding="{Binding Header}"/>
+                <DataGridCheckBoxColumn Header="是否显示"  Binding="{Binding Visibility,Converter={convterter:ConverterValueMapToBool Parameter='Collapsed'},ConverterParameter='Visible'}"/>
+                <DataGridTextColumn Header="格式化"  Binding="{Binding StringFormat}"/>
+                <DataGridTextColumn Header="列宽"  Binding="{Binding Width}"/>
+                <DataGridComboBoxColumn Header="类型" Width="100" ItemsSource="{binding:ControlBinding Types}" SelectedValueBinding="{Binding Type}" DisplayMemberPath="Item1" SelectedValuePath="Item2"/>
+                <DataGridCheckBoxColumn Header="可排序"  Binding="{Binding CanUserSort}"/>
+                <DataGridCheckBoxColumn Header="可调整大小"  Binding="{Binding CanUserResize}"/>
+                <DataGridCheckBoxColumn Header="可拖拽"  Binding="{Binding CanUserReorder}"/>
+                <DataGridTextColumn Header="显示顺序"  Binding="{Binding DisplayIndex}" IsReadOnly="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Margin="3" Content="关闭" Command="{x:Static command:ControlCommands.CloseWindow}" CommandParameter="{Binding ElementName=window}"></Button>
+            <Button Margin="3" Content="保存" Command="{Binding SaveCommand}"></Button>
+        </StackPanel>
+    </Grid>
+</controls:WindowBase>

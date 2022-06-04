@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -120,19 +121,6 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-        public string PropertiesString
-        {
-            get; set;
-        }
-
-        public string[] PropertiesArray
-        {
-            get
-            {
-                return PropertiesString?.Split('^');
-            }
-        }
-
         public PropertiesView()
         {
             InitializeComponent();
@@ -151,16 +139,22 @@ namespace AIStudio.Wpf.Controls
                 ClearGrid();
                 if (SelectedObject != null)
                 {
-                    int row = 0;
-                    foreach (var prop in SelectedObject.GetType().GetProperties())
+                    if (SelectedObject.GetType().GetProperty("PropertiesSetting") != null)
                     {
-                        if (PropertiesArray != null && PropertiesArray.Contains(prop.Name))
+                        Dictionary<string, string> settings = SelectedObject.GetType().GetProperty("PropertiesSetting").GetValue(SelectedObject) as Dictionary<string, string>;
+                        int row = 0; 
+                        foreach (var setting in settings)
                         {
-                            DisplayProperty(prop, row);
+                            var prop = SelectedObject.GetType().GetProperty(setting.Key);
+                            DisplayProperty(prop, row, setting.Value);
                             row++;
                         }
-                        else
-                        {                        
+                    }
+                    else
+                    {
+                        int row = 0;
+                        foreach (var prop in SelectedObject.GetType().GetProperties())
+                        {
                             var attr = prop.GetCustomAttributes(typeof(BrowsableAttribute), true);
                             if (NeedBrowsable == false && (attr.Length == 0 || (attr[0] as BrowsableAttribute).Browsable))
                             {
@@ -172,7 +166,7 @@ namespace AIStudio.Wpf.Controls
                                 DisplayProperty(prop, row);
                                 row++;
                             }
-                        }
+                        }                       
                     }
                     _panel.Children.Add(_gridContainer);
                 }
@@ -193,19 +187,28 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-        private void DisplayProperty(PropertyInfo prop, int row)
+        private void DisplayProperty(PropertyInfo prop, int row, string name = null)
         {
             var rowDef = new RowDefinition();
             rowDef.Height = new GridLength(Math.Max(20, this.FontSize * 2));
             _grid.RowDefinitions.Add(rowDef);
 
             var tb = new TextBlock() { Text = prop.Name };
-            var displayAttr = prop.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-            if (displayAttr.Length > 0)
+            if (name != null)
             {
-                tb.Text = (displayAttr[0] as DisplayNameAttribute).DisplayName;
+                tb.Text = name;
                 tb.ToolTip = prop.Name;
             }
+            else
+            {
+                var displayAttr = prop.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+                if (displayAttr.Length > 0)
+                {
+                    tb.Text = (displayAttr[0] as DisplayNameAttribute).DisplayName;
+                    tb.ToolTip = prop.Name;
+                }
+            }
+
             tb.Margin = new Thickness(4);
             Grid.SetColumn(tb, 0);
             Grid.SetRow(tb, _grid.RowDefinitions.Count - 1);

@@ -10,8 +10,9 @@
     <Style x:Key="AIStudio.Styles.UploadFile" TargetType="{x:Type controls:UploadFile}">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
         <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="3" />
         <Setter Property="Margin" Value="0" />
@@ -25,7 +26,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
-                                            <Border x:Name="datagrid" Visibility="Collapsed" SnapsToDevicePixels="{Binding SnapsToDevicePixels,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"     
+                                            <Border x:Name="border" Visibility="Collapsed" SnapsToDevicePixels="{Binding SnapsToDevicePixels,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"     
                                                 CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile}, Mode=FindAncestor}}"
                                                 BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
                                                 BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
@@ -77,12 +78,19 @@
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding IsUploadTemplate}" Value="False">
                                                 <Setter TargetName="template" Property="Visibility" Value="Collapsed"></Setter>
-                                                <Setter TargetName="datagrid" Property="Visibility" Value="Visible"></Setter>
+                                                <Setter TargetName="border" Property="Visibility" Value="Visible"></Setter>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Disable,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" Value="True">
                                                 <Setter TargetName="delete" Property="Visibility" Value="Collapsed"></Setter>
                                                 <Setter TargetName="template" Property="IsEnabled" Value="False"></Setter>
                                             </DataTrigger>
+
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsFocused" Value="True">
+                                                <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
+                                            </Trigger>
                                         </DataTemplate.Triggers>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -108,7 +116,7 @@
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid>
-                                                    <Border x:Name="datagrid" Height="138" Width="138" Visibility="Collapsed" SnapsToDevicePixels="{Binding SnapsToDevicePixels,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"     
+                                                    <Border x:Name="border" Height="138" Width="138" Visibility="Collapsed" SnapsToDevicePixels="{Binding SnapsToDevicePixels,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"     
                                                         CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile}, Mode=FindAncestor}}"
                                                         BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
                                                         BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
@@ -155,7 +163,7 @@
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding IsUploadTemplate}" Value="False">
                                                         <Setter TargetName="template" Property="Visibility" Value="Collapsed"></Setter>
-                                                        <Setter TargetName="datagrid" Property="Visibility" Value="Visible"></Setter>
+                                                        <Setter TargetName="border" Property="Visibility" Value="Visible"></Setter>
                                                     </DataTrigger>
                                                     <Trigger Property="IsMouseOver" Value="True">
                                                         <Setter TargetName="delete" Property="Visibility" Value="Visible"></Setter>
@@ -164,6 +172,13 @@
                                                         <Setter TargetName="delete" Property="Visibility" Value="Collapsed"></Setter>
                                                         <Setter TargetName="template" Property="IsEnabled" Value="False"></Setter>
                                                     </DataTrigger>
+
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsFocused" Value="True">
+                                                        <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
+                                                    </Trigger>
                                                 </DataTemplate.Triggers>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -178,33 +193,38 @@
 
 
             <Trigger Property="controls:ControlAttach.Status" Value="Light">
-                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Mid">
-                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Dark">
-                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
-                <Setter Property="BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Success">
-                <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource SuccessBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Info">
-                <Setter Property="BorderBrush" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource InfoBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Warning">
-                <Setter Property="BorderBrush" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource WarningBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Danger">
-                <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource DangerBrush}" />
             </Trigger>
             <Trigger Property="controls:ControlAttach.Status" Value="Plain">
-                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
+                <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.UploadFile.Underline" BasedOn="{StaticResource AIStudio.Styles.UploadFile}" TargetType="{x:Type controls:UploadFile}">
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="controls:ControlAttach.CornerRadius" Value="0" />
     </Style>
 
     <Style BasedOn="{StaticResource AIStudio.Styles.UploadFile}" TargetType="{x:Type controls:UploadFile}"/>

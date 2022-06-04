@@ -49,7 +49,7 @@
             <ScrollViewer x:Name="_gridContainer" VerticalScrollBarVisibility="Auto">
                 <Grid x:Name="_grid">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     

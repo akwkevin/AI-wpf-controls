@@ -4,7 +4,8 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/TextBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="AIStudio.Styles.RichTextBox" TargetType="RichTextBox" BasedOn="{StaticResource AIStudio.Styles.TextBox}">
+    <Style x:Key="AIStudio.Styles.RichTextBox" TargetType="RichTextBox" BasedOn="{StaticResource AIStudio.Styles.TextBox}"/>
 
-    </Style>
+    <Style x:Key="AIStudio.Styles.RichTextBox.Underline" TargetType="RichTextBox" BasedOn="{StaticResource AIStudio.Styles.TextBox.Underline}"/>
+    
 </ResourceDictionary>

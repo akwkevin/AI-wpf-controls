@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Media;
 using AIStudio.Wpf.Controls.Behaviors;
 using AIStudio.Wpf.Controls.Bindings;
 using AIStudio.Wpf.Controls.Converter;
+using AIStudio.Wpf.Controls.Core;
 
 namespace AIStudio.Wpf.Controls
 {
@@ -138,6 +140,124 @@ namespace AIStudio.Wpf.Controls
         private static bool IsSpanValid(object value)
         {
             return ((int)value) > 0;
+        }
+        #endregion
+
+        #region Extension1
+        public static readonly DependencyProperty ExtField1Property = DependencyProperty.Register(
+            "ExtField1", typeof(object), typeof(FormCodeItem), new PropertyMetadata(null));
+
+        [Browsable(true)]
+        [DisplayName("扩展字段1")]
+        public object ExtField1
+        {
+            get
+            {
+                return (object)GetValue(ExtField1Property);
+            }
+            set
+            {
+                SetValue(ExtField1Property, value);
+            }
+        }
+        #endregion
+
+        #region Extension2
+        public static readonly DependencyProperty ExtField2Property = DependencyProperty.Register(
+            "ExtField2", typeof(object), typeof(FormCodeItem), new PropertyMetadata(null));
+
+        [Browsable(true)]
+        [DisplayName("扩展字段2")]
+        public object ExtField2
+        {
+            get
+            {
+                return (object)GetValue(ExtField2Property);
+            }
+            set
+            {
+                SetValue(ExtField2Property, value);
+            }
+        }
+        #endregion
+
+        #region SettingField
+        public static readonly DependencyProperty SettingFieldProperty = DependencyProperty.Register(
+            "SettingField", typeof(object), typeof(FormCodeItem), new PropertyMetadata(null));
+
+        [Browsable(true)]
+        [DisplayName("设置字段")]
+        public object SettingField
+        {
+            get
+            {
+                return (object)GetValue(SettingFieldProperty);
+            }
+            set
+            {
+                SetValue(SettingFieldProperty, value);
+            }
+        }
+        #endregion
+
+        #region 属性设置
+        [Browsable(false)]
+        [DisplayName("属性设置")]
+        public Dictionary<string, string> PropertiesSetting
+        {
+            get
+            {
+                Dictionary<string, string> keyValuePairs = new Dictionary<string, string>()
+                {
+                    {"Header", "名称" },
+                    {"Path", "属性" },
+                    {"Span", "跨度" }
+                };
+
+                switch (ControlType)
+                {
+                    case FormControlType.TextBox:
+                    case FormControlType.ComboBox:
+                    case FormControlType.PasswordBox:
+                    case FormControlType.DatePicker:
+                    case FormControlType.IntegerUpDown:
+                    case FormControlType.LongUpDown:
+                    case FormControlType.DoubleUpDown:
+                    case FormControlType.DecimalUpDown:
+                    case FormControlType.DateTimeUpDown:
+                    case FormControlType.CheckBox:
+                    case FormControlType.ToggleButton:
+                    case FormControlType.RichTextBox:
+                    case FormControlType.Query:
+                    case FormControlType.Submit:
+                        {
+                            return keyValuePairs;
+                        }
+                    case FormControlType.TreeSelect:
+                    case FormControlType.MultiComboBox:
+                    case FormControlType.MultiTreeSelect:
+                        {
+                            keyValuePairs.Add("ItemsSource", "数据源");
+                            return keyValuePairs;
+                        }
+                    case FormControlType.UploadFile:
+                    case FormControlType.UploadImage:
+                        {
+                            keyValuePairs.Add("ExtField1", "上传地址");
+                            keyValuePairs.Add("ExtField2", "上传Header");
+                            return keyValuePairs;
+                        }
+                    case FormControlType.DataGrid:
+                        {
+                            keyValuePairs.Add("SettingField", "表格设置");
+                            return keyValuePairs;
+                        }                 
+                    default:
+                        {
+                            return keyValuePairs;
+                        }
+                }
+            }
         }
         #endregion
 
@@ -409,6 +529,95 @@ namespace AIStudio.Wpf.Controls
                             }
                             break;
                         }
+                    case FormControlType.RichTextBox:
+                        {
+                            _control = new RichTextBox() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(RichTextBox.TextProperty, binding);
+                            }
+                            break;
+                        }
+                    case FormControlType.UploadFile:
+                        {
+                            _control = new UploadFile() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(UploadFile.FileProperty, binding);
+                            }
+                            _control.SetValue(UploadFile.UploadUrlProperty, ExtField1);
+                            _control.SetValue(UploadFile.UploadTokenProperty, ExtField2);
+                            break;
+                        }
+                    case FormControlType.UploadImage:
+                        {
+                            _control = new UploadFile() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(UploadFile.FileProperty, binding);
+                                _control.SetValue(UploadFile.UploadFileTypeProperty, UploadFileType.Image);
+                            }
+                            _control.SetValue(UploadFile.UploadUrlProperty, ExtField1);
+                            _control.SetValue(UploadFile.UploadTokenProperty, ExtField2);
+                            break;
+                        }
+                    case FormControlType.DataGrid:
+                        {
+                            _control = new DataGrid() { Background = Brushes.Transparent };
+                            if (!string.IsNullOrEmpty(Path))
+                            {
+                                Binding binding = new Binding(Path);
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                binding.ValidatesOnExceptions = true;
+                                binding.ValidatesOnDataErrors = true;
+                                binding.NotifyOnValidationError = true;
+                                _control.SetBinding(DataGrid.ItemsSourceProperty, binding);
+                            }                           
+
+                            (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                            {
+                                Binding = new Binding("Field1"),
+                                Header = "字段1",
+                                Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
+                            });
+                            (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                            {
+                                Binding = new Binding("Field2"),
+                                Header = "字段2",
+                                Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
+                            });
+                            (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                            {
+                                Binding = new Binding("Field3"),
+                                Header = "字段3",
+                                Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
+                            });
+                            (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                            {
+                                Binding = new Binding("Field4"),
+                                Header = "字段4",
+                                Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
+                            });
+
+                            _control.SetValue(DataGridColumnsConfigAttach.ShowConfigProperty, true);
+                            _control.Height = 200;
+                            break;
+                        }
                     case FormControlType.Query:
                     case FormControlType.Submit:
                         {
@@ -482,6 +691,47 @@ namespace AIStudio.Wpf.Controls
         private string GetPath()
         {
             return string.IsNullOrEmpty(Path) ? "." : Path;
+        }
+
+        private string GetDataGridColumns()
+        {
+            List<string> formColumnsList = new List<string>();
+            if (_control is DataGrid datagrid)
+            {
+                
+                foreach (var item in datagrid.Columns)
+                {
+                    string str = string.Empty;
+                    if (item is DataGridTextColumn dataGridTextColumn)
+                    {
+                        str =
+$"                   <DataGridTextColumn Header=\"{dataGridTextColumn.Header}\" Binding=\"{{Binding {(dataGridTextColumn.Binding as Binding).Path.Path}}}\" Width=\"{dataGridTextColumn.Width.ToString()}\"/>";
+                    }
+                    else if (item is DataGridCheckBoxColumn dataGridCheckBoxColumn)
+                    {
+                        str =
+$"                   <DataGridCheckBoxColumn Header=\"{dataGridCheckBoxColumn.Header}\" Binding=\"{{Binding {(dataGridCheckBoxColumn.Binding as Binding).Path.Path}}}\" Width=\"{dataGridCheckBoxColumn.Width.ToString()}\"/>";
+                    }
+                    else if (item is DataGridComboBoxColumn dataGridComboBoxColumn)
+                    {
+                        str =
+$"                   <DataGridComboBoxColumn Header=\"{dataGridComboBoxColumn.Header}\" SelectedValueBinding=\"{{Binding {(dataGridComboBoxColumn.SelectedValueBinding as Binding).Path.Path}}}\" DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" Width=\"{dataGridComboBoxColumn.Width.ToString()}\"/>";
+                    }
+                    else if (item is DataGridHyperlinkColumn dataGridHyperlinkColumn)
+                    {
+                        str =
+$"                   <DataGridHyperlinkColumn Header=\"{dataGridHyperlinkColumn.Header}\" Binding=\"{{Binding {(dataGridHyperlinkColumn.Binding as Binding).Path.Path}}}\" Width=\"{dataGridHyperlinkColumn.Width.ToString()}\"/>";
+                    }
+                    else
+                    {
+                        str = 
+"                   " + System.Windows.Markup.XamlWriter.Save(item).Replace("xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"", "");
+                    }
+                    formColumnsList.Add(str);
+                }
+            }
+
+            return string.Join("\r\n", formColumnsList);
         }
 
         public override string ToString()
@@ -609,6 +859,42 @@ $"          <ToggleButton IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
 "       </ac:FormItem>";
                         return str;
                     }
+                case FormControlType.RichTextBox:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:RichTextBox Text=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.RichTextBox.Underline}}\"></ac:RichTextBox>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case FormControlType.UploadFile:
+                    {                        
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" UploadUrl=\"{ExtField1?.ToString()}\" UploadToken=\"{ExtField2?.ToString()}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.UploadFile.Underline}}\"></ac:UploadFile>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case FormControlType.UploadImage:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" UploadUrl=\"{ExtField1?.ToString()}\" UploadToken=\"{ExtField2?.ToString()}\" UploadFileType=\"Image\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.UploadFile.Underline}}\"></ac:UploadFile>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
+                case FormControlType.DataGrid:
+                    {
+                        string str =
+$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"          <DataGrid ItemsSource=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.DataGrid}}\">" + "\r\n" +
+$"              <DataGrid.Columns>"  + "\r\n" +
+GetDataGridColumns() + "\r\n" +
+$"              </DataGrid.Columns>" + "\r\n" +
+$"          </DataGrid>" + "\r\n" +
+"       </ac:FormItem>";
+                        return str;
+                    }
                 case FormControlType.Query:
                 case FormControlType.Submit:
                 case FormControlType.Add:
@@ -621,6 +907,16 @@ $"          <Button Content=\"{Header}\" Command=\"{{ac:ControlBinding {GetPath(
                         return str;
                     }
                 default: return base.ToString();
+            }
+        }
+
+        public void Setting()
+        {
+            if (_control is DataGrid datagrid)
+            {
+                var window = new DataGridColumnConfigWindow(datagrid);
+                window.Owner = Application.Current.MainWindow;
+                window.ShowDialog();
             }
         }
 

@@ -31,11 +31,13 @@
             <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource AIStudio.Styles.DatePicker.Underline}" />
             <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource AIStudio.Styles.PasswordBox.Underline}" />
             <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource AIStudio.Styles.RadioButton}" />
-            <Style TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource AIStudio.Styles.RichTextBox}" />
+            <Style TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource AIStudio.Styles.RichTextBox.Underline}" />
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource AIStudio.Styles.TextBox.Underline}" />
             <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource AIStudio.Styles.ToggleButton.Switch}" />
             <Style TargetType="{x:Type controls:TreeSelect}" BasedOn="{StaticResource AIStudio.Styles.TreeSelect.Underline}" />
             <Style TargetType="{x:Type controls:MultiComboBox}" BasedOn="{StaticResource AIStudio.Styles.MultiComboBox.Underline}" />
+            <Style TargetType="{x:Type controls:UploadFile}" BasedOn="{StaticResource AIStudio.Styles.UploadFile.Underline}" />
+            <Style TargetType="{x:Type controls:RichTextBox}" BasedOn="{StaticResource AIStudio.Styles.RichTextBox.Underline}" />
         </Style.Resources>
     </Style>
 
