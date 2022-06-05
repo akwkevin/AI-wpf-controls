@@ -17,8 +17,7 @@ namespace AIStudio.Wpf.Controls.Core
         static Extention()
         {
             JsonSerializerSettings setting = new JsonSerializerSettings();
-            JsonConvert.DefaultSettings = new Func<JsonSerializerSettings>(() =>
-            {
+            JsonConvert.DefaultSettings = new Func<JsonSerializerSettings>(() => {
                 //日期类型默认格式化处理
                 setting.DateFormatHandling = DateFormatHandling.MicrosoftDateFormat;
                 setting.DateFormatString = "yyyy-MM-dd HH:mm:ss";
@@ -27,7 +26,10 @@ namespace AIStudio.Wpf.Controls.Core
             });
         }
 
-        private static BindingFlags _bindingFlags { get; }
+        private static BindingFlags _bindingFlags
+        {
+            get;
+        }
             = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static;
 
         /// <summary>
@@ -71,7 +73,10 @@ namespace AIStudio.Wpf.Controls.Core
             return JsonConvert.SerializeObject(obj);
         }
 
-        public static JsonSerializerSettings Settings { get; set; } = new JsonSerializerSettings
+        public static JsonSerializerSettings Settings
+        {
+            get; set;
+        } = new JsonSerializerSettings
         {
             DateFormatString = "yyyy-MM-dd HH:mm:ss.fff",
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
@@ -262,15 +267,26 @@ namespace AIStudio.Wpf.Controls.Core
             return resObj;
         }
 
-        public static string ToLiteral(this object obj)
+        public static string ToProviderString(this string obj, string language = "CSharp")
         {
-            using (var writer = new StringWriter())
+            if (CodeDomProvider.IsDefinedLanguage(language))
             {
-                using (var provider = CodeDomProvider.CreateProvider("CSharp"))
+                using (var writer = new StringWriter())
                 {
-                    provider.GenerateCodeFromExpression(new System.CodeDom.CodePrimitiveExpression(obj), writer, null);
-                    return writer.ToString();
+                    using (var provider = CodeDomProvider.CreateProvider(language))
+                    {
+                        provider.GenerateCodeFromExpression(new System.CodeDom.CodePrimitiveExpression(obj), writer, null);
+                        return writer.ToString();
+                    }
                 }
+            }
+            else if (language?.ToLower() == "xaml")
+            {              
+                return obj.Replace("&", "&amp;").Replace(">", "&gt;").Replace("<", "&lt;").Replace("\"", "&quot;").Replace("'", "&apos;").Replace("{", "{}{");  //.Replace(" ", "&#160;")
+            }
+            else
+            {
+                return obj;
             }
         }
     }

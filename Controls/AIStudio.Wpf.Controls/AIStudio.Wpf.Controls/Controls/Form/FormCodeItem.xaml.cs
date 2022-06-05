@@ -871,7 +871,7 @@ $"          <ac:RichTextBox Text=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourc
                     {                        
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
-$"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" UploadUrl=\"{ExtField1?.ToString()}\" UploadToken=\"{ExtField2?.ToString()}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.UploadFile.Underline}}\"></ac:UploadFile>" + "\r\n" +
+$"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" UploadUrl=\"{ExtField1?.ToString()}\" UploadToken=\"{ExtField2?.ToString().ToProviderString("xaml")}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.UploadFile.Underline}}\"></ac:UploadFile>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
                     }
@@ -879,7 +879,7 @@ $"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSource
                     {
                         string str =
 $"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
-$"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" UploadUrl=\"{ExtField1?.ToString()}\" UploadToken=\"{ExtField2?.ToString()}\" UploadFileType=\"Image\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.UploadFile.Underline}}\"></ac:UploadFile>" + "\r\n" +
+$"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" UploadUrl=\"{ExtField1?.ToString()}\" UploadToken=\"{ExtField2?.ToString().ToProviderString("xaml")}\" UploadFileType=\"Image\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.UploadFile.Underline}}\"></ac:UploadFile>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
                     }
