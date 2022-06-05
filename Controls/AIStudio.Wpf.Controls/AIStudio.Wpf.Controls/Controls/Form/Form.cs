@@ -178,6 +178,12 @@ namespace AIStudio.Wpf.Controls
                     FrameworkElementFactory factory = new FrameworkElementFactory(typeof(WrapPanel));
                     panel.VisualTree = factory;
                 }
+                else if ((FormPanelType)e.NewValue == FormPanelType.UniformWrapPanel)
+                {
+                    FrameworkElementFactory factory = new FrameworkElementFactory(typeof(UniformWrapPanel));
+                    factory.SetValue(UniformWrapPanel.ColumnsProperty, form.PanelColumns);
+                    panel.VisualTree = factory;
+                }
                 else if ((FormPanelType)e.NewValue == FormPanelType.UniformGrid)
                 {
                     FrameworkElementFactory factory = new FrameworkElementFactory(typeof(UniformGridEx));
@@ -218,7 +224,15 @@ namespace AIStudio.Wpf.Controls
                     factory.SetValue(UniformGridEx.VerticalAlignmentProperty, VerticalAlignment.Top);
                     panel.VisualTree = factory;
                     form.ItemsPanel = panel;
-                }               
+                }
+                else if (form.PanelType == FormPanelType.UniformWrapPanel)
+                {
+                    ItemsPanelTemplate panel = new ItemsPanelTemplate();
+                    FrameworkElementFactory factory = new FrameworkElementFactory(typeof(UniformWrapPanel));
+                    factory.SetValue(UniformWrapPanel.ColumnsProperty, form.PanelColumns);
+                    panel.VisualTree = factory;
+                    form.ItemsPanel = panel;
+                }
             }
         }
 

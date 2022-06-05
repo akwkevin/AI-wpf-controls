@@ -8,6 +8,7 @@ namespace AIStudio.Wpf.Controls
     {
         StackPanel,
         WrapPanel,
+        UniformWrapPanel,
         UniformGrid,
     }
 }

@@ -1119,6 +1119,7 @@
         <Setter Property="CellStyle" Value="{StaticResource AIStudio.Styles.DataGridCell.Filter}"/>
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="CanUserDeleteRows" Value="False"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:FilterDataGrid}">

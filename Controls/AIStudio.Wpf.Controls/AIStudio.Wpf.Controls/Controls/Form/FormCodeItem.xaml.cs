@@ -120,6 +120,7 @@ namespace AIStudio.Wpf.Controls
             if (d is FormCodeItem formCodeItem)
             {
                 formCodeItem.SetValue(UniformGridEx.SpanProperty, formCodeItem.Span);
+                formCodeItem.SetValue(WrapPanelFill.SpanProperty, formCodeItem.Span);
             }
         }
 
@@ -217,7 +218,6 @@ namespace AIStudio.Wpf.Controls
                 switch (ControlType)
                 {
                     case FormControlType.TextBox:
-                    case FormControlType.ComboBox:
                     case FormControlType.PasswordBox:
                     case FormControlType.DatePicker:
                     case FormControlType.IntegerUpDown:
@@ -233,6 +233,7 @@ namespace AIStudio.Wpf.Controls
                         {
                             return keyValuePairs;
                         }
+                    case FormControlType.ComboBox:
                     case FormControlType.TreeSelect:
                     case FormControlType.MultiComboBox:
                     case FormControlType.MultiTreeSelect:
@@ -249,6 +250,7 @@ namespace AIStudio.Wpf.Controls
                         }
                     case FormControlType.DataGrid:
                         {
+                            keyValuePairs.Add("Height", "表格高度");
                             keyValuePairs.Add("SettingField", "表格设置");
                             return keyValuePairs;
                         }                 
@@ -587,35 +589,59 @@ namespace AIStudio.Wpf.Controls
                                 binding.ValidatesOnDataErrors = true;
                                 binding.NotifyOnValidationError = true;
                                 _control.SetBinding(DataGrid.ItemsSourceProperty, binding);
-                            }                           
+                            }
 
-                            (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                            if (ExtField1 is IEnumerable<DataGridColumn> columns)
                             {
-                                Binding = new Binding("Field1"),
-                                Header = "字段1",
-                                Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
-                            });
-                            (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                                if (columns != null)
+                                {
+                                    foreach (var column in columns)
+                                    {
+                                        (_control as DataGrid).Columns.Add(column);
+                                    }
+                                }
+                            }
+                            else if (ExtField1 is IEnumerable<DataGridColumnConfig> columnconfigs)
                             {
-                                Binding = new Binding("Field2"),
-                                Header = "字段2",
-                                Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
-                            });
-                            (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                                if (columnconfigs != null)
+                                {
+                                    foreach (var columnconfig in columnconfigs)
+                                    {
+                                        (_control as DataGrid).Columns.Add(columnconfig.GetColumn());
+                                    }
+                                }
+                            }
+                            else
                             {
-                                Binding = new Binding("Field3"),
-                                Header = "字段3",
-                                Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
-                            });
-                            (_control as DataGrid).Columns.Add(new DataGridTextColumn()
-                            {
-                                Binding = new Binding("Field4"),
-                                Header = "字段4",
-                                Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
-                            });
+                                (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                                {
+                                    Binding = new Binding("Field1"),
+                                    Header = "字段1",
+                                    Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
+                                });
+                                (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                                {
+                                    Binding = new Binding("Field2"),
+                                    Header = "字段2",
+                                    Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
+                                });
+                                (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                                {
+                                    Binding = new Binding("Field3"),
+                                    Header = "字段3",
+                                    Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
+                                });
+                                (_control as DataGrid).Columns.Add(new DataGridTextColumn()
+                                {
+                                    Binding = new Binding("Field4"),
+                                    Header = "字段4",
+                                    Width = new DataGridLength(100, DataGridLengthUnitType.Pixel)
+                                });
+                            }
 
                             _control.SetValue(DataGridColumnsConfigAttach.ShowConfigProperty, true);
-                            _control.Height = 200;
+                            this.VerticalContentAlignment = VerticalAlignment.Stretch;
+                            this.Height = 120;
                             break;
                         }
                     case FormControlType.Query:
@@ -902,7 +928,7 @@ $"          </DataGrid>" + "\r\n" +
                 {
                         string str =
 $"      <ac:FormItem>" + "\r\n" +
-$"          <Button Content=\"{Header}\" Command=\"{{ac:ControlBinding {GetPath()}}}\" CommandParameter=\"{{ Binding.}}\" Style=\"{{DynamicResource AIStudio.Styles.Button}}\"></Button>" + "\r\n" +
+$"          <Button Content=\"{Header}\" Command=\"{{ac:ControlBinding {GetPath()}}}\" CommandParameter=\"{{Binding .}}\" Style=\"{{DynamicResource AIStudio.Styles.Button}}\"></Button>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
                     }
@@ -918,6 +944,35 @@ $"          <Button Content=\"{Header}\" Command=\"{{ac:ControlBinding {GetPath(
                 window.Owner = Application.Current.MainWindow;
                 window.ShowDialog();
             }
+        }
+
+        public void InitControl(object obj)
+        {
+            if (_control is DataGrid datagrid)
+            {
+                datagrid.Columns.Clear();
+                if (obj is IEnumerable<DataGridColumn> columns)
+                {
+                    if (columns != null)
+                    {
+                        foreach (var column in columns)
+                        {
+                            datagrid.Columns.Add(column);
+                        }
+                    }
+                }
+                else if (obj is IEnumerable<DataGridColumnConfig> columnconfigs)
+                {
+                    if (columnconfigs != null)
+                    {
+                        foreach (var columnconfig in columnconfigs)
+                        {
+                            datagrid.Columns.Add(columnconfig.GetColumn());
+                        }
+                    }
+                }
+            }
+            
         }
 
     }

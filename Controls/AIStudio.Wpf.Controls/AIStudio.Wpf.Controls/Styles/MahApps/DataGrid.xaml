@@ -576,6 +576,7 @@
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource MahApps.Brushes.Separator}" />
         <Setter Property="MinRowHeight" Value="{DynamicResource DefaultControlHeight}" />
         <Setter Property="RowHeaderStyle" Value="{StaticResource AIStudio.Styles.DataGridRowHeader}" />
+        <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="RowStyle">
             <Setter.Value>
                 <Style BasedOn="{StaticResource AIStudio.Styles.DataGridRow}" TargetType="{x:Type DataGridRow}">

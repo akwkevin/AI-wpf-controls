@@ -8,6 +8,7 @@ namespace AIStudio.Wpf.Controls
 {
     public class WrapPanelFill : WrapPanel
     {
+        #region 附加属性
         // ******************************************************************
         private static readonly DependencyProperty UseToFillProperty = DependencyProperty.RegisterAttached("UseToFill", typeof(Boolean),
             typeof(WrapPanelFill), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
@@ -22,6 +23,32 @@ namespace AIStudio.Wpf.Controls
         {
             return (Boolean)element.GetValue(UseToFillProperty);
         }
+
+        // ******************************************************************
+        public static readonly DependencyProperty SpanProperty = DependencyProperty.RegisterAttached("Span", typeof(int),
+            typeof(WrapPanelFill), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsParentMeasure), ValidateSpan);
+
+        private static bool ValidateSpan(object value)
+        {
+            if (value is int span)
+            {
+                return span > 0;
+            }
+
+            return false;
+        }
+
+        // ******************************************************************
+        public static void SetSpan(UIElement element, int value)
+        {
+            element.SetValue(SpanProperty, value);
+        }
+        // ******************************************************************
+        public static int GetSpan(UIElement element)
+        {
+            return (int)element.GetValue(SpanProperty);
+        }
+        #endregion
 
 
         // ******************************************************************
@@ -78,9 +105,7 @@ namespace AIStudio.Wpf.Controls
             bool itemWidthSet = !Double.IsNaN(itemWidth);
             bool itemHeightSet = !Double.IsNaN(itemHeight);
 
-            Size childConstraint = new Size(
-                (itemWidthSet ? itemWidth : constraint.Width),
-                (itemHeightSet ? itemHeight : constraint.Height));
+     
 
             UIElementCollection children = InternalChildren;
 
@@ -94,14 +119,17 @@ namespace AIStudio.Wpf.Controls
                 UIElement child = children[i] as UIElement;
                 if (child == null) continue;
 
+                Size childConstraint = new Size(
+                     (itemWidthSet ? itemWidth * GetSpan(child) : constraint.Width),
+                     (itemHeightSet ? itemHeight * GetSpan(child) : constraint.Height));
                 //Flow passes its own constrint to children 
                 child.Measure(childConstraint);
 
                 //this is the size of the child in UV space 
                 XYSize sz = new XYSize(
                     Orientation,
-                    (itemWidthSet ? itemWidth : child.DesiredSize.Width),
-                    (itemHeightSet ? itemHeight : child.DesiredSize.Height));
+                    (itemWidthSet ? itemWidth * GetSpan(child) : child.DesiredSize.Width),
+                    (itemHeightSet ? itemHeight * GetSpan(child) : child.DesiredSize.Height));
 
                 if (DoubleGreaterThan(curLineSize.X + sz.X, uvConstraint.X) && CanWrap) //need to switch to another line 
                 {
@@ -258,8 +286,8 @@ namespace AIStudio.Wpf.Controls
 
                 XYSize sz = new XYSize(
                     Orientation,
-                    (itemWidthSet ? itemWidth : child.DesiredSize.Width),
-                    (itemHeightSet ? itemHeight : child.DesiredSize.Height));
+                    (itemWidthSet ? itemWidth * GetSpan(child) : child.DesiredSize.Width),
+                    (itemHeightSet ? itemHeight * GetSpan(child) : child.DesiredSize.Height));
 
                 if (DoubleGreaterThan(curLineSize.X + sz.X, uvFinalSize.X) && CanWrap) //need to switch to another line 
                 {
@@ -324,7 +352,7 @@ namespace AIStudio.Wpf.Controls
                 if (child != null)
                 {
                     XYSize childSize = new XYSize(Orientation, child.DesiredSize.Width, child.DesiredSize.Height);
-                    double layoutSlotU = (useItemU ? itemU : childSize.X);
+                    double layoutSlotU = (useItemU ? itemU * GetSpan(child) : childSize.X);
 
                     if (perControlCorrection > 0 && child == uIElementToAdjustNext)
                     {

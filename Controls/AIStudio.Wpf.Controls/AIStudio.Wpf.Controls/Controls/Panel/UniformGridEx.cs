@@ -195,8 +195,7 @@ namespace AIStudio.Wpf.Controls
         protected override Size MeasureOverride(Size constraint)
         {
             UpdateComputedValues();
-
-            Size childConstraint = new Size(constraint.Width / _columns, constraint.Height / _rows);
+            
             double maxChildDesiredWidth = 0.0;
             double maxChildDesiredHeight = 0.0;
 
@@ -205,13 +204,14 @@ namespace AIStudio.Wpf.Controls
             {
                 UIElement child = InternalChildren[i];
 
+                Size childConstraint = new Size(constraint.Width / _columns * GetSpan(child), constraint.Height / _rows);
                 // Measure the child.
                 child.Measure(childConstraint);
                 Size childDesiredSize = child.DesiredSize;
 
-                if (maxChildDesiredWidth < childDesiredSize.Width)
+                if (maxChildDesiredWidth < childDesiredSize.Width / GetSpan(child))
                 {
-                    maxChildDesiredWidth = childDesiredSize.Width;
+                    maxChildDesiredWidth = childDesiredSize.Width / GetSpan(child);
                 }
 
                 if (maxChildDesiredHeight < childDesiredSize.Height)
