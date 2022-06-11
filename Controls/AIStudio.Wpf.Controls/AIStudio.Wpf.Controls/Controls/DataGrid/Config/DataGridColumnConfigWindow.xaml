@@ -11,7 +11,7 @@
         xmlns:behaviors="clr-namespace:AIStudio.Wpf.Controls.Behaviors"
         mc:Ignorable="d"
         x:Name="window"
-        Title="表格配置" Height="450" Width="600" WindowStartupLocation="CenterOwner"
+        Title="表格配置" Height="450" Width="850" WindowStartupLocation="CenterOwner"
         Style="{StaticResource AIStudio.Styles.WindowBase}">
     <Grid>
         <Grid.RowDefinitions>
@@ -31,18 +31,20 @@
                 <DataGridTextColumn Header="字段"  Binding="{Binding PropertyName}"/>
                 <DataGridTextColumn Header="列头"  Binding="{Binding Header}"/>
                 <DataGridCheckBoxColumn Header="是否显示"  Binding="{Binding Visibility,Converter={convterter:ConverterValueMapToBool Parameter='Collapsed'},ConverterParameter='Visible'}"/>
-                <DataGridTextColumn Header="格式化"  Binding="{Binding StringFormat}"/>
-                <DataGridTextColumn Header="列宽"  Binding="{Binding Width}"/>
                 <DataGridComboBoxColumn Header="类型" Width="100" ItemsSource="{binding:ControlBinding Types}" SelectedValueBinding="{Binding Type}" DisplayMemberPath="Item1" SelectedValuePath="Item2"/>
+                <DataGridTextColumn Header="列宽"  Binding="{Binding Width}"/>
+                <DataGridTextColumn Header="格式化"  Binding="{Binding StringFormat}"/>
+                <DataGridTextColumn Header="转换器"  Binding="{Binding Converter,Converter={convterter:Object2StringConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="转换参数"  Binding="{Binding ConverterParameter}" />
                 <DataGridCheckBoxColumn Header="可排序"  Binding="{Binding CanUserSort}"/>
                 <DataGridCheckBoxColumn Header="可调整大小"  Binding="{Binding CanUserResize}"/>
                 <DataGridCheckBoxColumn Header="可拖拽"  Binding="{Binding CanUserReorder}"/>
-                <DataGridTextColumn Header="显示顺序"  Binding="{Binding DisplayIndex}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="显示顺序"  Binding="{Binding DisplayIndex}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="3" Content="关闭" Command="{x:Static command:ControlCommands.CloseWindow}" CommandParameter="{Binding ElementName=window}"></Button>
-            <Button Margin="3" Content="保存" Command="{Binding SaveCommand}"></Button>
+            <Button Margin="3" Content="关闭" IsCancel="True" Command="{x:Static command:ControlCommands.CloseWindow}" CommandParameter="{Binding ElementName=window}"></Button>
+            <Button Margin="3" Content="保存" IsDefault="True" Command="{Binding SaveCommand}"></Button>
         </StackPanel>
     </Grid>
 </controls:WindowBase>

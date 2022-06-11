@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -253,7 +255,7 @@ namespace AIStudio.Wpf.Controls
                             keyValuePairs.Add("Height", "表格高度");
                             keyValuePairs.Add("SettingField", "表格设置");
                             return keyValuePairs;
-                        }                 
+                        }
                     default:
                         {
                             return keyValuePairs;
@@ -262,6 +264,11 @@ namespace AIStudio.Wpf.Controls
             }
         }
         #endregion
+
+        public double InitHeight
+        {
+            get; set;
+        } = double.NaN;
 
         static FormCodeItem()
         {
@@ -281,7 +288,7 @@ namespace AIStudio.Wpf.Controls
                 _control = new IconTextBlock();
                 Binding binding = new Binding("Header");
                 binding.Source = this;
-                _control.SetBinding(IconTextBlock.ContentProperty, binding);               
+                _control.SetBinding(IconTextBlock.ContentProperty, binding);
 
                 var bindingIcon = new Binding();
                 bindingIcon.Path = new PropertyPath(IconAttach.GeometryProperty);
@@ -581,6 +588,7 @@ namespace AIStudio.Wpf.Controls
                     case FormControlType.DataGrid:
                         {
                             _control = new DataGrid() { Background = Brushes.Transparent };
+                            (_control as DataGrid).IsReadOnly = true;
                             if (!string.IsNullOrEmpty(Path))
                             {
                                 Binding binding = new Binding(Path);
@@ -597,7 +605,8 @@ namespace AIStudio.Wpf.Controls
                                 {
                                     foreach (var column in columns)
                                     {
-                                        (_control as DataGrid).Columns.Add(column);
+                                        var copy = System.Windows.Markup.XamlReader.Parse(System.Windows.Markup.XamlWriter.Save(column)) as DataGridColumn;
+                                        (_control as DataGrid).Columns.Add(copy);
                                     }
                                 }
                             }
@@ -640,8 +649,6 @@ namespace AIStudio.Wpf.Controls
                             }
 
                             _control.SetValue(DataGridColumnsConfigAttach.ShowConfigProperty, true);
-                            this.VerticalContentAlignment = VerticalAlignment.Stretch;
-                            this.Height = 120;
                             break;
                         }
                     case FormControlType.Query:
@@ -666,6 +673,8 @@ namespace AIStudio.Wpf.Controls
                             break;
                         }
                 }
+
+                this.Height = InitHeight;
             }
 
             if (_header != null)
@@ -719,39 +728,56 @@ namespace AIStudio.Wpf.Controls
             return string.IsNullOrEmpty(Path) ? "." : Path;
         }
 
+        public string GetSpan()
+        {
+            if (ParentForm != null && Span > 1)
+            {
+                if (ParentForm.PanelType == FormPanelType.UniformGrid)
+                {
+                    return $"ac:UniformGridEx.Span=\"{Span}\"";
+                }
+                if (ParentForm.PanelType == FormPanelType.UniformWrapPanel)
+                {
+                    return $"ac:UniformWrapPanel.Span=\"{Span}\"";
+                }
+            }
+
+            return string.Empty;
+        }
+
         private string GetDataGridColumns()
         {
             List<string> formColumnsList = new List<string>();
             if (_control is DataGrid datagrid)
             {
-                
-                foreach (var item in datagrid.Columns)
+
+                foreach (var item in datagrid.Columns.OrderBy(p => p.DisplayIndex))
                 {
                     string str = string.Empty;
-                    if (item is DataGridTextColumn dataGridTextColumn)
+//                    if (item is DataGridTextColumn dataGridTextColumn)
+//                    {
+//                        str =
+//$"                   <DataGridTextColumn Header=\"{dataGridTextColumn.Header}\" Binding=\"{{Binding {(dataGridTextColumn.Binding as Binding).Path.Path}}}\" Width=\"{dataGridTextColumn.Width.ToString()}\"/>";
+//                    }
+//                    else if (item is DataGridCheckBoxColumn dataGridCheckBoxColumn)
+//                    {
+//                        str =
+//$"                   <DataGridCheckBoxColumn Header=\"{dataGridCheckBoxColumn.Header}\" Binding=\"{{Binding {(dataGridCheckBoxColumn.Binding as Binding).Path.Path}}}\" Width=\"{dataGridCheckBoxColumn.Width.ToString()}\"/>";
+//                    }
+//                    else if (item is DataGridComboBoxColumn dataGridComboBoxColumn)
+//                    {
+//                        str =
+//$"                   <DataGridComboBoxColumn Header=\"{dataGridComboBoxColumn.Header}\" SelectedValueBinding=\"{{Binding {(dataGridComboBoxColumn.SelectedValueBinding as Binding).Path.Path}}}\" DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" Width=\"{dataGridComboBoxColumn.Width.ToString()}\"/>";
+//                    }
+//                    else if (item is DataGridHyperlinkColumn dataGridHyperlinkColumn)
+//                    {
+//                        str =
+//$"                   <DataGridHyperlinkColumn Header=\"{dataGridHyperlinkColumn.Header}\" Binding=\"{{Binding {(dataGridHyperlinkColumn.Binding as Binding).Path.Path}}}\" Width=\"{dataGridHyperlinkColumn.Width.ToString()}\"/>";
+//                    }
+//                    else
                     {
                         str =
-$"                   <DataGridTextColumn Header=\"{dataGridTextColumn.Header}\" Binding=\"{{Binding {(dataGridTextColumn.Binding as Binding).Path.Path}}}\" Width=\"{dataGridTextColumn.Width.ToString()}\"/>";
-                    }
-                    else if (item is DataGridCheckBoxColumn dataGridCheckBoxColumn)
-                    {
-                        str =
-$"                   <DataGridCheckBoxColumn Header=\"{dataGridCheckBoxColumn.Header}\" Binding=\"{{Binding {(dataGridCheckBoxColumn.Binding as Binding).Path.Path}}}\" Width=\"{dataGridCheckBoxColumn.Width.ToString()}\"/>";
-                    }
-                    else if (item is DataGridComboBoxColumn dataGridComboBoxColumn)
-                    {
-                        str =
-$"                   <DataGridComboBoxColumn Header=\"{dataGridComboBoxColumn.Header}\" SelectedValueBinding=\"{{Binding {(dataGridComboBoxColumn.SelectedValueBinding as Binding).Path.Path}}}\" DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" Width=\"{dataGridComboBoxColumn.Width.ToString()}\"/>";
-                    }
-                    else if (item is DataGridHyperlinkColumn dataGridHyperlinkColumn)
-                    {
-                        str =
-$"                   <DataGridHyperlinkColumn Header=\"{dataGridHyperlinkColumn.Header}\" Binding=\"{{Binding {(dataGridHyperlinkColumn.Binding as Binding).Path.Path}}}\" Width=\"{dataGridHyperlinkColumn.Width.ToString()}\"/>";
-                    }
-                    else
-                    {
-                        str = 
-"                   " + System.Windows.Markup.XamlWriter.Save(item).Replace("xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"", "");
+"                   " + Regex.Replace(System.Windows.Markup.XamlWriter.Save(item), "( ClipboardContentBinding=\".*?\")|( DisplayIndex=\".*?\")|( xmlns=\".*?\")", "");
                     }
                     formColumnsList.Add(str);
                 }
@@ -767,7 +793,7 @@ $"                   <DataGridHyperlinkColumn Header=\"{dataGridHyperlinkColumn.
                 case FormControlType.TextBox:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <TextBox Text=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.TextBox.Underline}}\"></TextBox>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -775,7 +801,7 @@ $"          <TextBox Text=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigge
                 case FormControlType.ComboBox:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ComboBox SelectedValue=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ItemsSource=\"{{ac:ControlBinding {ItemsSource}}}\"  DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.ComboBox.Underline}}\"></ComboBox>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -783,7 +809,7 @@ $"          <ComboBox SelectedValue=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
                 case FormControlType.PasswordBox:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <PasswordBox ac:PasswordBoxBindingBehavior.Password=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.PasswordBox.Underline}}\"></PasswordBox>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -791,7 +817,7 @@ $"          <PasswordBox ac:PasswordBoxBindingBehavior.Password=\"{{Binding {Get
                 case FormControlType.DatePicker:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <DatePicker SelectedDate=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.DatePicker.Underline}}\"></DatePicker>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -799,7 +825,7 @@ $"          <DatePicker SelectedDate=\"{{Binding {GetPath()},Mode=TwoWay,UpdateS
                 case FormControlType.TreeSelect:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:TreeSelect SelectedValue=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ItemsSource=\"{{ac:ControlBinding {ItemsSource}}}\"  DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.TreeSelect.Underline}}\">" + "\r\n" +
 $"              <ac:TreeSelect.ItemTemplate>" + "\r\n" +
 $"                  <HierarchicalDataTemplate ItemsSource = \"{{Binding Children}}\">" + "\r\n" +
@@ -815,7 +841,7 @@ $"          </ac:TreeSelect>" + "\r\n" +
                 case FormControlType.MultiComboBox:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:MultiComboBox ac:CustomeSelectionValues.SelectedValues=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ItemsSource=\"{{ac:ControlBinding {ItemsSource}}}\"  DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.MultiComboBox.Underline}}\"></ac:MultiComboBox>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -823,7 +849,7 @@ $"          <ac:MultiComboBox ac:CustomeSelectionValues.SelectedValues=\"{{Bindi
                 case FormControlType.MultiTreeSelect:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:TreeSelect SelectedValues=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ItemsSource=\"{{ac:ControlBinding {ItemsSource}}}\"  DisplayMemberPath=\"Text\" SelectedValuePath=\"Value\" IsMulti=\"True\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.TreeSelect.Underline}}\">" + "\r\n" +
 $"              <ac:TreeSelect.ItemTemplate>" + "\r\n" +
 $"                  <HierarchicalDataTemplate ItemsSource = \"{{Binding Children}}\">" + "\r\n" +
@@ -840,7 +866,7 @@ $"          </ac:TreeSelect>" + "\r\n" +
                 case FormControlType.IntegerUpDown:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:IntegerUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.NumericUpDown}}\"></ac:IntegerUpDown>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -848,7 +874,7 @@ $"          <ac:IntegerUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
                 case FormControlType.LongUpDown:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:LongUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.NumericUpDown}}\"></ac:LongUpDown>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -856,7 +882,7 @@ $"          <ac:LongUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourc
                 case FormControlType.DoubleUpDown:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:DoubleUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.NumericUpDown}}\"></ac:DoubleUpDown>" + "\r\n" +
 "        </ac:FormItem>";
                         return str;
@@ -864,7 +890,7 @@ $"          <ac:DoubleUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSou
                 case FormControlType.DecimalUpDown:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:DecimalUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.NumericUpDown}}\"></ac:DecimalUpDown>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -872,7 +898,7 @@ $"          <ac:DecimalUpDown Value=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
                 case FormControlType.CheckBox:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <CheckBox IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.CheckBox}}\"></CheckBox>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -880,7 +906,7 @@ $"          <CheckBox IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSource
                 case FormControlType.ToggleButton:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ToggleButton IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.ToggleButton.Switch}}\"></ToggleButton>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -888,15 +914,15 @@ $"          <ToggleButton IsChecked=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSo
                 case FormControlType.RichTextBox:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:RichTextBox Text=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.RichTextBox.Underline}}\"></ac:RichTextBox>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
                     }
                 case FormControlType.UploadFile:
-                    {                        
+                    {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" UploadUrl=\"{ExtField1?.ToString()}\" UploadToken=\"{ExtField2?.ToString().ToProviderString("xaml")}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.UploadFile.Underline}}\"></ac:UploadFile>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -904,7 +930,7 @@ $"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSource
                 case FormControlType.UploadImage:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
 $"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" UploadUrl=\"{ExtField1?.ToString()}\" UploadToken=\"{ExtField2?.ToString().ToProviderString("xaml")}\" UploadFileType=\"Image\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.UploadFile.Underline}}\"></ac:UploadFile>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
@@ -912,9 +938,9 @@ $"          <ac:UploadFile File=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSource
                 case FormControlType.DataGrid:
                     {
                         string str =
-$"      <ac:FormItem Header=\"{Header}\">" + "\r\n" +
-$"          <DataGrid ItemsSource=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" ac:ControlAttach.ClearTextButton=\"True\" Style=\"{{DynamicResource AIStudio.Styles.DataGrid}}\">" + "\r\n" +
-$"              <DataGrid.Columns>"  + "\r\n" +
+$"      <ac:FormItem Header=\"{Header}\" {GetSpan()}>" + "\r\n" +
+$"          <DataGrid ItemsSource=\"{{Binding {GetPath()},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}}\" IsReadOnly=\"True\" Style=\"{{DynamicResource AIStudio.Styles.DataGrid}}\">" + "\r\n" +
+$"              <DataGrid.Columns>" + "\r\n" +
 GetDataGridColumns() + "\r\n" +
 $"              </DataGrid.Columns>" + "\r\n" +
 $"          </DataGrid>" + "\r\n" +
@@ -925,14 +951,14 @@ $"          </DataGrid>" + "\r\n" +
                 case FormControlType.Submit:
                 case FormControlType.Add:
                 case FormControlType.Delete:
-                {
+                    {
                         string str =
-$"      <ac:FormItem>" + "\r\n" +
+$"      <ac:FormItem {GetSpan()}>" + "\r\n" +
 $"          <Button Content=\"{Header}\" Command=\"{{ac:ControlBinding {GetPath()}}}\" CommandParameter=\"{{Binding .}}\" Style=\"{{DynamicResource AIStudio.Styles.Button}}\"></Button>" + "\r\n" +
 "       </ac:FormItem>";
                         return str;
                     }
-                default: return base.ToString();
+                default: return System.Windows.Markup.XamlWriter.Save(this);
             }
         }
 
@@ -972,7 +998,7 @@ $"          <Button Content=\"{Header}\" Command=\"{{ac:ControlBinding {GetPath(
                     }
                 }
             }
-            
+
         }
 
     }

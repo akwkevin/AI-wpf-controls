@@ -183,9 +183,19 @@ namespace AIStudio.Wpf.Controls.Bindings
                 }
                 else
                 {
-                    binding.Source = rootObject;
+                   
                     if (rootObject is UserControl || rootObject is Window)
                     {
+                        binding.Source = rootObject;
+                        if (binding.Path == null || binding.Path.Path == ".")
+                            binding.Path = new PropertyPath("DataContext");
+                        else
+                            binding.Path = new PropertyPath("DataContext." + binding.Path.Path, binding.Path.PathParameters);
+                    }
+                    else
+                    {
+                        RelativeSource = new RelativeSource { AncestorLevel = AncestorLevel, AncestorType = typeof(UserControl), Mode = RelativeSourceMode.FindAncestor };
+                        binding.RelativeSource = RelativeSource;
                         if (binding.Path == null || binding.Path.Path == ".")
                             binding.Path = new PropertyPath("DataContext");
                         else

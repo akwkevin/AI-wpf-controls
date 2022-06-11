@@ -321,7 +321,7 @@ namespace AIStudio.Wpf.Controls
         public static event EventHandler<EventArgs> DialogOpened;
         public static event EventHandler<EventArgs> DialogClosed;
 
-        public static Task<object> ShowDialogAsync(BaseDialog content, string windowIdentifier, bool animate = true)
+        internal static Task<object> ShowDialogAsync(BaseDialog content, string windowIdentifier, bool animate = true)
         {
             var win = GetWindowBase(windowIdentifier);
             if (win == null) throw new ArgumentNullException(nameof(win));

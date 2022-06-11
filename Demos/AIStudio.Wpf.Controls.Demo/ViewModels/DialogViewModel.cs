@@ -23,7 +23,7 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
         {
             var dialog = new DialogTest();
             dialog.SetValue(ControlAttach.StatusProperty, para);
-            var res = await WindowBase.ShowDialogAsync(dialog, "RootWindow");
+            var res = await WindowBase.ShowDialogAsync2(dialog, "RootWindow");
         }
     }
 }

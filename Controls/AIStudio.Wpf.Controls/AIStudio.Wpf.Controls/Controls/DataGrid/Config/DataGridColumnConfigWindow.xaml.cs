@@ -142,66 +142,108 @@ namespace AIStudio.Wpf.Controls
             if (dataGridColumn is DataGridTextColumn dataGridTextColumn)
             {
                 PropertyName = (dataGridTextColumn.Binding as Binding).Path.Path;
-                StringFormat = dataGridTextColumn.Binding.StringFormat;
+                StringFormat = (dataGridTextColumn.Binding as Binding).StringFormat;
+                Converter = (dataGridTextColumn.Binding as Binding).Converter;
+                ConverterParameter = (dataGridTextColumn.Binding as Binding).ConverterParameter;
             }
             else if (dataGridColumn is DataGridCheckBoxColumn dataGridCheckBoxColumn)
             {
                 PropertyName = (dataGridCheckBoxColumn.Binding as Binding).Path.Path;
+                StringFormat = (dataGridCheckBoxColumn.Binding as Binding).StringFormat;
+                Converter = (dataGridCheckBoxColumn.Binding as Binding).Converter;
+                ConverterParameter = (dataGridCheckBoxColumn.Binding as Binding).ConverterParameter;
             }
             else if (dataGridColumn is DataGridComboBoxColumn dataGridComboBoxColumn)
             {
                 PropertyName = (dataGridComboBoxColumn.SelectedValueBinding as Binding).Path.Path;
+                StringFormat = (dataGridComboBoxColumn.SelectedValueBinding as Binding).StringFormat;
+                Converter = (dataGridComboBoxColumn.SelectedValueBinding as Binding).Converter;
+                ConverterParameter = (dataGridComboBoxColumn.SelectedValueBinding as Binding).ConverterParameter;
             }
             else if (dataGridColumn is DataGridHyperlinkColumn dataGridHyperlinkColumn)
             {
                 PropertyName = (dataGridHyperlinkColumn.Binding as Binding).Path.Path;
+                StringFormat = (dataGridHyperlinkColumn.Binding as Binding).StringFormat;
+                Converter = (dataGridHyperlinkColumn.Binding as Binding).Converter;
+                ConverterParameter = (dataGridHyperlinkColumn.Binding as Binding).ConverterParameter;
             }
             Type = dataGridColumn.GetType().Name;
             DataGridColumn = dataGridColumn;
+
+            this.PropertyChanged += DataGridColumnConfig_PropertyChanged;
+        }
+
+        bool _isChanged;
+
+        private void DataGridColumnConfig_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != nameof(IsChecked))
+            {
+                _isChanged = true;
+            }
         }
 
         public DataGridColumn GetColumn()
         {
             DataGridColumn dataGridColumn = null;
-            if (Type == typeof(DataGridTextColumn).Name)
-            {
-                dataGridColumn = new DataGridTextColumn();
-                var binding = new Binding(PropertyName);
-                binding.StringFormat = StringFormat;
-                (dataGridColumn as DataGridTextColumn).Binding = binding;
-            }
-            else if (Type == typeof(DataGridCheckBoxColumn).Name)
-            {
-                dataGridColumn = new DataGridCheckBoxColumn();
-                var binding = new Binding(PropertyName);
-                (dataGridColumn as DataGridCheckBoxColumn).Binding = binding;
-            }
-            else if (Type == typeof(DataGridComboBoxColumn).Name)
-            {
-                dataGridColumn = new DataGridComboBoxColumn();
-                var binding = new Binding(PropertyName);
-                (dataGridColumn as DataGridComboBoxColumn).SelectedValueBinding = binding;
-                (dataGridColumn as DataGridComboBoxColumn).DisplayMemberPath = "Text";
-                (dataGridColumn as DataGridComboBoxColumn).SelectedValuePath = "Value";
-            }
-            else if (Type == typeof(DataGridHyperlinkColumn).Name)
-            {
-                dataGridColumn = new DataGridHyperlinkColumn();
-                var binding = new Binding(PropertyName);
-                (dataGridColumn as DataGridHyperlinkColumn).Binding = binding;
-            }
-            else
+
+            if (_isChanged == false && DataGridColumn != null)
             {
                 dataGridColumn = DataGridColumn;
             }
+            else
+            {
+                if (Type == typeof(DataGridTextColumn).Name)
+                {
+                    dataGridColumn = new DataGridTextColumn();
+                    var binding = new Binding(PropertyName);
+                    binding.StringFormat = StringFormat;
+                    binding.Converter = Converter;
+                    binding.ConverterParameter = ConverterParameter;
+                    (dataGridColumn as DataGridTextColumn).Binding = binding;
 
-            dataGridColumn.CanUserSort = CanUserSort;
-            dataGridColumn.CanUserResize = CanUserResize;
-            dataGridColumn.CanUserReorder = CanUserReorder;
-            dataGridColumn.Width = Width;
-            dataGridColumn.Visibility = Visibility;
-            dataGridColumn.Header = Header;
+                }
+                else if (Type == typeof(DataGridCheckBoxColumn).Name)
+                {
+                    dataGridColumn = new DataGridCheckBoxColumn();
+                    var binding = new Binding(PropertyName);
+                    binding.StringFormat = StringFormat;
+                    binding.Converter = Converter;
+                    binding.ConverterParameter = ConverterParameter;
+                    (dataGridColumn as DataGridCheckBoxColumn).Binding = binding;
+                }
+                else if (Type == typeof(DataGridComboBoxColumn).Name)
+                {
+                    dataGridColumn = new DataGridComboBoxColumn();
+                    var binding = new Binding(PropertyName);
+                    binding.StringFormat = StringFormat;
+                    binding.Converter = Converter;
+                    binding.ConverterParameter = ConverterParameter;
+                    (dataGridColumn as DataGridComboBoxColumn).SelectedValueBinding = binding;
+                    (dataGridColumn as DataGridComboBoxColumn).DisplayMemberPath = "Text";
+                    (dataGridColumn as DataGridComboBoxColumn).SelectedValuePath = "Value";
+                }
+                else if (Type == typeof(DataGridHyperlinkColumn).Name)
+                {
+                    dataGridColumn = new DataGridHyperlinkColumn();
+                    var binding = new Binding(PropertyName);
+                    binding.StringFormat = StringFormat;
+                    binding.Converter = Converter;
+                    binding.ConverterParameter = ConverterParameter;
+                    (dataGridColumn as DataGridHyperlinkColumn).Binding = binding;
+                }
+                else
+                {
+                    throw new Exception("该类型未支持");
+                }
 
+                dataGridColumn.CanUserSort = CanUserSort;
+                dataGridColumn.CanUserResize = CanUserResize;
+                dataGridColumn.CanUserReorder = CanUserReorder;
+                dataGridColumn.Width = Width;
+                dataGridColumn.Visibility = Visibility;
+                dataGridColumn.Header = Header;
+            }
             return dataGridColumn;
         }
 
@@ -214,57 +256,151 @@ namespace AIStudio.Wpf.Controls
             }
             set
             {
-                if (value != _isChecked)
-                {
-                    _isChecked = value;
-                    RaisePropertyChanged("IsChecked");
-                }
+                SetProperty(ref _isChecked, value);
             }
         }
 
+        private int _displayIndex;
         public int DisplayIndex
         {
-            get; set;
+            get
+            {
+                return _displayIndex;
+            }
+            set
+            {
+                SetProperty(ref _displayIndex, value);
+            }
         }
 
+        private string _propertyName;
         public string PropertyName
         {
-            get; set;
+            get
+            {
+                return _propertyName;
+            }
+            set
+            {
+                SetProperty(ref _propertyName, value);
+            }
         }
 
+        private bool _canUserSort = true;
         public bool CanUserSort
         {
-            get; set;
-        } = true;
-
-        public bool CanUserResize
-        {
-            get; set;
-        } = true;
-
-        public bool CanUserReorder
-        {
-            get; set;
-        } = true;
-
-        public DataGridLength Width
-        {
-            get; set;
-        } = new DataGridLength(0, DataGridLengthUnitType.Auto);
-
-        public Visibility Visibility
-        {
-            get; set;
-        } = new Visibility();
-
-        public object Header
-        {
-            get; set;
+            get
+            {
+                return _canUserSort;
+            }
+            set
+            {
+                SetProperty(ref _canUserSort, value);
+            }
         }
 
+        private bool _canUserResize = true;
+        public bool CanUserResize
+        {
+            get
+            {
+                return _canUserResize;
+            }
+            set
+            {
+                SetProperty(ref _canUserResize, value);
+            }
+        }
+
+        private bool _canUserReorder = true;
+        public bool CanUserReorder
+        {
+            get
+            {
+                return _canUserReorder;
+            }
+            set
+            {
+                SetProperty(ref _canUserReorder, value);
+            }
+        }
+
+        private DataGridLength _width = new DataGridLength(0, DataGridLengthUnitType.Auto);
+        public DataGridLength Width
+        {
+            get
+            {
+                return _width;
+            }
+            set
+            {
+                SetProperty(ref _width, value);
+            }
+        }
+
+        private Visibility _visibility = new Visibility();
+        public Visibility Visibility
+        {
+            get
+            {
+                return _visibility;
+            }
+            set
+            {
+                SetProperty(ref _visibility, value);
+            }
+        }
+
+        private object _header;
+        public object Header
+        {
+            get
+            {
+                return _header;
+            }
+            set
+            {
+                SetProperty(ref _header, value);
+            }
+        }
+
+        private string _stringFormat;
         public string StringFormat
         {
-            get; set;
+            get
+            {
+                return _stringFormat;
+            }
+            set
+            {
+                SetProperty(ref _stringFormat, value);
+            }
+        }
+
+        private IValueConverter _converter;
+        public IValueConverter Converter
+        {
+            get
+            {
+                return _converter;
+            }
+            set
+            {
+                SetProperty(ref _converter, value);
+            }
+        }
+
+        private object _converterParameter;
+        public object ConverterParameter
+        {
+            get
+            {
+                return _converterParameter;
+            }
+            set
+            {
+                SetProperty(ref _converterParameter, value);
+            }
         }
 
         public string Type

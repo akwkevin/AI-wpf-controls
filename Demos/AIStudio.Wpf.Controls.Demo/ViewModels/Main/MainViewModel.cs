@@ -236,7 +236,7 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
             if (dialog == (int)ControlStatus.Plain)
             {
                 var dialogtest = new DialogTest();
-                var res = await WindowBase.ShowDialogAsync(dialogtest, "RootWindow");
+                var res = await WindowBase.ShowDialogAsync2(dialogtest, "RootWindow");
             }
             else
             {
