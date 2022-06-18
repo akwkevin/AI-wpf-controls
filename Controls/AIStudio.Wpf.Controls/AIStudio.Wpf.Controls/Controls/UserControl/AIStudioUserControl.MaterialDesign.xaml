@@ -119,6 +119,7 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                             <ToggleButton x:Name="PART_ToggleCode" 
+                                          Content="显示代码" 
                                           Tag="切换查看Xaml代码" 
                                           Margin="2,0,0,0" 
                                           IsChecked="{Binding IsOpen,ElementName=PART_DrawerCode}" 

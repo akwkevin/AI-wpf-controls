@@ -19,11 +19,11 @@
         <ac:WindowBaseTitleBar>
             <ac:WindowBaseTitleBar.LeftWindowCommands>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="." VerticalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                    <TextBlock Text="." VerticalAlignment="Center" Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <ComboBox x:Name="comboBox" 
                               SelectedIndex="0" 
                               Background="Transparent" 
-                              Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" 
+                              Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" 
                               Style="{DynamicResource AIStudio.Styles.ComboBox.Underline}" 
                               Padding="0">
                         <ComboBoxItem Content="Controls"/>

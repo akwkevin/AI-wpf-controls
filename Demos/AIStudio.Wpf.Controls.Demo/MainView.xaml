@@ -31,7 +31,7 @@
                                 Height="{Binding Path=HamburgerHeight, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
                                 Padding="{Binding Path=HamburgerMargin, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}">
                                 <Path                                
-                                    Fill="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                                    Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=ac:HamburgerTreeMenu}}"
                                     Stretch="Uniform"
                                     Data="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"
                                     SnapsToDevicePixels="False"
@@ -54,63 +54,63 @@
                             Command="{Binding ShowCommand}"
                             CommandParameter="Theme"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}"
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     
                     <Button Content="Window" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"
                             CommandParameter="Window"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}" 
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <Button Content="Flyout" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"
                             CommandParameter="Flyout"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}" 
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <Button Content="Snack" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"
                             CommandParameter="Snackbar"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}" 
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <Button Content="Dialog" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"
                             CommandParameter="Dialog"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}" 
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <Button Content="Wait" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"
                             CommandParameter="WaitingBox"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}"
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <Button Content="WaitCl" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"
                             CommandParameter="WaitingBoxWithCancel"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}" 
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <Button Content="Notice" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"
                             CommandParameter="Notice"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}"  
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <Button Content="Msg" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"
                             CommandParameter="MessageBox"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}" 
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <Button
                             Content="Popup" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"  
                             CommandParameter="Popup"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}"
-                            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
 
                     <!--<Menu VerticalAlignment="Center" Style="{DynamicResource AIStudio.Styles.Menu}">
                         <MenuItem Header="窗口">                           

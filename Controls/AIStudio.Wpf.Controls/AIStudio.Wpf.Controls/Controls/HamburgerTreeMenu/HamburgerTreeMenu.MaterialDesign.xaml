@@ -413,7 +413,7 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid Grid.Row="0" Height="{TemplateBinding HamburgerHeight}" >
-                                        <Border x:Name="OpenHeader" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"  
+                                        <Border x:Name="OpenHeader" BorderBrush="{TemplateBinding BorderBrush}"  
                                             BorderThickness="0,0,0,0"
                                             HorizontalAlignment="Left"
                                             Width="{TemplateBinding OpenPaneLength}">
