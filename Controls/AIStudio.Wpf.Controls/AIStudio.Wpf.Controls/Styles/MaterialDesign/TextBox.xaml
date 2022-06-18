@@ -419,7 +419,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="AIStudio.Styles.TextBox.Plain" BasedOn="{StaticResource AIStudio.Styles.TextBoxBase}" TargetType="TextBoxBase">
+    <Style x:Key="AIStudio.Styles.TextBox.Plain" BasedOn="{StaticResource AIStudio.Styles.TextBox}" TargetType="TextBoxBase">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="MinHeight" Value="6" />
