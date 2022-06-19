@@ -26,8 +26,12 @@
         </ResourceDictionary>
     </Application.Resources>
 ```
-
-4.MainWindow.xaml界面使用控件
+其中<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.xaml"/>可以替换成<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.Defaults.xaml"/>，标准控件的Style也默认使用本控件库的。
+    
+4.MainWindow.xaml界面使用控件,引入命名控件
+xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
+使用样式： Style="{StaticResource AIStudio.Styles.XXX}",其中XXX为控件名
+使用内置控件： <ac:YYY></ac:YYY>,其中YYY为自定义控件名
 
 
 ```
@@ -43,23 +47,23 @@
     <WrapPanel>
         <ac:Avatar Size="Small" Shape="Square" Margin="2">AI</ac:Avatar>
         <ac:Badged Margin="2" Badge="1" IsWaving="True">
-            <Rectangle Width="24" Height="24" Fill="{DynamicResource MahApps.Brushes.Gray8}"></Rectangle>
+            <Rectangle Width="24" Height="24" Fill="{StaticResource MahApps.Brushes.Gray8}"></Rectangle>
         </ac:Badged>
-        <Button Content="Default" Margin="2" Style="{DynamicResource AIStudio.Styles.Button}"/>
-        <Button Content="Outlined" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Outlined}"/>
-        <Button Content="Flat" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Flat}"/>
-        <Button Content="Paper" Margin="2" Style="{DynamicResource AIStudio.Styles.Button.Paper}"/>
-        <Button Content="Progress" Margin="2" ac:ButtonAttach.Value="50" Style="{DynamicResource AIStudio.Styles.Button.Progress}"/>
-        <CheckBox Margin="2" Content="CheckBox" IsChecked="True" Style="{DynamicResource AIStudio.Styles.CheckBox}"/>
-        <CheckBox Margin="2" Content="CheckBoxNull" IsChecked="{x:Null}" Style="{DynamicResource AIStudio.Styles.CheckBox}"/>
-        <CheckBox Margin="2" Content="RightCheckBox" IsChecked="True" ac:IconAttach.Dock="Right" Style="{DynamicResource AIStudio.Styles.CheckBox}"/>
-        <CheckBox Margin="2" Content="Plain" IsChecked="True" Style="{DynamicResource AIStudio.Styles.CheckBox.Plain}"/>
+        <Button Content="Default" Margin="2" Style="{StaticResource AIStudio.Styles.Button}"/>
+        <Button Content="Outlined" Margin="2" Style="{StaticResource AIStudio.Styles.Button.Outlined}"/>
+        <Button Content="Flat" Margin="2" Style="{StaticResource AIStudio.Styles.Button.Flat}"/>
+        <Button Content="Paper" Margin="2" Style="{StaticResource AIStudio.Styles.Button.Paper}"/>
+        <Button Content="Progress" Margin="2" ac:ButtonAttach.Value="50" Style="{StaticResource AIStudio.Styles.Button.Progress}"/>
+        <CheckBox Margin="2" Content="CheckBox" IsChecked="True" Style="{StaticResource AIStudio.Styles.CheckBox}"/>
+        <CheckBox Margin="2" Content="CheckBoxNull" IsChecked="{x:Null}" Style="{StaticResource AIStudio.Styles.CheckBox}"/>
+        <CheckBox Margin="2" Content="RightCheckBox" IsChecked="True" ac:IconAttach.Dock="Right" Style="{StaticResource AIStudio.Styles.CheckBox}"/>
+        <CheckBox Margin="2" Content="Plain" IsChecked="True" Style="{StaticResource AIStudio.Styles.CheckBox.Plain}"/>
         <ac:ColorPicker Width="180" Margin="2"/>
-        <ComboBox Width="180" Margin="2" ac:ControlAttach.Watermark="请选择" Style="{DynamicResource AIStudio.Styles.ComboBox}">
+        <ComboBox Width="180" Margin="2" ac:ControlAttach.Watermark="请选择" Style="{StaticResource AIStudio.Styles.ComboBox}">
             <ComboBoxItem Content="子项1"/>
             <ComboBoxItem Content="子项2"/>
         </ComboBox>
-        <DatePicker Margin="2" Style="{DynamicResource AIStudio.Styles.DatePicker}" MinWidth="120" ac:ControlAttach.Watermark="请选择日期"/>
+        <DatePicker Margin="2" Style="{StaticResource AIStudio.Styles.DatePicker}" MinWidth="120" ac:ControlAttach.Watermark="请选择日期"/>
         <ac:DropDown Margin="2" Content="Down">
             <ac:DropDown.Child>
                 <TextBlock Margin="10" Text="下拉列表" VerticalAlignment="Center"/>
@@ -67,24 +71,25 @@
         </ac:DropDown>
         <ac:LinkTextBlock Margin="2" Content="Link" ViewInBrower="True" Url="https://gitee.com/akwkevin" />
         <ac:Loading Margin="2" IsRunning="True"></ac:Loading>
-        <ProgressBar Margin="10" Width="100" Value="50" Style="{DynamicResource AIStudio.Styles.ProgressBar}"/>
-        <ProgressBar Margin="10" Width="100" Value="70" IsIndeterminate="True" Style="{DynamicResource AIStudio.Styles.ProgressBar}"/>
-        <ProgressBar Margin="10" Width="100" Height="22" Value="90" ac:ControlAttach.CornerRadius="10" Style="{DynamicResource AIStudio.Styles.ProgressBar.Percent}"/>
-        <ProgressBar Margin="10" Width="100" Value="50" Style="{DynamicResource AIStudio.Styles.ProgressBar}"/>
-        <ProgressBar Margin="10" Width="100" Value="70" IsIndeterminate="True" Style="{DynamicResource AIStudio.Styles.ProgressBar}"/>
-        <ProgressBar Margin="10" Width="100" Height="22" Value="90" ac:ControlAttach.CornerRadius="10" Style="{DynamicResource AIStudio.Styles.ProgressBar.Percent}"/>
-        <TextBox MinWidth="120" Margin="2" ac:ControlAttach.Watermark="请输入内容" Style="{DynamicResource AIStudio.Styles.TextBox}" ></TextBox>
-        <TextBox MinWidth="120" Margin="2" ac:ControlAttach.Watermark="请输入内容" ac:ShadowAttach.DropShadowEffect="{x:Null}" Style="{DynamicResource AIStudio.Styles.TextBox}" ></TextBox>
-        <PasswordBox Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请输入密码" Style="{DynamicResource AIStudio.Styles.PasswordBox}"/>
-        <PasswordBox Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请输入密码" Style="{DynamicResource AIStudio.Styles.PasswordBox.Plus}"/>
-        <TextBox MinWidth="120" Margin="2" ac:ControlAttach.Watermark="请输入内容" Style="{DynamicResource AIStudio.Styles.TextBox}" ></TextBox>
-        <TextBox MinWidth="120" Margin="2" ac:ControlAttach.Watermark="请输入内容" ac:ShadowAttach.DropShadowEffect="{x:Null}" Style="{DynamicResource AIStudio.Styles.TextBox}" ></TextBox>
-        <PasswordBox Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请输入密码" Style="{DynamicResource AIStudio.Styles.PasswordBox}"/>
-        <PasswordBox Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请输入密码" Style="{DynamicResource AIStudio.Styles.PasswordBox.Plus}"/>
+        <ProgressBar Margin="10" Width="100" Value="50" Style="{StaticResource AIStudio.Styles.ProgressBar}"/>
+        <ProgressBar Margin="10" Width="100" Value="70" IsIndeterminate="True" Style="{StaticResource AIStudio.Styles.ProgressBar}"/>
+        <ProgressBar Margin="10" Width="100" Height="22" Value="90" ac:ControlAttach.CornerRadius="10" Style="{StaticResource AIStudio.Styles.ProgressBar.Percent}"/>
+        <ProgressBar Margin="10" Width="100" Value="50" Style="{StaticResource AIStudio.Styles.ProgressBar}"/>
+        <ProgressBar Margin="10" Width="100" Value="70" IsIndeterminate="True" Style="{StaticResource AIStudio.Styles.ProgressBar}"/>
+        <ProgressBar Margin="10" Width="100" Height="22" Value="90" ac:ControlAttach.CornerRadius="10" Style="{StaticResource AIStudio.Styles.ProgressBar.Percent}"/>
+        <TextBox MinWidth="120" Margin="2" ac:ControlAttach.Watermark="请输入内容" Style="{StaticResource AIStudio.Styles.TextBox}" ></TextBox>
+        <TextBox MinWidth="120" Margin="2" ac:ControlAttach.Watermark="请输入内容" ac:ShadowAttach.DropShadowEffect="{x:Null}" Style="{StaticResource AIStudio.Styles.TextBox}" ></TextBox>
+        <PasswordBox Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请输入密码" Style="{StaticResource AIStudio.Styles.PasswordBox}"/>
+        <PasswordBox Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请输入密码" Style="{StaticResource AIStudio.Styles.PasswordBox.Plus}"/>
+        <TextBox MinWidth="120" Margin="2" ac:ControlAttach.Watermark="请输入内容" Style="{StaticResource AIStudio.Styles.TextBox}" ></TextBox>
+        <TextBox MinWidth="120" Margin="2" ac:ControlAttach.Watermark="请输入内容" ac:ShadowAttach.DropShadowEffect="{x:Null}" Style="{StaticResource AIStudio.Styles.TextBox}" ></TextBox>
+        <PasswordBox Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请输入密码" Style="{StaticResource AIStudio.Styles.PasswordBox}"/>
+        <PasswordBox Margin="2" MinWidth="120" ac:ControlAttach.Watermark="请输入密码" Style="{StaticResource AIStudio.Styles.PasswordBox.Plus}"/>
     </WrapPanel>
 </Window>
 ```
 
+以下为控件库的其它样式或者配套用法：
 5：如果使用MaterialDesign风格：App.xaml的引用资源替换成如下：
 
 ```
@@ -99,6 +104,7 @@
     </ResourceDictionary>
 </Application.Resources>
 ```
+其中<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.xaml"/>可以替换成<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.Defaults.xaml"/>，标准控件的Style也默认使用本控件库的。
 
 6：如果与MahApps.Metro一起使用(需要安装MahApps.Metro),App.xaml的引用资源替换成如下：
            
