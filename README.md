@@ -130,7 +130,12 @@
     </ResourceDictionary>
 </Application.Resources>
 ```
-  
+    
+**友情提示**
+很大朋友老问为什么编译不过去，您需要安装对应的net版本，或者修改工程的net版本，如下图。
+![image](https://user-images.githubusercontent.com/27945492/174464893-948521f0-36f6-4a15-84de-759043751d64.png)
+    
+    
 技术交流
 个人QQ:80267720 QQ技术交流群:51286643 个人博客:https://www.cnblogs.com/akwkevin/
 
