@@ -132,8 +132,8 @@ xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
 <Application.Resources>
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>             
-            <materialDesign:MahAppsBundledTheme BaseTheme="Inherit" PrimaryColor="DeepPurple" SecondaryColor="LightBlue"/>               
-             <!--Material Design--> 
+            <materialDesign:BundledTheme BaseTheme="Inherit" PrimaryColor="DeepPurple" SecondaryColor="Lime" ColorAdjustment="{materialDesign:ColorAdjustment}" />
+            <!--Material Design-->
             <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.xaml"/>
         </ResourceDictionary.MergedDictionaries>
