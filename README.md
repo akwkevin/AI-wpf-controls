@@ -29,9 +29,12 @@
 其中<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.xaml"/>可以替换成<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.Defaults.xaml"/>，标准控件的Style也默认使用本控件库的。
     
 4.MainWindow.xaml界面使用控件,引入命名控件
-xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
-使用样式： Style="{StaticResource AIStudio.Styles.XXX}",其中XXX为控件名
-使用内置控件： <ac:YYY></ac:YYY>,其中YYY为自定义控件名
+    
+xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"  
+    
+使用样式： Style="{StaticResource AIStudio.Styles.XXX}",其中XXX为控件名；
+    
+使用内置控件： <ac:YYY></ac:YYY>,其中YYY为自定义控件名；
 
 
 ```
