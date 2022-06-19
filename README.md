@@ -26,7 +26,8 @@
         </ResourceDictionary>
     </Application.Resources>
 ```
-其中<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.xaml"/>可以替换成<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.Defaults.xaml"/>，标准控件的Style也默认使用本控件库的。
+    
+其中```<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.xaml"/>```可以替换成```<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.Defaults.xaml"/>```，标准控件的Style也默认使用本控件库的。
     
 4.MainWindow.xaml界面使用控件,引入命名控件
     
@@ -107,7 +108,7 @@ xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
     </ResourceDictionary>
 </Application.Resources>
 ```
-其中<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.xaml"/>可以替换成<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.Defaults.xaml"/>，标准控件的Style也默认使用本控件库的。
+其中```<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.xaml"/>```可以替换成```<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.Defaults.xaml"/>```，标准控件的Style也默认使用本控件库的。
 
 6：如果与MahApps.Metro一起使用(需要安装MahApps.Metro),App.xaml的引用资源替换成如下：
            
