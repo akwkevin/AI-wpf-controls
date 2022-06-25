@@ -3,6 +3,9 @@
 
 ![image](https://user-images.githubusercontent.com/27945492/174432563-a997977f-e4f0-4749-920b-2a5aa4d08a29.png)
 
+github 地址：https://github.com/akwkevin/AI-wpf-controls
+gitee 地址：https://gitee.com/akwkevin/AI-wpf-controls
+    
 **快速使用方法** 
 
 1.新建WPF应用程序：TestAIControls
