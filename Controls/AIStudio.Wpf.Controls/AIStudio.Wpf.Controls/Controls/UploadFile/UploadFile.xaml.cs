@@ -15,6 +15,12 @@ namespace AIStudio.Wpf.Controls
 {
     public class UploadFile : Control
     {
+        public static Dictionary<string, string> Header;
+        public static void SetHeader(Dictionary<string, string> header)
+        {
+            Header = header;
+        }
+
         public static readonly DependencyProperty UploadFileTypeProperty = DependencyProperty.Register(
             nameof(UploadFileType), typeof(UploadFileType), typeof(UploadFile), new PropertyMetadata(UploadFileType.File));
 
@@ -341,7 +347,16 @@ namespace AIStudio.Wpf.Controls
                             using (System.IO.FileStream fStream = System.IO.File.Open(path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                             {
                                 data.Add(new StreamContent(fStream, (int)fStream.Length), "file", System.IO.Path.GetFileName(path));
-                                var header = JsonConvert.DeserializeObject<Dictionary<string, string>>(UploadToken ?? "");
+
+                                Dictionary<string, string> header;
+                                if (!string.IsNullOrEmpty(UploadToken))
+                                {
+                                    header = JsonConvert.DeserializeObject<Dictionary<string, string>>(UploadToken);                                    
+                                }
+                                else
+                                {
+                                    header = Header;
+                                }                               
 
                                 using (HttpClient client = new HttpClient())
                                 {
