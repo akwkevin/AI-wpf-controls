@@ -25,73 +25,92 @@
                             <ItemsControl VerticalAlignment="Center" ItemsSource="{TemplateBinding FilesDisplay}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid>
-                                            <Border x:Name="border" Visibility="Collapsed" SnapsToDevicePixels="{Binding SnapsToDevicePixels,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"     
-                                                CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile}, Mode=FindAncestor}}"
-                                                BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                Padding="{Binding Padding,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                Margin="{Binding Margin,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}">
-                                                <Grid ToolTip="{Binding Url}">
-                                                    <Grid.InputBindings>
-                                                        <MouseBinding MouseAction="LeftClick"
-                                                        Command="{Binding Path=OpenCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                        CommandParameter="{Binding Url}"/>
-                                                    </Grid.InputBindings>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Image x:Name="img" Grid.Column="0" Margin="3" Stretch="Fill" Width="32" Height="32" Source="{Binding Url}"></Image>
-                                                    <TextBlock x:Name="file" Grid.Column="0" Margin="3" VerticalAlignment="Center" Text="&#xf016;" Style="{StaticResource AIStudio.Styles.TextBlock.FontAwesome}" Visibility="Collapsed"></TextBlock>
-                                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding DisplayName}"></TextBlock>
-                                                    <Button x:Name="delete" 
-                                                            Grid.Column="2" 
-                                                            VerticalAlignment="Center" 
-                                                            Margin="5"                                                          
-                                                            Style="{StaticResource AIStudio.Styles.Button.Clear}"
-                                                            controls:ControlAttach.Status="{Binding Path=(controls:ControlAttach.Status),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                            Command="{Binding Path=DeleteCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                            CommandParameter="{Binding .}"></Button>
-                                                </Grid>
-                                            </Border>
-                                            <Grid x:Name="template">
-                                                <Button controls:ControlAttach.CornerRadius="2" 
-                                                        Margin="{Binding Margin,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                        Content="选择" 
-                                                        HorizontalAlignment="Left" 
-                                                        VerticalAlignment="Center"
-                                                        Command="{Binding Path=AddCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                        Visibility="{Binding UploadVisible,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                        controls:IconAttach.Geometry="{StaticResource AddGeometry}"  
-                                                        controls:ControlAttach.Status="{Binding Path=(controls:ControlAttach.Status),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                        Style="{StaticResource AIStudio.Styles.Button}">
-                                                </Button>
-                                            </Grid>
-                                        </Grid>
-                                        <DataTemplate.Triggers>
-                                            <DataTrigger Binding="{Binding Source,ElementName=img}" Value="{x:Null}">
-                                                <Setter TargetName="img" Property="Visibility" Value="Collapsed"></Setter>
-                                                <Setter TargetName="file" Property="Visibility" Value="Visible"></Setter>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsUploadTemplate}" Value="False">
-                                                <Setter TargetName="template" Property="Visibility" Value="Collapsed"></Setter>
-                                                <Setter TargetName="border" Property="Visibility" Value="Visible"></Setter>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=Disable,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" Value="True">
-                                                <Setter TargetName="delete" Property="Visibility" Value="Collapsed"></Setter>
-                                                <Setter TargetName="template" Property="IsEnabled" Value="False"></Setter>
-                                            </DataTrigger>
-
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
-                                            </Trigger>
-                                            <Trigger Property="IsFocused" Value="True">
-                                                <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
-                                            </Trigger>
-                                        </DataTemplate.Triggers>
+                                        <Control x:Name="control">
+                                            <Control.Style>
+                                                <Style TargetType="Control">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Control">
+                                                                <Border x:Name="border" SnapsToDevicePixels="{Binding SnapsToDevicePixels,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"     
+                                                                    CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile}, Mode=FindAncestor}}"
+                                                                    BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                    BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                    Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                    Padding="{Binding Padding,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                    Margin="{Binding Margin,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}">
+                                                                    <Grid ToolTip="{Binding Url}">
+                                                                        <Grid.InputBindings>
+                                                                            <MouseBinding MouseAction="LeftClick"
+                                                                                Command="{Binding Path=OpenCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                                CommandParameter="{Binding Url}"/>
+                                                                        </Grid.InputBindings>
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <Image x:Name="img" Grid.Column="0" Margin="3" Stretch="Fill" Width="32" Height="32" Source="{Binding Url}"></Image>
+                                                                        <TextBlock x:Name="file" Grid.Column="0" Margin="3" VerticalAlignment="Center" Text="&#xf016;" Style="{StaticResource AIStudio.Styles.TextBlock.FontAwesome}" Visibility="Collapsed"></TextBlock>
+                                                                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding DisplayName}"></TextBlock>
+                                                                        <Button x:Name="delete" 
+                                                                            Grid.Column="2" 
+                                                                            VerticalAlignment="Center" 
+                                                                            Margin="5"                                                          
+                                                                            Style="{StaticResource AIStudio.Styles.Button.Clear}"
+                                                                            controls:ControlAttach.Status="{Binding Path=(controls:ControlAttach.Status),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                            Command="{Binding Path=DeleteCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                            CommandParameter="{Binding .}"></Button>
+                                                                    </Grid>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <DataTrigger Binding="{Binding Source,ElementName=img}" Value="{x:Null}">
+                                                                        <Setter TargetName="img" Property="Visibility" Value="Collapsed"></Setter>
+                                                                        <Setter TargetName="file" Property="Visibility" Value="Visible"></Setter>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Path=Disable,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" Value="True">
+                                                                        <Setter TargetName="delete" Property="Visibility" Value="Collapsed"></Setter>
+                                                                    </DataTrigger>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsFocused" Value="True">
+                                                                        <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsUploadTemplate}" Value="True">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="Control">
+                                                                        <Grid x:Name="template">
+                                                                            <Button controls:ControlAttach.CornerRadius="2" 
+                                                                                Margin="{Binding Margin,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                                Content="选择" 
+                                                                                HorizontalAlignment="Left" 
+                                                                                VerticalAlignment="Center"
+                                                                                Command="{Binding Path=AddCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                                Visibility="{Binding UploadVisible,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                                controls:IconAttach.Geometry="{StaticResource AddGeometry}"  
+                                                                                controls:ControlAttach.Status="{Binding Path=(controls:ControlAttach.Status),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                                Style="{StaticResource AIStudio.Styles.Button}">
+                                                                            </Button>
+                                                                        </Grid>
+                                                                        <ControlTemplate.Triggers>
+                                                                            <DataTrigger Binding="{Binding Path=Disable,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" Value="True">
+                                                                                <Setter TargetName="template" Property="IsEnabled" Value="False"></Setter>
+                                                                            </DataTrigger>
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Control.Style>
+                                        </Control>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -115,71 +134,91 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid>
-                                                    <Border x:Name="border" Height="138" Width="138" Visibility="Collapsed" SnapsToDevicePixels="{Binding SnapsToDevicePixels,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"     
-                                                        CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile}, Mode=FindAncestor}}"
-                                                        BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                        BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                        Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                        Padding="{Binding Padding,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                        Margin="{Binding Margin,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}">
-                                                        <Grid ToolTip="{Binding Url}">
-                                                            <Grid.InputBindings>
-                                                                <MouseBinding MouseAction="LeftClick"
-                                                                    Command="{Binding Path=OpenCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                                    CommandParameter="{Binding Url}"/>
-                                                            </Grid.InputBindings>
-                                                            <Image x:Name="img" Grid.Column="0" Margin="3" Stretch="Fill" Source="{Binding Url}"></Image>
-                                                            <TextBlock x:Name="file" Grid.Column="0" Margin="3" VerticalAlignment="Center" Text="&#xf016;" Style="{StaticResource AIStudio.Styles.TextBlock.FontAwesome}" Visibility="Collapsed"></TextBlock>
-                                                            <Button x:Name="delete" 
-                                                                    VerticalAlignment="Center" 
-                                                                    controls:ControlAttach.CornerRadius="2" 
-                                                                    Margin="5"                                                                 
-                                                                    Style="{StaticResource AIStudio.Styles.Button.Clear}"
-                                                                    Command="{Binding Path=DeleteCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                                    CommandParameter="{Binding .}" 
-                                                                    Visibility="Collapsed"></Button>
-                                                        </Grid>
-                                                    </Border>
-                                                    <Grid x:Name="template">
-                                                        <Button Height="138" Width="138" 
-                                                                controls:ControlAttach.CornerRadius="2" 
-                                                                Margin="{Binding Margin,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                                BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
-                                                                Background="Transparent" 
-                                                                Foreground="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                                BorderThickness="1"
-                                                                controls:IconAttach.Geometry="{StaticResource AddGeometry}"                                                            
-                                                                Style="{StaticResource AIStudio.Styles.Button.Flat}"
-                                                                Command="{Binding Path=AddCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
-                                                                Visibility="{Binding UploadVisible,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}">
-                                                        </Button>
-                                                    </Grid>
-                                                </Grid>
-                                                <DataTemplate.Triggers>
-                                                    <DataTrigger Binding="{Binding Source,ElementName=img}" Value="{x:Null}">
-                                                        <Setter TargetName="img" Property="Visibility" Value="Collapsed"></Setter>
-                                                        <Setter TargetName="file" Property="Visibility" Value="Visible"></Setter>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding IsUploadTemplate}" Value="False">
-                                                        <Setter TargetName="template" Property="Visibility" Value="Collapsed"></Setter>
-                                                        <Setter TargetName="border" Property="Visibility" Value="Visible"></Setter>
-                                                    </DataTrigger>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="delete" Property="Visibility" Value="Visible"></Setter>
-                                                    </Trigger>
-                                                    <DataTrigger Binding="{Binding Path=Disable,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" Value="True">
-                                                        <Setter TargetName="delete" Property="Visibility" Value="Collapsed"></Setter>
-                                                        <Setter TargetName="template" Property="IsEnabled" Value="False"></Setter>
-                                                    </DataTrigger>
-
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
-                                                    </Trigger>
-                                                    <Trigger Property="IsFocused" Value="True">
-                                                        <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
-                                                    </Trigger>
-                                                </DataTemplate.Triggers>
+                                                <Control x:Name="control">
+                                                    <Control.Style>
+                                                        <Style TargetType="Control">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="Control">
+                                                                        <Border x:Name="border" Height="138" Width="138" SnapsToDevicePixels="{Binding SnapsToDevicePixels,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"     
+                                                                            CornerRadius="{Binding Path=(controls:ControlAttach.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile}, Mode=FindAncestor}}"
+                                                                            BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                            BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                            Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                            Padding="{Binding Padding,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                            Margin="{Binding Margin,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}">
+                                                                            <Grid ToolTip="{Binding Url}">
+                                                                                <Grid.InputBindings>
+                                                                                    <MouseBinding MouseAction="LeftClick"
+                                                                                        Command="{Binding Path=OpenCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                                        CommandParameter="{Binding Url}"/>
+                                                                                </Grid.InputBindings>
+                                                                                <Image x:Name="img" Grid.Column="0" Margin="3" Stretch="Fill" Source="{Binding Url}"></Image>
+                                                                                <TextBlock x:Name="file" Grid.Column="0" Margin="3" VerticalAlignment="Center" Text="&#xf016;" Style="{StaticResource AIStudio.Styles.TextBlock.FontAwesome}" Visibility="Collapsed"></TextBlock>
+                                                                                <Button x:Name="delete" 
+                                                                                    VerticalAlignment="Center" 
+                                                                                    controls:ControlAttach.CornerRadius="2" 
+                                                                                    Margin="5"                                                                 
+                                                                                    Style="{StaticResource AIStudio.Styles.Button.Clear}"
+                                                                                    Command="{Binding Path=DeleteCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                                    CommandParameter="{Binding .}" 
+                                                                                    Visibility="Collapsed"></Button>        
+                                                                            </Grid>
+                                                                        </Border>
+                                                                        <ControlTemplate.Triggers>
+                                                                            <DataTrigger Binding="{Binding Source,ElementName=img}" Value="{x:Null}">
+                                                                                <Setter TargetName="img" Property="Visibility" Value="Collapsed"></Setter>
+                                                                                <Setter TargetName="file" Property="Visibility" Value="Visible"></Setter>
+                                                                            </DataTrigger>                                                                      
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="delete" Property="Visibility" Value="Visible"></Setter>
+                                                                            </Trigger>
+                                                                            <DataTrigger Binding="{Binding Path=Disable,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" Value="True">
+                                                                                <Setter TargetName="delete" Property="Visibility" Value="Collapsed"></Setter>                                                                              
+                                                                            </DataTrigger>
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
+                                                                            </Trigger>
+                                                                            <Trigger Property="IsFocused" Value="True">
+                                                                                <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
+                                                                            </Trigger>
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsUploadTemplate}" Value="True">
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="Control">
+                                                                                <Grid x:Name="template">
+                                                                                    <Button Height="138" Width="138" 
+                                                                                        controls:ControlAttach.CornerRadius="2" 
+                                                                                        Margin="{Binding Margin,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                                        BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
+                                                                                        Background="Transparent" 
+                                                                                        Foreground="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                                        BorderThickness="1"
+                                                                                        controls:IconAttach.Geometry="{StaticResource AddGeometry}"                                                            
+                                                                                        Style="{StaticResource AIStudio.Styles.Button.Flat}"
+                                                                                        Command="{Binding Path=AddCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" 
+                                                                                        Visibility="{Binding UploadVisible,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}">
+                                                                                    </Button>
+                                                                                </Grid>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Path=Disable,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" Value="True">
+                                                                                        <Setter TargetName="template" Property="IsEnabled" Value="False"></Setter>
+                                                                                    </DataTrigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Control.Style>
+                                                </Control>                                               
+                                               
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
@@ -190,7 +229,6 @@
 
                 </Setter>
             </Trigger>
-
 
             <Trigger Property="controls:ControlAttach.Status" Value="Light">
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />

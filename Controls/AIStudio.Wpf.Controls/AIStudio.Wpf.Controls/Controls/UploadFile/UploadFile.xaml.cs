@@ -16,7 +16,7 @@ namespace AIStudio.Wpf.Controls
     public class UploadFile : Control
     {
         public static readonly DependencyProperty UploadFileTypeProperty = DependencyProperty.Register(
-            "UploadFileType", typeof(UploadFileType), typeof(UploadFile), new PropertyMetadata(UploadFileType.File));
+            nameof(UploadFileType), typeof(UploadFileType), typeof(UploadFile), new PropertyMetadata(UploadFileType.File));
 
         public UploadFileType UploadFileType
         {
@@ -31,7 +31,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty FilesProperty = DependencyProperty.Register(
-            "Files", typeof(ObservableCollection<string>), typeof(UploadFile), new PropertyMetadata(null, FilesPropertyChangedCallback));
+            nameof(Files), typeof(ObservableCollection<string>), typeof(UploadFile), new PropertyMetadata(null, FilesPropertyChangedCallback));
 
         public ObservableCollection<string> Files
         {
@@ -46,7 +46,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty MaxCountProperty = DependencyProperty.Register(
-            "MaxCount", typeof(int), typeof(UploadFile), new PropertyMetadata(1));
+            nameof(MaxCount), typeof(int), typeof(UploadFile), new PropertyMetadata(1));
 
         public int MaxCount
         {
@@ -61,7 +61,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty FileProperty = DependencyProperty.Register(
-            "File", typeof(string), typeof(UploadFile), new PropertyMetadata(default(string), FilePropertyChangedCallback));
+            nameof(File), typeof(string), typeof(UploadFile), new PropertyMetadata(default(string), FilePropertyChangedCallback));
 
         public string File
         {
@@ -76,7 +76,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty UploadVisibleProperty = DependencyProperty.Register(
-            "UploadVisible", typeof(Visibility), typeof(UploadFile), new PropertyMetadata(Visibility.Visible));
+            nameof(UploadVisible), typeof(Visibility), typeof(UploadFile), new PropertyMetadata(Visibility.Visible));
 
         public Visibility UploadVisible
         {
@@ -91,7 +91,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty FilesDisplayProperty = DependencyProperty.Register(
-            "FilesDisplay", typeof(ObservableCollection<UploadFileDisplay>), typeof(UploadFile), new PropertyMetadata(new ObservableCollection<UploadFileDisplay>() { new UploadFileDisplay() { IsUploadTemplate = true } }));
+            nameof(FilesDisplay), typeof(ObservableCollection<UploadFileDisplay>), typeof(UploadFile), new PropertyMetadata(new ObservableCollection<UploadFileDisplay>() { new UploadFileDisplay() { IsUploadTemplate = true } }));
 
         public ObservableCollection<UploadFileDisplay> FilesDisplay
         {
@@ -106,7 +106,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty DisableProperty = DependencyProperty.Register(
-           "Disable", typeof(bool), typeof(UploadFile), new PropertyMetadata(false));
+           nameof(Disable), typeof(bool), typeof(UploadFile), new PropertyMetadata(false));
 
         public bool Disable
         {
@@ -121,7 +121,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty UploadUrlProperty = DependencyProperty.Register(
-            "UploadUrl", typeof(string), typeof(UploadFile), new PropertyMetadata(default(string), FilePropertyChangedCallback));
+            nameof(UploadUrl), typeof(string), typeof(UploadFile), new PropertyMetadata(default(string), FilePropertyChangedCallback));
 
         public string UploadUrl
         {
@@ -136,7 +136,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty UploadTokenProperty = DependencyProperty.Register(
-        "UploadToken", typeof(string), typeof(UploadFile), new PropertyMetadata(default(string), FilePropertyChangedCallback));
+            nameof(UploadToken), typeof(string), typeof(UploadFile), new PropertyMetadata(default(string), FilePropertyChangedCallback));
 
         public string UploadToken
         {
@@ -151,7 +151,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty UploadProperty = DependencyProperty.Register(
-            "Upload", typeof(Func<string, Task<Tuple<string, string>>>), typeof(UploadFile), new PropertyMetadata(null));
+            nameof(Upload), typeof(Func<string, Task<Tuple<string, string>>>), typeof(UploadFile), new PropertyMetadata(null));
 
         public Func<string, Task<Tuple<string, string>>> Upload
         {
@@ -170,9 +170,14 @@ namespace AIStudio.Wpf.Controls
             var uploadFile = (UploadFile)dependencyObject;
             if (uploadFile != null)
             {
-                if (!string.IsNullOrEmpty(uploadFile.File) && uploadFile.MaxCount == 1 && !uploadFile.Files.Contains(uploadFile.File))
+                if (uploadFile.MaxCount == 1 && !uploadFile.Files.Contains(uploadFile.File))
                 {
-                    uploadFile.Files = new ObservableCollection<string>() { uploadFile.File };
+                    uploadFile.Files.Clear();
+                    if (!string.IsNullOrEmpty(uploadFile.File))
+                    {
+                        uploadFile.Files.Add(uploadFile.File);
+                    }
+                    uploadFile.InitDisplay();
                 }
             }
         }
@@ -250,7 +255,7 @@ namespace AIStudio.Wpf.Controls
             this.BindCommand(AddCommand, this.AddExecute);
             this.BindCommand(DeleteCommand, this.DeleteExecute);
             this.BindCommand(OpenCommand, this.OpenExecute);
-            Files = new ObservableCollection<string>();
+            SetCurrentValue(FilesProperty, new ObservableCollection<string>());
 
         }
 
