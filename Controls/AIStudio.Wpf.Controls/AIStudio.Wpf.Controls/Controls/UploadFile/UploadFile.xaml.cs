@@ -403,6 +403,7 @@ namespace AIStudio.Wpf.Controls
             UploadFile uploadFile = sender as UploadFile;
             if (uploadFile != null)
             {
+                uploadFile.File = null;
                 uploadFile.Files.Remove((e.Parameter as UploadFileDisplay).Url);
                 uploadFile.FilesDisplay.Remove(e.Parameter as UploadFileDisplay);
                 uploadFile.SetDisplay();
