@@ -75,7 +75,7 @@
                             <Grid Margin="{TemplateBinding Padding}">
                                 <!--内容区域-->
                                 <AdornerDecorator>
-                                    <ContentPresenter Content="{TemplateBinding Content}" />
+                                    <ContentPresenter ClipToBounds="True"  />
                                 </AdornerDecorator>
 
                                 <!--等待窗口弹出-->
@@ -229,8 +229,7 @@
                         <Trigger Property="WindowState" Value="Normal">
                             <Setter Property="controls:IconAttach.Geometry" TargetName="ButtonMax" Value="{StaticResource WindowMaxGeometry}"></Setter>
                         </Trigger>
-                        <Trigger Property="WindowState" Value="Maximized">
-                            <!--<Setter Property="Visibility" Value="Collapsed" TargetName="PART_Border"></Setter>-->
+                        <Trigger Property="WindowState" Value="Maximized">                         
                             <Setter Property="BorderThickness" Value="0" TargetName="PART_OUTBorder"></Setter>
                         </Trigger>
                         <Trigger Property="MinboxEnable" Value="False">
@@ -448,8 +447,7 @@
                         <Trigger Property="WindowState" Value="Normal">
                             <Setter Property="controls:IconAttach.Geometry" TargetName="ButtonMax" Value="{StaticResource WindowMaxGeometry}"></Setter>
                         </Trigger>
-                        <Trigger Property="WindowState" Value="Maximized">
-                            <!--<Setter Property="Visibility" Value="Collapsed" TargetName="PART_Border"></Setter>-->
+                        <Trigger Property="WindowState" Value="Maximized">                         
                             <Setter Property="BorderThickness" Value="0" TargetName="PART_OUTBorder"></Setter>
                         </Trigger>
                         <Trigger Property="MinboxEnable" Value="False">
