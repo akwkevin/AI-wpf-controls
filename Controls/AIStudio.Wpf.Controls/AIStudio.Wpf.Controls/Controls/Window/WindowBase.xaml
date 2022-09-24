@@ -67,11 +67,6 @@
         <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
         <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
         <Setter Property="CaptionHeight" Value="{DynamicResource AIStudio.Header.Size}"/>
-        <Setter Property="WindowChrome.WindowChrome">
-            <Setter.Value>
-                <WindowChrome ResizeBorderThickness="10" CaptionHeight="0" GlassFrameThickness="3" CornerRadius="0" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:WindowBase}">
@@ -198,14 +193,7 @@
 
                                     </DockPanel>
                                 </Border>
-
-                                <Border x:Name="PART_Border"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                                    Background="{x:Null}"
-                                    BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    UseLayoutRounding="True" />
+                             
 
                                 <ResizeGrip Width="10" Height="10" x:Name="ResizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" IsTabStop="False" Visibility="Collapsed" WindowChrome.ResizeGripDirection="BottomRight" />
                             </Grid>
@@ -242,7 +230,7 @@
                             <Setter Property="controls:IconAttach.Geometry" TargetName="ButtonMax" Value="{StaticResource WindowMaxGeometry}"></Setter>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Border"></Setter>
+                            <!--<Setter Property="Visibility" Value="Collapsed" TargetName="PART_Border"></Setter>-->
                             <Setter Property="BorderThickness" Value="0" TargetName="PART_OUTBorder"></Setter>
                         </Trigger>
                         <Trigger Property="MinboxEnable" Value="False">
@@ -283,11 +271,6 @@
         <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
         <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
         <Setter Property="CaptionHeight" Value="{DynamicResource AIStudio.Header.Size}"/>
-        <Setter Property="WindowChrome.WindowChrome">
-            <Setter.Value>
-                <WindowChrome ResizeBorderThickness="10" CaptionHeight="0" GlassFrameThickness="3" CornerRadius="0" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:WindowBase}">
@@ -368,7 +351,7 @@
 
                                 <!--内容区域-->
                                 <AdornerDecorator Grid.Row="1">
-                                    <ContentPresenter Content="{TemplateBinding Content}" />
+                                    <ContentPresenter ClipToBounds="True" />
                                 </AdornerDecorator>
 
                                 <Grid Grid.Row="1">
@@ -431,14 +414,6 @@
                                     <StackPanel controls:NoticeCard.Identifier="{TemplateBinding Identifier}" VerticalAlignment="Top" />
                                 </Grid>
 
-                                <Border x:Name="PART_Border" Grid.RowSpan="2"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                                    Background="{x:Null}"
-                                    BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    UseLayoutRounding="True" />
-
                                 <ResizeGrip Width="10" Height="10" x:Name="ResizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" IsTabStop="False" Visibility="Collapsed" WindowChrome.ResizeGripDirection="BottomRight" />
                             </Grid>
                         </Border>
@@ -474,7 +449,7 @@
                             <Setter Property="controls:IconAttach.Geometry" TargetName="ButtonMax" Value="{StaticResource WindowMaxGeometry}"></Setter>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Border"></Setter>
+                            <!--<Setter Property="Visibility" Value="Collapsed" TargetName="PART_Border"></Setter>-->
                             <Setter Property="BorderThickness" Value="0" TargetName="PART_OUTBorder"></Setter>
                         </Trigger>
                         <Trigger Property="MinboxEnable" Value="False">
