@@ -60,6 +60,8 @@ namespace AIStudio.Wpf.Controls
 
         public WindowBase()
         {
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             var chrome = new WindowChrome
             {
                 CornerRadius = new CornerRadius(),
