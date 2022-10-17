@@ -23,6 +23,11 @@
                         <DataGridTextColumn Header="编号" CanUserSort="True" SortMemberPath="Index" Binding="{Binding Index}"></DataGridTextColumn>
                         <DataGridTextColumn Header="姓名" CanUserSort="True" SortMemberPath="Name" Binding="{Binding Name}"></DataGridTextColumn>
                     </DataGrid.Columns>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction  Command="{Binding EditCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </DataGrid>
             </TabItem>
             <TabItem Header="ExtendedDataGrid">

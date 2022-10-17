@@ -1,8 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Windows.Data;
+using System.Windows.Input;
+using AIStudio.Wpf.Controls.Commands;
 using AIStudio.Wpf.Controls.Demo.Models;
 using AIStudio.Wpf.Controls.Demo.Services;
+using AIStudio.Wpf.Controls.Demo.Views;
 
 namespace AIStudio.Wpf.Controls.Demo.ViewModels
 {
@@ -79,6 +84,21 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
                     OnPropertyChanged("DataList3");
                 }
             }
+        }
+
+        private ICommand _editCommand;
+        public ICommand EditCommand
+        {
+            get
+            {
+                return this._editCommand ?? (this._editCommand = new DelegateCommand(() => this.Edit()));
+            }
+        }
+
+        private async void Edit()
+        {
+            var dialogtest = new DialogTest();
+            var res = await WindowBase.ShowDialogAsync2(dialogtest, "RootWindow");
         }
 
         private readonly ICollectionView _view;
