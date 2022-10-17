@@ -64,15 +64,33 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
             }
         }
 
+        private ObservableCollection<DemoDataModel> _dataList3;
+        public ObservableCollection<DemoDataModel> DataList3
+        {
+            get
+            {
+                return _dataList3;
+            }
+            set
+            {
+                if (_dataList3 != value)
+                {
+                    _dataList3 = value;
+                    OnPropertyChanged("DataList3");
+                }
+            }
+        }
+
         private readonly ICollectionView _view;
         public ICollectionView View { get { return _view; } }
 
         public DataGridViewModel()
         {
-            DataList = DataService.GetDemoDataList(5);
-            DataList0 = DataService.GetDemoDataList(5);
-            DataList1 = DataService.GetDemoDataList(5);
+            DataList = DataService.GetDemoDataList(5000);
+            DataList0 = DataService.GetDemoDataList(5000);
+            DataList1 = DataService.GetDemoDataList(5000);
             DataList2 = DataService.GetDemoDataList(5);
+            DataList3 = DataService.GetDemoDataList(5);
 
             CompositeCollection compositeCollection = new CompositeCollection();
             compositeCollection.Add(new CollectionContainer() { Collection = DataList });

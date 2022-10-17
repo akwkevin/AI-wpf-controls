@@ -493,6 +493,7 @@ namespace AIStudio.Wpf.Controls
 
         private void BaseDialog_Loaded(object sender, RoutedEventArgs e)
         {
+            this.Loaded -= BaseDialog_Loaded;
             if (this.Parent != null && this.Parent is FrameworkElement)
             {
                 FrameworkElement parent = this.Parent as FrameworkElement;

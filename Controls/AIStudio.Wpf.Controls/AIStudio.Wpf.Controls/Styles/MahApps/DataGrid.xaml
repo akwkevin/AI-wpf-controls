@@ -575,8 +575,15 @@
         <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource MahApps.Brushes.Separator}" />
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource MahApps.Brushes.Separator}" />
         <Setter Property="MinRowHeight" Value="{DynamicResource DefaultControlHeight}" />
-        <Setter Property="RowHeaderStyle" Value="{StaticResource AIStudio.Styles.DataGridRowHeader}" />
+        <Setter Property="RowHeaderStyle" Value="{StaticResource AIStudio.Styles.DataGridRowHeader}" />       
         <Setter Property="AutoGenerateColumns" Value="False"/>
+        <!--默认打开虚拟化-->
+        <Setter Property="EnableColumnVirtualization" Value="False"/>
+        <Setter Property="EnableRowVirtualization" Value="True"/>
+        <Setter Property="VirtualizingPanel.IsContainerVirtualizable" Value="True"/>
+        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
+        <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>      
         <Setter Property="RowStyle">
             <Setter.Value>
                 <Style BasedOn="{StaticResource AIStudio.Styles.DataGridRow}" TargetType="{x:Type DataGridRow}">
