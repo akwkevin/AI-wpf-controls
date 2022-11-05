@@ -189,8 +189,8 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-        private bool _isChecked = false;
-        public bool IsChecked
+        private bool? _isChecked = false;
+        public bool? IsChecked
         {
             get
             {
@@ -204,11 +204,29 @@ namespace AIStudio.Wpf.Controls
                     OnPropertyChanged("IsChecked");
 
                     SetChildChecked(_isChecked);
+
+
+                    if (Parent != null)
+                    {
+                        if (Parent.Children?.Count == Parent.Children?.Count(p => p.IsChecked == true))
+                        {
+                            Parent.IsChecked = true;
+                        }
+                        else if (Parent.Children?.Count == Parent.Children?.Count(p => p.IsChecked == false))
+                        {
+                            Parent.IsChecked = false;
+                        }
+                        else
+                        {
+                            Parent.IsChecked = null;
+                        }
+                    }
+
                 }
             }
         }
 
-        public bool IsCheckedOnlySelf
+        public bool? IsCheckedOnlySelf
         {
             get
             {
@@ -221,9 +239,9 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-        private void SetChildChecked(bool isChecked)
+        private void SetChildChecked(bool? isChecked)
         {
-            if (Children != null)
+            if (Children != null && isChecked != null)
             {
                 foreach (var child in Children)
                 {
@@ -404,7 +422,7 @@ namespace AIStudio.Wpf.Controls
         {
             get; set;
         }
-        bool IsChecked
+        bool? IsChecked
         {
             get; set;
         }
@@ -424,7 +442,7 @@ namespace AIStudio.Wpf.Controls
 
             foreach (var tree in trees)
             {
-                if (tree.IsChecked)
+                if (tree.IsChecked == true || tree.IsChecked == null)
                 {
                     list.Add(tree);
                 }
@@ -434,9 +452,9 @@ namespace AIStudio.Wpf.Controls
             return list;
         }
 
-        public static void SetChecked(IEnumerable<IBaseTreeItemViewModel> trees, bool isChecked)
+        public static void SetChecked(IEnumerable<IBaseTreeItemViewModel> trees, bool? isChecked)
         {
-            if (trees == null)
+            if (trees == null || isChecked == null)
                 return;
 
             foreach (var tree in trees)
