@@ -5,5 +5,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/DataGrid.xaml"/>
     </ResourceDictionary.MergedDictionaries>    
 
-    <Style TargetType="{x:Type controls:TreeDataGrid}" BasedOn="{StaticResource AIStudio.Styles.DataGrid}"></Style>
+    <Style TargetType="{x:Type controls:TreeDataGrid}" BasedOn="{StaticResource AIStudio.Styles.DataGrid}">
+        <Setter Property="CanUserSortColumns" Value="False"/>
+    </Style>
 </ResourceDictionary>

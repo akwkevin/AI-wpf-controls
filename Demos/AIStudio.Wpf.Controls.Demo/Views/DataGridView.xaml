@@ -69,7 +69,7 @@
                 </ac:DGFilterPanelContainer>
             </TabItem>
             <TabItem Header="TreeDataGrid">
-                <ac:TreeDataGrid Margin="2" ItemsSource="{Binding DataList2}" CanUserSortColumns="True" AutoGenerateColumns="False" >
+                <ac:TreeDataGrid Margin="2" ItemsSource="{Binding DataList2}" AutoGenerateColumns="False" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="">
                             <DataGridTemplateColumn.CellTemplate>
@@ -78,13 +78,13 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="编号" CanUserSort="True" SortMemberPath="Index" Binding="{Binding Index}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="姓名" CanUserSort="True" SortMemberPath="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="编号" Binding="{Binding Index}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="姓名" Binding="{Binding Name}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </ac:TreeDataGrid>
             </TabItem>
             <TabItem Header="TreeDataGridPlus">
-                <ac:TreeDataGrid Margin="2" ItemsSource="{Binding DataList2}" CanUserSortColumns="True" AutoGenerateColumns="False">
+                <ac:TreeDataGrid Margin="2" ItemsSource="{Binding DataList2}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="">
                             <DataGridTemplateColumn.CellTemplate>
@@ -93,8 +93,8 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="编号" CanUserSort="True" SortMemberPath="Index" Binding="{Binding Index}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="姓名" CanUserSort="True" SortMemberPath="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="编号" Binding="{Binding Index}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="姓名" Binding="{Binding Name}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </ac:TreeDataGrid>
             </TabItem>
