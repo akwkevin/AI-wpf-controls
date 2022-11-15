@@ -490,13 +490,14 @@ namespace AIStudio.Wpf.Controls
         private double _widthRatio = 0;
         private double _heightRatio = 0;
         private bool _hastag;
-
+        private bool _initing = false;
         private void BaseDialog_Loaded(object sender, RoutedEventArgs e)
         {
             this.Loaded -= BaseDialog_Loaded;
-            if (this.Parent != null && this.Parent is FrameworkElement)
+
+            _initing = true;
+            if (this.Parent is FrameworkElement parent)
             {
-                FrameworkElement parent = this.Parent as FrameworkElement;
                 double left = (parent.ActualWidth - this.ActualWidth) / 2;
                 double top = (parent.ActualHeight - this.ActualHeight) / 2;
                 this.HorizontalAlignment = HorizontalAlignment.Left;
@@ -512,10 +513,14 @@ namespace AIStudio.Wpf.Controls
                     _widthRatio = this.Margin.Left / (parent.ActualWidth - this.ActualWidth);
                     _heightRatio = this.Margin.Top / (parent.ActualHeight - this.ActualHeight);
                 }
+                parent.SizeChanged -= BaseDialog_SizeChanged;
                 parent.SizeChanged += BaseDialog_SizeChanged;
             }
 
+            Thread.Sleep(50);
+            this.MouseLeftButtonDown -= BaseDialog_MouseLeftButtonDown;
             this.MouseLeftButtonDown += BaseDialog_MouseLeftButtonDown;
+            _initing = false;
         }
 
 
@@ -557,6 +562,8 @@ namespace AIStudio.Wpf.Controls
                     {
                         return;
                     }
+
+                    element.MouseLeftButtonDown -= Element_MouseLeftButtonDown;
                     element.MouseLeftButtonDown += Element_MouseLeftButtonDown;
                     BaseDialog baseDialog = (element as BaseDialog) ?? element.TryFindParent<BaseDialog>();
                     if (baseDialog != null)
@@ -578,13 +585,15 @@ namespace AIStudio.Wpf.Controls
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.Parent != null && this.Parent is FrameworkElement)
+            if (_initing == true)
+                return;
+
+            if (this.Parent is FrameworkElement parent)
             {
-                FrameworkElement parent = this.Parent as FrameworkElement;
                 _move = true;
                 _lastPos = e.GetPosition(parent);
 
-                parent.PreviewMouseMove += (s, ee) => {
+                MouseEventHandler mouseEventHandler = (s, ee) => {
                     if (_move)
                     {
                         Point pos = ee.GetPosition(parent);
@@ -595,8 +604,10 @@ namespace AIStudio.Wpf.Controls
                         _lastPos = e.GetPosition(parent);
                     }
                 };
+                parent.PreviewMouseMove -= mouseEventHandler;
+                parent.PreviewMouseMove += mouseEventHandler;
 
-                parent.PreviewMouseUp += (s, ee) => {
+                MouseButtonEventHandler mouseButtonEventHandler = (s, ee) => {
                     if (_move)
                     {
                         _move = false;
@@ -633,6 +644,9 @@ namespace AIStudio.Wpf.Controls
                         }
                     }
                 };
+
+                parent.PreviewMouseUp -= mouseButtonEventHandler;
+                parent.PreviewMouseUp += mouseButtonEventHandler;
             }
         }
 
