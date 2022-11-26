@@ -52,6 +52,7 @@ namespace AIStudio.Wpf.Controls
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
 
+
             if (_negativeButton == null)
                 _negativeButton = this.FindName("PART_NegativeButton") as Button;
             if (_affirmativeButton == null)
@@ -293,7 +294,7 @@ namespace AIStudio.Wpf.Controls
                 if (action != null)
                 {
                     action(BaseDialogResult.Cancel);
-                }                
+                }
             });
 
             OKSource = new CancellationTokenSource();
@@ -486,7 +487,10 @@ namespace AIStudio.Wpf.Controls
 
         public BaseDialog()
         {
-            this.Loaded += BaseDialog_Loaded;
+            if (CanDragMove == true)
+            {
+                this.Loaded += BaseDialog_Loaded;
+            }
         }
 
         #region 拖动使用
@@ -523,15 +527,9 @@ namespace AIStudio.Wpf.Controls
             }
 
             Thread.Sleep(50);
-            if (CanDragMove)
-            {
-                this.MouseLeftButtonDown -= BaseDialog_MouseLeftButtonDown;
-                this.MouseLeftButtonDown += BaseDialog_MouseLeftButtonDown;
-            }
+
             _initing = false;
         }
-
-
 
         private void BaseDialog_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -566,20 +564,15 @@ namespace AIStudio.Wpf.Controls
                 var element = d as FrameworkElement;
                 if (element != null)
                 {
-                    if (element is BaseDialog)
-                    {
-                        return;
-                    }
-
                     element.MouseLeftButtonDown -= Element_MouseLeftButtonDown;
                     element.MouseLeftButtonDown += Element_MouseLeftButtonDown;
-                    BaseDialog baseDialog = (element as BaseDialog) ?? element.TryFindParent<BaseDialog>();
-                    if (baseDialog != null)
-                    {
-                        SetTitleTag(baseDialog, true);
-                    }
+
+                    element.MouseLeave -= Element_MouseLeave;
+                    element.MouseLeave += Element_MouseLeave;
                 }
             }));
+
+
 
         private static void Element_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -588,6 +581,16 @@ namespace AIStudio.Wpf.Controls
             if (baseDialog != null)
             {
                 baseDialog.TitleBar_MouseLeftButtonDown(sender, e);
+            }
+        }
+
+        private static void Element_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var element = sender as FrameworkElement;
+            BaseDialog baseDialog = (element as BaseDialog) ?? element.TryFindParent<BaseDialog>();
+            if (baseDialog != null)
+            {
+                baseDialog.TitleBar_MouseLeave(sender, e);
             }
         }
 
@@ -604,72 +607,95 @@ namespace AIStudio.Wpf.Controls
                 _move = true;
                 _lastPos = e.GetPosition(parent);
 
-                MouseEventHandler mouseEventHandler = (s, ee) => {
+                parent.PreviewMouseMove += (s, ee) => {
                     if (_move)
                     {
                         Point pos = ee.GetPosition(parent);
                         double left = this.Margin.Left + pos.X - this._lastPos.X;
                         double top = this.Margin.Top + pos.Y - this._lastPos.Y;
+                        //if (left < 0)
+                        //{
+                        //    left = 0;
+                        //}
+                        //else if (left + this.ActualWidth >= parent.ActualWidth)
+                        //{
+                        //    left = parent.ActualWidth - this.ActualWidth;
+                        //}
+
+                        //if (top < 0)
+                        //{
+                        //    top = 0;
+                        //}
+                        //else if (top + this.ActualHeight >= parent.ActualHeight)
+                        //{
+                        //    top = parent.ActualHeight - this.ActualHeight;
+                        //}
                         this.Margin = new Thickness(left, top, 0, 0);
 
                         _lastPos = e.GetPosition(parent);
                     }
                 };
-                parent.PreviewMouseMove -= mouseEventHandler;
-                parent.PreviewMouseMove += mouseEventHandler;
 
-                MouseButtonEventHandler mouseButtonEventHandler = (s, ee) => {
-                    if (_move)
-                    {
-                        _move = false;
-                        double left = this.Margin.Left;
-                        double top = this.Margin.Top;
-
-                        if (left < 0)
-                        {
-                            left = 0;
-                        }
-                        if (top < 0)
-                        {
-                            top = 0;
-                        }
-                        if (left > (parent.ActualWidth - 50))
-                        {
-                            left = parent.ActualWidth - 50;
-                        }
-                        if (top > (parent.ActualHeight - 50))
-                        {
-                            top = parent.ActualHeight - 50;
-                        }
-                        this.Margin = new Thickness(left, top, 0, 0);
-
-                        if (parent.ActualWidth == this.ActualWidth)
-                        {
-                            _widthRatio = 1;
-                            _heightRatio = 1;
-                        }
-                        else
-                        {
-                            _widthRatio = this.Margin.Left / (parent.ActualWidth - this.ActualWidth);
-                            _heightRatio = this.Margin.Top / (parent.ActualHeight - this.ActualHeight);
-                        }
-                    }
+                parent.PreviewMouseUp += (s, ee) => {
+                    Leave();
                 };
-
-                parent.PreviewMouseUp -= mouseButtonEventHandler;
-                parent.PreviewMouseUp += mouseButtonEventHandler;
             }
-        }
+        }      
 
-        private void BaseDialog_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void TitleBar_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (GetTitleTag(this) == true)
-            {
+            if (CanDragMove == false)
                 return;
-            }
 
-            TitleBar_MouseLeftButtonDown(sender, e);
+            if (_initing == true)
+                return;
+
+            Leave();
         }
+
+        private void Leave()
+        {
+            if (this.Parent is FrameworkElement parent)
+            {
+                if (_move)
+                {
+                    _move = false;
+                    double left = this.Margin.Left;
+                    double top = this.Margin.Top;
+
+                    if (left < 0)
+                    {
+                        left = 0;
+                    }
+                    else if (left + this.ActualWidth >= parent.ActualWidth)
+                    {
+                        left = parent.ActualWidth - this.ActualWidth;
+                    }
+
+                    if (top < 0)
+                    {
+                        top = 0;
+                    }
+                    else if (top + this.ActualHeight >= parent.ActualHeight)
+                    {
+                        top = parent.ActualHeight - this.ActualHeight;
+                    }
+                    this.Margin = new Thickness(left, top, 0, 0);
+
+                    if (parent.ActualWidth == this.ActualWidth)
+                    {
+                        _widthRatio = 1;
+                        _heightRatio = 1;
+                    }
+                    else
+                    {
+                        _widthRatio = this.Margin.Left / (parent.ActualWidth - this.ActualWidth);
+                        _heightRatio = this.Margin.Top / (parent.ActualHeight - this.ActualHeight);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         protected override void OnRender(DrawingContext drawingContext)

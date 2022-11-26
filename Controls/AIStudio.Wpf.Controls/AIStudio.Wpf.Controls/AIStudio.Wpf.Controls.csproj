@@ -9,7 +9,7 @@
     <PackageIcon>A.png</PackageIcon>
     <PackageIconUrl />
     <NeutralLanguage />
-    <Version>1.1.35</Version>
+    <Version>1.1.36</Version>
     <Description>兼容主流控件库MahApps和MaterialDesign的一个控件库</Description>
   </PropertyGroup>
 
@@ -353,12 +353,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Controls\Expander\FloatExpander.MaterialDesign.xamlxx">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
   </ItemGroup>
 
@@ -366,6 +360,20 @@
     <PackageReference Include="System.Text.Encoding.CodePages">
       <Version>6.0.0</Version>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\WindowContainer\ChildMessageBox.MaterialDesign.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\WindowContainer\ChildWindow.MaterialDesign.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Controls\WindowContainer\WindowControl.MaterialDesign.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

@@ -296,6 +296,50 @@ namespace AIStudio.Wpf.Controls.Helper
         }
 
         /// <summary>
+        /// This will search for a child of the specified type. The search is performed 
+        /// hierarchically, breadth first (as opposed to depth first).
+        /// </summary>
+        /// <typeparam name="T">The type of the element to find</typeparam>
+        /// <param name="parent">The root of the tree to search for. This element itself is not checked.</param>
+        /// <param name="additionalCheck">Provide a callback to check additional properties 
+        /// of the found elements. Can be left Null if no additional criteria are needed.</param>
+        /// <returns>Returns the found element. Null if nothing is found.</returns>
+        /// <example>Button button = TreeHelper.FindChild&lt;Button&gt;( this, foundChild => foundChild.Focusable );</example>
+        public static T FindChild<T>(DependencyObject parent, Func<T, bool> additionalCheck) where T : DependencyObject
+        {
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            T child;
+
+            for (int index = 0; index < childrenCount; index++)
+            {
+                child = VisualTreeHelper.GetChild(parent, index) as T;
+
+                if (child != null)
+                {
+                    if (additionalCheck == null)
+                    {
+                        return child;
+                    }
+                    else
+                    {
+                        if (additionalCheck(child))
+                            return child;
+                    }
+                }
+            }
+
+            for (int index = 0; index < childrenCount; index++)
+            {
+                child = FindChild<T>(VisualTreeHelper.GetChild(parent, index), additionalCheck);
+
+                if (child != null)
+                    return child;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// This method is an alternative to WPF's
         /// <see cref="VisualTreeHelper.GetParent"/> method, which also
         /// supports content elements. Keep in mind that for content element,

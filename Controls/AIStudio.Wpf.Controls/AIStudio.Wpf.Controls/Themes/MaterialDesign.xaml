@@ -152,6 +152,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/MessageBox.MaterialDesign.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/PopupWindow.MaterialDesign.xaml"/>
         <!--<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Xaml/XamlDisplay.xaml"/>-->
-
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/WindowContainer/ChildWindow.MaterialDesign.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/WindowContainer/ChildMessageBox.MaterialDesign.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

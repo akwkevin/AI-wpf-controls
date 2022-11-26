@@ -73,6 +73,7 @@
       [ "Drawer 抽屉", "DrawerView", "Drawer", "" ],
       [ "Message 全局提示", "MessageBoxView", "Message", "" ],
       [ "Dialog 对话框", "DialogView", "Dialog", "" ],
+      [ "WindowContainer 窗口容器", "WindowContainerView", "WindowContainer", "" ],
       [ "Notification 通知提醒框", "NotificationView", "Notification", "" ],
       [ "Progress 进度条", "ProgressBarView", "Progress", "" ],
       [ "Loading 加载中", "LoadingView", "Loading", "" ]
