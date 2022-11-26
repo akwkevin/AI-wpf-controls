@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -498,7 +499,6 @@ namespace AIStudio.Wpf.Controls
         private Point _lastPos;
         private double _widthRatio = 0;
         private double _heightRatio = 0;
-        private bool _hastag;
         private bool _initing = false;
         private void BaseDialog_Loaded(object sender, RoutedEventArgs e)
         {
@@ -566,9 +566,6 @@ namespace AIStudio.Wpf.Controls
                 {
                     element.MouseLeftButtonDown -= Element_MouseLeftButtonDown;
                     element.MouseLeftButtonDown += Element_MouseLeftButtonDown;
-
-                    element.MouseLeave -= Element_MouseLeave;
-                    element.MouseLeave += Element_MouseLeave;
                 }
             }));
 
@@ -636,11 +633,17 @@ namespace AIStudio.Wpf.Controls
                     }
                 };
 
+                parent.MouseLeave += (s, ee) => {
+                    Leave();
+                };
+
                 parent.PreviewMouseUp += (s, ee) => {
                     Leave();
                 };
             }
-        }      
+        }
+
+
 
         private void TitleBar_MouseLeave(object sender, MouseEventArgs e)
         {
