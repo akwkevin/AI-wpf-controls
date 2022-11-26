@@ -29,6 +29,11 @@ namespace AIStudio.Wpf.Controls
             get; set;
         }
 
+        public bool CanDragMove
+        {
+            get; set;
+        } = true;
+
         /// <summary>
         /// 取消
         /// </summary>
@@ -518,8 +523,11 @@ namespace AIStudio.Wpf.Controls
             }
 
             Thread.Sleep(50);
-            this.MouseLeftButtonDown -= BaseDialog_MouseLeftButtonDown;
-            this.MouseLeftButtonDown += BaseDialog_MouseLeftButtonDown;
+            if (CanDragMove)
+            {
+                this.MouseLeftButtonDown -= BaseDialog_MouseLeftButtonDown;
+                this.MouseLeftButtonDown += BaseDialog_MouseLeftButtonDown;
+            }
             _initing = false;
         }
 
@@ -585,6 +593,9 @@ namespace AIStudio.Wpf.Controls
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (CanDragMove == false)
+                return;
+
             if (_initing == true)
                 return;
 
