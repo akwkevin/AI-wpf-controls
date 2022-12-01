@@ -73,7 +73,7 @@
                                       IsEditable="True" 
                                       helper:EnumHelper.Enum="{x:Type controls:ControlStatus}"
                                       ToolTip="色彩" 
-                                      Tag="此处可以选择色彩" 
+                                      Tag="此处可以选择色彩，第一次会比较慢" 
                                       controls:ControlAttach.CornerRadius="0" 
                                       Style="{DynamicResource AIStudio.Styles.ComboBox}" 
                                       Background="{DynamicResource PrimaryHueMidBrush}" 
@@ -139,14 +139,6 @@
                             </Grid>
                         </controls:Drawer>
 
-                        <controls:OptionsPanel Grid.RowSpan="2" x:Name="PART_OptionsPanel" Tag="展开查看选中控件的属性" HeaderText="属性" IsExpanded="False" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
-                            <Grid>
-                                <controls:PropertyGrid x:Name="property" Width="200" Height="300"/>
-                                <controls:BorderResizeThumb Width="1" Margin="-3,0,0,0" ResizeElement="{Binding ElementName=property}" Cursor="SizeWE" VerticalAlignment="Stretch" HorizontalAlignment="Right" />
-                                <controls:BorderResizeThumb Height="1" Margin="0,-3,0,0" ResizeElement="{Binding ElementName=property}" Cursor="SizeNS" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />
-                            </Grid>
-                        </controls:OptionsPanel>                      
-                        
                     </Grid>
 
                     <ControlTemplate.Triggers>

@@ -221,7 +221,7 @@ namespace AIStudio.Wpf.Controls
 
         }
 
-        List<FrameworkElement> _controls = new List<FrameworkElement>();
+        List<FrameworkElement> _controls;
 
         private void _controlStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

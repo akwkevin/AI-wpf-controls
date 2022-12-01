@@ -94,7 +94,6 @@
                     <MultiBinding Converter="{StaticResource ObjectListConverter}">
                         <Binding ElementName="userControl" Path="ControlStatus"/>
                         <Binding ElementName="userControl" Path="CodeToggleButton"/>
-                        <Binding ElementName="userControl" Path="OptionsPanel"/>
                         <Binding ElementName="testBtn" Path="."/>
                     </MultiBinding>
                 </Button.CommandParameter>
