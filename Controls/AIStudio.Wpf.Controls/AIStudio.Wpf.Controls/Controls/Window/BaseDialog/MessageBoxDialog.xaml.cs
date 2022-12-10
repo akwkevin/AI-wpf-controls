@@ -84,7 +84,7 @@ namespace AIStudio.Wpf.Controls
         /// 信息提示
         /// </summary>
         /// <param name="msg"></param>
-        public static async Task<BaseDialogResult> Info(string message, string title, string identifier = "RootWindow")
+        public static async Task<DialogResult> Info(string message, string title, string identifier = "RootWindow")
         {
             return await Show(message, title, ControlStatus.Info, identifier);
         }
@@ -93,7 +93,7 @@ namespace AIStudio.Wpf.Controls
         /// 真香警告
         /// </summary>
         /// <param name="msg"></param>
-        public static async Task<BaseDialogResult> Warning(string message, string title, string identifier = "RootWindow")
+        public static async Task<DialogResult> Warning(string message, string title, string identifier = "RootWindow")
         {
             return await Show(message, title, ControlStatus.Warning, identifier);
         }
@@ -103,7 +103,7 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public static async Task<BaseDialogResult> Success(string message, string title, string identifier = "RootWindow")
+        public static async Task<DialogResult> Success(string message, string title, string identifier = "RootWindow")
         {
             return await Show(message, title, ControlStatus.Success, identifier);
         }
@@ -112,7 +112,7 @@ namespace AIStudio.Wpf.Controls
         /// 错误
         /// </summary>
         /// <param name="msg"></param>
-        public static async Task<BaseDialogResult> Error(string message, string title, string identifier = "RootWindow")
+        public static async Task<DialogResult> Error(string message, string title, string identifier = "RootWindow")
         {
             return await Show(message, title, ControlStatus.Danger, identifier);
         }
@@ -123,7 +123,7 @@ namespace AIStudio.Wpf.Controls
         /// <param name="notify">类型</param>
         /// <param name="msg">文本信息</param>
         /// <returns></returns>
-        public static async Task<BaseDialogResult> Show(string message, string title, ControlStatus status = ControlStatus.Mid, string identifier = "RootWindow")
+        public static async Task<DialogResult> Show(string message, string title, ControlStatus status = ControlStatus.Mid, string identifier = "RootWindow")
         {
             string path = string.Empty;
             switch (status)
@@ -156,7 +156,7 @@ namespace AIStudio.Wpf.Controls
             };
 
             var result = await WindowBase.ShowDialogAsync(baseDialog, identifier); //位于顶级窗口
-            return (BaseDialogResult)result;
+            return (DialogResult)result;
         }
     }
 }

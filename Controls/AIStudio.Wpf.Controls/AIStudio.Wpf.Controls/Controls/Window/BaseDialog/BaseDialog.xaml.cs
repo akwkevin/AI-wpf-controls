@@ -96,14 +96,14 @@ namespace AIStudio.Wpf.Controls
 
             var cancellationTokenRegistration = CancelSource.Token.Register(() => {
                 cleanUpHandlers();
-                tcs.TrySetResult(BaseDialogResult.Cancel);
+                tcs.TrySetResult(DialogResult.Cancel);
             });
 
             OKSource = new CancellationTokenSource();
 
             var okTokenRegistration = OKSource.Token.Register(() => {
                 cleanUpHandlers();
-                tcs.TrySetResult(BaseDialogResult.OK);
+                tcs.TrySetResult(DialogResult.OK);
             });
 
             cleanUpHandlers = () => {
@@ -135,7 +135,7 @@ namespace AIStudio.Wpf.Controls
                 {
                     cleanUpHandlers();
 
-                    tcs.TrySetResult(BaseDialogResult.Cancel);
+                    tcs.TrySetResult(DialogResult.Cancel);
                 }
             };
 
@@ -144,7 +144,7 @@ namespace AIStudio.Wpf.Controls
                 {
                     cleanUpHandlers();
 
-                    tcs.TrySetResult(BaseDialogResult.Cancel);
+                    tcs.TrySetResult(DialogResult.Cancel);
                 }
             };
 
@@ -158,14 +158,14 @@ namespace AIStudio.Wpf.Controls
                 if (e.Key == Key.Enter)
                 {
                     cleanUpHandlers();
-                    tcs.TrySetResult(BaseDialogResult.OK);
+                    tcs.TrySetResult(DialogResult.OK);
                 }
             };
 
             negativeHandler = (sender, e) => {
                 cleanUpHandlers();
 
-                tcs.TrySetResult(BaseDialogResult.Cancel);
+                tcs.TrySetResult(DialogResult.Cancel);
 
                 e.Handled = true;
             };
@@ -179,7 +179,7 @@ namespace AIStudio.Wpf.Controls
 
                 cleanUpHandlers();
 
-                tcs.TrySetResult(BaseDialogResult.OK);
+                tcs.TrySetResult(DialogResult.OK);
 
                 e.Handled = true;
             };
@@ -193,7 +193,7 @@ namespace AIStudio.Wpf.Controls
 
                 cleanUpHandlers();
 
-                tcs.TrySetResult(BaseDialogResult.Other1);
+                tcs.TrySetResult(DialogResult.Other1);
 
                 e.Handled = true;
             };
@@ -207,7 +207,7 @@ namespace AIStudio.Wpf.Controls
 
                 cleanUpHandlers();
 
-                tcs.TrySetResult(BaseDialogResult.Other2);
+                tcs.TrySetResult(DialogResult.Other2);
 
                 e.Handled = true;
             };
@@ -221,7 +221,7 @@ namespace AIStudio.Wpf.Controls
 
                 cleanUpHandlers();
 
-                tcs.TrySetResult(BaseDialogResult.Other3);
+                tcs.TrySetResult(DialogResult.Other3);
 
                 e.Handled = true;
             };
@@ -294,7 +294,7 @@ namespace AIStudio.Wpf.Controls
                 cleanUpHandlers();
                 if (action != null)
                 {
-                    action(BaseDialogResult.Cancel);
+                    action(DialogResult.Cancel);
                 }
             });
 
@@ -304,7 +304,7 @@ namespace AIStudio.Wpf.Controls
                 cleanUpHandlers();
                 if (action != null)
                 {
-                    action(BaseDialogResult.OK);
+                    action(DialogResult.OK);
                 }
             });
 
@@ -339,7 +339,7 @@ namespace AIStudio.Wpf.Controls
 
                     if (action != null)
                     {
-                        action(BaseDialogResult.Cancel);
+                        action(DialogResult.Cancel);
                     }
                 }
             };
@@ -351,7 +351,7 @@ namespace AIStudio.Wpf.Controls
 
                     if (action != null)
                     {
-                        action(BaseDialogResult.Cancel);
+                        action(DialogResult.Cancel);
                     }
                 }
             };
@@ -369,7 +369,7 @@ namespace AIStudio.Wpf.Controls
 
                     if (action != null)
                     {
-                        action(BaseDialogResult.OK);
+                        action(DialogResult.OK);
                     }
                 }
             };
@@ -379,7 +379,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.Cancel);
+                    action(DialogResult.Cancel);
                 }
 
                 e.Handled = true;
@@ -396,7 +396,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.OK);
+                    action(DialogResult.OK);
                 }
 
                 e.Handled = true;
@@ -413,7 +413,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.Other1);
+                    action(DialogResult.Other1);
                 }
 
                 e.Handled = true;
@@ -430,7 +430,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.Other2);
+                    action(DialogResult.Other2);
                 }
 
                 e.Handled = true;
@@ -447,7 +447,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.Other3);
+                    action(DialogResult.Other3);
                 }
 
                 e.Handled = true;
@@ -708,7 +708,7 @@ namespace AIStudio.Wpf.Controls
 
     }
 
-    public enum BaseDialogResult
+    public enum DialogResult
     {
         None,
         Cancel,

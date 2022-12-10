@@ -468,7 +468,7 @@ namespace AIStudio.Wpf.Controls
 
                 this.Focus();
 
-                tcs.TrySetResult(BaseDialogResult.None);
+                tcs.TrySetResult(Controls.DialogResult.None);
             };
 
             this.Loaded += handler;
@@ -485,7 +485,7 @@ namespace AIStudio.Wpf.Controls
             else
             {
                 var tcs = new System.Threading.Tasks.TaskCompletionSource<object>();
-                tcs.SetResult(BaseDialogResult.None);
+                tcs.SetResult(Controls.DialogResult.None);
                 return tcs.Task;
             }
         }
@@ -499,7 +499,7 @@ namespace AIStudio.Wpf.Controls
             else
             {
                 var tcs = new System.Threading.Tasks.TaskCompletionSource<object>();
-                tcs.SetResult(BaseDialogResult.None);
+                tcs.SetResult(Controls.DialogResult.None);
                 return tcs.Task;
             }
         }
@@ -538,7 +538,7 @@ namespace AIStudio.Wpf.Controls
                     overlayStoryboard = null;
                 }
 
-                tcs.TrySetResult(BaseDialogResult.None);
+                tcs.TrySetResult(Controls.DialogResult.None);
             };
 
             sb.Completed += completionHandler;
@@ -562,7 +562,7 @@ namespace AIStudio.Wpf.Controls
             if (overlayBox.Visibility == Visibility.Visible && overlayBox.Opacity == 0.0)
             {
                 //No Task.FromResult in .NET 4.
-                tcs.SetResult(BaseDialogResult.None);
+                tcs.SetResult(Controls.DialogResult.None);
                 return tcs.Task;
             }
 
@@ -582,7 +582,7 @@ namespace AIStudio.Wpf.Controls
                     overlayStoryboard = null;
                 }
 
-                tcs.TrySetResult(BaseDialogResult.None);
+                tcs.TrySetResult(Controls.DialogResult.None);
             };
 
             sb.Completed += completionHandler;

@@ -910,7 +910,7 @@ namespace AIStudio.Wpf.Controls
                 cleanUpHandlers();
                 if (action != null)
                 {
-                    action(BaseDialogResult.Cancel);
+                    action(Controls.DialogResult.Cancel);
                 }
             });
 
@@ -920,7 +920,7 @@ namespace AIStudio.Wpf.Controls
                 cleanUpHandlers();
                 if (action != null)
                 {
-                    action(BaseDialogResult.OK);
+                    action(Controls.DialogResult.OK);
                 }
             });          
 
@@ -955,7 +955,7 @@ namespace AIStudio.Wpf.Controls
 
                     if (action != null)
                     {
-                        action(BaseDialogResult.Cancel);
+                        action(Controls.DialogResult.Cancel);
                     }
                 }
             };
@@ -967,7 +967,7 @@ namespace AIStudio.Wpf.Controls
 
                     if (action != null)
                     {
-                        action(BaseDialogResult.Cancel);
+                        action(Controls.DialogResult.Cancel);
                     }
                 }
             };
@@ -985,7 +985,7 @@ namespace AIStudio.Wpf.Controls
 
                     if (action != null)
                     {
-                        action(BaseDialogResult.OK);
+                        action(Controls.DialogResult.OK);
                     }
                 }
             };
@@ -995,7 +995,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.Cancel);
+                    action(Controls.DialogResult.Cancel);
                 }
 
                 e.Handled = true;
@@ -1012,7 +1012,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.OK);
+                    action(Controls.DialogResult.OK);
                 }
 
                 e.Handled = true;
@@ -1029,7 +1029,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.Other1);
+                    action(Controls.DialogResult.Other1);
                 }
 
                 e.Handled = true;
@@ -1046,7 +1046,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.Other2);
+                    action(Controls.DialogResult.Other2);
                 }
 
                 e.Handled = true;
@@ -1063,7 +1063,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.Other3);
+                    action(Controls.DialogResult.Other3);
                 }
 
                 e.Handled = true;
@@ -1074,7 +1074,7 @@ namespace AIStudio.Wpf.Controls
 
                 if (action != null)
                 {
-                    action(BaseDialogResult.Cancel);
+                    action(Controls.DialogResult.Cancel);
                 }
             };
 
