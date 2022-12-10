@@ -30,6 +30,7 @@ namespace AIStudio.Wpf.Controls
     [TemplatePart(Name = PART_OverlayGrid, Type = typeof(Grid))]
     [TemplatePart(Name = PART_WaitingGrid, Type = typeof(Grid))]
     [TemplatePart(Name = PART_TitleBar, Type = typeof(UIElement))]
+    [TemplatePart(Name = PART_WindowContainer, Type = typeof(WindowContainer))]
     public class WindowBase : System.Windows.Window
     {
         private const string PART_FlyoutModal = "PART_FlyoutModal";
@@ -40,6 +41,7 @@ namespace AIStudio.Wpf.Controls
         private const string PART_AnimationGrid = "PART_AnimationGrid";
         private const string PART_OverlayGrid = "PART_OverlayGrid";
         private const string PART_WaitingGrid = "PART_WaitingGrid";
+        private const string PART_WindowContainer = "PART_WindowContainer";
         private const string PART_TitleBar = "PART_TitleBar";
 
         internal Grid overlayBox;
@@ -51,6 +53,8 @@ namespace AIStudio.Wpf.Controls
         internal Grid overlayGrid;
         internal Grid waitingGrid;
         internal UIElement titleBar;
+        internal WindowContainer windowContainer;
+
         private readonly Thickness _commonPadding;
 
         static WindowBase()
@@ -104,6 +108,7 @@ namespace AIStudio.Wpf.Controls
             animationGrid = GetTemplateChild(PART_AnimationGrid) as Grid;
             overlayGrid = GetTemplateChild(PART_OverlayGrid) as Grid;
             waitingGrid = GetTemplateChild(PART_WaitingGrid) as Grid;
+            windowContainer = GetTemplateChild(PART_WindowContainer) as WindowContainer;
             titleBar = GetTemplateChild(PART_TitleBar) as UIElement;
             if (titleBar != null)
             {
@@ -609,7 +614,7 @@ namespace AIStudio.Wpf.Controls
         }
         #endregion
 
-        #region 弹出对话框（伪异步方法推荐）和同步方法
+        #region 弹出对话框（伪异步方法推荐）和同步方法, 不推荐使用，使用ChildrenWindow替代
         public static Task<object> ShowDialogAsync2(BaseDialog content, string windowIdentifier, bool animate = true)
         {
             var win = GetWindowBase(windowIdentifier);
@@ -617,7 +622,7 @@ namespace AIStudio.Wpf.Controls
 
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
 
-            win.ShowDialog(content, animate,(object res)=> {
+            win.ShowDialog(content, animate, (object res) => {
                 tcs.TrySetResult(res);
             });
 
@@ -658,24 +663,23 @@ namespace AIStudio.Wpf.Controls
                 DialogOpened(this, new EventArgs());
             }
 
-            dialog.WaitForButtonPress((object obj) => 
+            dialog.WaitForButtonPress((object obj) => {
+                if (DialogClosed != null)
                 {
-                    if (DialogClosed != null)
-                    {
-                        DialogClosed(this, new EventArgs());
-                    }
+                    DialogClosed(this, new EventArgs());
+                }
 
-                    SizeChanged -= sizeHandler;
+                SizeChanged -= sizeHandler;
 
-                    RemoveDialog(dialog);
+                RemoveDialog(dialog);
 
-                    HandleOverlayOnHide(animate);
+                HandleOverlayOnHide(animate);
 
-                    if (action != null)
-                    {
-                        action(obj);
-                    }
-                });
+                if (action != null)
+                {
+                    action(obj);
+                }
+            });
         }
 
         private void OverlayOnShow(bool animateShow)
@@ -754,6 +758,198 @@ namespace AIStudio.Wpf.Controls
             sb.Completed += completionHandler;
             overlayBox.BeginStoryboard(sb);
             overlayStoryboard = sb;
+        }
+        #endregion
+
+        #region ChildWindow
+        public static Task<object> ShowChildWindowAsync(Control content, string caption, string windowIdentifier, bool isModal = true, bool animate = true)
+        {
+            var win = GetWindowBase(windowIdentifier);
+            if (win == null) throw new ArgumentNullException(nameof(win));
+            if (win.windowContainer == null) throw new ArgumentNullException(nameof(win.windowContainer));
+
+            ChildWindow childWindow;
+            if (content is ChildWindow child)
+            {
+                childWindow = child;
+            }
+            else
+            {
+                childWindow = new ChildWindow();
+                childWindow.WindowStartupLocation = ChildWindowStartupLocation.Center;
+                childWindow.Content = content;
+            }
+
+            childWindow.Caption = caption;
+            childWindow.IsModal = isModal;
+
+            TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
+
+            win.ShowChildWindow(childWindow, animate, (object res) => {
+                tcs.TrySetResult(res);
+            });
+
+            return tcs.Task;
+        }
+
+        public static void ShowChildWindow(Control content, string windowIdentifier, string caption, Action<object> action, bool isModal = true, bool animate = true)
+        {
+            var win = GetWindowBase(windowIdentifier);
+            if (win == null) throw new ArgumentNullException(nameof(win));
+            if (win.windowContainer == null) throw new ArgumentNullException(nameof(win.windowContainer));
+
+            ChildWindow childWindow;
+            if (content is ChildWindow child)
+            {
+                childWindow = child;
+            }
+            else
+            {
+                childWindow = new ChildWindow();
+                childWindow.WindowStartupLocation = ChildWindowStartupLocation.Center;
+                childWindow.Content = content;
+            }
+
+            childWindow.Caption = caption;
+            childWindow.IsModal = isModal;
+
+            win.ShowChildWindow(childWindow, animate, action);
+        }
+
+        public void ShowChildWindow(ChildWindow childWindow, bool animate, Action<object> action)
+        {
+            OverlayOnShow(animate);
+
+            windowContainer.Children.Add(childWindow);
+            childWindow.WindowState = ChildWindowState.Open;
+
+            childWindow.WaitForButtonPress((object obj) => {
+                if (DialogClosed != null)
+                {
+                    DialogClosed(this, new EventArgs());
+                }
+
+                childWindow.WindowState = ChildWindowState.Closed;
+                windowContainer.Children.Remove(childWindow);
+
+                HandleOverlayOnHide(animate);
+
+                if (action != null)
+                {
+                    action(obj);
+                }
+            });
+        }
+        #endregion
+
+        #region ChildMessageBox
+        public static Task<MessageBoxResult> ShowChildMessageBoxAsync(string content, string windowIdentifier, bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+            return ShowChildMessageBoxAsync(content, string.Empty, MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.None, windowIdentifier, animate, controlStatus);
+        }
+
+        public static Task<MessageBoxResult> ShowChildMessageBoxAsync(string content, string caption, string windowIdentifier,  bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+            return ShowChildMessageBoxAsync(content, caption, MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.None, windowIdentifier, animate, controlStatus);
+        }
+
+        public static Task<MessageBoxResult> ShowChildMessageBoxAsync(string content, string caption, MessageBoxButton button, string windowIdentifier, bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+            return ShowChildMessageBoxAsync(content, caption, button, MessageBoxImage.None, MessageBoxResult.None, windowIdentifier, animate, controlStatus);
+        }
+
+        public static Task<MessageBoxResult> ShowChildMessageBoxAsync(string content, string caption, MessageBoxButton button, MessageBoxImage icon, string windowIdentifier, bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+            return ShowChildMessageBoxAsync(content, caption, button, icon, MessageBoxResult.None, windowIdentifier, animate, controlStatus);
+        }
+
+        public static Task<MessageBoxResult> ShowChildMessageBoxAsync(string content, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult, string windowIdentifier, bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+            ChildMessageBox childWindow = new ChildMessageBox();
+            childWindow.Text = content;
+            childWindow.Caption = caption;
+            childWindow.SetDefaultButton(button);
+            childWindow.SetMessageBoxImage(icon);
+            childWindow.SetDefaultResult(defaultResult);
+            childWindow.SetCurrentValue(ControlAttach.StatusProperty, controlStatus);
+            return ShowChildMessageBoxAsync(childWindow, windowIdentifier, animate);
+        }
+
+        public static Task<MessageBoxResult> ShowChildMessageBoxAsync(ChildMessageBox childWindow, string windowIdentifier, bool animate = true)
+        {
+            var win = GetWindowBase(windowIdentifier);
+            if (win == null) throw new ArgumentNullException(nameof(win));
+            if (win.windowContainer == null) throw new ArgumentNullException(nameof(win.windowContainer));
+
+            TaskCompletionSource<MessageBoxResult> tcs = new TaskCompletionSource<MessageBoxResult>();
+
+            win.ShowChildMessageBoxCore(childWindow, animate, (MessageBoxResult res) => {
+                tcs.TrySetResult(res);
+            });
+
+            return tcs.Task;
+        }
+
+        public static void ShowChildMessageBox(string content, string windowIdentifier, Action<MessageBoxResult> action, bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+             ShowChildMessageBox(content, string.Empty, MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.None, windowIdentifier, action, animate, controlStatus);
+        }
+
+        public static void ShowChildMessageBox(string content, string caption, string windowIdentifier, Action<MessageBoxResult> action, bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+            ShowChildMessageBox(content, caption, MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.None, windowIdentifier, action, animate, controlStatus);
+        }
+
+        public static void ShowChildMessageBox(string content, string caption, MessageBoxButton button, string windowIdentifier, Action<MessageBoxResult> action, bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+            ShowChildMessageBox(content, caption, button, MessageBoxImage.None, MessageBoxResult.None, windowIdentifier, action, animate, controlStatus);
+        }
+
+        public static void ShowChildMessageBox(string content, string caption, MessageBoxButton button, MessageBoxImage icon, string windowIdentifier, Action<MessageBoxResult> action, bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+            ShowChildMessageBox(content, caption, button, icon, MessageBoxResult.None, windowIdentifier, action, animate, controlStatus);
+        }
+
+        public static void ShowChildMessageBox(string content, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult, string windowIdentifier, Action<MessageBoxResult> action, bool animate = true, ControlStatus controlStatus = ControlStatus.Default)
+        {
+            ChildMessageBox childWindow = new ChildMessageBox();
+            childWindow.Text = content;
+            childWindow.Caption = caption;
+            childWindow.SetDefaultButton(button);
+            childWindow.SetMessageBoxImage(icon);
+            childWindow.SetDefaultResult(defaultResult);
+            childWindow.SetCurrentValue(ControlAttach.StatusProperty, controlStatus);
+            ShowChildMessageBox(childWindow, windowIdentifier, action, animate);
+        }
+
+        public static void ShowChildMessageBox(ChildMessageBox childWindow, string windowIdentifier, Action<MessageBoxResult> action, bool animate = true)
+        {
+            var win = GetWindowBase(windowIdentifier);
+            if (win == null) throw new ArgumentNullException(nameof(win));
+            if (win.windowContainer == null) throw new ArgumentNullException(nameof(win.windowContainer));
+
+            TaskCompletionSource<MessageBoxResult> tcs = new TaskCompletionSource<MessageBoxResult>();
+
+            win.ShowChildMessageBoxCore(childWindow, animate, action);
+        }
+
+        public void ShowChildMessageBoxCore(ChildMessageBox childWindow, bool animate, Action<MessageBoxResult> action)
+        {
+            OverlayOnShow(animate);
+
+            windowContainer.Children.Add(childWindow);
+            childWindow.ShowMessageBox(childWindow.Text, childWindow.Caption, childWindow.Button, childWindow.MessageBoxImage, childWindow.DefaultResult);
+
+            childWindow.Closed += (sender, e) => {
+                windowContainer.Children.Remove(childWindow);
+
+                HandleOverlayOnHide(animate);
+
+                if (action != null)
+                {
+                    action(childWindow.MessageBoxResult);
+                }
+            };
         }
         #endregion
 
@@ -1373,7 +1569,7 @@ namespace AIStudio.Wpf.Controls
             }
 
             Marshal.StructureToPtr(mmi, lParam, true);
-        }     
+        }
         #endregion
 
         public static readonly DependencyProperty ShowNotifyIconProperty = DependencyProperty.Register(

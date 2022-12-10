@@ -308,7 +308,7 @@ namespace AIStudio.Wpf.Controls
         {
             // A MessageBox with no X and Y will be centered.
             // A ChildWindow with ChildWindowStartupLocation == Center will be centered.
-            if (((windowControl is MessageBox) && (windowControl.Left == 0) && (windowControl.Top == 0))
+            if (((windowControl is ChildMessageBox) && (windowControl.Left == 0) && (windowControl.Top == 0))
               || ((windowControl is ChildWindow) && (((ChildWindow)windowControl).WindowStartupLocation == ChildWindowStartupLocation.Center)))
             {
                 this.CenterChild(windowControl);

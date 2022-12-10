@@ -9,7 +9,7 @@
     <PackageIcon>A.png</PackageIcon>
     <PackageIconUrl />
     <NeutralLanguage />
-    <Version>1.1.39</Version>
+    <Version>1.1.40</Version>
     <Description>兼容主流控件库MahApps和MaterialDesign的一个控件库</Description>
   </PropertyGroup>
 
@@ -182,11 +182,19 @@
     <None Remove="Resources\A.ico" />
     <None Remove="Resources\blank.ico" />
     <None Remove="Resources\fontawesome-webfont.ttf" />
+    <None Remove="Resources\Icons\Error48.png" />
+    <None Remove="Resources\Icons\Information48.png" />
+    <None Remove="Resources\Icons\Question48.png" />
+    <None Remove="Resources\Icons\Warning48.png" />
     <None Remove="Resources\variables.less" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Controls\Emoji\emoji.json" />
+    <Resource Include="Resources\Icons\Error48.png" />
+    <Resource Include="Resources\Icons\Information48.png" />
+    <Resource Include="Resources\Icons\Question48.png" />
+    <Resource Include="Resources\Icons\Warning48.png" />
   </ItemGroup>
 
   <ItemGroup>

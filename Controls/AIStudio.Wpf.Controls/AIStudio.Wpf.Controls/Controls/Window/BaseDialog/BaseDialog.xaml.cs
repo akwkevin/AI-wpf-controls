@@ -33,7 +33,7 @@ namespace AIStudio.Wpf.Controls
         public bool CanDragMove
         {
             get; set;
-        } = true;
+        } = false;
 
         /// <summary>
         /// 取消

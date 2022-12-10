@@ -623,6 +623,24 @@ namespace AIStudio.Wpf.Controls
             SetImageSource(image);
         }
 
+        public MessageBoxResult DefaultResult;
+        public void SetDefaultResult(MessageBoxResult messageBoxResult)
+        {
+            DefaultResult = messageBoxResult;
+        }
+
+        public MessageBoxButton Button;
+        public void SetDefaultButton(MessageBoxButton messageBoxButton)
+        {
+            Button = messageBoxButton;
+        }
+
+        public MessageBoxImage MessageBoxImage;
+        public void SetMessageBoxImage(MessageBoxImage messageBoxImage)
+        {
+            MessageBoxImage = messageBoxImage;
+        }
+
         /// <summary>
         /// Changes the control's visual state(s).
         /// </summary>
@@ -674,6 +692,8 @@ namespace AIStudio.Wpf.Controls
                 defaultButton.Focus();
             }
         }
+
+     
 
         /// <summary>
         /// Gets the default button from the _defaultResult.
@@ -862,7 +882,7 @@ namespace AIStudio.Wpf.Controls
             }
 
             // Use this syntax for other themes to get the icons
-            this.ImageSource = new BitmapImage(new Uri(String.Format("/Util.Controls.Xceed;component/Controls/ChildMessageBox/Icons/{0}", iconName), UriKind.RelativeOrAbsolute));
+            this.ImageSource = new BitmapImage(new Uri(String.Format("pack://application:,,,/AIStudio.Wpf.Controls;component/Resources/Icons/{0}", iconName), UriKind.RelativeOrAbsolute));
         }
 
         /// <summary>

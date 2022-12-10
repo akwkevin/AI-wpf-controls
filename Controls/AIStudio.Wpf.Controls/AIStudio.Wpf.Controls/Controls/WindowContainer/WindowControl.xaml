@@ -105,7 +105,8 @@
                                     </MultiBinding>
                                 </StackPanel.Margin>
                                 <!--close button-->
-                                <Button x:Name="PART_CloseButton"
+                                <Button x:Name="PART_CloseButton" 
+                                    Foreground="{TemplateBinding CaptionForeground}"
                                     Style="{TemplateBinding CloseButtonStyle}" 
                                     Visibility="{TemplateBinding CloseButtonVisibility}" />
                             </StackPanel>
@@ -127,6 +128,7 @@
                                 </Border.Margin>
                                 <Button x:Name="PART_ToolWindowCloseButton"
                                     Margin="0,3,0,1"
+                                    Foreground="{TemplateBinding CaptionForeground}"
                                     Style="{TemplateBinding CloseButtonStyle}" >
                                 </Button>
                             </Border>
@@ -166,7 +168,6 @@
             <Border x:Name="PART_BlockMouseInputsBorder" Background="Transparent" Visibility="Collapsed"/>
         </Grid>
         <ControlTemplate.Triggers>
-
             <Trigger Property="WindowStyle" Value="None">
                 <Setter Property="Height" Value="0" TargetName="HeaderRow" />
                 <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Icon" />
@@ -175,8 +176,6 @@
                 <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonsPanel" />
                 <Setter Property="Height" Value="0" TargetName="HeaderRow" />
             </Trigger>
-
-
 
             <Trigger Property="WindowStyle" Value="ToolWindow">
                 <Setter Property="Height" Value="Auto" TargetName="HeaderRow" />

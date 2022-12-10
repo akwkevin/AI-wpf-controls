@@ -10,7 +10,7 @@
     <!-- ChildMessageBox                                                                      -->
     <!-- =============================================================================== -->
 
-    <Style TargetType="{x:Type controls:ChildMessageBox}" BasedOn="{StaticResource {x:Type controls:WindowControl}}">      
+    <Style x:Key="AIStudio.Styles.ChildMessageBox" TargetType="{x:Type controls:ChildMessageBox}" BasedOn="{StaticResource {x:Type controls:WindowControl}}">      
         <Setter Property="Focusable" Value="False" />
         <Setter Property="MinWidth" Value="350" />
         <Setter Property="MinHeight" Value="50" />
@@ -157,7 +157,7 @@
                                                 Height="28"
                                                 MinWidth="60"
                                                 Content="{TemplateBinding YesButtonContent}"
-                                                Background="{DynamicResource PrimaryHueMidBrush}"
+                                                Background="{TemplateBinding WindowBackground}"
                                                 Style="{TemplateBinding YesButtonStyle}"
                                                 Margin="5 0 5 0" 
                                                 Visibility="Collapsed"/>
@@ -165,7 +165,7 @@
                                                 Height="28"
                                                 MinWidth="60"
                                                 Content="{TemplateBinding NoButtonContent}"
-                                                Background="{DynamicResource MahApps.Brushes.Gray2}"
+                                                Background="{DynamicResource MaterialDesignToolForeground}"
                                                 Style="{TemplateBinding NoButtonStyle}"
                                                 Margin="5 0 5 0" 
                                                 Visibility="Collapsed"/>
@@ -173,7 +173,7 @@
                                                 Height="28"
                                                 MinWidth="60"
                                                 Content="{TemplateBinding OkButtonContent}"
-                                                Background="{DynamicResource PrimaryHueMidBrush}"
+                                                Background="{TemplateBinding WindowBackground}"
                                                 Style="{TemplateBinding OkButtonStyle}"
                                                 Margin="5 0 5 0" 
                                                 Visibility="Collapsed"/>
@@ -181,7 +181,7 @@
                                                 Height="28"
                                                 MinWidth="60"                                        
                                                 Content="{TemplateBinding CancelButtonContent}"
-                                                Background="{DynamicResource MahApps.Brushes.Gray2}"
+                                                Background="{DynamicResource MaterialDesignToolForeground}"
                                                 Style="{TemplateBinding CancelButtonStyle}"
                                                 Margin="5 0 5 0" 
                                                 Visibility="Collapsed"/>
@@ -194,6 +194,73 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="WindowBackground" Value="{DynamicResource PrimaryHueLightBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueLightBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource PrimaryHueLightBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBody}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="WindowBackground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="WindowBackground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="WindowBackground" Value="{DynamicResource Theme.ShowcaseBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="WindowBackground" Value="{DynamicResource SuccessBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="WindowBackground" Value="{DynamicResource InfoBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource InfoBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="WindowBackground" Value="{DynamicResource WarningBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource WarningBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="WindowBackground" Value="{DynamicResource DangerBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="WindowBackground" Value="{DynamicResource MaterialDesignToolBackground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignToolBackground}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource MaterialDesignToolBackground}" />
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignToolForeground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MaterialDesignToolForeground}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
+    <Style BasedOn="{StaticResource AIStudio.Styles.ChildMessageBox}" TargetType="{x:Type controls:ChildMessageBox}"/>
+    
 </ResourceDictionary>

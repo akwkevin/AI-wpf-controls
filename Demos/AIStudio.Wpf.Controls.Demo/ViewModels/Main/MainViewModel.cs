@@ -97,6 +97,9 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
                        case "Snackbar":
                            ShowSnackbar();
                            break;
+                       case "ChildWindow":
+                           ShowChildWindow();
+                           break;
                        case "Dialog":
                            ShowDialog();
                            break;
@@ -229,6 +232,30 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
                 snackbar = 0;
             }
         }
+
+        int childwindow = 0;
+        private async void ShowChildWindow()
+        {
+            if (childwindow == (int)ControlStatus.Plain)
+            {
+                var dialogtest = new ChildWindowTest();
+                var res = await WindowBase.ShowChildWindowAsync(dialogtest, "ChildWindow", "RootWindow");
+            }
+            else
+            {
+                var res = await WindowBase.ShowChildMessageBoxAsync("Diaglog", "MesssageBox", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes, "RootWindow", true, (ControlStatus)childwindow);
+            }
+
+            if (childwindow < (int)ControlStatus.Plain)
+            {
+                childwindow++;
+            }
+            else
+            {
+                childwindow = 0;
+            }
+        }
+
 
         int dialog = 0;
         private async void ShowDialog()

@@ -34,9 +34,12 @@ namespace AIStudio.Wpf.Controls
             MultiComboBox ecb = d as MultiComboBox;
             ecb.bindingList.Clear();
             //遍历循环操作
-            foreach (var item in ecb.ItemsSource)
+            if (ecb.ItemsSource != null)
             {
-                ecb.bindingList.Add(item);
+                foreach (var item in ecb.ItemsSource)
+                {
+                    ecb.bindingList.Add(item);
+                }
             }
         }
         /// <summary>

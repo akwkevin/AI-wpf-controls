@@ -10,7 +10,7 @@
     <!-- ChildMessageBox                                                                      -->
     <!-- =============================================================================== -->
 
-    <Style TargetType="{x:Type controls:ChildMessageBox}" BasedOn="{StaticResource {x:Type controls:WindowControl}}">      
+    <Style x:Key="AIStudio.Styles.ChildMessageBox" TargetType="{x:Type controls:ChildMessageBox}" BasedOn="{StaticResource {x:Type controls:WindowControl}}">      
         <Setter Property="Focusable" Value="False" />
         <Setter Property="MinWidth" Value="350" />
         <Setter Property="MinHeight" Value="50" />
@@ -157,7 +157,7 @@
                                                 Height="28"
                                                 MinWidth="60"
                                                 Content="{TemplateBinding YesButtonContent}"
-                                                Background="{DynamicResource MahApps.Brushes.Accent}"
+                                                Background="{TemplateBinding WindowBackground}"
                                                 Style="{TemplateBinding YesButtonStyle}"
                                                 Margin="5 0 5 0" 
                                                 Visibility="Collapsed"/>
@@ -173,7 +173,7 @@
                                                 Height="28"
                                                 MinWidth="60"
                                                 Content="{TemplateBinding OkButtonContent}"
-                                                Background="{DynamicResource MahApps.Brushes.Accent}"
+                                                Background="{TemplateBinding WindowBackground}"
                                                 Style="{TemplateBinding OkButtonStyle}"
                                                 Margin="5 0 5 0" 
                                                 Visibility="Collapsed"/>
@@ -194,6 +194,73 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="controls:ControlAttach.Status" Value="Light">
+                <Setter Property="WindowBackground" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
+                <Setter Property="WindowBackground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
+                <Setter Property="WindowBackground" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
+                <Setter Property="WindowBackground" Value="{DynamicResource Theme.ShowcaseBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource Theme.ShowcaseBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+                <Setter Property="WindowBackground" Value="{DynamicResource SuccessBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource SuccessBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+                <Setter Property="WindowBackground" Value="{DynamicResource InfoBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource InfoBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource InfoBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+                <Setter Property="WindowBackground" Value="{DynamicResource WarningBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource WarningBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource WarningBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+                <Setter Property="WindowBackground" Value="{DynamicResource DangerBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource DangerBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+            </Trigger>
+            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
+                <Setter Property="WindowBackground" Value="{DynamicResource MahApps.Brushes.Gray8}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray8}"/>
+                <Setter Property="WindowBorderBrush" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+                <Setter Property="CaptionForeground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
+    <Style BasedOn="{StaticResource AIStudio.Styles.ChildMessageBox}" TargetType="{x:Type controls:ChildMessageBox}"/>
+    
 </ResourceDictionary>

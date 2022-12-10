@@ -74,6 +74,12 @@
                             CommandParameter="Snackbar"
                             Style="{DynamicResource AIStudio.Styles.Button.Window}" 
                             Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
+                    <Button Content="ChildWindow" 
+                            Padding="2,0"
+                            Command="{Binding ShowCommand}"
+                            CommandParameter="ChildWindow"
+                            Style="{DynamicResource AIStudio.Styles.Button.Window}" 
+                            Foreground="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ac:WindowBase}}" />
                     <Button Content="Dialog" 
                             Padding="2,0"
                             Command="{Binding ShowCommand}"

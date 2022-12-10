@@ -136,6 +136,10 @@
                                       Panel.ZIndex="5"
                                       FocusVisualStyle="{x:Null}" />
 
+                                <controls:WindowContainer Margin="{TemplateBinding CaptionHeight, Converter={StaticResource IntToThicknessConverter},ConverterParameter='TOP'}"
+                                    x:Name="PART_WindowContainer"
+                                    Panel.ZIndex="6"/>
+
                                 <controls:Snackbar x:Name="PART_MainSnackbar" />
 
                                 <StackPanel controls:NoticeCard.Identifier="{TemplateBinding Identifier}" VerticalAlignment="Top" />
@@ -404,6 +408,9 @@
                                     <Grid  x:Name="PART_MetroActiveDialogContainer"                         
                                           Panel.ZIndex="5"
                                           FocusVisualStyle="{x:Null}" />
+
+                                    <controls:WindowContainer x:Name="PART_WindowContainer"
+                                          Panel.ZIndex="6"/>
 
                                     <controls:Snackbar x:Name="PART_MainSnackbar" />
 

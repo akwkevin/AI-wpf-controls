@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -580,18 +581,6 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         [Obsolete("This method is obsolete and should no longer be used.")]
         private void ParentContainer_LayoutUpdated(object sender, EventArgs e)
         {
@@ -846,6 +835,268 @@ namespace AIStudio.Wpf.Controls
         }
 
         #endregion //Events
+
+        #region Custom
+        public CancellationTokenSource CancelSource
+        {
+            get; set;
+        }
+        public CancellationTokenSource OKSource
+        {
+            get; set;
+        }
+        public Func<bool> ValidationAction
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// 取消
+        /// </summary>
+        protected Button _negativeButton = null;
+        /// <summary>
+        /// 确定
+        /// </summary>
+        protected Button _affirmativeButton = null;
+        protected Button _otherButton = null;
+        protected Button _otherButton2 = null;
+        protected Button _otherButton3 = null;
+        public bool AutoNavigation { get; set; } = true;
+
+        public virtual void WaitForButtonPress(Action<object> action)
+        {
+            HorizontalAlignment = HorizontalAlignment.Center;
+            VerticalAlignment = VerticalAlignment.Center;
+
+            if (_negativeButton == null)
+                _negativeButton = this.FindName("PART_NegativeButton") as Button;
+            if (_affirmativeButton == null)
+                _affirmativeButton = this.FindName("PART_AffirmativeButton") as Button;
+            if (_otherButton == null)
+                _otherButton = this.FindName("PART_OtherButton") as Button;
+            if (_otherButton2 == null)
+                _otherButton2 = this.FindName("PART_OtherButton2") as Button;
+            if (_otherButton3 == null)
+                _otherButton3 = this.FindName("PART_OtherButton3") as Button;
+
+            if (AutoNavigation)
+            {
+                if (_affirmativeButton != null)
+                    ControlNavigationAttach.SetNavigationIndex(_affirmativeButton, 0);
+                if (_negativeButton != null)
+                    ControlNavigationAttach.SetNavigationIndex(_negativeButton, 1);
+
+                ControlNavigationAttach.SetNavWithUpDown(this, true);
+                ControlNavigationAttach.SetNavWithUpDownDefaultIndex(this, 0);
+            }
+
+            RoutedEventHandler negativeHandler = null;
+            KeyEventHandler negativeKeyHandler = null;
+
+            RoutedEventHandler affirmativeHandler = null;
+            KeyEventHandler affirmativeKeyHandler = null;
+
+            RoutedEventHandler otherHandler = null;
+            RoutedEventHandler otherHandler2 = null;
+            RoutedEventHandler otherHandler3 = null;
+
+            KeyEventHandler escapeKeyHandler = null;
+
+            Action cleanUpHandlers = null;
+
+            CancelSource = new CancellationTokenSource();
+
+            var cancellationTokenRegistration = CancelSource.Token.Register(() => {
+                cleanUpHandlers();
+                if (action != null)
+                {
+                    action(BaseDialogResult.Cancel);
+                }
+            });
+
+            OKSource = new CancellationTokenSource();
+
+            var okTokenRegistration = OKSource.Token.Register(() => {
+                cleanUpHandlers();
+                if (action != null)
+                {
+                    action(BaseDialogResult.OK);
+                }
+            });          
+
+            cleanUpHandlers = () => {
+                this.KeyDown -= escapeKeyHandler;
+
+                if (_negativeButton != null)
+                    _negativeButton.Click -= negativeHandler;
+                if (_affirmativeButton != null)
+                    _affirmativeButton.Click -= affirmativeHandler;
+                if (_otherButton != null)
+                    _otherButton.Click -= otherHandler;
+                if (_otherButton2 != null)
+                    _otherButton2.Click -= otherHandler2;
+                if (_otherButton3 != null)
+                    _otherButton3.Click -= otherHandler3;
+
+                if (_negativeButton != null)
+                    _negativeButton.KeyDown -= negativeKeyHandler;
+                if (_affirmativeButton != null)
+                    _affirmativeButton.KeyDown -= affirmativeKeyHandler;
+
+
+                cancellationTokenRegistration.Dispose();
+                okTokenRegistration.Dispose();
+            };
+
+            escapeKeyHandler = (sender, e) => {
+                if (e.Key == Key.Escape)
+                {
+                    cleanUpHandlers();
+
+                    if (action != null)
+                    {
+                        action(BaseDialogResult.Cancel);
+                    }
+                }
+            };
+
+            negativeKeyHandler = (sender, e) => {
+                if (e.Key == Key.Enter)
+                {
+                    cleanUpHandlers();
+
+                    if (action != null)
+                    {
+                        action(BaseDialogResult.Cancel);
+                    }
+                }
+            };
+
+            affirmativeKeyHandler = (sender, e) => {
+                if (ValidationAction != null)
+                {
+                    if (ValidationAction() == false)
+                        return;
+                }
+
+                if (e.Key == Key.Enter)
+                {
+                    cleanUpHandlers();
+
+                    if (action != null)
+                    {
+                        action(BaseDialogResult.OK);
+                    }
+                }
+            };
+
+            negativeHandler = (sender, e) => {
+                cleanUpHandlers();
+
+                if (action != null)
+                {
+                    action(BaseDialogResult.Cancel);
+                }
+
+                e.Handled = true;
+            };
+
+            affirmativeHandler = (sender, e) => {
+                if (ValidationAction != null)
+                {
+                    if (ValidationAction() == false)
+                        return;
+                }
+
+                cleanUpHandlers();
+
+                if (action != null)
+                {
+                    action(BaseDialogResult.OK);
+                }
+
+                e.Handled = true;
+            };
+
+            otherHandler = (sender, e) => {
+                if (ValidationAction != null)
+                {
+                    if (ValidationAction() == false)
+                        return;
+                }
+
+                cleanUpHandlers();
+
+                if (action != null)
+                {
+                    action(BaseDialogResult.Other1);
+                }
+
+                e.Handled = true;
+            };
+
+            otherHandler2 = (sender, e) => {
+                if (ValidationAction != null)
+                {
+                    if (ValidationAction() == false)
+                        return;
+                }
+
+                cleanUpHandlers();
+
+                if (action != null)
+                {
+                    action(BaseDialogResult.Other2);
+                }
+
+                e.Handled = true;
+            };
+
+            otherHandler3 = (sender, e) => {
+                if (ValidationAction != null)
+                {
+                    if (ValidationAction() == false)
+                        return;
+                }
+
+                cleanUpHandlers();
+
+                if (action != null)
+                {
+                    action(BaseDialogResult.Other3);
+                }
+
+                e.Handled = true;
+            };
+
+            CloseButtonClicked += (sender, e) => {
+                cleanUpHandlers();
+
+                if (action != null)
+                {
+                    action(BaseDialogResult.Cancel);
+                }
+            };
+
+            if (_negativeButton != null)
+                _negativeButton.KeyDown += negativeKeyHandler;
+            if (_affirmativeButton != null)
+                _affirmativeButton.KeyDown += affirmativeKeyHandler;
+
+            this.KeyDown += escapeKeyHandler;
+
+            if (_negativeButton != null)
+                _negativeButton.Click += negativeHandler;
+            if (_affirmativeButton != null)
+                _affirmativeButton.Click += affirmativeHandler;
+            if (_otherButton != null)
+                _otherButton.Click += otherHandler;
+            if (_otherButton2 != null)
+                _otherButton2.Click += otherHandler2;
+            if (_otherButton3 != null)
+                _otherButton3.Click += otherHandler3;
+        }
+        #endregion
 
     }
 
