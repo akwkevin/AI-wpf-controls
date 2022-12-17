@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -849,6 +850,10 @@ namespace AIStudio.Wpf.Controls
         {
             get; set;
         }
+        public Func<Task<bool>> ValidationActionAsync
+        {
+            get; set;
+        }
 
         /// <summary>
         /// 取消
@@ -1001,10 +1006,16 @@ namespace AIStudio.Wpf.Controls
                 e.Handled = true;
             };
 
-            affirmativeHandler = (sender, e) => {
+            affirmativeHandler = async (sender, e) => {
                 if (ValidationAction != null)
                 {
                     if (ValidationAction() == false)
+                        return;
+                }
+
+                if (ValidationActionAsync != null)
+                {
+                    if (await ValidationActionAsync() == false)
                         return;
                 }
 
