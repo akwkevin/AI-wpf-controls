@@ -6,6 +6,8 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <converter:ThicknessBindingConverter x:Key="ThicknessBindingConverter"/>
+    
     <Duration x:Key="ExpandDuration">0:0:0.250</Duration>
     <Duration x:Key="CollapseDuration">0:0:0.200</Duration>
 
