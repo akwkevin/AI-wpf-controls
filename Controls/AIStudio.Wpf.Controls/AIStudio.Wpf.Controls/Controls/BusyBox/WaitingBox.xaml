@@ -12,7 +12,7 @@
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
         <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
-        <Setter Property="FontSize" Value="{DynamicResource AIStudio.Font.Size}"/>
+        <Setter Property="FontSize" Value="{DynamicResource AIStudio.Title.Size}"/>
         <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
         <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.ExtraLarge}"/>
         <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.ExtraLarge}"/>

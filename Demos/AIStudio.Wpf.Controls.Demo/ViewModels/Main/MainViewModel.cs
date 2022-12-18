@@ -297,6 +297,7 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
                     busyBoxViewModel.CancelAction = () => {
                         stop = true;
                     };
+                    busyBoxViewModel.Percent = 0;
                     for (int i = 0; i < 10; i++)
                     {
                         System.Threading.Thread.Sleep(300);

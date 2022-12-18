@@ -1,15 +1,22 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MaterialDesign/ProgressBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Loading/Loading.MaterialDesign.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <converter:PercentConverter x:Key="PercentConverter"/>
+    
     <Style x:Key="AIStudio.Styles.BusyBox" TargetType="{x:Type controls:BusyBox}">
         <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}"/>
         <Setter Property="Background" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+        <Setter Property="FontSize" Value="{DynamicResource AIStudio.Title.Size}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AIStudio.Font.FontFamily}"/>
+        <Setter Property="controls:IconAttach.Width" Value="{DynamicResource AIStudio.Icon.Size.ExtraLarge}"/>
+        <Setter Property="controls:IconAttach.Height" Value="{DynamicResource AIStudio.Icon.Size.ExtraLarge}"/>
         <Style.Triggers>
             <Trigger Property="WaitingStyle" Value="Busy">
                 <Setter Property="Template">
@@ -17,14 +24,14 @@
                         <ControlTemplate TargetType="{x:Type controls:BusyBox}">
                             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" MinHeight="30" MinWidth="200">
                                 <Grid>
-                                    <Border CornerRadius="5" BorderBrush="{TemplateBinding Foreground}" BorderThickness="1" Background="{TemplateBinding Background}" >
+                                    <Border CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" >
                                         <Border.Effect>
                                             <DropShadowEffect Color="Black"></DropShadowEffect>
                                         </Border.Effect>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
-                                            <controls:Loading Width="{Binding ElementName=tbPrompt,Path=Height}" Height="{Binding ElementName=tbPrompt,Path=Height}" Foreground="{TemplateBinding Foreground}" Margin="5,0"/>
+                                            <controls:Loading Width="{TemplateBinding controls:IconAttach.Width}" Height="{TemplateBinding controls:IconAttach.Height}" Foreground="{TemplateBinding Foreground}" Margin="5,0"/>
                                             <TextBlock x:Name="tbPrompt" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding WaitInfo}"></TextBlock>
-                                            <TextBlock x:Name="txtValue" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Text="{Binding Percent,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay,StringFormat={}{0:N1}%}" />
+                                            <TextBlock x:Name="txtValue" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Percent,Converter={StaticResource PercentConverter}}" />
                                             <TextBlock x:Name="txtCancel" VerticalAlignment="Center" Visibility="Collapsed" Margin="5,0">
                                                 <Hyperlink Foreground="{TemplateBinding Foreground}" Command="{Binding CancelCommmad, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">取消</Hyperlink>
                                             </TextBlock>

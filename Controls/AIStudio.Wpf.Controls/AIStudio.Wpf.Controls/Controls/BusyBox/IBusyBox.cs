@@ -8,7 +8,7 @@ namespace AIStudio.Wpf.Controls
         {
             get; set;
         }
-        double Percent
+        double? Percent
         {
             get; set;
         }

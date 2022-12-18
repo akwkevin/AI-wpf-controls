@@ -22,9 +22,9 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-        private double percent;
+        private double? percent;
 
-        public double Percent
+        public double? Percent
         {
             get
             {

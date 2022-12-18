@@ -51,13 +51,13 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty PercentProperty = DependencyProperty.Register(
-         nameof(Percent), typeof(double), typeof(BusyBox), new PropertyMetadata(0d));
+         nameof(Percent), typeof(double?), typeof(BusyBox), new PropertyMetadata(default(double?)));
 
-        public double Percent
+        public double? Percent
         {
             get
             {
-                return (double)GetValue(PercentProperty);
+                return (double?)GetValue(PercentProperty);
             }
             set
             {
