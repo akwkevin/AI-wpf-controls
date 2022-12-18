@@ -226,7 +226,7 @@ namespace AIStudio.Wpf.Controls.Behaviors
                 if (item is ExpandoObject keyValuePairs)
                 {
                     var dictionary = (IDictionary<string, object>)keyValuePairs;
-                    if ((bool)dictionary["IsChecked"] == true)
+                    if (object.Equals(dictionary["IsChecked"], true))
                     {
                         count++;
                     }
@@ -235,8 +235,8 @@ namespace AIStudio.Wpf.Controls.Behaviors
                 {
                     if (item.GetType().GetProperty("IsChecked") != null)
                     {
-                        var value = (bool)item.GetType().GetProperty("IsChecked").GetValue(item);
-                        if (value)
+                        var value = item.GetType().GetProperty("IsChecked").GetValue(item);
+                        if (object.Equals(value, true))
                         {
                             count++;
                         }
