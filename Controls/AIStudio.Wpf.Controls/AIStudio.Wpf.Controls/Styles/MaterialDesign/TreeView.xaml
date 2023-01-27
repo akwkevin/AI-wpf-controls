@@ -605,5 +605,174 @@
         <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
     </Style>
 
+    <Style x:Key="AIStudio.Styles.TreeViewItem.Menu" TargetType="{x:Type TreeViewItem}">
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                    <StackPanel>
+                        <Grid x:Name="Root_Grid" Background="Transparent">
+                            <Grid x:Name="PART_Background" Background="{TemplateBinding Foreground}" Opacity="0" />
+                            <Border x:Name="Bd" Opacity="0.75"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <controls:Ripple Focusable="False" 
+                                         Padding="{TemplateBinding Padding}" 
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                         Feedback="{TemplateBinding Foreground, Converter={StaticResource BrushRoundConverter}}"
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <Grid Margin="{Binding Converter={StaticResource TreeViewMarginConverter}, RelativeSource={x:Static RelativeSource.TemplatedParent}}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" MinWidth="19" />
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter x:Name="PART_Header"
+                                                  Grid.Column="0"
+                                                  ContentSource="Header"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        <ToggleButton x:Name="Expander"  Grid.Column="1"
+                                              Style="{StaticResource AIStudio.Styles.ComboToggleButton}"
+                                              controls:IconAttach.Geometry="{StaticResource FillUpGeometry}"
+                                              Margin="0,0,5,0"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              ClickMode="Press"
+                                              IsHitTestVisible="False"
+                                              IsChecked="{Binding Path=IsExpanded, RelativeSource={x:Static RelativeSource.TemplatedParent}, Mode=TwoWay}" />
+                                    </Grid>
+                                </controls:Ripple>
+                            </Border>
+                        </Grid>
+                        <ItemsPresenter x:Name="ItemsHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" >
+                            <ItemsPresenter.LayoutTransform>
+                                <ScaleTransform ScaleY="0" ScaleX="1"/>
+                            </ItemsPresenter.LayoutTransform>
+                        </ItemsPresenter>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <!--<Trigger Property="IsExpanded" Value="False">
+                            <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed" />
+                        </Trigger>-->
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.3"
+                                                         Storyboard.TargetName="ItemsHost"
+                                                         Storyboard.TargetProperty="(ContentPresenter.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                         To="1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.3"
+                                                         Storyboard.TargetName="ItemsHost"
+                                                         Storyboard.TargetProperty="(ContentPresenter.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                         To="0" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
+                        </Trigger>
+
+                        <Trigger SourceName="Root_Grid" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0.3" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0.2" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="Selector.IsSelectionActive" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0.35" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="1" />
+                        </MultiTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingStackPanel.IsVirtualizing" Value="True">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.TreeView.Menu" TargetType="{x:Type TreeView}">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignBody}" />
+        <!--  default to 0  -->
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource AIStudio.Styles.TreeViewItem.Menu}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="controls:TreeViewAttach.ExpandBehaviour" Value="OnlyOne"/>
+        <Setter Property="controls:TreeViewAttach.ExpandMode" Value="SingleClick"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeView}">
+                    <Border Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ScrollViewer x:Name="TreeViewScrollViewer"
+                                      Padding="{TemplateBinding Padding}"
+                                      CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                      Focusable="False"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingStackPanel.IsVirtualizing" Value="True">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray9}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style> 
 
 </ResourceDictionary>

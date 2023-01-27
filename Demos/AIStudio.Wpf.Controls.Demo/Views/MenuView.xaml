@@ -91,6 +91,28 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="左侧菜单" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <TreeView ItemsSource="{Binding DataList}" Style="{DynamicResource AIStudio.Styles.TreeView.Menu}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate DataType="{x:Type ac:HamburgerTreeMenuGlyphItem}" ItemsSource="{Binding Path=Children}">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid>
+                                        <Image Width="16" Height="16" Margin="3"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Source="{Binding ImgPath}"
+                                               Stretch="UniformToFill" />
+                                    </Grid>
+                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding Name}" />
+                                </Grid>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </GroupBox>
+                <GroupBox Header="汉堡菜单" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
                     <ac:HamburgerTreeMenu
                                 x:Name="HamburgerMenuControl"
                                 ItemsSource="{Binding DataList}"
