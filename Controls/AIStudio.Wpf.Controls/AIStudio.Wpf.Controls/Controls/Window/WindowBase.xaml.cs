@@ -15,6 +15,7 @@ using WinInterop = System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Windows.Shell;
 using AIStudio.Wpf.Controls.Interop;
+using System.Diagnostics;
 
 namespace AIStudio.Wpf.Controls
 {
@@ -1510,65 +1511,75 @@ namespace AIStudio.Wpf.Controls
 
         #region 最大化显示任务栏
 
-        protected override void OnSourceInitialized(EventArgs e)
+        //protected override void OnSourceInitialized(EventArgs e)
+        //{
+        //    base.OnSourceInitialized(e);
+        //    this.GetHwndSource()?.AddHook(HwndSourceHook);
+        //}
+
+        //private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
+        //{
+        //    switch (msg)
+        //    {
+        //        case InteropValues.WM_WINDOWPOSCHANGED:
+        //            Padding = WindowState == WindowState.Maximized ? WindowHelper.WindowMaximizedPadding : _commonPadding;
+
+        //            Debug.WriteLine($"WM_WINDOWPOSCHANGED{WindowState}{Padding}");
+        //            break;
+        //        case InteropValues.WM_GETMINMAXINFO:
+        //            WmGetMinMaxInfo(hwnd, lparam);
+        //            Padding = WindowState == WindowState.Maximized || WindowState == WindowState.Minimized ? WindowHelper.WindowMaximizedPadding : _commonPadding;
+
+        //            Debug.WriteLine($"WM_GETMINMAXINFO{WindowState}{Padding}");
+        //            break;
+        //        case InteropValues.WM_NCHITTEST:
+        //            // for fixing #886
+        //            // https://developercommunity.visualstudio.com/t/overflow-exception-in-windowchrome/167357
+        //            try
+        //            {
+        //                _ = lparam.ToInt32();
+        //            }
+        //            catch (OverflowException)
+        //            {
+        //                handled = true;
+        //            }
+        //            break;
+        //    }
+
+        //    return IntPtr.Zero;
+        //}
+
+        //private void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
+        //{
+        //    var mmi = (InteropValues.MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
+        //    var monitor = InteropMethods.MonitorFromWindow(hwnd, InteropValues.MONITOR_DEFAULTTONEAREST);
+
+        //    if (monitor != IntPtr.Zero && mmi != null)
+        //    {
+        //        InteropValues.APPBARDATA appBarData = default;
+        //        var autoHide = InteropMethods.SHAppBarMessage(4, ref appBarData) != 0;
+        //        if (autoHide)
+        //        {
+        //            var monitorInfo = default(InteropValues.MONITORINFO);
+        //            monitorInfo.cbSize = (uint)Marshal.SizeOf(typeof(InteropValues.MONITORINFO));
+        //            InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
+        //            var rcWorkArea = monitorInfo.rcWork;
+        //            var rcMonitorArea = monitorInfo.rcMonitor;
+        //            mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
+        //            mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
+        //            mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
+        //            mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top - 1);
+        //        }
+        //    }
+
+        //    Marshal.StructureToPtr(mmi, lParam, true);
+        //}
+
+
+        protected override void OnStateChanged(EventArgs e)
         {
-            base.OnSourceInitialized(e);
-            this.GetHwndSource()?.AddHook(HwndSourceHook);
-        }
-
-
-        private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
-        {
-            switch (msg)
-            {
-                case InteropValues.WM_WINDOWPOSCHANGED:
-                    Padding = WindowState == WindowState.Maximized ? WindowHelper.WindowMaximizedPadding : _commonPadding;
-                    break;
-                case InteropValues.WM_GETMINMAXINFO:
-                    WmGetMinMaxInfo(hwnd, lparam);
-                    Padding = WindowState == WindowState.Maximized ? WindowHelper.WindowMaximizedPadding : _commonPadding;
-                    break;
-                case InteropValues.WM_NCHITTEST:
-                    // for fixing #886
-                    // https://developercommunity.visualstudio.com/t/overflow-exception-in-windowchrome/167357
-                    try
-                    {
-                        _ = lparam.ToInt32();
-                    }
-                    catch (OverflowException)
-                    {
-                        handled = true;
-                    }
-                    break;
-            }
-
-            return IntPtr.Zero;
-        }
-
-        private void WmGetMinMaxInfo(System.IntPtr hwnd, System.IntPtr lParam)
-        {
-            var mmi = (InteropValues.MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
-            var monitor = InteropMethods.MonitorFromWindow(hwnd, InteropValues.MONITOR_DEFAULTTONEAREST);
-
-            if (monitor != IntPtr.Zero && mmi != null)
-            {
-                InteropValues.APPBARDATA appBarData = default;
-                var autoHide = InteropMethods.SHAppBarMessage(4, ref appBarData) != 0;
-                if (autoHide)
-                {
-                    var monitorInfo = default(InteropValues.MONITORINFO);
-                    monitorInfo.cbSize = (uint)Marshal.SizeOf(typeof(InteropValues.MONITORINFO));
-                    InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
-                    var rcWorkArea = monitorInfo.rcWork;
-                    var rcMonitorArea = monitorInfo.rcMonitor;
-                    mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
-                    mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
-                    mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
-                    mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top - 1);
-                }
-            }
-
-            Marshal.StructureToPtr(mmi, lParam, true);
+            base.OnStateChanged(e);
+            Padding = WindowState == WindowState.Maximized ? WindowHelper.WindowMaximizedPadding : _commonPadding;
         }
         #endregion
 
