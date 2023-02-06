@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
              xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
+             xmlns:wpftk="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="RootGrid">
@@ -16,7 +17,7 @@
         <ListBox Grid.Row="1" ItemsSource="{Binding Kinds}" SelectedItem="{Binding SelectedKind}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <ac:VirtualizingWrapPanelEx Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBox},Path=ActualWidth}" ChildWidth="142" ChildHeight="46"/>
+                    <wpftk:VirtualizingWrapPanel MouseWheelDelta="80" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
