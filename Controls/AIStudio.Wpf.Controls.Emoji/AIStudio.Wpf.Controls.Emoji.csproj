@@ -1,0 +1,247 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <UseWPF>true</UseWPF>
+    <Company>AIStudio.Wpf.Controls</Company>
+    <Authors>akwkevin</Authors>
+    <PackageProjectUrl>https://gitee.com/akwkevin</PackageProjectUrl>
+    <PackageIcon>A.png</PackageIcon>
+    <PackageIconUrl />
+    <NeutralLanguage />
+    <Version>1.1.1</Version>
+    <Description>Wpf Emoji</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Emoji\emoji.json" />
+    <None Remove="Emoji\emotion\0.gif" />
+    <None Remove="Emoji\emotion\1.gif" />
+    <None Remove="Emoji\emotion\10.gif" />
+    <None Remove="Emoji\emotion\100.gif" />
+    <None Remove="Emoji\emotion\101.gif" />
+    <None Remove="Emoji\emotion\102.gif" />
+    <None Remove="Emoji\emotion\103.gif" />
+    <None Remove="Emoji\emotion\104.gif" />
+    <None Remove="Emoji\emotion\11.gif" />
+    <None Remove="Emoji\emotion\12.gif" />
+    <None Remove="Emoji\emotion\13.gif" />
+    <None Remove="Emoji\emotion\14.gif" />
+    <None Remove="Emoji\emotion\15.gif" />
+    <None Remove="Emoji\emotion\16.gif" />
+    <None Remove="Emoji\emotion\17.gif" />
+    <None Remove="Emoji\emotion\18.gif" />
+    <None Remove="Emoji\emotion\19.gif" />
+    <None Remove="Emoji\emotion\2.gif" />
+    <None Remove="Emoji\emotion\20.gif" />
+    <None Remove="Emoji\emotion\21.gif" />
+    <None Remove="Emoji\emotion\22.gif" />
+    <None Remove="Emoji\emotion\23.gif" />
+    <None Remove="Emoji\emotion\24.gif" />
+    <None Remove="Emoji\emotion\25.gif" />
+    <None Remove="Emoji\emotion\26.gif" />
+    <None Remove="Emoji\emotion\27.gif" />
+    <None Remove="Emoji\emotion\28.gif" />
+    <None Remove="Emoji\emotion\29.gif" />
+    <None Remove="Emoji\emotion\3.gif" />
+    <None Remove="Emoji\emotion\30.gif" />
+    <None Remove="Emoji\emotion\31.gif" />
+    <None Remove="Emoji\emotion\32.gif" />
+    <None Remove="Emoji\emotion\33.gif" />
+    <None Remove="Emoji\emotion\34.gif" />
+    <None Remove="Emoji\emotion\35.gif" />
+    <None Remove="Emoji\emotion\36.gif" />
+    <None Remove="Emoji\emotion\37.gif" />
+    <None Remove="Emoji\emotion\38.gif" />
+    <None Remove="Emoji\emotion\39.gif" />
+    <None Remove="Emoji\emotion\4.gif" />
+    <None Remove="Emoji\emotion\40.gif" />
+    <None Remove="Emoji\emotion\41.gif" />
+    <None Remove="Emoji\emotion\42.gif" />
+    <None Remove="Emoji\emotion\43.gif" />
+    <None Remove="Emoji\emotion\44.gif" />
+    <None Remove="Emoji\emotion\45.gif" />
+    <None Remove="Emoji\emotion\46.gif" />
+    <None Remove="Emoji\emotion\47.gif" />
+    <None Remove="Emoji\emotion\48.gif" />
+    <None Remove="Emoji\emotion\49.gif" />
+    <None Remove="Emoji\emotion\5.gif" />
+    <None Remove="Emoji\emotion\50.gif" />
+    <None Remove="Emoji\emotion\51.gif" />
+    <None Remove="Emoji\emotion\52.gif" />
+    <None Remove="Emoji\emotion\53.gif" />
+    <None Remove="Emoji\emotion\54.gif" />
+    <None Remove="Emoji\emotion\55.gif" />
+    <None Remove="Emoji\emotion\56.gif" />
+    <None Remove="Emoji\emotion\57.gif" />
+    <None Remove="Emoji\emotion\58.gif" />
+    <None Remove="Emoji\emotion\59.gif" />
+    <None Remove="Emoji\emotion\6.gif" />
+    <None Remove="Emoji\emotion\60.gif" />
+    <None Remove="Emoji\emotion\61.gif" />
+    <None Remove="Emoji\emotion\62.gif" />
+    <None Remove="Emoji\emotion\63.gif" />
+    <None Remove="Emoji\emotion\64.gif" />
+    <None Remove="Emoji\emotion\65.gif" />
+    <None Remove="Emoji\emotion\66.gif" />
+    <None Remove="Emoji\emotion\67.gif" />
+    <None Remove="Emoji\emotion\68.gif" />
+    <None Remove="Emoji\emotion\69.gif" />
+    <None Remove="Emoji\emotion\7.gif" />
+    <None Remove="Emoji\emotion\70.gif" />
+    <None Remove="Emoji\emotion\71.gif" />
+    <None Remove="Emoji\emotion\72.gif" />
+    <None Remove="Emoji\emotion\73.gif" />
+    <None Remove="Emoji\emotion\74.gif" />
+    <None Remove="Emoji\emotion\75.gif" />
+    <None Remove="Emoji\emotion\76.gif" />
+    <None Remove="Emoji\emotion\77.gif" />
+    <None Remove="Emoji\emotion\78.gif" />
+    <None Remove="Emoji\emotion\79.gif" />
+    <None Remove="Emoji\emotion\8.gif" />
+    <None Remove="Emoji\emotion\80.gif" />
+    <None Remove="Emoji\emotion\81.gif" />
+    <None Remove="Emoji\emotion\82.gif" />
+    <None Remove="Emoji\emotion\83.gif" />
+    <None Remove="Emoji\emotion\84.gif" />
+    <None Remove="Emoji\emotion\85.gif" />
+    <None Remove="Emoji\emotion\86.gif" />
+    <None Remove="Emoji\emotion\87.gif" />
+    <None Remove="Emoji\emotion\88.gif" />
+    <None Remove="Emoji\emotion\89.gif" />
+    <None Remove="Emoji\emotion\9.gif" />
+    <None Remove="Emoji\emotion\90.gif" />
+    <None Remove="Emoji\emotion\91.gif" />
+    <None Remove="Emoji\emotion\92.gif" />
+    <None Remove="Emoji\emotion\93.gif" />
+    <None Remove="Emoji\emotion\94.gif" />
+    <None Remove="Emoji\emotion\95.gif" />
+    <None Remove="Emoji\emotion\96.gif" />
+    <None Remove="Emoji\emotion\97.gif" />
+    <None Remove="Emoji\emotion\98.gif" />
+    <None Remove="Emoji\emotion\99.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Emoji\emoji.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AIStudio.Wpf.Controls.MediaPlayer\AIStudio.Wpf.Controls.MediaPlayer.csproj" />
+    <ProjectReference Include="..\AIStudio.Wpf.Controls\AIStudio.Wpf.Controls\AIStudio.Wpf.Controls.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Emoji\emotion\0.gif" />
+    <Resource Include="Emoji\emotion\1.gif" />
+    <Resource Include="Emoji\emotion\10.gif" />
+    <Resource Include="Emoji\emotion\100.gif" />
+    <Resource Include="Emoji\emotion\101.gif" />
+    <Resource Include="Emoji\emotion\102.gif" />
+    <Resource Include="Emoji\emotion\103.gif" />
+    <Resource Include="Emoji\emotion\104.gif" />
+    <Resource Include="Emoji\emotion\11.gif" />
+    <Resource Include="Emoji\emotion\12.gif" />
+    <Resource Include="Emoji\emotion\13.gif" />
+    <Resource Include="Emoji\emotion\14.gif" />
+    <Resource Include="Emoji\emotion\15.gif" />
+    <Resource Include="Emoji\emotion\16.gif" />
+    <Resource Include="Emoji\emotion\17.gif" />
+    <Resource Include="Emoji\emotion\18.gif" />
+    <Resource Include="Emoji\emotion\19.gif" />
+    <Resource Include="Emoji\emotion\2.gif" />
+    <Resource Include="Emoji\emotion\20.gif" />
+    <Resource Include="Emoji\emotion\21.gif" />
+    <Resource Include="Emoji\emotion\22.gif" />
+    <Resource Include="Emoji\emotion\23.gif" />
+    <Resource Include="Emoji\emotion\24.gif" />
+    <Resource Include="Emoji\emotion\25.gif" />
+    <Resource Include="Emoji\emotion\26.gif" />
+    <Resource Include="Emoji\emotion\27.gif" />
+    <Resource Include="Emoji\emotion\28.gif" />
+    <Resource Include="Emoji\emotion\29.gif" />
+    <Resource Include="Emoji\emotion\3.gif" />
+    <Resource Include="Emoji\emotion\30.gif" />
+    <Resource Include="Emoji\emotion\31.gif" />
+    <Resource Include="Emoji\emotion\32.gif" />
+    <Resource Include="Emoji\emotion\33.gif" />
+    <Resource Include="Emoji\emotion\34.gif" />
+    <Resource Include="Emoji\emotion\35.gif" />
+    <Resource Include="Emoji\emotion\36.gif" />
+    <Resource Include="Emoji\emotion\37.gif" />
+    <Resource Include="Emoji\emotion\38.gif" />
+    <Resource Include="Emoji\emotion\39.gif" />
+    <Resource Include="Emoji\emotion\4.gif" />
+    <Resource Include="Emoji\emotion\40.gif" />
+    <Resource Include="Emoji\emotion\41.gif" />
+    <Resource Include="Emoji\emotion\42.gif" />
+    <Resource Include="Emoji\emotion\43.gif" />
+    <Resource Include="Emoji\emotion\44.gif" />
+    <Resource Include="Emoji\emotion\45.gif" />
+    <Resource Include="Emoji\emotion\46.gif" />
+    <Resource Include="Emoji\emotion\47.gif" />
+    <Resource Include="Emoji\emotion\48.gif" />
+    <Resource Include="Emoji\emotion\49.gif" />
+    <Resource Include="Emoji\emotion\5.gif" />
+    <Resource Include="Emoji\emotion\50.gif" />
+    <Resource Include="Emoji\emotion\51.gif" />
+    <Resource Include="Emoji\emotion\52.gif" />
+    <Resource Include="Emoji\emotion\53.gif" />
+    <Resource Include="Emoji\emotion\54.gif" />
+    <Resource Include="Emoji\emotion\55.gif" />
+    <Resource Include="Emoji\emotion\56.gif" />
+    <Resource Include="Emoji\emotion\57.gif" />
+    <Resource Include="Emoji\emotion\58.gif" />
+    <Resource Include="Emoji\emotion\59.gif" />
+    <Resource Include="Emoji\emotion\6.gif" />
+    <Resource Include="Emoji\emotion\60.gif" />
+    <Resource Include="Emoji\emotion\61.gif" />
+    <Resource Include="Emoji\emotion\62.gif" />
+    <Resource Include="Emoji\emotion\63.gif" />
+    <Resource Include="Emoji\emotion\64.gif" />
+    <Resource Include="Emoji\emotion\65.gif" />
+    <Resource Include="Emoji\emotion\66.gif" />
+    <Resource Include="Emoji\emotion\67.gif" />
+    <Resource Include="Emoji\emotion\68.gif" />
+    <Resource Include="Emoji\emotion\69.gif" />
+    <Resource Include="Emoji\emotion\7.gif" />
+    <Resource Include="Emoji\emotion\70.gif" />
+    <Resource Include="Emoji\emotion\71.gif" />
+    <Resource Include="Emoji\emotion\72.gif" />
+    <Resource Include="Emoji\emotion\73.gif" />
+    <Resource Include="Emoji\emotion\74.gif" />
+    <Resource Include="Emoji\emotion\75.gif" />
+    <Resource Include="Emoji\emotion\76.gif" />
+    <Resource Include="Emoji\emotion\77.gif" />
+    <Resource Include="Emoji\emotion\78.gif" />
+    <Resource Include="Emoji\emotion\79.gif" />
+    <Resource Include="Emoji\emotion\8.gif" />
+    <Resource Include="Emoji\emotion\80.gif" />
+    <Resource Include="Emoji\emotion\81.gif" />
+    <Resource Include="Emoji\emotion\82.gif" />
+    <Resource Include="Emoji\emotion\83.gif" />
+    <Resource Include="Emoji\emotion\84.gif" />
+    <Resource Include="Emoji\emotion\85.gif" />
+    <Resource Include="Emoji\emotion\86.gif" />
+    <Resource Include="Emoji\emotion\87.gif" />
+    <Resource Include="Emoji\emotion\88.gif" />
+    <Resource Include="Emoji\emotion\89.gif" />
+    <Resource Include="Emoji\emotion\9.gif" />
+    <Resource Include="Emoji\emotion\90.gif" />
+    <Resource Include="Emoji\emotion\91.gif" />
+    <Resource Include="Emoji\emotion\92.gif" />
+    <Resource Include="Emoji\emotion\93.gif" />
+    <Resource Include="Emoji\emotion\94.gif" />
+    <Resource Include="Emoji\emotion\95.gif" />
+    <Resource Include="Emoji\emotion\96.gif" />
+    <Resource Include="Emoji\emotion\97.gif" />
+    <Resource Include="Emoji\emotion\98.gif" />
+    <Resource Include="Emoji\emotion\99.gif" />
+  </ItemGroup>	
+
+  <ItemGroup>
+    <None Update="Resources\A.png">
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
+
+</Project>

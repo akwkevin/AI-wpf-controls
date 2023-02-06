@@ -62,7 +62,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Card/Flipper.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Carousel/Carousel.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Cascader/Cascader.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/ChatBubble/ChatBubble.xaml" />
+        <!--<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/ChatBubble/ChatBubble.xaml" />-->
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/ColorPicker/ColorCanvas.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/ColorPicker/ColorPicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/ComboBox/InputComboBox.xaml"/>
@@ -108,8 +108,8 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Loading/Others/RollLoading.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Loading/Others/StreamerLoading.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Loading/Others/WaitLoading.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/MediaElementPlayer.Classic.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/MediaElementPlayer.xaml"/>
+        <!--<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/MediaElementPlayer.Classic.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/MediaElementPlayer.xaml"/>-->
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/NavigationBar/NavigationBar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Notice/NoticeCard.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Notice/Notification.xaml"/>

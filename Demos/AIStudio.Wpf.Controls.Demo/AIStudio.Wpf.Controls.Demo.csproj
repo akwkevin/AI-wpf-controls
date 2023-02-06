@@ -16,6 +16,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Controls\AIStudio.Wpf.Controls.MediaPlayer\AIStudio.Wpf.Controls.MediaPlayer.csproj" />
     <ProjectReference Include="..\..\Controls\AIStudio.Wpf.Controls\AIStudio.Wpf.Controls\AIStudio.Wpf.Controls.csproj" />
   </ItemGroup>
 

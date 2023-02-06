@@ -5,11 +5,12 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
-using AIStudio.Wpf.Controls.Commands;
+using AIStudio.Wpf.Controls.MediaPlayer.Commands;
 using Microsoft.Win32;
 
-namespace AIStudio.Wpf.Controls
+namespace AIStudio.Wpf.Controls.MediaPlayer
 {
     [TemplatePart(Name = PART_MediaElement, Type = typeof(MediaElement))]
     [TemplatePart(Name = PART_Slider_Progress, Type = typeof(Slider))]
@@ -280,6 +281,25 @@ namespace AIStudio.Wpf.Controls
             set
             {
                 SetValue(MusicListProperty, value);
+            }
+        }
+        #endregion
+
+
+
+        #region SliderForeground 滑块颜色
+        public static readonly DependencyProperty SliderForegroundProperty = DependencyProperty.Register(
+            nameof(SliderForeground), typeof(Brush), typeof(MediaElementPlayer), new PropertyMetadata(default(Brush)));
+
+        public Brush SliderForeground
+        {
+            get
+            {
+                return (Brush)GetValue(SliderForegroundProperty);
+            }
+            set
+            {
+                SetValue(SliderForegroundProperty, value);
             }
         }
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using AIStudio.Wpf.Controls.Commands;
+using AIStudio.Wpf.Controls.MediaPlayer;
 
 namespace AIStudio.Wpf.Controls.Demo.ViewModels
 {

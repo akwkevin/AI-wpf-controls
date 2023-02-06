@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace AIStudio.Wpf.Controls
+namespace AIStudio.Wpf.Controls.Emoji
 {
     public class ChatBubble : ContentControl
     {

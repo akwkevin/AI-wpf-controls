@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controls", "Controls", "{3D54C8D2-F15E-4BD8-8579-904AF5D4A5E7}"
 EndProject
@@ -35,7 +35,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.GridControls.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.Wall3D", "Controls\AIStudio.Wpf.Wall3D\AIStudio.Wpf.Wall3D.csproj", "{511E29B0-E4BD-4C23-A942-3C4F6C494B10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIStudio.Wpf.Wall3D.Demo", "Demos\AIStudio.Wpf.Wall3D.Demo\AIStudio.Wpf.Wall3D.Demo.csproj", "{D193788D-5672-4186-A444-E50EFEB4ECB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.Wall3D.Demo", "Demos\AIStudio.Wpf.Wall3D.Demo\AIStudio.Wpf.Wall3D.Demo.csproj", "{D193788D-5672-4186-A444-E50EFEB4ECB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIStudio.Wpf.Controls.Emoji", "Controls\AIStudio.Wpf.Controls.Emoji\AIStudio.Wpf.Controls.Emoji.csproj", "{ED8512F6-0197-4C04-85E9-2149659D8531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIStudio.Wpf.Controls.MediaPlayer", "Controls\AIStudio.Wpf.Controls.MediaPlayer\AIStudio.Wpf.Controls.MediaPlayer.csproj", "{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +95,14 @@ Global
 		{D193788D-5672-4186-A444-E50EFEB4ECB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D193788D-5672-4186-A444-E50EFEB4ECB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D193788D-5672-4186-A444-E50EFEB4ECB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8512F6-0197-4C04-85E9-2149659D8531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8512F6-0197-4C04-85E9-2149659D8531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8512F6-0197-4C04-85E9-2149659D8531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8512F6-0197-4C04-85E9-2149659D8531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +119,8 @@ Global
 		{DCECB5D8-16ED-47BF-A817-2C200AABD623} = {72A4E17E-1F5A-4324-9492-2CD44BEE3855}
 		{511E29B0-E4BD-4C23-A942-3C4F6C494B10} = {3D54C8D2-F15E-4BD8-8579-904AF5D4A5E7}
 		{D193788D-5672-4186-A444-E50EFEB4ECB7} = {72A4E17E-1F5A-4324-9492-2CD44BEE3855}
+		{ED8512F6-0197-4C04-85E9-2149659D8531} = {3D54C8D2-F15E-4BD8-8579-904AF5D4A5E7}
+		{6008B63D-41A7-4972-8840-FA1FBF1E9C9E} = {3D54C8D2-F15E-4BD8-8579-904AF5D4A5E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {38918B9E-D567-458D-8EE0-3A82F3D0C27F}

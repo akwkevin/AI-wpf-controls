@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
-                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls.MediaPlayer"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.MediaPlayer.Converter">
 
     <converter:BoolInverseConverter x:Key="BoolInverseConverter"/>
 
@@ -12,7 +12,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/a_play.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/a_play.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -32,7 +32,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/a_pause.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/a_pause.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -52,7 +52,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/a_stop.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/a_stop.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -72,7 +72,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/a_next.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/a_next.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -92,7 +92,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/a_prev.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/a_prev.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -112,7 +112,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6" Margin="0,2,0,2">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/s_style_0.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/s_style_0.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -132,7 +132,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6" Margin="0,2,0,2">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/s_style_1.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/s_style_1.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -152,7 +152,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6" Margin="0,2,0,2">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/s_style_2.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/s_style_2.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -172,7 +172,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6" Margin="2">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/b_lrc.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/b_lrc.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -192,7 +192,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6" Margin="2">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/b_lrc-n.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/b_lrc-n.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -212,7 +212,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6" Margin="2">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/b_song_list.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/b_song_list.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -234,7 +234,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6" Margin="3">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/b_vol_0.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/b_vol_0.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -254,7 +254,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6" Margin="3">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/b_vol_1.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/b_vol_1.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -275,7 +275,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/b_like_0.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/b_like_0.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -295,7 +295,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.8">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/b_like_1.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/b_like_1.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -315,7 +315,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid" Opacity="0.6">
                         <Grid.Background>
-                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls;component/Controls/MediaPlayer/Icon/b_share.png"/>
+                            <ImageBrush ImageSource="/AIStudio.Wpf.Controls.MediaPlayer;component/MediaPlayer/Icon/b_share.png"/>
                         </Grid.Background>
                     </Grid>
                     <ControlTemplate.Triggers>

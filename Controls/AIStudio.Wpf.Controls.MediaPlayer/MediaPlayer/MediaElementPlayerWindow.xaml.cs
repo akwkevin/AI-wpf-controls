@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 
-namespace AIStudio.Wpf.Controls
+namespace AIStudio.Wpf.Controls.MediaPlayer
 {
     /// <summary>
     /// MediaElementPlayerWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MediaElementPlayerWindow : WindowBase
+    public partial class MediaElementPlayerWindow : Window
     {
         public MediaElementPlayerWindow()
         {

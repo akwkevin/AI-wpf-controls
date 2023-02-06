@@ -1,10 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
-                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls.Emoji"
+                    xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls">
 
-    <converter:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
-    <converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+    <ac:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
+    <ac:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
     <!--未知-->
@@ -12,8 +12,8 @@
         <StackPanel>
             <TextBlock Text="{TemplateBinding CreateTime,Converter={StaticResource DateTimeToStringConverter}}" HorizontalAlignment="Center" Visibility="{TemplateBinding ShowTime,Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Grid>
-                <Image x:Name="Avatar" Width="32" Height="32" controls:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
-                <controls:AngleBorder x:Name="Body"
+                <Image x:Name="Avatar" Width="32" Height="32" ac:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
+                <ac:AngleBorder x:Name="Body"
                                Placement="RightTop" 
                                TailWidth="6" 
                                TailHeight="6" 
@@ -30,7 +30,7 @@
                     <LineBreak/>
                     <Run  Text="{TemplateBinding Content}"/>
                     </TextBlock>
-                </controls:AngleBorder>
+                </ac:AngleBorder>
             </Grid>
         </StackPanel>
         <ControlTemplate.Triggers>
@@ -58,8 +58,8 @@
         <StackPanel>
             <TextBlock Text="{TemplateBinding CreateTime,Converter={StaticResource DateTimeToStringConverter}}" HorizontalAlignment="Center" Visibility="{TemplateBinding ShowTime,Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Grid>
-                <Image x:Name="Avatar" Width="32" Height="32" controls:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
-                <controls:AngleBorder x:Name="Body"
+                <Image x:Name="Avatar" Width="32" Height="32" ac:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
+                <ac:AngleBorder x:Name="Body"
                                Placement="RightTop" 
                                TailWidth="6" 
                                TailHeight="6" 
@@ -70,7 +70,7 @@
                                HorizontalAlignment="Right"
                                Margin="0,0,35,0">
                     <controls:EmojiTextBlock TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-                </controls:AngleBorder>
+                </ac:AngleBorder>
             </Grid>
         </StackPanel>
         <ControlTemplate.Triggers>
@@ -98,8 +98,8 @@
         <StackPanel>
             <TextBlock Text="{TemplateBinding CreateTime,Converter={StaticResource DateTimeToStringConverter}}" HorizontalAlignment="Center" Visibility="{TemplateBinding ShowTime,Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Grid>
-                <Image x:Name="Avatar" Width="32" Height="32" controls:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
-                <controls:AngleBorder x:Name="Body"
+                <Image x:Name="Avatar" Width="32" Height="32" ac:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
+                <ac:AngleBorder x:Name="Body"
                                Placement="RightTop" 
                                TailWidth="6" 
                                TailHeight="6" 
@@ -110,7 +110,7 @@
                                HorizontalAlignment="Right"
                                Margin="0,0,35,0">
                     <Image Margin="{TemplateBinding Padding}" Stretch="Fill" VerticalAlignment="Center" Source="{TemplateBinding Content,Converter={StaticResource StringToImageSourceConverter}}" MaxWidth="200" MaxHeight="150"/>
-                </controls:AngleBorder>
+                </ac:AngleBorder>
             </Grid>
         </StackPanel>
         <ControlTemplate.Triggers>
@@ -138,8 +138,8 @@
         <StackPanel>
             <TextBlock Text="{TemplateBinding CreateTime,Converter={StaticResource DateTimeToStringConverter}}" HorizontalAlignment="Center" Visibility="{TemplateBinding ShowTime,Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Grid>
-                <Image x:Name="Avatar" Width="32" Height="32" controls:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
-                <controls:AngleBorder x:Name="Body"
+                <Image x:Name="Avatar" Width="32" Height="32" ac:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
+                <ac:AngleBorder x:Name="Body"
                                Placement="RightTop" 
                                TailWidth="6" 
                                TailHeight="6" 
@@ -149,8 +149,8 @@
                                CornerRadius="5"
                                HorizontalAlignment="Right"
                                Margin="0,0,35,0">
-                    <controls:MediaElementPlayer x:Name= "myMedia" ShowMode="PathVideoMode" Height="280" Margin="{TemplateBinding Padding}" MusicPath= "{TemplateBinding Content}" />
-                </controls:AngleBorder>
+                    <ac:MediaElementPlayer x:Name= "myMedia" ShowMode="PathVideoMode" Height="280" Margin="{TemplateBinding Padding}" MusicPath= "{TemplateBinding Content}" />
+                </ac:AngleBorder>
             </Grid>
         </StackPanel>
         <ControlTemplate.Triggers>
@@ -178,8 +178,8 @@
         <StackPanel>
             <TextBlock Text="{TemplateBinding CreateTime,Converter={StaticResource DateTimeToStringConverter}}" HorizontalAlignment="Center" Visibility="{TemplateBinding ShowTime,Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Grid>
-                <Image x:Name="Avatar" Width="32" Height="32" controls:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
-                <controls:AngleBorder x:Name="Body"
+                <Image x:Name="Avatar" Width="32" Height="32" ac:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
+                <ac:AngleBorder x:Name="Body"
                                Placement="RightTop" 
                                TailWidth="6" 
                                TailHeight="6" 
@@ -189,8 +189,8 @@
                                CornerRadius="5"
                                HorizontalAlignment="Right"
                                Margin="0,0,35,0">
-                    <controls:MediaElementPlayer x:Name= "myMedia" ShowMode="PathMode" Margin="{TemplateBinding Padding}" MusicPath= "{TemplateBinding Content}" />
-                </controls:AngleBorder>
+                    <ac:MediaElementPlayer x:Name= "myMedia" ShowMode="PathMode" Margin="{TemplateBinding Padding}" MusicPath= "{TemplateBinding Content}" />
+                </ac:AngleBorder>
             </Grid>
         </StackPanel>
         <ControlTemplate.Triggers>
@@ -218,8 +218,8 @@
         <StackPanel>
             <TextBlock Text="{TemplateBinding CreateTime,Converter={StaticResource DateTimeToStringConverter}}" HorizontalAlignment="Center" Visibility="{TemplateBinding ShowTime,Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Grid>
-                <Image x:Name="Avatar" Width="32" Height="32" controls:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
-                <controls:AngleBorder x:Name="Body"
+                <Image x:Name="Avatar" Width="32" Height="32" ac:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
+                <ac:AngleBorder x:Name="Body"
                                Placement="RightTop" 
                                TailWidth="6" 
                                TailHeight="6" 
@@ -229,8 +229,8 @@
                                CornerRadius="5"
                                HorizontalAlignment="Right"
                                Margin="0,0,35,0">
-                    <controls:UploadFile Margin="{TemplateBinding Padding}" Disable="True" File= "{TemplateBinding Content}" />
-                </controls:AngleBorder>
+                    <ac:UploadFile Margin="{TemplateBinding Padding}" Disable="True" File= "{TemplateBinding Content}" />
+                </ac:AngleBorder>
             </Grid>
         </StackPanel>
         <ControlTemplate.Triggers>
@@ -264,8 +264,8 @@
                 </Grid.ColumnDefinitions>
                 <Ellipse x:Name="Dot" VerticalAlignment="Top" Fill="{DynamicResource DangerBrush}" Width="6" Height="6" Visibility="{TemplateBinding IsRead,Converter={StaticResource Boolean2VisibilityReConverter}}" Margin="0,0,6,0"/>
                 <Grid x:Name="Panel" Grid.Column="1">
-                    <Image x:Name="Avatar" Width="32" Height="32" controls:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
-                    <controls:AngleBorder x:Name="Body"
+                    <Image x:Name="Avatar" Width="32" Height="32" ac:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
+                    <ac:AngleBorder x:Name="Body"
                                Placement="RightTop" 
                                TailWidth="6" 
                                TailHeight="6" 
@@ -289,7 +289,7 @@
                                 </Path.RenderTransform>
                             </Path>
                         </Grid>
-                    </controls:AngleBorder>
+                    </ac:AngleBorder>
                 </Grid>
             </Grid>
         </StackPanel>
@@ -332,8 +332,8 @@
         <StackPanel>
             <TextBlock Text="{TemplateBinding CreateTime,Converter={StaticResource DateTimeToStringConverter}}" HorizontalAlignment="Center" Visibility="{TemplateBinding ShowTime,Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Grid>
-                <Image x:Name="Avatar" Width="32" Height="32" controls:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
-                <controls:AngleBorder x:Name="Body"
+                <Image x:Name="Avatar" Width="32" Height="32" ac:ImageAttach.CornerRadius="5"  Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" Source="{TemplateBinding Avatar}"/>
+                <ac:AngleBorder x:Name="Body"
                                Placement="RightTop" 
                                TailWidth="6" 
                                TailHeight="6" 
@@ -344,7 +344,7 @@
                                HorizontalAlignment="Right"
                                Margin="0,0,35,0">
                     <ContentPresenter VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-                </controls:AngleBorder>
+                </ac:AngleBorder>
             </Grid>
         </StackPanel>
         <ControlTemplate.Triggers>
@@ -370,8 +370,8 @@
     <Style x:Key="AIStudio.Styles.ChatBubble" TargetType="controls:ChatBubble">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="Margin" Value="5"/>
         <Setter Property="MinHeight" Value="{DynamicResource DefaultControlHeight}"/>
@@ -380,8 +380,8 @@
 
         <Style.Triggers>
             <Trigger Property="Role" Value="Receiver">
-                <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
             </Trigger>
             <Trigger Property="Type" Value="1">
@@ -406,41 +406,41 @@
                 <Setter Property="Template" Value="{StaticResource ChatBubblePhoneticsBaseTemplate}"/>
             </Trigger>
 
-            <Trigger Property="controls:ControlAttach.Status" Value="Light">
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightForegroundBrush}"/>
+            <Trigger Property="ac:ControlAttach.Status" Value="Light">
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+            <Trigger Property="ac:ControlAttach.Status" Value="Mid">
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
+            <Trigger Property="ac:ControlAttach.Status" Value="Dark">
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
-                <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}"/>
+            <Trigger Property="ac:ControlAttach.Status" Value="Secondary">
+                <Setter Property="Background" Value="{DynamicResource Theme.ShowcaseBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Success">
+            <Trigger Property="ac:ControlAttach.Status" Value="Success">
                 <Setter Property="Background" Value="{DynamicResource SuccessBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Info">
+            <Trigger Property="ac:ControlAttach.Status" Value="Info">
                 <Setter Property="Background" Value="{DynamicResource InfoBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
+            <Trigger Property="ac:ControlAttach.Status" Value="Warning">
                 <Setter Property="Background" Value="{DynamicResource WarningBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
+            <Trigger Property="ac:ControlAttach.Status" Value="Danger">
                 <Setter Property="Background" Value="{DynamicResource DangerBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
-                <Setter Property="Background" Value="{DynamicResource MaterialDesignToolBackground}"/>
-                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignToolForeground}"/>
+            <Trigger Property="ac:ControlAttach.Status" Value="Plain">
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray8}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

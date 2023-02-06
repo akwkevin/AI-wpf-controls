@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace AIStudio.Wpf.Controls
+namespace AIStudio.Wpf.Controls.Emoji
 {
     public static class EmojiDataFactory
     {

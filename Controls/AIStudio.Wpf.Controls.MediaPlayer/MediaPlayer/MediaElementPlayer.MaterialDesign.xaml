@@ -1,19 +1,25 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls"
-                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.Converter">
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls.MediaPlayer"
+                    xmlns:converter="clr-namespace:AIStudio.Wpf.Controls.MediaPlayer.Converter"
+                    xmlns:o="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
+    <Geometry o:Freeze="True" x:Key="PlayGeometry">M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z</Geometry>
+    <Geometry o:Freeze="True" x:Key="PauseGeometry">M300 550A250 250 0 1 1 550 300A250 250 0 0 1 300 550zM300 100A200 200 0 1 0 500 300A200 200 0 0 0 300 100zM375 400A25 25 0 0 1 350 375V225A25 25 0 0 1 400 225V375A25 25 0 0 1 375 400zM225 400A25 25 0 0 1 200 375V225A25 25 0 0 1 250 225V375A25 25 0 0 1 225 400z</Geometry>
+    <Geometry o:Freeze="True" x:Key="StopGeometry">M600 100C323.85 100 100 323.85 100 600S323.85 1100 600 1100S1100 876.15 1100 600S876.15 100 600 100zM600 200A400 400 0 1 1 600 1000A400 400 0 0 1 600 200zM450 750H750V450H450V750z</Geometry>
+    <Geometry o:Freeze="True" x:Key="NextGeometry">M512 874.667c-235.264 0-426.667-191.403-426.667-426.667s191.403-426.667 426.667-426.667 426.667 191.403 426.667 426.667-191.403 426.667-426.667 426.667zM512 106.667c-188.203 0-341.333 153.131-341.333 341.333s153.131 341.333 341.333 341.333 341.333-153.131 341.333-341.333-153.131-341.333-341.333-341.333zM341.333 277.333l213.333 170.667-213.333 170.667zM554.667 448v-170.667h85.333v341.333h-85.333z</Geometry>
+    <Geometry o:Freeze="True" x:Key="PreviousGeometry">M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4C7.59,4 4,7.59 4,12C4,16.41 7.59,20 12,20C16.41,20 20,16.41 20,12C20,7.59 16.41,4 12,4M16,8V16L11,12M10,8V16H8V8</Geometry>
+    <Geometry o:Freeze="True" x:Key="VolumeHighGeometry">M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z</Geometry>
+    <Geometry o:Freeze="True" x:Key="VolumeLowGeometry">M7,9V15H11L16,20V4L11,9H7Z</Geometry>
+    <Geometry o:Freeze="True" x:Key="RepeatGeometry">M 20,7.50001L 16.4645,11.0355L 15.7574,10.3284L 18.0858,8.00001L 5.99999,8.00002L 5.99999,12L 5,12L 5,7.00002L 18.0858,7.00001L 15.7574,4.67158L 16.4645,3.96447L 20,7.50001 Z M 17,17L 17,13L 18,13L 18,18L 4.91421,18L 7.24263,20.3284L 6.53552,21.0355L 2.99999,17.5L 6.53553,13.9645L 7.24264,14.6716L 4.91421,17L 17,17 Z</Geometry>
+    <Geometry o:Freeze="True" x:Key="RepeatOnceGeometry">M 20,7.50001L 16.4645,11.0355L 15.7574,10.3284L 18.0858,8.00001L 5.99999,8.00002L 5.99999,12L 5,12L 5,7.00002L 18.0858,7.00001L 15.7574,4.67158L 16.4645,3.96447L 20,7.50001 Z M 17,17L 17,13L 18,13L 18,18L 4.91421,18L 7.24263,20.3284L 6.53552,21.0355L 2.99999,17.5L 6.53553,13.9645L 7.24264,14.6716L 4.91421,17L 17,17 Z M 10,14L 11,14L 11,11L 10,11L 10,10L 12,10L 12,14L 13,14L 13,15L 10,15L 10,14 Z</Geometry>
     <converter:BrushToColorConverter x:Key="BrushToColorConverter"/>
     <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
     <converter:BoolInverseConverter x:Key="BoolInverseConverter"/>
 
     <!-- 播放 -->
     <Style x:Key="buttonControlTemplate_play" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -32,7 +38,7 @@
 
     <!-- 暂停 -->
     <Style x:Key="buttonControlTemplate_pause" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -51,7 +57,7 @@
 
     <!-- 停止 -->
     <Style x:Key="buttonControlTemplate_stop" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -70,7 +76,7 @@
 
     <!-- 下一首 -->
     <Style x:Key="buttonControlTemplate_next" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -89,7 +95,7 @@
 
     <!-- 上一首 -->
     <Style x:Key="buttonControlTemplate_prev" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -108,7 +114,7 @@
 
     <!-- 播放模式 列表循环 -->
     <Style x:Key="buttonControlTemplate_play_style_0" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -127,7 +133,7 @@
 
     <!-- 播放模式 单曲循环 -->
     <Style x:Key="buttonControlTemplate_play_style_1" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -146,7 +152,7 @@
 
     <!-- 播放模式 随机播放 -->
     <Style x:Key="buttonControlTemplate_play_style_2" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -165,7 +171,7 @@
 
     <!-- 音量静音按钮 -->
     <Style x:Key="buttonControlTemplate_vol_0" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -185,7 +191,7 @@
 
     <!-- 音量按钮 -->
     <Style x:Key="buttonControlTemplate_vol_1" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -201,7 +207,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>   
 
     <!--音量滑块槽 左边 样式 -->
     <Style x:Key="Slider_RepeatButton_Left_Vol" TargetType="{x:Type RepeatButton}">
@@ -251,7 +257,7 @@
     <!-- 音量样式 （外部调用） -->
     <Style x:Key="Slider_CustomStyle_Vol" TargetType="{x:Type Slider}">
         <Setter Property="Focusable" Value="false" />
-        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}"/>
         <Setter Property="Foreground" Value="#FFBC3232"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -308,7 +314,7 @@
     <!--滑块 进度条-->
     <Style x:Key="Slider_Thumb_Progress" TargetType="{x:Type Thumb}">
         <Setter Property="Background" Value="White"/>
-        <Setter Property="Foreground" Value="#FFB82525"/>
+        <Setter Property="Foreground" Value="#FFB82525"/> 
         <Setter Property="Focusable" Value="false" />
         <Setter Property="Template">
             <Setter.Value>
@@ -334,7 +340,7 @@
     <!--进度条样式 媒体进度 （外部调用）-->
     <Style x:Key="Slider_CustomStyle_Progress" TargetType="{x:Type Slider}">
         <Setter Property="Focusable" Value="false" />
-        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}"/>
         <Setter Property="Foreground" Value="#FFBC3232"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -357,9 +363,9 @@
 
     <!--播放器-->
     <Style x:Key="AIStudio.Styles.MediaElementPlayer" TargetType="{x:Type controls:MediaElementPlayer}">
-        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
-        <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkDangerBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBody}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBackground}"/>
+        <Setter Property="SliderForeground" Value="{DynamicResource DarkDangerBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:MediaElementPlayer}">
@@ -410,7 +416,7 @@
                                                          IsMoveToPointEnabled="True"                                   
                                                          Value="{TemplateBinding Position}"
                                                          Maximum="{TemplateBinding TotalSeconds}" 
-                                                         Foreground="{TemplateBinding controls:ControlAttach.Foreground}"
+                                                         Foreground="{TemplateBinding SliderForeground}"
                                                          Background="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType=controls:MediaElementPlayer},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.12}"
                                                          Style="{StaticResource Slider_CustomStyle_Progress}" 
                                                          VerticalAlignment="Center" 
@@ -441,7 +447,7 @@
                                                        Height="30" 
                                                        VerticalAlignment="Center" 
                                                        HorizontalAlignment="Right" 
-                                                       Foreground="{TemplateBinding controls:ControlAttach.Foreground}"
+                                                       Foreground="{TemplateBinding SliderForeground}"
                                                        Background="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType=controls:MediaElementPlayer},Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.12}"
                                                        Style="{StaticResource Slider_CustomStyle_Vol}"
                                                        Maximum="1" 
@@ -509,37 +515,8 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="controls:ControlAttach.Status" Value="Light">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Mid">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Dark">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Secondary">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource Theme.ShowcaseBrush}"/>
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Success">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkSuccessBrush}" />
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Info">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkInfoBrush}" />
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Warning">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkWarningBrush}" />
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Danger">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource DarkDangerBrush}" />
-            </Trigger>
-            <Trigger Property="controls:ControlAttach.Status" Value="Plain">
-                <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.Gray2}" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <Style BasedOn="{StaticResource AIStudio.Styles.MediaElementPlayer}" TargetType="{x:Type controls:MediaElementPlayer}"/>
-
+    
 </ResourceDictionary>

@@ -1,0 +1,115 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <UseWPF>true</UseWPF>
+    <Company>AIStudio.Wpf.Controls</Company>
+    <Authors>akwkevin</Authors>
+    <PackageProjectUrl>https://gitee.com/akwkevin</PackageProjectUrl>
+    <PackageIcon>A.png</PackageIcon>
+    <PackageIconUrl />
+    <NeutralLanguage />
+    <Version>1.1.1</Version>
+    <Description>Wpf MediaPlayer</Description>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="TagLibSharp" Version="2.2.0" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <None Remove="MediaPlayer\Icon\a_next.png" />
+    <None Remove="MediaPlayer\Icon\a_pause.png" />
+    <None Remove="MediaPlayer\Icon\a_play.png" />
+    <None Remove="MediaPlayer\Icon\a_prev.png" />
+    <None Remove="MediaPlayer\Icon\a_stop.png" />
+    <None Remove="MediaPlayer\Icon\b_like_0.png" />
+    <None Remove="MediaPlayer\Icon\b_like_1.png" />
+    <None Remove="MediaPlayer\Icon\b_list.png" />
+    <None Remove="MediaPlayer\Icon\b_lrc-n.png" />
+    <None Remove="MediaPlayer\Icon\b_lrc.png" />
+    <None Remove="MediaPlayer\Icon\b_share.png" />
+    <None Remove="MediaPlayer\Icon\b_song_list.png" />
+    <None Remove="MediaPlayer\Icon\b_vol_0.png" />
+    <None Remove="MediaPlayer\Icon\b_vol_1.png" />
+    <None Remove="MediaPlayer\Icon\c_close.png" />
+    <None Remove="MediaPlayer\Icon\c_headIcon.png" />
+    <None Remove="MediaPlayer\Icon\c_max.png" />
+    <None Remove="MediaPlayer\Icon\c_min.png" />
+    <None Remove="MediaPlayer\Icon\c_mini.png" />
+    <None Remove="MediaPlayer\Icon\c_normal.png" />
+    <None Remove="MediaPlayer\Icon\c_search.png" />
+    <None Remove="MediaPlayer\Icon\c_set.png" />
+    <None Remove="MediaPlayer\Icon\d_cloud.png" />
+    <None Remove="MediaPlayer\Icon\d_download.png" />
+    <None Remove="MediaPlayer\Icon\d_fm.png" />
+    <None Remove="MediaPlayer\Icon\d_friend.png" />
+    <None Remove="MediaPlayer\Icon\d_like.png" />
+    <None Remove="MediaPlayer\Icon\d_local_m.png" />
+    <None Remove="MediaPlayer\Icon\d_look.png" />
+    <None Remove="MediaPlayer\Icon\d_m.png" />
+    <None Remove="MediaPlayer\Icon\d_my_f.png" />
+    <None Remove="MediaPlayer\Icon\d_video.png" />
+    <None Remove="MediaPlayer\Icon\e_now_song_0.png" />
+    <None Remove="MediaPlayer\Icon\e_now_song_1.png" />
+    <None Remove="MediaPlayer\Icon\f_clear.png" />
+    <None Remove="MediaPlayer\Icon\f_favorite.png" />
+    <None Remove="MediaPlayer\Icon\f_from.png" />
+    <None Remove="MediaPlayer\Icon\f_pause.png" />
+    <None Remove="MediaPlayer\Icon\f_play.png" />
+    <None Remove="MediaPlayer\Icon\s_style_0.png" />
+    <None Remove="MediaPlayer\Icon\s_style_1.png" />
+    <None Remove="MediaPlayer\Icon\s_style_2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MediaPlayer\Icon\a_next.png" />
+    <Resource Include="MediaPlayer\Icon\a_pause.png" />
+    <Resource Include="MediaPlayer\Icon\a_play.png" />
+    <Resource Include="MediaPlayer\Icon\a_prev.png" />
+    <Resource Include="MediaPlayer\Icon\a_stop.png" />
+    <Resource Include="MediaPlayer\Icon\b_like_0.png" />
+    <Resource Include="MediaPlayer\Icon\b_like_1.png" />
+    <Resource Include="MediaPlayer\Icon\b_list.png" />
+    <Resource Include="MediaPlayer\Icon\b_lrc-n.png" />
+    <Resource Include="MediaPlayer\Icon\b_lrc.png" />
+    <Resource Include="MediaPlayer\Icon\b_share.png" />
+    <Resource Include="MediaPlayer\Icon\b_song_list.png" />
+    <Resource Include="MediaPlayer\Icon\b_vol_0.png" />
+    <Resource Include="MediaPlayer\Icon\b_vol_1.png" />
+    <Resource Include="MediaPlayer\Icon\c_close.png" />
+    <Resource Include="MediaPlayer\Icon\c_headIcon.png" />
+    <Resource Include="MediaPlayer\Icon\c_max.png" />
+    <Resource Include="MediaPlayer\Icon\c_min.png" />
+    <Resource Include="MediaPlayer\Icon\c_mini.png" />
+    <Resource Include="MediaPlayer\Icon\c_normal.png" />
+    <Resource Include="MediaPlayer\Icon\c_search.png" />
+    <Resource Include="MediaPlayer\Icon\c_set.png" />
+    <Resource Include="MediaPlayer\Icon\d_cloud.png" />
+    <Resource Include="MediaPlayer\Icon\d_download.png" />
+    <Resource Include="MediaPlayer\Icon\d_fm.png" />
+    <Resource Include="MediaPlayer\Icon\d_friend.png" />
+    <Resource Include="MediaPlayer\Icon\d_like.png" />
+    <Resource Include="MediaPlayer\Icon\d_local_m.png" />
+    <Resource Include="MediaPlayer\Icon\d_look.png" />
+    <Resource Include="MediaPlayer\Icon\d_m.png" />
+    <Resource Include="MediaPlayer\Icon\d_my_f.png" />
+    <Resource Include="MediaPlayer\Icon\d_video.png" />
+    <Resource Include="MediaPlayer\Icon\e_now_song_0.png" />
+    <Resource Include="MediaPlayer\Icon\e_now_song_1.png" />
+    <Resource Include="MediaPlayer\Icon\f_clear.png" />
+    <Resource Include="MediaPlayer\Icon\f_favorite.png" />
+    <Resource Include="MediaPlayer\Icon\f_from.png" />
+    <Resource Include="MediaPlayer\Icon\f_pause.png" />
+    <Resource Include="MediaPlayer\Icon\f_play.png" />
+    <Resource Include="MediaPlayer\Icon\s_style_0.png" />
+    <Resource Include="MediaPlayer\Icon\s_style_1.png" />
+    <Resource Include="MediaPlayer\Icon\s_style_2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\A.png">
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
+
+</Project>

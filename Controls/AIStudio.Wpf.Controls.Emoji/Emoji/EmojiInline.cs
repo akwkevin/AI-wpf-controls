@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Documents;
 
-namespace AIStudio.Wpf.Controls
+namespace AIStudio.Wpf.Controls.Emoji
 {
     public class EmojiInline : InlineUIContainer
     {

@@ -1,13 +1,15 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
-namespace AIStudio.Wpf.Controls
+
+namespace AIStudio.Wpf.Controls.MediaPlayer
 {
     /// <summary>
-    /// 音量进度条
+    /// 媒体进度条
     /// </summary>
-    public class SliderVolume : Slider
+    public class SliderProgress : Slider
     {
         private ToolTip _autoToolTip;
         private string _autoToolTipFormat;
@@ -40,8 +42,8 @@ namespace AIStudio.Wpf.Controls
         {
             if (!string.IsNullOrWhiteSpace(this.AutoToolTipFormat))
             {
-                double f = double.Parse(this.AutoToolTip.Content.ToString());
-                this.AutoToolTip.Content = string.Format(this.AutoToolTipFormat, (int)(f * 100));
+                TimeSpan s = TimeSpan.FromSeconds(double.Parse(this.AutoToolTip.Content.ToString()));
+                this.AutoToolTip.Content = s.ToString("mm\\:ss");
             }
         }
 
@@ -52,6 +54,7 @@ namespace AIStudio.Wpf.Controls
                 if (_autoToolTip == null)
                 {
                     FieldInfo field = typeof(Slider).GetField("_autoToolTip", BindingFlags.NonPublic | BindingFlags.Instance);
+
                     _autoToolTip = field.GetValue(this) as ToolTip;
                 }
 
@@ -59,4 +62,5 @@ namespace AIStudio.Wpf.Controls
             }
         }
     }
+
 }
