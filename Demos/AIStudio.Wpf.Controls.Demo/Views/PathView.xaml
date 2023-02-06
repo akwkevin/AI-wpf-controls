@@ -14,7 +14,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ac:SearchBar Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource AIStudio.Styles.SearchBar.Underline}"/>
-        <ListBox Grid.Row="1" ItemsSource="{Binding Kinds}" SelectedItem="{Binding SelectedKind}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox Grid.Row="1" ItemsSource="{Binding Kinds}" 
+                 SelectedItem="{Binding SelectedKind}" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 VirtualizingPanel.VirtualizationMode="Recycling"
+                 VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                 VirtualizingPanel.ScrollUnit="Item">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <wpftk:VirtualizingWrapPanel MouseWheelDelta="80" />
