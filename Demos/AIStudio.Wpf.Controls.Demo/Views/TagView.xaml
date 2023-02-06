@@ -30,7 +30,61 @@
                             </ac:TagBox>
 
                             <ac:TagBox ItemsSource="{Binding DataList2}" DisplayMemberPath="Name" Margin="2" IsLineFeed="False"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="标签用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <StackPanel>
+                        <WrapPanel>
 
+                            <ac:LinkTag Margin="2" Url="https://weixin.qq.com/" >
+                                <ac:LinkTag.Header>
+                                    LinkTag
+                                </ac:LinkTag.Header>
+                                Content
+                            </ac:LinkTag>
+
+                            <ac:LinkTag Margin="2" Url="https://weixin.qq.com/" Background="{DynamicResource SuccessBrush}">
+                                <ac:LinkTag.Header>
+                                    <ac:Icon Kind="weixin" Foreground="White" FontWeight="Normal" Padding="0" FontSize="20" />
+                                </ac:LinkTag.Header>
+                                Wechat
+                            </ac:LinkTag>
+
+                            <ac:LinkTag Margin="2" Url="https://github.com/akwkevin/AI-wpf-controls/" >
+                                <ac:LinkTag.Header>
+                                    <ac:Icon Kind="github" Foreground="White" FontWeight="Normal" Padding="0" FontSize="20" />
+                                </ac:LinkTag.Header>
+                                Baidu
+                            </ac:LinkTag>
+
+                            <ac:LinkTag Margin="2" Url="https://gitee.com/akwkevin/AI-wpf-controls" ac:ControlAttach.Status="Light">
+                                gitee
+                            </ac:LinkTag>
+                            <ac:LinkTag Margin="2" Url="https://gitee.com/akwkevin/AI-wpf-controls" ac:ControlAttach.Status="Mid">
+                                gitee
+                            </ac:LinkTag>
+                            <ac:LinkTag Margin="2" Url="https://gitee.com/akwkevin/AI-wpf-controls" ac:ControlAttach.Status="Dark">
+                                gitee
+                            </ac:LinkTag>
+                            <ac:LinkTag Margin="2" Url="https://gitee.com/akwkevin/AI-wpf-controls" ac:ControlAttach.Status="Secondary">
+                                gitee
+                            </ac:LinkTag>
+                            <ac:LinkTag Margin="2" Url="https://gitee.com/akwkevin/AI-wpf-controls" ac:ControlAttach.Status="Success">
+                                gitee
+                            </ac:LinkTag>
+                            <ac:LinkTag Margin="2" Url="https://gitee.com/akwkevin/AI-wpf-controls" ac:ControlAttach.Status="Info">
+                                gitee
+                            </ac:LinkTag>
+                            <ac:LinkTag Margin="2" Url="https://gitee.com/akwkevin/AI-wpf-controls" ac:ControlAttach.Status="Warning">
+                                gitee
+                            </ac:LinkTag>
+                            <ac:LinkTag Margin="2" Url="https://gitee.com/akwkevin/AI-wpf-controls" ac:ControlAttach.Status="Danger">
+                                gitee
+                            </ac:LinkTag>
+                            <ac:LinkTag Margin="2" Url="https://gitee.com/akwkevin/AI-wpf-controls" ac:ControlAttach.Status="Plain">
+                                gitee
+                            </ac:LinkTag>
                         </WrapPanel>
                     </StackPanel>
                 </GroupBox>
