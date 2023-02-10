@@ -10,7 +10,7 @@
              Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <Grid>
-            <StackPanel ac:PropertyGrid.GotFocusProperty="{Binding ElementName=property}">
+            <StackPanel>
                 <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
                     <StackPanel>
                         <WrapPanel>
@@ -31,7 +31,33 @@
                             <TextBlock Text="Text" Margin="2" VerticalAlignment="Center"/>
                         </WrapPanel>
                     </StackPanel>
-                </GroupBox>              
+                </GroupBox>
+                <GroupBox Header="Grid分割线" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                    <WrapPanel>
+                        <Grid Height="100" Width="100" Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Text" Margin="2" VerticalAlignment="Center"/>
+                            <ac:AnimatedVertialGridSplitter Grid.Column="1" />
+                            <TextBlock Grid.Column="2" Text="Text" Margin="2" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Height="100" Width="100" Margin="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Text" Margin="2" VerticalAlignment="Center"/>
+                            <ac:AnimatedHorizontalGridSplitter Grid.Row="1" />
+                            <TextBlock Grid.Row="2" Text="Text" Margin="2" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <ac:AnimatedRectangle Width="100" Height="100" Margin="2"/>
+                    </WrapPanel>
+                </GroupBox>
             </StackPanel>
         </Grid>
     </ScrollViewer>

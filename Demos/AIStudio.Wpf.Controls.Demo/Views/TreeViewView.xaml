@@ -9,6 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
     <Grid>
+       
         <StackPanel >
             <GroupBox Header="基本用法" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
                 <StackPanel>
@@ -90,9 +91,26 @@
                                     </StackPanel>
                                 </HierarchicalDataTemplate>
                             </TreeView.ItemTemplate>
-                        </TreeView>
+                        </TreeView>                      
                     </UniformGrid>
                 </StackPanel>
+            </GroupBox>
+            <GroupBox Header="动画" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+                <TreeView Margin="2" ItemsSource="{Binding DataList2}" Style="{DynamicResource AIStudio.Styles.TreeView}">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem" BasedOn="{StaticResource GraphStyle}">
+
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <StackPanel Orientation="Horizontal">
+                                <ac:Icon Kind="smile-o"/>
+                                <TextBlock Margin="5,0,0,0" Text="{Binding Name}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
             </GroupBox>
         </StackPanel>
     </Grid>

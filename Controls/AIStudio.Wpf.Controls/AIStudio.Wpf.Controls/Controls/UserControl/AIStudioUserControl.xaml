@@ -27,7 +27,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Grid x:Name="PART_RootGrid" controls:PropertyGrid.GotFocusProperty="{Binding ElementName=property}">
+                        <Grid x:Name="PART_RootGrid">
                             <ContentPresenter Panel.ZIndex="0"/>
                             <Grid x:Name="maskingGrid"
                             Width="Auto"

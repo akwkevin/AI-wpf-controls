@@ -771,6 +771,345 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray9}" />
             </Trigger>
         </Style.Triggers>
-    </Style>  
-   
+    </Style>
+
+    <!-- Toggle Button -->
+    <Style x:Key="ExpandCollapseToggleStyle" TargetType="ToggleButton">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid Width="21" Height="19" SnapsToDevicePixels="True">
+                        <Rectangle Width="15" Height="15" Stroke="#919191" SnapsToDevicePixels="true">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,2" StartPoint="0.5,0">
+                                    <GradientStop Color="White" Offset="0"/>
+                                    <GradientStop Color="Silver" Offset="0.5"/>
+                                    <GradientStop Color="LightGray" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle x:Name="ExpandPath" Width="1" Height="11" Stroke="Black" SnapsToDevicePixels="true"/>
+                        <Rectangle Width="11" Height="1" Stroke="Black" SnapsToDevicePixels="true"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility"  TargetName="ExpandPath" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <converter:HorzLineConv x:Key="horzLineConv"/>
+    <converter:VertLineConv x:Key="vertLineConv"/>
+    
+    <!--内容区域的边框颜色-->
+    <SolidColorBrush x:Key="NormalBorderBrushKey" Color="Transparent" />
+    <!--连接线颜色-->
+    <SolidColorBrush x:Key="ConnectLineBrushKey" Color="Gray" />
+    <!-- 悬停状态的画刷 -->
+    <LinearGradientBrush x:Key="HoverBackgroundBrushKey" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFD1F896" Offset="0.003"/>
+        <GradientStop Color="#FFD0F896" Offset="0.996"/>
+        <GradientStop Color="#FFC5F582" Offset="0.505"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="HoverBorderBrushKey" Color="#FF1B82A8" />
+    <SolidColorBrush x:Key="HoverFontBrushKey" Color="Black" />
+    <!-- 选中(激活)状态的画刷/字体 -->
+    <LinearGradientBrush x:Key="SelectedActiveBackgroundBrushKey" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFB8F561" Offset="0"/>
+        <GradientStop Color="#FFBAF565" Offset="0.992"/>
+        <GradientStop Color="#FFAFF052" Offset="0.505"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="SelectedActiveBorderBrushKey" Color="#FF1B82A8" />
+    <SolidColorBrush x:Key="SelectedActiveFontBrushKey" Color="Black" />
+    <!-- 选中(悬停)状态的画刷 -->
+    <LinearGradientBrush x:Key="SelectedHoverBackgroundBrushKey" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFB6F161" Offset="0"/>
+        <GradientStop Color="#FFB3F05D" Offset="1"/>
+        <GradientStop Color="#FFACEC4F" Offset="0.532"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="SelectedHoverBorderBrushKey" Color="#FF1B82A8" />
+    <SolidColorBrush x:Key="SelectedHoverFontBrushKey" Color="Black" />
+    <!-- 选中(失效)状态的画刷 -->
+    <LinearGradientBrush x:Key="SelectedInactiveBackgroundBrushKey" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFBAF565" Offset="0"/>
+        <GradientStop Color="#FFBAF565" Offset="1"/>
+        <GradientStop Color="#FFACEC4F" Offset="0.519"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="SelectedInactiveBorderBrushKey" Color="#FF2896BF" />
+    <!-- 展开/缩进按钮风格 -->
+    <Style x:Key="ExpandCollapseToggleStyle2" TargetType="ToggleButton">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <!--此处的高度应和朝下的垂直线高度一致-->
+                    <Grid Width="14" Height="12" SnapsToDevicePixels="false" Background="#02ECECEC">
+                        <Path x:Name="Arrow" Width="14"  Stretch="Fill" Fill="Black" VerticalAlignment="Center"
+                              RenderTransformOrigin="0.5,0.5"
+                              Data="F1 M 37.8516,39.5833L 52.1016,24.9375L 52.1016,35.2292L 37.8516,50.2708L 23.6016,35.2292L 23.6016,24.9375L 37.8516,39.5833 Z ">
+                            <Path.RenderTransform>
+                                <RotateTransform Angle="0"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- 当鼠标经过时的风格 -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Fill" TargetName="Arrow">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.5,2" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="#FF958D8D" Offset="0.5"/>
+                                        <GradientStop Color="LightGray" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <!--折叠展开的旋转动画-->
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Arrow"
+                                                 Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+                                                 To="180"
+                                                 Duration="0:0:0.4"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Arrow"
+                                                 Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+                                                 To="0"
+                                                 Duration="0:0:0.4"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--树形视图项风格-->
+    <Style TargetType="TreeViewItem" x:Key="GraphStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TreeViewItem">
+                    <ControlTemplate.Resources>
+                        <!--展开动画-->
+                        <Storyboard x:Key="Timeline1">
+                            <!--控制可见性-->
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ItemsHost">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="VerLineDown">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <!--控制伸出-->
+                            <DoubleAnimation Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="LayoutTransform.ScaleX" To="1" Duration="0:0:0.4">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <!--控制透明度-->
+                            <DoubleAnimation Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5"/>
+                        </Storyboard>
+                        <!--折叠动画-->
+                        <Storyboard x:Key="Timeline2">
+                            <!--控制收缩-->
+                            <DoubleAnimation Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="LayoutTransform.ScaleX" To="0" Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <!--控制透明度-->
+                            <DoubleAnimation Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.4" />
+                            <!--控制可见性-->
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ItemsHost">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}"/>
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="VerLineDown">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Collapsed}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid>
+                        <!-- Main Grid-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Horizontal line-->
+                            <RowDefinition Height="Auto"/>
+                            <!--The top row contains the item's content.-->
+                            <RowDefinition Height="Auto" />
+                            <!-- Item presenter(children) -->
+                        </Grid.RowDefinitions>
+                        <!--第0行水平线-->
+                        <Grid Grid.Row="0">
+                            <!-- Horizontal line grid -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- 左侧水平线 -->
+                            <Rectangle  Grid.Column="0" HorizontalAlignment="Stretch"
+                          Stroke="{StaticResource ConnectLineBrushKey}" SnapsToDevicePixels="false">
+                                <Rectangle.Height>
+                                    <Binding  Mode="OneWay"
+                            Converter="{StaticResource horzLineConv}"
+                            ConverterParameter="left" 
+                            RelativeSource="{RelativeSource
+                                AncestorLevel=1,
+                                AncestorType={x:Type TreeViewItem}}"/>
+                                </Rectangle.Height>
+                            </Rectangle>
+
+                            <!-- 右侧水平线 -->
+                            <Rectangle Grid.Column="1" HorizontalAlignment="Stretch" 
+                         Stroke="{StaticResource ConnectLineBrushKey}"
+                         SnapsToDevicePixels="false">
+                                <Rectangle.Height>
+                                    <Binding Mode="OneWay" 
+                    Converter="{StaticResource horzLineConv}" 
+                    ConverterParameter="right" 
+                    RelativeSource="{RelativeSource 
+                      AncestorLevel=1, 
+                      AncestorType={x:Type TreeViewItem}}"/>
+                                </Rectangle.Height>
+                            </Rectangle>
+                        </Grid>
+                        <!-- End of Horizontal line grid -->
+
+                        <Grid Grid.Row="1">
+                            <!-- Header 内容显示区域 -->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <!-- Vert. line above node	-->
+                                <RowDefinition Height="*"/>
+                                <!-- Header -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Vert line below node	-->
+                            </Grid.RowDefinitions>
+                            <!-- 朝上的垂直线,这里垂直线的高度确定了项上部垂直线的高度 -->
+                            <Rectangle Grid.Row="0" 
+                         Height="15" Stroke="{StaticResource ConnectLineBrushKey}" SnapsToDevicePixels="false">
+                                <Rectangle.Width>
+                                    <Binding Mode="OneWay" 
+                    Converter="{StaticResource vertLineConv}" 
+                    ConverterParameter="top" 
+                    RelativeSource=
+                      "{RelativeSource AncestorLevel=1, 
+                                       AncestorType={x:Type TreeViewItem}}"/>
+                                </Rectangle.Width>
+                            </Rectangle>
+
+                            <!-- Header 内容显示区域-->
+                            <Border x:Name="borderHeader" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0"
+                        Background="Transparent" BorderThickness="1" BorderBrush="{StaticResource NormalBorderBrushKey}">
+                                <ContentPresenter  ContentSource="Header"/>
+                            </Border>
+                            <!-- 朝下的垂直线 -->
+                            <Rectangle x:Name="VerLineDown"  Grid.Row="2"  Height="20" Stroke="{StaticResource ConnectLineBrushKey}" 
+                SnapsToDevicePixels="false" Visibility="Collapsed">
+                                <Rectangle.Width>
+                                    <Binding Mode="OneWay" 
+                    Converter="{StaticResource vertLineConv}" 
+                    ConverterParameter="bottom" 
+                    RelativeSource=
+                      "{RelativeSource  AncestorLevel=1, 
+                                        AncestorType={x:Type TreeViewItem}}"/>
+                                </Rectangle.Width>
+                            </Rectangle>
+                            <!--展开折叠按钮-->
+                            <ToggleButton Grid.Row="2" Margin="0" x:Name="Expander" Style="{StaticResource ExpandCollapseToggleStyle}" VerticalAlignment="Top"
+                          IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"
+                               />
+
+                        </Grid>
+                        <!-- End of Header grid -->
+                        <!--内容预设-->
+                        <ItemsPresenter x:Name="ItemsHost" Grid.Row="2" Visibility="Collapsed" Opacity="0">
+                            <!--预设比拟动画-->
+                            <ItemsPresenter.LayoutTransform>
+                                <ScaleTransform ScaleX="0" />
+                            </ItemsPresenter.LayoutTransform>
+                        </ItemsPresenter>
+                        <!-- Children -->
+
+                    </Grid>
+                    <!-- End of Main grid -->
+                    <ControlTemplate.Triggers>
+                        <!--收缩时-->
+                        <Trigger Property="IsExpanded" Value="true">
+                            <!--<Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="VerLineDown" Property="Visibility" Value="Collapsed" />-->
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource Timeline1}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource Timeline2}"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <!--当子项为0时-->
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
+                        </Trigger>
+                        <!--当项被选择时-->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="borderHeader" Property="BorderBrush"  Value="{StaticResource SelectedActiveBorderBrushKey}"/>
+                            <Setter TargetName="borderHeader" Property="Background" Value="{StaticResource SelectedActiveBackgroundBrushKey}"/>
+                            <Setter Property="Foreground" Value="{StaticResource SelectedActiveFontBrushKey}"/>
+                        </Trigger>
+                        <!--当项被选择，而控件失去焦点时-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="Selector.IsSelectionActive" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="borderHeader" Property="BorderBrush" Value="{StaticResource SelectedInactiveBorderBrushKey}"/>
+                            <Setter TargetName="borderHeader" Property="Background" Value="{StaticResource SelectedInactiveBackgroundBrushKey}"/>
+                        </MultiTrigger>
+                        <!--当鼠标悬停，且没有被选中时-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" SourceName="borderHeader" Value="True"/>
+                                <Condition Property="IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Foreground" Value="{StaticResource HoverFontBrushKey}"/>
+                            <Setter TargetName="borderHeader" Property="Background" Value="{StaticResource HoverBackgroundBrushKey}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" 
+								Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--用于展现水平排布-->
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel
+            HorizontalAlignment="Center" 
+            IsItemsHost="True" 
+            Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
