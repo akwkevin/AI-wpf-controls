@@ -17,9 +17,9 @@
 
                 <!--Material Design--><!--
                 <materialDesign:MahAppsBundledTheme BaseTheme="Inherit" PrimaryColor="DeepPurple" SecondaryColor="LightBlue"/>
-                --><!--Material Design: MahApps Compatibility--><!-- 
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Defaults.xaml"/>
-                 --><!--AIStudio--><!--
+                --><!--Material Design: MahApps Compatibility--> 
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Defaults.xaml"/>-->
+                 <!--AIStudio--><!--
                 <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
