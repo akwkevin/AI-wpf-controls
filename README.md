@@ -8,13 +8,13 @@ gitee 地址：https://gitee.com/akwkevin/AI-wpf-controls
     
 **快速使用方法** 
 
-1.新建WPF应用程序：TestAIControls
+# 1.新建WPF应用程序：TestAIControls
 
-2.使用nuget安装AIStudio.Wpf.Controls控件库
+# 2.使用nuget安装AIStudio.Wpf.Controls控件库
 
 ![image](https://user-images.githubusercontent.com/27945492/174433289-8e9b2891-b8f6-49c9-a632-3e402bac58a7.png)
 
-3.App.xaml 引用资源
+# 3.App.xaml 引用资源
 
 
 ```
@@ -32,7 +32,7 @@ gitee 地址：https://gitee.com/akwkevin/AI-wpf-controls
     
 其中```<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.xaml"/>```可以替换成```<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MahApps.Defaults.xaml"/>```，标准控件的Style也默认使用本控件库的。
     
-4.MainWindow.xaml界面使用控件,引入命名控件
+# 4.MainWindow.xaml界面使用控件,引入命名控件
     
 xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"  
     
@@ -97,7 +97,7 @@ xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
 ```
 
 以下为控件库的其它样式或者配套用法：
-5：如果使用MaterialDesign风格：App.xaml的引用资源替换成如下：
+# 5：如果使用MaterialDesign风格：App.xaml的引用资源替换成如下：
 
 ```
 <Application.Resources>
@@ -113,7 +113,7 @@ xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
 ```
 其中```<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.xaml"/>```可以替换成```<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/MaterialDesign.Defaults.xaml"/>```，标准控件的Style也默认使用本控件库的。
 
-6：如果与MahApps.Metro一起使用(需要安装MahApps.Metro),App.xaml的引用资源替换成如下：
+# 6：如果与MahApps.Metro一起使用(需要安装MahApps.Metro),App.xaml的引用资源替换成如下：
            
 ```
 <Application.Resources>
@@ -130,7 +130,7 @@ xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
 </Application.Resources>
 ```
 
-7：如果与MaterialDesign一起使用(需要安装MaterialDesign),App.xaml的引用资源替换成如下：
+# 7：如果与MaterialDesign一起使用(需要安装MaterialDesign),App.xaml的引用资源替换成如下：
 ```
 <Application.Resources>
     <ResourceDictionary>
