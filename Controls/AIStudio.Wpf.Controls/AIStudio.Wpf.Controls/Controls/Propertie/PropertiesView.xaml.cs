@@ -97,13 +97,7 @@ namespace AIStudio.Wpf.Controls
         protected virtual void OnSelectedObjectChanged(object oldValue, object newValue)
         {
             // We do not want to process the change now if the grid is initializing (ie. BeginInit/EndInit).
-            var obj = oldValue as INotifyPropertyChanged;
-            if (obj != null)
-                obj.PropertyChanged -= PropertyChanged;
             DisplayProperties();
-            obj = newValue as INotifyPropertyChanged;
-            if (obj != null)
-                obj.PropertyChanged += PropertyChanged;
         }
 
         #endregion //SelectedObject
@@ -124,11 +118,6 @@ namespace AIStudio.Wpf.Controls
         public PropertiesView()
         {
             InitializeComponent();
-            DisplayProperties();
-        }
-
-        void PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
             DisplayProperties();
         }
 
