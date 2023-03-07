@@ -164,7 +164,7 @@ namespace AIStudio.Wpf.Controls.Helper
                     // update layout, so that following calls to f.e. SelectObject on child nodes will 
                     // find theire TreeViewNodes
                     treeView.UpdateLayout();
-                }
+                }                
             }
         }
 

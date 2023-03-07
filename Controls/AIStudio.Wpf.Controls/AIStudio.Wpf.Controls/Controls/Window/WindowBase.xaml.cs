@@ -1730,7 +1730,7 @@ namespace AIStudio.Wpf.Controls
                 case nameof(ToggleFullScreen): return win.ToggleFullScreen;
                 case nameof(NotifyIconBlink): return win.NotifyIconBlink;
                 default: return false;
-            }
+            }            
         }
         #endregion
 

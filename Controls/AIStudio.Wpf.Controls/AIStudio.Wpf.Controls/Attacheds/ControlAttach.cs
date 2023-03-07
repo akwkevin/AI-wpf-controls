@@ -561,13 +561,7 @@ namespace AIStudio.Wpf.Controls
             else if (tbox is System.Windows.Controls.PasswordBox)
             {
                 ((System.Windows.Controls.PasswordBox)tbox).Clear();
-            }
-            else if(tbox is System.Windows.Controls.ComboBox)
-            {
-                var cb = tbox as System.Windows.Controls.ComboBox;
-                cb.SelectedItem = null;
-                cb.Text = string.Empty;
-            }
+            }       
             else if(tbox is TreeSelect)
             {
                 var cb = tbox as TreeSelect;
@@ -577,12 +571,18 @@ namespace AIStudio.Wpf.Controls
                     cb.SelectedItems.Clear();
                 }
             }
-            else if(tbox is TreeComboBox)
+            else if (tbox is TreeComboBox)
             {
                 var cb = tbox as TreeComboBox;
                 cb.SelectedItem = null;
                 cb.Text = string.Empty;
             }
+            else if (tbox is System.Windows.Controls.ComboBox)
+            {
+                var cb = tbox as System.Windows.Controls.ComboBox;
+                cb.SelectedItem = null;
+                cb.Text = string.Empty;
+            }      
             else if(tbox is MultiComboBox)
             {
                 var cb = tbox as MultiComboBox;
