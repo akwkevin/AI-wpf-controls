@@ -29,7 +29,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty IsMultiProperty =
-            DependencyProperty.Register("IsMulti", typeof(bool), typeof(TreeSelect), new PropertyMetadata(false));
+            DependencyProperty.Register(nameof(IsMulti), typeof(bool), typeof(TreeSelect), new PropertyMetadata(false));
 
         public IList SelectedItems
         {
@@ -44,7 +44,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty SelectedItemsProperty =
-            DependencyProperty.Register("SelectedItems", typeof(IList), typeof(TreeSelect), new PropertyMetadata(OnSelectedItemsChanged));
+            DependencyProperty.Register(nameof(SelectedItems), typeof(IList), typeof(TreeSelect), new PropertyMetadata(OnSelectedItemsChanged));
 
         private static void OnSelectedItemsChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -64,7 +64,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty SelectedValuesProperty =
-            DependencyProperty.Register("SelectedValues", typeof(IList), typeof(TreeSelect), new PropertyMetadata(OnSelectedValuesChanged));
+            DependencyProperty.Register(nameof(SelectedValues), typeof(IList), typeof(TreeSelect), new PropertyMetadata(OnSelectedValuesChanged));
 
         private static void OnSelectedValuesChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -84,7 +84,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public new static readonly DependencyProperty DisplayMemberPathProperty =
-            DependencyProperty.Register("DisplayMemberPath", typeof(string), typeof(TreeSelect));
+            DependencyProperty.Register(nameof(DisplayMemberPath), typeof(string), typeof(TreeSelect));
 
         public new string SelectedValuePath
         {
@@ -99,7 +99,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public new static readonly DependencyProperty SelectedValuePathProperty =
-            DependencyProperty.Register("SelectedValuePath", typeof(string), typeof(TreeSelect));
+            DependencyProperty.Register(nameof(SelectedValuePath), typeof(string), typeof(TreeSelect));
 
         /// <summary>
         /// Selected item of the TreeView
@@ -117,7 +117,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public new static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(TreeSelect), new PropertyMetadata(null, OnSelectedItemChanged));
+            DependencyProperty.Register(nameof(SelectedItem), typeof(object), typeof(TreeSelect), new PropertyMetadata(null, OnSelectedItemChanged));
 
         private static void OnSelectedItemChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -137,7 +137,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public new static readonly DependencyProperty SelectedValueProperty =
-            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TreeSelect), new PropertyMetadata(null, OnSelectedValueChanged));
+            DependencyProperty.Register(nameof(SelectedValue), typeof(object), typeof(TreeSelect), new PropertyMetadata(null, OnSelectedValueChanged));
 
         private static void OnSelectedValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -157,7 +157,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static new readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(TreeSelect));
+            DependencyProperty.Register(nameof(Text), typeof(string), typeof(TreeSelect));
 
         /// <summary>
         /// Gets or sets text separator.
@@ -175,7 +175,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty TextSeparatorProperty =
-            DependencyProperty.Register("TextSeparator", typeof(string), typeof(TreeSelect), new PropertyMetadata(","));
+            DependencyProperty.Register(nameof(TextSeparator), typeof(string), typeof(TreeSelect), new PropertyMetadata(","));
 
         static TreeSelect()
         {
