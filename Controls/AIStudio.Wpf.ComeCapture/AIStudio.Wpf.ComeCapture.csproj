@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <UseWPF>true</UseWPF>
+    <Company>AIStudio.Wpf.Controls</Company>
+    <Authors>akwkevin</Authors>
+    <PackageProjectUrl>https://gitee.com/akwkevin</PackageProjectUrl>
+    <PackageIcon>A.png</PackageIcon>
+    <PackageIconUrl />
+    <NeutralLanguage />
+    <Version>1.1.0</Version>
+    <Description>一个WPF的截屏控件</Description>
+    <ApplicationIcon>Resources\cut.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup Condition="$(DefineConstants.Contains(NETCOREAPP))">
@@ -9,6 +18,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <None Remove="Resources\A.ico" />
     <None Remove="Resources\showyou.png" />
     <None Remove="Resources\保存.png" />
     <None Remove="Resources\后退.png" />
@@ -16,14 +26,26 @@
     <None Remove="Resources\箭头.png" />
     <None Remove="Resources\设置.png" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="Resources\cut.ico" />
+  </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\A.ico" />
     <Resource Include="Resources\showyou.png" />
     <Resource Include="Resources\保存.png" />
     <Resource Include="Resources\后退.png" />
     <Resource Include="Resources\笔刷.png" />
     <Resource Include="Resources\箭头.png" />
     <Resource Include="Resources\设置.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\A.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

@@ -53,6 +53,7 @@ namespace AIStudio.Wpf.ComeCapture.Helpers
         public static BitmapSource GetFullBitmapSource()
         {
             var bounds = new System.Drawing.Size((int)(MainWindow.ScreenWidth * MainWindow.ScreenScale), (int)(MainWindow.ScreenHeight * MainWindow.ScreenScale));// ScreenHelper.GetPhysicalDisplaySize();
+          
             _Bitmap = new Bitmap(bounds.Width, bounds.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             var bmpGraphics = Graphics.FromImage(_Bitmap);
             var x = System.Windows.SystemParameters.VirtualScreenLeft;
