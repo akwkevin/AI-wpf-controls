@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
              xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Style="{DynamicResource AIStudio.Styles.AIStudioUserControl}">
@@ -19,11 +18,11 @@
                                 <ToolBar Style="{DynamicResource AIStudio.Styles.ToolBar}" ClipToBounds="False">
                                     <Button
                                         ToolTip="Follow me on Twitter"
-                                        Content="{materialDesign:PackIcon Kind=Twitter}"/>
+                                        Content="Twitter"/>
 
                                     <Button
                                         ToolTip="Save"
-                                        Content="{materialDesign:PackIcon Kind=ContentSave}"/>
+                                        Content="ContentSave"/>
 
                                     <Separator/>
 
@@ -31,13 +30,13 @@
                                         Command="Cut"
                                         ToolTip="Cut"
                                         ToolBar.OverflowMode="AsNeeded"
-                                        Content="{materialDesign:PackIcon Kind=ContentCut}"/>
+                                        Content="ContentCut"/>
 
                                     <Button
                                         Command="Copy"
                                         ToolTip="Copy that stuff"
                                         ToolBar.OverflowMode="AsNeeded"
-                                        Content="{materialDesign:PackIcon Kind=ContentCopy}"/>
+                                        Content="ContentCopy"/>
 
                                     <Separator/>
 
@@ -45,17 +44,17 @@
                                         Command="Paste"
                                         ToolTip="Paste some stuff"
                                         ToolBar.OverflowMode="AsNeeded"
-                                        Content="{materialDesign:PackIcon Kind=ContentPaste}"/>
+                                        Content="ContentPaste"/>
 
                                     <!-- when badging in a toolbar, make sure the parent ToolBar.ClipToBounds="False", and manually apply the button style -->
                                     <ac:Badged
                                         ToolBar.OverflowMode="AsNeeded"
-                                        Badge="{materialDesign:PackIcon Alert}"
+                                        Badge="Alert"
                                         CornerRadius="5">
                                         <Button
                                             ToolTip="Badge it up!"
                                             Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                            Content="{materialDesign:PackIcon Kind=AirplaneTakeoff}"/>
+                                            Content="AirplaneTakeoff"/>
                                     </ac:Badged>
 
                                     <Separator/>
@@ -77,10 +76,10 @@
                                             </StackPanel>
                                         </ListBox.ToolTip>
 
-                                        <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatAlignLeft}"/>
-                                        <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatAlignCenter}"/>
-                                        <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatAlignRight}"/>
-                                        <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatAlignJustify}"/>
+                                        <ListBoxItem Content="FormatAlignLeft"/>
+                                        <ListBoxItem Content="FormatAlignCenter"/>
+                                        <ListBoxItem Content="FormatAlignRight"/>
+                                        <ListBoxItem Content="FormatAlignJustify"/>
                                     </ListBox>
 
                                     <Separator/>
@@ -94,9 +93,9 @@
                                             </StackPanel>
                                         </ListBox.ToolTip>
 
-                                        <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatBold}"/>
-                                        <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatItalic}"/>
-                                        <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatUnderline}"/>
+                                        <ListBoxItem Content="FormatBold"/>
+                                        <ListBoxItem Content="FormatItalic"/>
+                                        <ListBoxItem Content="FormatUnderline"/>
                                     </ListBox>
 
                                     <Separator/>
@@ -115,7 +114,7 @@
                                     <Button
                                         ToolTip="Take a nap"
                                         ToolBar.OverflowMode="Always"
-                                        Content="{materialDesign:PackIcon Kind=Hotel}"/>
+                                        Content="Hotel"/>
 
                                     <RadioButton
                                         GroupName="XXX"
@@ -130,12 +129,12 @@
                                     <RadioButton
                                         GroupName="YYY"
                                         Style="{StaticResource AIStudio.Styles.RadioButton}"
-                                        Content="{materialDesign:PackIcon Kind=Radio}"/>
+                                        Content="Radio"/>
 
                                     <RadioButton
                                         GroupName="YYY"
                                         Style="{StaticResource AIStudio.Styles.RadioButton}"
-                                        Content="{materialDesign:PackIcon Kind=EmoticonPoop}"/>
+                                        Content="EmoticonPoop"/>
 
                                     <Separator/>
 
@@ -156,8 +155,7 @@
                                     <ComboBox
                                         Margin="8 0"
                                         Width="80"
-                                        Style="{DynamicResource AIStudio.Styles.ComboBox.Underline}"
-                                        materialDesign:HintAssist.Hint="Food">
+                                        Style="{DynamicResource AIStudio.Styles.ComboBox.Underline}">
                                         <ComboBoxItem Content="Fries" IsSelected="True" />
                                         <ComboBoxItem Content="Waffles" />
                                         <ComboBoxItem Content="Chocolate" />
@@ -167,7 +165,6 @@
                                         Width="80"
                                         Margin="8 0"
                                         Style="{DynamicResource AIStudio.Styles.TextBox.Underline}"
-                                        materialDesign:HintAssist.Hint="Drink"
                                         Text="Beer" />
                                 </ToolBar>
                             </ToolBarTray>
