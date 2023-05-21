@@ -37,9 +37,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.Wall3D", "Cont
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.Wall3D.Demo", "Demos\AIStudio.Wpf.Wall3D.Demo\AIStudio.Wpf.Wall3D.Demo.csproj", "{D193788D-5672-4186-A444-E50EFEB4ECB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIStudio.Wpf.Controls.Emoji", "Controls\AIStudio.Wpf.Controls.Emoji\AIStudio.Wpf.Controls.Emoji.csproj", "{ED8512F6-0197-4C04-85E9-2149659D8531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.Controls.Emoji", "Controls\AIStudio.Wpf.Controls.Emoji\AIStudio.Wpf.Controls.Emoji.csproj", "{ED8512F6-0197-4C04-85E9-2149659D8531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIStudio.Wpf.Controls.MediaPlayer", "Controls\AIStudio.Wpf.Controls.MediaPlayer\AIStudio.Wpf.Controls.MediaPlayer.csproj", "{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.Controls.MediaPlayer", "Controls\AIStudio.Wpf.Controls.MediaPlayer\AIStudio.Wpf.Controls.MediaPlayer.csproj", "{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIStudio.Wpf.ColorPicker", "Controls\AIStudio.Wpf.ColorPicker\AIStudio.Wpf.ColorPicker.csproj", "{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +105,10 @@ Global
 		{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +127,7 @@ Global
 		{D193788D-5672-4186-A444-E50EFEB4ECB7} = {72A4E17E-1F5A-4324-9492-2CD44BEE3855}
 		{ED8512F6-0197-4C04-85E9-2149659D8531} = {3D54C8D2-F15E-4BD8-8579-904AF5D4A5E7}
 		{6008B63D-41A7-4972-8840-FA1FBF1E9C9E} = {3D54C8D2-F15E-4BD8-8579-904AF5D4A5E7}
+		{BDBAFCA4-6713-4C5E-836F-1B87B65A8011} = {3D54C8D2-F15E-4BD8-8579-904AF5D4A5E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {38918B9E-D567-458D-8EE0-3A82F3D0C27F}

@@ -32,6 +32,7 @@
                         <ComboBoxItem Content="GridControl"/>
                         <ComboBoxItem Content="Screenshot"/>
                         <ComboBoxItem Content="Wall3D"/>
+                        <ComboBoxItem Content="ColorPicker"/>
                     </ComboBox>                   
                 </StackPanel>
             </ac:WindowBaseTitleBar.LeftWindowCommands>
@@ -90,6 +91,15 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Control">
                                         <wall3dDemo:MainView/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text,ElementName=comboBox, Mode=OneWay}" Value="ColorPicker">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Control">
+                                        <local:ColorPickerView/>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>

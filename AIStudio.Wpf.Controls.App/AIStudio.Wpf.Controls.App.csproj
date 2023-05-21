@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Controls\AIStudio.Wpf.ColorPicker\AIStudio.Wpf.ColorPicker.csproj" />
     <ProjectReference Include="..\Controls\AIStudio.Wpf.ComeCapture\AIStudio.Wpf.ComeCapture.csproj" />
     <ProjectReference Include="..\Demos\AIStudio.Wpf.Controls.Demo\AIStudio.Wpf.Controls.Demo.csproj" />
     <ProjectReference Include="..\Demos\AIStudio.Wpf.GridControls.Demo\AIStudio.Wpf.GridControls.Demo.csproj" />
@@ -24,7 +25,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\ColorPickerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Update="WpfAnalyzers" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\ColorPickerView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>
