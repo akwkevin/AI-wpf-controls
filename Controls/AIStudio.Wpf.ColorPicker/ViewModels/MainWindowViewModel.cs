@@ -36,21 +36,11 @@ namespace AIStudio.Wpf.ColorPicker.ViewModels
             _isActivity = true;
             Position = "X:" + e.X + " Y:" + e.Y;
 
-            POINT point;
+            var color = ColorPickerManager.GetColor(e.X, e.Y);
 
-            GetCursorPos(out point);
+            DecimalColor = color.R.ToString() + "," + color.G.ToString() + "," + color.B.ToString();
+            Color = color.ToString();
 
-            IntPtr hdc = GetDC(IntPtr.Zero);
-            uint c = GetPixel(hdc, point.X, point.Y);
-            ReleaseDC(IntPtr.Zero, hdc);
-
-            byte r = Convert.ToByte(c & 0xFF);
-            var g = Convert.ToByte((c & 0xFF00) / 256);
-            var b = Convert.ToByte((c & 0xFF0000) / 65536);
-
-            DecimalColor = r.ToString() + "," + g.ToString() + "," + b.ToString();
-            Color = System.Windows.Media.Color.FromRgb(r, g, b).ToString();
-            //Thread.Sleep(10);
             _isActivity = false;
         }
         /// <summary>
@@ -125,39 +115,8 @@ namespace AIStudio.Wpf.ColorPicker.ViewModels
                 _decimalColor = value;
                 OnPropertyChanged();
             }
-        }      
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
-        {
-            public int X;
-            public int Y;
-            public POINT(int x, int y)
-            {
-                this.X = x;
-                this.Y = y;
-            }
-        }
-
-        [DllImport("user32.dll")]
-        static extern IntPtr GetDC(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        static extern Int32 ReleaseDC(IntPtr hwnd, IntPtr hdc);
-
-        [DllImport("gdi32.dll")]
-        static extern uint GetPixel(IntPtr hdc, int nXPos, int nYPos);
-        /// <summary>   
-        /// 获取鼠标的坐标   
-        /// </summary>   
-        /// <param name="lpPoint">传址参数，坐标point类型</param>   
-        /// <returns>获取成功返回真</returns>   
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern bool GetCursorPos(out POINT pt);
-
-        [DllImport("user32.dll", EntryPoint = "GetDesktopWindow")]
-        public static extern IntPtr GetDesktopWindow();
-
+        }     
+    
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
         /// 属性修改事件

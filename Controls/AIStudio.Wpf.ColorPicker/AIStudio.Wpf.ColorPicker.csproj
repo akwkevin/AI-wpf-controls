@@ -7,7 +7,7 @@
     <Authors>akwkevin</Authors>
     <PackageProjectUrl>https://gitee.com/akwkevin</PackageProjectUrl>
     <PackageIcon>A.png</PackageIcon>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Description>一个WPF的取色控件</Description>
   </PropertyGroup>
 
