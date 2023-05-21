@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Timers;
 using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace AIStudio.Wpf.ColorPicker.ViewModels
@@ -25,12 +28,13 @@ namespace AIStudio.Wpf.ColorPicker.ViewModels
         }
 
         bool _isActivity = false;
+        bool _stop = false;
         /// <summary>
         /// 鼠标移动事件
         /// </summary>
         void hook_OnMouseActivity(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (_isActivity == true)
+            if (_isActivity == true || _stop == true)
                 return;
 
             _isActivity = true;
@@ -61,10 +65,14 @@ namespace AIStudio.Wpf.ColorPicker.ViewModels
         /// </summary>
         void hook_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            if (e.KeyCode == System.Windows.Forms.Keys.Space)
+            Debug.WriteLine(e.KeyValue.ToString() + e.Control + e.KeyData + Keyboard.IsKeyDown(Key.LeftCtrl)) ;
+            if (e.KeyCode == System.Windows.Forms.Keys.C && Control.ModifierKeys == Keys.Control)
             {
-                System.Windows.Clipboard.Clear();
-                System.Windows.Clipboard.SetData(System.Windows.DataFormats.Text, Color);
+                System.Windows.Clipboard.SetDataObject(Color);
+            }
+            else if (e.KeyCode == System.Windows.Forms.Keys.S && Control.ModifierKeys == Keys.Control)
+            {
+                _stop = !_stop;
             }
         }
 

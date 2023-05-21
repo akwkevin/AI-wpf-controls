@@ -19,7 +19,7 @@
             </Border>
         </ControlTemplate>
     </Window.Template>
-    <Border Height="190" Width="120" BorderThickness="1" BorderBrush="#002FA7" Background="Transparent" CornerRadius="5"  ToolTip="按下Space，颜色复制到剪贴板;&#13;">
+    <Border Height="190" Width="130" BorderThickness="1" BorderBrush="#002FA7" Background="Transparent" CornerRadius="5"  ToolTip="按下Ctrl+C，颜色复制到剪贴板;&#13;按下Ctrl+S，颜色停止或继续取色;">
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -31,7 +31,7 @@
             </Grid.RowDefinitions>
             <Border Background="#002FA7" CornerRadius="5,5,0,0">
                 <Grid>
-                    <TextBlock Grid.Row="0" Margin="5" Text="取色器(空格取色)" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Margin="5" Text="取色器(Ctrl+C取色)" VerticalAlignment="Center"/>
                     <Button Content="X" HorizontalAlignment="Right" Foreground="red" Margin="5" Background="#99002FA7" BorderThickness="0" Click="Close_Click"  WindowChrome.IsHitTestVisibleInChrome="True" Style="{x:Null}"/>
                 </Grid>
             </Border>
