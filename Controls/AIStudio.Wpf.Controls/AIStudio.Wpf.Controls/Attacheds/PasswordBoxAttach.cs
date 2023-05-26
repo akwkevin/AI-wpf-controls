@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -14,12 +15,14 @@ namespace AIStudio.Wpf.Controls
                 new PropertyMetadata("!", OnCapsLockIconChanged));
 
         [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
+        [Category(AppName.AIStudio)]
         public static object GetCapsLockIcon(PasswordBox element)
         {
             return element.GetValue(CapsLockIconProperty);
         }
 
         [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
+        [Category(AppName.AIStudio)]
         public static void SetCapsLockIcon(PasswordBox element, object value)
         {
             element.SetValue(CapsLockIconProperty, value);

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using AIStudio.Wpf.Controls.Converter;
@@ -34,9 +35,13 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
+        [AttachedPropertyBrowsableForType(typeof(Border))]
+        [Category(AppName.AIStudio)]
         public static void SetCircular(DependencyObject element, bool value)
             => element.SetValue(CircularProperty, value);
 
+        [AttachedPropertyBrowsableForType(typeof(Border))]
+        [Category(AppName.AIStudio)]
         public static bool GetCircular(DependencyObject element)
             => (bool)element.GetValue(CircularProperty);
         #endregion

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -7,10 +8,15 @@ namespace AIStudio.Wpf.Controls
     public static class ImageAttach
     {
         //图片圆角       
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Image))]
         public static CornerRadius GetCornerRadius(DependencyObject obj)
         {
             return (CornerRadius)obj.GetValue(CornerRadiusProperty);
         }
+
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Image))]
         public static void SetCornerRadius(DependencyObject obj, CornerRadius value)
         {
             obj.SetValue(CornerRadiusProperty, value);

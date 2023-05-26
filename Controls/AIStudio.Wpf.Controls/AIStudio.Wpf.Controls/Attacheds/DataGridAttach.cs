@@ -15,7 +15,7 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Gets the value to define the DataGridRow selection behavior.
         /// </summary>
-        [Category("AIStudio.Wpf.Controls")]
+        [Category(AppName.AIStudio)]
         [AttachedPropertyBrowsableForType(typeof(DataGridRow))]
         public static DataGridSelectionUnit GetSelectionUnit(UIElement element)
         {
@@ -39,7 +39,7 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Gets the value to define the DataGridCell selection behavior.
         /// </summary>
-        [Category("AIStudio.Wpf.Controls")]
+        [Category(AppName.AIStudio)]
         [AttachedPropertyBrowsableForType(typeof(DataGridCell))]
         public static bool GetIsCellOrRowHeader(UIElement element)
         {
@@ -60,8 +60,13 @@ namespace AIStudio.Wpf.Controls
             = DependencyProperty.RegisterAttached("ColumnHeaderPadding", typeof(Thickness), typeof(DataGridAttach),
                 new FrameworkPropertyMetadata(DefaultColumnHeaderPadding, FrameworkPropertyMetadataOptions.Inherits));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(GridViewColumnHeader))]
         public static Thickness GetColumnHeaderPadding(DataGrid element)
             => (Thickness)element.GetValue(ColumnHeaderPaddingProperty);
+
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(GridViewColumnHeader))]
         public static void SetColumnHeaderPadding(DependencyObject element, Thickness value)
             => element.SetValue(ColumnHeaderPaddingProperty, value);
         #endregion
@@ -71,12 +76,16 @@ namespace AIStudio.Wpf.Controls
             typeof(Thickness),
             typeof(DataGridAttach),
             new FrameworkPropertyMetadata(DefaultListViewItemPadding, FrameworkPropertyMetadataOptions.Inherits));
-
+   
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(ListViewItem))]
         public static void SetListViewItemPadding(DependencyObject element, Thickness value)
         {
             element.SetValue(ListViewItemPaddingProperty, value);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(ListViewItem))]
         public static Thickness GetListViewItemPadding(DependencyObject element)
         {
             return (Thickness)element.GetValue(ListViewItemPaddingProperty);

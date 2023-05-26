@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace AIStudio.Wpf.Controls
@@ -8,9 +10,13 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty IsDragElementProperty = DependencyProperty.RegisterAttached(
             "IsDragElement", typeof(bool), typeof(WindowAttach), new PropertyMetadata(false, OnIsDragElementChanged));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Window))]
         public static void SetIsDragElement(DependencyObject element, bool value)
             => element.SetValue(IsDragElementProperty, value);
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Window))]
         public static bool GetIsDragElement(DependencyObject element)
             => (bool)element.GetValue(IsDragElementProperty);
 
@@ -63,9 +69,13 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Window))]
         public static void SetIgnoreAltF4(DependencyObject element, bool value)
             => element.SetValue(IgnoreAltF4Property, value);
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Window))]
         public static bool GetIgnoreAltF4(DependencyObject element)
             => (bool)element.GetValue(IgnoreAltF4Property);
 
@@ -82,9 +92,13 @@ namespace AIStudio.Wpf.Controls
         }
 
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Window))]
         public static void SetShowInTaskManager(DependencyObject element, bool value)
             => element.SetValue(ShowInTaskManagerProperty, value);
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Window))]
         public static bool GetShowInTaskManager(DependencyObject element)
             => (bool)element.GetValue(ShowInTaskManagerProperty);
     }

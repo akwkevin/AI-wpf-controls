@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,9 +12,13 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty RegexStringProperty = DependencyProperty.RegisterAttached(
              "RegexString", typeof(string), typeof(TextBoxAttach), new PropertyMetadata(null, OnRegexStringChanged));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TextBox))]
         public static void SetRegexString(DependencyObject element, string value)
             => element.SetValue(RegexStringProperty, value);
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TextBox))]
         public static string GetRegexString(DependencyObject element)
             => (string)element.GetValue(RegexStringProperty);
 
@@ -37,9 +42,13 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty EnterUpdateSourceProperty = DependencyProperty.RegisterAttached(
             "EnterUpdateSource", typeof(bool), typeof(TextBoxAttach), new PropertyMetadata(false, OnEnterUpdateSourceChanged));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TextBox))]
         public static void SetEnterUpdateSource(DependencyObject element, bool value)
             => element.SetValue(EnterUpdateSourceProperty, value);
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TextBox))]
         public static bool GetEnterUpdateSource(DependencyObject element)
             => (bool)element.GetValue(EnterUpdateSourceProperty);
 

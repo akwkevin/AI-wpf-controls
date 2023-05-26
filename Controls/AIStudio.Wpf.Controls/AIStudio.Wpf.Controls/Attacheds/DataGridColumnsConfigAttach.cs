@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ namespace AIStudio.Wpf.Controls
 {
     public class DataGridColumnsConfigAttach
     {
+    
         public static readonly DependencyProperty ShowConfigProperty =
             DependencyProperty.RegisterAttached(
                 "ShowConfig",
@@ -17,11 +19,15 @@ namespace AIStudio.Wpf.Controls
                 typeof(DataGridColumnsConfigAttach),
                 new UIPropertyMetadata(false, OnShowConfigChanged));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(DataGrid))]
         public static void SetShowConfig(DependencyObject element, bool value)
         {
             element.SetValue(ShowConfigProperty, value);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(DataGrid))]
         public static bool GetShowConfig(DependencyObject element)
         {
             return (bool)element.GetValue(ShowConfigProperty);

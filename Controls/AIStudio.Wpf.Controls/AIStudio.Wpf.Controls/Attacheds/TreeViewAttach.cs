@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -30,11 +31,15 @@ namespace AIStudio.Wpf.Controls
     public static class TreeViewAttach
     {
         #region ControlStyle
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static TreeViewControlStyle GetControlStyle(DependencyObject obj)
         {
             return (TreeViewControlStyle)obj.GetValue(ControlStyleProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetControlStyle(DependencyObject obj, TreeViewControlStyle value)
         {
             obj.SetValue(ControlStyleProperty, value);
@@ -45,11 +50,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region SelectMode
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static SelectMode GetSelectMode(DependencyObject obj)
         {
             return (SelectMode)obj.GetValue(SelectModeProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetSelectMode(DependencyObject obj, SelectMode value)
         {
             obj.SetValue(SelectModeProperty, value);
@@ -60,11 +69,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region ExpandMode
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static TreeExpandMode GetExpandMode(DependencyObject obj)
         {
             return (TreeExpandMode)obj.GetValue(ExpandModeProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetExpandMode(DependencyObject obj, TreeExpandMode value)
         {
             obj.SetValue(ExpandModeProperty, value);
@@ -126,11 +139,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region ExpandBehaviour
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static ExpandBehaviour GetExpandBehaviour(DependencyObject obj)
         {
             return (ExpandBehaviour)obj.GetValue(ExpandBehaviourProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetExpandBehaviour(DependencyObject obj, ExpandBehaviour value)
         {
             obj.SetValue(ExpandBehaviourProperty, value);
@@ -205,14 +222,18 @@ namespace AIStudio.Wpf.Controls
             return items;
         }
 
-        #endregion 
+        #endregion
 
         #region ExpandedBrush
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static Brush GetExpandedBrush(DependencyObject obj)
         {
             return (Brush)obj.GetValue(ExpandedBrushProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetExpandedBrush(DependencyObject obj, Brush value)
         {
             obj.SetValue(ExpandedBrushProperty, value);
@@ -223,11 +244,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region SelectedBackground
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static Brush GetSelectedBackground(DependencyObject obj)
         {
             return (Brush)obj.GetValue(SelectedBackgroundProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetSelectedBackground(DependencyObject obj, Brush value)
         {
             obj.SetValue(SelectedBackgroundProperty, value);
@@ -238,11 +263,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region SelectedForeground
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static Brush GetSelectedForeground(DependencyObject obj)
         {
             return (Brush)obj.GetValue(SelectedForegroundProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetSelectedForeground(DependencyObject obj, Brush value)
         {
             obj.SetValue(SelectedForegroundProperty, value);
@@ -253,11 +282,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region ItemHeight
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static double GetItemHeight(DependencyObject obj)
         {
             return (double)obj.GetValue(ItemHeightProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetItemHeight(DependencyObject obj, double value)
         {
             obj.SetValue(ItemHeightProperty, value);
@@ -268,11 +301,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region ItemIcon
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static object GetItemIcon(DependencyObject obj)
         {
             return obj.GetValue(ItemIconProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetItemIcon(DependencyObject obj, object value)
         {
             obj.SetValue(ItemIconProperty, value);
@@ -283,11 +320,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region ItemPadding
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static Thickness GetItemPadding(DependencyObject obj)
         {
             return (Thickness)obj.GetValue(ItemPaddingProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         public static void SetItemPadding(DependencyObject obj, Thickness value)
         {
             obj.SetValue(ItemPaddingProperty, value);
@@ -298,11 +339,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region (Internal) LastSelectedItem
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         internal static TreeViewItem GetLastSelectedItem(DependencyObject obj)
         {
             return (TreeViewItem)obj.GetValue(LastSelecteedItemProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         internal static void SetLastSelecteedItem(DependencyObject obj, TreeViewItem value)
         {
             obj.SetValue(LastSelecteedItemProperty, value);
@@ -313,11 +358,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region (Internal) LastExpandedItem
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         internal static TreeViewItem GetLastExpandedItem(DependencyObject obj)
         {
             return (TreeViewItem)obj.GetValue(LastExpandedItemProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TreeView))]
         internal static void SetLastExpandedItem(DependencyObject obj, TreeViewItem value)
         {
             obj.SetValue(LastExpandedItemProperty, value);

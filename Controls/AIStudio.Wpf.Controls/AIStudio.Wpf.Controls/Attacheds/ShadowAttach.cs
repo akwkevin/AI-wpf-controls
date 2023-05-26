@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
@@ -23,11 +25,15 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty DropShadowEffectProperty = DependencyProperty.RegisterAttached(
           "DropShadowEffect", typeof(DropShadowEffect), typeof(ShadowAttach), new FrameworkPropertyMetadata(default(DropShadowEffect), FrameworkPropertyMetadataOptions.AffectsRender));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static void SetDropShadowEffect(DependencyObject element, DropShadowEffect value)
         {
             element.SetValue(DropShadowEffectProperty, value);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static DropShadowEffect GetDropShadowEffect(DependencyObject element)
         {
             return (DropShadowEffect)element.GetValue(DropShadowEffectProperty);
@@ -36,9 +42,13 @@ namespace AIStudio.Wpf.Controls
         private static readonly DependencyPropertyKey LocalInfoPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
             "LocalInfo", typeof(ShadowLocalInfo), typeof(ShadowAttach), new PropertyMetadata(default(ShadowLocalInfo)));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         private static void SetLocalInfo(DependencyObject element, ShadowLocalInfo value)
             => element.SetValue(LocalInfoPropertyKey, value);
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         private static ShadowLocalInfo GetLocalInfo(DependencyObject element)
             => (ShadowLocalInfo)element.GetValue(LocalInfoPropertyKey.DependencyProperty);
 
@@ -75,11 +85,15 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static void SetDarken(DependencyObject element, bool value)
         {
             element.SetValue(DarkenProperty, value);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static bool GetDarken(DependencyObject element)
         {
             return (bool)element.GetValue(DarkenProperty);
@@ -88,11 +102,15 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty CacheModeProperty = DependencyProperty.RegisterAttached(
             "CacheMode", typeof(CacheMode), typeof(ShadowAttach), new FrameworkPropertyMetadata(new BitmapCache { EnableClearType = true, SnapsToDevicePixels = true }, FrameworkPropertyMetadataOptions.Inherits));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static void SetCacheMode(DependencyObject element, CacheMode value)
         {
             element.SetValue(CacheModeProperty, value);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static CacheMode GetCacheMode(DependencyObject element)
         {
             return (CacheMode)element.GetValue(CacheModeProperty);
@@ -101,11 +119,15 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty ShadowEdgesProperty = DependencyProperty.RegisterAttached(
             "ShadowEdges", typeof(ShadowEdges), typeof(ShadowAttach), new PropertyMetadata(ShadowEdges.All));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static void SetShadowEdges(DependencyObject element, ShadowEdges value)
         {
             element.SetValue(ShadowEdgesProperty, value);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static ShadowEdges GetShadowEdges(DependencyObject element)
         {
             return (ShadowEdges)element.GetValue(ShadowEdgesProperty);

@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace AIStudio.Wpf.Controls
@@ -9,11 +11,16 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty ViewInBrowerProperty = DependencyProperty.RegisterAttached(
         "ViewInBrower", typeof(bool), typeof(HyperlinkAttach), new FrameworkPropertyMetadata(default(bool), OnViewInBrowerChanged));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Hyperlink))]
         public static void SetViewInBrower(DependencyObject element, bool value)
         {
             element.SetValue(ViewInBrowerProperty, value);
         }
 
+
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Hyperlink))]
         public static bool GetViewInBrower(DependencyObject element)
         {
             return (bool)element.GetValue(ViewInBrowerProperty);

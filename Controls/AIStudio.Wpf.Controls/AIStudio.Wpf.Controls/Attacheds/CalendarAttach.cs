@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace AIStudio.Wpf.Controls
@@ -9,9 +10,13 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty NextYearProperty = DependencyProperty.RegisterAttached(
            "NextYear", typeof(Calendar), typeof(CalendarAttach), new FrameworkPropertyMetadata(default(Calendar), FrameworkPropertyMetadataOptions.Inherits, OnNextYearChanged));
 
+        [AttachedPropertyBrowsableForType(typeof(Calendar))]
+        [Category(AppName.AIStudio)]
         public static void SetNextYear(DependencyObject element, Calendar value)
             => element.SetValue(NextYearProperty, value);
 
+        [AttachedPropertyBrowsableForType(typeof(Calendar))]
+        [Category(AppName.AIStudio)]
         public static Calendar GetNextYear(DependencyObject element)
             => (Calendar)element.GetValue(NextYearProperty);
 
@@ -50,9 +55,13 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty PreYearProperty = DependencyProperty.RegisterAttached(
            "PreYear", typeof(Calendar), typeof(CalendarAttach), new FrameworkPropertyMetadata(default(Calendar), FrameworkPropertyMetadataOptions.Inherits, OnPreYearChanged));
 
+        [AttachedPropertyBrowsableForType(typeof(Calendar))]
+        [Category(AppName.AIStudio)]
         public static void SetPreYear(DependencyObject element, Calendar value)
             => element.SetValue(PreYearProperty, value);
 
+        [AttachedPropertyBrowsableForType(typeof(Calendar))]
+        [Category(AppName.AIStudio)]
         public static Calendar GetPreYear(DependencyObject element)
             => (Calendar)element.GetValue(PreYearProperty);
 

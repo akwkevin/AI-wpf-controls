@@ -14,22 +14,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controls\Transitional\**" />
     <Compile Remove="Controls\Window\Native\**" />
     <Compile Remove="Controls\Window\Standard\**" />
+    <EmbeddedResource Remove="Controls\Transitional\**" />
     <EmbeddedResource Remove="Controls\Window\Native\**" />
     <EmbeddedResource Remove="Controls\Window\Standard\**" />
+    <None Remove="Controls\Transitional\**" />
     <None Remove="Controls\Window\Native\**" />
     <None Remove="Controls\Window\Standard\**" />
     <None Include="Resources\A.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <Page Remove="Controls\Transitional\**" />
     <Page Remove="Controls\Window\Native\**" />
     <Page Remove="Controls\Window\Standard\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Controls\Transition\Images\star.png" />
     <None Remove="Controls\Verify\Idioms.txt" />
     <None Remove="Resources\A.ico" />
     <None Remove="Resources\blank.ico" />
@@ -49,7 +52,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Controls\Transition\Images\star.png" />
     <Resource Include="Controls\Verify\Idioms.txt" />
     <Resource Include="Resources\A.ico" />
     <Resource Include="Resources\blank.ico" />

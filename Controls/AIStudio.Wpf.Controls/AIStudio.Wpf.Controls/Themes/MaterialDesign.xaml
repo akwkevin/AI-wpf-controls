@@ -42,6 +42,7 @@
 
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Base/Ripple.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Base/Underline.MaterialDesign.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Base/Transitional.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Base/BreathLamp.xaml"/>
 
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Avatar/Avatar.MaterialDesign.xaml"/>

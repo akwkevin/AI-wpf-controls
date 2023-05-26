@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace AIStudio.Wpf.Controls
@@ -10,11 +11,15 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty PaddingProperty = DependencyProperty.RegisterAttached(
             "Padding", typeof(Thickness), typeof(ContentHostAttach), new FrameworkPropertyMetadata(new Thickness(-1), OnThicknessChanged));
 
+        [AttachedPropertyBrowsableForType(typeof(ScrollViewer))]
+        [Category(AppName.AIStudio)]
         public static void SetPadding(DependencyObject element, Thickness value)
         {
             element.SetValue(PaddingProperty, value);
         }
 
+        [AttachedPropertyBrowsableForType(typeof(ScrollViewer))]
+        [Category(AppName.AIStudio)]
         public static Thickness GetPadding(DependencyObject element)
         {
             return (Thickness)element.GetValue(PaddingProperty);

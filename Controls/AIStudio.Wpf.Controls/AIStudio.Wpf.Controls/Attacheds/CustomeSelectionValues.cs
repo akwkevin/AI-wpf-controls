@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,11 +10,19 @@ namespace AIStudio.Wpf.Controls
 {
     public class CustomeSelectionValues
     {
+
+        [AttachedPropertyBrowsableForType(typeof(MultiSelector))]
+        [AttachedPropertyBrowsableForType(typeof(ListBox))]
+        [Category(AppName.AIStudio)]
         public static IList GetSelectedValues(DependencyObject obj) 
         { 
             return (IList)obj.GetValue(SelectedValuesProperty);
         }
 
+
+        [AttachedPropertyBrowsableForType(typeof(MultiSelector))]
+        [AttachedPropertyBrowsableForType(typeof(ListBox))]
+        [Category(AppName.AIStudio)]
         public static void SetSelectedValues(DependencyObject obj, IList value) 
         { 
             obj.SetValue(SelectedValuesProperty, value);

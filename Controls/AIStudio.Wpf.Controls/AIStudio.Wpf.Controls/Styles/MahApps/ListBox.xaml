@@ -5,10 +5,13 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Base/Transitional.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <converter:BrushRoundConverter x:Key="BrushRoundConverter"/>
     <converter:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
     <Style x:Key="AIStudio.Styles.ListBoxItem" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Background" Value="Transparent"/>
@@ -144,16 +147,22 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-  
-    <Style x:Key="AIStudio.Styles.ListBoxItem.Plain" BasedOn="{StaticResource AIStudio.Styles.ListBoxItem}" TargetType="{x:Type ListBoxItem}">      
+
+    <Style x:Key="AIStudio.Styles.ListBoxItem.Plain" BasedOn="{StaticResource AIStudio.Styles.ListBoxItem}" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <Border Background="{TemplateBinding Background}"
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">                     
-                        <Grid>
-                            <controls:Ripple x:Name="Ripple" 
+                            BorderThickness="{TemplateBinding BorderThickness}"/>
+                        <Border x:Name="SelectedBorder"
+                                    Opacity="0"
+                                    BorderThickness="{Binding Path=(controls:ControlAttach.BorderThickness),RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                    BorderBrush="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                    Background="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+
+                        <controls:Ripple x:Name="Ripple" 
                                         Feedback="{TemplateBinding Foreground, Converter={StaticResource BrushRoundConverter}}"
                                         Focusable="False"                        
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -161,21 +170,99 @@
                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                         RecognizesAccessKey="False">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                                    <ContentPresenter/>
+                                <ContentPresenter x:Name="content"/>
 
-                                    <!--附加内容区域-->
-                                    <Border x:Name="PART_AttachContent" Grid.Column="1">
-                                        <ContentControl Template="{TemplateBinding controls:ControlAttach.AttachContent}" IsTabStop="False" />
-                                    </Border>
-                                </Grid>
+                                <!--附加内容区域-->
+                                <Border x:Name="PART_AttachContent" Grid.Column="1">
+                                    <ContentControl Template="{TemplateBinding controls:ControlAttach.AttachContent}" IsTabStop="False" />
+                                </Border>
+                            </Grid>
 
-                            </controls:Ripple>
+                        </controls:Ripple>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="SelectedBorder" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="controls:ControlAttach.AttachContent">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Button x:Name="clear" 
+                            Visibility="Collapsed" 
+                            Foreground="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType=ListBox}}"
+                            Focusable="False"
+                            IsTabStop="False" 
+                            Style="{StaticResource AIStudio.Styles.Button.Clear}"
+                            controls:ControlAttach.ClearTextButton="{Binding Path=(controls:ControlAttach.ClearTextButton),RelativeSource={RelativeSource AncestorType=ListBoxItem}}" 
+                            Command="controls:ControlAttach.ClearTextCommand" 
+                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type ListBoxItem}}}"
+                            Margin="5,0,0,0"/>
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(controls:ControlAttach.ClearTextButton), RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="clear" Property="Visibility" Value="Visible"></Setter>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Separator}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.ListBoxItem.Plain2" BasedOn="{StaticResource AIStudio.Styles.ListBoxItem}" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <controls:Transitional HorizontalAlignment="Left"
+                                           IsShow="{TemplateBinding IsSelected}"
+                                           Type="ZoomY">
+                                <Rectangle Width="3"
+                                           Fill="{Binding Path=(controls:ControlAttach.BorderBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                            </controls:Transitional>
+
+                            <ContentPresenter 
+                                        x:Name="content" 
+                                        Focusable="False"                        
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                        RecognizesAccessKey="False"/>
+
+                            <!--附加内容区域-->
+                            <Border x:Name="PART_AttachContent" Grid.Column="1">
+                                <ContentControl Template="{TemplateBinding controls:ControlAttach.AttachContent}" IsTabStop="False" />
+                            </Border>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -311,6 +398,7 @@
         <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
         <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BrushOpacityConverter}, ConverterParameter=0.16}" />
         <Setter Property="controls:ControlAttach.BorderThickness" Value="0,0,2,0" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource AIStudio.Styles.ListBoxItem.Plain}"/>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray9}" />
@@ -354,6 +442,10 @@
                 <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray2}" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AIStudio.Styles.ListBox.Plain2" BasedOn="{StaticResource AIStudio.Styles.ListBox.Plain}" TargetType="{x:Type ListBox}">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource AIStudio.Styles.ListBoxItem.Plain2}"/>
     </Style>
 
     <Style x:Key="AIStudio.Styles.ListBox.Virtualized" BasedOn="{StaticResource AIStudio.Styles.ListBox}" TargetType="{x:Type ListBox}">
@@ -528,5 +620,56 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="AIStudio.Styles.ListBox.Animation" TargetType="{x:Type ListBox}" BasedOn="{StaticResource AIStudio.Styles.ListBox}">
+        <Setter Property="controls:ControlAttach.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="controls:ControlAttach.Background" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BrushOpacityConverter}, ConverterParameter=0.16}" />
+        <Setter Property="controls:ListBoxAttach.IsAnimation" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <Border Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Canvas>
+                                <Rectangle x:Name="PART_AnimationRectangle"
+                                           Canvas.Left="0"
+                                           Canvas.Top="0"
+                                           Width="3"
+                                           Height="0"
+                                           Fill="{Binding Path=(controls:ControlAttach.BorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </Canvas>
+
+                            <ScrollViewer Grid.Column="1"
+                                      Padding="{TemplateBinding Padding}"
+                                      CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                      Focusable="False"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

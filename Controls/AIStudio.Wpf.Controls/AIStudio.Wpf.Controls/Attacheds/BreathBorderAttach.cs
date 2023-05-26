@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
@@ -13,10 +15,15 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="element"></param>
         /// <param name="value"></param>
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         public static void SetIsBreath(DependencyObject element, bool value)
         {
             element.SetValue(IsBreathProperty, value);
         }
+
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
 
         public static bool GetIsBreath(DependencyObject element)
         {
@@ -24,7 +31,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty IsBreathProperty = DependencyProperty.RegisterAttached(
-            "IsBreath", typeof(bool), typeof(ControlNavigationAttach), new FrameworkPropertyMetadata(default(bool), OnIsBreathPropertyChanged));
+            "IsBreath", typeof(bool), typeof(BreathBorderAttach), new FrameworkPropertyMetadata(default(bool), OnIsBreathPropertyChanged));
 
 
         private static void OnIsBreathPropertyChanged(DependencyObject depObj, DependencyPropertyChangedEventArgs e)

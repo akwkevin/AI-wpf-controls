@@ -27,6 +27,20 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+                        <ListBox Margin="2" ItemsSource="{Binding DataList}" Style="{DynamicResource AIStudio.Styles.ListBox.Plain2}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox Margin="2" ItemsSource="{Binding DataList}" Style="{DynamicResource AIStudio.Styles.ListBox.Animation}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                         <ListView Margin="2" AlternationCount="2" ItemsSource="{Binding DataList}" Style="{DynamicResource AIStudio.Styles.ListView}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>

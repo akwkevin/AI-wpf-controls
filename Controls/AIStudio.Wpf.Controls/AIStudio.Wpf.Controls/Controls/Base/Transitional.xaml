@@ -1,0 +1,126 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AIStudio.Wpf.Controls">
+    
+    <ControlTemplate x:Key="RubyerTransitionTemplate" TargetType="{x:Type controls:Transitional}">
+        <Border>
+            <ContentPresenter x:Name="content"
+                              Focusable="False"
+                              RecognizesAccessKey="True"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="CollapseTransitionTemplate" TargetType="{x:Type controls:Transitional}">
+        <Border x:Name="root" VerticalAlignment="Top">
+            <StackPanel x:Name="rootStackPanel">
+                <ContentPresenter x:Name="content"
+                                  Focusable="False"
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+            </StackPanel>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Type" Value="CollapseUp">
+                <Setter TargetName="root" Property="Height">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                            <Binding ElementName="content" Path="ActualHeight" />
+                            <Binding Path="Progress" RelativeSource="{RelativeSource AncestorType=controls:Transitional}" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseDown">
+                <Setter TargetName="root" Property="VerticalAlignment" Value="Bottom" />
+                <Setter TargetName="root" Property="Height">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                            <Binding ElementName="content" Path="ActualHeight" />
+                            <Binding Path="Progress" RelativeSource="{RelativeSource AncestorType=controls:Transitional}" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseLeft">
+                <Setter TargetName="rootStackPanel" Property="Orientation" Value="Horizontal" />
+                <Setter TargetName="root" Property="HorizontalAlignment" Value="Left" />
+                <Setter TargetName="root" Property="VerticalAlignment" Value="Stretch" />
+                <Setter TargetName="root" Property="Width">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                            <Binding ElementName="content" Path="ActualWidth" />
+                            <Binding Path="Progress" RelativeSource="{RelativeSource AncestorType=controls:Transitional}" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseRight">
+                <Setter TargetName="rootStackPanel" Property="Orientation" Value="Horizontal" />
+                <Setter TargetName="root" Property="HorizontalAlignment" Value="Right" />
+                <Setter TargetName="root" Property="VerticalAlignment" Value="Stretch" />
+                <Setter TargetName="root" Property="Width">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                            <Binding ElementName="content" Path="ActualWidth" />
+                            <Binding Path="Progress" RelativeSource="{RelativeSource AncestorType=controls:Transitional}" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="AIStudio.Styles.Transitional" TargetType="{x:Type controls:Transitional}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="IsShow" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="IsFade" Value="True" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Type" Value="Fade" />
+        <Setter Property="Duration" Value="0:0:0.3" />
+        <Setter Property="Offset" Value="50" />
+        <Setter Property="ShowEasingFunction">
+            <Setter.Value>
+                <CubicEase EasingMode="EaseOut" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CloseEasingFunction">
+            <Setter.Value>
+                <CubicEase EasingMode="EaseOut" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="PlayEveryTime" Value="False" />
+        <Setter Property="Template" Value="{StaticResource RubyerTransitionTemplate}" />
+        <Style.Triggers>
+            <Trigger Property="Type" Value="CollapseUp">
+                <Setter Property="Template" Value="{StaticResource CollapseTransitionTemplate}" />
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseDown">
+                <Setter Property="Template" Value="{StaticResource CollapseTransitionTemplate}" />
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseLeft">
+                <Setter Property="Template" Value="{StaticResource CollapseTransitionTemplate}" />
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseRight">
+                <Setter Property="Template" Value="{StaticResource CollapseTransitionTemplate}" />
+            </Trigger>
+            <Trigger Property="IsFade" Value="True">
+                <Setter Property="Opacity" Value="{Binding Progress, RelativeSource={RelativeSource Self}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+	<Style TargetType="{x:Type controls:Transitional}" BasedOn="{StaticResource AIStudio.Styles.Transitional}" />
+</ResourceDictionary>

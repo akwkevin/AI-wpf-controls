@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using AIStudio.Wpf.Controls.Helper;
@@ -8,11 +9,15 @@ namespace AIStudio.Wpf.Controls
     public static class TabAttach
     {
         #region HeaderContent
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TabControl))]
         public static object GetHeaderContent(DependencyObject obj)
         {
             return (object)obj.GetValue(HeaderContentProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TabControl))]
         public static void SetHeaderContent(DependencyObject obj, object value)
         {
             obj.SetValue(HeaderContentProperty, value);
@@ -23,11 +28,15 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region ControlStyle
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TabControl))]
         public static TabControlStyle GetControlStyle(DependencyObject obj)
         {
             return (TabControlStyle)obj.GetValue(ControlStyleProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TabControl))]
         public static void SetControlStyle(DependencyObject obj, TabControlStyle value)
         {
             obj.SetValue(ControlStyleProperty, value);
@@ -43,11 +52,15 @@ namespace AIStudio.Wpf.Controls
     public class TabItemAttach
     {
         #region SelectMode
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TabItemAttach))]
         public static bool GetIsCanClose(DependencyObject obj)
         {
             return (bool)obj.GetValue(IsCanCloseProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TabItemAttach))]
         public static void SetIsCanClose(DependencyObject obj, bool value)
         {
             obj.SetValue(IsCanCloseProperty, value);
@@ -63,12 +76,15 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty CloseButtonProperty = DependencyProperty.RegisterAttached("CloseButton"
             , typeof(bool), typeof(TabItemAttach), new FrameworkPropertyMetadata(false, OnCloseButtonChanged));
 
-        [AttachedPropertyBrowsableForType(typeof(System.Windows.Controls.TextBox))]
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TabItemAttach))]
         public static bool GetCloseButton(DependencyObject d)
         {
             return (bool)d.GetValue(CloseButtonProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(TabItemAttach))]
         public static void SetCloseButton(DependencyObject obj, bool value)
         {
             obj.SetValue(CloseButtonProperty, value);

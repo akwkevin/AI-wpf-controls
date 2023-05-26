@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +13,17 @@ namespace AIStudio.Wpf.Controls
 {
     public class CustomeSelectionItems
     {
+        [AttachedPropertyBrowsableForType(typeof(MultiSelector))]
+        [AttachedPropertyBrowsableForType(typeof(ListBox))]
+        [Category(AppName.AIStudio)]
         public static IList GetSelectedItems(DependencyObject obj) 
         { 
             return (IList)obj.GetValue(SelectedItemsProperty);
         }
 
+        [AttachedPropertyBrowsableForType(typeof(MultiSelector))]
+        [AttachedPropertyBrowsableForType(typeof(ListBox))]
+        [Category(AppName.AIStudio)]
         public static void SetSelectedItems(DependencyObject obj, IList value) 
         { 
             obj.SetValue(SelectedItemsProperty, value);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,11 +16,15 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="element"></param>
         /// <param name="value"></param>
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         public static void SetNavWithUpDownKey(DependencyObject element, string value)
         {
             element.SetValue(NavWithUpDownKeyProperty, value);
         }
 
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         public static string GetNavWithUpDownKey(DependencyObject element)
         {
             return (string)element.GetValue(NavWithUpDownKeyProperty);
@@ -33,11 +38,15 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="cc"></param>
         /// <returns></returns>
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         public static double GetNavWithUpDownDefaultIndex(DependencyObject cc)
         {
             return (double)cc.GetValue(NavWithUpDownDefaultIndexProperty);
         }
 
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         public static void SetNavWithUpDownDefaultIndex(DependencyObject cc, double value)
         {
             cc.SetValue(NavWithUpDownDefaultIndexProperty, value);
@@ -51,11 +60,15 @@ namespace AIStudio.Wpf.Controls
         /// </summary>
         /// <param name="element"></param>
         /// <param name="value"></param>
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         public static void SetNavWithUpDown(DependencyObject element, bool value)
         {
             element.SetValue(NavWithUpDownProperty, value);
         }
 
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         public static bool GetNavWithUpDown(DependencyObject element)
         {
             return (bool)element.GetValue(NavWithUpDownProperty);
@@ -236,11 +249,15 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty NavigationIndexProperty = DependencyProperty.RegisterAttached("NavigationIndex", typeof(double?), typeof(ControlNavigationAttach),
             new UIPropertyMetadata(null));
 
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         public static double GetNavigationMultiple(DependencyObject cc)
         {
             return (double)cc.GetValue(NavigationMultipleProperty);
         }
 
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         public static void SetNavigationMultiple(DependencyObject cc, double value)
         {
             cc.SetValue(NavigationMultipleProperty, value);
@@ -263,11 +280,15 @@ namespace AIStudio.Wpf.Controls
             new UIPropertyMetadata(0d));
 
 
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         private static List<Control> GetNavigationControlList(DependencyObject cc)
         {
             return (List<Control>)cc.GetValue(NavigationControlListProperty);
         }
 
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(AppName.AIStudio)]
         private static void SetNavigationControlList(DependencyObject cc, List<Control> value)
         {
             cc.SetValue(NavigationControlListProperty, value);

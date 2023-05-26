@@ -16,8 +16,13 @@ namespace AIStudio.Wpf.Controls
             = DependencyProperty.RegisterAttached("HorizontalHeaderPadding", typeof(Thickness), typeof(ExpanderAttach),
                 new FrameworkPropertyMetadata(DefaultHorizontalHeaderPadding, FrameworkPropertyMetadataOptions.Inherits));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static Thickness GetHorizontalHeaderPadding(Expander element)
             => (Thickness)element.GetValue(HorizontalHeaderPaddingProperty);
+
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetHorizontalHeaderPadding(Expander element, Thickness value)
             => element.SetValue(HorizontalHeaderPaddingProperty, value);
         #endregion
@@ -27,8 +32,13 @@ namespace AIStudio.Wpf.Controls
             = DependencyProperty.RegisterAttached("VerticalHeaderPadding", typeof(Thickness), typeof(ExpanderAttach),
                 new FrameworkPropertyMetadata(DefaultVerticalHeaderPadding, FrameworkPropertyMetadataOptions.Inherits));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static Thickness GetVerticalHeaderPadding(Expander element)
             => (Thickness)element.GetValue(VerticalHeaderPaddingProperty);
+
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetVerticalHeaderPadding(Expander element, Thickness value)
             => element.SetValue(VerticalHeaderPaddingProperty, value);
         #endregion
@@ -38,8 +48,13 @@ namespace AIStudio.Wpf.Controls
             = DependencyProperty.RegisterAttached("HeaderIsEnabled", typeof(bool), typeof(ExpanderAttach),
                 new FrameworkPropertyMetadata(true));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static bool GetHeaderIsEnabled(Expander element)
             => (bool)element.GetValue(HeaderIsEnabledProperty);
+
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetHeaderIsEnabled(Expander element, bool value)
             => element.SetValue(HeaderIsEnabledProperty, value);
         #endregion
@@ -48,8 +63,13 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty HeaderBackgroundProperty
             = DependencyProperty.RegisterAttached("HeaderBackground", typeof(Brush), typeof(ExpanderAttach));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static Brush GetHeaderBackground(Expander element)
             => (Brush)element.GetValue(HeaderBackgroundProperty);
+
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetHeaderBackground(Expander element, Brush value)
             => element.SetValue(HeaderBackgroundProperty, value);
         #endregion
@@ -58,18 +78,27 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty HeaderForegroundProperty
             = DependencyProperty.RegisterAttached("HeaderForeground", typeof(Brush), typeof(ExpanderAttach));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static Brush GetHeaderForeground(Expander element)
             => (Brush)element.GetValue(HeaderForegroundProperty);
+
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetHeaderForeground(Expander element, Brush value)
             => element.SetValue(HeaderForegroundProperty, value);
         #endregion
 
         #region ExpanderAttach
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static bool GetAutoExpander(DependencyObject obj)
         {
             return (bool)obj.GetValue(AutoExpanderProperty);
         }
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetAutoExpander(DependencyObject obj, bool value)
         {
             obj.SetValue(AutoExpanderProperty, value);
@@ -158,7 +187,7 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Gets the toggle button style used for the ExpandDirection Up.
         /// </summary>
-        [Category("AIStudio.Wpf.Controls")]
+        [Category(AppName.AIStudio)]
         [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static Style GetHeaderUpStyle(UIElement element)
         {
@@ -168,6 +197,8 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Sets the toggle button style used for the ExpandDirection Up.
         /// </summary>
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetHeaderUpStyle(UIElement element, Style value)
         {
             element.SetValue(HeaderUpStyleProperty, value);
@@ -178,7 +209,7 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Gets the toggle button style used for the ExpandDirection Down.
         /// </summary>
-        [Category("AIStudio.Wpf.Controls")]
+        [Category(AppName.AIStudio)]
         [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static Style GetHeaderDownStyle(UIElement element)
         {
@@ -188,6 +219,8 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Sets the toggle button style used for the ExpandDirection Down.
         /// </summary>
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetHeaderDownStyle(UIElement element, Style value)
         {
             element.SetValue(HeaderDownStyleProperty, value);
@@ -198,7 +231,7 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Gets the toggle button style used for the ExpandDirection Left.
         /// </summary>
-        [Category("AIStudio.Wpf.Controls")]
+        [Category(AppName.AIStudio)]
         [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static Style GetHeaderLeftStyle(UIElement element)
         {
@@ -208,6 +241,8 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Sets the toggle button style used for the ExpandDirection Left.
         /// </summary>
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetHeaderLeftStyle(UIElement element, Style value)
         {
             element.SetValue(HeaderLeftStyleProperty, value);
@@ -218,7 +253,7 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Gets the toggle button style used for the ExpandDirection Right.
         /// </summary>
-        [Category("AIStudio.Wpf.Controls")]
+        [Category(AppName.AIStudio)]
         [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static Style GetHeaderRightStyle(UIElement element)
         {
@@ -228,6 +263,8 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Sets the toggle button style used for the ExpandDirection Right.
         /// </summary>
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetHeaderRightStyle(UIElement element, Style value)
         {
             element.SetValue(HeaderRightStyleProperty, value);
@@ -239,7 +276,7 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Gets the toggle button style used for the ExpandDirection Right.
         /// </summary>
-        [Category("AIStudio.Wpf.Controls")]
+        [Category(AppName.AIStudio)]
         [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static bool GetIsHeaderRight(UIElement element)
         {
@@ -249,6 +286,8 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// Sets the toggle button style used for the ExpandDirection Right.
         /// </summary>
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Expander))]
         public static void SetIsHeaderRight(UIElement element, bool value)
         {
             element.SetValue(IsHeaderRightProperty, value);

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
 namespace AIStudio.Wpf.Controls
@@ -8,23 +10,38 @@ namespace AIStudio.Wpf.Controls
         public static readonly DependencyProperty VisibilityProperty = DependencyProperty.RegisterAttached(
             "Visibility", typeof(Visibility), typeof(TipAttach), new PropertyMetadata(Visibility.Collapsed));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Popup))]
+        [AttachedPropertyBrowsableForType(typeof(Slider))]
         public static void SetVisibility(DependencyObject element, Visibility value) => element.SetValue(VisibilityProperty, value);
 
-        public static Visibility GetVisibility(DependencyObject element) => (Visibility)element.GetValue(VisibilityProperty);
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Popup))]
+        [AttachedPropertyBrowsableForType(typeof(Slider))] public static Visibility GetVisibility(DependencyObject element) => (Visibility)element.GetValue(VisibilityProperty);
 
         public static readonly DependencyProperty PlacementProperty = DependencyProperty.RegisterAttached(
             "Placement", typeof(PlacementType), typeof(TipAttach), new PropertyMetadata(default(PlacementType)));
 
-        public static void SetPlacement(DependencyObject element, PlacementType value) => element.SetValue(PlacementProperty, value);
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Popup))]
+        [AttachedPropertyBrowsableForType(typeof(Slider))] public static void SetPlacement(DependencyObject element, PlacementType value) => element.SetValue(PlacementProperty, value);
 
-        public static PlacementType GetPlacement(DependencyObject element) => (PlacementType)element.GetValue(PlacementProperty);
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Popup))]
+        [AttachedPropertyBrowsableForType(typeof(Slider))] public static PlacementType GetPlacement(DependencyObject element) => (PlacementType)element.GetValue(PlacementProperty);
 
         public static readonly DependencyProperty StringFormatProperty = DependencyProperty.RegisterAttached(
             "StringFormat", typeof(string), typeof(TipAttach), new PropertyMetadata("#0.0"));
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Popup))]
+        [AttachedPropertyBrowsableForType(typeof(Slider))]
         public static void SetStringFormat(DependencyObject element, string value)
             => element.SetValue(StringFormatProperty, value);
 
+        [Category(AppName.AIStudio)]
+        [AttachedPropertyBrowsableForType(typeof(Popup))]
+        [AttachedPropertyBrowsableForType(typeof(Slider))]
         public static string GetStringFormat(DependencyObject element)
             => (string)element.GetValue(StringFormatProperty);
 
