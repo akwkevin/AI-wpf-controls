@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace AIStudio.Wpf.Controls
 {
-    public sealed class AngleBorder : Decorator
+    public class AngleBorder : Decorator
     {
         public AngleBorder()
         {

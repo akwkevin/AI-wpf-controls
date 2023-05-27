@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.BorderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <GroupBox Header="对话边框" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+            <WrapPanel>
+                <ac:AngleBorder  Placement="LeftTop" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6" 
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="LeftBottom" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6" 
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="LeftCenter" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6" 
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="RightTop" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6" 
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="RightBottom" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6" 
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="RightCenter" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6"
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="TopLeft" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6" 
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="TopCenter" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6" 
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="TopRight" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6"
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="BottomLeft" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6"
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="BottomRight" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6" 
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+                <ac:AngleBorder  Placement="BottomRight" Margin="2" Background="{DynamicResource MahApps.Brushes.Accent}"
+                               Padding="6" 
+                               VerticalAlignment="Top">
+                    <TextBlock Text="Border"/>
+                </ac:AngleBorder>
+            </WrapPanel>
+        </GroupBox>
+        <GroupBox Header="彩色边框" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+            <WrapPanel>
+                <ac:FourColorBorder LeftBorderBrush="Green" TopBorderBrush="Orange" RightBorderBrush="Red" BottomBorderBrush="Blue" BorderThickness="1" Margin="2" Padding="2">
+                    <TextBlock Text="Border"/>
+                </ac:FourColorBorder>
+            </WrapPanel>
+        </GroupBox>
+        <GroupBox Header="虚线边框" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+            <WrapPanel>
+                <ac:DashedBorder BorderDashArray="1 1" BorderThickness="1" BorderBrush="Black"  Margin="2" Padding="2">
+                    <TextBlock Text="Border"/>
+                </ac:DashedBorder>
+                <ac:DashedBorder BorderDashArray="2 1" BorderThickness="1" BorderBrush="Black" Margin="2" Padding="2">
+                    <TextBlock Text="Border"/>
+                </ac:DashedBorder>
+                <ac:DashedBorder BorderDashArray="2 2" BorderThickness="1" BorderBrush="Black" Margin="2" Padding="2">
+                    <TextBlock Text="Border"/>
+                </ac:DashedBorder>
+            </WrapPanel>
+        </GroupBox>
+        <GroupBox Header="Block边框" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
+            <WrapPanel>
+                <ac:StartBlockBorder Margin="2,2,2,7" Padding="6" Background="{DynamicResource MahApps.Brushes.Accent}">
+                    <TextBlock Text="Border" />
+                </ac:StartBlockBorder>
+            </WrapPanel>
+        </GroupBox>
+    </StackPanel>
+</UserControl>

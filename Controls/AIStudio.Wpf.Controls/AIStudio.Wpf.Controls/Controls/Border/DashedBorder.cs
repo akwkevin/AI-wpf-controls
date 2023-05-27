@@ -56,7 +56,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty BorderThicknessProperty = DependencyProperty.Register(
-            "BorderThickness", typeof(Thickness), typeof(DashedBorder), new FrameworkPropertyMetadata(default(Thickness),
+            nameof(BorderThickness), typeof(Thickness), typeof(DashedBorder), new FrameworkPropertyMetadata(default(Thickness),
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 OnClearPenCache));
 
@@ -67,7 +67,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty BorderDashThicknessProperty = DependencyProperty.Register(
-            "BorderDashThickness", typeof(double), typeof(DashedBorder), new FrameworkPropertyMetadata(0d,
+            nameof(BorderDashThickness), typeof(double), typeof(DashedBorder), new FrameworkPropertyMetadata(0d,
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 OnClearPenCache));
 
@@ -78,7 +78,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty PaddingProperty = DependencyProperty.Register(
-            "Padding", typeof(Thickness), typeof(DashedBorder), new FrameworkPropertyMetadata(default(Thickness),
+            nameof(Padding), typeof(Thickness), typeof(DashedBorder), new FrameworkPropertyMetadata(default(Thickness),
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
         public Thickness Padding
@@ -88,7 +88,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
-            "CornerRadius", typeof(CornerRadius), typeof(DashedBorder), new FrameworkPropertyMetadata(default(CornerRadius),
+            nameof(CornerRadius), typeof(CornerRadius), typeof(DashedBorder), new FrameworkPropertyMetadata(default(CornerRadius),
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
         public CornerRadius CornerRadius
@@ -98,7 +98,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty BorderBrushProperty = DependencyProperty.Register(
-            "BorderBrush", typeof(Brush), typeof(DashedBorder), new FrameworkPropertyMetadata(default(Brush),
+            nameof(BorderBrush), typeof(Brush), typeof(DashedBorder), new FrameworkPropertyMetadata(default(Brush),
                 FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender,
                 OnClearPenCache));
 
@@ -109,7 +109,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty BackgroundProperty = DependencyProperty.Register(
-            "Background", typeof(Brush), typeof(DashedBorder), new FrameworkPropertyMetadata(default(Brush),
+            nameof(Background), typeof(Brush), typeof(DashedBorder), new FrameworkPropertyMetadata(default(Brush),
                 FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender,
                 OnClearPenCache));
 
@@ -120,7 +120,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty BorderDashArrayProperty = DependencyProperty.Register(
-            "BorderDashArray", typeof(DoubleCollection), typeof(DashedBorder), new FrameworkPropertyMetadata(default(DoubleCollection),
+            nameof(BorderDashArray), typeof(DoubleCollection), typeof(DashedBorder), new FrameworkPropertyMetadata(default(DoubleCollection),
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 OnClearPenCache));
 
@@ -131,7 +131,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty BorderDashCapProperty = DependencyProperty.Register(
-            "BorderDashCap", typeof(PenLineCap), typeof(DashedBorder), new FrameworkPropertyMetadata(default(PenLineCap),
+            nameof(BorderDashCap), typeof(PenLineCap), typeof(DashedBorder), new FrameworkPropertyMetadata(default(PenLineCap),
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 OnClearPenCache));
 
@@ -142,7 +142,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty BorderDashOffsetProperty = DependencyProperty.Register(
-            "BorderDashOffset", typeof(double), typeof(DashedBorder), new FrameworkPropertyMetadata(0d,
+            nameof(BorderDashOffset), typeof(double), typeof(DashedBorder), new FrameworkPropertyMetadata(0d,
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 OnClearPenCache));
 

@@ -58,7 +58,8 @@
       [ "Text 文本块", "TextBlockView", "Text", "" ],
       [ "Timeline 时间轴", "TimelineView", "Timeline", "" ],
       [ "Tree 树形控件", "TreeViewView", "Tree", "" ],
-      [ "List 列表框", "ListBoxView", "List", "" ]
+      [ "List 列表框", "ListBoxView", "List", "" ],
+      [ "Border 边框", "BorderView", "Border", "" ]
     ]
   },
   {
