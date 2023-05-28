@@ -57,7 +57,7 @@ namespace AIStudio.Wpf.Controls
         public void RefreshPosition()
         {
             var offset = this.HorizontalOffset;
-            // "bump" the offset to cause the popup to reposition itself on its own
+            // "bump" the insideoffset to cause the popup to reposition itself on its own
             SetCurrentValue(HorizontalOffsetProperty, offset + 1);
             SetCurrentValue(HorizontalOffsetProperty, offset);
         }

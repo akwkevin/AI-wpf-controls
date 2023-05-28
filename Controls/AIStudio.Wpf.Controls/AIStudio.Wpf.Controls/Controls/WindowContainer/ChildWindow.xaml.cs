@@ -368,7 +368,7 @@ namespace AIStudio.Wpf.Controls
                     _parentContainer.LayoutUpdated += ParentContainer_LayoutUpdated;
                     _parentContainer.SizeChanged += ParentContainer_SizeChanged;
 
-                    //this is for XBAP applications only. When inside an XBAP the parent container has no height or width until it has loaded. Therefore
+                    //this is for XBAP applications only. When inside an XBAP the parent container has no height or _width until it has loaded. Therefore
                     //we need to handle the loaded event and reposition the window.
                     if (System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
                     {
@@ -380,7 +380,7 @@ namespace AIStudio.Wpf.Controls
 
                 this.Unloaded += new RoutedEventHandler(ChildWindow_Unloaded);
 
-                //initialize our modal background width/height
+                //initialize our modal background _width/height
                 _modalLayer.Height = _parentContainer.ActualHeight;
                 _modalLayer.Width = _parentContainer.ActualWidth;
 
@@ -604,7 +604,7 @@ namespace AIStudio.Wpf.Controls
                 _parentContainer.LayoutUpdated -= ParentContainer_LayoutUpdated;
                 _parentContainer.SizeChanged -= ParentContainer_SizeChanged;
 
-                //this is for XBAP applications only. When inside an XBAP the parent container has no height or width until it has loaded. Therefore
+                //this is for XBAP applications only. When inside an XBAP the parent container has no height or _width until it has loaded. Therefore
                 //we need to handle the loaded event and reposition the window.
                 if (System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
                 {

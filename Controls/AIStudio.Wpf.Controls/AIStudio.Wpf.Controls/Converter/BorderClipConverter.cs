@@ -10,9 +10,9 @@ namespace AIStudio.Wpf.Controls.Converter
     //{
     //    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     //    {
-    //        if (values.Length == 3 && values[0] is double width && values[1] is double height && values[2] is CornerRadius radius)
+    //        if (values.Length == 3 && values[0] is double _width && values[1] is double height && values[2] is CornerRadius radius)
     //        {
-    //            if (width < double.Epsilon || height < double.Epsilon)
+    //            if (_width < double.Epsilon || height < double.Epsilon)
     //            {
     //                return Geometry.Empty;
     //            }
@@ -23,10 +23,10 @@ namespace AIStudio.Wpf.Controls.Converter
     //                {
     //                    new PathFigure(new Point(radius.TopLeft, 0), new PathSegment[]
     //                    {
-    //                        new LineSegment(new Point(width - radius.TopRight, 0), false),
-    //                        new ArcSegment(new Point(width, radius.TopRight), new Size(radius.TopRight, radius.TopRight), 90, false, SweepDirection.Clockwise, false),
-    //                        new LineSegment(new Point(width, height - radius.BottomRight), false),
-    //                        new ArcSegment(new Point(width - radius.BottomRight, height), new Size(radius.BottomRight, radius.BottomRight), 90, false, SweepDirection.Clockwise, false),
+    //                        new LineSegment(new Point(_width - radius.TopRight, 0), false),
+    //                        new ArcSegment(new Point(_width, radius.TopRight), new Size(radius.TopRight, radius.TopRight), 90, false, SweepDirection.Clockwise, false),
+    //                        new LineSegment(new Point(_width, height - radius.BottomRight), false),
+    //                        new ArcSegment(new Point(_width - radius.BottomRight, height), new Size(radius.BottomRight, radius.BottomRight), 90, false, SweepDirection.Clockwise, false),
     //                        new LineSegment(new Point(radius.BottomLeft, height), false),
     //                        new ArcSegment(new Point(0, height - radius.BottomLeft), new Size(radius.BottomLeft, radius.BottomLeft), 90, false, SweepDirection.Clockwise, false),
     //                        new LineSegment(new Point(0, radius.TopLeft), false),
@@ -162,7 +162,7 @@ namespace AIStudio.Wpf.Controls.Converter
                 Math.Max(0.0, cornerRadius.BottomLeft - leftHalf),
                 Math.Max(0.0, cornerRadius.BottomLeft - bottomHalf));
 
-            // Adjust the width of the TopLeft and TopRight rectangles so that they are proportional to the width of the baseRect 
+            // Adjust the _width of the TopLeft and TopRight rectangles so that they are proportional to the _width of the baseRect 
             if (topLeftRect.Right > topRightRect.Left)
             {
                 var newWidth = (topLeftRect.Width / (topLeftRect.Width + topRightRect.Width)) * baseRect.Width;
@@ -186,7 +186,7 @@ namespace AIStudio.Wpf.Controls.Converter
                     Math.Max(0.0, baseRect.Height - newHeight));
             }
 
-            // Adjust the width of the BottomLeft and BottomRight rectangles so that they are proportional to the width of the baseRect
+            // Adjust the _width of the BottomLeft and BottomRight rectangles so that they are proportional to the _width of the baseRect
             if (bottomRightRect.Left < bottomLeftRect.Right)
             {
                 var newWidth = (bottomLeftRect.Width / (bottomLeftRect.Width + bottomRightRect.Width)) * baseRect.Width;

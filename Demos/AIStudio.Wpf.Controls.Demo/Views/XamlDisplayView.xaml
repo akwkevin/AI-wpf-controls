@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.XamlDisplayView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel ac:XamlDisplay.GotFocusProperty="{Binding ElementName=display}">
+            <Button/>
+            <Calendar/>
+            <CheckBox/>
+            <ComboBox/>
+            <ContentControl/>
+            <DataGrid/>
+            <DatePicker/>
+            <Expander/>
+            <GridSplitter/>
+            <GroupBox/>
+            <Label/>
+            <ListBox/>
+            <ListView/>
+            <Menu/>
+            <PasswordBox/>
+            <Slider/>
+            <TabControl/>
+            <TextBlock/>
+            <TextBox/>
+            <TreeView/>
+            <UserControl/>
+            <ac:Badged/>
+        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Column="1">
+            <ac:XamlDisplay x:Name="display" />
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>

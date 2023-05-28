@@ -94,9 +94,23 @@
         </GroupBox>
         <GroupBox Header="Block边框" Style="{DynamicResource AIStudio.Styles.GroupBox}" ac:ControlAttach.CornerRadius="0">
             <WrapPanel>
-                <ac:StartBlockBorder Margin="2,2,2,7" Padding="6" Background="{DynamicResource MahApps.Brushes.Accent}">
+                <ac:StartBlockBorder Margin="2,2,2,7" Background="{DynamicResource MahApps.Brushes.Accent}">
                     <TextBlock Text="Border" />
                 </ac:StartBlockBorder>
+                <ac:NextBlockBorder Margin="2,2,2,7" Background="{DynamicResource MahApps.Brushes.Accent}">
+                    <TextBlock Text="Border" />
+                </ac:NextBlockBorder>
+                <ac:NextForBlockContentControl Margin="2,2,2,7" Background="{DynamicResource MahApps.Brushes.Accent}">
+                    <ac:NextForBlockContentControl.Header>
+                        <TextBlock Text="Header"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </ac:NextForBlockContentControl.Header>
+                    <ac:NextForBlockContentControl.Content>
+                        <TextBlock Text="Content"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </ac:NextForBlockContentControl.Content>
+                    <ac:NextForBlockContentControl.Footer>
+                        <TextBlock Text="Footer" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </ac:NextForBlockContentControl.Footer>
+                </ac:NextForBlockContentControl>
             </WrapPanel>
         </GroupBox>
     </StackPanel>

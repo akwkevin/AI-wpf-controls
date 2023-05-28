@@ -77,7 +77,7 @@
         public static readonly DependencyProperty ContentTransitionProperty = DependencyProperty.Register(nameof(ContentTransition), typeof(TransitionType), typeof(HamburgerTreeMenu), new FrameworkPropertyMetadata(TransitionType.Normal));
 
         /// <summary>
-        /// Gets or sets the width of the pane when it's fully expanded.
+        /// Gets or sets the _width of the pane when it's fully expanded.
         /// </summary>
         public double OpenPaneLength
         {
@@ -122,7 +122,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the width of the pane in its compact display mode.
+        /// Gets or sets the _width of the pane in its compact display mode.
         /// </summary>
         public double CompactPaneLength
         {
@@ -152,7 +152,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether gets or sets a value that specifies whether the pane is expanded to its full width.
+        /// Gets or sets a value indicating whether gets or sets a value that specifies whether the pane is expanded to its full _width.
         /// </summary>
         public bool IsPaneOpen
         {

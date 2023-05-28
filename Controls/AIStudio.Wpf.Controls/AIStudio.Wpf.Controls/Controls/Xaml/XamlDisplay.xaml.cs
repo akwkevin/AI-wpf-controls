@@ -23,7 +23,7 @@ namespace AIStudio.Wpf.Controls
             {
                 if (d is Panel panel)
                 {
-                    foreach (var child in GetChildren(panel).OfType<UIElement>())
+                    foreach (var child in GetChildren(panel).OfType<FrameworkElement>())
                     {
                         child.GotFocus -= Child_GotFocus;
                     }
@@ -34,7 +34,7 @@ namespace AIStudio.Wpf.Controls
             {
                 if (d is Panel panel)
                 {
-                    foreach (var child in GetChildren(panel).OfType<UIElement>())
+                    foreach (var child in GetChildren(panel).OfType<FrameworkElement>())
                     {
                         XamlDisplay.SetGotFocusProperty(child, newvalue);
 
@@ -45,9 +45,9 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-        private static List<UIElement> GetChildren(Panel panel)
+        private static List<FrameworkElement> GetChildren(Panel panel)
         {
-            List<UIElement> elements = new List<UIElement>();
+            List<FrameworkElement> elements = new List<FrameworkElement>();
             foreach (var child in panel.Children)
             {
                 if (child is Panel chiledpanel)
@@ -62,10 +62,10 @@ namespace AIStudio.Wpf.Controls
                     }
                     else
                     {
-                        elements.Add(groupBox.Content as UIElement);
+                        elements.Add(groupBox.Content as FrameworkElement);
                     }
                 }
-                else if (child is UIElement element)
+                else if (child is FrameworkElement element)
                 {
                     elements.Add(element);
                 }
@@ -75,7 +75,7 @@ namespace AIStudio.Wpf.Controls
 
         private static void Child_GotFocus(object sender, RoutedEventArgs e)
         {
-            var element = sender as UIElement;
+            var element = sender as FrameworkElement;
             if (element != null)
             {
                 var property = XamlDisplay.GetGotFocusProperty(element);
@@ -95,7 +95,7 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-           "Text", typeof(string), typeof(XamlDisplay), new FrameworkPropertyMetadata(string.Empty));
+           nameof(Text), typeof(string), typeof(XamlDisplay), new FrameworkPropertyMetadata(string.Empty));
 
         public string Text
         {
@@ -103,8 +103,17 @@ namespace AIStudio.Wpf.Controls
             set => SetValue(TextProperty, value);
         }
 
+        public static readonly DependencyProperty IsStyleProperty = DependencyProperty.Register(
+          nameof(IsStyle), typeof(bool), typeof(XamlDisplay), new FrameworkPropertyMetadata(true));
+
+        public bool IsStyle
+        {
+            get => (bool)GetValue(IsStyleProperty);
+            set => SetValue(IsStyleProperty, value);
+        }
+
         public static readonly RoutedEvent SelectedObjectChangedEvent =
-           EventManager.RegisterRoutedEvent("SelectedObjectChanged", RoutingStrategy.Bubble,
+           EventManager.RegisterRoutedEvent(nameof(SelectedObjectChanged), RoutingStrategy.Bubble,
                typeof(RoutedPropertyChangedEventHandler<object>), typeof(XamlDisplay));
 
         public event RoutedPropertyChangedEventHandler<object> SelectedObjectChanged
@@ -114,30 +123,32 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty SelectedObjectProperty = DependencyProperty.Register(
-            "SelectedObject", typeof(object), typeof(XamlDisplay), new PropertyMetadata(default, OnSelectedObjectChanged));
+            nameof(SelectedObject), typeof(FrameworkElement), typeof(XamlDisplay), new PropertyMetadata(default, OnSelectedObjectChanged));
 
         private static void OnSelectedObjectChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var ctl = (XamlDisplay)d;
-            ctl.OnSelectedObjectChanged(e.OldValue, e.NewValue);
+            ctl.OnSelectedObjectChanged((FrameworkElement)e.OldValue, (FrameworkElement)e.NewValue);
         }
 
-        public object SelectedObject
+        public FrameworkElement SelectedObject
         {
-            get => GetValue(SelectedObjectProperty);
+            get => (FrameworkElement)GetValue(SelectedObjectProperty);
             set => SetValue(SelectedObjectProperty, value);
         }
 
-        protected virtual void OnSelectedObjectChanged(object oldValue, object newValue)
+        protected virtual void OnSelectedObjectChanged(FrameworkElement oldValue, FrameworkElement newValue)
         {
-            UpdateItems(newValue);
-            RaiseEvent(new RoutedPropertyChangedEventArgs<object>(oldValue, newValue, SelectedObjectChangedEvent));
+            UpdateItem(newValue);
+            RaiseEvent(new RoutedPropertyChangedEventArgs<FrameworkElement>(oldValue, newValue, SelectedObjectChangedEvent));
         }
 
-        private void UpdateItems(object obj)
+        private void UpdateItem(FrameworkElement control)
         {
-            if (obj == null)
+            if (control == null)
                 return;
+
+            var appearance = IsStyle ? Application.Current.FindResource(control.GetType()) : control;
 
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
@@ -145,12 +156,9 @@ namespace AIStudio.Wpf.Controls
             settings.NewLineOnAttributes = true;
             StringBuilder sb = new StringBuilder();
             XmlWriter xmlWriter = XmlWriter.Create(sb, settings);
-            XamlWriter.Save(obj, xmlWriter);
+            XamlWriter.Save(appearance, xmlWriter);
             Text = sb.ToString();
             xmlWriter.Close();
-            sb = null;
-
-            //Text = System.Windows.Markup.XamlWriter.Save(obj);
 
         }
 
@@ -158,5 +166,7 @@ namespace AIStudio.Wpf.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(XamlDisplay), new FrameworkPropertyMetadata(typeof(XamlDisplay)));
         }
+
+ 
     }
 }

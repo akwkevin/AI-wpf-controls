@@ -693,7 +693,7 @@ namespace AIStudio.Wpf.Controls
             {
                 Point ptCursor = MouseUtilities.GetMousePosition(this.ListBox);
 
-                // 4/13/2007 - Made the top offset relative to the item being dragged.
+                // 4/13/2007 - Made the top insideoffset relative to the item being dragged.
                 ListBoxItem itemBeingDragged = this.GetListBoxItem(this.indexToSelect);
                 Point itemLoc = itemBeingDragged.TranslatePoint(new Point(0, 0), this.ListBox);
                 double left = itemLoc.X + ptCursor.X - this.ptMouseDown.X;

@@ -31,7 +31,7 @@
                             <ac:RainbowText Margin="2" Content="123456789" Style="{DynamicResource AIStudio.Styles.RainbowText.TextShimmer}"/>
                             <Button Margin="2" Content="123456789" Style="{DynamicResource AIStudio.Styles.Button.Rainbow}" />
                             <Button Margin="2" Content="123456789" Style="{DynamicResource AIStudio.Styles.Button.Rainbow.Glow}" />
-                            <ac:FloatingBlock Margin="2">
+                            <!--<ac:FloatingBlock Margin="2">
                                 <ac:FloatingBlock.ContentTemplate>
                                     <DataTemplate>
                                         <Path Stretch="Uniform" Data="{StaticResource ThumbsUpGeometry}" Fill="{DynamicResource DangerBrush}" Width="{DynamicResource AIStudio.Icon.Size.Small}" Height="{DynamicResource AIStudio.Icon.Size.Small}"/>
@@ -45,7 +45,7 @@
                                         <Path Stretch="Uniform" Data="{StaticResource ThumbsUpGeometry}" Fill="{DynamicResource DangerBrush}" Width="{DynamicResource AIStudio.Icon.Size.Small}" Height="{DynamicResource AIStudio.Icon.Size.Small}"/>
                                     </DataTemplate>
                                 </ac:FloatingBlock.ContentTemplate>
-                            </Button>
+                            </Button>-->
                         </WrapPanel>
                     </GroupBox>                   
                 </StackPanel>

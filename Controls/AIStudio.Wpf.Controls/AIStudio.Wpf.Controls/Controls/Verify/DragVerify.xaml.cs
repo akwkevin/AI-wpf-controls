@@ -336,7 +336,7 @@ namespace AIStudio.Wpf.Controls
             ib.Stretch = Stretch.None;
 
             rectangle.Fill = ib;
-            //SetLeft(rectangle, column * width / ColumnNum + column * 3);
+            //SetLeft(rectangle, column * _width / ColumnNum + column * 3);
             //SetTop(rectangle, row * height / RowNum  + row * 3);
 
             RectangleTag rectangleTag = new RectangleTag()

@@ -192,7 +192,7 @@ namespace AIStudio.Wpf.Controls
             {
                 UIElement child = this.Children[i];
 
-                // Map the child offset to an item offset
+                // Map the child insideoffset to an item insideoffset
                 int itemIndex = generator.IndexFromGeneratorPosition(new GeneratorPosition(i, 0));
 
                 ArrangeChild(itemIndex, child, finalSize);

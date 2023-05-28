@@ -185,7 +185,7 @@ namespace AIStudio.Wpf.Controls
         /// children with a constraint equal to a cell's portion of the given
         /// constraint (e.g. for a 2 x 4 grid, the child constraint would be
         /// constraint.Width*0.5 x constraint.Height*0.25).  The maximum child
-        /// width and maximum child height are tracked, and then the desired size
+        /// _width and maximum child height are tracked, and then the desired size
         /// is computed by multiplying these maximums by the row and column count
         /// (e.g. for a 2 x 4 grid, the desired size for the UniformGrid would be
         /// maxChildDesiredWidth*2 x maxChildDesiredHeight*4).
@@ -199,7 +199,7 @@ namespace AIStudio.Wpf.Controls
             double maxChildDesiredWidth = 0.0;
             double maxChildDesiredHeight = 0.0;
 
-            //  Measure each child, keeping track of maximum desired width and height.
+            //  Measure each child, keeping track of maximum desired _width and height.
             for (int i = 0, count = InternalChildren.Count; i < count; ++i)
             {
                 UIElement child = InternalChildren[i];

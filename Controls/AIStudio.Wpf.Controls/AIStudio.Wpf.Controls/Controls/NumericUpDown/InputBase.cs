@@ -209,7 +209,7 @@ namespace AIStudio.Wpf.Controls
             = DependencyProperty.Register(nameof(UpDownButtonsWidth), typeof(double), typeof(InputBase), new PropertyMetadata(20d));
 
         /// <summary>
-        /// Gets or sets the width of the up/down buttons.
+        /// Gets or sets the _width of the up/down buttons.
         /// </summary>
 
         public double UpDownButtonsWidth

@@ -43,7 +43,7 @@
         }
 
         /// <summary>
-        /// Gets or sets main button's width
+        /// Gets or sets main button's _width
         /// </summary>
         public double HamburgerWidth
         {

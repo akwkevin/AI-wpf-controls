@@ -3,9 +3,12 @@
     "title": "General",
     "image": "Home",
     "demoItemList": [
-      [ "Introduce 介绍", "IntroduceView", "Introduce", "" ],    
+      [ "Introduce 介绍", "IntroduceView", "Introduce", "" ],
       [ "Button 按钮", "ButtonView", "Button", "" ],
-      [ "TextBox 输入框", "TextBoxView", "Input", "" ]
+      [ "TextBox 输入框", "TextBoxView", "Input", "" ],
+      [ "Icon 图标", "IconView", "FontAwesome", "" ],
+      [ "Path 路径", "PathView", "Path", "" ],  
+      [ "Color 色彩", "BrushView", "Brush", "" ]
     ]
   },
   {
@@ -88,10 +91,8 @@
       [ "Verify 校验", "VerifyView", "Verify", "" ],
       [ "WebBrowser 网页", "WebBrowserView", "Browser", "" ],
       [ "KeyNavigation 键盘操作", "ControlNavigationView", "Keyboard", "" ],
-      [ "Icon 图标", "IconView", "FontAwesome", "" ],
-      [ "Path 路径", "PathView", "Path", "" ],
       [ "Theme 自定义主题", "ColorToolView", "PalettePath", "" ],
-      [ "Color 色彩", "BrushView", "Brush", "" ]
+      [ "XamlDisplay 锚点", "XamlDisplayView", "Anchor", "" ]
     ]
   }
 

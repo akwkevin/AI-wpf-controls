@@ -50,10 +50,10 @@
         }
 
         /// <summary>
-        ///     Gets or sets the width of the <see cref="SplitView" /> pane in its compact display mode.
+        ///     Gets or sets the _width of the <see cref="SplitView" /> pane in its compact display mode.
         /// </summary>
         /// <returns>
-        ///     The width of the pane in it's compact display mode. The default is 48 device-independent pixel (DIP) (defined
+        ///     The _width of the pane in it's compact display mode. The default is 48 device-independent pixel (DIP) (defined
         ///     by the SplitViewCompactPaneThemeLength resource).
         /// </returns>
         public double CompactPaneLength
@@ -147,9 +147,9 @@
         }
 
         /// <summary>
-        ///     Gets or sets a value that specifies whether the <see cref="SplitView" /> pane is expanded to its full width.
+        ///     Gets or sets a value that specifies whether the <see cref="SplitView" /> pane is expanded to its full _width.
         /// </summary>
-        /// <returns>true if the pane is expanded to its full width; otherwise, false. The default is true.</returns>
+        /// <returns>true if the pane is expanded to its full _width; otherwise, false. The default is true.</returns>
         public bool IsPaneOpen
         {
             get
@@ -170,10 +170,10 @@
             DependencyProperty.Register("OpenPaneLength", typeof(double), typeof(SplitView), new PropertyMetadata(0d, OnMetricsChanged));
 
         /// <summary>
-        ///     Gets or sets the width of the <see cref="SplitView" /> pane when it's fully expanded.
+        ///     Gets or sets the _width of the <see cref="SplitView" /> pane when it's fully expanded.
         /// </summary>
         /// <returns>
-        ///     The width of the <see cref="SplitView" /> pane when it's fully expanded. The default is 320 device-independent
+        ///     The _width of the <see cref="SplitView" /> pane when it's fully expanded. The default is 320 device-independent
         ///     pixel (DIP).
         /// </returns>
         public double OpenPaneLength

@@ -775,7 +775,7 @@ namespace AIStudio.Wpf.Controls
             if (_owner != null)
                 _owner.InvalidateScrollInfo();
 
-            //_trans.Y = -offset;
+            //_trans.Y = -insideoffset;
 
             InvalidateMeasure();
             firstIndex = GetFirstVisibleIndex();

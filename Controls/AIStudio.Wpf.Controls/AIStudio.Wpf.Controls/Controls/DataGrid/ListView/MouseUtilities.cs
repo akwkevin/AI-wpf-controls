@@ -43,8 +43,8 @@ namespace AIStudio.Wpf.Controls
             //    (System.Windows.Interop.HwndSource)PresentationSource.FromVisual( relativeTo );
             //ScreenToClient( presentationSource.Handle, ref mouse );
             //GeneralTransform transform = relativeTo.TransformToAncestor( presentationSource.RootVisual );
-            //Point offset = transform.Transform( new Point( 0, 0 ) );
-            //return new Point( mouse.X - offset.X, mouse.Y - offset.Y );
+            //Point insideoffset = transform.Transform( new Point( 0, 0 ) );
+            //return new Point( mouse.X - insideoffset.X, mouse.Y - insideoffset.Y );
             #endregion // Commented Out
         }
     }

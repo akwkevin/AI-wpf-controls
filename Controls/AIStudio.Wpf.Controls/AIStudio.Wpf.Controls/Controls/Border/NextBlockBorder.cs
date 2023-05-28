@@ -7,16 +7,16 @@ using System.Windows.Media;
 
 namespace AIStudio.Wpf.Controls
 {
-    public class StartBlockBorder : Decorator
+    public class NextBlockBorder : Decorator
     {
-        public StartBlockBorder()
+        public NextBlockBorder()
         {
 
         }
 
         #region 依赖属性
         public static readonly DependencyProperty BackgroundProperty =
-            DependencyProperty.Register(nameof(Background), typeof(Brush), typeof(StartBlockBorder)
+            DependencyProperty.Register(nameof(Background), typeof(Brush), typeof(NextBlockBorder)
                 , new PropertyMetadata(new SolidColorBrush(Color.FromRgb(255, 255, 255))));
         /// <summary>
         /// 背景色，默认值为#FFFFFF，白色
@@ -34,7 +34,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty PaddingProperty =
-            DependencyProperty.Register(nameof(Padding), typeof(Thickness), typeof(StartBlockBorder)
+            DependencyProperty.Register(nameof(Padding), typeof(Thickness), typeof(NextBlockBorder)
                 , new PropertyMetadata(new Thickness(0, 0, 0, 0)));
         /// <summary>
         /// 内边距
@@ -52,7 +52,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty BorderBrushProperty =
-            DependencyProperty.Register(nameof(BorderBrush), typeof(Brush), typeof(StartBlockBorder)
+            DependencyProperty.Register(nameof(BorderBrush), typeof(Brush), typeof(NextBlockBorder)
                 , new PropertyMetadata(default(Brush)));
         /// <summary>
         /// 边框颜色
@@ -70,7 +70,7 @@ namespace AIStudio.Wpf.Controls
         }
 
         public static readonly DependencyProperty BorderThicknessProperty =
-            DependencyProperty.Register(nameof(BorderThickness), typeof(Thickness), typeof(StartBlockBorder), new PropertyMetadata(new Thickness(0d)));
+            DependencyProperty.Register(nameof(BorderThickness), typeof(Thickness), typeof(NextBlockBorder), new PropertyMetadata(new Thickness(0d)));
         /// <summary>
         /// 边框大小
         /// </summary>
@@ -88,14 +88,11 @@ namespace AIStudio.Wpf.Controls
         #endregion
 
         #region 方法重写
-        private double outsideheight = 13;
-        private double outsidewidth = 70;
         private double insideheight = 6;
         private double insidewidth = 21;
         private double insideoffset = 14;
         private double minwidth = 86;
-        private double minheight = 47;
-
+        private double minheight = 34;
         /// <summary>
         /// 该方法用于测量整个控件的大小
         /// </summary>
@@ -112,7 +109,7 @@ namespace AIStudio.Wpf.Controls
                 Child.Measure(constraint);
 
                 result.Width = Math.Max(minwidth, Child.DesiredSize.Width + padding.Left + padding.Right);
-                result.Height = Math.Max(minheight, Child.DesiredSize.Height + padding.Top + padding.Bottom + outsideheight);
+                result.Height = Math.Max(minheight, Child.DesiredSize.Height + padding.Top + padding.Bottom);
             }
             else
             {
@@ -132,7 +129,7 @@ namespace AIStudio.Wpf.Controls
             Thickness padding = this.Padding;
             if (Child != null)
             {
-                Child.Arrange(new Rect(new Point(padding.Left, outsideheight + padding.Top), Child.DesiredSize));
+                Child.Arrange(new Rect(new Point(padding.Left, padding.Top), Child.DesiredSize));
             }
             return arrangeSize;
         }
@@ -149,67 +146,86 @@ namespace AIStudio.Wpf.Controls
             pen.Brush = this.BorderBrush;
             pen.Thickness = this.BorderThickness.Left;// NextForBlockBorder.RoundLayoutValue(BorderThickness.Left, DoubleUtil.DpiScaleX);
 
-            Geometry cg = CreateGeometry(Math.Max(minwidth, Child?.DesiredSize.Width??0 + padding.Left + padding.Right), Math.Max(minheight - outsideheight, Child?.DesiredSize.Height??0 + padding.Top + padding.Bottom));
+            Geometry cg = CreateGeometry(Math.Max(minwidth, Child?.DesiredSize.Width??0 + padding.Left + padding.Right), Math.Max(minheight, Child?.DesiredSize.Height??0 + padding.Top + padding.Bottom));
             Brush brush = CreateFillBrush();
 
             GuidelineSet guideLines = new GuidelineSet();
             drawingContext.PushGuidelineSet(guideLines);
             drawingContext.DrawGeometry(brush, pen, cg);
+
         }
         #endregion
-
         #region 私有方法
-        //按Element的大小计算
         private Geometry CreateGeometry(double x, double y)
         {
             #region 
             PathFigure pf = new PathFigure();
             pf.IsClosed = true;
-            pf.StartPoint = new Point(0, outsideheight);
+            pf.StartPoint = new Point(0, 2);
 
             //第一横线
-            QuadraticBezierSegment seg1 = new QuadraticBezierSegment() { Point1 = new Point(outsidewidth / 2, 3 - outsideheight), Point2 = new Point(outsidewidth, outsideheight) };
+            ArcSegment seg1 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(2, 0) };
             pf.Segments.Add(seg1);
 
-            LineSegment seg2 = new LineSegment() { Point = new Point(x - 2, outsideheight) };
+            LineSegment seg2 = new LineSegment() { Point = new Point(insideoffset, 0) };
             pf.Segments.Add(seg2);
 
-            //第二竖线
-            ArcSegment seg3 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x, outsideheight + 2) };
+            //第二in
+            QuadraticBezierSegment seg3 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 1, 0), Point2 = new Point(insideoffset + 2, 2) };
             pf.Segments.Add(seg3);
 
-            LineSegment seg4 = new LineSegment() { Point = new Point(x, outsideheight + y - 2) };
+            QuadraticBezierSegment seg4 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 4, 6), Point2 = new Point(insideoffset + 5, 6) };
             pf.Segments.Add(seg4);
 
-            //第三横线
-            ArcSegment seg5 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x - 2, outsideheight + y) };
+            LineSegment seg5 = new LineSegment() { Point = new Point(insideoffset + insidewidth - 5, 6) };
             pf.Segments.Add(seg5);
 
-            LineSegment seg6 = new LineSegment() { Point = new Point(insideoffset + insidewidth, outsideheight + y) };
+            QuadraticBezierSegment seg6 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 4, 6), Point2 = new Point(insideoffset + insidewidth - 2, 2) };
             pf.Segments.Add(seg6);
 
-            //第四in
-            QuadraticBezierSegment seg7 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 1, outsideheight + y), Point2 = new Point(insideoffset + insidewidth - 2, outsideheight + y + 2) };
+            QuadraticBezierSegment seg7 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 1, 0), Point2 = new Point(insideoffset + insidewidth, 0) };
             pf.Segments.Add(seg7);
 
-            QuadraticBezierSegment seg8 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 4, outsideheight + y + insideheight), Point2 = new Point(insideoffset + insidewidth - 5, outsideheight + y + insideheight) };
+            //第三横线
+            LineSegment seg8 = new LineSegment() { Point = new Point(x - 2, 0) };
             pf.Segments.Add(seg8);
 
-            LineSegment seg9 = new LineSegment() { Point = new Point(insideoffset + 5, outsideheight + y + insideheight) };
+            //第四竖线
+            ArcSegment seg9 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x, 2) };
             pf.Segments.Add(seg9);
-           
-            QuadraticBezierSegment seg10 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 4, outsideheight + y + insideheight), Point2 = new Point(insideoffset + 2, outsideheight + y + 2) };
+
+            LineSegment seg10 = new LineSegment() { Point = new Point(x, y - 2) };
             pf.Segments.Add(seg10);
 
-            QuadraticBezierSegment seg11 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 1, outsideheight + y), Point2 = new Point(insideoffset, outsideheight + y) };
+            //第五横线
+            ArcSegment seg11 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x - 2, y) };
             pf.Segments.Add(seg11);
 
-            //第五横线
-            LineSegment seg12 = new LineSegment() { Point = new Point(2, outsideheight + y) };
+            LineSegment seg12 = new LineSegment() { Point = new Point(insideoffset + insidewidth, y) };
             pf.Segments.Add(seg12);
 
-            ArcSegment seg13 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(0, outsideheight + y - 2) };
+            //第六in
+            QuadraticBezierSegment seg13 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 1, y), Point2 = new Point(insideoffset + insidewidth - 2, y + 2) };
             pf.Segments.Add(seg13);
+
+            QuadraticBezierSegment seg14 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 4, y + insideheight), Point2 = new Point(insideoffset + insidewidth - 5, y + insideheight) };
+            pf.Segments.Add(seg14);
+
+            LineSegment seg15 = new LineSegment() { Point = new Point(insideoffset + 5, y + insideheight) };
+            pf.Segments.Add(seg15);
+
+            QuadraticBezierSegment seg16 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 4, y + insideheight), Point2 = new Point(insideoffset + 2, y + 2) };
+            pf.Segments.Add(seg16);
+
+            QuadraticBezierSegment seg17 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 1, y), Point2 = new Point(insideoffset, y) };
+            pf.Segments.Add(seg17);
+
+            //第七横线
+            LineSegment seg18 = new LineSegment() { Point = new Point(2, y) };
+            pf.Segments.Add(seg18);
+
+            ArcSegment seg19 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(0, y - 2) };
+            pf.Segments.Add(seg19);
 
             PathGeometry g1 = new PathGeometry();
             g1.Figures.Add(pf);

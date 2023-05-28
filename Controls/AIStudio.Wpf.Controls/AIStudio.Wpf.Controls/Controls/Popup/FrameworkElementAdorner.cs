@@ -88,7 +88,7 @@ namespace AIStudio.Wpf.Controls
         {
             double left = DetermineLeft(finalSize);
             double top = DetermineTop(finalSize);
-            //double width = DetermineWidth();
+            //double _width = DetermineWidth();
             //double height = DetermineHeight();
             double width = finalSize.Width;
             double height = finalSize.Height;

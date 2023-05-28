@@ -58,6 +58,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Block/IconTextBlock.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Block/LinkTextBlock.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Block/RainbowText.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Border/NextForBlockContentControl.xaml" />
         <!--<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/BreadcrumbBar/BreadcrumbBar.xaml"/>-->
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Card/Card.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Card/Flipper.xaml"/>
@@ -156,7 +157,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/WindowBase.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/MessageBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Window/PopupWindow.xaml"/>
-        <!--<ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Xaml/XamlDisplay.xaml"/>-->
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/Xaml/XamlDisplay.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/WindowContainer/ChildWindow.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Controls/WindowContainer/ChildMessageBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>

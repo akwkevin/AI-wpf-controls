@@ -262,7 +262,7 @@ namespace AIStudio.Wpf.Controls
             EnsureFormattedText();
 
             // constrain the formatted text according to the available size
-            // the Math.Min call is important - without this constraint (which seems arbitrary, but is the maximum allowable text width), things blow up when availableSize is infinite in both directions
+            // the Math.Min call is important - without this constraint (which seems arbitrary, but is the maximum allowable text _width), things blow up when availableSize is infinite in both directions
             // the Math.Max call is to ensure we don't hit zero, which will cause MaxTextHeight to throw
             _formattedText.MaxTextWidth = Math.Min(3579139, availableSize.Width);
             _formattedText.MaxTextHeight = Math.Max(0.0001d, availableSize.Height);
