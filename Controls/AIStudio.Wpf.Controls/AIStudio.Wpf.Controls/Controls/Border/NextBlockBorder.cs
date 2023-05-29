@@ -129,7 +129,8 @@ namespace AIStudio.Wpf.Controls
             Thickness padding = this.Padding;
             if (Child != null)
             {
-                Child.Arrange(new Rect(new Point(padding.Left, padding.Top), Child.DesiredSize));
+                Child.Arrange(new Rect(new Point(padding.Left, padding.Top),
+                    new Size(Math.Max(minwidth, Child.DesiredSize.Width + padding.Left + padding.Right), Math.Max(minheight, Child.DesiredSize.Height + padding.Top + padding.Bottom))));
             }
             return arrangeSize;
         }

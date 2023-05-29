@@ -132,7 +132,8 @@ namespace AIStudio.Wpf.Controls
             Thickness padding = this.Padding;
             if (Child != null)
             {
-                Child.Arrange(new Rect(new Point(padding.Left, outsideheight + padding.Top), Child.DesiredSize));
+                Child.Arrange(new Rect(new Point(padding.Left, outsideheight + padding.Top),
+                    new Size(Math.Max(minwidth, Child.DesiredSize.Width + padding.Left + padding.Right), Math.Max(minheight - outsideheight, Child.DesiredSize.Height + padding.Top + padding.Bottom))));
             }
             return arrangeSize;
         }
@@ -149,7 +150,7 @@ namespace AIStudio.Wpf.Controls
             pen.Brush = this.BorderBrush;
             pen.Thickness = this.BorderThickness.Left;// NextForBlockBorder.RoundLayoutValue(BorderThickness.Left, DoubleUtil.DpiScaleX);
 
-            Geometry cg = CreateGeometry(Math.Max(minwidth, Child?.DesiredSize.Width??0 + padding.Left + padding.Right), Math.Max(minheight - outsideheight, Child?.DesiredSize.Height??0 + padding.Top + padding.Bottom));
+            Geometry cg = CreateGeometry(Math.Max(minwidth, Child?.DesiredSize.Width ?? 0 + padding.Left + padding.Right), Math.Max(minheight - outsideheight, Child?.DesiredSize.Height ?? 0 + padding.Top + padding.Bottom));
             Brush brush = CreateFillBrush();
 
             GuidelineSet guideLines = new GuidelineSet();
@@ -197,7 +198,7 @@ namespace AIStudio.Wpf.Controls
 
             LineSegment seg9 = new LineSegment() { Point = new Point(insideoffset + 5, outsideheight + y + insideheight) };
             pf.Segments.Add(seg9);
-           
+
             QuadraticBezierSegment seg10 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 4, outsideheight + y + insideheight), Point2 = new Point(insideoffset + 2, outsideheight + y + 2) };
             pf.Segments.Add(seg10);
 

@@ -4,82 +4,41 @@ using System.Data;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Media;
 
 namespace AIStudio.Wpf.Controls
 {
-    [TemplatePart(Name = HeaderPresenter, Type = typeof(ContentPresenter))]
-    [TemplatePart(Name = ContentPresenter, Type = typeof(ContentPresenter))]
-    //[TemplatePart(Name = SecondContentPresenter, Type = typeof(ContentPresenter))]
-    [TemplatePart(Name = FooterPresenter, Type = typeof(ContentPresenter))]
-    public class NextForBlockContentControl : BlockContentControl
+
+    public class NextForBlockPanel : BlockPanel
     {
-        private const string HeaderPresenter = "HeaderPresenter";
-        private const string ContentPresenter = "ContentPresenter";
-        // private const string SecondContentPresenter = "SecondContentPresenter";
-        private const string FooterPresenter = "FooterPresenter";
-
-        private ContentPresenter _headerContentPresenter;
-        private ContentPresenter _contentContentPresenter;
-        //private ContentPresenter _secondContentContentPresenter;
-        private ContentPresenter _footerContentPresenter;
-
-        public NextForBlockContentControl()
+        public NextForBlockPanel()
         {
 
         }
 
-        //#region 依赖属性
-        //public static readonly DependencyProperty SecondContentProperty = DependencyProperty.Register(
-        //nameof(SecondContent), typeof(object), typeof(NextForBlockContentControl), new PropertyMetadata(default(object)));
-
-        //public object SecondContent
-        //{
-        //    get => GetValue(SecondContentProperty);
-        //    set => SetValue(SecondContentProperty, value);
-        //}
-
-        //public static readonly DependencyProperty SecondContentTemplateProperty = DependencyProperty.Register(
-        //    nameof(SecondContentTemplate), typeof(DataTemplate), typeof(NextForBlockContentControl), new PropertyMetadata(default(DataTemplate)));
-
-        //[Bindable(true), Category("Content")]
-        //public DataTemplate SecondContentTemplate
-        //{
-        //    get => (DataTemplate)GetValue(SecondContentTemplateProperty);
-        //    set => SetValue(SecondContentTemplateProperty, value);
-        //}
-
-        //public static readonly DependencyProperty SecondContentTemplateSelectorProperty = DependencyProperty.Register(
-        //    nameof(SecondContentTemplateSelector), typeof(DataTemplateSelector), typeof(NextForBlockContentControl), new PropertyMetadata(default(DataTemplateSelector)));
-
-        //[Bindable(true), Category("Content")]
-        //public DataTemplateSelector SecondContentTemplateSelector
-        //{
-        //    get => (DataTemplateSelector)GetValue(SecondContentTemplateSelectorProperty);
-        //    set => SetValue(SecondContentTemplateSelectorProperty, value);
-        //}
-
-        //public static readonly DependencyProperty SecondContentStringFormatProperty = DependencyProperty.Register(
-        //    nameof(SecondContentStringFormat), typeof(string), typeof(NextForBlockContentControl), new PropertyMetadata(default(string)));
-
-        //[Bindable(true), Category("Content")]
-        //public string SecondContentStringFormat
-        //{
-        //    get => (string)GetValue(SecondContentStringFormatProperty);
-        //    set => SetValue(SecondContentStringFormatProperty, value);
-        //}
-        //#endregion
-
         #region 方法重写
-
-        public override void OnApplyTemplate()
+        private UIElement Header
         {
-            base.OnApplyTemplate();
-            _headerContentPresenter = GetTemplateChild(HeaderPresenter) as ContentPresenter;
-            _contentContentPresenter = GetTemplateChild(ContentPresenter) as ContentPresenter;
-            //_secondContentContentPresenter = GetTemplateChild(SecondContentPresenter) as ContentPresenter;
-            _footerContentPresenter = GetTemplateChild(FooterPresenter) as ContentPresenter;
+            get
+            {
+                return InternalChildren.Count >= 0 ? InternalChildren[0] : null;
+            }
+        }
+
+        private UIElement Content
+        {
+            get
+            {
+                return InternalChildren.Count >= 1 ? InternalChildren[1] : null;
+            }
+        }
+
+        private UIElement Footer
+        {
+            get
+            {
+                return InternalChildren.Count >= 2 ? InternalChildren[2] : null;
+            }
         }
 
         private double insideheight = 6;
@@ -106,37 +65,36 @@ namespace AIStudio.Wpf.Controls
             Thickness padding = this.Padding;
 
             _width = minwidth;
-            double height = 0;
-            if (Header is FrameworkElement headerelement)
+            if (Header != null)
             {
                 //测量子控件的大小
-                headerelement.Measure(constraint);
-                _width = Math.Max(minwidth, headerelement.DesiredSize.Width + padding.Left + padding.Right);
-                _headerheight = Math.Max(minheaderheight, headerelement.DesiredSize.Height + padding.Top + padding.Bottom);
+                Header.Measure(constraint);
+                _width = Math.Max(minwidth, Header.DesiredSize.Width + padding.Left + padding.Right);
+                _headerheight = Math.Max(minheaderheight, Header.DesiredSize.Height + padding.Top + padding.Bottom);
             }
             else
             {
                 _headerheight = minheaderheight;
             }
 
-            if (Content is FrameworkElement contentelement)
+            if (Content != null)
             {
                 //测量子控件的大小
-                contentelement.Measure(constraint);
-                _width = Math.Max(minwidth, contentelement.DesiredSize.Width + padding.Left + padding.Right + leftpanelwidth);
-                _contentheight  = Math.Max(mincontentheight, contentelement.DesiredSize.Height + padding.Top + padding.Bottom);
+                Content.Measure(constraint);
+                _width = Math.Max(minwidth, Content.DesiredSize.Width + padding.Left + padding.Right + leftpanelwidth);
+                _contentheight = Math.Max(mincontentheight, Content.DesiredSize.Height + padding.Top + padding.Bottom);
             }
             else
             {
                 _contentheight = mincontentheight;
             }
 
-            if (Footer is FrameworkElement footerelement)
+            if (Footer != null)
             {
                 //测量子控件的大小
-                footerelement.Measure(constraint);
-                _width = Math.Max(minwidth, footerelement.DesiredSize.Width + padding.Left + padding.Right);
-                _footerheight = Math.Max(minfooterheight, footerelement.DesiredSize.Height + padding.Top + padding.Bottom);
+                Footer.Measure(constraint);
+                _width = Math.Max(minwidth, Footer.DesiredSize.Width + padding.Left + padding.Right);
+                _footerheight = Math.Max(minfooterheight, Footer.DesiredSize.Height + padding.Top + padding.Bottom);
             }
             else
             {
@@ -155,21 +113,21 @@ namespace AIStudio.Wpf.Controls
         {
             Thickness padding = this.Padding;
 
-            if (_headerContentPresenter != null)
+            if (Header != null)
             {
-                _headerContentPresenter.Margin = new Thickness(padding.Left, padding.Top, padding.Right, padding.Bottom + _contentheight  + _footerheight);
+                Header.Arrange(new Rect(new Point(padding.Left, padding.Top), new Size(_width, _headerheight)));             
             }
 
 
-            if (_contentContentPresenter != null)
+            if (Content != null)
             {
-                _contentContentPresenter.Margin = new Thickness(padding.Left + leftpanelwidth, padding.Top + _headerheight, padding.Right,  padding.Bottom + _footerheight);
+                Content.Arrange(new Rect(new Point(padding.Left + leftpanelwidth, padding.Top + _headerheight), new Size(_width - leftpanelwidth,_contentheight)));
             }
 
 
-            if (_footerContentPresenter != null)
+            if (Footer != null)
             {
-                _footerContentPresenter.Margin = new Thickness(padding.Left, padding.Top + _headerheight + _contentheight, padding.Right, padding.Bottom);
+                Footer.Arrange(new Rect(new Point(padding.Left + leftpanelwidth, padding.Top + _headerheight + _contentheight), new Size(_width, _footerheight)));
             }
 
 
@@ -295,7 +253,7 @@ namespace AIStudio.Wpf.Controls
             QuadraticBezierSegment seg26 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + insidewidth - 4, y0 + y1 + insideheight), Point2 = new Point(leftpanelwidth + insideoffset + insidewidth - 2, y0 + y1 + 2) };
             pf.Segments.Add(seg26);
 
-            QuadraticBezierSegment seg27 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + insidewidth - 1, y0 + y1), Point2 = new Point(leftpanelwidth + insideoffset + insidewidth , y0 + y1) };
+            QuadraticBezierSegment seg27 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + insidewidth - 1, y0 + y1), Point2 = new Point(leftpanelwidth + insideoffset + insidewidth, y0 + y1) };
             pf.Segments.Add(seg27);
 
             //第十一横线
@@ -305,8 +263,8 @@ namespace AIStudio.Wpf.Controls
             //第十二竖线
             ArcSegment seg29 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x, y0 + y1 + 2) };
             pf.Segments.Add(seg29);
-          
-            LineSegment seg30 = new LineSegment() { Point = new Point(x, y0 + y1 + y2 -2) };
+
+            LineSegment seg30 = new LineSegment() { Point = new Point(x, y0 + y1 + y2 - 2) };
             pf.Segments.Add(seg30);
 
             //第十三横线
