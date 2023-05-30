@@ -9,9 +9,9 @@ using System.Windows.Media;
 namespace AIStudio.Wpf.Controls
 {
 
-    public class NextForBlockPanel : BlockPanel
+    public class NextFor2BlockPanel : BlockPanel
     {
-        public NextForBlockPanel()
+        public NextFor2BlockPanel()
         {
 
         }
@@ -25,7 +25,7 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-        private UIElement Content
+        private UIElement Content1
         {
             get
             {
@@ -33,11 +33,27 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
-        private UIElement Footer
+        private UIElement Footer1
         {
             get
             {
                 return InternalChildren.Count >= 2 ? InternalChildren[2] : null;
+            }
+        }
+
+        private UIElement Content2
+        {
+            get
+            {
+                return InternalChildren.Count >= 3 ? InternalChildren[3] : null;
+            }
+        }
+
+        private UIElement Footer2
+        {
+            get
+            {
+                return InternalChildren.Count >= 4 ? InternalChildren[4] : null;
             }
         }
 
@@ -53,8 +69,10 @@ namespace AIStudio.Wpf.Controls
 
         private double _width;
         private double _headerheight;
-        private double _contentheight;
-        private double _footerheight;
+        private double _content1height;
+        private double _footer1height;
+        private double _content2height;
+        private double _footer2height;
         /// <summary>
         /// 该方法用于测量整个控件的大小
         /// </summary>
@@ -77,31 +95,55 @@ namespace AIStudio.Wpf.Controls
                 _headerheight = minheaderheight;
             }
 
-            if (Content != null)
+            if (Content1 != null)
             {
                 //测量子控件的大小
-                Content.Measure(constraint);
-                _width = Math.Max(minwidth, Content.DesiredSize.Width + padding.Left + padding.Right + leftpanelwidth);
-                _contentheight = Math.Max(mincontentheight, Content.DesiredSize.Height + padding.Top + padding.Bottom);
+                Content1.Measure(constraint);
+                _width = Math.Max(minwidth, Content1.DesiredSize.Width + padding.Left + padding.Right + leftpanelwidth);
+                _content1height = Math.Max(mincontentheight, Content1.DesiredSize.Height + padding.Top + padding.Bottom);
             }
             else
             {
-                _contentheight = mincontentheight;
+                _content1height = mincontentheight;
             }
 
-            if (Footer != null)
+            if (Footer1 != null)
             {
                 //测量子控件的大小
-                Footer.Measure(constraint);
-                _width = Math.Max(minwidth, Footer.DesiredSize.Width + padding.Left + padding.Right);
-                _footerheight = Math.Max(minfooterheight, Footer.DesiredSize.Height + padding.Top + padding.Bottom);
+                Footer1.Measure(constraint);
+                _width = Math.Max(minwidth, Footer1.DesiredSize.Width + padding.Left + padding.Right);
+                _footer1height = Math.Max(minfooterheight, Footer1.DesiredSize.Height + padding.Top + padding.Bottom);
             }
             else
             {
-                _footerheight = minfooterheight;
+                _footer1height = minfooterheight;
             }
 
-            return new Size(_width, _headerheight + _contentheight + _footerheight);
+            if (Content2!= null)
+            {
+                //测量子控件的大小
+                Content2.Measure(constraint);
+                _width = Math.Max(minwidth, Content2.DesiredSize.Width + padding.Left + padding.Right + leftpanelwidth);
+                _content2height = Math.Max(mincontentheight, Content2.DesiredSize.Height + padding.Top + padding.Bottom);
+            }
+            else
+            {
+                _content2height = mincontentheight;
+            }
+
+            if (Footer2 != null)
+            {
+                //测量子控件的大小
+                Footer2.Measure(constraint);
+                _width = Math.Max(minwidth, Footer2.DesiredSize.Width + padding.Left + padding.Right);
+                _footer2height = Math.Max(minfooterheight, Footer2.DesiredSize.Height + padding.Top + padding.Bottom);
+            }
+            else
+            {
+                _footer2height = minfooterheight;
+            }
+
+            return new Size(_width, _headerheight + _content1height + _footer1height + _content2height + _footer2height);
         }
 
         /// <summary>
@@ -119,15 +161,26 @@ namespace AIStudio.Wpf.Controls
             }
 
 
-            if (Content != null)
+            if (Content1 != null)
             {
-                Content.Arrange(new Rect(new Point(padding.Left + leftpanelwidth, padding.Top + _headerheight), new Size(_width - leftpanelwidth,_contentheight)));
+                Content1.Arrange(new Rect(new Point(padding.Left + leftpanelwidth, padding.Top + _headerheight), new Size(_width - leftpanelwidth,_content1height)));
             }
 
 
-            if (Footer != null)
+            if (Footer1 != null)
             {
-                Footer.Arrange(new Rect(new Point(padding.Left, padding.Top + _headerheight + _contentheight), new Size(_width, _footerheight)));
+                Footer1.Arrange(new Rect(new Point(padding.Left, padding.Top + _headerheight + _content1height), new Size(_width, _footer1height)));
+            }
+
+            if (Content2 != null)
+            {
+                Content2.Arrange(new Rect(new Point(padding.Left + leftpanelwidth, padding.Top + _headerheight + _content1height + _footer1height), new Size(_width - leftpanelwidth, _content2height)));
+            }
+
+
+            if (Footer2 != null)
+            {
+                Footer2.Arrange(new Rect(new Point(padding.Left, padding.Top + _headerheight + _content1height + _footer1height + _content2height), new Size(_width, _footer2height)));
             }
 
 
@@ -146,7 +199,7 @@ namespace AIStudio.Wpf.Controls
             pen.Brush = this.BorderBrush;
             pen.Thickness = this.BorderThickness.Left;// NextForBlockBorder.RoundLayoutValue(BorderThickness.Left, DoubleUtil.DpiScaleX);
 
-            Geometry cg = CreateGeometry(_width, _headerheight, _contentheight, _footerheight);
+            Geometry cg = CreateGeometry(_width, _headerheight, _content1height, _footer1height, _content2height, _footer2height);
             Brush brush = CreateFillBrush();
 
             GuidelineSet guideLines = new GuidelineSet();
@@ -158,7 +211,7 @@ namespace AIStudio.Wpf.Controls
         #endregion      
 
         #region 私有方法
-        private Geometry CreateGeometry(double x, double y0, double y1, double y2)
+        private Geometry CreateGeometry(double x, double y0, double y1, double y2, double y3, double y4)
         {
             #region 
             PathFigure pf = new PathFigure();
@@ -271,31 +324,104 @@ namespace AIStudio.Wpf.Controls
             ArcSegment seg31 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x - 2, y0 + y1 + y2) };
             pf.Segments.Add(seg31);
 
-            LineSegment seg32 = new LineSegment() { Point = new Point(insideoffset + insidewidth, y0 + y1 + y2) };
+
+
+            LineSegment seg32 = new LineSegment() { Point = new Point(leftpanelwidth +  insideoffset + insidewidth, y0 + y1 + y2) };
             pf.Segments.Add(seg32);
 
             //第十四in
-            QuadraticBezierSegment seg33 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 1, y0 + y1 + y2), Point2 = new Point(insideoffset + insidewidth - 2, y0 + y1 + y2 + 2) };
+            QuadraticBezierSegment seg33 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + insidewidth - 1, y0 + y1 + y2), Point2 = new Point(leftpanelwidth + insideoffset + insidewidth - 2, y0 + y1 + y2 + 2) };
             pf.Segments.Add(seg33);
 
-            QuadraticBezierSegment seg34 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 4, y0 + y1 + y2 + insideheight), Point2 = new Point(insideoffset + insidewidth - 5, y0 + y1 + y2 + insideheight) };
+            QuadraticBezierSegment seg34 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + insidewidth - 4, y0 + y1 + y2 + insideheight), Point2 = new Point(leftpanelwidth + insideoffset + insidewidth - 5, y0 + y1 + y2 + insideheight) };
             pf.Segments.Add(seg34);
 
-            LineSegment seg35 = new LineSegment() { Point = new Point(insideoffset + 5, y0 + y1 + y2 + insideheight) };
+            LineSegment seg35 = new LineSegment() { Point = new Point(leftpanelwidth + insideoffset + 5, y0 + y1 + y2 + insideheight) };
             pf.Segments.Add(seg35);
 
-            QuadraticBezierSegment seg36 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 4, y0 + y1 + y2 + insideheight), Point2 = new Point(insideoffset + 2, y0 + y1 + y2 + 2) };
+            QuadraticBezierSegment seg36 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + 4, y0 + y1 + y2 + insideheight), Point2 = new Point(leftpanelwidth + insideoffset + 2, y0 + y1 + y2 + 2) };
             pf.Segments.Add(seg36);
 
-            QuadraticBezierSegment seg37 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 1, y0 + y1 + y2), Point2 = new Point(insideoffset, y0 + y1 + y2) };
+            QuadraticBezierSegment seg37 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + 1, y0 + y1 + y2), Point2 = new Point(leftpanelwidth + insideoffset, y0 + y1 + y2) };
             pf.Segments.Add(seg37);
 
             //第十五横线
-            LineSegment seg38 = new LineSegment() { Point = new Point(2, y0 + y1 + y2) };
+            LineSegment seg38 = new LineSegment() { Point = new Point(leftpanelwidth + 2, y0 + y1 + y2) };
             pf.Segments.Add(seg38);
 
-            ArcSegment seg39 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(0, y0 + y1 + y2 - 2) };
+            ArcSegment seg39 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Counterclockwise, Point = new Point(leftpanelwidth, y0 + y1 + y2 + 2) };
             pf.Segments.Add(seg39);
+
+            //第十六竖向
+            LineSegment seg40 = new LineSegment() { Point = new Point(leftpanelwidth, y0 + y1 + y2 + y3 - 2) };
+            pf.Segments.Add(seg40);
+
+            ArcSegment seg41 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Counterclockwise, Point = new Point(leftpanelwidth + 2, y0 + y1 + y2 + y3) };
+            pf.Segments.Add(seg41);
+
+            //第十七横线
+            LineSegment seg42 = new LineSegment() { Point = new Point(leftpanelwidth + insideoffset, y0 + y1 + y2 + y3) };
+            pf.Segments.Add(seg42);
+
+            //第十八in
+            QuadraticBezierSegment seg43 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + 1, y0 + y1 + y2 + y3), Point2 = new Point(leftpanelwidth + insideoffset + 2, y0 + y1 + y2 + y3 + 2) };
+            pf.Segments.Add(seg43);
+
+            QuadraticBezierSegment seg44 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + 4, y0 + y1 + y2 + y3 + insideheight), Point2 = new Point(leftpanelwidth + insideoffset + 5, y0 + y1 + y2 + y3 + insideheight) };
+            pf.Segments.Add(seg44);
+
+            LineSegment seg45 = new LineSegment() { Point = new Point(leftpanelwidth + insideoffset + insidewidth - 5, y0 + y1 + y2 + y3 + insideheight) };
+            pf.Segments.Add(seg45);
+
+            QuadraticBezierSegment seg46 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + insidewidth - 4, y0 + y1 + y2 + y3 + insideheight), Point2 = new Point(leftpanelwidth + insideoffset + insidewidth - 2, y0 + y1 + y2 + y3 + 2) };
+            pf.Segments.Add(seg46);
+
+            QuadraticBezierSegment seg47 = new QuadraticBezierSegment() { Point1 = new Point(leftpanelwidth + insideoffset + insidewidth - 1, y0 + y1 + y2 + y3), Point2 = new Point(leftpanelwidth + insideoffset + insidewidth, y0 + y1 + y2 + y3) };
+            pf.Segments.Add(seg47);
+
+            //第十一横线
+            LineSegment seg48 = new LineSegment() { Point = new Point(x - 2, y0 + y1 + y2 + y3) };
+            pf.Segments.Add(seg48);
+
+            //第十二竖线
+            ArcSegment seg49 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x, y0 + y1 + y2 + y3 + 2) };
+            pf.Segments.Add(seg49);
+
+            LineSegment seg50 = new LineSegment() { Point = new Point(x, y0 + y1 + y2 + y3 + y4 - 2) };
+            pf.Segments.Add(seg50);
+
+            //第十三横线
+            ArcSegment seg51 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x - 2, y0 + y1 + y2 + y3 + y4) };
+            pf.Segments.Add(seg51);
+
+
+
+            LineSegment seg52 = new LineSegment() { Point = new Point(insideoffset + insidewidth, y0 + y1 + y2 + y3 + y4) };
+            pf.Segments.Add(seg52);
+
+            //第十四in
+            QuadraticBezierSegment seg53 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 1, y0 + y1 + y2 + y3 + y4), Point2 = new Point(insideoffset + insidewidth - 2, y0 + y1 + y2 + y3 + y4 + 2) };
+            pf.Segments.Add(seg53);
+
+            QuadraticBezierSegment seg54 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 4, y0 + y1 + y2 + y3 + y4 + insideheight), Point2 = new Point(insideoffset + insidewidth - 5, y0 + y1 + y2 + y3 + y4 + insideheight) };
+            pf.Segments.Add(seg54);
+
+            LineSegment seg55 = new LineSegment() { Point = new Point(insideoffset + 5, y0 + y1 + y2 + y3 + y4 + insideheight) };
+            pf.Segments.Add(seg55);
+
+            QuadraticBezierSegment seg56 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 4, y0 + y1 + y2 + y3 + y4 + insideheight), Point2 = new Point(insideoffset + 2, y0 + y1 + y2 + y3 + y4 + 2) };
+            pf.Segments.Add(seg56);
+
+            QuadraticBezierSegment seg57 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 1, y0 + y1 + y2 + y3 + y4), Point2 = new Point(insideoffset, y0 + y1 + y2 + y3 + y4) };
+            pf.Segments.Add(seg57);
+
+            //第十五横线
+            LineSegment seg58 = new LineSegment() { Point = new Point(2, y0 + y1 + y2 + y3 + y4) };
+            pf.Segments.Add(seg58);
+
+            ArcSegment seg59 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Counterclockwise, Point = new Point(0, y0 + y1 + y2 + y3 + y4 - 2) };
+            pf.Segments.Add(seg59);
+
 
             PathGeometry g1 = new PathGeometry();
             g1.Figures.Add(pf);
