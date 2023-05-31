@@ -198,7 +198,7 @@ namespace AIStudio.Wpf.Controls
             var parent = (this.Parent as FrameworkElement);
             if (parent != null)
             {
-                //TODO: insideoffset by control's Margin
+                //TODO: Insideoffset by control's Margin
                 _maxMarginLeft = parent.ActualWidth - this.ActualWidth;
                 _maxMarginTop = parent.ActualHeight - this.ActualHeight;
             }

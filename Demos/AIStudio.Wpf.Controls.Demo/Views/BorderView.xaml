@@ -100,6 +100,9 @@
                 <ac:NextBlockBorder Margin="2,2,2,7" Background="{DynamicResource MahApps.Brushes.Accent}">
                     <TextBlock Text="Border" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </ac:NextBlockBorder>
+                <ac:EndBlockBorder Margin="2,2,2,7" Background="{DynamicResource MahApps.Brushes.Accent}">
+                    <TextBlock Text="Border" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </ac:EndBlockBorder>
                 <ac:NextForBlockPanel Margin="2,2,2,7" Background="{DynamicResource MahApps.Brushes.Accent}">
                     <TextBlock Text="Header"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <TextBlock Text="Content"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -112,6 +115,12 @@
                     <TextBlock Text="Content2"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <TextBlock Text="Footer2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </ac:NextFor2BlockPanel>
+                <ac:VariableBlockBorder Margin="2,2,2,7" Background="{DynamicResource MahApps.Brushes.Accent}">
+                    <TextBlock Text="Border" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </ac:VariableBlockBorder>
+                <ac:OperationBlockBorder Margin="2,2,2,7" Background="{DynamicResource MahApps.Brushes.Accent}">
+                    <TextBlock Text="Border" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </ac:OperationBlockBorder>                
             </WrapPanel>
         </GroupBox>
     </StackPanel>

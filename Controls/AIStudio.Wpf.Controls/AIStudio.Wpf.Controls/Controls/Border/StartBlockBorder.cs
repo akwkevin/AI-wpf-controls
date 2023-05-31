@@ -1,100 +1,24 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Media;
 
 namespace AIStudio.Wpf.Controls
 {
-    public class StartBlockBorder : Decorator
+    public class StartBlockBorder : BlockDecorator
     {
         public StartBlockBorder()
         {
 
         }
 
-        #region 依赖属性
-        public static readonly DependencyProperty BackgroundProperty =
-            DependencyProperty.Register(nameof(Background), typeof(Brush), typeof(StartBlockBorder)
-                , new PropertyMetadata(new SolidColorBrush(Color.FromRgb(255, 255, 255))));
-        /// <summary>
-        /// 背景色，默认值为#FFFFFF，白色
-        /// </summary>
-        public Brush Background
-        {
-            get
-            {
-                return (Brush)GetValue(BackgroundProperty);
-            }
-            set
-            {
-                SetValue(BackgroundProperty, value);
-            }
-        }
-
-        public static readonly DependencyProperty PaddingProperty =
-            DependencyProperty.Register(nameof(Padding), typeof(Thickness), typeof(StartBlockBorder)
-                , new PropertyMetadata(new Thickness(0, 0, 0, 0)));
-        /// <summary>
-        /// 内边距
-        /// </summary>
-        public Thickness Padding
-        {
-            get
-            {
-                return (Thickness)GetValue(PaddingProperty);
-            }
-            set
-            {
-                SetValue(PaddingProperty, value);
-            }
-        }
-
-        public static readonly DependencyProperty BorderBrushProperty =
-            DependencyProperty.Register(nameof(BorderBrush), typeof(Brush), typeof(StartBlockBorder)
-                , new PropertyMetadata(default(Brush)));
-        /// <summary>
-        /// 边框颜色
-        /// </summary>
-        public Brush BorderBrush
-        {
-            get
-            {
-                return (Brush)GetValue(BorderBrushProperty);
-            }
-            set
-            {
-                SetValue(BorderBrushProperty, value);
-            }
-        }
-
-        public static readonly DependencyProperty BorderThicknessProperty =
-            DependencyProperty.Register(nameof(BorderThickness), typeof(Thickness), typeof(StartBlockBorder), new PropertyMetadata(new Thickness(0d)));
-        /// <summary>
-        /// 边框大小
-        /// </summary>
-        public Thickness BorderThickness
-        {
-            get
-            {
-                return (Thickness)GetValue(BorderThicknessProperty);
-            }
-            set
-            {
-                SetValue(BorderThicknessProperty, value);
-            }
-        }
-        #endregion
-
         #region 方法重写
-        private double outsideheight = 13;
-        private double outsidewidth = 70;
-        private double insideheight = 6;
-        private double insidewidth = 21;
-        private double insideoffset = 14;
-        private double minwidth = 86;
-        private double minheight = 47;
+        public double Outsideheight { get; set; } = 13;
+        public double Outsidewidth { get; set; } = 70;
+        public double Insideheight { get; set; } = 6;
+        public double Insidewidth { get; set; } = 21;
+        public double Insideoffset { get; set; } = 14;
+        public double Minwidth { get; set; } = 86;
+        public double Minheight { get; set; } = 47;
 
         /// <summary>
         /// 该方法用于测量整个控件的大小
@@ -111,13 +35,13 @@ namespace AIStudio.Wpf.Controls
                 //测量子控件的大小
                 Child.Measure(constraint);
 
-                result.Width = Math.Max(minwidth, Child.DesiredSize.Width + padding.Left + padding.Right);
-                result.Height = Math.Max(minheight, Child.DesiredSize.Height + padding.Top + padding.Bottom + outsideheight);
+                result.Width = Math.Max(Minwidth, Child.DesiredSize.Width + padding.Left + padding.Right);
+                result.Height = Math.Max(Minheight, Child.DesiredSize.Height + padding.Top + padding.Bottom + Outsideheight);
             }
             else
             {
-                result.Width = minwidth;
-                result.Height = minheight;
+                result.Width = Minwidth;
+                result.Height = Minheight;
             }
             return result;
         }
@@ -132,8 +56,8 @@ namespace AIStudio.Wpf.Controls
             Thickness padding = this.Padding;
             if (Child != null)
             {
-                Child.Arrange(new Rect(new Point(padding.Left, outsideheight + padding.Top),
-                    new Size(Math.Max(minwidth, Child.DesiredSize.Width + padding.Left + padding.Right), Math.Max(minheight - outsideheight, Child.DesiredSize.Height + padding.Top + padding.Bottom))));
+                Child.Arrange(new Rect(new Point(padding.Left, Outsideheight + padding.Top),
+                    new Size(Math.Max(Minwidth - padding.Left - padding.Right, Child.DesiredSize.Width), Math.Max(Minheight - Outsideheight - padding.Top - padding.Bottom, Child.DesiredSize.Height ))));
             }
             return arrangeSize;
         }
@@ -150,7 +74,7 @@ namespace AIStudio.Wpf.Controls
             pen.Brush = this.BorderBrush;
             pen.Thickness = this.BorderThickness.Left;// NextForBlockBorder.RoundLayoutValue(BorderThickness.Left, DoubleUtil.DpiScaleX);
 
-            Geometry cg = CreateGeometry(Math.Max(minwidth, Child?.DesiredSize.Width ?? 0 + padding.Left + padding.Right), Math.Max(minheight - outsideheight, Child?.DesiredSize.Height ?? 0 + padding.Top + padding.Bottom));
+            Geometry cg = CreateGeometry(Math.Max(Minwidth, Child?.DesiredSize.Width ?? 0 + padding.Left + padding.Right), Math.Max(Minheight - Outsideheight, Child?.DesiredSize.Height ?? 0 + padding.Top + padding.Bottom));
             Brush brush = CreateFillBrush();
 
             GuidelineSet guideLines = new GuidelineSet();
@@ -166,50 +90,50 @@ namespace AIStudio.Wpf.Controls
             #region 
             PathFigure pf = new PathFigure();
             pf.IsClosed = true;
-            pf.StartPoint = new Point(0, outsideheight);
+            pf.StartPoint = new Point(0, Outsideheight);
 
             //第一横线
-            QuadraticBezierSegment seg1 = new QuadraticBezierSegment() { Point1 = new Point(outsidewidth / 2, 3 - outsideheight), Point2 = new Point(outsidewidth, outsideheight) };
+            QuadraticBezierSegment seg1 = new QuadraticBezierSegment() { Point1 = new Point(Outsidewidth / 2, 3 - Outsideheight), Point2 = new Point(Outsidewidth, Outsideheight) };
             pf.Segments.Add(seg1);
 
-            LineSegment seg2 = new LineSegment() { Point = new Point(x - 2, outsideheight) };
+            LineSegment seg2 = new LineSegment() { Point = new Point(x - 2, Outsideheight) };
             pf.Segments.Add(seg2);
 
             //第二竖线
-            ArcSegment seg3 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x, outsideheight + 2) };
+            ArcSegment seg3 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x, Outsideheight + 2) };
             pf.Segments.Add(seg3);
 
-            LineSegment seg4 = new LineSegment() { Point = new Point(x, outsideheight + y - 2) };
+            LineSegment seg4 = new LineSegment() { Point = new Point(x, Outsideheight + y - 2) };
             pf.Segments.Add(seg4);
 
             //第三横线
-            ArcSegment seg5 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x - 2, outsideheight + y) };
+            ArcSegment seg5 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x - 2, Outsideheight + y) };
             pf.Segments.Add(seg5);
 
-            LineSegment seg6 = new LineSegment() { Point = new Point(insideoffset + insidewidth, outsideheight + y) };
+            LineSegment seg6 = new LineSegment() { Point = new Point(Insideoffset + Insidewidth, Outsideheight + y) };
             pf.Segments.Add(seg6);
 
             //第四in
-            QuadraticBezierSegment seg7 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 1, outsideheight + y), Point2 = new Point(insideoffset + insidewidth - 2, outsideheight + y + 2) };
+            QuadraticBezierSegment seg7 = new QuadraticBezierSegment() { Point1 = new Point(Insideoffset + Insidewidth - 1, Outsideheight + y), Point2 = new Point(Insideoffset + Insidewidth - 2, Outsideheight + y + 2) };
             pf.Segments.Add(seg7);
 
-            QuadraticBezierSegment seg8 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + insidewidth - 4, outsideheight + y + insideheight), Point2 = new Point(insideoffset + insidewidth - 5, outsideheight + y + insideheight) };
+            QuadraticBezierSegment seg8 = new QuadraticBezierSegment() { Point1 = new Point(Insideoffset + Insidewidth - 4, Outsideheight + y + Insideheight), Point2 = new Point(Insideoffset + Insidewidth - 5, Outsideheight + y + Insideheight) };
             pf.Segments.Add(seg8);
 
-            LineSegment seg9 = new LineSegment() { Point = new Point(insideoffset + 5, outsideheight + y + insideheight) };
+            LineSegment seg9 = new LineSegment() { Point = new Point(Insideoffset + 5, Outsideheight + y + Insideheight) };
             pf.Segments.Add(seg9);
 
-            QuadraticBezierSegment seg10 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 4, outsideheight + y + insideheight), Point2 = new Point(insideoffset + 2, outsideheight + y + 2) };
+            QuadraticBezierSegment seg10 = new QuadraticBezierSegment() { Point1 = new Point(Insideoffset + 4, Outsideheight + y + Insideheight), Point2 = new Point(Insideoffset + 2, Outsideheight + y + 2) };
             pf.Segments.Add(seg10);
 
-            QuadraticBezierSegment seg11 = new QuadraticBezierSegment() { Point1 = new Point(insideoffset + 1, outsideheight + y), Point2 = new Point(insideoffset, outsideheight + y) };
+            QuadraticBezierSegment seg11 = new QuadraticBezierSegment() { Point1 = new Point(Insideoffset + 1, Outsideheight + y), Point2 = new Point(Insideoffset, Outsideheight + y) };
             pf.Segments.Add(seg11);
 
             //第五横线
-            LineSegment seg12 = new LineSegment() { Point = new Point(2, outsideheight + y) };
+            LineSegment seg12 = new LineSegment() { Point = new Point(2, Outsideheight + y) };
             pf.Segments.Add(seg12);
 
-            ArcSegment seg13 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(0, outsideheight + y - 2) };
+            ArcSegment seg13 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(0, Outsideheight + y - 2) };
             pf.Segments.Add(seg13);
 
             PathGeometry g1 = new PathGeometry();
@@ -217,18 +141,6 @@ namespace AIStudio.Wpf.Controls
             #endregion
 
             return g1;
-        }
-
-        private Brush CreateFillBrush()
-        {
-            Brush result = null;
-
-            GradientStopCollection gsc = new GradientStopCollection();
-            gsc.Add(new GradientStop(((SolidColorBrush)this.Background).Color, 0));
-            LinearGradientBrush backGroundBrush = new LinearGradientBrush(gsc, new Point(0, 0), new Point(0, 1));
-            result = backGroundBrush;
-
-            return result;
         }
         #endregion
     }

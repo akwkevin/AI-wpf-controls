@@ -4,9 +4,9 @@ using System.Windows.Media;
 
 namespace AIStudio.Wpf.Controls
 {
-    public class NextBlockBorder : BlockDecorator
+    public class EndBlockBorder : BlockDecorator
     {
-        public NextBlockBorder()
+        public EndBlockBorder()
         {
 
         }
@@ -127,31 +127,11 @@ namespace AIStudio.Wpf.Controls
             ArcSegment seg11 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(x - 2, y) };
             pf.Segments.Add(seg11);
 
-            LineSegment seg12 = new LineSegment() { Point = new Point(Insideoffset + Insidewidth, y) };
-            pf.Segments.Add(seg12);
+            LineSegment seg12 = new LineSegment() { Point = new Point(2, y) };
+            pf.Segments.Add(seg12);          
 
-            //第六in
-            QuadraticBezierSegment seg13 = new QuadraticBezierSegment() { Point1 = new Point(Insideoffset + Insidewidth - 1, y), Point2 = new Point(Insideoffset + Insidewidth - 2, y + 2) };
+            ArcSegment seg13 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(0, y - 2) };
             pf.Segments.Add(seg13);
-
-            QuadraticBezierSegment seg14 = new QuadraticBezierSegment() { Point1 = new Point(Insideoffset + Insidewidth - 4, y + Insideheight), Point2 = new Point(Insideoffset + Insidewidth - 5, y + Insideheight) };
-            pf.Segments.Add(seg14);
-
-            LineSegment seg15 = new LineSegment() { Point = new Point(Insideoffset + 5, y + Insideheight) };
-            pf.Segments.Add(seg15);
-
-            QuadraticBezierSegment seg16 = new QuadraticBezierSegment() { Point1 = new Point(Insideoffset + 4, y + Insideheight), Point2 = new Point(Insideoffset + 2, y + 2) };
-            pf.Segments.Add(seg16);
-
-            QuadraticBezierSegment seg17 = new QuadraticBezierSegment() { Point1 = new Point(Insideoffset + 1, y), Point2 = new Point(Insideoffset, y) };
-            pf.Segments.Add(seg17);
-
-            //第七横线
-            LineSegment seg18 = new LineSegment() { Point = new Point(2, y) };
-            pf.Segments.Add(seg18);
-
-            ArcSegment seg19 = new ArcSegment() { Size = new Size(2, 2), SweepDirection = SweepDirection.Clockwise, Point = new Point(0, y - 2) };
-            pf.Segments.Add(seg19);
 
             PathGeometry g1 = new PathGeometry();
             g1.Figures.Add(pf);
