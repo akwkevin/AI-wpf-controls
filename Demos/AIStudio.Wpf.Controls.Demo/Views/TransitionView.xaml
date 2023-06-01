@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="AIStudio.Wpf.Controls.Demo.Views.TransitionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIStudio.Wpf.Controls.Demo.Views"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <VisualBrush x:Key="TransitionReflection" Visual="{Binding ElementName=TransitionBox}" Stretch="Fill">
+            <VisualBrush.RelativeTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1" ScaleY="-1" />
+                    <TranslateTransform  Y="1" />
+                </TransformGroup>
+            </VisualBrush.RelativeTransform>
+        </VisualBrush>
+        <LinearGradientBrush x:Key="ReflectionFade" EndPoint="0.694,0.808" StartPoint="0.726,-0.264">
+            <GradientStop Color="#FF000000" Offset="0"/>
+            <GradientStop Color="#00FFFFFF" Offset="1"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="TransitionCell" TargetType="{x:Type ContentControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ContentControl}">
+                        <Viewbox>
+                            <Grid Width="200" Height="200">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <Rectangle Fill="{TemplateBinding Background}" Stroke="#FF000000" StrokeThickness="4" RadiusX="8" RadiusY="8" x:Name="BackgroundRect" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                                <Rectangle Fill="#FFFFFFFF" Stroke="#FF000000" StrokeThickness="4" RadiusX="8" RadiusY="8" x:Name="LetterRect" Grid.Column="1" Grid.Row="1"/>
+                                <ContentPresenter Grid.Column="1" Grid.Row="1"/>
+                            </Grid>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CellA" TargetType="{x:Type ContentControl}" BasedOn="{StaticResource TransitionCell}">
+            <Setter Property="Control.Background" Value="Green" />
+            <Setter Property="ContentControl.ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="A" FontFamily="Arial" FontSize="72" FontWeight="Bold" Grid.Column="1" Grid.Row="1"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CellB" TargetType="{x:Type ContentControl}" BasedOn="{StaticResource TransitionCell}">
+            <Setter Property="Control.Background" Value="Yellow" />
+            <Setter Property="ContentControl.ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="B" FontFamily="Arial" FontSize="72" FontWeight="Bold" Grid.Column="1" Grid.Row="1"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ObjectDataProvider x:Key="TransitionTypesDS" d:IsDataSource="True" ObjectType="{x:Type System:Type}"/>
+        <ObjectDataProvider x:Key="TransitionDS" d:IsDataSource="True" ObjectType="{x:Type ac:Transition}"/>
+
+        <LinearGradientBrush x:Key="ItemBackgroundBrush" EndPoint="0.5,0.919" StartPoint="0.5,0.042">
+            <GradientStop Color="#57000000" Offset="0.005"/>
+            <GradientStop Color="#95000000" Offset="1"/>
+            <GradientStop Color="#00000000" Offset="0.178"/>
+            <GradientStop Color="#73000000" Offset="0.875"/>
+        </LinearGradientBrush>
+
+        <DataTemplate x:Key="TransitionTypeItem">
+            <Grid MinHeight="32" Background="{DynamicResource ItemBackgroundBrush}">
+                <TextBlock x:Name="TypeName" FontSize="18" Text="{Binding Path=Name, Mode=OneWay}" MinWidth="400"/>
+            </Grid>
+        </DataTemplate>
+
+        <Style x:Key="AlwaysSelectedListBoxItem" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Padding" Value="2,0,0,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Property="Background" />
+                                <Setter Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" Property="Foreground" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Property="Foreground" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        <Border Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="TransitionFadeMask" EndPoint="0.854,0.854" StartPoint="0.146,0.146">
+            <GradientStop Color="#00FFFFFF" Offset="1"/>
+            <GradientStop Color="#FFFFFFFF" Offset="0"/>
+            <GradientStop Color="#FFFFFFFF" Offset="0.452"/>
+            <GradientStop Color="#00FFFFFF" Offset="0.553"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <Canvas x:Name="MainLayout" Width="800" Height="600">
+                <Rectangle x:Name="ReflectionBox" Width="400" Height="132.979" Canvas.Left="400" Canvas.Top="449.171" OpacityMask="{DynamicResource ReflectionFade}" Fill="{DynamicResource TransitionReflection}" />
+                <ac:TransitionElement x:Name="TransitionBox" DataContext="{DynamicResource TransitionDS}" Transition="{Binding}" Width="400" Height="413.022" Canvas.Left="400" Canvas.Top="19.149" />
+                <StackPanel x:Name="ButtonStack" Canvas.Top="475" Orientation="Horizontal">
+                    <Button Width="90" Height="90" x:Name="ABButton" Click="ABButton_Click" Canvas.Left="8" Canvas.Top="462.766" Margin="0,0,5,0">
+                        <Grid>
+                            <ContentControl Style="{DynamicResource CellB}"/>
+                            <ContentControl Style="{DynamicResource CellA}" OpacityMask="{DynamicResource TransitionFadeMask}"/>
+                        </Grid>
+                    </Button>
+                    <Button Width="90" Height="90" Canvas.Left="102" Canvas.Top="462.766" x:Name="AButton" Click="AButton_Click" Margin="0,0,5,0">
+                        <ContentControl Style="{DynamicResource CellA}"/>
+                    </Button>
+                    <Button Width="90" Height="90" Canvas.Left="195.873" Canvas.Top="462.766" x:Name="ClearButton" Click="ClearButton_Click" Margin="0,0,5,0">
+                        <Path Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF000000" Fill="#FFFF0000" Data="F1 M 40,7.62939e-006C 62.0914,7.62939e-006 80,17.9086 80,40C 80,62.0914 62.0914,80 40,80C 17.9086,80 2.38419e-006,62.0914 2.38419e-006,40C 2.38419e-006,17.9086 17.9086,7.62939e-006 40,7.62939e-006 Z M 40.3125,66.25C 54.6719,66.25 66.3125,54.6094 66.3125,40.25C 66.3125,35.4052 64.9874,30.8699 62.6798,26.9867L 27.0492,62.6173C 30.9324,64.9249 35.4677,66.25 40.3125,66.25 Z M 40.3125,14.25C 25.9531,14.25 14.3125,25.8906 14.3125,40.25C 14.3125,45.0948 15.6376,49.6301 17.9452,53.5133L 53.5758,17.8827C 49.6926,15.5751 45.1573,14.25 40.3125,14.25 Z " Width="81" Height="81"/>
+                        <!--<ContentControl Style="{DynamicResource CellB}"/>-->
+                    </Button>
+                </StackPanel>
+                <Grid DataContext="{StaticResource TransitionTypesDS}" x:Name="TransTypeLayout" Width="378.723" Height="419.149" Canvas.Top="19.149">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.926*"/>
+                        <RowDefinition Height="0.074*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="TransitionList" IsSynchronizedWithCurrentItem="True" ItemContainerStyle="{DynamicResource AlwaysSelectedListBoxItem}" ItemTemplate="{DynamicResource TransitionTypeItem}" ItemsSource="{Binding}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                    <Label x:Name="NamespaceLabel" Content="{Binding Path=Namespace}" Background="{DynamicResource ItemBackgroundBrush}" FontSize="14" Foreground="#FFFFFFFF" Grid.Row="1"/>
+                </Grid>
+            </Canvas>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

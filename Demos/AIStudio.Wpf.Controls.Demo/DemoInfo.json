@@ -92,7 +92,8 @@
       [ "WebBrowser 网页", "WebBrowserView", "Browser", "" ],
       [ "KeyNavigation 键盘操作", "ControlNavigationView", "Keyboard", "" ],
       [ "Theme 自定义主题", "ColorToolView", "PalettePath", "" ],
-      [ "XamlDisplay 锚点", "XamlDisplayView", "Anchor", "" ]
+      [ "Xaml 显示", "XamlDisplayView", "Xaml", "" ],
+      [ "Transition 切换动画", "TransitionView", "Transition", "" ]
     ]
   }
 

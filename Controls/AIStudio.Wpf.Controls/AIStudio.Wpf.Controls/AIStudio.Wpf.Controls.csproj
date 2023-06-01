@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Controls\Transition\Images\star.png" />
     <None Remove="Controls\Verify\Idioms.txt" />
     <None Remove="Resources\A.ico" />
     <None Remove="Resources\blank.ico" />
@@ -54,6 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Controls\Transition\Images\star.png" />
     <Resource Include="Resources\Icons\Error48.png" />
     <Resource Include="Resources\Icons\Information48.png" />
     <Resource Include="Resources\Icons\Question48.png" />
