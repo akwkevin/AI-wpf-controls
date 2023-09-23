@@ -5,6 +5,7 @@
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Themes/Geometries.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/TextBlock.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Styles/MahApps/ProgressBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="AIStudio.Styles.UploadFile" TargetType="{x:Type controls:UploadFile}">
@@ -22,6 +23,7 @@
                 <ControlTemplate TargetType="{x:Type controls:UploadFile}">
                     <Grid x:Name="PART_Root">
                         <Grid x:Name="PART_InnerGrid" Margin="0">
+                            <ProgressBar x:Name="progress" Height="Auto" Value="{TemplateBinding Progress}" Minimum="0" Maximum="1" Style="{StaticResource AIStudio.Styles.ProgressBar}" Visibility="Visible"/>
                             <ItemsControl VerticalAlignment="Center" ItemsSource="{TemplateBinding FilesDisplay}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -48,7 +50,7 @@
                                                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                                                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                                                        </Grid.ColumnDefinitions>
+                                                                        </Grid.ColumnDefinitions>                                                                       
                                                                         <Image x:Name="img" Grid.Column="0" Margin="3" Stretch="Fill" Width="32" Height="32" Source="{Binding Url}"></Image>
                                                                         <TextBlock x:Name="file" Grid.Column="0" Margin="3" VerticalAlignment="Center" Text="&#xf016;" Style="{StaticResource AIStudio.Styles.TextBlock.FontAwesome}" Visibility="Collapsed"></TextBlock>
                                                                         <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding DisplayName}"></TextBlock>
@@ -69,7 +71,7 @@
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Path=Disable,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" Value="True">
                                                                         <Setter TargetName="delete" Property="Visibility" Value="Collapsed"></Setter>
-                                                                    </DataTrigger>
+                                                                    </DataTrigger>                                                                 
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
                                                                     </Trigger>
@@ -81,6 +83,7 @@
                                                         </Setter.Value>
                                                     </Setter>
                                                     <Style.Triggers>
+
                                                         <DataTrigger Binding="{Binding IsUploadTemplate}" Value="True">
                                                             <Setter Property="Template">
                                                                 <Setter.Value>
@@ -116,6 +119,11 @@
                             </ItemsControl>
                         </Grid>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Progress" Value="1">
+                            <Setter TargetName="progress" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -125,6 +133,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type controls:UploadFile}">
                             <Grid x:Name="PART_Root">
+                                <ProgressBar x:Name="progress" Height="Auto" Value="{TemplateBinding Progress}" Minimum="0" Maximum="1" Style="{StaticResource AIStudio.Styles.ProgressBar}" Visibility="Visible"/>
                                 <Grid x:Name="PART_InnerGrid" Margin="0">
                                     <ItemsControl ItemsSource="{TemplateBinding FilesDisplay}">
                                         <ItemsControl.ItemsPanel>
@@ -152,7 +161,7 @@
                                                                                     <MouseBinding MouseAction="LeftClick"
                                                                                         Command="{Binding Path=OpenCommand,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"
                                                                                         CommandParameter="{Binding Url}"/>
-                                                                                </Grid.InputBindings>
+                                                                                </Grid.InputBindings>                                                                           
                                                                                 <Image x:Name="img" Grid.Column="0" Margin="3" Stretch="Fill" Source="{Binding Url}"></Image>
                                                                                 <TextBlock x:Name="file" Grid.Column="0" Margin="3" VerticalAlignment="Center" Text="&#xf016;" Style="{StaticResource AIStudio.Styles.TextBlock.FontAwesome}" Visibility="Collapsed"></TextBlock>
                                                                                 <Button x:Name="delete" 
@@ -174,7 +183,7 @@
                                                                                 <Setter TargetName="delete" Property="Visibility" Value="Visible"></Setter>
                                                                             </Trigger>
                                                                             <DataTrigger Binding="{Binding Path=Disable,RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}" Value="True">
-                                                                                <Setter TargetName="delete" Property="Visibility" Value="Collapsed"></Setter>                                                                              
+                                                                                <Setter TargetName="delete" Property="Visibility" Value="Collapsed"></Setter>
                                                                             </DataTrigger>
                                                                             <Trigger Property="IsMouseOver" Value="True">
                                                                                 <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(controls:ControlAttach.BorderBrush),RelativeSource={RelativeSource AncestorType={x:Type controls:UploadFile},Mode=FindAncestor}}"/>
@@ -224,6 +233,11 @@
                                     </ItemsControl>
                                 </Grid>
                             </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Progress" Value="1">
+                                    <Setter TargetName="progress" Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
 

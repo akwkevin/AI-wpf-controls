@@ -66,6 +66,36 @@ namespace AIStudio.Wpf.Controls
             }
         }
 
+        public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(
+          nameof(Progress), typeof(double), typeof(UploadFile), new PropertyMetadata(1d));
+
+        public double Progress
+        {
+            get
+            {
+                return (double)this.GetValue(ProgressProperty);
+            }
+            set
+            {
+                this.SetValue(ProgressProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty BigFileUploadProperty = DependencyProperty.Register(
+            nameof(BigFileUpload), typeof(bool), typeof(UploadFile), new PropertyMetadata(false));
+
+        public bool BigFileUpload
+        {
+            get
+            {
+                return (bool)this.GetValue(BigFileUploadProperty);
+            }
+            set
+            {
+                this.SetValue(BigFileUploadProperty, value);
+            }
+        }
+
         public static readonly DependencyProperty FileProperty = DependencyProperty.Register(
             nameof(File), typeof(string), typeof(UploadFile), new PropertyMetadata(default(string), FilePropertyChangedCallback));
 
@@ -324,6 +354,7 @@ namespace AIStudio.Wpf.Controls
             {
                 try
                 {
+                    Progress = 0d;
                     foreach (var path in paths)
                     {
                         if (Upload != null)
@@ -334,11 +365,16 @@ namespace AIStudio.Wpf.Controls
                                 Files.Add(result.Item1);
                                 FilesDisplay.Insert(FilesDisplay.Count - 1, new UploadFileDisplay() { DisplayName = result.Item2, Url = result.Item1 });
                                 SetDisplay();
+
+                                if (BigFileUpload == false)//大文件上传由自己控制进度
+                                {
+                                    Progress += 1 / paths.Length;
+                                }
                             }
                             else
                             {
                                 MessageBox.Show($"上传失败:{result.Item2}");
-                            }
+                            }                           
                         }
                         else if (!string.IsNullOrEmpty(UploadUrl))
                         {
@@ -351,12 +387,12 @@ namespace AIStudio.Wpf.Controls
                                 Dictionary<string, string> header;
                                 if (!string.IsNullOrEmpty(UploadToken))
                                 {
-                                    header = JsonConvert.DeserializeObject<Dictionary<string, string>>(UploadToken);                                    
+                                    header = JsonConvert.DeserializeObject<Dictionary<string, string>>(UploadToken);
                                 }
                                 else
                                 {
                                     header = Header;
-                                }                               
+                                }
 
                                 using (HttpClient client = new HttpClient())
                                 {
@@ -380,10 +416,11 @@ namespace AIStudio.Wpf.Controls
                                         Files.Add(result.url);
                                         FilesDisplay.Insert(FilesDisplay.Count - 1, new UploadFileDisplay() { DisplayName = result.name, Url = result.url });
                                         SetDisplay();
+                                        Progress += 1 / paths.Length;
                                     }
                                     else
                                     {
-                                        MessageBox.Show($"上传失败:{ result.status }");
+                                        MessageBox.Show($"上传失败:{result.status}");
                                     }
                                 }
                             }
@@ -394,6 +431,10 @@ namespace AIStudio.Wpf.Controls
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    Progress = 1d;
                 }
             }
         }
