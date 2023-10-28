@@ -237,7 +237,7 @@ xmlns:ac="https://gitee.com/akwkevin/AI-wpf-controls"
     
     
 技术交流
-个人QQ:80267720 QQ技术交流群:51286643 个人博客:https://www.cnblogs.com/akwkevin/
+个人QQ:80267720 QQ技术交流群:51286643，qq群已满，请添加个人QQ进入微信群 个人博客:https://www.cnblogs.com/akwkevin/
 
 更多
 界面截图请到博客介绍：https://www.cnblogs.com/akwkevin/p/16297568.html
