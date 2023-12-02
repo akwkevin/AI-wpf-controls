@@ -74,7 +74,7 @@
                                 </ScrollViewer.Template>
                                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </ScrollViewer>
-                            <controls:DataGridScrollView x:Name="PART_Right"  Grid.Column="1" Visibility="Collapsed"
+                            <controls:DataGridScrollView x:Name="PART_Right"  Grid.Column="1" Visibility="Collapsed" BorderThickness="1,0,0,0"
                                       ItemsSource="{TemplateBinding ItemsSource}" 
                                       AutoGenerateColumns="{TemplateBinding AutoGenerateColumns}"
                                       CanUserSortColumns="False"
