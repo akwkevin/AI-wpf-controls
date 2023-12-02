@@ -22,7 +22,7 @@ using Microsoft.Win32;
 
 namespace AIStudio.Wpf.Controls
 {
-    [TemplatePart(Name = DG_ScrollViewer, Type = typeof(ScrollViewer))]
+    [TemplatePart(Name = PART_ScrollViewer, Type = typeof(ScrollViewer))]
     [TemplatePart(Name = PART_ColumnHeadersPresenter, Type = typeof(DataGridColumnHeadersPresenter))]
     [TemplatePart(Name = PART_ColumnHeadersContextMenu, Type = typeof(ScrollViewer))]
     [TemplatePart(Name = PART_RefreshMenuItem, Type = typeof(MenuItem))]
@@ -37,7 +37,7 @@ namespace AIStudio.Wpf.Controls
     public class ExtendedDataGrid : DataGrid
     {
         #region 常量
-        private const string DG_ScrollViewer = "DG_ScrollViewer";
+        private const string PART_ScrollViewer = "PART_ScrollViewer";
         private const string PART_ColumnHeadersPresenter = "PART_ColumnHeadersPresenter";
         private const string PART_ColumnHeadersContextMenu = "PART_ColumnHeadersContextMenu";
         private const string PART_RefreshMenuItem = "PART_RefreshMenuItem";
@@ -385,6 +385,7 @@ namespace AIStudio.Wpf.Controls
             base.OnRender(drawingContext);
             if (!_isRendered)
             {
+                _isRendered = true;
                 GetSaveDirectory();
                 _frozenColumns = new List<string>();
                 for (var i = 0; i < this.FrozenColumnCount; i++)
@@ -413,7 +414,7 @@ namespace AIStudio.Wpf.Controls
 
         private void OnComponentLoaded()
         {
-            _scrollViewer = GetTemplateChild(DG_ScrollViewer) as ScrollViewer;
+            _scrollViewer = GetTemplateChild(PART_ScrollViewer) as ScrollViewer;
             _columnHeader = VisualHelper.FindChild<DataGridColumnHeadersPresenter>(_scrollViewer, PART_ColumnHeadersPresenter);
             if (_columnHeader != null && _columnHeader.ContextMenu != null)
             {

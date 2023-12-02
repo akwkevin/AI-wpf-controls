@@ -20,7 +20,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ScrollViewer x:Name="DG_ScrollViewer"
+                            <ScrollViewer x:Name="PART_ScrollViewer"
                                       Focusable="false">
                                 <ScrollViewer.Template>
                                     <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -140,8 +140,10 @@
                                 </ScrollViewer.Template>
                                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </ScrollViewer>
-                            <DataGrid x:Name="PART_TotalRow" Grid.Row="1" HeadersVisibility="None" Visibility="Collapsed" IsHitTestVisible="False"
+                            <ScrollViewer  Grid.Row="1">
+                                 <DataGrid x:Name="PART_TotalRow" HeadersVisibility="None" Visibility="Collapsed" IsHitTestVisible="False"
                                           AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" Style="{StaticResource AIStudio.Styles.DataGrid}" />
+                            </ScrollViewer>
                         </Grid>
                     </Border>
                 </ControlTemplate>

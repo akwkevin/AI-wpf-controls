@@ -86,6 +86,23 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
             }
         }
 
+        private ObservableCollection<DemoDataModel> _dataList4;
+        public ObservableCollection<DemoDataModel> DataList4
+        {
+            get
+            {
+                return _dataList4;
+            }
+            set
+            {
+                if (_dataList4 != value)
+                {
+                    _dataList4 = value;
+                    OnPropertyChanged("DataList4");
+                }
+            }
+        }
+
         private ICommand _editCommand;
         public ICommand EditCommand
         {
@@ -111,6 +128,7 @@ namespace AIStudio.Wpf.Controls.Demo.ViewModels
             DataList1 = DataService.GetDemoDataList(5000);
             DataList2 = DataService.GetDemoDataList(5);
             DataList3 = DataService.GetDemoDataList(5);
+            DataList4 = DataService.GetDemoDataList(20);
 
             CompositeCollection compositeCollection = new CompositeCollection();
             compositeCollection.Add(new CollectionContainer() { Collection = DataList });

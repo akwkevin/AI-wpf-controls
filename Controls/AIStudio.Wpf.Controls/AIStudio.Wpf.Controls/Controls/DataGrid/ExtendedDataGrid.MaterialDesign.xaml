@@ -20,7 +20,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ScrollViewer x:Name="DG_ScrollViewer"
+                            <ScrollViewer x:Name="PART_ScrollViewer"
                                       Focusable="false">
                                 <ScrollViewer.Template>
                                     <ControlTemplate TargetType="{x:Type ScrollViewer}">

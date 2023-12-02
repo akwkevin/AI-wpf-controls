@@ -98,6 +98,19 @@
                     </DataGrid.Columns>
                 </ac:TreeDataGrid>
             </TabItem>
+            <TabItem Header="DataGridRightFrozen">
+                <ac:DataGridRightFrozen RightFrozenCount="2" Margin="2" ItemsSource="{Binding DataList4}" CanUserSortColumns="True" AutoGenerateColumns="False" Style="{StaticResource AIStudio.Styles.DataGridRightFrozen}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="编号" CanUserSort="True" SortMemberPath="Index" Binding="{Binding Index}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="姓名" CanUserSort="True" SortMemberPath="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Field1" CanUserSort="True" SortMemberPath="Field1" Binding="{Binding Field1}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Field2" CanUserSort="True" SortMemberPath="Field2" Binding="{Binding Field2}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Field3" CanUserSort="True" SortMemberPath="Field3" Binding="{Binding Field3}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Field4" CanUserSort="True" SortMemberPath="Field4" Binding="{Binding Field4}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </ac:DataGridRightFrozen>
+            </TabItem>
         </TabControl>
+        
     </Grid>
 </ac:AIStudioUserControl>

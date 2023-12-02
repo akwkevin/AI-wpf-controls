@@ -176,7 +176,7 @@ namespace AIStudio.Wpf.Controls
         #region 右键菜单
 
         #region 常量
-        private const string DG_ScrollViewer = "DG_ScrollViewer";
+        private const string PART_ScrollViewer = "PART_ScrollViewer";
         private const string PART_ColumnHeadersPresenter = "PART_ColumnHeadersPresenter";
         private const string PART_RefreshMenuItem = "PART_RefreshMenuItem";
         private const string PART_AutoRefreshMenuItem = "PART_AutoRefreshMenuItem";
@@ -625,7 +625,7 @@ namespace AIStudio.Wpf.Controls
 
         private void OnComponentLoaded()
         {
-            _scrollViewer = GetTemplateChild(DG_ScrollViewer) as ScrollViewer;
+            _scrollViewer = GetTemplateChild(PART_ScrollViewer) as ScrollViewer;
             _columnHeader = VisualHelper.FindChild<DataGridColumnHeadersPresenter>(_scrollViewer, PART_ColumnHeadersPresenter);
             if (_columnHeader != null && _columnHeader.ContextMenu != null)
             {
@@ -1970,7 +1970,7 @@ namespace AIStudio.Wpf.Controls
         /// <summary>
         /// DataGrid中滚动条样式
         /// </summary>
-        private const string ScrollViewerNameInTemplate = "DG_ScrollViewer";
+        private const string ScrollViewerNameInTemplate = "PART_ScrollViewer";
 
         private bool InitInitSumRowGridFinished = false;
 
