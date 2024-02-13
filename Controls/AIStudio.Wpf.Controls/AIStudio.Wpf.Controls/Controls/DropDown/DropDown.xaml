@@ -25,6 +25,7 @@
         <Setter Property="controls:ControlAttach.CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
         <Setter Property="IsAngleVisible" Value="True" />
         <Setter Property="controls:ShadowAttach.DropShadowEffect" Value="{StaticResource ShadowDepth1}"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Style.Triggers>
             <Trigger Property="IsDropVisible" Value="True">
                 <Setter Property="Template">

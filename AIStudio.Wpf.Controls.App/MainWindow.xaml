@@ -14,6 +14,7 @@
         Title="AIStudio.Wpf" Height="450" Width="800"
         Identifier="RootWindow"
         Icon="A.ico" 
+        ac:ControlAttach.CornerRadius="10"
         Style="{DynamicResource AIStudio.Styles.WindowBase}">
     <Grid>
         <ac:WindowBaseTitleBar>

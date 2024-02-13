@@ -335,6 +335,7 @@
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
         <Setter Property="controls:ControlAttach.Foreground" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="controls:ControlAttach.Background" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="HamburgerMenuTemplate">
@@ -423,6 +424,7 @@
                                                 VerticalAlignment="Stretch"
                                                 AutomationProperties.Name="Main button"
                                                 Style="{StaticResource HamburgerButtonStyle}"
+                                                Background="{Binding Path=(controls:ControlAttach.Background),RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerTreeMenu},Mode=FindAncestor}}"
                                                 TabIndex="0">
                                             <ContentControl
                                                 ContentTemplate="{TemplateBinding HamburgerMenuTemplate}"
