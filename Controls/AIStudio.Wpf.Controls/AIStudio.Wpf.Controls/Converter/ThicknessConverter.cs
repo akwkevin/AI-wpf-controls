@@ -18,6 +18,25 @@ namespace AIStudio.Wpf.Controls.Converter
         }
     }
 
+    public class ThicknessAddConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Thickness thickness)
+            {
+                double offset = 0;
+                double.TryParse(parameter?.ToString(), out offset);
+                return new Thickness(thickness.Left + offset, thickness.Top + offset, thickness.Right + offset, thickness.Bottom + offset);
+            }
+            return DependencyProperty.UnsetValue;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+    }
+
     internal class DoubleToRightMarginConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
