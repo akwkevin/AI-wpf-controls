@@ -91,7 +91,7 @@
                                         HorizontalAlignment="Stretch"
                                         VerticalAlignment="Stretch"
                                         Panel.ZIndex="6"
-                                        Background="{DynamicResource MahApps.Brushes.Gray1}"
+                                        Background="{DynamicResource MahApps.Brushes.Accent4}"
                                         Opacity="0.5" />
                                     <Grid x:Name="PART_WaitingGrid" Panel.ZIndex="7" HorizontalAlignment="Center" />
                                 </Grid>
@@ -100,7 +100,7 @@
                                 <Rectangle 
                                Focusable="False"
                                Name="PART_FlyoutModal"
-                               Fill="{DynamicResource MahApps.Brushes.Gray1}"
+                               Fill="{DynamicResource MahApps.Brushes.Accent4}"
                                Visibility="Hidden" />
 
                                 <!-- flyouts -->
@@ -126,7 +126,7 @@
                                       Panel.ZIndex="4"
                                       Focusable="False"
                                       FocusVisualStyle="{x:Null}"
-                                      Background="{DynamicResource MahApps.Brushes.Gray1}"
+                                      Background="{DynamicResource MahApps.Brushes.Accent4}"
                                       Opacity="0"
                                       Visibility="Hidden" />
 
@@ -371,7 +371,7 @@
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Panel.ZIndex="6"
-                                            Background="{DynamicResource MahApps.Brushes.Gray1}"
+                                            Background="{DynamicResource MahApps.Brushes.Accent4}"
                                             Opacity="0.5" />
                                         <Grid x:Name="PART_WaitingGrid" Panel.ZIndex="7" HorizontalAlignment="Center" />
                                     </Grid>
@@ -380,7 +380,7 @@
                                     <Rectangle 
                                         Focusable="False"
                                         Name="PART_FlyoutModal"
-                                        Fill="{DynamicResource MahApps.Brushes.Gray1}"
+                                        Fill="{DynamicResource MahApps.Brushes.Accent4}"
                                         Visibility="Hidden" />
 
                                     <!-- flyouts -->
@@ -403,7 +403,7 @@
                                           Panel.ZIndex="4"
                                           Focusable="False"
                                           FocusVisualStyle="{x:Null}"
-                                          Background="{DynamicResource MahApps.Brushes.Gray1}"
+                                          Background="{DynamicResource MahApps.Brushes.Accent4}"
                                           Opacity="0"
                                           Visibility="Hidden" />
 

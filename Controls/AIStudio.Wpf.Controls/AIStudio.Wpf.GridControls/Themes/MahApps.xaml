@@ -1092,7 +1092,7 @@
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}" />
-        <Setter Property="AlternatingRowBackground" Value="{DynamicResource MahApps.Brushes.Gray9}" />
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource MahApps.Brushes.AlternatingRowBackground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource AIStudio.Styles.DataGridColumnHeader.Filter}" />
         <Setter Property="DropLocationIndicatorStyle">

@@ -114,7 +114,37 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
-
+            <Trigger Property="WaitingStyle" Value="Loading">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:BusyBox}">
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" MinHeight="30" MinWidth="200">
+                                <Grid>
+                                    <Border CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" >
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="Black"></DropShadowEffect>
+                                        </Border.Effect>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                                            <controls:GifImage Width="{TemplateBinding controls:IconAttach.Width}" Height="{TemplateBinding controls:IconAttach.Height}" Stretch="Fill" Source="pack://application:,,,/AIStudio.Wpf.Controls;component/Resources/loading.gif"/>
+                                            <TextBlock x:Name="tbPrompt" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding WaitInfo}"></TextBlock>
+                                            <TextBlock x:Name="txtValue" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Percent,Converter={StaticResource PercentConverter}}" />
+                                            <TextBlock x:Name="txtCancel" VerticalAlignment="Center" Visibility="Collapsed" Margin="5,0">
+                                                <Hyperlink Foreground="{TemplateBinding Foreground}" Command="{Binding CancelCommmad, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">取消</Hyperlink>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="CanCancel" Value="True">
+                                    <Setter  Property="Visibility" Value="Visible" TargetName="txtCancel"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            
             <Trigger Property="controls:ControlAttach.Status" Value="Light">
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>

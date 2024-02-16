@@ -47,6 +47,7 @@
     <None Remove="Resources\Icons\Information48.png" />
     <None Remove="Resources\Icons\Question48.png" />
     <None Remove="Resources\Icons\Warning48.png" />
+    <None Remove="Resources\loading.gif" />
     <None Remove="Resources\variables.less" />
   </ItemGroup>
 
@@ -67,6 +68,9 @@
     <Resource Include="Resources\A.ico" />
     <Resource Include="Resources\blank.ico" />
     <Resource Include="Resources\fontawesome-webfont.ttf" />
+    <Resource Include="Resources\loading.gif">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\variables.less" />
   </ItemGroup>
 

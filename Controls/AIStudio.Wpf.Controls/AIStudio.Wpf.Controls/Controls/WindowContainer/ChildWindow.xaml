@@ -16,7 +16,7 @@
     <Style x:Key="AIStudio.Styles.ChildWindow" TargetType="{x:Type controls:ChildWindow}" BasedOn="{StaticResource {x:Type controls:WindowControl}}">
         <Setter Property="MinWidth" Value="140" />
         <Setter Property="MinHeight" Value="40" />
-        <Setter Property="WindowBackground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="WindowBackground" Value="{DynamicResource MahApps.Brushes.AccentBase}"/>
         <Setter Property="WindowStartupLocation" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>

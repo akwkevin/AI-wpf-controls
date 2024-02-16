@@ -44,6 +44,7 @@
         Busy = 0,
         Progress = 1,
         Ring = 2,
+        Loading= 3,
     }
 
     public enum LoadingStyle
