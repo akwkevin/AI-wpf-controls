@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Controls\AIStudio.Wpf.ColorPicker\AIStudio.Wpf.ColorPicker.csproj" />
+  </ItemGroup>
+
+</Project>

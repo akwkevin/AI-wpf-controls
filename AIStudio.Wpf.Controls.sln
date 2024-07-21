@@ -41,7 +41,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.Controls.Emoji
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.Controls.MediaPlayer", "Controls\AIStudio.Wpf.Controls.MediaPlayer\AIStudio.Wpf.Controls.MediaPlayer.csproj", "{6008B63D-41A7-4972-8840-FA1FBF1E9C9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIStudio.Wpf.ColorPicker", "Controls\AIStudio.Wpf.ColorPicker\AIStudio.Wpf.ColorPicker.csproj", "{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIStudio.Wpf.ColorPicker", "Controls\AIStudio.Wpf.ColorPicker\AIStudio.Wpf.ColorPicker.csproj", "{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIStudio.Wpf.ColorPicker.App", "AIStudio.Wpf.ColorPicker.App\AIStudio.Wpf.ColorPicker.App.csproj", "{E1FE9C73-81BE-4604-9D28-31158C3BB924}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,10 @@ Global
 		{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDBAFCA4-6713-4C5E-836F-1B87B65A8011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1FE9C73-81BE-4604-9D28-31158C3BB924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1FE9C73-81BE-4604-9D28-31158C3BB924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1FE9C73-81BE-4604-9D28-31158C3BB924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1FE9C73-81BE-4604-9D28-31158C3BB924}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
