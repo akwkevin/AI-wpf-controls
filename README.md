@@ -3,6 +3,7 @@
 
 ![image](https://github.com/akwkevin/AI-wpf-controls/assets/27945492/5fddb88c-ddd5-4193-b1f7-6126eda276ec)
 
+### AIStudio框架汇总：[https://gitee.com/akwkevin/aistudio.-introduce](https://gitee.com/akwkevin/aistudio.-introduce)
 ### github 地址：https://github.com/akwkevin/AI-wpf-controls
 ### gitee 地址：https://gitee.com/akwkevin/AI-wpf-controls
     
